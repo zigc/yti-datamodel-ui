@@ -1,5 +1,6 @@
-# iow-ui
-Interoperability workbench user interface  
+# yti-datamodel-ui
+
+Interoperability workbench data model user interface  
 
 ## Prepare tools
 
@@ -38,19 +39,15 @@ To load example data to a custom host and/or port
 Copy new entries from `template.pot` to `po` translation files or use "Update from POT file" if using poedit.
 
 ## Architechture
-Interoperability user interface is separate one page application that uses IOW backend services. Backend design follows restful three layer architecture:
+Interoperability user interface is separate one page application that uses data model backend services. Backend design follows restful three layer architecture:
 
 ![Alt text](/Technical architecture.jpg "Technical architecture")
 
 
 Backend:
 
-https://github.com/CSC-IT-Center-for-Science/iow-api/
+https://github.com/VRK-YTI/yti-datamodel-api
 
 Database configuration:
 
-https://github.com/CSC-IT-Center-for-Science/iow-database/
-
-Private configuration:
-
-https://github.com/CSC-IT-Center-for-Science/iow-playground/
+https://github.com/VRK-YTI/yti-datamodel-database
