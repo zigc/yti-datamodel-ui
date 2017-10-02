@@ -1,5 +1,5 @@
 {
-  "name": "iow-ui",
+  "name": "yti-terminology-ui",
   "version": "1.0.0",
   "description": "Interoperability workbench user interface seed.",
   "license": "EUPL-1.1",
@@ -16,13 +16,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/CSC-IT-Center-for-Science/iow-ui.git"
+    "url": "git+https://github.com:VRK-YTI/yti-terminology-ui.git"
   },
   "author": "",
   "bugs": {
-    "url": "https://github.com/CSC-IT-Center-for-Science/iow-ui/issues"
+    "url": "https://github.com/VRK-YTI/yti-datamodel-ui/issues"
   },
-  "homepage": "https://github.com/CSC-IT-Center-for-Science/iow-ui#readme",
+  "homepage": "https://github.com/VRK-YTI/yti-datamodel-ui#readme",
   "dependencies": {
     "angular": "1.6.0",
     "angular-animate": "1.5.7",
