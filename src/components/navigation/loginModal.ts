@@ -1,9 +1,8 @@
-import { IWindowService, ILocationService, ui } from 'angular';
-import IModalService = ui.bootstrap.IModalService;
-import IModalServiceInstance = ui.bootstrap.IModalServiceInstance;
-import { config } from '../../../config';
+import { ILocationService, IWindowService, ui } from 'angular';
 import { modalCancelHandler } from '../../utils/angular';
 import { identity } from '../../utils/function';
+import IModalService = ui.bootstrap.IModalService;
+import IModalServiceInstance = ui.bootstrap.IModalServiceInstance;
 
 export class LoginModal {
   /* @ngInject */
@@ -27,7 +26,7 @@ class LoginModalController {
   close = () => this.$uibModalInstance.dismiss('cancel');
 
   login() {
-    this.$window.location.href = config.apiEndpoint + `/login?target=${encodeURIComponent(this.$location.absUrl())}`;
+    this.$window.location.href = `/Shibboleth.sso/Login?target=${encodeURIComponent(this.$location.absUrl())}`;
   }
 
   register() {
