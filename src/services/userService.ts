@@ -1,9 +1,6 @@
-import { IPromise, IHttpService } from 'angular';
+import { IPromise, IHttpService, IQService } from 'angular';
 import { config } from '../../config';
-import { GraphData } from '../entities/contract';
-import { FrameService } from './frameService';
-import { userFrame } from '../entities/frames';
-import { User, AnonymousUser, DefaultUser } from '../entities/user';
+import { User, DefaultUser, AnonymousUser } from '../entities/user';
 
 export interface UserService {
   user: User;
@@ -18,18 +15,25 @@ export class DefaultUserService {
   user: User = new AnonymousUser();
 
   /* @ngInject */
-  constructor(private $http: IHttpService, private frameService: FrameService) {
+  constructor(private $http: IHttpService, private $q: IQService) {
   }
 
   updateLogin(): IPromise<User> {
     return this.$http.get<boolean>(config.apiEndpointWithName('loginstatus'))
-      .then(statusResponse => statusResponse.data
-        ? this.$http.get<GraphData>(config.apiEndpointWithName('user')).then(response => this.deserializeUser(response.data!))
-        : new AnonymousUser())
+      .then(statusResponse => {
+        const loggedIn: boolean = statusResponse.data || false;
+
+        if (loggedIn) {
+          return this.$http.get<any>(config.apiEndpointWithName('user'))
+            .then(response => this.user = new DefaultUser(response.data!) as User);
+        } else {
+          return this.$q.when(new AnonymousUser() as User);
+        }
+      })
       .then(updatedUser => this.user = updatedUser);
   }
 
-  ifStillLoggedIn(loggedInCallback: () => void, notLoggedInCallback: () => void) {
+  ifStillLoggedIn(loggedInCallback: () => void, notLoggedInCallback: () => void): void {
     this.updateLogin().then(user => {
       if (user.isLoggedIn()) {
         loggedInCallback();
@@ -45,9 +49,5 @@ export class DefaultUserService {
 
   logout(): IPromise<User> {
     return this.$http.get(config.apiEndpointWithName('logout')).then(() => this.user = new AnonymousUser());
-  }
-
-  private deserializeUser(data: GraphData): IPromise<User> {
-    return this.frameService.frameAndMap(data, true, userFrame(data), () => DefaultUser);
   }
 }

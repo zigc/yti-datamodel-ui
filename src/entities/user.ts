@@ -1,13 +1,14 @@
 import { AbstractGroup } from './group';
-import { Uri } from '../entities/uri';
-import { UserLogin } from './contract';
-import { Moment } from 'moment';
-import { dateSerializer, optional, userLoginSerializer, stringSerializer } from './serializer/serializer';
-import { Model, AbstractModel } from './model';
-import { contains } from '../utils/array';
-import { init } from './mapping';
-import { GraphNode } from './graphNode';
-import { entityAwareList, uriSerializer } from './serializer/entitySerializer';
+import { Uri } from './uri';
+import { AbstractModel } from './model';
+import { normalizeAsArray } from '../utils/array';
+
+export type Role = 'ADMIN'
+                 | 'DATA_MODEL_EDITOR'
+                 | 'TERMINOLOGY_EDITOR'
+                 | 'CODE_LIST_EDITOR';
+
+export type UUID = string;
 
 export interface User {
   isLoggedIn(): boolean;
@@ -18,51 +19,69 @@ export interface User {
   name: string|null;
 }
 
-export class DefaultUser extends GraphNode implements User {
+export class DefaultUser implements User {
 
-  static defaultUserMapping = {
-    createdAt: { name: 'created', serializer: dateSerializer },
-    modifierAt: { name: 'modified', serializer: optional(dateSerializer) },
-    adminGroups: { name: 'isAdminOf', serializer: entityAwareList(uriSerializer) },
-    memberGroups: { name: 'isPartOf', serializer: entityAwareList(uriSerializer) },
-    name: { name: 'name', serializer: optional(stringSerializer) },
-    login: { name: '@id', serializer: userLoginSerializer }
-  };
+  email: string;
+  firstName: string;
+  lastName: string;
+  anonymous: boolean;
+  superuser: boolean;
+  rolesInOrganizations: Map<UUID, Set<Role>>;
+  organizationsInRole: Map<Role, Set<UUID>>;
 
-  createdAt: Moment;
-  modifiedAt: Moment|null;
-  adminGroups: Uri[];
-  memberGroups: Uri[];
-  name: string|null;
-  login: UserLogin;
+  constructor(json: any) {
+    this.email = json.email;
+    this.firstName = json.firstName;
+    this.lastName = json.lastName;
+    this.anonymous = json.anonymous;
+    this.superuser = json.superuser;
+    this.rolesInOrganizations = convertToMapSet<UUID, Role>(json.rolesInOrganizations);
+    this.organizationsInRole = convertToMapSet<Role, UUID>(json.organizationsInRole);
+  }
 
-  constructor(graph: any, context: any, frame: any) {
-    super(graph, context, frame);
-    init(this, DefaultUser.defaultUserMapping);
+  get name() {
+    return this.firstName + ' ' + this.lastName;
+  }
+
+  getRoles(organizationIds: UUID|UUID[]): Set<Role> {
+    return combineResultSets<UUID, Role>(this.rolesInOrganizations, organizationIds);
+  }
+
+  getOrganizations(roles: Role|Role[]): Set<UUID> {
+    return combineResultSets<Role, UUID>(this.organizationsInRole, roles);
+  }
+
+  isInRole(role: Role|Role[], organizationIds: UUID|UUID[]) {
+    return hasAny(this.getRoles(organizationIds), role);
+  }
+
+  isInOrganization(organizationIds: UUID|UUID[], roles: Role|Role[]) {
+    return hasAny(this.getOrganizations(roles), organizationIds);
   }
 
   isLoggedIn(): boolean {
-    return this.graph['iow:login'];
+    return !this.anonymous;
   }
 
-  isMemberOf(entity: Model|AbstractGroup) {
-    return this.isMemberOfGroup(entity.groupId);
+  isMemberOf(_entity: AbstractModel|AbstractGroup): boolean {
+    return true;
   }
 
-  isMemberOfGroup(id: Uri) {
-    return contains(this.memberGroups, id, (lhs, rhs) => lhs.equals(rhs));
+  isMemberOfGroup(_id: Uri): boolean {
+    return true;
   }
 
-  isAdminOf(entity: Model|AbstractGroup) {
-    return this.isAdminOfGroup(entity.groupId);
+  isAdminOf(_entity: AbstractModel|AbstractGroup): boolean {
+    return true;
   }
 
-  isAdminOfGroup(id: Uri) {
-    return contains(this.adminGroups, id, (lhs, rhs) => lhs.equals(rhs));
+  isAdminOfGroup(_id: Uri): boolean {
+    return true;
   }
 }
 
 export class AnonymousUser implements User {
+
   get name() {
     return null;
   }
@@ -71,7 +90,7 @@ export class AnonymousUser implements User {
     return false;
   }
 
-  isMemberOf(_entity: Model|AbstractGroup) {
+  isMemberOf(_entity: AbstractModel|AbstractGroup) {
     return false;
   }
 
@@ -79,11 +98,78 @@ export class AnonymousUser implements User {
     return false;
   }
 
-  isAdminOf(_entity: Model|AbstractGroup) {
+  isAdminOf(_entity: AbstractModel|AbstractGroup) {
     return false;
   }
 
   isAdminOfGroup(_id: Uri) {
     return false;
   }
+}
+
+function hasAny<T>(set: Set<T>, values: T|T[]) {
+
+  for (const value of normalizeAsArray(values)) {
+    if (set.has(value)) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
+function combineResultSets<K, V>(map: Map<K, Set<V>>, keys: K|K[]): Set<V> {
+
+  const normalizedKeys = normalizeAsArray(keys);
+
+  switch (normalizedKeys.length) {
+    case 0:
+      return new Set<V>();
+    case 1:
+      return map.get(normalizedKeys[0]) || new Set<V>();
+    default:
+      const result = new Set<V>();
+
+      for (const key of normalizedKeys) {
+
+        const values = map.get(key);
+
+        if (values) {
+          values.forEach(value => result.add(value));
+        }
+      }
+
+      return result;
+  }
+}
+
+function getOrCreateSet<K, V>(map: Map<K, Set<V>>, key: K): Set<V> {
+
+  const set = map.get(key);
+
+  if (set) {
+    return set;
+  } else {
+    const newSet = new Set<V>();
+    map.set(key, newSet);
+    return newSet;
+  }
+}
+
+function convertToMapSet<K extends string, V extends string>(mapSetLike: { [key: string]: string[] }): Map<K, Set<V>> {
+
+  const map = new Map<K, Set<V>>();
+
+  for (const entry of Object.entries(mapSetLike)) {
+
+    const key = entry[0] as K;
+    const values = entry[1] as V[];
+    const set = getOrCreateSet(map, key);
+
+    for (const value of values) {
+      set.add(value);
+    }
+  }
+
+  return map;
 }

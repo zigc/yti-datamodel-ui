@@ -130,11 +130,6 @@ const usageContext = Object.assign({}, coreContext, modelContext, {
   isReferencedBy: { '@id': 'http://purl.org/dc/terms/isReferencedBy', '@type': '@id' }
 });
 
-const userContext = Object.assign({}, coreContext, {
-  name: { '@id': 'http://xmlns.com/foaf/0.1/name'},
-  isAdminOf: { '@id': 'http://purl.org/dc/terms/isAdminOf', '@type': '@id' }
-});
-
 const modelPositionContext = Object.assign({}, coreContext, {
   predicate,
   property,
@@ -328,10 +323,6 @@ export function vocabularyFrame(data: any): Frame {
       '@embed': '@never'
     }
   });
-}
-
-export function userFrame(data: any): Frame {
-  return frame(data, userContext, { name: {} });
 }
 
 export function namespaceFrame(data: any): Frame {
