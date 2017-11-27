@@ -1,6 +1,6 @@
-import { IPromise, IHttpService } from 'angular';
+import { IPromise, IHttpService, IWindowService, ILocationService } from 'angular';
 import { config } from '../../config';
-import { User, DefaultUser, AnonymousUser } from '../entities/user';
+import { User, DefaultUser } from '../entities/user';
 
 export interface UserService {
   user: User;
@@ -12,10 +12,12 @@ export interface UserService {
 
 export class DefaultUserService {
 
-  user: User = new AnonymousUser();
+  user: User;
 
   /* @ngInject */
-  constructor(private $http: IHttpService) {
+  constructor(private $http: IHttpService,
+              private $window: IWindowService,
+              private $location: ILocationService) {
   }
 
   updateLogin(): IPromise<User> {
@@ -38,7 +40,7 @@ export class DefaultUserService {
     return this.user.isLoggedIn();
   }
 
-  logout(): IPromise<User> {
-    return this.$http.get(config.apiEndpointWithName('logout')).then(() => this.user = new AnonymousUser());
+  logout() {
+    this.$window.location.href = `/Shibboleth.sso/Logout?return=${encodeURIComponent(this.$location.absUrl())}`;
   }
 }

@@ -80,33 +80,6 @@ export class DefaultUser implements User {
   }
 }
 
-export class AnonymousUser implements User {
-
-  get name() {
-    return null;
-  }
-
-  isLoggedIn(): boolean {
-    return false;
-  }
-
-  isMemberOf(_entity: AbstractModel|AbstractGroup) {
-    return false;
-  }
-
-  isMemberOfGroup(_id: Uri) {
-    return false;
-  }
-
-  isAdminOf(_entity: AbstractModel|AbstractGroup) {
-    return false;
-  }
-
-  isAdminOfGroup(_id: Uri) {
-    return false;
-  }
-}
-
 function hasAny<T>(set: Set<T>, values: T|T[]) {
 
   for (const value of normalizeAsArray(values)) {
