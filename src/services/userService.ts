@@ -1,4 +1,4 @@
-import { IPromise, IHttpService, IQService } from 'angular';
+import { IPromise, IHttpService } from 'angular';
 import { config } from '../../config';
 import { User, DefaultUser, AnonymousUser } from '../entities/user';
 
@@ -15,21 +15,12 @@ export class DefaultUserService {
   user: User = new AnonymousUser();
 
   /* @ngInject */
-  constructor(private $http: IHttpService, private $q: IQService) {
+  constructor(private $http: IHttpService) {
   }
 
   updateLogin(): IPromise<User> {
-    return this.$http.get<boolean>(config.apiEndpointWithName('loginstatus'))
-      .then(statusResponse => {
-        const loggedIn: boolean = statusResponse.data || false;
-
-        if (loggedIn) {
-          return this.$http.get<any>(config.apiEndpointWithName('user'))
-            .then(response => this.user = new DefaultUser(response.data!) as User);
-        } else {
-          return this.$q.when(new AnonymousUser() as User);
-        }
-      })
+    return this.$http.get<any>(config.apiEndpointWithName('user'))
+      .then(response => this.user = new DefaultUser(response.data!))
       .then(updatedUser => this.user = updatedUser);
   }
 
