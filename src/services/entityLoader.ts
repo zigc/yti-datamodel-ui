@@ -2,7 +2,6 @@ import { IPromise, IQService } from 'angular';
 import { ModelService } from './modelService';
 import { ClassService } from './classService';
 import { PredicateService } from './predicateService';
-import { ResetService } from './resetService';
 import { Uri, Url } from '../entities/uri';
 import { DataType } from '../entities/dataTypes';
 import { identity } from '../utils/function';
@@ -105,18 +104,16 @@ export class EntityLoaderService {
               private modelService: ModelService,
               private predicateService: PredicateService,
               private classService: ClassService,
-              private vocabularyService: VocabularyService,
-              private resetService: ResetService) {
+              private vocabularyService: VocabularyService) {
   }
 
-  create(context: any, shouldReset: boolean): EntityLoader {
-    return new EntityLoader(this.$q, this.modelService, this.predicateService, this.classService, this.vocabularyService, this.resetService, context, shouldReset);
+  create(context: any): EntityLoader {
+    return new EntityLoader(this.$q, this.modelService, this.predicateService, this.classService, this.vocabularyService, context);
   }
 }
 
 export class EntityLoader {
 
-  private reset: IPromise<any>;
   private vocabularies: IPromise<any>;
   private actions: IPromise<any>[] = [];
 
@@ -125,12 +122,9 @@ export class EntityLoader {
               private predicateService: PredicateService,
               private classService: ClassService,
               private vocabularyService: VocabularyService,
-              resetService: ResetService,
-              private context: any,
-              shouldReset: boolean) {
+              private context: any) {
 
-    this.reset = shouldReset ? resetService.reset() : $q.when();
-    this.vocabularies = this.reset.then(() => this.vocabularyService.getAllVocabularies());
+    this.vocabularies = this.vocabularyService.getAllVocabularies();
   }
 
   addAction<T>(action: IPromise<T>, details: any): IPromise<T> {
