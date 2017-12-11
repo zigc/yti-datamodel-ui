@@ -4,8 +4,8 @@ import { jhsGroupId } from '../src/services/entityLoader';
 export const model = loader.createLibrary(jhsGroupId, {
   prefix: 'jhs',
   label:   { fi: 'Julkishallinnon tietokomponentit' },
-  comment: { fi: 'Julkisessa hallinnossa ja kaikilla toimialoilla yleisesti käytössä olevat tietosisällöt' },
-  vocabularies: ['http://purl.org/att/tuha/'] // TODO change to EOS when available
+  comment: { fi: 'Julkisessa hallinnossa ja kaikilla toimialoilla yleisesti käytössä olevat tietosisällöt' }
+  // vocabularies: ['http://purl.org/att/tuha/'] // FIXME
 });
 
 export namespace Associations {
@@ -320,10 +320,11 @@ export namespace Classes {
 
   export const henkilo = loader.createClass(model, {
     label: { fi: 'Henkilö'  },
-    concept: {
-      label: 'Henkilön käsite',
-      comment: 'Henkilön määritelmä'
-    },
+    // FIXME
+    // concept: {
+    //   label: 'Henkilön käsite',
+    //   comment: 'Henkilön määritelmä'
+    // },
     equivalentClasses: ['schema:Person', 'foaf:Person'],
     properties: [
       {

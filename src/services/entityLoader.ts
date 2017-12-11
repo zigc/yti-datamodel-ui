@@ -16,7 +16,6 @@ import { VocabularyService } from './vocabularyService';
 import { first, keepMatching } from '../utils/array';
 import { requireDefined } from '../utils/object';
 
-export const asiaConceptId = new Uri('http://jhsmeta.fi/skos/J392', {});
 export const ktkGroupId = new Uri('https://tt.eduuni.fi/sites/csc-iow#KTK', {});
 export const jhsGroupId = new Uri('https://tt.eduuni.fi/sites/csc-iow#JHS', {});
 
@@ -286,7 +285,7 @@ export class EntityLoader {
     const concept = details.concept;
     const conceptIdPromise = isConceptSuggestion(concept)
       ? this.createConceptSuggestion(concept, modelPromise).then(conceptSuggestion => conceptSuggestion.id)
-      : concept ? this.$q.when(this.createUri(<string> concept)) : this.$q.when(asiaConceptId);
+      : concept ? this.$q.when(this.createUri(<string> concept)) : this.$q.when(null);
 
     const result =
       this.$q.all([modelPromise, conceptIdPromise])
@@ -342,7 +341,7 @@ export class EntityLoader {
     const concept = details.concept;
     const conceptIdPromise = isConceptSuggestion(concept)
       ? this.createConceptSuggestion(concept, modelPromise).then(conceptSuggestion => conceptSuggestion.id)
-      : concept ? this.$q.when(this.createUri(<string> concept)) : this.$q.when(asiaConceptId);
+      : concept ? this.$q.when(this.createUri(<string> concept)) : this.$q.when(null);
 
     const result =
       this.$q.all([modelPromise, conceptIdPromise])
