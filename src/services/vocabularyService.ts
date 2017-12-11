@@ -25,8 +25,13 @@ export class DefaultVocabularyService implements VocabularyService {
   }
 
   getAllVocabularies(): IPromise<Vocabulary[]> {
-    return this.$http.get<GraphData>(config.apiEndpointWithName('conceptSchemes'))
-      .then(response => this.deserializeVocabularies(response.data!));
+
+    // FIXME
+
+    return this.$q.when([]);
+
+    // return this.$http.get<GraphData>(config.apiEndpointWithName('conceptSchemes'))
+    //   .then(response => this.deserializeVocabularies(response.data!));
   }
 
   searchConcepts(searchText: string, vocabulary?: Vocabulary): IPromise<Concept[]> {
