@@ -6,7 +6,6 @@ import { httpService } from './requestToAngularHttpService';
 import { DefaultPredicateService } from '../src/services/predicateService';
 import { DefaultModelService } from '../src/services/modelService';
 import { DefaultClassService } from '../src/services/classService';
-import { DefaultUserService } from '../src/services/userService';
 import { DefaultVocabularyService } from '../src/services/vocabularyService';
 import { ResetService } from '../src/services/resetService';
 import { FrameService } from '../src/services/frameService';
@@ -27,7 +26,6 @@ const frameService = new FrameService(log);
 const modelService = new DefaultModelService(httpService, q, frameService);
 const predicateService = new DefaultPredicateService(httpService, q, frameService);
 const classService = new DefaultClassService(httpService, q, predicateService, frameService);
-const userService = new DefaultUserService(httpService, frameService);
 const vocabularyService = new DefaultVocabularyService(httpService, q, frameService);
 const resetService = new ResetService(httpService);
 
@@ -40,4 +38,4 @@ const context = {
 };
 
 
-export const loader = new EntityLoader(q, httpService, modelService, predicateService, classService, userService, vocabularyService, resetService, context, true);
+export const loader = new EntityLoader(q, modelService, predicateService, classService, vocabularyService, resetService, context, true);
