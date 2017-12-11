@@ -135,14 +135,20 @@ export class DefaultPredicateService implements PredicateService {
       .then(() => this.modelPredicatesCache.delete(model.id.uri));
   }
 
-  newPredicate<T extends Attribute|Association>(model: Model, predicateLabel: string, conceptID: Uri, type: KnownPredicateType, lang: Language): IPromise<T> {
-    return this.$http.get<GraphData>(config.apiEndpointWithName('predicateCreator'), {
-      params: {
-        modelID: model.id.uri,
-        predicateLabel: upperCaseFirst(predicateLabel),
-        conceptID: conceptID.uri,
-        type: reverseMapType(type), lang
-      }})
+  newPredicate<T extends Attribute|Association>(model: Model, predicateLabel: string, conceptID: Uri|null, type: KnownPredicateType, lang: Language): IPromise<T> {
+
+    const params: any = {
+      modelID: model.id.uri,
+      predicateLabel: upperCaseFirst(predicateLabel),
+      type: reverseMapType(type),
+      lang
+    };
+
+    if (conceptID !== null) {
+      params.conceptID = conceptID.uri;
+    }
+
+    return this.$http.get<GraphData>(config.apiEndpointWithName('predicateCreator'), {params})
       .then(expandContextWithKnownModels(model))
       .then(response => this.deserializePredicate(response.data!))
       .then((predicate: Predicate) => {

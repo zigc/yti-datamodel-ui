@@ -141,14 +141,17 @@ export class DefaultClassService implements ClassService {
       .then(() => this.modelClassesCache.delete(model.id.uri));
   }
 
-  newClass(model: Model, classLabel: string, conceptID: Uri, lang: Language): IPromise<Class> {
+  newClass(model: Model, classLabel: string, conceptID: Uri|null, lang: Language): IPromise<Class> {
 
-    const params = {
+    const params: any = {
       modelID: model.id.uri,
       classLabel: upperCaseFirst(classLabel),
-      conceptID: conceptID.uri,
       lang
     };
+
+    if (conceptID !== null) {
+      params.conceptID = conceptID.uri;
+    }
 
     return this.$http.get<GraphData>(config.apiEndpointWithName('classCreator'), {params})
       .then(expandContextWithKnownModels(model))
