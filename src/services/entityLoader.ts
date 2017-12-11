@@ -116,8 +116,8 @@ export class EntityLoaderService {
 
 export class EntityLoader {
 
-  private reset: IPromise<any>;
-  private vocabularies: IPromise<any>;
+  private initialized: IPromise<any>;
+  private vocabularies: Vocabulary[];
   private actions: IPromise<any>[] = [];
 
   constructor(private $q: IQService,
@@ -129,8 +129,16 @@ export class EntityLoader {
               private context: any,
               shouldReset: boolean) {
 
-    this.reset = shouldReset ? resetService.reset() : $q.when();
-    this.vocabularies = this.reset.then(() => this.vocabularyService.getAllVocabularies());
+    const reset = shouldReset ? resetService.reset() : $q.when();
+
+    const initialized = $q.defer();
+    this.initialized = initialized.promise;
+
+    reset.then(() => this.vocabularyService.getAllVocabularies())
+      .then(vocabularies => {
+        this.vocabularies = vocabularies;
+        initialized.resolve();
+      });
   }
 
   addAction<T>(action: IPromise<T>, details: any): IPromise<T> {
@@ -159,23 +167,25 @@ export class EntityLoader {
 
   createModel(type: KnownModelType, groupId: Uri, details: ModelDetails): IPromise<Model> {
     const result =
-      this.modelService.newModel(details.prefix, details.label['fi'], groupId, ['fi', 'en'], type)
+      this.initialized.then(() =>
+        this.modelService.newModel(details.prefix, details.label['fi'], groupId, ['fi', 'en'], type))
         .then(model => {
           setDetails(model, details);
 
           const promises: IPromise<any>[] = [];
 
+          const resolveVocabulary = (importedVocabulary: string) => {
+            const vocabulary = first(this.vocabularies, (vocabulary: Vocabulary) => vocabulary.id.toString() === importedVocabulary);
+
+            if (!vocabulary) {
+              throw new Error('Vocabulary not found: ' + vocabulary);
+            }
+
+            return vocabulary;
+          };
+
           for (const importedVocabulary of details.vocabularies || []) {
-            promises.push(
-              this.vocabularies.then((vocabularies: Vocabulary[]) => {
-                const vocabulary = first(vocabularies, (vocabulary: Vocabulary) => vocabulary.id.toString() === importedVocabulary);
-                if (!vocabulary) {
-                  throw new Error('Vocabulary not found: ' + vocabulary);
-                }
-                return vocabulary;
-              })
-                .then(vocabularyEntity => model.addVocabulary(vocabularyEntity))
-            );
+              model.addVocabulary(resolveVocabulary(importedVocabulary));
           }
 
           for (const ns of details.namespaces || []) {
