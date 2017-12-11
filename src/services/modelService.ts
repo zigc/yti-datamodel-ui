@@ -66,7 +66,7 @@ export class DefaultModelService implements ModelService {
     return this.$http.delete(config.apiEndpointWithName('model'), { params: { id: id.uri } });
   }
 
-  newModel(prefix: string, label: string, _groupId: Uri, lang: Language[], type: KnownModelType, _redirect?: Uri): IPromise<Model> {
+  newModel(prefix: string, label: string, _groupId: Uri, lang: Language[], type: KnownModelType, redirect?: Uri): IPromise<Model> {
     function mapEndpoint() {
       switch (type) {
         case 'library':
@@ -83,7 +83,7 @@ export class DefaultModelService implements ModelService {
         label: upperCaseFirst(label),
         lang: lang[0],
         langList: lang.join(' '),
-        // redirect: redirect && redirect.uri,
+        redirect: redirect && redirect.uri,
         serviceList: 'EDUC', // FIXME
         orgList: ['88ce73b9-376c-4ff1-8c51-e4159b0af75c'] // FIXME
       }
