@@ -7,6 +7,7 @@ import { DefaultPredicateService } from '../src/services/predicateService';
 import { DefaultModelService } from '../src/services/modelService';
 import { DefaultClassService } from '../src/services/classService';
 import { DefaultVocabularyService } from '../src/services/vocabularyService';
+import { ResetService } from '../src/services/resetService';
 import { FrameService } from '../src/services/frameService';
 
 const argv = require('optimist')
@@ -26,6 +27,8 @@ const modelService = new DefaultModelService(httpService, q, frameService);
 const predicateService = new DefaultPredicateService(httpService, q, frameService);
 const classService = new DefaultClassService(httpService, q, predicateService, frameService);
 const vocabularyService = new DefaultVocabularyService(httpService, q, frameService);
+const resetService = new ResetService(httpService);
+
 
 const context = {
   'skos' : 'http://www.w3.org/2004/02/skos/core#',
@@ -35,4 +38,4 @@ const context = {
 };
 
 
-export const loader = new EntityLoader(q, modelService, predicateService, classService, vocabularyService, context);
+export const loader = new EntityLoader(q, modelService, predicateService, classService, vocabularyService, resetService, context, true);
