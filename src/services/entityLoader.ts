@@ -174,7 +174,7 @@ export class EntityLoader {
           const promises: IPromise<any>[] = [];
 
           const resolveVocabulary = (importedVocabulary: string) => {
-            const vocabulary = first(this.vocabularies, (vocabulary: Vocabulary) => vocabulary.id.toString() === importedVocabulary);
+            const vocabulary = first(this.vocabularies, (voc: Vocabulary) => voc.id.toString() === importedVocabulary);
 
             if (!vocabulary) {
               throw new Error('Vocabulary not found: ' + vocabulary);
