@@ -12,7 +12,7 @@ import { KnownModelType } from '../entities/type';
 import { Model, ModelListItem, ImportedNamespace, Link } from '../entities/model';
 
 export interface ModelService {
-  getModelsByGroup(groupUrn: Uri): IPromise<ModelListItem[]>;
+  getModels(): IPromise<ModelListItem[]>;
   getModelByUrn(urn: Uri|Urn): IPromise<Model>;
   getModelByPrefix(prefix: string): IPromise<Model>;
   createModel(model: Model): IPromise<any>;
@@ -30,8 +30,8 @@ export class DefaultModelService implements ModelService {
   constructor(private $http: IHttpService, private $q: IQService, private frameService: FrameService) {
   }
 
-  getModelsByGroup(groupUrn: Uri): IPromise<ModelListItem[]> {
-    return this.$http.get<GraphData>(config.apiEndpointWithName('model'), { params: { group: groupUrn.uri } })
+  getModels(): IPromise<ModelListItem[]> {
+    return this.$http.get<GraphData>(config.apiEndpointWithName('model'))
       .then(response => this.deserializeModelList(response.data!));
   }
 

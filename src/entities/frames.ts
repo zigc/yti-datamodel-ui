@@ -191,7 +191,7 @@ export function modelFrame(data: any, options: { id?: Uri|Urn, prefix?: string }
 }
 
 export function modelListFrame(data: any): Frame {
-  return frame(data, modelContext, { isPartOf: {} });
+  return frame(data, modelContext, { preferredXMLNamespaceName: {} });
 }
 
 export function usageFrame(data: any): Frame {

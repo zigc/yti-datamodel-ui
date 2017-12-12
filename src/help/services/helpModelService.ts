@@ -27,11 +27,11 @@ export class InteractiveHelpModelService implements ModelService, ResetableServi
     return this.$q.when();
   }
 
-  getModelsByGroup(groupUrn: Uri): IPromise<ModelListItem[]> {
+  getModels(): IPromise<ModelListItem[]> {
 
-    const storeModels = this.store.findAll(model => model.groupId.equals(groupUrn));
+    const storeModels = this.store.values();
 
-    return this.defaultModelService.getModelsByGroup(groupUrn).then(models => [...models, ...storeModels]);
+    return this.defaultModelService.getModels().then(models => [...models, ...storeModels]);
   }
 
   getModelByUrn(urn: Uri|Urn): IPromise<Model> {

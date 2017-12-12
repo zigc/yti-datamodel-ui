@@ -3,7 +3,6 @@ export { module } from './module';
 
 import { ClassService, DefaultClassService } from './classService';
 import { VocabularyService, DefaultVocabularyService } from './vocabularyService';
-import { GroupService } from './groupService';
 import { LanguageService } from './languageService';
 import { LocationService } from './locationService';
 import { DefaultModelService, ModelService } from './modelService';
@@ -35,7 +34,6 @@ mod.service('defaultVocabularyService', DefaultVocabularyService);
 mod.factory('vocabularyService', (interactiveHelpService: InteractiveHelpService, defaultVocabularyService: VocabularyService, helpVocabularyService: VocabularyService) =>
   proxyConditionallyToHelp(interactiveHelpService, defaultVocabularyService, helpVocabularyService));
 
-mod.service('groupService', GroupService);
 mod.service('languageService', LanguageService);
 mod.service('locationService', LocationService);
 

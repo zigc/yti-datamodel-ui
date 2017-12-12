@@ -1,4 +1,4 @@
-<div ng-show="ctrl.groups">
+<div ng-show="!ctrl.loading">
 
   <div class="row main-functions-row brand-primary-bg">
     <div class="frontpage-container">
@@ -8,28 +8,9 @@
         <div class="iow-panel-heading"><h3 translate>Search</h3></div>
         <div class="frontpage-panel__body">
 
-          <text-filter search-text="ctrl.searchText" search-controller="ctrl" content-extractors="ctrl.contentExtractors" placeholder="'search descriptions'"></text-filter>
-
-          <div style="display: inline-block; width: 100%">
+          <div style="display: inline-block; width: 100%; margin-top: 20px">
             <span class="advanced-search link" ng-click="ctrl.openAdvancedSearch()" translate>Advanced search</span>
-            <model-language-chooser ng-show="ctrl.searchResults.length > 0" context="ctrl.context"></model-language-chooser>
           </div>
-
-          <ul class="selectable-panel__list search-results">
-            <li ng-show="ctrl.searchText && ctrl.searchResults.length === 0" translate>No search results</li>
-            <li ng-repeat="searchResult in ctrl.searchResults" ng-click="ctrl.selectSearchResult(searchResult)" key-control-selection>
-              <div>
-                <i ng-class="searchResult.glyphIconClass"></i>
-                <span ng-class="{link: searchResult.iowUrl}"><highlight text="searchResult.label" context="ctrl.context" search="ctrl.searchText"></highlight></span>
-              </div>
-
-              <p><highlight text="searchResult.comment" context="ctrl.context" search="ctrl.searchText"></highlight></p>
-              <div class="origin">
-                <span class="pull-left">{{searchResult.definedBy | translateLabel: ctrl.context}}</span>
-                <span class="pull-right" ng-bind-html="searchResult.id.compact | highlight: ctrl.searchText"></span>
-              </div>
-            </li>
-          </ul>
 
         </div>
       </div>
@@ -40,8 +21,8 @@
         <div class="iow-panel-heading"><h3 translate>Browse</h3></div>
         <div class="frontpage-panel__body">
           <ul class="selectable-panel__list">
-            <li ng-repeat="group in ctrl.groups" ng-click="ctrl.selectGroup(group)">
-              <span class="link">{{group | translateLabel}}</span>
+            <li ng-repeat="model in ctrl.models" ng-click="ctrl.selectModel(model)">
+              <span class="link">{{model | translateLabel}}</span>
             </li>
           </ul>
         </div>
@@ -49,38 +30,5 @@
     </div>
     </div>
   </div>
-
-  <div class="row frontpage-container">
-    <div class="text-center frontpage-text-container">
-      <h3></i><span translate>Interoperability method</span></h3>
-      <span translate>Interoperability method description</span>
-    </div>
-  </div>
-  <div class="row main-content-row frontpage-container">
-    <div class="col-md-6">
-      <div ng-repeat="bullet in ctrl.bullets" class="">
-        <blockquote class="front-page-descriptions">
-          <h4>{{bullet.title | translate}}</h4>
-          <span ng-bind-html="bullet.content | translate | trustAsHtml"></span>
-        </blockquote>
-      </div>
-    </div>
-    <div class="col-md-6">
-      <div>
-        <img id="frontpage-image" ng-src="{{ctrl.frontPageImage}}" />
-      </div>
-    </div>
-  </div>
-  <div class="row main-bottom-row">
-    <div class="frontpage-container">
-    <div class="text-center frontpage-text-container">
-      <h3></i><span translate>How?</span></h3>
-      <span translate>How content</span>
-    </div>
-    </div>
-  </div>
-
-
-  <div class="col-md-5 col-md-offset-1"></div>
 
 </div>
