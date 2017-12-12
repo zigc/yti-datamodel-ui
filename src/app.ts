@@ -1,10 +1,9 @@
-import { ICompileProvider, ILogProvider, ILocationProvider, ui, animate } from 'angular';
-import IAnimateProvider = animate.IAnimateProvider;
-import ITooltipProvider = ui.bootstrap.ITooltipProvider;
-import './shim';
 import * as jQuery from 'jquery';
 window.jQuery = jQuery;
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import * as angular from 'angular';
+import { animate, ICompileProvider, ILocationProvider, ILogProvider, ui } from 'angular';
+import './shim';
 import { routeConfig } from './routes';
 import { module as commonModule } from './components/common';
 import { module as editorModule } from './components/editor';
@@ -18,15 +17,38 @@ import { module as filterModule } from './components/filter';
 import { module as componentsModule } from './components';
 import { module as servicesModule } from './services';
 import { module as helpModule } from './help';
+import IAnimateProvider = animate.IAnimateProvider;
+import ITooltipProvider = ui.bootstrap.ITooltipProvider;
+import { BrowserModule } from '@angular/platform-browser';
+import { UpgradeModule } from '@angular/upgrade/static';
+import { NgModule } from '@angular/core';
 
 import './styles/app.scss';
 import 'font-awesome/scss/font-awesome.scss';
+import { HttpModule } from '@angular/http';
 
 require('./vendor/modernizr');
 require('imports?define=>false!jquery-mousewheel/jquery.mousewheel')(jQuery);
 require('angular-gettext');
 require('checklist-model');
 require('ngclipboard');
+
+@NgModule({
+  imports: [
+    BrowserModule,
+    HttpModule,
+    UpgradeModule
+  ]
+})
+export class AppModule {
+
+  constructor(private upgrade: UpgradeModule) {
+  }
+
+  ngDoBootstrap() {
+    this.upgrade.bootstrap(document.body, ['iow-ui'], { strictDi: true });
+  }
+}
 
 const mod = angular.module('iow-ui', [
   require('angular-animate'),
@@ -79,7 +101,7 @@ export const done = new Promise((resolve) => {
   mod.run(() => resolve(true));
 });
 
-angular.bootstrap(document.body, ['iow-ui'], {strictDi: true});
+platformBrowserDynamic().bootstrapModule(AppModule);
 
 // TODO replace with angular 1.6 @types when available
 interface Angular16ICompileProvider extends ICompileProvider {
