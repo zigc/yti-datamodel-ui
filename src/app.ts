@@ -1,8 +1,8 @@
+import './shim';
 import * as jQuery from 'jquery';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import * as angular from 'angular';
 import { animate, ICompileProvider, ILocationProvider, ILogProvider, ui } from 'angular';
-import './shim';
 import { routeConfig } from './routes';
 import { module as commonModule } from './components/common';
 import { module as editorModule } from './components/editor';
