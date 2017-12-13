@@ -19,8 +19,9 @@ export const commonConfig = {
     rules: [
       { test: /\.js$/,                 loaders: ['strip-sourcemap-loader'] },
       { test: /\.css$/,                loaders: ['style-loader', 'css-loader'] },
-      { test: /\.scss$/,               loaders: ['style-loader', 'css-loader', 'sass-loader'] },
-      { test: /\.ts$/, enforce: 'pre', loaders: ['tslint-loader'] },
+      { test: /\.scss$/,               loaders: ['style-loader', 'css-loader', 'sass-loader'], exclude: new RegExp('.*?/components/.*') },
+      { test: /\.scss$/,               loaders: ['raw-loader', 'css-loader', 'sass-loader'], include: new RegExp('.*?/components/.*') },
+      { test: /\.ts$/, enforce: 'pre', loaders: ['tslint-loader'], exclude: /node_modules/ },
       {
         test: /\.ts$/,
         loaders: [

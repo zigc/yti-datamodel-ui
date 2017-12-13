@@ -4099,6 +4099,10 @@ ng-annotate@1.2.1:
     stringset "~0.2.1"
     tryor "~0.1.2"
 
+ng2-translate@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/ng2-translate/-/ng2-translate-5.0.0.tgz#0adbb510eb5007a2d6ded5f5d26888c14760aca5"
+
 ngclipboard@1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/ngclipboard/-/ngclipboard-1.1.1.tgz#5b2c59553db62c726ccb4d41f804cfdb06d6bba0"
@@ -6855,6 +6859,10 @@ yn@^1.2.0:
   resolved "https://registry.yarnpkg.com/yn/-/yn-1.3.0.tgz#1b0812abb8d805d48966f8df385dc9dacc9a19d8"
   dependencies:
     object-assign "^4.1.1"
+
+"yti-common-ui@https://github.com/VRK-YTI/yti-common-ui.git#2f9ef6f0d041c281d2c328928e4e1def0f992ed1":
+  version "0.0.0"
+  resolved "https://github.com/VRK-YTI/yti-common-ui.git#2f9ef6f0d041c281d2c328928e4e1def0f992ed1"
 
 zone.js@^0.8.18:
   version "0.8.18"

@@ -26,6 +26,7 @@ import { NgModule } from '@angular/core';
 import './styles/app.scss';
 import 'font-awesome/scss/font-awesome.scss';
 import { HttpModule } from '@angular/http';
+import { YtiCommonModule } from 'yti-common-ui';
 
 require('./vendor/modernizr');
 require('imports-loader?define=>false!jquery-mousewheel/jquery.mousewheel')(jQuery);
@@ -37,7 +38,8 @@ require('ngclipboard');
   imports: [
     BrowserModule,
     HttpModule,
-    UpgradeModule
+    UpgradeModule,
+    YtiCommonModule
   ]
 })
 export class AppModule {

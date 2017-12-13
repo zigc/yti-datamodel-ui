@@ -28,6 +28,6 @@
       "moment"
     ]
   },
-  "include": [ "src/**/*.ts" ],
-  "exclude": [ "types", "node_modules" , "public", "src/**/*.d.ts", "src/**/*.spec.ts"]
+  "include": [ "src/**/*.ts", "node_modules/yti-common-ui/**/*.ts" ],
+  "exclude": [ "types", "public", "src/**/*.d.ts", "src/**/*.spec.ts"]
 }
