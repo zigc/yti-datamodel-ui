@@ -17,29 +17,29 @@ export const commonConfig = {
 
   module: {
     rules: [
-      { test: /\.js$/,                 loaders: ['strip-sourcemap-loader'] },
-      { test: /\.css$/,                loaders: ['style-loader', 'css-loader'] },
-      { test: /\.scss$/,               loaders: ['style-loader', 'css-loader', 'sass-loader'], exclude: new RegExp('.*?/components/.*') },
-      { test: /\.scss$/,               loaders: ['raw-loader', 'css-loader', 'sass-loader'], include: new RegExp('.*?/components/.*') },
-      { test: /\.ts$/, enforce: 'pre', loaders: ['tslint-loader'], exclude: /node_modules/ },
+      { test: /\.js$/,                 use: ['strip-sourcemap-loader'] },
+      { test: /\.css$/,                use: ['style-loader', 'css-loader'] },
+      { test: /\.scss$/,               use: ['style-loader', 'css-loader', 'sass-loader'], exclude: new RegExp('.*?/components/.*') },
+      { test: /\.scss$/,               use: ['raw-loader', 'css-loader', 'sass-loader'], include: new RegExp('.*?/components/.*') },
+      { test: /\.ts$/, enforce: 'pre', use: ['tslint-loader'], exclude: path.resolve(__dirname, 'node_modules')},
       {
         test: /\.ts$/,
-        loaders: [
+        use: [
           'ng-annotate-loader',
           'ts-loader',
           'angular2-template-loader',
           'strip-sourcemap-loader'
         ]
       },
-      { test: /\.woff(\?.+)?$/,        loaders: ['url-loader?limit=10000&mimetype=application/font-woff'] },
-      { test: /\.woff2(\?.+)?$/,       loaders: ['url-loader?limit=10000&mimetype=application/font-woff'] },
-      { test: /\.ttf(\?.+)?$/,         loaders: ['file-loader'] },
-      { test: /\.eot(\?.+)?$/,         loaders: ['file-loader'] },
-      { test: /\.svg(\?.+)?$/,         loaders: ['file-loader'] },
-      { test: /\.html/,                loaders: ['raw-loader'] },
-      { test: /\.po$/,                 loaders: ['json-loader', 'po-loader?format=mf'] },
-      { test: /\.png$/,                loaders: ['url-loader?mimetype=image/png'] },
-      { test: /\.gif$/,                loaders: ['url-loader?mimetype=image/gif'] }
+      { test: /\.woff(\?.+)?$/,        use: ['url-loader?limit=10000&mimetype=application/font-woff'] },
+      { test: /\.woff2(\?.+)?$/,       use: ['url-loader?limit=10000&mimetype=application/font-woff'] },
+      { test: /\.ttf(\?.+)?$/,         use: ['file-loader'] },
+      { test: /\.eot(\?.+)?$/,         use: ['file-loader'] },
+      { test: /\.svg(\?.+)?$/,         use: ['file-loader'] },
+      { test: /\.html/,                use: ['raw-loader'] },
+      { test: /\.po$/,                 use: ['json-loader', 'po-loader?format=mf'] },
+      { test: /\.png$/,                use: ['url-loader?mimetype=image/png'] },
+      { test: /\.gif$/,                use: ['url-loader?mimetype=image/gif'] }
     ]
   }
 };
