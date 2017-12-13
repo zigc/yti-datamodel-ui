@@ -37,7 +37,6 @@ applyProgressBar(webpack(createVendorConfig(false))).run((err: Error, stats: web
       colors: true
     },
     contentBase: './src',
-    hot: true,
     historyApiFallback: {
       index: '/'
     },
