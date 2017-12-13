@@ -11,6 +11,9 @@ ENV NODE_ENV ${NODE_ENV}
 ENV GIT_DATE ${GIT_DATE}
 ENV GIT_HASH ${GIT_HASH}
 
+# Install git
+RUN apk add --update git
+
 # Install nginx
 RUN apk add --update nginx && \
     rm -rf /var/cache/apk/*
