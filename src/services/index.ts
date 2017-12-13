@@ -1,4 +1,4 @@
-import { module as mod }  from './module';
+import { module as mod } from './module';
 export { module } from './module';
 
 import { ClassService, DefaultClassService } from './classService';
@@ -27,40 +27,47 @@ function proxyConditionallyToHelp<T>(interactiveHelpService: InteractiveHelpServ
 }
 
 mod.service('defaultClassService', DefaultClassService);
-mod.factory('classService', (interactiveHelpService: InteractiveHelpService, defaultClassService: ClassService, helpClassService: ClassService) =>
-  proxyConditionallyToHelp(interactiveHelpService, defaultClassService, helpClassService));
+mod.factory('classService',
+  (interactiveHelpService: InteractiveHelpService, defaultClassService: ClassService, helpClassService: ClassService) =>
+    proxyConditionallyToHelp(interactiveHelpService, defaultClassService, helpClassService));
 
 mod.service('defaultVocabularyService', DefaultVocabularyService);
-mod.factory('vocabularyService', (interactiveHelpService: InteractiveHelpService, defaultVocabularyService: VocabularyService, helpVocabularyService: VocabularyService) =>
-  proxyConditionallyToHelp(interactiveHelpService, defaultVocabularyService, helpVocabularyService));
+mod.factory('vocabularyService',
+  (interactiveHelpService: InteractiveHelpService, defaultVocabularyService: VocabularyService, helpVocabularyService: VocabularyService) =>
+    proxyConditionallyToHelp(interactiveHelpService, defaultVocabularyService, helpVocabularyService));
 
 mod.service('languageService', LanguageService);
 mod.service('locationService', LocationService);
 
 mod.service('defaultModelService', DefaultModelService);
-mod.factory('modelService', (interactiveHelpService: InteractiveHelpService, defaultModelService: ModelService, helpModelService: ModelService) =>
-  proxyConditionallyToHelp(interactiveHelpService, defaultModelService, helpModelService));
+mod.factory('modelService',
+  (interactiveHelpService: InteractiveHelpService, defaultModelService: ModelService, helpModelService: ModelService) =>
+    proxyConditionallyToHelp(interactiveHelpService, defaultModelService, helpModelService));
 
 mod.service('defaultVisualizationService', DefaultVisualizationService);
-mod.factory('visualizationService', (interactiveHelpService: InteractiveHelpService, defaultVisualizationService: VisualizationService, helpVisualizationService: VisualizationService) =>
-  proxyConditionallyToHelp(interactiveHelpService, defaultVisualizationService, helpVisualizationService));
+mod.factory('visualizationService',
+  (interactiveHelpService: InteractiveHelpService, defaultVisualizationService: VisualizationService, helpVisualizationService: VisualizationService) =>
+    proxyConditionallyToHelp(interactiveHelpService, defaultVisualizationService, helpVisualizationService));
 
 mod.service('referenceDataService', ReferenceDataService);
 
 mod.service('defaultPredicateService', DefaultPredicateService);
-mod.factory('predicateService', (interactiveHelpService: InteractiveHelpService, defaultPredicateService: PredicateService, helpPredicateService: PredicateService) =>
-  proxyConditionallyToHelp(interactiveHelpService, defaultPredicateService, helpPredicateService));
+mod.factory('predicateService',
+  (interactiveHelpService: InteractiveHelpService, defaultPredicateService: PredicateService, helpPredicateService: PredicateService) =>
+    proxyConditionallyToHelp(interactiveHelpService, defaultPredicateService, helpPredicateService));
 
 mod.service('searchService', SearchService);
 mod.service('usageService', UsageService);
 
 mod.service('defaultUserService', DefaultUserService);
-mod.factory('userService', (interactiveHelpService: InteractiveHelpService, defaultUserService: UserService, helpUserService: UserService) =>
-  proxyConditionallyToHelp(interactiveHelpService, defaultUserService, helpUserService));
+mod.factory('userService',
+  (interactiveHelpService: InteractiveHelpService, defaultUserService: UserService, helpUserService: UserService) =>
+    proxyConditionallyToHelp(interactiveHelpService, defaultUserService, helpUserService));
 
 mod.service('defaultValidatorService', DefaultValidatorService);
-mod.service('validatorService', (interactiveHelpService: InteractiveHelpService, defaultValidatorService: ValidatorService, helpValidatorService: InteractiveHelpValidatorService) =>
-  proxyConditionallyToHelp(interactiveHelpService, defaultValidatorService, helpValidatorService));
+mod.service('validatorService',
+  (interactiveHelpService: InteractiveHelpService, defaultValidatorService: ValidatorService, helpValidatorService: InteractiveHelpValidatorService) =>
+    proxyConditionallyToHelp(interactiveHelpService, defaultValidatorService, helpValidatorService));
 
 mod.service('historyService', HistoryService);
 mod.service('resetService', ResetService);

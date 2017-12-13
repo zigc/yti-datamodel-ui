@@ -1,11 +1,9 @@
 import { Moment } from 'moment';
 import { Localizable } from '../entities/contract';
-import { isDefined, Optional } from '../utils/object';
-import { Localizer } from '../utils/language';
+import { isDefined, Optional } from './object';
+import { Localizer } from './language';
 
-export interface Comparator<T> {
-  (lhs: T, rhs: T): number;
-}
+export type Comparator<T> = (lhs: T, rhs: T) =>  number;
 
 export interface ChainableComparator<T> extends Comparator<T> {
   andThen(other: Comparator<T>): ChainableComparator<T>;

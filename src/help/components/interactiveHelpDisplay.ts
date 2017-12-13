@@ -156,10 +156,16 @@ class InteractiveHelpController {
     const keyDownHandler = (event: JQueryEventObject) => this.keyDownHandler(event);
     const clickHandler = (event: JQueryEventObject) => this.clickHandler(event);
 
+    function updateIfNeeded(newPos: Positioning|null, oldPos: Positioning|null) {
+      if (!isPositionInMargin(1, newPos, oldPos)) {
+        debounceUpdatePositions();
+      }
+    }
+
     // Additional checks for sub-pixel fluctuation are needed for example because of float (fixed style)
-    $scope.$watch(itemPopoverPositioning, (newPos, oldPos) => { if (!isPositionInMargin(1, newPos, oldPos)) debounceUpdatePositions(); }, true);
-    $scope.$watch(itemFocusPositioning, (newPos, oldPos) => { if (!isPositionInMargin(1, newPos, oldPos)) debounceUpdatePositions(); }, true);
-    $scope.$watch(itemScrollPositioning, (newPos, oldPos) => { if (!isPositionInMargin(1, newPos, oldPos)) debounceUpdatePositions(); }, true);
+    $scope.$watch(itemPopoverPositioning, updateIfNeeded, true);
+    $scope.$watch(itemFocusPositioning, updateIfNeeded, true);
+    $scope.$watch(itemScrollPositioning, updateIfNeeded, true);
 
     $scope.$watch(() => this.getPopoverDimensions(), debounceUpdatePositions, true);
 
@@ -712,9 +718,22 @@ mod.directive('helpPopover', () => {
         <div class="help-content-wrapper">
           <h3 ng-show="ctrl.title" ng-bind="ctrl.title | translate"></h3>
           <p ng-show="ctrl.content" ng-bind="ctrl.content | translate"></p>
-          <button ng-show="ctrl.showPrevious" ng-disabled="!ctrl.helpController.canMoveToPrevious()" ng-click="ctrl.helpController.moveToPreviousItem()" class="small button help-navigate" translate>previous</button>
-          <button ng-show="ctrl.showNext" ng-disabled="!ctrl.helpController.canMoveToNext()" ng-click="ctrl.helpController.tryToMoveToNextItem()" class="small button help-navigate" translate>next</button>
-          <button ng-show="ctrl.showClose" ng-disabled="!ctrl.helpController.canMoveToNext()" ng-click="ctrl.helpController.close(false)" class="small button help-next" translate>close</button>
+          
+          <button ng-show="ctrl.showPrevious" 
+                  ng-disabled="!ctrl.helpController.canMoveToPrevious()" 
+                  ng-click="ctrl.helpController.moveToPreviousItem()" 
+                  class="small button help-navigate" translate>previous</button>
+                  
+          <button ng-show="ctrl.showNext" 
+                  ng-disabled="!ctrl.helpController.canMoveToNext()" 
+                  ng-click="ctrl.helpController.tryToMoveToNextItem()" 
+                  class="small button help-navigate" translate>next</button>
+                  
+          <button ng-show="ctrl.showClose" 
+                  ng-disabled="!ctrl.helpController.canMoveToNext()" 
+                  ng-click="ctrl.helpController.close(false)" 
+                  class="small button help-next" translate>close</button>
+                  
           <a ng-click="ctrl.helpController.close(true)" class="help-close">&times;</a>
         </div>
     `,
@@ -848,28 +867,30 @@ class HelpPopoverController {
         newWidth += newLeft;
         newLeft = 0;
         newHeight = undefined; // allow to expand
-      }
-
-      if (newTop < 0) {
+      } else if (newTop < 0) {
         newHeight += newTop;
         newTop = 0;
         newWidth = undefined; // allow to expand
       }
 
-      const right = newLeft + newWidth;
+      if (newWidth) {
+        const right = newLeft + newWidth;
 
-      if (right > documentWidth) {
-        newWidth += documentWidth - right;
-        newLeft = documentWidth - newWidth;
-        newHeight = undefined; // allow to expand
+        if (right > documentWidth) {
+          newWidth += documentWidth - right;
+          newLeft = documentWidth - newWidth;
+          newHeight = undefined; // allow to expand
+        }
       }
 
-      const bottom = newTop + newHeight;
+      if (newHeight) {
+        const bottom = newTop + newHeight;
 
-      if (bottom > documentHeight) {
-        newHeight += documentHeight - bottom;
-        newTop = documentHeight - newHeight;
-        newWidth = undefined; // allow to expand
+        if (bottom > documentHeight) {
+          newHeight += documentHeight - bottom;
+          newTop = documentHeight - newHeight;
+          newWidth = undefined; // allow to expand
+        }
       }
 
       return { left: newLeft, top: newTop, width: newWidth, height: newHeight };
@@ -905,6 +926,14 @@ class HelpBackdropController {
 
   helpController: InteractiveHelpController;
 
+  private static fullBackdrop = {
+    top: { left: 0, top: 0, right: 0, bottom: 0 },
+    right: { left: 0, top: 0, width: 0, height: 0 },
+    bottom: { left: 0, top: 0, width: 0, height: 0 },
+    left: { left: 0, top: 0, width: 0, height: 0 },
+    focus: { left: 0, top: 0, width: 0, height: 0 }
+  };
+
   constructor(private $document: IDocumentService) {
     this.helpController.registerBackdrop(this);
   }
@@ -918,14 +947,6 @@ class HelpBackdropController {
       this.regions = this.resolveRegions(this.item);
     }
   }
-
-  private static fullBackdrop = {
-    top: { left: 0, top: 0, right: 0, bottom: 0 },
-    right: { left: 0, top: 0, width: 0, height: 0 },
-    bottom: { left: 0, top: 0, width: 0, height: 0 },
-    left: { left: 0, top: 0, width: 0, height: 0 },
-    focus: { left: 0, top: 0, width: 0, height: 0 }
-  };
 
   private resolveRegions(item: Story|Notification): Optional<Regions> {
     switch (item.type) {
@@ -1023,7 +1044,10 @@ function resolveArrowClass(item: Optional<Story|Notification>) {
   }
 }
 
-type Dimensions = { width: number, height: number };
+interface Dimensions {
+  width: number;
+  height: number
+}
 
 interface PopoverDimensionsProvider {
   getDimensions(): Dimensions;

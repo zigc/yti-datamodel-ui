@@ -3,7 +3,7 @@ import { ModelViewController } from './modelView';
 import { LanguageService } from '../../services/languageService';
 import { TableDescriptor, ColumnDescriptor } from '../form/editableTable';
 import { SearchVocabularyModal } from './searchVocabularyModal';
-import { module as mod }  from './module';
+import { module as mod } from './module';
 import { createExistsExclusion } from '../../utils/exclusion';
 import { ConceptEditorModal } from './conceptEditorModal';
 import { collectProperties } from '../../utils/array';

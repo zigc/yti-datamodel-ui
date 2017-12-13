@@ -24,7 +24,7 @@ function loadingScreen() {
 
 if (Modernizr.es5syntax && Modernizr.svg) {
 
-  let waitScreen = loadingScreen();
+  const waitScreen = loadingScreen();
 
   require.ensure(['./app'], require => {
     require('./app').done.then(() => waitScreen.finish());

@@ -16,7 +16,7 @@ import { Show, ChangeNotifier, ChangeListener, SearchClassType, WithDefinedBy } 
 import { Uri } from '../../entities/uri';
 import { comparingLocalizable } from '../../utils/comparators';
 import { AddPropertiesFromClassModal } from '../editor/addPropertiesFromClassModal';
-import { module as mod }  from './module';
+import { module as mod } from './module';
 import { isDifferentUrl, nextUrl, modalCancelHandler } from '../../utils/angular';
 import {
   createClassTypeExclusion, createDefinedByExclusion, combineExclusions,
@@ -280,12 +280,18 @@ export class ModelPageController implements ModelPageActions, HelpProvider, Mode
   }
 
   getUsedNamespaces(): Set<string> {
-    return new Set<string>(_.chain<WithDefinedBy>(this.associations)
-                         .concat(this.attributes)
-                         .concat(this.classes)
-                         .filter(item => item && item.definedBy)
-                         .map(item => item.definedBy!.id.uri)
-                         .value());
+
+    const resources: WithDefinedBy[] = [
+      ...this.associations,
+      ...this.attributes,
+      ...this.classes
+    ];
+
+    const namespaces = resources
+      .filter(item => item && item.definedBy)
+      .map(item => item.definedBy!.id.uri);
+
+    return new Set<string>(namespaces);
   }
 
   registerView(view: View) {
@@ -707,7 +713,7 @@ function setOverlaps(items: SelectableItem[]) {
   }
 }
 
-class SelectableItem {
+class SelectableItem implements WithDefinedBy {
 
   hasOverlap = false;
 

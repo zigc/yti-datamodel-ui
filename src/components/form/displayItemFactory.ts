@@ -72,13 +72,13 @@ export class DisplayItem {
   }
 }
 
-export type DisplayItemConfiguration = {
+export interface DisplayItemConfiguration {
+  hideLinks?: () => boolean;
+  valueAsLocalizationKey?: boolean;
   context(): LanguageContext;
   value(): Value;
   link?(): string;
   onClick?(value: Value): void;
-  hideLinks?: () => boolean;
-  valueAsLocalizationKey?: boolean;
 }
 
 

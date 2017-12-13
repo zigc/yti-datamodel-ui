@@ -3,7 +3,6 @@ import {
   GraphData, EntityFactory, EntityConstructor,
   EntityArrayFactory, EntityArrayConstructor
 } from '../entities/contract';
-import { Frame } from '../entities/frames';
 import { normalizeAsArray } from '../utils/array';
 import { GraphNode, GraphNodes } from '../entities/graphNode';
 
@@ -26,7 +25,7 @@ export class FrameService {
   }
 
 
-  frameAndMap<T extends GraphNode>(data: GraphData, optional: boolean, frame: Frame, entityFactory: EntityFactory<T>): IPromise<T> {
+  frameAndMap<T extends GraphNode>(data: GraphData, optional: boolean, frame: {}, entityFactory: EntityFactory<T>): IPromise<T> {
 
     return this.frameData(data, frame)
       .then(framed => {
@@ -46,7 +45,7 @@ export class FrameService {
       });
   }
 
-  frameAndMapArray<T extends GraphNode>(data: GraphData, frame: Frame, entityFactory: EntityFactory<T>): IPromise<T[]> {
+  frameAndMapArray<T extends GraphNode>(data: GraphData, frame: {}, entityFactory: EntityFactory<T>): IPromise<T[]> {
 
     return this.frameData(data, frame)
       .then(framed => {
@@ -62,7 +61,7 @@ export class FrameService {
       });
   }
 
-  frameAndMapArrayEntity<T extends GraphNode, A extends GraphNodes<T>>(data: GraphData, frame: Frame, entityArrayFactory: EntityArrayFactory<T, A>): IPromise<A> {
+  frameAndMapArrayEntity<T extends GraphNode, A extends GraphNodes<T>>(data: GraphData, frame: {}, entityArrayFactory: EntityArrayFactory<T, A>): IPromise<A> {
 
     return this.frameData(data, frame)
       .then(framed => {

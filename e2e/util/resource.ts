@@ -3,10 +3,28 @@ import { defaultModelNamespaceForEnvironmentAndPrefix } from '../../config';
 import { ClassType, KnownPredicateType } from '../../src/entities/type';
 import { assertNever } from '../../src/utils/object';
 
-export type FromConceptSuggestion = { type: 'conceptSuggestion', name: string };
-export type FromExistingConcept =   { type: 'existingConcept', name: string, conceptId: string };
-export type FromExistingResource =  { type: 'existingResource', name: string, id: string };
-export type FromExternalResource =  { type: 'externalResource', name: string, id: string };
+export interface FromConceptSuggestion {
+  type: 'conceptSuggestion',
+  name: string
+}
+
+export interface FromExistingConcept {
+  type: 'existingConcept',
+  name: string,
+  conceptId: string
+}
+
+export interface FromExistingResource {
+  type: 'existingResource',
+  name: string,
+  id: string
+}
+
+export interface FromExternalResource {
+  type: 'externalResource',
+  name: string,
+  id: string
+}
 
 export type AddResourceParameters = FromConceptSuggestion
                                   | FromExistingConcept
@@ -34,14 +52,12 @@ export interface ResourceDescriptor<T> {
   type: T;
 }
 
-export interface PropertyDescriptor extends ResourceDescriptor<KnownPredicateType> {
-}
+export type PropertyDescriptor = ResourceDescriptor<KnownPredicateType>;
 
-export interface PredicateDescriptor extends ResourceDescriptor<KnownPredicateType> {
-}
+export type PredicateDescriptor = ResourceDescriptor<KnownPredicateType>;
 
 export interface ClassDescriptor extends ResourceDescriptor<ClassType> {
-  properties?: PropertyDescriptor[];
+  properties?: ResourceDescriptor<KnownPredicateType>[];
 }
 
 export function modelIdFromPrefix(modelPrefix: string) {

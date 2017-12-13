@@ -31,7 +31,7 @@ class AdvancedSearchController implements SearchController<SearchResult> {
   close = this.$uibModalInstance.dismiss;
   searchResults: SearchResult[];
   types: Type[] = ['model', 'class', 'shape', 'attribute', 'association'];
-  searchText: string = '';
+  searchText = '';
   private localizer: Localizer;
 
   contentExtractors = [ (searchResult: SearchResult) => searchResult.label, (searchResult: SearchResult) => searchResult.comment ];
@@ -70,7 +70,14 @@ class AdvancedSearchController implements SearchController<SearchResult> {
   }
 
   search() {
-    this.searchResults = filterAndSortSearchResults<SearchResult>(this.apiSearchResults, this.searchText, this.contentExtractors, this.searchFilters, defaultLabelComparator(this.localizer));
+    this.searchResults =
+      filterAndSortSearchResults<SearchResult>(
+        this.apiSearchResults,
+        this.searchText,
+        this.contentExtractors,
+        this.searchFilters,
+        defaultLabelComparator(this.localizer)
+      );
   }
 
   selectSearchResult(searchResult: SearchResult) {

@@ -11,12 +11,12 @@ export type Role = 'ADMIN'
 export type UUID = string;
 
 export interface User {
+  name: string|null;
   isLoggedIn(): boolean;
   isMemberOf(entity: AbstractModel|AbstractGroup): boolean;
   isMemberOfGroup(id: Uri): boolean;
   isAdminOf(entity: AbstractModel|AbstractGroup): boolean;
   isAdminOfGroup(id: Uri): boolean;
-  name: string|null;
 }
 
 export class DefaultUser implements User {

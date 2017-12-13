@@ -155,7 +155,8 @@ export class EntityLoader {
   }
 
   createConceptSuggestion(details: ConceptSuggestionDetails, modelPromise: IPromise<Model>): IPromise<Concept> {
-    const result = modelPromise.then((model: Model) => this.vocabularyService.createConceptSuggestion(model.modelVocabularies[0].vocabulary, details.label, details.comment, null, 'fi', model));
+    const result = modelPromise.then((model: Model) =>
+      this.vocabularyService.createConceptSuggestion(model.modelVocabularies[0].vocabulary, details.label, details.comment, null, 'fi', model));
 
     return this.addAction(result, details);
   }
@@ -187,20 +188,22 @@ export class EntityLoader {
               model.addVocabulary(resolveVocabulary(importedVocabulary));
           }
 
-          for (const ns of details.namespaces || []) {
+          for (const namespace of details.namespaces || []) {
 
-            if (isUriResolvable(ns)) {
+            if (isUriResolvable(namespace)) {
               promises.push(
-                asUriPromise(assertExists(ns, 'namespace for ' + model.label['fi']), this.context)
-                  .then(importedNamespace => this.$q.all([this.$q.when(importedNamespace), this.modelService.getAllImportableNamespaces()]))
-                  .then(([importedNamespace, importableNamespaces]: [Uri, ImportedNamespace[]]) => model.addNamespace(requireDefined(first(importableNamespaces, ns => ns.id.equals(importedNamespace)))))
+                asUriPromise(assertExists(namespace, 'namespace for ' + model.label['fi']), this.context)
+                  .then(importedNamespace =>
+                    this.$q.all([this.$q.when(importedNamespace), this.modelService.getAllImportableNamespaces()]))
+                  .then(([importedNamespace, importableNamespaces]: [Uri, ImportedNamespace[]]) =>
+                    model.addNamespace(requireDefined(first(importableNamespaces, ns => ns.id.equals(importedNamespace)))))
               );
-            } else if (isExternalNamespace(ns)) {
-              promises.push(this.modelService.newNamespaceImport(ns.namespace, ns.prefix, ns.label, 'fi')
+            } else if (isExternalNamespace(namespace)) {
+              promises.push(this.modelService.newNamespaceImport(namespace.namespace, namespace.prefix, namespace.label, 'fi')
                 .then(newImportedNamespace => model.addNamespace(newImportedNamespace))
               );
             } else {
-              throw new Error('Unknown namespace: ' + ns);
+              throw new Error('Unknown namespace: ' + namespace);
             }
           }
 
@@ -245,8 +248,8 @@ export class EntityLoader {
               const promises: IPromise<any>[] = [];
 
               for (const property of details.properties || []) {
-                promises.push(this.createProperty(modelPromise, property).then(property => {
-                  shape.addProperty(property);
+                promises.push(this.createProperty(modelPromise, property).then(prop => {
+                  shape.addProperty(prop);
                 }));
               }
 
@@ -259,7 +262,8 @@ export class EntityLoader {
               }
 
               for (const equivalentClass of details.equivalentClasses || []) {
-                promises.push(asUriPromise(assertExists(equivalentClass, 'equivalent class for ' + details.class.toString()), this.context, shape.context).then(id => shape.equivalentClasses.push(id)));
+                promises.push(asUriPromise(assertExists(equivalentClass, 'equivalent class for ' + details.class.toString()), this.context, shape.context)
+                  .then(id => shape.equivalentClasses.push(id)));
               }
 
               if (details.constraint) {
@@ -267,7 +271,8 @@ export class EntityLoader {
                 shape.constraint.comment = details.constraint.comment;
 
                 for (const constraintShape of details.constraint.shapes) {
-                  promises.push(asPromise(assertExists(constraintShape, 'constraint item for ' + details.class.toString())).then(item => shape.constraint.addItem(item)));
+                  promises.push(asPromise(assertExists(constraintShape, 'constraint item for ' + details.class.toString()))
+                    .then(item => shape.constraint.addItem(item)));
                 }
               }
 
@@ -297,14 +302,16 @@ export class EntityLoader {
           const promises: IPromise<any>[] = [];
 
           for (const property of details.properties || []) {
-            promises.push(this.createProperty(modelPromise, property).then(property => klass.addProperty(property)));
+            promises.push(this.createProperty(modelPromise, property)
+              .then(prop => klass.addProperty(prop)));
           }
 
           assertPropertyValueExists(details, 'subClassOf for ' + details.label['fi']);
           promises.push(asUriPromise(details.subClassOf!, this.context, klass.context).then(uri => klass.subClassOf = uri));
 
           for (const equivalentClass of details.equivalentClasses || []) {
-            promises.push(asUriPromise(assertExists(equivalentClass, 'equivalent class for ' + details.label['fi']), this.context, klass.context).then(uri => klass.equivalentClasses.push(uri)));
+            promises.push(asUriPromise(assertExists(equivalentClass, 'equivalent class for ' + details.label['fi']), this.context, klass.context)
+              .then(uri => klass.equivalentClasses.push(uri)));
           }
 
           if (details.constraint) {
@@ -312,7 +319,8 @@ export class EntityLoader {
             klass.constraint.comment = details.constraint.comment;
 
             for (const constraintShape of details.constraint.shapes) {
-              promises.push(asPromise(assertExists(constraintShape, 'constraint item for ' + details.label['fi'])).then(item => klass.constraint.addItem(item)));
+              promises.push(asPromise(assertExists(constraintShape, 'constraint item for ' + details.label['fi']))
+                .then(item => klass.constraint.addItem(item)));
             }
           }
 
@@ -336,7 +344,10 @@ export class EntityLoader {
     return this.addAction(result, 'assign predicate');
   }
 
-  createPredicate<T extends Attribute|Association>(modelPromise: IPromise<Model>, type: KnownPredicateType, details: PredicateDetails, mangler: (predicate: T) => IPromise<any>): IPromise<T> {
+  createPredicate<T extends Attribute|Association>(modelPromise: IPromise<Model>,
+                                                   type: KnownPredicateType,
+                                                   details: PredicateDetails,
+                                                   mangler: (predicate: T) => IPromise<any>): IPromise<T> {
 
     const concept = details.concept;
     const conceptIdPromise = isConceptSuggestion(concept)
@@ -356,7 +367,8 @@ export class EntityLoader {
           promises.push(asUriPromise(details.subPropertyOf!, this.context, predicate.context).then(uri => predicate.subPropertyOf = uri));
 
           for (const equivalentProperty of details.equivalentProperties || []) {
-            promises.push(asUriPromise(assertExists(equivalentProperty, 'equivalent property for ' + details.label['fi']), this.context, predicate.context).then(uri => predicate.equivalentProperties.push(uri)));
+            promises.push(asUriPromise(assertExists(equivalentProperty, 'equivalent property for ' + details.label['fi']), this.context, predicate.context)
+              .then(uri => predicate.equivalentProperties.push(uri)));
           }
 
           promises.push(mangler(predicate));

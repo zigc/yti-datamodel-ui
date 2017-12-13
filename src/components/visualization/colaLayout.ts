@@ -130,7 +130,7 @@ export function layout(graph: joint.dia.Graph, onlyNodeIds: string[] = []): Prom
       }
     }
 
-    return { x: minX, y: minY };
+    return { x: minX!, y: minY! };
   }
 
   return new Promise((resolve) => {

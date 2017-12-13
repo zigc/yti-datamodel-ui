@@ -1,4 +1,4 @@
-import { module as mod }  from './module';
+import { module as mod } from './module';
 import { IScope, IAttributes, INgModelController, IFormController } from 'angular';
 
 mod.directive('ignoreForm', () => {

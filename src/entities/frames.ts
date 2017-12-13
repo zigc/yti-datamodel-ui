@@ -1,6 +1,4 @@
-import { Uri, Urn, Url } from '../entities/uri';
-
-export type Frame = {};
+import { Uri, Urn, Url } from './uri';
 
 const inScheme = { '@id': 'http://www.w3.org/2004/02/skos/core#inScheme', '@type': '@id' };
 const subject = { '@id': 'http://purl.org/dc/terms/subject', '@type': '@id' };
@@ -24,7 +22,7 @@ const coreContext = {
   modified: { '@id': 'http://purl.org/dc/terms/modified', '@type': 'http://www.w3.org/2001/XMLSchema#dateTime' },
   nodeKind: { '@id': 'http://www.w3.org/ns/shacl#nodeKind', '@type': '@id' },
   prefLabel: { '@id': 'http://www.w3.org/2004/02/skos/core#prefLabel', '@container': '@language' },
-  prov: "http://www.w3.org/ns/prov#",
+  prov: 'http://www.w3.org/ns/prov#',
   title: { '@id': 'http://purl.org/dc/terms/title', '@container': '@language' },
   versionInfo: { '@id': 'http://www.w3.org/2002/07/owl#versionInfo' },
   editorialNote: { '@id': 'http://www.w3.org/2004/02/skos/core#editorialNote', '@container': '@language' }
@@ -143,7 +141,7 @@ function frame(data: any, context: {}, frame?: {}) {
   return Object.assign({ '@context': Object.assign({}, data['@context'], context) }, frame);
 }
 
-export function groupFrame(data: any, id: Uri): Frame {
+export function groupFrame(data: any, id: Uri) {
   return frame(data, groupContext, {
     '@id': id.toString(),
     graph: {
@@ -154,7 +152,7 @@ export function groupFrame(data: any, id: Uri): Frame {
   });
 }
 
-export function groupListFrame(data: any): Frame {
+export function groupListFrame(data: any) {
   return frame(data, groupContext, {
     '@type': 'foaf:Group',
     graph: {
@@ -165,7 +163,7 @@ export function groupListFrame(data: any): Frame {
   });
 }
 
-export function modelFrame(data: any, options: { id?: Uri|Urn, prefix?: string } = {}): Frame {
+export function modelFrame(data: any, options: { id?: Uri|Urn, prefix?: string } = {}) {
 
   const frameObj: any = {
     isPartOf: {},
@@ -190,11 +188,11 @@ export function modelFrame(data: any, options: { id?: Uri|Urn, prefix?: string }
   return frame(data, modelContext, frameObj);
 }
 
-export function modelListFrame(data: any): Frame {
+export function modelListFrame(data: any) {
   return frame(data, modelContext, { preferredXMLNamespaceName: {} });
 }
 
-export function usageFrame(data: any): Frame {
+export function usageFrame(data: any) {
   return frame(data, usageContext, {
     isReferencedBy: {
       '@id': {},
@@ -207,11 +205,11 @@ export function usageFrame(data: any): Frame {
   });
 }
 
-export function propertyFrame(data: any): Frame {
+export function propertyFrame(data: any) {
   return frame(data, propertyContext, { '@id': data['@id'] });
 }
 
-export function predicateListFrame(data: any): Frame {
+export function predicateListFrame(data: any) {
   return frame(data, predicateContext, { isDefinedBy: {} });
 }
 
@@ -228,7 +226,7 @@ const embeddedSubject: any = {
   }
 };
 
-export function predicateFrame(data: any): Frame {
+export function predicateFrame(data: any) {
   return frame(data, predicateContext, {
     '@type': ['owl:DatatypeProperty', 'owl:ObjectProperty', 'rdf:Property'],
     isDefinedBy: {'@embed': '@always'},
@@ -236,7 +234,7 @@ export function predicateFrame(data: any): Frame {
   });
 }
 
-export function classFrame(data: any): Frame {
+export function classFrame(data: any) {
   return frame(data, classContext, {
     '@type': ['rdfs:Class', 'sh:Shape'],
     isDefinedBy: { '@embed': '@always' },
@@ -261,11 +259,11 @@ export function classFrame(data: any): Frame {
   });
 }
 
-export function classListFrame(data: any): Frame {
+export function classListFrame(data: any) {
   return frame(data, classContext, { isDefinedBy: {} });
 }
 
-export function conceptFrame(data: any, id: Uri|Url): Frame {
+export function conceptFrame(data: any, id: Uri|Url) {
 
   return frame(data, conceptContext, {
     '@id': id.toString(),
@@ -287,7 +285,7 @@ export function conceptFrame(data: any, id: Uri|Url): Frame {
   });
 }
 
-export function conceptListFrame(data: any): Frame {
+export function conceptListFrame(data: any) {
 
   return frame(data, conceptContext, {
     '@type': 'skos:Concept',
@@ -309,7 +307,7 @@ export function conceptListFrame(data: any): Frame {
   });
 }
 
-export function vocabularyFrame(data: any): Frame {
+export function vocabularyFrame(data: any) {
   return frame(data, vocabularyContext, {
     '@type': ['skos:ConceptScheme'],
     graph: {
@@ -325,17 +323,17 @@ export function vocabularyFrame(data: any): Frame {
   });
 }
 
-export function namespaceFrame(data: any): Frame {
+export function namespaceFrame(data: any) {
   return frame(data, namespaceContext);
 }
 
-export function referenceDataServerFrame(data: any): Frame {
+export function referenceDataServerFrame(data: any) {
   return frame(data, referenceDataServerContext, {
     identifier: {}
   });
 }
 
-export function referenceDataFrame(data: any): Frame {
+export function referenceDataFrame(data: any) {
   return frame(data, referenceDataContext, {
     '@type': ['iow:FCodeScheme', 'dcam:VocabularyEncodingScheme'],
     isPartOf: {
@@ -346,11 +344,11 @@ export function referenceDataFrame(data: any): Frame {
   });
 }
 
-export function referenceDataCodeFrame(data: any): Frame {
+export function referenceDataCodeFrame(data: any) {
   return frame(data, referenceDataCodeContext, { '@type': 'iow:FCode' });
 }
 
-export function searchResultFrame(data: any): Frame {
+export function searchResultFrame(data: any) {
   return frame(data, searchResultContext, {
     '@id': {},
     '@type': {},
@@ -362,7 +360,7 @@ export function searchResultFrame(data: any): Frame {
   });
 }
 
-export function classVisualizationFrame(data: any): Frame {
+export function classVisualizationFrame(data: any) {
   return frame(data, classContext, {
     '@type': ['rdfs:Class', 'sh:Shape'],
     property: {
@@ -399,7 +397,7 @@ export function classVisualizationFrame(data: any): Frame {
   });
 }
 
-export function modelPositionsFrame(data: any): Frame {
+export function modelPositionsFrame(data: any) {
   return frame(data, modelPositionContext, {
     '@type': ['rdfs:Class', 'sh:Shape'],
     property: {
@@ -411,7 +409,7 @@ export function modelPositionsFrame(data: any): Frame {
   });
 }
 
-export function versionFrame(data: any): Frame {
+export function versionFrame(data: any) {
   return frame(data, versionContext, {
     generated: {
       wasAttributedTo: {},

@@ -3,7 +3,7 @@ import { SearchPredicateModal } from './searchPredicateModal';
 import { SearchClassModal } from './searchClassModal';
 import { EditableForm } from '../form/editableEntityController';
 import { Uri } from '../../entities/uri';
-import { module as mod }  from './module';
+import { module as mod } from './module';
 import { DataSource } from '../form/dataSource';
 import { ClassService } from '../../services/classService';
 import { PredicateService } from '../../services/predicateService';
@@ -71,16 +71,21 @@ class UriSelectController {
   duplicate: (uri: Uri) => boolean;
   defaultToCurrentModel: boolean;
   datasource: DataSource<DataType>;
-  valueExtractor = (item: DataType) => item.id;
+  private change: Uri|null = null;
+
   excludeId: (id: Uri) => string;
   excludeItem: (item: DataType) => string;
+  valueExtractor = (item: DataType) => item.id;
 
   createIdExclusion = () => idExclusion(this.excludeId, this.excludeItem, this.datasource, this.$q);
   createItemExclusion = () => itemExclusion(this.excludeId, this.excludeItem);
 
-  private change: Uri|null = null;
-
-  constructor($scope: IScope, private $q: IQService, private searchPredicateModal: SearchPredicateModal, private searchClassModal: SearchClassModal, classService: ClassService, predicateService: PredicateService) {
+  constructor($scope: IScope,
+              private $q: IQService,
+              private searchPredicateModal: SearchPredicateModal,
+              private searchClassModal: SearchClassModal,
+              classService: ClassService,
+              predicateService: PredicateService) {
 
     const modelProvider = () => this.model;
     this.datasource = this.type === 'class' || this.type === 'shape' ? classService.getClassesForModelDataSource(modelProvider)

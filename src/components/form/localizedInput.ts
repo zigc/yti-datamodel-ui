@@ -2,7 +2,7 @@ import { IAttributes, INgModelController, IScope } from 'angular';
 import { LanguageService } from '../../services/languageService';
 import { isValidString, isValidLabelLength, isValidModelLabelLength } from './validators';
 import { allLocalizations, hasLocalization } from '../../utils/language';
-import { module as mod }  from './module';
+import { module as mod } from './module';
 import { LanguageContext, Localizable } from '../../entities/contract';
 
 interface LocalizedInputAttributes extends IAttributes {

@@ -39,7 +39,7 @@ class SearchNamespaceController implements SearchController<ImportedNamespace> {
 
   searchResults: ImportedNamespace[];
   namespaces: ImportedNamespace[];
-  searchText: string = '';
+  searchText = '';
   showTechnical: boolean;
   loadingResults: boolean;
 

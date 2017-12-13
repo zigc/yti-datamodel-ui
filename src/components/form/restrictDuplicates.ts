@@ -2,7 +2,7 @@ import { IAttributes, INgModelController, IScope } from 'angular';
 import { Uri } from '../../entities/uri';
 import { contains, containsAny, flatten } from '../../utils/array';
 import { referenceEquality } from '../../utils/object';
-import { module as mod }  from './module';
+import { module as mod } from './module';
 
 interface RestrictDuplicatesAttributes extends IAttributes {
   restrictDuplicates: string;

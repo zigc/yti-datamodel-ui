@@ -2,7 +2,7 @@ import { IAttributes, IAsyncModelValidators, IQService, IScope, INgModelControll
 import gettextCatalog = angular.gettext.gettextCatalog;
 import { ReferenceDataService } from '../../services/referenceDataService';
 import { LanguageService } from '../../services/languageService';
-import { module as mod }  from './module';
+import { module as mod } from './module';
 import { any } from '../../utils/array';
 import { ReferenceData } from '../../entities/referenceData';
 

@@ -1,6 +1,6 @@
 import { IAttributes, IScope } from 'angular';
 import { Uri } from '../../entities/uri';
-import { module as mod }  from './module';
+import { module as mod } from './module';
 import { PredicateService } from '../../services/predicateService';
 import { SearchPredicateModal } from './searchPredicateModal';
 import { createDefinedByExclusion } from '../../utils/exclusion';

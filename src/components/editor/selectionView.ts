@@ -1,5 +1,5 @@
 import { Show } from '../contracts';
-import { module as mod }  from './module';
+import { module as mod } from './module';
 
 mod.directive('selectionView', () => {
   return {

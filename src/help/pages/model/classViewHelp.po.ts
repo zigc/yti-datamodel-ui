@@ -42,7 +42,8 @@ export const addProperty = createStory({
   nextCondition: createClickNextCondition(addPropertyElement)
 });
 
-export function addPropertyUsingExistingPredicateItems(predicate: { type: KnownPredicateType, namespaceId: string, name: string }, gettextCatalog: gettextCatalog): Story[] {
+export function addPropertyUsingExistingPredicateItems(predicate: { type: KnownPredicateType, namespaceId: string, name: string },
+                                                       gettextCatalog: gettextCatalog): Story[] {
   return [
     addProperty,
     ...SearchPredicateModal.findAndSelectExistingPredicateItems(predicate.type, predicate.namespaceId, predicate.name, gettextCatalog),
@@ -50,7 +51,8 @@ export function addPropertyUsingExistingPredicateItems(predicate: { type: KnownP
   ];
 }
 
-export function addPropertyBasedOnSuggestionItems(predicate: { type: KnownPredicateType, searchName: string, name: string, comment: string }, gettextCatalog: gettextCatalog): Story[] {
+export function addPropertyBasedOnSuggestionItems(predicate: { type: KnownPredicateType, searchName: string, name: string, comment: string },
+                                                  gettextCatalog: gettextCatalog): Story[] {
   return [
     addProperty,
     ...SearchPredicateModal.findAndCreateNewPropertyBasedOnSuggestionItems(predicate.type, predicate.searchName, predicate.name, predicate.comment, gettextCatalog),
@@ -58,7 +60,8 @@ export function addPropertyBasedOnSuggestionItems(predicate: { type: KnownPredic
   ];
 }
 
-export function addPropertyBasedOnExistingConceptItems(predicate: { type: KnownPredicateType, searchName: string, name: string, conceptId: string }, gettextCatalog: gettextCatalog): Story[] {
+export function addPropertyBasedOnExistingConceptItems(predicate: { type: KnownPredicateType, searchName: string, name: string, conceptId: string },
+                                                       gettextCatalog: gettextCatalog): Story[] {
   return [
     addProperty,
     ...SearchPredicateModal.findAndCreateNewPropertyBasedOnExistingConceptItems(predicate.type, predicate.searchName, predicate.name, predicate.conceptId, gettextCatalog),

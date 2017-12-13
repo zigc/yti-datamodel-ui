@@ -1,5 +1,5 @@
 import { IScope, IAttributes, ITranscludeFunction } from 'angular';
-import { module as mod }  from './module';
+import { module as mod } from './module';
 import { isDefined } from '../../utils/object';
 
 mod.directive('accordion', () => {

@@ -1,10 +1,15 @@
 import { IScope, IAttributes, INgModelController } from 'angular';
 import { resolveValidator } from './validators';
 import { normalizeAsArray } from '../../utils/array';
-import { module as mod }  from './module';
+import { module as mod } from './module';
 import { dataTypes } from '../../entities/dataTypes';
 
-type Error = { key: string, message: string, format?: string };
+interface Error {
+  key: string;
+  message: string;
+  format?: string
+}
+
 const errors: Error[] = [];
 
 for (const dataType of dataTypes) {

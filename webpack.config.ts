@@ -2,36 +2,43 @@
 
 import * as path from 'path';
 import * as webpack from 'webpack';
+import { Configuration } from 'webpack';
 const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 export const commonConfig = {
 
   resolve: {
-    extensions: ['', '.ts', '.js'],
+    extensions: ['.ts', '.js'],
     alias: {
       'proxy-polyfill': path.resolve(__dirname, 'node_modules/proxy-polyfill/proxy.min.js')
     }
   },
 
   module: {
-    preLoaders: [
-      { test: /\.ts$/,            loader: 'tslint' }
-    ],
-    loaders: [
-      { test: /\.js$/,            loader: 'strip-sourcemap-loader' },
-      { test: /\.css$/,           loader: 'style!css' },
-      { test: /\.scss$/,          loader: 'style!css!sass' },
-      { test: /\.ts$/,            loader: 'ng-annotate!ts-loader!strip-sourcemap-loader' },
-      { test: /\.woff(\?.+)?$/,   loader: 'url-loader?limit=10000&mimetype=application/font-woff' },
-      { test: /\.woff2(\?.+)?$/,  loader: 'url-loader?limit=10000&mimetype=application/font-woff' },
-      { test: /\.ttf(\?.+)?$/,    loader: 'file-loader' },
-      { test: /\.eot(\?.+)?$/,    loader: 'file-loader' },
-      { test: /\.svg(\?.+)?$/,    loader: 'file-loader' },
-      { test: /\.html/,           loader: 'raw' },
-      { test: /\.po$/,            loader: 'json!po?format=mf' },
-      { test: /\.png$/,           loader: 'url-loader?mimetype=image/png' },
-      { test: /\.gif$/,           loader: 'url-loader?mimetype=image/gif' }
+    rules: [
+      { test: /\.js$/,                 loaders: ['strip-sourcemap-loader'] },
+      { test: /\.css$/,                loaders: ['style-loader', 'css-loader'] },
+      { test: /\.scss$/,               loaders: ['style-loader', 'css-loader', 'sass-loader'] },
+      { test: /\.ts$/, enforce: 'pre', loaders: ['tslint-loader'] },
+      {
+        test: /\.ts$/,
+        loaders: [
+          'ng-annotate-loader',
+          'ts-loader',
+          'angular2-template-loader',
+          'strip-sourcemap-loader'
+        ]
+      },
+      { test: /\.woff(\?.+)?$/,        loaders: ['url-loader?limit=10000&mimetype=application/font-woff'] },
+      { test: /\.woff2(\?.+)?$/,       loaders: ['url-loader?limit=10000&mimetype=application/font-woff'] },
+      { test: /\.ttf(\?.+)?$/,         loaders: ['file-loader'] },
+      { test: /\.eot(\?.+)?$/,         loaders: ['file-loader'] },
+      { test: /\.svg(\?.+)?$/,         loaders: ['file-loader'] },
+      { test: /\.html/,                loaders: ['raw-loader'] },
+      { test: /\.po$/,                 loaders: ['json-loader', 'po-loader?format=mf'] },
+      { test: /\.png$/,                loaders: ['url-loader?mimetype=image/png'] },
+      { test: /\.gif$/,                loaders: ['url-loader?mimetype=image/gif'] }
     ]
   }
 };
@@ -55,7 +62,12 @@ export function createConfig(build: boolean): Configuration {
     NODE_ENV: JSON.stringify('local')
   };
 
-  const buildPlugins = [ new webpack.optimize.DedupePlugin(),  new webpack.optimize.UglifyJsPlugin({ compress: { warnings: false } }) ];
+  const buildPlugins = [
+    new webpack.optimize.UglifyJsPlugin({
+      compress: { warnings: false },
+      sourceMap: true
+    })
+  ];
   const servePlugins = [ new webpack.HotModuleReplacementPlugin() ];
 
   const plugins = [
@@ -69,8 +81,9 @@ export function createConfig(build: boolean): Configuration {
       filepath: require.resolve(path.join(outputPath, require(path.join(outputPath, 'assets.json')).vendor.js)),
       includeSourcemap: true
     }),
-    new webpack.NoErrorsPlugin(),
-    ...(build ? buildPlugins : servePlugins)
+    new webpack.NoEmitOnErrorsPlugin(),
+    new webpack.LoaderOptionsPlugin({ debug: !build }),
+    ...(build ? buildPlugins : servePlugins),
   ];
 
   return Object.assign({}, commonConfig, {
@@ -82,25 +95,7 @@ export function createConfig(build: boolean): Configuration {
       filename: build ? '[name].[chunkhash].js' : '[name].js',
       publicPath: build ? '/assets/' : '/'
     },
-
-    debug: !build,
-    devtool: build ? 'source-map' : fastRebuild ? 'cheap-module-source-map' : 'source-map',
+    devtool: build ? 'source-map' : fastRebuild ? 'cheap-module-source-map' : 'source-map' as 'source-map'|'cheap-module-source-map',
     plugins
   });
-}
-
-interface Configuration extends webpack.Configuration {
-  tslint?: {
-    configuration: {}
-  };
-}
-
-declare module 'webpack' {
-  interface DllReferencePluginStatic {
-    new (options: any): Plugin;
-  }
-
-  interface Webpack {
-    DllReferencePlugin: DllReferencePluginStatic;
-  }
 }

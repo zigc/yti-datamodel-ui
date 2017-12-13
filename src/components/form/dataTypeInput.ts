@@ -1,4 +1,4 @@
-import { module as mod }  from './module';
+import { module as mod } from './module';
 import { IAttributes, IScope, IQService, INgModelController } from 'angular';
 import gettextCatalog = angular.gettext.gettextCatalog;
 import { resolveValidator } from './validators';

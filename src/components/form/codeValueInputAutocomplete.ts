@@ -1,4 +1,4 @@
-import { module as mod }  from './module';
+import { module as mod } from './module';
 import { ReferenceDataService } from '../../services/referenceDataService';
 import { LanguageService, Localizer } from '../../services/languageService';
 import { ReferenceData, ReferenceDataCode } from '../../entities/referenceData';
@@ -13,7 +13,10 @@ mod.directive('codeValueInputAutocomplete', () => {
     },
     bindToController: true,
     transclude: true,
-    template: '<autocomplete datasource="ctrl.datasource" matcher="ctrl.matcher" value-extractor="ctrl.valueExtractor" formatter="ctrl.formatter"><ng-transclude></ng-transclude></autocomplete>',
+    template: `
+      <autocomplete datasource="ctrl.datasource" matcher="ctrl.matcher" value-extractor="ctrl.valueExtractor" formatter="ctrl.formatter">
+        <ng-transclude></ng-transclude>
+      </autocomplete>`,
     controller: UriInputAutocompleteController,
     controllerAs: 'ctrl'
   };

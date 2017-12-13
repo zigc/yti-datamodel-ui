@@ -1,5 +1,5 @@
 import { Localizer } from '../../services/languageService';
-import { module as mod }  from './module';
+import { module as mod } from './module';
 import { Concept, LegacyConcept } from '../../entities/vocabulary';
 import { Model } from '../../entities/model';
 

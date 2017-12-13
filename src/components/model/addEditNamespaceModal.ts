@@ -48,7 +48,13 @@ class AddEditNamespaceController {
   prefixBeforeForced: string|null = null;
 
   /* @ngInject */
-  constructor(private $uibModalInstance: IModalServiceInstance, $scope: IScope, public model: Model, private language: Language, private namespaceToEdit: ImportedNamespace|null, private modelService: ModelService) {
+  constructor(private $uibModalInstance: IModalServiceInstance,
+              $scope: IScope,
+              public model: Model,
+              private language: Language,
+              private namespaceToEdit: ImportedNamespace|null,
+              private modelService: ModelService) {
+
     this.edit = !!namespaceToEdit;
 
     if (namespaceToEdit) {

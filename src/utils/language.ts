@@ -110,7 +110,7 @@ export function isLocalizationDefined(localizationKey: string, localized: string
 
 export function allLocalizations(predicate: (localized: string) => boolean, localizable: Localizable) {
   if (localizable) {
-    for (let localized of Object.values(localizable)) {
+    for (const localized of Object.values(localizable)) {
       if (!predicate(localized)) {
         return false;
       }
@@ -121,7 +121,7 @@ export function allLocalizations(predicate: (localized: string) => boolean, loca
 
 export function anyLocalization(predicate: (localized: string) => boolean, localizable: Localizable) {
   if (localizable) {
-    for (let localized of Object.values(localizable)) {
+    for (const localized of Object.values(localizable)) {
       if (predicate(localized)) {
         return true;
       }

@@ -28,7 +28,7 @@ import 'font-awesome/scss/font-awesome.scss';
 import { HttpModule } from '@angular/http';
 
 require('./vendor/modernizr');
-require('imports?define=>false!jquery-mousewheel/jquery.mousewheel')(jQuery);
+require('imports-loader?define=>false!jquery-mousewheel/jquery.mousewheel')(jQuery);
 require('angular-gettext');
 require('checklist-model');
 require('ngclipboard');

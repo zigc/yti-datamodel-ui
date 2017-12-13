@@ -18,7 +18,7 @@ export function filterForPredicate(namespaceId: string, predicateName: string, g
 }
 
 export function filterForNewPredicate(predicateName: string, gettextCatalog: gettextCatalog) {
-  return filterForAddNewResult(searchPredicateModalElement, predicateName, gettextCatalog, "predicate");
+  return filterForAddNewResult(searchPredicateModalElement, predicateName, gettextCatalog, 'predicate');
 }
 
 export function selectPredicate(namespaceId: string, predicateName: string) {
@@ -36,7 +36,10 @@ export function confirmPredicateSelection(navigates: boolean) {
  return confirm(searchPredicateModalElement, navigates);
 }
 
-export function findAndSelectExistingPredicateItems(type: KnownPredicateType, namespaceId: string, predicateName: string, gettextCatalog: angular.gettext.gettextCatalog): Story[] {
+export function findAndSelectExistingPredicateItems(type: KnownPredicateType,
+                                                    namespaceId: string,
+                                                    predicateName: string,
+                                                    gettextCatalog: angular.gettext.gettextCatalog): Story[] {
   return [
     filterForPredicate(namespaceId, predicateName, gettextCatalog),
     selectPredicate(namespaceId, predicateName),
@@ -45,7 +48,11 @@ export function findAndSelectExistingPredicateItems(type: KnownPredicateType, na
   ];
 }
 
-export function findAndCreateNewBasedOnSuggestionItems(type: KnownPredicateType, name: string, comment: string, navigates: boolean, gettextCatalog: gettextCatalog): Story[] {
+export function findAndCreateNewBasedOnSuggestionItems(type: KnownPredicateType,
+                                                       name: string,
+                                                       comment: string,
+                                                       navigates: boolean,
+                                                       gettextCatalog: gettextCatalog): Story[] {
   return [
     filterForNewPredicate(name, gettextCatalog),
     selectAddNewPredicateSearchResult(type),
@@ -53,7 +60,11 @@ export function findAndCreateNewBasedOnSuggestionItems(type: KnownPredicateType,
   ];
 }
 
-export function findAndCreateNewBasedOnExistingConceptItems(type: KnownPredicateType, name: string, conceptId: string, navigates: boolean, gettextCatalog: gettextCatalog): Story[] {
+export function findAndCreateNewBasedOnExistingConceptItems(type: KnownPredicateType,
+                                                            name: string,
+                                                            conceptId: string,
+                                                            navigates: boolean,
+                                                            gettextCatalog: gettextCatalog): Story[] {
   return [
     filterForNewPredicate(name, gettextCatalog),
     selectAddNewPredicateSearchResult(type),
@@ -61,7 +72,11 @@ export function findAndCreateNewBasedOnExistingConceptItems(type: KnownPredicate
   ];
 }
 
-export function findAndCreateNewPropertyBasedOnSuggestionItems(type: KnownPredicateType, searchName: string, name: string, comment: string, gettextCatalog: gettextCatalog): Story[] {
+export function findAndCreateNewPropertyBasedOnSuggestionItems(type: KnownPredicateType,
+                                                               searchName: string,
+                                                               name: string,
+                                                               comment: string,
+                                                               gettextCatalog: gettextCatalog): Story[] {
   return [
     ...findAndCreateNewBasedOnSuggestionItems(type, searchName, comment, false, gettextCatalog),
     type === 'attribute' ? focusSelectedAttribute : focusSelectedAssociation,
@@ -70,7 +85,11 @@ export function findAndCreateNewPropertyBasedOnSuggestionItems(type: KnownPredic
   ];
 }
 
-export function findAndCreateNewPropertyBasedOnExistingConceptItems(type: KnownPredicateType, searchName: string, name: string, conceptId: string, gettextCatalog: gettextCatalog): Story[] {
+export function findAndCreateNewPropertyBasedOnExistingConceptItems(type: KnownPredicateType,
+                                                                    searchName: string,
+                                                                    name: string,
+                                                                    conceptId: string,
+                                                                    gettextCatalog: gettextCatalog): Story[] {
   return [
     ...findAndCreateNewBasedOnExistingConceptItems(type, searchName, conceptId, false, gettextCatalog),
     type === 'attribute' ? focusSelectedAttribute : focusSelectedAssociation,

@@ -1,6 +1,6 @@
 import { IAttributes, IScope } from 'angular';
 import { EditableForm } from '../form/editableEntityController';
-import { module as mod }  from './module';
+import { module as mod } from './module';
 import { isDefined } from '../../utils/object';
 
 interface ModalTemplateAttributes extends IAttributes {

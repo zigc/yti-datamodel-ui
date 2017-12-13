@@ -4,7 +4,7 @@ import IModalStackService = ui.bootstrap.IModalStackService;
 import { UserService } from '../services/userService';
 import { config } from '../../config';
 import { ConfirmationModal } from './common/confirmationModal';
-import { module as mod }  from './module';
+import { module as mod } from './module';
 import { nextUrl, modalCancelHandler } from '../utils/angular';
 import { HelpProvider } from './common/helpProvider';
 

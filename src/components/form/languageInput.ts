@@ -1,7 +1,7 @@
 import { IScope, IAttributes, INgModelController, IModelValidators } from 'angular';
 import gettextCatalog = angular.gettext.gettextCatalog;
 import { isValidLanguageCode } from './validators';
-import { module as mod }  from './module';
+import { module as mod } from './module';
 import { LanguageService } from '../../services/languageService';
 
 export function placeholderText(gettextCatalog: gettextCatalog) {

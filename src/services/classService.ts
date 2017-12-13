@@ -236,7 +236,8 @@ export class DefaultClassService implements ClassService {
   newProperty(predicateOrExternal: Predicate|ExternalEntity, type: KnownPredicateType, model: Model): IPromise<Property> {
 
     const id = requireDefined(predicateOrExternal.id);
-    const predicatePromise = (predicateOrExternal instanceof ExternalEntity) ? this.defaultPredicateService.getExternalPredicate(id, model) : this.$q.when(<Predicate> predicateOrExternal);
+    const predicatePromise = (predicateOrExternal instanceof ExternalEntity) ? this.defaultPredicateService.getExternalPredicate(id, model)
+                                                                             : this.$q.when(<Predicate> predicateOrExternal);
 
     return this.$q.all([
       predicatePromise,

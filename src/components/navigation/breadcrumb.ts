@@ -1,7 +1,7 @@
 import { IScope } from 'angular';
 import { LocationService, Location } from '../../services/locationService';
 
-import { module as mod }  from './module';
+import { module as mod } from './module';
 
 mod.directive('breadcrumb', () => {
   return {

@@ -5,7 +5,7 @@ import { SearchPredicateModal } from './searchPredicateModal';
 import { UserService } from '../../services/userService';
 import { DeleteConfirmationModal } from '../common/deleteConfirmationModal';
 import { Show } from '../contracts';
-import { module as mod }  from './module';
+import { module as mod } from './module';
 import { ErrorModal } from '../form/errorModal';
 import { setSelectionStyles, modalCancelHandler } from '../../utils/angular';
 import { Class } from '../../entities/class';

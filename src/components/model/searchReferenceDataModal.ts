@@ -60,7 +60,7 @@ export class SearchReferenceDataModalController implements SearchController<Refe
   referenceDataGroups: ReferenceDataGroup[];
   showServer: ReferenceDataServer;
   showGroup: ReferenceDataGroup|null;
-  searchText: string = '';
+  searchText= '';
   loadingResults = true;
   selectedItem: ReferenceData|AddNewReferenceData;
   selection: ReferenceData|AddNewReferenceDataFormData;
@@ -93,7 +93,7 @@ export class SearchReferenceDataModalController implements SearchController<Refe
     const init = (referenceDatas: ReferenceData[]) => {
       this.referenceDatas = referenceDatas;
 
-      this.referenceDataGroups = _.chain<ReferenceData>(this.referenceDatas)
+      this.referenceDataGroups = _.chain(this.referenceDatas)
         .map(referenceData => referenceData.groups)
         .flatten<ReferenceDataGroup>()
         .uniqBy(group => group.id.uri)

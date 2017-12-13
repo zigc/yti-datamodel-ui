@@ -1,4 +1,4 @@
-import { module as mod }  from './module';
+import { module as mod } from './module';
 export { module } from './module';
 
 import { InteractiveHelpService } from './services/interactiveHelpService';

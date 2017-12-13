@@ -3,7 +3,7 @@ import { LanguageService } from '../../services/languageService';
 import { VisualizationService, ClassVisualization } from '../../services/visualizationService';
 import { ChangeListener, Show } from '../contracts';
 import * as joint from 'jointjs';
-import { module as mod }  from './module';
+import { module as mod } from './module';
 import { Uri } from '../../entities/uri';
 import { first, arraysAreEqual, normalizeAsArray } from '../../utils/array';
 import { UserService } from '../../services/userService';
@@ -42,32 +42,39 @@ mod.directive('classVisualization', () => {
       modelPageActions: '='
     },
     template: `
-               <div class="visualization-buttons">
-                 <a role="button" class="btn btn-default btn-xs" ng-mousedown="ctrl.zoomOut()" ng-mouseup="ctrl.zoomOutEnded()"><i class="fa fa-search-minus"></i></a>
-                 <a role="button" class="btn btn-default btn-xs" ng-mousedown="ctrl.zoomIn()" ng-mouseup="ctrl.zoomInEnded()"><i class="fa fa-search-plus"></i></a>
-                 <a role="button" class="btn btn-default btn-xs" ng-click="ctrl.fitToContent()"><i class="fa fa-arrows-alt"></i></a>
-                 <a role="button" ng-show="ctrl.canFocus()" class="btn btn-default btn-xs" ng-click="ctrl.centerToSelectedClass()"><i class="fa fa-crosshairs"></i></a>
-                 <span ng-show="ctrl.canFocus()">
-                   <a role="button" class="btn btn-default btn-xs" ng-click="ctrl.focusOut()"><i class="fa fa-angle-left"></i></a>
-                   <div class="focus-indicator"><i>{{ctrl.renderSelectionFocus()}}</i></div>
-                   <a role="button" class="btn btn-default btn-xs" ng-click="ctrl.focusIn()"><i class="fa fa-angle-right"></i></a>
-                 </span>
-                 <a role="button" class="btn btn-default btn-xs" ng-click="ctrl.toggleShowName()"><i>{{ctrl.showNameLabel | translate}}</i></a>
-                 <a role="button" class="btn btn-default btn-xs" ng-show="ctrl.canSave()" ng-disabled="ctrl.modelPositions.isPristine()" ng-click="ctrl.savePositions()"><i class="fa fa-save"></i></a>
-                 <a role="button" class="btn btn-default btn-xs" ng-disabled="ctrl.saving" ng-click="ctrl.layoutPersistentPositions()" ng-context-menu="ctrl.relayoutPositions()"><i class="fa fa-refresh"></i></a>
-                 <div class="btn-group" uib-dropdown is-open="ctrl.exportOpen" ng-if="ctrl.downloads">
-                  <button class="btn btn-default btn-xs" uib-dropdown-toggle><i class="fa fa-download"></i>&nbsp;<span class="caret"></span></button>
-                    <ul class="dropdown-menu" role="menu" ng-if="ctrl.exportOpen">
-                      <li role="menuitem" ng-repeat="download in ctrl.downloads track by download.name">
-                        <a target="_self" download="{{download.filename}}" ng-href="{{download.href}}" ng-click="download.onClick()">{{download.name}}</a>
-                      </li>
-                    </ul>
-                  </div>
-               </div>
-               <canvas style="display:none; background-color: white"></canvas>
-               <visualization-popover details="ctrl.popoverDetails" context="ctrl.model"></visualization-popover>
-               <visualization-context-menu ng-if="ctrl.contextMenuTarget" target="ctrl.contextMenuTarget" model="ctrl.model" model-page-actions="ctrl.modelPageActions"></visualization-context-menu>
-               <ajax-loading-indicator class="loading-indicator" ng-show="ctrl.loading"></ajax-loading-indicator>
+     <div class="visualization-buttons">
+       <a role="button" class="btn btn-default btn-xs" ng-mousedown="ctrl.zoomOut()" ng-mouseup="ctrl.zoomOutEnded()"><i class="fa fa-search-minus"></i></a>
+       <a role="button" class="btn btn-default btn-xs" ng-mousedown="ctrl.zoomIn()" ng-mouseup="ctrl.zoomInEnded()"><i class="fa fa-search-plus"></i></a>
+       <a role="button" class="btn btn-default btn-xs" ng-click="ctrl.fitToContent()"><i class="fa fa-arrows-alt"></i></a>
+       <a role="button" ng-show="ctrl.canFocus()" class="btn btn-default btn-xs" ng-click="ctrl.centerToSelectedClass()"><i class="fa fa-crosshairs"></i></a>
+       <span ng-show="ctrl.canFocus()">
+         <a role="button" class="btn btn-default btn-xs" ng-click="ctrl.focusOut()"><i class="fa fa-angle-left"></i></a>
+         <div class="focus-indicator"><i>{{ctrl.renderSelectionFocus()}}</i></div>
+         <a role="button" class="btn btn-default btn-xs" ng-click="ctrl.focusIn()"><i class="fa fa-angle-right"></i></a>
+       </span>
+       <a role="button" class="btn btn-default btn-xs" ng-click="ctrl.toggleShowName()"><i>{{ctrl.showNameLabel | translate}}</i></a>
+       <a role="button" class="btn btn-default btn-xs" ng-show="ctrl.canSave()" ng-disabled="ctrl.modelPositions.isPristine()" ng-click="ctrl.savePositions()">
+        <i class="fa fa-save"></i>
+       </a>
+       <a role="button" class="btn btn-default btn-xs" ng-disabled="ctrl.saving" ng-click="ctrl.layoutPersistentPositions()" ng-context-menu="ctrl.relayoutPositions()">
+        <i class="fa fa-refresh"></i>
+       </a>
+       <div class="btn-group" uib-dropdown is-open="ctrl.exportOpen" ng-if="ctrl.downloads">
+        <button class="btn btn-default btn-xs" uib-dropdown-toggle><i class="fa fa-download"></i>&nbsp;<span class="caret"></span></button>
+          <ul class="dropdown-menu" role="menu" ng-if="ctrl.exportOpen">
+            <li role="menuitem" ng-repeat="download in ctrl.downloads track by download.name">
+              <a target="_self" download="{{download.filename}}" ng-href="{{download.href}}" ng-click="download.onClick()">{{download.name}}</a>
+            </li>
+          </ul>
+        </div>
+     </div>
+     <canvas style="display:none; background-color: white"></canvas>
+     <visualization-popover details="ctrl.popoverDetails" context="ctrl.model"></visualization-popover>
+     <visualization-context-menu ng-if="ctrl.contextMenuTarget" 
+                                 target="ctrl.contextMenuTarget" 
+                                 model="ctrl.model" 
+                                 model-page-actions="ctrl.modelPageActions"></visualization-context-menu>
+     <ajax-loading-indicator class="loading-indicator" ng-show="ctrl.loading"></ajax-loading-indicator>
     `,
     bindToController: true,
     controllerAs: 'ctrl',
@@ -81,8 +88,8 @@ mod.directive('classVisualization', () => {
       const setDimensions = () => {
         controller.dimensionChangeInProgress = true;
         const paper = controller.paper;
-        const xd = paper.options.width - element.width();
-        const yd = paper.options.height - element.height();
+        const xd = paper.options.width! - element.width();
+        const yd = paper.options.height! - element.height();
 
         if (xd || yd) {
           paper.setDimensions(element.width(), element.height());
@@ -272,7 +279,7 @@ class ClassVisualizationController implements ChangeListener<Class|Predicate>, C
   svgToString() {
     // brutal way to inject styles to the document but creating new dom hierarchy seems to be impossible to get to work with IE
     return new XMLSerializer().serializeToString(this.svg())
-      .replace('</svg>', '<style>' + require('!raw!sass!../../styles/classVisualizationSvgExport.scss') + '</style></svg>');
+      .replace('</svg>', '<style>' + require('!raw-loader!sass-loader!../../styles/classVisualizationSvgExport.scss') + '</style></svg>');
   }
 
   get selectionFocus() {
@@ -592,7 +599,7 @@ class ClassVisualizationController implements ChangeListener<Class|Predicate>, C
       this.userService.ifStillLoggedIn(() => {
 
         const klass = this.classVisualization.hasClass(classId) ? this.classVisualization.getClassById(classId)
-                                                                : new AssociationTargetPlaceholderClass(new Uri(classId, this.model.context), this.model);
+          : new AssociationTargetPlaceholderClass(new Uri(classId, this.model.context), this.model);
         this.contextMenuTarget = { coordinate, target: klass };
       }, () => this.notificationModal.openNotLoggedIn());
     }
@@ -630,7 +637,7 @@ class ClassVisualizationController implements ChangeListener<Class|Predicate>, C
     if (klass) {
       this.$scope.$applyAsync(() => {
 
-        const property = requireDefined(first(klass.properties, property => property.internalId.toString() === propertyId));
+        const property = requireDefined(first(klass.properties, prop => prop.internalId.toString() === propertyId));
 
         this.popoverDetails = {
           coordinate: coordinate,

@@ -13,7 +13,7 @@ export function layoutGraph($q: IQService, graph: joint.dia.Graph, directed: boo
         nodeSep: 100,
         edgeSep: 150,
         rankSep: 500,
-        rankDir: "LR"
+        rankDir: 'LR'
       })
     );
   } else {

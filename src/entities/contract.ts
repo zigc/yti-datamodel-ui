@@ -1,5 +1,5 @@
 import { Type } from './type';
-import { Uri } from '../entities/uri';
+import { Uri } from './uri';
 import { Language, availableUILanguages } from '../utils/language';
 import { GraphNode, GraphNodes } from './graphNode';
 
@@ -14,12 +14,22 @@ export interface LanguageContext {
 }
 
 // TODO: type language indexer as Language when typescript supports it https://github.com/Microsoft/TypeScript/issues/5683
-export type Localizable = { [language: string]: string; }
+export interface Localizable {
+  [language: string]: string;
+}
 export type UserLogin = string;
-export type Coordinate = { x: number, y: number };
-export type Dimensions = { width: number, height: number };
 
-export type GraphData = {
+export interface Coordinate {
+  x: number;
+  y: number ;
+}
+
+export interface Dimensions {
+  width: number;
+  height: number
+}
+
+export interface GraphData {
   '@context': any;
   '@graph': any;
 }
@@ -39,8 +49,8 @@ export interface EditableEntity {
   id: Uri;
   label: Localizable;
   normalizedType: Type;
-  isOfType(type: Type): boolean;
   unsaved: boolean;
+  isOfType(type: Type): boolean;
   clone<T>(): T;
   serialize<T>(): T;
 }

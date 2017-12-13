@@ -12,11 +12,9 @@ export function createConfig(build: boolean): webpack.Configuration {
   const assetsPath = build ? path.join(outputPath, 'assets') : outputPath;
 
   const buildPlugins = [
-    new webpack.optimize.DedupePlugin(),
     new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
-      }
+      compress: { warnings: false },
+      sourceMap: true
     })
   ];
 
@@ -38,6 +36,12 @@ export function createConfig(build: boolean): webpack.Configuration {
         path: outputPath + '/' + '[name]-manifest.json',
         name: '[name]_lib'
       }),
+      new webpack.LoaderOptionsPlugin({ debug: !build }),
+      new webpack.ContextReplacementPlugin(
+        /angular(\\|\/)core(\\|\/)@angular/,
+        path.join(__dirname, 'src'),
+        {}
+      ),
       ...(build ? buildPlugins : servePlugins)
     ],
     resolve: {
@@ -45,17 +49,6 @@ export function createConfig(build: boolean): webpack.Configuration {
         'proxy-polyfill': path.resolve(__dirname, 'node_modules/proxy-polyfill/proxy.min.js')
       }
     },
-    debug: !build,
     devtool: build ? 'source-map' : 'cheap-module-source-map',
   };
-}
-
-declare module 'webpack' {
-  interface DllPluginStatic {
-    new (options: any): Plugin;
-  }
-
-  interface Webpack {
-    DllPlugin: DllPluginStatic;
-  }
 }

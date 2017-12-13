@@ -40,7 +40,7 @@ export class LocationService {
     this.changeLocation([{
       localizationKey: 'User details',
       iowUrl() {
-        return "/#user";
+        return '/#user';
       }
     }]);
   }

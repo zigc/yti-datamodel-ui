@@ -4,7 +4,7 @@ import { SearchClassModal } from '../editor/searchClassModal';
 import { requireDefined } from '../../utils/object';
 import { Model } from '../../entities/model';
 import { ClassListItem } from '../../entities/class';
-import { module as mod }  from './module';
+import { module as mod } from './module';
 import { modalCancelHandler } from '../../utils/angular';
 
 mod.directive('editableRootClass', () => {

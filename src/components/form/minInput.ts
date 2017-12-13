@@ -1,6 +1,6 @@
 import { IScope, IAttributes, INgModelController } from 'angular';
 import { isDefined } from '../../utils/object';
-import { module as mod }  from './module';
+import { module as mod } from './module';
 
 mod.directive('minInput', () => {
   return {

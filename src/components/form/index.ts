@@ -1,7 +1,7 @@
 import { ErrorModal } from './errorModal';
 import { DisplayItemFactory } from './displayItemFactory';
 
-import { module as mod }  from './module';
+import { module as mod } from './module';
 export { module } from './module';
 
 import './autocomplete';

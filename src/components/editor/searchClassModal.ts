@@ -24,7 +24,12 @@ export class SearchClassModal {
   constructor(private $uibModal: IModalService) {
   }
 
-  private openModal(model: Model, exclude: Exclusion<AbstractClass>, defaultToCurrentModel: boolean, onlySelection: boolean, textForSelection: (klass: Optional<Class>) => string) {
+  private openModal(model: Model,
+                    exclude: Exclusion<AbstractClass>,
+                    defaultToCurrentModel: boolean,
+                    onlySelection: boolean,
+                    textForSelection: (klass: Optional<Class>) => string) {
+
     return this.$uibModal.open({
       template: require('./searchClassModal.html'),
       size: 'large',
@@ -41,11 +46,18 @@ export class SearchClassModal {
     }).result;
   }
 
-  open(model: Model, exclude: Exclusion<AbstractClass>, textForSelection: (klass: Optional<Class>) => string): IPromise<ExternalEntity|EntityCreation|Class> {
+  open(model: Model,
+       exclude: Exclusion<AbstractClass>,
+       textForSelection: (klass: Optional<Class>) => string): IPromise<ExternalEntity|EntityCreation|Class> {
+
     return this.openModal(model, exclude, false, false, textForSelection);
   }
 
-  openWithOnlySelection(model: Model, defaultToCurrentModel: boolean, exclude: Exclusion<AbstractClass>, textForSelection: (klass: Optional<Class>) => string = defaultTextForSelection): IPromise<Class> {
+  openWithOnlySelection(model: Model,
+                        defaultToCurrentModel: boolean,
+                        exclude: Exclusion<AbstractClass>,
+                        textForSelection: (klass: Optional<Class>) => string = defaultTextForSelection): IPromise<Class> {
+
     return this.openModal(model, exclude, defaultToCurrentModel, true, textForSelection);
   }
 }
@@ -61,7 +73,7 @@ class SearchClassController implements SearchController<ClassListItem> {
   close = this.$uibModalInstance.dismiss;
   searchResults: (ClassListItem|AddNewClass)[] = [];
   selection: Class|ExternalEntity;
-  searchText: string = '';
+  searchText = '';
   cannotConfirm: string|null;
   loadingResults: boolean;
   selectedItem: ClassListItem|AddNewClass;
@@ -132,8 +144,15 @@ class SearchClassController implements SearchController<ClassListItem> {
 
   search() {
     this.searchResults = [
-      new AddNewClass(`${this.gettextCatalog.getString('Create new class')} '${this.searchText}'`, this.canAddNew.bind(this), false),
-      new AddNewClass(`${this.gettextCatalog.getString('Create new shape')} ${this.gettextCatalog.getString('by referencing external uri')}`, () => this.canAddNew() && this.model.isOfType('profile'), true),
+      new AddNewClass(
+        `${this.gettextCatalog.getString('Create new class')} '${this.searchText}'`,
+        this.canAddNew.bind(this),
+        false
+      ),
+      new AddNewClass(
+        `${this.gettextCatalog.getString('Create new shape')} ${this.gettextCatalog.getString('by referencing external uri')}`,
+        () => this.canAddNew() && this.model.isOfType('profile'),
+        true),
       ...filterAndSortSearchResults(this.classes, this.searchText, this.contentExtractors, this.searchFilters, defaultLabelComparator(this.localizer, this.exclude))
     ];
   }

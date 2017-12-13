@@ -1,4 +1,4 @@
-import { module as mod }  from './module';
+import { module as mod } from './module';
 import { IParseService, IScope, IAttributes } from 'angular';
 
 interface ContextMenuAttributes extends IAttributes {

@@ -5,7 +5,7 @@ import {
   isValidPredicateIdentifier
 } from './validators';
 import { Uri } from '../../entities/uri';
-import { module as mod }  from './module';
+import { module as mod } from './module';
 import { Class } from '../../entities/class';
 import { Predicate } from '../../entities/predicate';
 import { extendNgModelOptions } from '../../utils/angular';

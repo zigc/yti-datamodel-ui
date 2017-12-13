@@ -2,7 +2,7 @@ import { IScope } from 'angular';
 import gettextCatalog = angular.gettext.gettextCatalog;
 import { LanguageService } from '../../services/languageService';
 import { Language, isLocalizationDefined } from '../../utils/language';
-import { module as mod }  from './module';
+import { module as mod } from './module';
 import { LanguageContext } from '../../entities/contract';
 
 mod.directive('modelLanguageChooser', () => {

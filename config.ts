@@ -5,11 +5,11 @@ export type Environment = 'local'
 export const dateFormat = 'YYYY-MM-DD HH:mm:ss ZZ';
 
 export interface Config {
-  apiEndpointWithName(name: string): string;
   apiEndpoint: string;
   environment: Environment;
   gitDate: string;
   gitHash: string;
+  apiEndpointWithName(name: string): string;
   defaultModelNamespace(prefix: string): string;
 }
 

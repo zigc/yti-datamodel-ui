@@ -1,6 +1,6 @@
 import { IRepeatScope, ITimeoutService } from 'angular';
 import { scrollToElement } from '../../utils/angular';
-import { module as mod }  from './module';
+import { module as mod } from './module';
 
 const selectionClass = 'selection';
 

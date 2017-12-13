@@ -1,6 +1,6 @@
 import { IScope } from 'angular';
 import { TableDescriptor, ColumnDescriptor } from '../form/editableTable';
-import { module as mod }  from './module';
+import { module as mod } from './module';
 import { Model, Namespace, NamespaceType } from '../../entities/model';
 
 mod.directive('technicalNamespaces', () => {

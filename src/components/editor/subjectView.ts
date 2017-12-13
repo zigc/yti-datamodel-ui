@@ -1,4 +1,4 @@
-import { module as mod }  from './module';
+import { module as mod } from './module';
 import { SearchConceptModal } from './searchConceptModal';
 import { Class } from '../../entities/class';
 import { Predicate } from '../../entities/predicate';

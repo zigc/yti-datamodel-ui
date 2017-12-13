@@ -14,7 +14,7 @@ export interface EditableScope extends IScope {
   form: EditableForm;
 }
 
-export type Rights = {
+export interface Rights {
   edit(): boolean;
   remove(): boolean;
 }

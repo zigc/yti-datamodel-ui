@@ -36,7 +36,7 @@ export function openAddResource(type: 'class' | KnownPredicateType) {
     popover: { element: openAddResourceElement, position: 'right-down' },
     focus: { element: openAddResourceElement },
     title: 'Add ' + type,
-    content: 'Add ' + type + " description",
+    content: 'Add ' + type + ' description',
     nextCondition: createClickNextCondition(openAddResourceElement)
   });
 }

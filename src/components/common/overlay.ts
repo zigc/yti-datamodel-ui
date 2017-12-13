@@ -23,9 +23,9 @@ export interface OverlayOptions {
 }
 
 export interface IOverlayScope extends IScope {
+  $$overlayDestructionScheduled?: boolean;
   $close(result?: any): void;
   $dismiss(reason?: any): void;
-  $$overlayDestructionScheduled?: boolean;
 }
 
 const overlayOpenClass = 'overlay-open';
@@ -44,7 +44,9 @@ export class OverlayService {
 
   open(options: OverlayOptions): OverlayInstance {
 
-    if (!options.template) throw new Error('template is required');
+    if (!options.template) {
+      throw new Error('template is required');
+    }
 
     const body = this.$document.find('body').eq(0);
     const appendTo = options.appendTo || body;
@@ -63,11 +65,13 @@ export class OverlayService {
         const instantiator: any = this.$controller(options.controller, locals, true);
         const ctrl = instantiator();
 
-        if (options.controllerAs)
+        if (options.controllerAs) {
           scope[options.controllerAs] = ctrl;
+        }
 
-        if (angular.isFunction(ctrl.$onInit))
+        if (angular.isFunction(ctrl.$onInit)) {
           ctrl.$onInit();
+        }
       }
 
       const elem = angular.element(options.template);
@@ -126,8 +130,9 @@ class DefaultOverlayInstance implements OverlayInstance {
     scope.$dismiss = this.dismiss.bind(this);
 
     scope.$on('$destroy', () => {
-      if (!scope.$$overlayDestructionScheduled)
+      if (!scope.$$overlayDestructionScheduled) {
         this.dismiss('unscheduledDestruction');
+      }
     });
 
     this.scope = () => scope;
@@ -145,8 +150,9 @@ class DefaultOverlayInstance implements OverlayInstance {
   private closeOrDismiss(result: any, closing: boolean) {
     const scope = this.scope();
 
-    if (scope.$broadcast('overlay.closing', result, closing).defaultPrevented)
+    if (scope.$broadcast('overlay.closing', result, closing).defaultPrevented) {
       return;
+    }
 
     scope.$$overlayDestructionScheduled = true;
 

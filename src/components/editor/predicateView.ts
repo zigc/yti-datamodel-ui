@@ -5,7 +5,7 @@ import { EditableEntityController, EditableScope, Rights } from '../form/editabl
 import { DeleteConfirmationModal } from '../common/deleteConfirmationModal';
 import { Show } from '../contracts';
 import { ErrorModal } from '../form/errorModal';
-import { module as mod }  from './module';
+import { module as mod } from './module';
 import { setSelectionStyles } from '../../utils/angular';
 import { Association, Attribute } from '../../entities/predicate';
 import { Model } from '../../entities/model';

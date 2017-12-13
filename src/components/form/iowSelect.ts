@@ -1,7 +1,7 @@
 import { IAttributes, IDocumentService, IParseService, IQService, IScope, ITranscludeFunction } from 'angular';
 import { isDefined } from '../../utils/object';
 import { esc, tab, enter, pageUp, pageDown, arrowUp, arrowDown } from '../../utils/keyCode';
-import { module as mod }  from './module';
+import { module as mod } from './module';
 import { InputWithPopupController } from './inputPopup';
 
 // TODO: similarities with autocomplete
@@ -62,6 +62,16 @@ export class IowSelectController<T> implements InputWithPopupController<T> {
 
   element: JQuery;
 
+  private keyEventHandlers: {[key: number]: () => void|boolean} = {
+    [arrowDown]: () => this.openIfNotShown(() => this.moveSelection(1)),
+    [arrowUp]: () => this.openIfNotShown(() => this.moveSelection(-1)),
+    [pageDown]: () => this.openIfNotShown(() => this.moveSelection(10)),
+    [pageUp]: () => this.openIfNotShown(() => this.moveSelection(-10)),
+    [enter]: () => this.openIfNotShown(() => this.selectSelection()),
+    [tab]: () => this.selectSelection(),
+    [esc]: () => this.close()
+  };
+
   /* @ngInject */
   constructor($q: IQService, $scope: SelectionScope, $parse: IParseService) {
 
@@ -80,16 +90,6 @@ export class IowSelectController<T> implements InputWithPopupController<T> {
       action();
     }
   }
-
-  private keyEventHandlers: {[key: number]: () => void|boolean} = {
-    [arrowDown]: () => this.openIfNotShown(() => this.moveSelection(1)),
-    [arrowUp]: () => this.openIfNotShown(() => this.moveSelection(-1)),
-    [pageDown]: () => this.openIfNotShown(() => this.moveSelection(10)),
-    [pageUp]: () => this.openIfNotShown(() => this.moveSelection(-10)),
-    [enter]: () => this.openIfNotShown(() => this.selectSelection()),
-    [tab]: () => this.selectSelection(),
-    [esc]: () => this.close()
-  };
 
   keyPressed(event: JQueryEventObject) {
     const handler = this.keyEventHandlers[event.keyCode];

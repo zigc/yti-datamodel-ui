@@ -1,4 +1,4 @@
-import { module as mod }  from './module';
+import { module as mod } from './module';
 import { IScope } from 'angular';
 import { UsageService } from '../../services/usageService';
 import { EditableEntity, LanguageContext } from '../../entities/contract';

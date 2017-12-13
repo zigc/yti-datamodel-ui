@@ -2,7 +2,7 @@ import { IAttributes, INgModelController, IQService, IScope, IModelFormatter } f
 import { EditableForm } from '../form/editableEntityController';
 import { arrayValidator, arrayAsyncValidator } from '../form/validators';
 import { extendNgModelOptions, formatWithFormatters, ValidationResult, validateWithValidators } from '../../utils/angular';
-import { module as mod }  from './module';
+import { module as mod } from './module';
 import { remove } from '../../utils/array';
 import { enter } from '../../utils/keyCode';
 
@@ -27,7 +27,11 @@ mod.directive('editableMultiple', /* @ngInject */ ($q: IQService) => {
     },
     template: require('./editableMultiple.html'),
     require: ['editableMultiple', 'ngModel', '?^form'],
-    link($scope: EditableMultipleScope, element: JQuery, _attributes: IAttributes, [thisController, ngModel, formController]: [EditableMultipleController<any>, INgModelController, EditableForm]) {
+    link($scope: EditableMultipleScope,
+         element: JQuery,
+         _attributes: IAttributes,
+         [thisController, ngModel, formController]: [EditableMultipleController<any>, INgModelController, EditableForm]) {
+
       thisController.isEditing = () => formController.editing;
 
       const inputElement = element.find('input');

@@ -1,6 +1,6 @@
 import { IScope, IAttributes, IFormController } from 'angular';
 import { EditableEntityController } from './editableEntityController';
-import { module as mod }  from './module';
+import { module as mod } from './module';
 
 mod.directive('editableEntityButtons', () => {
   return {

@@ -24,8 +24,8 @@ export function scale(paper: joint.dia.Paper, scaleDiff: number, x?: number, y?:
   if (scale !== newScale && newScale >= minScale && newScale <= maxScale) {
     const scaleRatio = newScale / scale;
 
-    const actualX = x || paper.options.width / 2;
-    const actualY = y || paper.options.height / 2;
+    const actualX = x || (paper.options.width!) / 2;
+    const actualY = y || (paper.options.height!) / 2;
 
     const tx = scaleRatio * (paper.options.origin.x - actualX) + actualX;
     const ty = scaleRatio * (paper.options.origin.y - actualY) + actualY;
@@ -38,8 +38,8 @@ export function scale(paper: joint.dia.Paper, scaleDiff: number, x?: number, y?:
 export function centerToElement(paper: joint.dia.Paper, element: joint.dia.Element) {
   const scale = 0.8;
   const bbox = element.getBBox();
-  const x = (paper.options.width / 2) - (bbox.x + bbox.width / 2) * scale;
-  const y = (paper.options.height / 2) - (bbox.y + bbox.height / 2) * scale;
+  const x = ((paper.options.width!) / 2) - (bbox.x + bbox.width / 2) * scale;
+  const y = ((paper.options.height!) / 2) - (bbox.y + bbox.height / 2) * scale;
 
   paper.scale(scale);
   paper.setOrigin(x, y);
@@ -61,8 +61,8 @@ export function scaleToFit(paper: joint.dia.Paper, graph: joint.dia.Graph, onlyV
   const fittingBBox = {
     x: paper.options.origin.x + padding,
     y: paper.options.origin.y + padding,
-    width: paper.options.width - padding * 2,
-    height: paper.options.height - padding * 2
+    width: paper.options.width! - padding * 2,
+    height: paper.options.height! - padding * 2
   };
 
   const newScale = Math.min(fittingBBox.width / contentBBox.width * scale, fittingBBox.height / contentBBox.height * scale);
@@ -113,7 +113,14 @@ function resetFocusOnAllCells(paper: joint.dia.Paper, graph: joint.dia.Graph, el
   }
 }
 
-function applyFocus(paper: joint.dia.Paper, graph: joint.dia.Graph, e: joint.dia.Element, selectionFocus: FocusLevel, direction: Direction, depth: number, visitedOutgoing: Set<joint.dia.Element>, visitedIncoming: Set<joint.dia.Element>) {
+function applyFocus(paper: joint.dia.Paper,
+                    graph: joint.dia.Graph,
+                    e: joint.dia.Element,
+                    selectionFocus: FocusLevel,
+                    direction: Direction,
+                    depth: number,
+                    visitedOutgoing: Set<joint.dia.Element>,
+                    visitedIncoming: Set<joint.dia.Element>) {
 
   // optimization handled in resetFocusOnAllCells
   if (selectionFocus === FocusLevel.ALL) {

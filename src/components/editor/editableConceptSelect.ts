@@ -1,4 +1,4 @@
-import { module as mod }  from './module';
+import { module as mod } from './module';
 import { SearchConceptModal } from './searchConceptModal';
 import { EditableForm } from '../form/editableEntityController';
 import { IScope, IAttributes } from 'angular';

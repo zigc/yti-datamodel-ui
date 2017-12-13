@@ -88,8 +88,8 @@ export class Predicate extends AbstractPredicate {
   modifiedAt: Moment|null;
   createdAt: Moment|null;
 
-  unsaved: boolean = false;
-  external: boolean = false;
+  unsaved = false;
+  external = false;
 
   constructor(graph: any, context: any, frame: any) {
     super(graph, context, frame);

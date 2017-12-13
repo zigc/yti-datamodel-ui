@@ -1,6 +1,6 @@
 import { IAttributes, IScope } from 'angular';
 import { arrowDown, arrowUp, pageDown, pageUp, enter } from '../../utils/keyCode';
-import { module as mod }  from './module';
+import { module as mod } from './module';
 
 mod.directive('keyControl', () => {
   return {
@@ -17,8 +17,8 @@ mod.directive('keyControl', () => {
 
 export class KeyControlController {
 
-  itemCount: number = 0;
-  selectionIndex: number = -1;
+  itemCount = 0;
+  selectionIndex = -1;
 
   private keyEventHandlers: {[key: number]: () => void} = {
     [arrowDown]: () => this.moveSelection(1),

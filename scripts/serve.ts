@@ -26,15 +26,21 @@ function applyHotLoading(config: webpack.Configuration) {
   return Object.assign({}, config, { entry: appendEntry(config.entry) });
 }
 
-applyProgressBar(webpack(createVendorConfig(false))).run((err: Error, stats: webpack.compiler.Stats) => {
+applyProgressBar(webpack(createVendorConfig(false))).run((err: Error, stats: webpack.Stats) => {
 
   report(err, stats);
 
   const server = new WebpackDevServer(applyProgressBar(webpack(applyHotLoading(createAppConfig(false)))), {
-    stats: true,
+    stats: {
+      modules: false,
+      children: false,
+      colors: true
+    },
     contentBase: './src',
     hot: true,
-    historyApiFallback: '/',
+    historyApiFallback: {
+      index: '/'
+    },
     proxy: {
       '/api/*': {
         target: `http://${hostname}:${apiPort}/`,

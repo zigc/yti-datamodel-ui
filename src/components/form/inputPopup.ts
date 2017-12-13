@@ -6,11 +6,11 @@ export interface InputWithPopupController<T> {
   popupItemName: string;
   show: boolean;
   popupItems: T[];
+  selectedSelectionIndex: number;
+  element: JQuery;
   isSelected(index: number): boolean;
   setSelection(index: number): void;
   selectSelection(event?: JQueryEventObject): void;
-  selectedSelectionIndex: number;
-  element: JQuery;
 }
 
 interface InputPopupScope extends IScope {

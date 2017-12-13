@@ -4,10 +4,10 @@ import { EntityAwareSerializer } from './serializer/entitySerializer';
 import { GraphNode } from './graphNode';
 import { first, contains } from '../utils/array';
 
-export type Mapping<T, N extends GraphNode> = {
-  name: string|string[],
-  serializer: Serializer<T>|EntityAwareSerializer<T, N>,
-};
+export interface Mapping<T, N extends GraphNode> {
+  name: string|string[];
+  serializer: Serializer<T>|EntityAwareSerializer<T, N>;
+}
 
 export function init<T, N extends GraphNode>(instance: N, mappings: { [propertyName: string]: Mapping<any, N>; }) {
   const result: any = {};
@@ -29,14 +29,12 @@ export function initSingle<T, N extends GraphNode>(instance: N, mapping: Mapping
     }
   }
 
-  const value = resolveValue(mapping.name);
-
   try {
     switch (mapping.serializer.type) {
       case 'Normal':
-        return mapping.serializer.deserialize(value);
+        return mapping.serializer.deserialize(resolveValue(mapping.name));
       case 'EntityAware':
-        return mapping.serializer.deserialize(value, instance);
+        return mapping.serializer.deserialize(resolveValue(mapping.name), instance);
       default:
         return assertNever(mapping.serializer, 'Unsupported serializer');
     }

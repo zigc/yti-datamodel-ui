@@ -79,8 +79,6 @@ export class ClassListItem extends AbstractClass {
 
 export class Class extends AbstractClass implements VisualizationClass {
 
-  static isConstraintDefined = (constraint: Constraint) => constraint.items.length > 0 || hasLocalization(constraint.comment);
-
   static classMappings = {
     subClassOf:        { name: 'subClassOf',      serializer: entityAwareOptional(uriSerializer) },
     scopeClass:        { name: 'scopeClass',      serializer: entityAwareOptional(uriSerializer) },
@@ -88,7 +86,8 @@ export class Class extends AbstractClass implements VisualizationClass {
     properties:        { name: 'property',        serializer: entityAwareList(entity(() => Property)) },
     subject:           { name: 'subject',         serializer: entityAwareOptional(entity(resolveConceptConstructor)) },
     equivalentClasses: { name: 'equivalentClass', serializer: entityAwareList(uriSerializer) },
-    constraint:        { name: 'constraint',      serializer: entityAwareValueOrDefault(entity(() => Constraint), {}, Class.isConstraintDefined) },
+    constraint:        { name: 'constraint',      serializer: entityAwareValueOrDefault(entity(() => Constraint), {},
+        (constraint: Constraint) => constraint.items.length > 0 || hasLocalization(constraint.comment)) },
     version:           { name: 'identifier',      serializer: optional(identitySerializer<Urn>()) },
     editorialNote:     { name: 'editorialNote',   serializer: localizableSerializer },
     modifiedAt:        { name: 'modified',        serializer: optional(dateSerializer) },
@@ -108,8 +107,8 @@ export class Class extends AbstractClass implements VisualizationClass {
   createdAt: Moment|null;
 
   resolved = true;
-  unsaved: boolean = false;
-  external: boolean = false;
+  unsaved = false;
+  external = false;
 
   constructor(graph: any, context: any, frame: any) {
     super(graph, context, frame);
@@ -292,33 +291,32 @@ export class ConstraintListItem extends GraphNode {
   }
 }
 
-export class Property extends GraphNode {
 
-  static propertyTypeSerializer = createSerializer<KnownPredicateType>(
-    (data: KnownPredicateType) => reverseMapType(data),
-    (data: any) => {
-      const predicateType = requireDefined(mapType(data));
+const propertyTypeSerializer = createSerializer<KnownPredicateType>((data: KnownPredicateType) => reverseMapType(data), (data: any) => {
+    const predicateType = requireDefined(mapType(data));
 
-      if (predicateType !== 'association' && predicateType !== 'attribute') {
-        throw new Error('Unknown predicate type: ' + predicateType);
-      }
-
-      return predicateType;
+    if (predicateType !== 'association' && predicateType !== 'attribute') {
+      throw new Error('Unknown predicate type: ' + predicateType);
     }
-  );
 
-  static resolvePredicateConstructor(framedData: any): EntityConstructor<Association|Attribute> {
-
-    const types = typeSerializer.deserialize(framedData['@type']);
-
-    if (containsAny(types, ['association'])) {
-      return Association;
-    } else if (containsAny(types, ['attribute'])) {
-      return Attribute;
-    } else {
-      throw new Error('Incompatible predicate type: ' + types.join());
-    }
+    return predicateType;
   }
+);
+
+function resolvePredicateConstructor(framedData: any): EntityConstructor<Association|Attribute> {
+
+  const types = typeSerializer.deserialize(framedData['@type']);
+
+  if (containsAny(types, ['association'])) {
+    return Association;
+  } else if (containsAny(types, ['attribute'])) {
+    return Attribute;
+  } else {
+    throw new Error('Incompatible predicate type: ' + types.join());
+  }
+}
+
+export class Property extends GraphNode {
 
   static propertyMapping = {
     internalId:         { name: '@id',                  serializer: uriSerializer },
@@ -331,7 +329,7 @@ export class Property extends GraphNode {
     dataType:           { name: 'datatype',             serializer: optional(identitySerializer<DataType>()) },
     language:           { name: 'language',             serializer: list(identitySerializer<Language>()) },
     valueClass:         { name: 'valueShape',           serializer: entityAwareOptional(uriSerializer) },
-    predicate:          { name: 'predicate',            serializer: entityOrId(entity(Property.resolvePredicateConstructor)) },
+    predicate:          { name: 'predicate',            serializer: entityOrId(entity(resolvePredicateConstructor)) },
     index:              { name: 'index',                serializer: identitySerializer<number>() },
     minCount:           { name: 'minCount',             serializer: optional(identitySerializer<number>()) },
     maxCount:           { name: 'maxCount',             serializer: optional(identitySerializer<number>()) },
@@ -346,7 +344,7 @@ export class Property extends GraphNode {
     editorialNote:      { name: 'editorialNote',        serializer: localizableSerializer },
     resourceIdentifier: { name: 'isResourceIdentifier', serializer: booleanSerializer },
     uniqueLang:         { name: 'uniqueLang',           serializer: booleanSerializer },
-    predicateType:      { name: 'type',                 serializer: optional(Property.propertyTypeSerializer) },
+    predicateType:      { name: 'type',                 serializer: optional(propertyTypeSerializer) },
     xmlWrapper:         { name: 'isXmlWrapper',         serializer: booleanSerializer },
     xmlAttribute:       { name: 'isXmlAttribute',       serializer: booleanSerializer }
   };

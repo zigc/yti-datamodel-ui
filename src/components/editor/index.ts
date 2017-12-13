@@ -4,7 +4,7 @@ import { SearchConceptModal } from './searchConceptModal';
 import { SearchClassModal } from './searchClassModal';
 import { SearchPredicateModal } from './searchPredicateModal';
 import { AddPropertiesFromClassModal } from './addPropertiesFromClassModal';
-import { module as mod }  from './module';
+import { module as mod } from './module';
 export { module } from './module';
 
 import './classForm';

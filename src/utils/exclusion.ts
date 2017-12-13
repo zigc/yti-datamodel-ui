@@ -28,7 +28,7 @@ export function idExclusion<T extends { id: Uri }>(excludeId: Exclusion<Uri>,
       return $q.when(excludeIdReason);
     } else if (excludeItem) {
       return dataSource(id.toString()).then(items => {
-        const item = first(items, item => item.id.equals(id));
+        const item = first(items, i => i.id.equals(id));
         return item && excludeItem(item);
       });
     } else {

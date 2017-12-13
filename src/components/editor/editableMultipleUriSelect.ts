@@ -2,7 +2,7 @@ import { IAttributes, IPromise, IScope } from 'angular';
 import { SearchPredicateModal } from './searchPredicateModal';
 import { SearchClassModal } from './searchClassModal';
 import { Uri } from '../../entities/uri';
-import { module as mod }  from './module';
+import { module as mod } from './module';
 import { EditableForm } from '../form/editableEntityController';
 import { collectProperties } from '../../utils/array';
 import { createExistsExclusion } from '../../utils/exclusion';
@@ -43,7 +43,9 @@ mod.directive('editableMultipleUriSelect', () => {
          </input-container>
 
         <button-container>
-          <button ng-if="ctrl.isEditing()" type="button" class="btn btn-default btn-sm" style="display: block" ng-click="ctrl.selectUri()">{{('Choose ' + ctrl.type) | translate}}</button>
+          <button ng-if="ctrl.isEditing()" type="button" class="btn btn-default btn-sm" style="display: block" ng-click="ctrl.selectUri()">
+            {{('Choose ' + ctrl.type) | translate}}
+          </button>
         </button-container>
 
       </editable-multiple>
@@ -66,12 +68,13 @@ class EditableMultipleUriSelectController {
   model: Model;
   id: string;
   title: string;
-  link = (uri: Uri) => this.model.linkToResource(uri);
 
   isEditing: () => boolean;
   addUri: (uri: Uri) => void;
   datasource: DataSource<DataType>;
   valueExtractor = (item: DataType) => item.id;
+
+  link = (uri: Uri) => this.model.linkToResource(uri);
   createExclusion = () => createExistsExclusion(collectProperties(this.ngModel, uri => uri.uri));
 
   /* @ngInject */

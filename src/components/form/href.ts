@@ -1,5 +1,5 @@
 import { IScope, ITimeoutService } from 'angular';
-import { module as mod }  from './module';
+import { module as mod } from './module';
 
 mod.directive('ngHref', ($timeout: ITimeoutService) => {
   return {

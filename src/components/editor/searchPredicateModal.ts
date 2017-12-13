@@ -85,11 +85,10 @@ export class SearchPredicateController implements SearchController<PredicateList
 
   private predicates: PredicateListItem[] = [];
 
-  editInProgress = () => this.$scope.form.editing && this.$scope.form.$dirty;
   close = this.$uibModalInstance.dismiss;
   searchResults: (PredicateListItem|AddNewPredicate)[] = [];
   selection: Predicate|ExternalEntity;
-  searchText: string = '';
+  searchText = '';
   typeSelectable: boolean;
   excludeError: string|null = null;
   cannotConfirm: string|null = null;
@@ -110,6 +109,8 @@ export class SearchPredicateController implements SearchController<PredicateList
   contentExtractors = this.contentMatchers.map(m => m.extractor);
 
   private searchFilters: SearchFilter<PredicateListItem>[] = [];
+
+  editInProgress = () => this.$scope.form.editing && this.$scope.form.$dirty;
 
   /* @ngInject */
   constructor(private $scope: SearchPredicateScope,
@@ -169,9 +170,24 @@ export class SearchPredicateController implements SearchController<PredicateList
 
   search() {
     this.searchResults = [
-      new AddNewPredicate(`${this.gettextCatalog.getString('Create new attribute')} '${this.searchText}'`, this.isAttributeAddable.bind(this), 'attribute', false),
-      new AddNewPredicate(`${this.gettextCatalog.getString('Create new association')} '${this.searchText}'`, this.isAssociationAddable.bind(this), 'association', false),
-      new AddNewPredicate(`${this.gettextCatalog.getString('Create new predicate')} ${this.gettextCatalog.getString('by referencing external uri')}`, () => this.canAddExternal(), this.type, true),
+      new AddNewPredicate(
+        `${this.gettextCatalog.getString('Create new attribute')} '${this.searchText}'`,
+        this.isAttributeAddable.bind(this),
+        'attribute',
+        false
+      ),
+      new AddNewPredicate(
+        `${this.gettextCatalog.getString('Create new association')} '${this.searchText}'`,
+        this.isAssociationAddable.bind(this),
+        'association',
+        false
+      ),
+      new AddNewPredicate(
+        `${this.gettextCatalog.getString('Create new predicate')} ${this.gettextCatalog.getString('by referencing external uri')}`,
+        () => this.canAddExternal(),
+        this.type,
+        true
+      ),
       ...filterAndSortSearchResults(this.predicates, this.searchText, this.contentExtractors, this.searchFilters, defaultLabelComparator(this.localizer, this.exclude))
     ];
   }

@@ -1,6 +1,6 @@
 import { IAttributes, IRepeatScope, IScope } from 'angular';
 import { moveElement, resetWith } from '../../utils/array';
-import { module as mod }  from './module';
+import { module as mod } from './module';
 
 interface DragSortableAttributes extends IAttributes {
   dragSortable: string;
@@ -106,8 +106,12 @@ mod.directive('dragSortableItem', () => {
     link($scope: IRepeatScope, element: JQuery, _attributes: IAttributes, dragSortable: DragSortableController<any>) {
 
       const selectStartHandler = () => element[0].dragDrop(); // IE9 support hack
-      const dragStartHandler = (event: JQueryMouseEventObject) => $scope.$apply(() => dragSortable.startDrag((<DragEvent> event.originalEvent).dataTransfer, $scope.$index, element.width()));
+
+      const dragStartHandler = (event: JQueryMouseEventObject) => $scope.$apply(
+        () => dragSortable.startDrag((<DragEvent> event.originalEvent).dataTransfer, $scope.$index, element.width()));
+
       const dragEndHandler = () => $scope.$apply(() => dragSortable.drop());
+
       const dragOverHandler = (event: JQueryMouseEventObject) => {
         if (dragSortable.drag) {
           event.preventDefault();
@@ -118,8 +122,11 @@ mod.directive('dragSortableItem', () => {
           $scope.$apply(() => dragSortable.overDroppable($scope.$index, element.width(), mousePosition));
         }
       };
+
       const dragLeaveHandler = () => $scope.$apply(() => dragSortable.notOverDroppable());
+
       const dragEnterHandler = () => $scope.$apply(() => dragSortable.cloneCreated());
+
       const dropHandler = (event: JQueryMouseEventObject) => {
         event.preventDefault();
         $scope.$apply(() => dragSortable.drop());

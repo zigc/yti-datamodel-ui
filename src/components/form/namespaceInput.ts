@@ -1,6 +1,6 @@
 import { IScope, IAttributes, INgModelController } from 'angular';
 import { isValidNamespace, isValidUrl } from './validators';
-import { module as mod }  from './module';
+import { module as mod } from './module';
 import { NamespaceType, Model, ImportedNamespace } from '../../entities/model';
 
 mod.directive('namespaceInput', () => {

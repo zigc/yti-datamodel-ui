@@ -1,4 +1,4 @@
-import { module as mod }  from './module';
+import { module as mod } from './module';
 import { Show } from '../contracts';
 import { IScope, IAttributes } from 'angular';
 import { FloatController } from '../common/float';
@@ -24,7 +24,8 @@ mod.directive('visualizationView', () => {
     require: ['visualizationView', '?float'],
     link($scope: IScope, element: JQuery, _attributes: IAttributes, [thisController, floatController]: [VisualizationViewController, FloatController]) {
 
-      $scope.$watchGroup([() => thisController.selectionWidth, () => thisController.show, () => floatController && floatController.floating], ([selectionWidth, show, floating]: [number, Show, boolean]) => {
+      $scope.$watchGroup([() => thisController.selectionWidth, () => thisController.show, () => floatController && floatController.floating],
+        ([selectionWidth, show, floating]: [number, Show, boolean]) => {
 
         const width = show === Show.Both ? `calc(100% - ${selectionWidth + 10 + (floating ? 295 : 0)}px)` : '100%';
 

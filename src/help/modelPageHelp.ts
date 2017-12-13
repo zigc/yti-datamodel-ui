@@ -65,7 +65,10 @@ function assignClass(klass: { namespaceId: string, name: string }, gettextCatalo
   };
 }
 
-function addAttribute(modelPrefix: string, className: string, predicate: { type: KnownPredicateType, namespaceId: string, name: string }, gettextCatalog: gettextCatalog): StoryLine {
+function addAttribute(modelPrefix: string,
+                      className: string,
+                      predicate: { type: KnownPredicateType, namespaceId: string, name: string },
+                      gettextCatalog: gettextCatalog): StoryLine {
   return {
     title: 'Guide through adding an attribute',
     description: 'This tutorial shows how to add new attribute',
@@ -81,7 +84,9 @@ function addAttribute(modelPrefix: string, className: string, predicate: { type:
   };
 }
 
-function createNewClass(klass: { name: string, comment: string }, propertyByExistingPredicate: { type: KnownPredicateType, namespaceId: string, name: string }, gettextCatalog: gettextCatalog): StoryLine {
+function createNewClass(klass: { name: string, comment: string },
+                        propertyByExistingPredicate: { type: KnownPredicateType, namespaceId: string, name: string },
+                        gettextCatalog: gettextCatalog): StoryLine {
   return {
     title: 'Guide through creating a class',
     description: 'This tutorial shows how to create a new Class',

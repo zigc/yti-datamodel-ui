@@ -2,7 +2,7 @@ import { ILogService, IQService } from 'angular';
 import { EditableEntityController, EditableScope, Rights } from '../form/editableEntityController';
 import { UserService } from '../../services/userService';
 import { DeleteConfirmationModal } from '../common/deleteConfirmationModal';
-import { module as mod }  from './module';
+import { module as mod } from './module';
 import { ConceptEditorModalController } from './conceptEditorModal';
 import { UsageService } from '../../services/usageService';
 import { ErrorModal } from '../form/errorModal';
@@ -35,7 +35,7 @@ export class ConceptViewController extends EditableEntityController<Concept|Lega
   model: Model;
   modelController: ConceptEditorModalController;
   usage: Usage|null = null;
-  loading: boolean = true;
+  loading = true;
 
   /* @ngInject */
   constructor($scope: EditableScope,

@@ -30,7 +30,9 @@ mod.directive('typeFilter', () => {
   };
 });
 
-type WithNormalizedType = { normalizedType: Type|null };
+interface WithNormalizedType {
+  normalizedType: Type|null;
+}
 
 class TypeFilterController {
 

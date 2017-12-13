@@ -2,7 +2,7 @@ import { IAttributes, IScope } from 'angular';
 import { ModelViewController } from './modelView';
 import { LanguageService, Localizer } from '../../services/languageService';
 import { TableDescriptor, ColumnDescriptor } from '../form/editableTable';
-import { module as mod }  from './module';
+import { module as mod } from './module';
 import { createExistsExclusion } from '../../utils/exclusion';
 import { collectIds } from '../../utils/entity';
 import { SearchReferenceDataModal } from './searchReferenceDataModal';
@@ -47,7 +47,12 @@ class ReferenceDatasViewController {
   expanded: boolean;
 
   /* @ngInject */
-  constructor($scope: IScope, private searchReferenceDataModal: SearchReferenceDataModal, editReferenceDataModal: EditReferenceDataModal, viewReferenceDataModal: ViewReferenceDataModal, languageService: LanguageService) {
+  constructor($scope: IScope,
+              private searchReferenceDataModal: SearchReferenceDataModal,
+              editReferenceDataModal: EditReferenceDataModal,
+              viewReferenceDataModal: ViewReferenceDataModal,
+              languageService: LanguageService) {
+
     $scope.$watch(() => this.model, model => {
       this.descriptor = new ReferenceDataTableDescriptor(model, languageService.createLocalizer(model), editReferenceDataModal, viewReferenceDataModal);
     });
@@ -66,7 +71,10 @@ class ReferenceDatasViewController {
 
 class ReferenceDataTableDescriptor extends TableDescriptor<ReferenceData> {
 
-  constructor(private model: Model, private localizer: Localizer, private editReferenceDataModal: EditReferenceDataModal, private viewReferenceDataModal: ViewReferenceDataModal) {
+  constructor(private model: Model,
+              private localizer: Localizer,
+              private editReferenceDataModal: EditReferenceDataModal,
+              private viewReferenceDataModal: ViewReferenceDataModal) {
     super();
   }
 

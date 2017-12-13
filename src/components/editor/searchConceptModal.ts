@@ -42,7 +42,13 @@ export class SearchConceptModal {
   constructor(private $uibModal: IModalService) {
   }
 
-  private open(vocabularies: ModelVocabulary[], model: Model, type: ClassType|KnownPredicateType|null, allowSuggestions: boolean, newEntityCreation: boolean, initialSearch: string) {
+  private open(vocabularies: ModelVocabulary[],
+               model: Model,
+               type: ClassType|KnownPredicateType|null,
+               allowSuggestions: boolean,
+               newEntityCreation: boolean,
+               initialSearch: string) {
+
     return this.$uibModal.open({
       template: require('./searchConceptModal.html'),
       size: 'large',
@@ -83,7 +89,6 @@ function isNewConceptData(obj: Concept|NewConceptData): obj is NewConceptData {
 
 class SearchConceptController implements SearchController<Concept> {
 
-  editInProgress = () => this.$scope.form.editing && this.$scope.form.$dirty;
   close = this.$uibModalInstance.dismiss;
   queryResults: Concept[];
   searchResults: (Concept|AddNewConcept)[];
@@ -92,7 +97,7 @@ class SearchConceptController implements SearchController<Concept> {
   buttonTitle: string;
   labelTitle: string;
   selectedVocabulary: ModelVocabulary;
-  searchText: string = '';
+  searchText = '';
   submitError: string|null = null;
   loadingResults: boolean;
   selectedItem: Concept|AddNewConcept;
@@ -101,6 +106,8 @@ class SearchConceptController implements SearchController<Concept> {
 
   contentExtractors = [ (concept: Concept) => concept.label ];
   private searchFilters: SearchFilter<Concept>[] = [];
+
+  editInProgress = () => this.$scope.form.editing && this.$scope.form.$dirty;
 
   /* @ngInject */
   constructor(private $scope: SearchPredicateScope,
@@ -241,7 +248,15 @@ class SearchConceptController implements SearchController<Concept> {
 
     if (isNewConceptData(selection)) {
 
-      const conceptSuggestion = this.vocabularyService.createConceptSuggestion(selection.vocabulary.vocabulary, selection.label, selection.comment, extractId(selection.broaderConcept), language, this.model);
+      const conceptSuggestion =
+        this.vocabularyService.createConceptSuggestion(
+          selection.vocabulary.vocabulary,
+          selection.label,
+          selection.comment,
+          extractId(selection.broaderConcept),
+          language,
+          this.model
+        );
 
       if (this.newEntityCreation) {
         return conceptSuggestion.then(cs => new EntityCreation(cs, newEntity(cs)));

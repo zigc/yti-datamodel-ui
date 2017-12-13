@@ -27,7 +27,7 @@ mod.directive('profileFilter', () => {
 class ProfileFilterController {
 
   searchController: SearchController<WithDefinedBy>;
-  showProfiles: boolean = true;
+  showProfiles = true;
 
   /* @ngInject */
   constructor($scope: IScope) {

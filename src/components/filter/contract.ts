@@ -9,24 +9,20 @@ export function applyFilters<T>(searchResults: TextAnalysis<T>[], filters: Searc
 }
 
 export interface SearchController<T> {
-  addFilter(filter: SearchFilter<T>): void;
-  search(): void;
   items: T[];
   searchResults: (AddNew|T)[];
+  search(): void;
+  addFilter(filter: SearchFilter<T>): void;
 }
 
-export interface SearchFilter<T> {
-  (analyzedItem: TextAnalysis<T>): boolean;
-}
+export type SearchFilter<T> = (analyzedItem: TextAnalysis<T>) => boolean;
 
 export interface ContentMatcher<T> {
   name: string;
   extractor: ContentExtractor<T>;
 }
 
-export interface ContentExtractor<T> {
-  (item: T): Localizable|string;
-}
+export type ContentExtractor<T> = (item: T) => Localizable|string;
 
 export interface TextAnalysis<T> {
   item: T;

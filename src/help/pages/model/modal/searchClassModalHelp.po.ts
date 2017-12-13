@@ -16,7 +16,7 @@ export function filterForClass(namespaceId: string, className: string, gettextCa
 }
 
 export function filterForNewClass(className: string, gettextCatalog: gettextCatalog) {
-  return filterForAddNewResult(searchClassModal, className, gettextCatalog, "class");
+  return filterForAddNewResult(searchClassModal, className, gettextCatalog, 'class');
 }
 
 export function selectClass(namespaceId: string, className: string) {

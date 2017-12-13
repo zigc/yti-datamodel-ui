@@ -3,7 +3,7 @@ import { ClassFormController } from './classForm';
 import { Uri } from '../../entities/uri';
 import { LanguageService } from '../../services/languageService';
 import { any, all } from '../../utils/array';
-import { module as mod }  from './module';
+import { module as mod } from './module';
 import { hasLocalization } from '../../utils/language';
 import { Property, Class } from '../../entities/class';
 import { Model } from '../../entities/model';

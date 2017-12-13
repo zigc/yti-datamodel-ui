@@ -6,13 +6,8 @@ import { contains } from '../../utils/array';
 import { DataType } from '../../entities/dataTypes';
 const URI = require('uri-js');
 
-export interface Validator<T> {
-  (input: T, raw?: any): boolean;
-}
-
-export interface AsyncValidator<T> {
-  (input: T, raw?: any): IPromise<any>;
-}
+export type Validator<T> = (input: T, raw?: any) =>  boolean;
+export type AsyncValidator<T> = (input: T, raw?: any) => IPromise<any>;
 
 export interface ValidatorWithFormat<T> extends Validator<T> {
   format?: string;

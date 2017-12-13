@@ -1,4 +1,4 @@
-import { module as mod }  from './module';
+import { module as mod } from './module';
 import { LanguageService, localizationStrings } from '../../services/languageService';
 import { UserService } from '../../services/userService';
 import { LoginModal } from './loginModal';

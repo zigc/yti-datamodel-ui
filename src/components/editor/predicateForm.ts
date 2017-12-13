@@ -1,4 +1,4 @@
-import { module as mod }  from './module';
+import { module as mod } from './module';
 import { IScope, IAttributes } from 'angular';
 import { isDefined } from '../../utils/object';
 import { UsageService } from '../../services/usageService';
@@ -23,7 +23,10 @@ mod.directive('predicateForm', () => {
     bindToController: true,
     controllerAs: 'ctrl',
     require: ['predicateForm', '?^predicateView', '?^form'],
-    link(_$scope: IScope, _element: JQuery, _attributes: IAttributes, [predicateFormController, predicateViewController, formController]: [PredicateFormController, PredicateViewController, EditableForm]) {
+    link(_$scope: IScope,
+         _element: JQuery,
+         _attributes: IAttributes,
+         [predicateFormController, predicateViewController, formController]: [PredicateFormController, PredicateViewController, EditableForm]) {
       predicateFormController.isEditing = () => formController && formController.editing;
       predicateFormController.shouldAutofocus = !isDefined(predicateViewController);
     },

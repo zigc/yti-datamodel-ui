@@ -1,7 +1,7 @@
 import * as _ from 'lodash';
 import { requireDefined } from '../utils/object';
 import { normalizeModelType, KnownModelType, State, Type } from './type';
-import { Uri, Url, Urn } from '../entities/uri';
+import { Uri, Url, Urn } from './uri';
 import { Localizable } from './contract';
 import { modelUrl, resourceUrl } from '../utils/entity';
 import { GroupListItem } from './group';
@@ -21,17 +21,18 @@ import {
   languageSerializer, dateSerializer, typeSerializer
 } from './serializer/serializer';
 
-export abstract class AbstractModel extends GraphNode {
 
-  static normalizeType(type: Type[]): KnownModelType {
-    const normalizedType = requireDefined(normalizeModelType(type));
+function normalizeType(type: Type[]): KnownModelType {
+  const normalizedType = requireDefined(normalizeModelType(type));
 
-    if (normalizedType === 'model') {
-      throw new Error('Model type must be known');
-    } else {
-      return normalizedType;
-    }
+  if (normalizedType === 'model') {
+    throw new Error('Model type must be known');
+  } else {
+    return normalizedType;
   }
+}
+
+export abstract class AbstractModel extends GraphNode {
 
   static abstractModelMappings = {
     id:        { name: '@id',                         serializer: uriSerializer },
@@ -44,7 +45,7 @@ export abstract class AbstractModel extends GraphNode {
   label: Localizable;
   namespace: Url;
   prefix: string;
-  normalizedType = AbstractModel.normalizeType(this.type);
+  normalizedType = normalizeType(this.type);
 
   constructor(graph: any, context: any, frame: any) {
     super(graph, context, frame);
@@ -98,7 +99,7 @@ export class Model extends AbstractModel {
   namespaces: ImportedNamespace[];
   links: Link[];
   referenceDatas: ReferenceData[];
-  unsaved: boolean = false;
+  unsaved = false;
   group: GroupListItem;
   version: Urn|null;
   rootClass: Uri|null;

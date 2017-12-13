@@ -149,9 +149,16 @@ export function allAttributePropertyNames(attributeProperty: Property, showCardi
   return result;
 }
 
-export type ClassAttributePropertyAnnotation = { start: number, end: number, attrs: { id: string } };
+export interface ClassAttributePropertyAnnotation {
+  start: number;
+  end: number;
+  attrs: { id: string };
+}
 
-export function formatAttributeNamesAndAnnotations(properties: Property[], showCardinality: boolean, showName: NameType, localizer: Localizer): [string[], ClassAttributePropertyAnnotation[]] {
+export function formatAttributeNamesAndAnnotations(properties: Property[],
+                                                   showCardinality: boolean,
+                                                   showName: NameType,
+                                                   localizer: Localizer): [string[], ClassAttributePropertyAnnotation[]] {
 
   let chars = 0;
   const names: string[] = [];

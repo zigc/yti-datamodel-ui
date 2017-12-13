@@ -36,7 +36,7 @@ class SearchVocabularyController implements SearchController<Vocabulary> {
 
   searchResults: Vocabulary[] = [];
   vocabularies: Vocabulary[] = [];
-  searchText: string = '';
+  searchText = '';
   loadingResults: boolean;
   private localizer: Localizer;
 
@@ -80,7 +80,14 @@ class SearchVocabularyController implements SearchController<Vocabulary> {
   }
 
   search() {
-    this.searchResults = filterAndSortSearchResults(this.vocabularies, this.searchText, this.contentExtractors, this.searchFilters, defaultTitleComparator(this.localizer, this.exclude));
+    this.searchResults =
+      filterAndSortSearchResults(
+        this.vocabularies,
+        this.searchText,
+        this.contentExtractors,
+        this.searchFilters,
+        defaultTitleComparator(this.localizer, this.exclude)
+      );
   }
 
   selectItem(vocabulary: Vocabulary) {

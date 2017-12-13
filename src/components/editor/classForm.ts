@@ -3,7 +3,7 @@ import { ClassViewController } from './classView';
 import { AddPropertiesFromClassModal } from './addPropertiesFromClassModal';
 import { Uri } from '../../entities/uri';
 import { ClassService } from '../../services/classService';
-import { module as mod }  from './module';
+import { module as mod } from './module';
 import { isDefined } from '../../utils/object';
 import { SearchPredicateModal } from './searchPredicateModal';
 import { EditableForm } from '../form/editableEntityController';
@@ -30,7 +30,10 @@ mod.directive('classForm', () => {
     require: ['classForm', '?^classView', '?^form'],
     controllerAs: 'ctrl',
     bindToController: true,
-    link(_$scope: IScope, _element: JQuery, _attributes: IAttributes, [classFormController, classViewController, formController]: [ClassFormController, ClassViewController, EditableForm]) {
+    link(_$scope: IScope,
+         _element: JQuery,
+         _attributes: IAttributes,
+         [classFormController, classViewController, formController]: [ClassFormController, ClassViewController, EditableForm]) {
       classFormController.isEditing = () => formController && formController.editing;
       classFormController.shouldAutofocus = !isDefined(classViewController);
     },
@@ -46,11 +49,11 @@ export class ClassFormController {
   model: Model;
   isEditing: () => boolean;
   openPropertyId: string;
-  onPropertyReorder = (property: Property, index: number) => property.index = index;
   shouldAutofocus: boolean;
   addPropertyActions: Option[];
   localizer: Localizer;
 
+  onPropertyReorder = (property: Property, index: number) => property.index = index;
   superClassExclude = (klass: ClassListItem) => klass.isOfType('shape') ? 'Super cannot be shape' : null;
 
   /* @ngInject */

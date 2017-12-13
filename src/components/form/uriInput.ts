@@ -2,7 +2,7 @@ import { IScope, IAttributes, INgModelController, IModelValidators } from 'angul
 import gettextCatalog = angular.gettext.gettextCatalog;
 import { isValidUri, isValidUrl, isValidUriStem } from './validators';
 import { Uri } from '../../entities/uri';
-import { module as mod }  from './module';
+import { module as mod } from './module';
 import { Model } from '../../entities/model';
 import { LanguageService } from '../../services/languageService';
 

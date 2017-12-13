@@ -1,5 +1,5 @@
 import { IWindowService, IScope } from 'angular';
-import { module as mod }  from './module';
+import { module as mod } from './module';
 import { SessionService } from '../../services/sessionService';
 
 mod.directive('divider', () => {

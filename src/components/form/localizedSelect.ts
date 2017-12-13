@@ -1,5 +1,5 @@
 import gettextCatalog = angular.gettext.gettextCatalog;
-import { module as mod }  from './module';
+import { module as mod } from './module';
 
 mod.directive('localizedSelect', () => {
   return {

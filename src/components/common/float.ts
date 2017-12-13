@@ -1,4 +1,4 @@
-import { module as mod }  from './module';
+import { module as mod } from './module';
 import { IScope, IAttributes } from 'angular';
 import { InteractiveHelpService } from '../../help/services/interactiveHelpService';
 
@@ -98,7 +98,7 @@ export class FloatController {
   isStaticPosition: () => boolean;
   isInitialized: () => boolean;
 
-  floating: boolean = false;
+  floating = false;
   enabled = true;
   width: string|number;
 

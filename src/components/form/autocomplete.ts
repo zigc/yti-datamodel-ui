@@ -2,7 +2,7 @@ import { IScope, IAttributes, INgModelController, IQService, IModelFormatter } f
 import { isDefined } from '../../utils/object';
 import { esc, tab, enter, pageUp, pageDown, arrowUp, arrowDown } from '../../utils/keyCode';
 import { formatWithFormatters } from '../../utils/angular';
-import { module as mod }  from './module';
+import { module as mod } from './module';
 import { DataSource } from './dataSource';
 import { InputWithPopupController } from './inputPopup';
 import { limit } from '../../utils/array';
@@ -65,7 +65,7 @@ mod.directive('autocomplete', ($document: JQuery) => {
           ignoreNextViewChange = false;
         } else {
           // prevents initial triggering when user is not actually inputting anything
-          if (inputElement.is(":focus")) {
+          if (inputElement.is(':focus')) {
             thisController.autocomplete(viewValue);
           }
         }

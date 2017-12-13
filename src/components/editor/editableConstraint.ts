@@ -7,7 +7,7 @@ import {
   createSelfExclusion, combineExclusions
 } from '../../utils/exclusion';
 import { collectProperties } from '../../utils/array';
-import { module as mod }  from './module';
+import { module as mod } from './module';
 import { Constraint, Class, ConstraintListItem, ClassListItem } from '../../entities/class';
 import { Model } from '../../entities/model';
 import { ConstraintType } from '../../entities/type';

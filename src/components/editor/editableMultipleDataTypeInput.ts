@@ -1,4 +1,4 @@
-import { module as mod }  from './module';
+import { module as mod } from './module';
 import { DataType } from '../../entities/dataTypes';
 import { ReferenceData } from '../../entities/referenceData';
 import { LanguageContext } from '../../entities/contract';

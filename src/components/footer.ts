@@ -1,5 +1,5 @@
 import { config, dateFormat } from '../../config';
-import { module as mod }  from './module';
+import { module as mod } from './module';
 import moment = require('moment');
 
 mod.directive('footer', () => {

@@ -1,7 +1,7 @@
 import { IScope, IAttributes } from 'angular';
 import { EditableForm } from '../form/editableEntityController';
 import { SearchReferenceDataModal } from '../model/searchReferenceDataModal';
-import { module as mod }  from './module';
+import { module as mod } from './module';
 import { ViewReferenceDataModal } from '../model/viewReferenceDataModal';
 import { TableDescriptor, ColumnDescriptor } from '../form/editableTable';
 import { Localizer, LanguageService } from '../../services/languageService';

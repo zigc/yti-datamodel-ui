@@ -3,7 +3,7 @@ import { EditableEntityController, EditableScope, Rights } from '../form/editabl
 import { ModelService } from '../../services/modelService';
 import { UserService } from '../../services/userService';
 import { DeleteConfirmationModal } from '../common/deleteConfirmationModal';
-import { module as mod }  from './module';
+import { module as mod } from './module';
 import { ErrorModal } from '../form/errorModal';
 import { Model } from '../../entities/model';
 import { GroupListItem } from '../../entities/group';
@@ -27,7 +27,7 @@ mod.directive('modelView', () => {
 
 export class ModelViewController extends EditableEntityController<Model> {
 
-  visible: boolean = false;
+  visible = false;
   model: Model;
   modelController: ModelControllerService;
 

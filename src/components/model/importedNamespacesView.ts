@@ -5,7 +5,7 @@ import { AddEditNamespaceModal } from './addEditNamespaceModal';
 import { SearchNamespaceModal } from './searchNamespaceModal';
 import { ModelViewController } from './modelView';
 import { combineExclusions } from '../../utils/exclusion';
-import { module as mod }  from './module';
+import { module as mod } from './module';
 import { Model, ImportedNamespace, NamespaceType } from '../../entities/model';
 import { ModelControllerService } from './modelControllerService';
 import { modalCancelHandler } from '../../utils/angular';
@@ -78,7 +78,10 @@ class ImportedNamespacesViewController {
 
 class ImportedNamespaceTableDescriptor extends TableDescriptor<ImportedNamespace> {
 
-  constructor(private addEditNamespaceModal: AddEditNamespaceModal, private model: Model, private languageService: LanguageService, private modelController: ModelControllerService) {
+  constructor(private addEditNamespaceModal: AddEditNamespaceModal,
+              private model: Model,
+              private languageService: LanguageService,
+              private modelController: ModelControllerService) {
     super();
   }
 

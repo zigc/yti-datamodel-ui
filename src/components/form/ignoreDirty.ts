@@ -1,6 +1,6 @@
 import { IScope, IAttributes, INgModelController } from 'angular';
 
-import { module as mod }  from './module';
+import { module as mod } from './module';
 
 mod.directive('ignoreDirty', () => {
   return {

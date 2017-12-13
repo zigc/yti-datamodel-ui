@@ -48,13 +48,14 @@ export class ConceptEditorModalController {
   showModel: DefinedBy;
   showVocabulary: Vocabulary;
   showConceptType: 'concept'|'conceptSuggestion';
-  searchText: string = '';
+  searchText = '';
 
   loadingResults: boolean;
-  editInProgress = () => this.view.isEditing();
 
   view: ConceptViewController;
   private localizer: Localizer;
+
+  editInProgress = () => this.view.isEditing();
 
   /* @ngInject */
   constructor($scope: IScope,

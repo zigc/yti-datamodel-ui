@@ -1,6 +1,6 @@
 import { IAttributes, IScope } from 'angular';
 import { UserService } from '../../services/userService';
-import { module as mod }  from './module';
+import { module as mod } from './module';
 import { EditableForm } from './editableEntityController';
 import { State } from '../../entities/type';
 import { Model } from '../../entities/model';

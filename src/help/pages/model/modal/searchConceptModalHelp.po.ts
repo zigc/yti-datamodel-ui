@@ -14,7 +14,7 @@ import gettextCatalog = angular.gettext.gettextCatalog;
 const searchConceptModal = child(modal, '.search-concept');
 
 export function filterForConceptSuggestionConcept(conceptName: string, gettextCatalog: gettextCatalog) {
-  return filterForAddNewResult(searchConceptModal, conceptName, gettextCatalog, "concept");
+  return filterForAddNewResult(searchConceptModal, conceptName, gettextCatalog, 'concept');
 }
 
 export function filterForConcept(className: string, conceptId: string, gettextCatalog: gettextCatalog) {

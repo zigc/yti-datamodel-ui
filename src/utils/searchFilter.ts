@@ -2,6 +2,7 @@ import { localizableContains } from './language';
 import { Localizable } from '../entities/contract';
 import { isLocalizable } from './entity';
 
+
 export function valueContains(value: Localizable|string, searchString: string) {
   if (isLocalizable(value)) {
     return localizableContains(value, searchString);

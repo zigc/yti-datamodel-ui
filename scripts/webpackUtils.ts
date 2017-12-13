@@ -9,6 +9,7 @@ export function report(err: Error, stats: webpack.compiler.Stats): void {
 
   console.log(stats.toString({
     chunks: false,
+    modules: false,
     colors: true
   }));
 }
@@ -20,12 +21,4 @@ export function applyProgressBar(compiler: webpack.compiler.Compiler) {
   }));
 
   return compiler;
-}
-
-declare module 'webpack' {
-  namespace compiler {
-    interface Compiler {
-      apply(plugin: any): void;
-    }
-  }
 }

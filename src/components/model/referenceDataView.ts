@@ -1,5 +1,5 @@
 import { IScope } from 'angular';
-import { module as mod }  from './module';
+import { module as mod } from './module';
 import { ReferenceDataService } from '../../services/referenceDataService';
 import { ViewReferenceDataModal } from './viewReferenceDataModal';
 import { ReferenceData, ReferenceDataCode } from '../../entities/referenceData';

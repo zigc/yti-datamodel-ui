@@ -34,11 +34,12 @@ class AddModelController {
   redirect?: Uri;
   submitError: string;
 
+  cancel = this.$uibModalInstance.dismiss;
+
   /* @ngInject */
   constructor(private $uibModalInstance: IModalServiceInstance, private modelService: ModelService, private groupId: Uri, public type: KnownModelType) {
   }
 
-  cancel = this.$uibModalInstance.dismiss;
   create() {
     // service call only for validation purposes
     this.modelService.newModel(this.prefix, this.label, this.groupId, this.language, this.type, this.redirect)

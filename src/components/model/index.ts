@@ -7,7 +7,7 @@ import { SearchReferenceDataModal } from './searchReferenceDataModal';
 import { EditReferenceDataModal } from './editReferenceDataModal';
 import { ViewReferenceDataModal} from './viewReferenceDataModal';
 import { ConceptEditorModal } from './conceptEditorModal';
-import { module as mod }  from './module';
+import { module as mod } from './module';
 export { module } from './module';
 
 import './editableRootClass';
