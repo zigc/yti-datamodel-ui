@@ -4,7 +4,6 @@ import { DeleteConfirmationModal } from '../common/deleteConfirmationModal';
 import { isModalCancel } from '../../utils/angular';
 import { ErrorModal } from '../form/errorModal';
 import { EditableEntity, LanguageContext } from '../../entities/contract';
-import { NotificationModal } from '../common/notificationModal';
 
 export interface EditableForm extends IFormController {
   editing: boolean;
@@ -28,7 +27,6 @@ export abstract class EditableEntityController<T extends EditableEntity> {
               private $log: ILogService,
               protected deleteConfirmationModal: DeleteConfirmationModal,
               private errorModal: ErrorModal,
-              protected notificationModal: NotificationModal,
               protected userService: UserService) {
     $scope.$watch(() => userService.isLoggedIn(), (isLoggedIn, wasLoggedIn) => {
       if (!isLoggedIn && wasLoggedIn) {
@@ -80,23 +78,21 @@ export abstract class EditableEntityController<T extends EditableEntity> {
   }
 
   removeEdited() {
-    this.userService.ifStillLoggedIn(() => {
-        const editable = this.getEditable();
-        this.persisting = true;
-        this.openDeleteConfirmationModal()
-          .then(() => this.remove(editable!))
-          .then(() => {
-            this.select(null);
-            this.persisting = false;
-          }, err => {
-            if (!isModalCancel(err)) {
-              this.$log.error(err);
-              this.errorModal.openSubmitError((err.data && err.data.errorMessage) || 'Unexpected error');
-            }
-            this.persisting = false;
-          });
-      }, () => this.notificationModal.openNotLoggedIn()
-    );
+
+    const editable = this.getEditable();
+    this.persisting = true;
+    this.openDeleteConfirmationModal()
+      .then(() => this.remove(editable!))
+      .then(() => {
+        this.select(null);
+        this.persisting = false;
+      }, err => {
+        if (!isModalCancel(err)) {
+          this.$log.error(err);
+          this.errorModal.openSubmitError((err.data && err.data.errorMessage) || 'Unexpected error');
+        }
+        this.persisting = false;
+      });
   }
 
   canRemove() {
@@ -114,10 +110,7 @@ export abstract class EditableEntityController<T extends EditableEntity> {
   }
 
   edit() {
-    this.userService.ifStillLoggedIn(
-      () => this.$scope.form.editing = true,
-      () => this.notificationModal.openNotLoggedIn()
-    );
+    this.$scope.form.editing = true;
   }
 
   isEditing(): boolean {

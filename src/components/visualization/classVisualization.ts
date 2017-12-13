@@ -1,37 +1,39 @@
-import { IAttributes, IQService, IScope, ITimeoutService, IPromise, IWindowService } from 'angular';
+import { IAttributes, IPromise, IQService, IScope, ITimeoutService, IWindowService } from 'angular';
 import { LanguageService } from '../../services/languageService';
-import { VisualizationService, ClassVisualization } from '../../services/visualizationService';
+import { ClassVisualization, VisualizationService } from '../../services/visualizationService';
 import { ChangeListener, Show } from '../contracts';
 import * as joint from 'jointjs';
 import { module as mod } from './module';
 import { Uri } from '../../entities/uri';
-import { first, arraysAreEqual, normalizeAsArray } from '../../utils/array';
+import { arraysAreEqual, first, normalizeAsArray } from '../../utils/array';
 import { UserService } from '../../services/userService';
 import { ConfirmationModal } from '../common/confirmationModal';
-import { SessionService, FocusLevel, NameType } from '../../services/sessionService';
+import { FocusLevel, NameType, SessionService } from '../../services/sessionService';
 import { VisualizationPopoverDetails } from './popover';
-import { ShadowClass, createClassElement, createAssociationLink } from './diagram';
+import { createAssociationLink, createClassElement, ShadowClass } from './diagram';
 import { PaperHolder } from './paperHolder';
 import { ClassInteractionListener } from './contract';
-import { moveOrigin, scale, focusElement, centerToElement, scaleToFit } from './paperUtil';
-import { adjustElementLinks, layoutGraph, VertexAction, calculateLabelPosition } from './layout';
+import { centerToElement, focusElement, moveOrigin, scale, scaleToFit } from './paperUtil';
+import { adjustElementLinks, calculateLabelPosition, layoutGraph, VertexAction } from './layout';
 import { Localizer } from '../../utils/language';
 import { ifChanged, modalCancelHandler } from '../../utils/angular';
-import { coordinatesAreEqual, centerToPosition, copyVertices } from '../../utils/entity';
-import { mapOptional, requireDefined, Optional } from '../../utils/object';
+import { centerToPosition, coordinatesAreEqual, copyVertices } from '../../utils/entity';
+import { mapOptional, Optional, requireDefined } from '../../utils/object';
 import { Class, Property } from '../../entities/class';
 import { Predicate } from '../../entities/predicate';
 import { Model } from '../../entities/model';
 import {
-  ModelPositions, AssociationTargetPlaceholderClass, VisualizationClass,
-  AssociationPropertyPosition
+  AssociationPropertyPosition,
+  AssociationTargetPlaceholderClass,
+  ModelPositions,
+  VisualizationClass
 } from '../../entities/visualization';
 import { Coordinate } from '../../entities/contract';
-import { NotificationModal } from '../common/notificationModal';
 import { InteractiveHelpService } from '../../help/services/interactiveHelpService';
 import * as moment from 'moment';
 import { ContextMenuTarget } from './contextMenu';
 import { ModelPageActions } from '../model/modelPage';
+import { AuthorizationManagerService } from '../../services/authorizationManagerService';
 
 mod.directive('classVisualization', () => {
   return {
@@ -174,7 +176,7 @@ class ClassVisualizationController implements ChangeListener<Class|Predicate>, C
               private sessionService: SessionService,
               private interactiveHelpService: InteractiveHelpService,
               private confirmationModal: ConfirmationModal,
-              private notificationModal: NotificationModal) {
+              private authorizationManagerService: AuthorizationManagerService) {
 
     this.modelPageActions.addListener(this);
 
@@ -311,22 +313,20 @@ class ClassVisualizationController implements ChangeListener<Class|Predicate>, C
   }
 
   canSave() {
-    return this.interactiveHelpService.isClosed() && this.userService.user.isMemberOf(this.model.group);
+    return this.interactiveHelpService.isClosed() && this.authorizationManagerService.canSaveVisualization(this.model);
   }
 
   savePositions() {
-    this.userService.ifStillLoggedIn(() => {
-      this.confirmationModal.openVisualizationLocationsSave()
-        .then(() => {
-          this.saving = true;
-          this.visualizationService.updateModelPositions(this.model, this.modelPositions)
-            .then(() => {
-              this.modelPositions.setPristine();
-              this.persistentPositions = this.modelPositions.clone();
-              this.saving = false;
-            });
-        }, modalCancelHandler);
-    }, () => this.notificationModal.openNotLoggedIn());
+    this.confirmationModal.openVisualizationLocationsSave()
+      .then(() => {
+        this.saving = true;
+        this.visualizationService.updateModelPositions(this.model, this.modelPositions)
+          .then(() => {
+            this.modelPositions.setPristine();
+            this.persistentPositions = this.modelPositions.clone();
+            this.saving = false;
+          });
+      }, modalCancelHandler);
   }
 
   relayoutPositions() {
@@ -595,13 +595,10 @@ class ClassVisualizationController implements ChangeListener<Class|Predicate>, C
 
   onClassContextMenu(classId: string, coordinate: Coordinate): void {
 
-    if (this.userService.user.isLoggedIn()) {
-      this.userService.ifStillLoggedIn(() => {
-
-        const klass = this.classVisualization.hasClass(classId) ? this.classVisualization.getClassById(classId)
-          : new AssociationTargetPlaceholderClass(new Uri(classId, this.model.context), this.model);
-        this.contextMenuTarget = { coordinate, target: klass };
-      }, () => this.notificationModal.openNotLoggedIn());
+    if (!this.userService.user.anonymous) {
+      const klass = this.classVisualization.hasClass(classId) ? this.classVisualization.getClassById(classId)
+                                                              : new AssociationTargetPlaceholderClass(new Uri(classId, this.model.context), this.model);
+      this.contextMenuTarget = { coordinate, target: klass };
     }
   }
 

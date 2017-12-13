@@ -11,7 +11,6 @@ import { ReferenceDataService } from './referenceDataService';
 import { PredicateService, DefaultPredicateService } from './predicateService';
 import { SearchService } from './searchService';
 import { UsageService } from './usageService';
-import { UserService, DefaultUserService } from './userService';
 import { DefaultValidatorService, ValidatorService } from './validatorService';
 import { HistoryService } from './historyService';
 import { EntityLoaderService } from './entityLoader';
@@ -21,6 +20,9 @@ import { FrameService } from './frameService';
 import { proxyToInstance } from '../utils/proxy';
 import { InteractiveHelpService } from '../help/services/interactiveHelpService';
 import { InteractiveHelpValidatorService } from '../help/services/helpValidatorService';
+import { UserService } from 'yti-common-ui/services/user.service';
+import { downgradeInjectable } from '@angular/upgrade/static';
+import { AuthorizationManagerService } from './authorizationManagerService';
 
 function proxyConditionallyToHelp<T>(interactiveHelpService: InteractiveHelpService, defaultService: T, helpService: T) {
   return proxyToInstance(() => interactiveHelpService.isOpen() ? helpService : defaultService);
@@ -59,7 +61,7 @@ mod.factory('predicateService',
 mod.service('searchService', SearchService);
 mod.service('usageService', UsageService);
 
-mod.service('defaultUserService', DefaultUserService);
+mod.factory('defaultUserService', downgradeInjectable(UserService));
 mod.factory('userService',
   (interactiveHelpService: InteractiveHelpService, defaultUserService: UserService, helpUserService: UserService) =>
     proxyConditionallyToHelp(interactiveHelpService, defaultUserService, helpUserService));
@@ -74,3 +76,4 @@ mod.service('resetService', ResetService);
 mod.service('entityLoaderService', EntityLoaderService);
 mod.service('sessionService', SessionService);
 mod.service('frameService', FrameService);
+mod.service('authorizationManagerService', AuthorizationManagerService);

@@ -6,24 +6,8 @@
     <form>
       <div class="top-actions"></div>
       <div class="col-md-12">
-        <non-editable data-title="User login" value="ctrl.user.login"></non-editable>
+        <non-editable data-title="User login" value="ctrl.user.email"></non-editable>
         <non-editable data-title="User name" value="ctrl.user.name"></non-editable>
-        <non-editable data-title="Created at" value="ctrl.user.createdAt"></non-editable>
-        <non-editable data-title="Modified at" value="ctrl.user.modifiedAt"></non-editable>
-
-        <div class="editable-wrap">
-          <label translate>Member groups</label>
-          <ul>
-            <li ng-repeat="group in ctrl.user.memberGroups"><a ng-href="{{ctrl.groupUrl(group)}}">{{group.compact}}</a></li>
-          </ul>
-        </div>
-
-        <div class="editable-wrap">
-          <label translate>Admin groups</label>
-          <ul>
-            <li ng-repeat="group in ctrl.user.adminGroups"><a ng-href="{{ctrl.groupUrl(group)}}">{{group.compact}}</a></li>
-          </ul>
-        </div>
       </div>
     </form>
 

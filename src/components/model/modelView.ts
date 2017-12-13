@@ -6,10 +6,9 @@ import { DeleteConfirmationModal } from '../common/deleteConfirmationModal';
 import { module as mod } from './module';
 import { ErrorModal } from '../form/errorModal';
 import { Model } from '../../entities/model';
-import { GroupListItem } from '../../entities/group';
 import { LanguageContext } from '../../entities/contract';
-import { NotificationModal } from '../common/notificationModal';
 import { ModelControllerService } from './modelControllerService';
+import { AuthorizationManagerService } from '../../services/authorizationManagerService';
 
 mod.directive('modelView', () => {
   return {
@@ -37,9 +36,10 @@ export class ModelViewController extends EditableEntityController<Model> {
               private modelService: ModelService,
               deleteConfirmationModal: DeleteConfirmationModal,
               errorModal: ErrorModal,
-              notificationModal: NotificationModal,
-              userService: UserService) {
-    super($scope, $log, deleteConfirmationModal, errorModal, notificationModal, userService);
+              userService: UserService,
+              private authorizationManagerService: AuthorizationManagerService) {
+
+    super($scope, $log, deleteConfirmationModal, errorModal, userService);
 
     if (this.modelController) {
       this.modelController.registerView(this);
@@ -66,8 +66,8 @@ export class ModelViewController extends EditableEntityController<Model> {
 
   rights(): Rights {
     return {
-      edit: () => this.belongToGroup(),
-      remove: () => this.belongToGroup() && this.model.state === 'Unstable'
+      edit: () => this.authorizationManagerService.canEditModel(this.model),
+      remove: () => this.authorizationManagerService.canRemoveModel(this.model)
     };
   }
 
@@ -77,18 +77,6 @@ export class ModelViewController extends EditableEntityController<Model> {
 
   setEditable(editable: Model) {
     this.model = editable;
-  }
-
-  getGroup(): GroupListItem {
-    return this.model.group;
-  }
-
-  belongToGroup(): boolean {
-    return this.userService.user.isMemberOf(this.getGroup());
-  }
-
-  canAskForRights(): boolean {
-    return this.userService.isLoggedIn() && !this.belongToGroup();
   }
 
   getContext(): LanguageContext {

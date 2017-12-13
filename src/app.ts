@@ -1,5 +1,4 @@
 import * as jQuery from 'jquery';
-window.jQuery = jQuery;
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import * as angular from 'angular';
 import { animate, ICompileProvider, ILocationProvider, ILogProvider, ui } from 'angular';
@@ -17,8 +16,6 @@ import { module as filterModule } from './components/filter';
 import { module as componentsModule } from './components';
 import { module as servicesModule } from './services';
 import { module as helpModule } from './help';
-import IAnimateProvider = animate.IAnimateProvider;
-import ITooltipProvider = ui.bootstrap.ITooltipProvider;
 import { BrowserModule } from '@angular/platform-browser';
 import { UpgradeModule } from '@angular/upgrade/static';
 import { NgModule } from '@angular/core';
@@ -27,6 +24,12 @@ import './styles/app.scss';
 import 'font-awesome/scss/font-awesome.scss';
 import { HttpModule } from '@angular/http';
 import { YtiCommonModule } from 'yti-common-ui';
+import { config } from '../config';
+import { AUTHENTICATED_USER_ENDPOINT } from 'yti-common-ui/services/user.service';
+
+window.jQuery = jQuery;
+import IAnimateProvider = animate.IAnimateProvider;
+import ITooltipProvider = ui.bootstrap.ITooltipProvider;
 
 require('./vendor/modernizr');
 require('imports-loader?define=>false!jquery-mousewheel/jquery.mousewheel')(jQuery);
@@ -34,12 +37,19 @@ require('angular-gettext');
 require('checklist-model');
 require('ngclipboard');
 
+export function resolveAuthenticatedUserEndpoint() {
+  return config.apiEndpointWithName('user');
+}
+
 @NgModule({
   imports: [
     BrowserModule,
     HttpModule,
     UpgradeModule,
     YtiCommonModule
+  ],
+  providers: [
+    { provide: AUTHENTICATED_USER_ENDPOINT, useFactory: resolveAuthenticatedUserEndpoint }
   ]
 })
 export class AppModule {
@@ -73,6 +83,7 @@ const mod = angular.module('iow-ui', [
   servicesModule.name,
   helpModule.name
 ]);
+
 
 mod.config(routeConfig);
 

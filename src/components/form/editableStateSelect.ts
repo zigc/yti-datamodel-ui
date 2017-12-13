@@ -1,12 +1,9 @@
 import { IAttributes, IScope } from 'angular';
-import { UserService } from '../../services/userService';
 import { module as mod } from './module';
 import { EditableForm } from './editableEntityController';
 import { State } from '../../entities/type';
 import { Model } from '../../entities/model';
-
-const userStates: State[] = ['Unstable', 'Draft'];
-const adminStates: State[] = userStates.concat(['Recommendation', 'Deprecated']);
+import { AuthorizationManagerService } from '../../services/authorizationManagerService';
 
 mod.directive('editableStateSelect', () => {
   return {
@@ -47,11 +44,11 @@ class StateSelectController {
   isEditing: () => boolean;
 
   /* @ngInject */
-  constructor(private userService: UserService) {
+  constructor(private authorizationManagerService: AuthorizationManagerService) {
   }
 
   getStates() {
-    return this.userService.user.isAdminOf(this.model) ? adminStates : userStates;
+    return this.authorizationManagerService.getAllowedStates(this.model);
   }
 
   classForState(state: State) {

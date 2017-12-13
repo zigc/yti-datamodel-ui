@@ -11,7 +11,6 @@ import { Model } from '../../entities/model';
 import { Usage } from '../../entities/usage';
 import { GroupListItem } from '../../entities/group';
 import { LanguageContext } from '../../entities/contract';
-import { NotificationModal } from '../common/notificationModal';
 
 mod.directive('conceptView', () => {
   return {
@@ -43,10 +42,9 @@ export class ConceptViewController extends EditableEntityController<Concept|Lega
               $log: ILogService,
               deleteConfirmationModal: DeleteConfirmationModal,
               errorModal: ErrorModal,
-              notificationModal: NotificationModal,
               userService: UserService,
               usageService: UsageService) {
-    super($scope, $log, deleteConfirmationModal, errorModal, notificationModal, userService);
+    super($scope, $log, deleteConfirmationModal, errorModal, userService);
 
     this.modelController.registerView(this);
 

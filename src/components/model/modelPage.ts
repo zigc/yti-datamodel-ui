@@ -1,35 +1,35 @@
-import { IPromise, IAttributes, IScope, ILocationService, IQService, route } from 'angular';
-import IRouteService = route.IRouteService;
-import ICurrentRoute = route.ICurrentRoute;
+import { IAttributes, ILocationService, IPromise, IQService, IScope, route } from 'angular';
 import * as _ from 'lodash';
 import { ClassService } from '../../services/classService';
 import { LanguageService, Localizer } from '../../services/languageService';
 import { LocationService } from '../../services/locationService';
 import { ModelService } from '../../services/modelService';
 import { PredicateService } from '../../services/predicateService';
-import { UserService } from '../../services/userService';
 import { ConfirmationModal } from '../common/confirmationModal';
 import { SearchClassModal } from '../editor/searchClassModal';
 import { SearchPredicateModal } from '../editor/searchPredicateModal';
 import { EntityCreation } from '../editor/searchConceptModal';
-import { Show, ChangeNotifier, ChangeListener, SearchClassType, WithDefinedBy } from './../contracts';
+import { ChangeListener, ChangeNotifier, SearchClassType, Show, WithDefinedBy } from './../contracts';
 import { Uri } from '../../entities/uri';
 import { comparingLocalizable } from '../../utils/comparators';
 import { AddPropertiesFromClassModal } from '../editor/addPropertiesFromClassModal';
 import { module as mod } from './module';
-import { isDifferentUrl, nextUrl, modalCancelHandler } from '../../utils/angular';
+import { isDifferentUrl, modalCancelHandler, nextUrl } from '../../utils/angular';
 import {
-  createClassTypeExclusion, createDefinedByExclusion, combineExclusions,
-  createExistsExclusion, Exclusion
+  combineExclusions,
+  createClassTypeExclusion,
+  createDefinedByExclusion,
+  createExistsExclusion,
+  Exclusion
 } from '../../utils/exclusion';
 import { collectIds, glyphIconClassForType } from '../../utils/entity';
 import { SessionService } from '../../services/sessionService';
-import { isDefined, areEqual, Optional } from '../../utils/object';
-import { Predicate, AbstractPredicate, PredicateListItem } from '../../entities/predicate';
-import { Class, AbstractClass, Property, ClassListItem } from '../../entities/class';
+import { areEqual, isDefined, Optional } from '../../utils/object';
+import { AbstractPredicate, Predicate, PredicateListItem } from '../../entities/predicate';
+import { AbstractClass, Class, ClassListItem, Property } from '../../entities/class';
 import { Model } from '../../entities/model';
 import { ExternalEntity } from '../../entities/externalEntity';
-import { KnownPredicateType, ClassType, SelectionType } from '../../entities/type';
+import { ClassType, KnownPredicateType, SelectionType } from '../../entities/type';
 import { NotificationModal } from '../common/notificationModal';
 import { removeMatching } from '../../utils/array';
 import { ApplicationController } from '../application';
@@ -38,6 +38,9 @@ import { InteractiveHelp } from '../../help/contract';
 import { ModelPageHelpService } from '../../help/modelPageHelp';
 import { InteractiveHelpService } from '../../help/services/interactiveHelpService';
 import { ModelControllerService, View } from './modelControllerService';
+import { AuthorizationManagerService } from '../../services/authorizationManagerService';
+import IRouteService = route.IRouteService;
+import ICurrentRoute = route.ICurrentRoute;
 
 mod.directive('modelPage', () => {
   return {
@@ -101,7 +104,6 @@ export class ModelPageController implements ModelPageActions, HelpProvider, Mode
               private modelService: ModelService,
               private classService: ClassService,
               private predicateService: PredicateService,
-              private userService: UserService,
               private searchClassModal: SearchClassModal,
               private searchPredicateModal: SearchPredicateModal,
               private confirmationModal: ConfirmationModal,
@@ -110,7 +112,8 @@ export class ModelPageController implements ModelPageActions, HelpProvider, Mode
               private sessionService: SessionService,
               public languageService: LanguageService,
               interactiveHelpService: InteractiveHelpService,
-              modelPageHelpService: ModelPageHelpService) {
+              modelPageHelpService: ModelPageHelpService,
+              private authorizationManagerService: AuthorizationManagerService) {
 
     this.localizerProvider = () => languageService.createLocalizer(this.model);
     this._show = sessionService.show;
@@ -322,7 +325,7 @@ export class ModelPageController implements ModelPageActions, HelpProvider, Mode
   }
 
   canEdit(): boolean {
-    return this.model && this.userService.user.isMemberOf(this.model);
+    return this.model && this.authorizationManagerService.canEditModel(this.model);
   }
 
   selectionDeleted(selection: Class|Predicate) {
@@ -410,20 +413,17 @@ export class ModelPageController implements ModelPageActions, HelpProvider, Mode
                                                           fromConcept: (concept: EntityCreation) => void,
                                                           fromEntity: (entity: T) => void) {
 
-    this.userService.ifStillLoggedIn(() => {
-        this.askPermissionWhenEditing(() => {
-          modal().then(result => {
-            if (result instanceof EntityCreation) {
-              fromConcept(result);
-            } else if (result instanceof ExternalEntity) {
-              fromExternalEntity(result);
-            } else {
-              fromEntity(<T> result);
-            }
-          }, modalCancelHandler);
-        });
-      },
-      () => this.notificationModal.openNotLoggedIn());
+    this.askPermissionWhenEditing(() => {
+      modal().then(result => {
+        if (result instanceof EntityCreation) {
+          fromConcept(result);
+        } else if (result instanceof ExternalEntity) {
+          fromExternalEntity(result);
+        } else {
+          fromEntity(<T> result);
+        }
+      }, modalCancelHandler);
+    });
   }
 
   selectNewlyCreatedOrAssignedEntity<T extends Class|Predicate>(entity: T) {

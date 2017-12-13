@@ -3,8 +3,8 @@ import { UserService } from '../../services/userService';
 import { LocationService } from '../../services/locationService';
 import { module as mod } from './module';
 import { Uri } from '../../entities/uri';
-import { DefaultUser } from '../../entities/user';
 import { groupUrl } from '../../utils/entity';
+import { User } from 'yti-common-ui/services/user.service';
 
 mod.directive('userPage', () => {
   return {
@@ -18,14 +18,14 @@ mod.directive('userPage', () => {
 
 class UserPageController {
 
-  user: DefaultUser;
+  user: User;
 
   /* @ngInject */
   constructor($scope: IScope, $location: ILocationService, userService: UserService, locationService: LocationService) {
     locationService.atUser();
 
     $scope.$watch(() => userService.user, user => {
-      if (user instanceof DefaultUser) {
+      if (user instanceof User) {
         this.user = user;
       } else {
         $location.url('/');

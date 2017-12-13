@@ -1,4 +1,4 @@
-import { IScope, IAttributes, ILogService } from 'angular';
+import { IAttributes, ILogService, IScope } from 'angular';
 import { EditableEntityController, EditableScope, Rights } from '../form/editableEntityController';
 import { ClassService } from '../../services/classService';
 import { SearchPredicateModal } from './searchPredicateModal';
@@ -7,13 +7,12 @@ import { DeleteConfirmationModal } from '../common/deleteConfirmationModal';
 import { Show } from '../contracts';
 import { module as mod } from './module';
 import { ErrorModal } from '../form/errorModal';
-import { setSelectionStyles, modalCancelHandler } from '../../utils/angular';
+import { modalCancelHandler, setSelectionStyles } from '../../utils/angular';
 import { Class } from '../../entities/class';
 import { Model } from '../../entities/model';
-import { GroupListItem } from '../../entities/group';
 import { LanguageContext } from '../../entities/contract';
-import { NotificationModal } from '../common/notificationModal';
 import { ModelControllerService } from '../model/modelControllerService';
+import { AuthorizationManagerService } from '../../services/authorizationManagerService';
 
 mod.directive('classView', () => {
   return {
@@ -54,10 +53,10 @@ export class ClassViewController extends EditableEntityController<Class> {
               private searchPredicateModal: SearchPredicateModal,
               deleteConfirmationModal: DeleteConfirmationModal,
               errorModal: ErrorModal,
-              notificationModal: NotificationModal,
               private classService: ClassService,
-              userService: UserService) {
-    super($scope, $log, deleteConfirmationModal, errorModal, notificationModal, userService);
+              userService: UserService,
+              private authorizationManagerService: AuthorizationManagerService) {
+    super($scope, $log, deleteConfirmationModal, errorModal, userService);
 
     this.modelController.registerView(this);
   }
@@ -85,8 +84,8 @@ export class ClassViewController extends EditableEntityController<Class> {
 
   rights(): Rights {
     return {
-      edit: () => this.belongToGroup() && !this.isReference(),
-      remove: () => this.belongToGroup() && (this.isReference() || this.class.state === 'Unstable')
+      edit: () => this.authorizationManagerService.canEditClass(this.model, this.class),
+      remove: () => this.authorizationManagerService.canRemoveClass(this.model, this.class)
     };
   }
 
@@ -100,18 +99,6 @@ export class ClassViewController extends EditableEntityController<Class> {
 
   isReference(): boolean {
     return this.class.definedBy.id.notEquals(this.model.id);
-  }
-
-  getGroup(): GroupListItem {
-    return this.model.group;
-  }
-
-  canAskForRights(): boolean {
-    return this.userService.isLoggedIn() && !this.belongToGroup();
-  }
-
-  belongToGroup(): boolean {
-    return this.userService.user.isMemberOf(this.getGroup());
   }
 
   getRemoveText(): string {

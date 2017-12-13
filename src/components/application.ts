@@ -32,7 +32,7 @@ export class ApplicationController {
               userService: UserService,
               confirmationModal: ConfirmationModal) {
 
-    userService.updateLogin().then(() => this.applicationInitialized = true);
+    userService.loggedIn$.subscribe(() => this.applicationInitialized = true);
     $scope.$watch(() => $location.path(), path => this.showFooter = path === '/');
     this.production = config.environment === 'production';
 

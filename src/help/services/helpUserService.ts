@@ -1,36 +1,35 @@
 import { User } from '../../entities/user';
 import { IPromise, IQService } from 'angular';
-import { Uri } from '../../entities/uri';
-import { AbstractGroup } from '../../entities/group';
-import { AbstractModel } from '../../entities/model';
 import { ResetableService } from './resetableService';
+import { Role, UUID } from 'yti-common-ui/services/user.service';
+import { UserService } from '../../services/userService';
+import { Observable } from 'rxjs/Observable';
+
+// TODO fix to align with yti-common-ui UserService
 
 class InteractiveHelpUser implements User {
 
   name = 'Ohjekäyttäjä';
+  anonymous = false;
 
-  isLoggedIn(): boolean {
+  getRoles(organizationIds: UUID | UUID[]): Set<Role> {
+    return new Set<Role>();
+  }
+
+  getOrganizations(roles: Role | Role[]): Set<UUID> {
+    return new Set<UUID>();
+  }
+
+  isInRole(role: Role | Role[], organizationIds: UUID | UUID[]): boolean {
     return true;
   }
 
-  isMemberOf(_entity: AbstractModel|AbstractGroup): boolean {
+  isInOrganization(organizationIds: UUID | UUID[], roles: Role | Role[]): boolean {
     return true;
-  }
-
-  isMemberOfGroup(_id: Uri): boolean {
-    return true;
-  }
-
-  isAdminOf(_entity: AbstractModel|AbstractGroup): boolean {
-    return false;
-  }
-
-  isAdminOfGroup(_id: Uri): boolean {
-    return false;
   }
 }
 
-export class InteractiveHelpUserService implements ResetableService {
+export class InteractiveHelpUserService implements UserService, ResetableService {
 
   user = new InteractiveHelpUser();
 
@@ -38,23 +37,31 @@ export class InteractiveHelpUserService implements ResetableService {
   constructor(private $q: IQService) {
   }
 
-  reset(): IPromise<any> {
-    return this.$q.when();
+  get loggedIn$(): Observable<boolean> {
+    return Observable.of(true);
   }
 
-  updateLogin(): IPromise<User> {
-    return this.$q.when(this.user);
+  updateLoggedInUser(fakeLoginMail?: string): void {
+    throw new Error();
   }
 
-  ifStillLoggedIn(loggedInCallback: () => void, _notLoggedInCallback: () => void): void {
-    loggedInCallback();
+  register(): void {
+    throw new Error();
+  }
+
+  login(): void {
+    throw new Error();
   }
 
   isLoggedIn(): boolean {
     return true;
   }
 
-  logout(): IPromise<User> {
+  logout(): void {
     throw new Error('Should not be able to logout when in help');
+  }
+
+  reset(): IPromise<any> {
+    return this.$q.when();
   }
 }

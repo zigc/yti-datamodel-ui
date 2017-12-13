@@ -1,4 +1,4 @@
-import { IScope, IAttributes, ILogService } from 'angular';
+import { IAttributes, ILogService, IScope } from 'angular';
 import { PredicateService } from '../../services/predicateService';
 import { UserService } from '../../services/userService';
 import { EditableEntityController, EditableScope, Rights } from '../form/editableEntityController';
@@ -9,10 +9,9 @@ import { module as mod } from './module';
 import { setSelectionStyles } from '../../utils/angular';
 import { Association, Attribute } from '../../entities/predicate';
 import { Model } from '../../entities/model';
-import { GroupListItem } from '../../entities/group';
 import { LanguageContext } from '../../entities/contract';
-import { NotificationModal } from '../common/notificationModal';
 import { ModelControllerService } from '../model/modelControllerService';
+import { AuthorizationManagerService } from '../../services/authorizationManagerService';
 
 mod.directive('predicateView', () => {
   return {
@@ -50,10 +49,10 @@ export class PredicateViewController extends EditableEntityController<Associatio
               $log: ILogService,
               deleteConfirmationModal: DeleteConfirmationModal,
               errorModal: ErrorModal,
-              notificationModal: NotificationModal,
               private predicateService: PredicateService,
-              userService: UserService) {
-    super($scope, $log, deleteConfirmationModal, errorModal, notificationModal, userService);
+              userService: UserService,
+              private authorizationManagerService: AuthorizationManagerService) {
+    super($scope, $log, deleteConfirmationModal, errorModal, userService);
     this.modelController.registerView(this);
   }
 
@@ -71,8 +70,8 @@ export class PredicateViewController extends EditableEntityController<Associatio
 
   rights(): Rights {
     return {
-      edit: () => this.belongToGroup() && !this.isReference(),
-      remove: () => this.belongToGroup() && (this.isReference() || this.predicate.state === 'Unstable')
+      edit: () => this.authorizationManagerService.canEditPredicate(this.model, this.predicate),
+      remove: () => this.authorizationManagerService.canRemovePredicate(this.model, this.predicate)
     };
   }
 
@@ -86,18 +85,6 @@ export class PredicateViewController extends EditableEntityController<Associatio
 
   isReference(): boolean {
     return this.predicate.definedBy.id.notEquals(this.model.id);
-  }
-
-  getGroup(): GroupListItem {
-    return this.model.group;
-  }
-
-  canAskForRights(): boolean {
-    return this.userService.isLoggedIn() && !this.belongToGroup();
-  }
-
-  belongToGroup(): boolean {
-    return this.userService.user.isMemberOf(this.getGroup());
   }
 
   getRemoveText(): string {
