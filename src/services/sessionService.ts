@@ -1,5 +1,5 @@
 import { isDefined } from '../utils/object';
-import { Language } from '../utils/language';
+import { Language, UILanguage } from '../utils/language';
 import { Show } from '../components/contracts';
 
 const modelLanguageKey = 'modelLanguage';
@@ -35,11 +35,11 @@ export class SessionService {
     window.sessionStorage.setItem(key, JSON.stringify(value));
   }
 
-  get UILanguage(): Language {
-    return this.get<Language>(uiLanguageKey);
+  get UILanguage(): UILanguage {
+    return this.get<UILanguage>(uiLanguageKey);
   }
 
-  set UILanguage(lang: Language) {
+  set UILanguage(lang: UILanguage) {
     this.set(uiLanguageKey, lang);
   }
 

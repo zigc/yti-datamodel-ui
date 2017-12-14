@@ -17,19 +17,31 @@ import { module as componentsModule } from './components';
 import { module as servicesModule } from './services';
 import { module as helpModule } from './help';
 import { BrowserModule } from '@angular/platform-browser';
-import { UpgradeModule } from '@angular/upgrade/static';
+import { downgradeComponent, downgradeInjectable, UpgradeModule } from '@angular/upgrade/static';
 import { NgModule } from '@angular/core';
-
-import './styles/app.scss';
-import 'font-awesome/scss/font-awesome.scss';
 import { HttpModule } from '@angular/http';
 import { YtiCommonModule } from 'yti-common-ui';
 import { config } from '../config';
 import { AUTHENTICATED_USER_ENDPOINT } from 'yti-common-ui/services/user.service';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {
+  MissingTranslationHandler, MissingTranslationHandlerParams, TranslateLoader, TranslateModule,
+  TranslateService
+} from 'ng2-translate';
+import { Observable } from 'rxjs/Observable';
+import { availableUILanguages } from './utils/language';
 
-window.jQuery = jQuery;
+import 'font-awesome/scss/font-awesome.scss';
+import './styles/app.scss';
+import { LoginModalService } from 'yti-common-ui/components/login-modal.component';
+import { FooterComponent } from 'yti-common-ui/components/footer.component';
+import { LOCALIZER } from 'yti-common-ui/pipes/translate-value.pipe';
+import { Localizer as AngularLocalizer } from 'yti-common-ui/types/localization';
+import { DefaultAngularLocalizer, LanguageService } from './services/languageService';
+import IInjectorService = angular.auto.IInjectorService;
 import IAnimateProvider = animate.IAnimateProvider;
 import ITooltipProvider = ui.bootstrap.ITooltipProvider;
+import { MenuComponent } from 'yti-common-ui/components/menu.component';
 
 require('./vendor/modernizr');
 require('imports-loader?define=>false!jquery-mousewheel/jquery.mousewheel')(jQuery);
@@ -37,8 +49,39 @@ require('angular-gettext');
 require('checklist-model');
 require('ngclipboard');
 
+export const localizationStrings: { [key: string]: { [key: string]: string } } = {};
+
+for (const language of availableUILanguages) {
+  localizationStrings[language] = Object.assign({},
+    require(`../po/${language}.po`),
+    require(`yti-common-ui/po/${language}.po`)
+  );
+}
+
+Object.freeze(localizationStrings);
+
 export function resolveAuthenticatedUserEndpoint() {
   return config.apiEndpointWithName('user');
+}
+
+export function createTranslateLoader(): TranslateLoader {
+  return {
+    getTranslation: (lang: string) => {
+      return Observable.of(localizationStrings[lang])
+    }
+  };
+}
+
+export function createMissingTranslationHandler(): MissingTranslationHandler {
+  return {
+    handle: (params: MissingTranslationHandlerParams) => {
+      if (params.translateService.currentLang === 'en') {
+        return params.key;
+      } else {
+        return '[MISSING]: ' + params.key;
+      }
+    }
+  };
 }
 
 @NgModule({
@@ -46,10 +89,30 @@ export function resolveAuthenticatedUserEndpoint() {
     BrowserModule,
     HttpModule,
     UpgradeModule,
-    YtiCommonModule
+    YtiCommonModule,
+    TranslateModule.forRoot({ provide: TranslateLoader, useFactory: createTranslateLoader }),
+    NgbModule.forRoot()
+  ],
+  entryComponents: [
+    FooterComponent,
+    MenuComponent
   ],
   providers: [
-    { provide: AUTHENTICATED_USER_ENDPOINT, useFactory: resolveAuthenticatedUserEndpoint }
+    { provide: AUTHENTICATED_USER_ENDPOINT, useFactory: resolveAuthenticatedUserEndpoint },
+    { provide: MissingTranslationHandler, useFactory: createMissingTranslationHandler },
+    {
+      provide: LanguageService,
+      useFactory(injector: IInjectorService): AngularLocalizer {
+        return new DefaultAngularLocalizer(injector.get<LanguageService>('languageService'));
+      },
+      deps: ['$injector']
+    },
+    { provide: LOCALIZER,
+      useFactory(languageService: LanguageService): AngularLocalizer {
+        return new DefaultAngularLocalizer(languageService);
+      },
+      deps: [LanguageService]
+    }
   ]
 })
 export class AppModule {
@@ -66,7 +129,7 @@ const mod = angular.module('iow-ui', [
   require('angular-animate'),
   require('angular-messages'),
   require('angular-route'),
-  require('angular-ui-bootstrap'),
+  require('ui-bootstrap4'),
   'gettext',
   'checklist-model',
   'ngclipboard',
@@ -84,6 +147,12 @@ const mod = angular.module('iow-ui', [
   helpModule.name
 ]);
 
+mod.directive('appMenu', downgradeComponent({component: MenuComponent}));
+mod.directive('appFooter', downgradeComponent({component: FooterComponent}));
+
+mod.factory('translateService', downgradeInjectable(TranslateService));
+mod.factory('loginModal', downgradeInjectable(LoginModalService));
+mod.factory('localizationStrings', () => localizationStrings);
 
 mod.config(routeConfig);
 
@@ -107,11 +176,17 @@ mod.config(($locationProvider: ILocationProvider,
   $uibTooltipProvider.setTriggers({'mouseenter': 'mouseleave click'});
 });
 
-// FIXME: proper typing for gettextCatalog
-mod.run((gettextCatalog: any) => gettextCatalog.debug = true);
-
 export const done = new Promise((resolve) => {
-  mod.run(() => resolve(true));
+  mod.run((gettextCatalog: any) => {
+
+    gettextCatalog.debug = true;
+
+    for (const language of availableUILanguages) {
+      gettextCatalog.setStrings(language, localizationStrings[language]);
+    }
+
+    resolve(true);
+  });
 });
 
 platformBrowserDynamic().bootstrapModule(AppModule);

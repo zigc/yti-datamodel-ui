@@ -1,31 +1,49 @@
-<nav class="navbar navbar-default">
-  <div class="navbar-header">
-    <div><a class="" ng-href="/"><img id="logo-image" ng-src="{{ctrl.logoImage}}" /></a></div><div><span>{{'IOW' | translate}}</span></div>
-  </div>
+<nav class="navbar navbar-expand-md navbar-light">
 
-  <ul class="nav navbar-nav navbar-right">
+  <a class="navbar-brand" ng-href="/"><span>Tietomallit</span></a>
 
-    <li ng-if="ctrl.canStartHelp()">
-      <a ng-click="ctrl.startHelp()" uib-tooltip="{{'Start help' | translate}}" tooltip-placement="left"><i class="glyphicon glyphicon-info-sign" style="font-size: large"></i></a>
+  <ul class="navbar-nav ml-auto">
+
+    <li class="nav-item" ng-if="!ctrl.isLoggedIn()">
+      <a class="nav-link" ng-click="ctrl.logIn()" translate>LOG IN</a>
     </li>
 
-    <li ng-repeat="language in ctrl.languages">
-      <a ng-click="ctrl.language = language.code">{{language.name}}</a>
+    <li class="nav-item logged-in" ng-if="ctrl.isLoggedIn()">
+      <span>{{ctrl.user.name}}</span>
+      <a class="nav-link" ng-click="ctrl.logOut()" translate>LOG OUT</a>
     </li>
 
-    <li ng-if="ctrl.getUser().anonymous">
-      <a id="login" ng-click="ctrl.openLogin()" translate>Login</a>
-    </li>
-
-    <li ng-if="!ctrl.getUser().anonymous">
-      <div class="btn-group navbar-btn" uib-dropdown is-open="status.isopen">
-        <button class="btn btn-default navbar-btn" uib-dropdown-toggle>{{ctrl.getUser().name}} <span class="caret"></span></button>
-        <ul class="dropdown-menu" role="menu">
-          <li role="menuitem"><a ng-href="/user" translate>User details</a></li>
-          <li role="menuitem"><a id="logout" ng-click="ctrl.logout()" translate>Logout</a></li>
-        </ul>
+    <li class="nav-item dropdown" uib-dropdown>
+      <a class="nav-link btn btn-language" uib-dropdown-toggle>{{ctrl.language.toUpperCase()}}</a>
+      <div class="dropdown-menu-right" uib-dropdown-menu>
+        <a ng-repeat="availableLanguage in ctrl.availableLanguages"
+           class="dropdown-item"
+           ng-class="{active: availableLanguage.code === ctrl.language}"
+           ng-click="ctrl.language = availableLanguage.code">
+          <span>{{availableLanguage.name}}</span>
+        </a>
       </div>
     </li>
 
+    <li class="nav-item dropdown" uib-dropdown>
+      <a class="dropdown-toggle nav-link btn-menu" uib-dropdown-toggle>
+        <app-menu></app-menu>
+      </a>
+      <div class="dropdown-menu-right" uib-dropdown-menu>
+        <a class="dropdown-item" ng-if="ctrl.isLoggedIn()" ng-click="ctrl.logOut()">
+          <i class="fa fa-sign-out"></i>
+          <span translate>LOG OUT</span>
+        </a>
+        <a class="dropdown-item" ng-if="!ctrl.isLoggedIn()" ng-click="ctrl.logIn()">
+          <i class="fa fa-sign-in"></i>
+          <span translate>LOG IN</span>
+        </a>
+        <div class="dropdown-divider" ng-hide="ctrl.noMenuItemsAvailable"></div>
+        <a class="dropdown-item"
+           ng-if="ctrl.isLoggedIn()"
+           ng-href="/user"
+           translate>User details</a>
+      </div>
+    </li>
   </ul>
 </nav>

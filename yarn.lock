@@ -427,10 +427,6 @@ angular-route@1.5.7:
   version "1.5.7"
   resolved "https://registry.yarnpkg.com/angular-route/-/angular-route-1.5.7.tgz#d43fb72fb6e3ce3e2ac300c196db4dd8d36894c8"
 
-angular-ui-bootstrap@2.4.0:
-  version "2.4.0"
-  resolved "https://registry.yarnpkg.com/angular-ui-bootstrap/-/angular-ui-bootstrap-2.4.0.tgz#1a46e1bfacedcf50281684a88f5548be01546e7a"
-
 angular2-template-loader@^0.6.2:
   version "0.6.2"
   resolved "https://registry.yarnpkg.com/angular2-template-loader/-/angular2-template-loader-0.6.2.tgz#c0d44e90fff0fac95e8b23f043acda7fd1c51d7c"
@@ -799,9 +795,9 @@ boom@5.x.x:
   dependencies:
     hoek "4.x.x"
 
-bootstrap-sass@3.3.7:
-  version "3.3.7"
-  resolved "https://registry.yarnpkg.com/bootstrap-sass/-/bootstrap-sass-3.3.7.tgz#6596c7ab40f6637393323ab0bc80d064fc630498"
+bootstrap@4.0.0-beta.2:
+  version "4.0.0-beta.2"
+  resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-4.0.0-beta.2.tgz#4d67d2aa2219f062cd90bc1247e6747b9e8fd051"
 
 brace-expansion@^1.1.7:
   version "1.1.8"
@@ -2066,6 +2062,13 @@ expand-range@^1.8.1:
   resolved "https://registry.yarnpkg.com/expand-range/-/expand-range-1.8.2.tgz#a299effd335fe2721ebae8e257ec79644fc85337"
   dependencies:
     fill-range "^2.1.0"
+
+exports-loader@^0.6.4:
+  version "0.6.4"
+  resolved "https://registry.yarnpkg.com/exports-loader/-/exports-loader-0.6.4.tgz#d70fc6121975b35fc12830cf52754be2740fc886"
+  dependencies:
+    loader-utils "^1.0.2"
+    source-map "0.5.x"
 
 express@^4.16.2:
   version "4.16.2"
@@ -5444,7 +5447,7 @@ source-map@0.4.x, source-map@^0.4.2:
   dependencies:
     amdefine ">=0.0.4"
 
-source-map@^0.5.3, source-map@^0.5.6, source-map@^0.5.7, source-map@~0.5.1, source-map@~0.5.3:
+source-map@0.5.x, source-map@^0.5.3, source-map@^0.5.6, source-map@^0.5.7, source-map@~0.5.1, source-map@~0.5.3:
   version "0.5.7"
   resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.5.7.tgz#8a039d2d1021d22d1ea14c80d8ea468ba2ef3fcc"
 
@@ -5906,6 +5909,10 @@ uglifyjs-webpack-plugin@^0.4.6:
     source-map "^0.5.6"
     uglify-js "^2.8.29"
     webpack-sources "^1.0.1"
+
+ui-bootstrap4@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/ui-bootstrap4/-/ui-bootstrap4-3.0.0.tgz#43b70ccb5bc17d4c9ca57a9f08182195a67bfc4c"
 
 uid-number@^0.0.6:
   version "0.0.6"
@@ -6390,9 +6397,9 @@ yn@^1.2.0:
   dependencies:
     object-assign "^4.1.1"
 
-"yti-common-ui@https://github.com/VRK-YTI/yti-common-ui.git#2f9ef6f0d041c281d2c328928e4e1def0f992ed1":
+"yti-common-ui@https://github.com/VRK-YTI/yti-common-ui.git#d54363c64c4762f84937522251c75ccf9d4ae85f":
   version "0.0.0"
-  resolved "https://github.com/VRK-YTI/yti-common-ui.git#2f9ef6f0d041c281d2c328928e4e1def0f992ed1"
+  resolved "https://github.com/VRK-YTI/yti-common-ui.git#d54363c64c4762f84937522251c75ccf9d4ae85f"
 
 zone.js@^0.8.18:
   version "0.8.18"

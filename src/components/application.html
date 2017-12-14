@@ -1,7 +1,10 @@
-<div ng-show="ctrl.applicationInitialized">
+<ng-container ng-show="ctrl.applicationInitialized">
   <navigation-bar help-provider="ctrl.helpProvider"></navigation-bar>
-  <breadcrumb ng-class="['iow-breadcrumb', { 'with-breadcrumb': ctrl.showFooter }]"></breadcrumb>
-  <div ng-class="['main', { 'with-footer': ctrl.showFooter }]" ng-view></div>
-  <footer ng-if="ctrl.showFooter"></footer>
+  <div class="container-fluid" ng-class="{ 'without-footer': !ctrl.showFooter }">
+    <breadcrumb></breadcrumb>
+    <div ng-view></div>
+  </div>
+
+  <app-footer [title]="'Tietomallit'" ng-if="ctrl.showFooter"></app-footer>
   <google-analytics ng-if="ctrl.production"></google-analytics>
-</div>
+</ng-container>

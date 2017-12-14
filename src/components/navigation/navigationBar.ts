@@ -1,10 +1,9 @@
 import { module as mod } from './module';
-import { LanguageService, localizationStrings } from '../../services/languageService';
+import { LanguageService } from '../../services/languageService';
 import { UserService } from '../../services/userService';
-import { LoginModal } from './loginModal';
-import { availableUILanguages, UILanguage } from '../../utils/language';
+import { LoginModalService } from 'yti-common-ui/components/login-modal.component';
+import { UILanguage } from '../../utils/language';
 import { User } from '../../entities/user';
-import { config } from '../../../config';
 import { HelpSelectionModal } from '../common/helpSelectionModal';
 import { InteractiveHelp } from '../../help/contract';
 import { HelpProvider } from '../common/helpProvider';
@@ -12,8 +11,6 @@ import { IScope, ILocationService, route } from 'angular';
 import { InteractiveHelpService } from '../../help/services/interactiveHelpService';
 import { identity } from '../../utils/function';
 import { modalCancelHandler } from '../../utils/angular';
-
-const logoImage = require('../../assets/logo-01.svg');
 
 mod.directive('navigationBar', () => {
   return {
@@ -32,7 +29,12 @@ class NavigationController {
 
   helpProvider: HelpProvider|null;
 
-  languages: { code: UILanguage, name: string }[];
+  availableLanguages = [
+    { code: 'fi' as UILanguage, name: 'Suomeksi (FI)' },
+    { code: 'sv' as UILanguage, name: 'På svenska (SV)' },
+    { code: 'en' as UILanguage, name: 'In English (EN)' }
+  ];
+
   helps: InteractiveHelp[];
 
   /* @ngInject */
@@ -41,14 +43,9 @@ class NavigationController {
               $location: ILocationService,
               private languageService: LanguageService,
               private userService: UserService,
-              private loginModal: LoginModal,
+              private loginModal: LoginModalService,
               private interactiveHelpService: InteractiveHelpService,
               private helpSelectionModal: HelpSelectionModal) {
-
-    this.languages = availableUILanguages.map(language => {
-      const stringsForLang = localizationStrings[language];
-      return { code: language, name: (stringsForLang && stringsForLang['In language']) || language };
-    });
 
     const helps = () => this.helpProvider && this.helpProvider.helps || [];
 
@@ -63,10 +60,6 @@ class NavigationController {
     });
   }
 
-  get logoImage() {
-    return logoImage;
-  }
-
   get language(): UILanguage {
     return this.languageService.UILanguage;
   }
@@ -75,20 +68,28 @@ class NavigationController {
     this.languageService.UILanguage = language;
   }
 
-  getUser(): User {
+  get user(): User {
     return this.userService.user;
   }
 
-  logout() {
+  get noMenuItemsAvailable() {
+    return !this.userService.isLoggedIn();
+  }
+
+  isLoggedIn() {
+    return !this.user.anonymous;
+  }
+
+  logOut() {
     return this.userService.logout();
   }
 
-  openLogin() {
+  logIn() {
     this.loginModal.open();
   }
 
   canStartHelp() {
-    return this.interactiveHelpService.isClosed() && config.environment !== 'production' && this.helps.length > 0;
+    return this.interactiveHelpService.isClosed() && this.helps.length > 0;
   }
 
   startHelp() {

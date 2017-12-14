@@ -1,14 +1,17 @@
-<div ng-show="ctrl.user">
-  <div class="main-header">
-    <h2><span translate>User details</span></h2>
+<div class="content-box" ng-show="ctrl.user">
+
+  <div class="page-header">
+    <h2 translate>User details</h2>
   </div>
 
-    <form>
-      <div class="top-actions"></div>
-      <div class="col-md-12">
-        <non-editable data-title="User login" value="ctrl.user.email"></non-editable>
-        <non-editable data-title="User name" value="ctrl.user.name"></non-editable>
-      </div>
-    </form>
+  <div class="form-group">
+    <label translate>Name</label>
+    <p class="form-control-static">{{ctrl.user.name}}</p>
+  </div>
+
+  <div class="form-group">
+    <label translate>Email</label>
+    <p class="form-control-static">{{ctrl.user.email}}</p>
+  </div>
 
 </div>

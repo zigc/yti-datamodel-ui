@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.11\n"
+"X-Generator: Poedit 1.8.5\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: translations/misc.html:62 translations/misc.html:98
@@ -32,10 +32,6 @@ msgstr "Lisää luokka"
 msgid "Add class description"
 msgstr "Voit lisätä uuden luokan täältä"
 
-#: components/group/groupPage.html:13
-msgid "Add library"
-msgstr "Lisää tietokomponenttikirjasto"
-
 #: translations/help.html:44
 msgid "Add library description"
 msgstr ""
@@ -51,10 +47,6 @@ msgstr "Lisää linkki"
 #: components/model/searchNamespaceModal.html:30
 msgid "Add new namespace"
 msgstr "Luo uusi nimiavaruus"
-
-#: components/group/groupPage.html:14
-msgid "Add profile"
-msgstr "Lisää soveltamisprofiili"
 
 #: translations/help.html:43
 msgid "Add profile description"
@@ -83,7 +75,7 @@ msgstr "Lisää ominaisuudet tarkennettavasta luokasta"
 msgid "Add properties from super class"
 msgstr "Lisää ominaisuudet yläluokasta"
 
-#: components/editor/classView.html:7
+#: components/editor/classView.html:6
 msgid "Add property"
 msgstr "Lisää ominaisuus"
 
@@ -112,11 +104,11 @@ msgstr "Lisää sanasto"
 msgid "Additional information"
 msgstr "Lisätiedot"
 
-#: components/user/userPage.html:22 translations/misc.html:147
+#: translations/misc.html:147
 msgid "Admin groups"
 msgstr "Pääkäyttäjänä ryhmissä"
 
-#: components/advancedSearchModal.html:2 components/frontPage.html:14
+#: components/advancedSearchModal.html:2 components/frontPage.html:6
 msgid "Advanced search"
 msgstr "Tarkennettu haku"
 
@@ -160,10 +152,6 @@ msgstr "On jo lisätty"
 #: translations/misc.html:13
 msgid "and create new"
 msgstr "ja luo uusi"
-
-#: components/group/groupPage.html:46
-msgid "Application profiles"
-msgstr "Soveltamisprofiilit"
 
 #: translations/misc.html:133
 msgid "application/ld+json"
@@ -215,11 +203,6 @@ msgstr ""
 #: translations/help.html:140
 msgid "Asia joka tuotetaan"
 msgstr ""
-
-#: components/editor/classView.html:6 components/editor/predicateView.html:6
-#: components/group/groupPage.html:12 components/model/modelView.html:11
-msgid "Ask for group rights"
-msgstr "Pyydä käyttöoikeuksia ryhmään"
 
 #: translations/misc.html:234
 msgid "Assign class to library"
@@ -332,10 +315,6 @@ msgstr "Attribuutin ihmisluettava nimi"
 msgid "Attribute list"
 msgstr "Attribuutit"
 
-#: components/footer.html:13
-msgid "Backend"
-msgstr "Taustajärjestelmä"
-
 #: translations/titles.html:49
 msgid "Broader concept"
 msgstr "Laajempi käsite"
@@ -344,7 +323,7 @@ msgstr "Laajempi käsite"
 msgid "Broader concept info"
 msgstr "Käsitteeseen liittyvä yläkäsite"
 
-#: components/frontPage.html:40
+#: components/frontPage.html:10
 msgid "Browse"
 msgstr "Selaa"
 
@@ -688,10 +667,6 @@ msgstr "Loogisen rajoitteen luokat"
 msgid "Constraint classes info"
 msgstr ""
 
-#: components/footer.html:3
-msgid "Contact info"
-msgstr "Yhteystiedot"
-
 #: translations/misc.html:199
 msgid "Controlled vocabularies"
 msgstr "Käytetyt sanastot"
@@ -802,10 +777,6 @@ msgstr "Luoja"
 msgid "Creator info"
 msgstr ""
 
-#: components/footer.html:3
-msgid "CSC - IT Center for Science Ltd"
-msgstr "CSC - Tieteen tietotekniikan keskus Oy"
-
 #: translations/misc.html:40
 msgid "data en"
 msgstr "Sisältö englanniksi"
@@ -825,10 +796,6 @@ msgstr "Sisältö venäjäksi"
 #: translations/misc.html:41
 msgid "data sv"
 msgstr "Sisältö ruotsiksi"
-
-#: components/footer.html:14
-msgid "Database"
-msgstr "Tietokanta"
 
 #: translations/misc.html:141
 msgid "date format"
@@ -1086,11 +1053,9 @@ msgstr "Muokkaajan kommentti"
 msgid "Editorial note info"
 msgstr ""
 
-#: components/navigation/loginModal.html:6
-msgid "eDuuni information"
-msgstr ""
-"Palveluun kirjaudutaan eDuuni-tunnuksilla. Kirjautumista vaaditaan jos "
-"haluat muokata palvelun sisältöä."
+#: components/user/userPage.html:13
+msgid "Email"
+msgstr "Sähköposti"
 
 #: translations/misc.html:37
 msgid "en"
@@ -1206,10 +1171,6 @@ msgstr "Framed JSON-LD"
 msgid "Front page"
 msgstr "Etusivu"
 
-#: components/footer.html:12
-msgid "Frontend"
-msgstr "Käyttöliittymä"
-
 #: components/form/errorMessages.html:16
 msgid "Greater than max error"
 msgstr "Ei saa olla suurempi kuin maksimi"
@@ -1308,14 +1269,14 @@ msgstr "Linkki"
 msgid "Homepage info"
 msgstr "Linkki sivustoon tai sovellukseen joissa tietosisältöjä on hyödynnetty"
 
-#: components/frontPage.html:78 translations/misc.html:77
+#: translations/misc.html:77
 msgid "How content"
 msgstr ""
 "Välineistössä julkaistut tietomääritykset ovat vapaasti selailtavissa. "
 "Sisältöjä tietokomponenttikirjastoihin tuottavat eri kohdealueiden "
 "asiantuntijat."
 
-#: components/frontPage.html:77 translations/misc.html:76
+#: translations/misc.html:76
 msgid "How?"
 msgstr "Kuinka pääsen osallistumaan?"
 
@@ -1373,11 +1334,7 @@ msgstr "Kohdealueen ryhmän sisäiset sivut"
 msgid "Internal vocabulary"
 msgstr "Sisäinen käsitteistö"
 
-#: components/frontPage.html:55
-msgid "Interoperability method"
-msgstr "Yhteentoimivuutta ja ymmärrettävyyttä"
-
-#: components/frontPage.html:56 translations/misc.html:224
+#: translations/misc.html:224
 msgid "Interoperability method description"
 msgstr ""
 "Menetelmän avulla varmistetaan, että yhteisten määritysten soveltaminen on "
@@ -1403,10 +1360,6 @@ msgstr "Virheellinen URI muoto"
 #: components/form/errorMessages.html:4
 msgid "Invalid url error"
 msgstr "Syöte ei ole URL"
-
-#: components/navigation/navigationBar.html:3
-msgid "IOW"
-msgstr "Yhteentoimivuuden kuvaukset"
 
 #: components/form/errorMessages.html:21
 msgid "Is not valid language code"
@@ -1460,10 +1413,6 @@ msgstr "Tietokomponenttikirjaston nimi"
 msgid "Library label info"
 msgstr "Tietokomponenttikirjaston ihmisluettava nimi"
 
-#: components/footer.html:15
-msgid "licensed under the"
-msgstr "lisenssillä"
-
 #: translations/misc.html:203
 msgid "Links"
 msgstr "Linkit"
@@ -1472,25 +1421,19 @@ msgstr "Linkit"
 msgid "Local ID"
 msgstr "Paikallinen ID"
 
+#: components/navigation/navigationBar.html:39
+#: components/navigation/navigationBar.html:8
+msgid "LOG IN"
+msgstr "KIRJAUDU SISÄÄN"
+
+#: components/navigation/navigationBar.html:13
+#: components/navigation/navigationBar.html:35
+msgid "LOG OUT"
+msgstr "KIRJAUDU ULOS"
+
 #: components/editor/editableConstraint.html:5
 msgid "Logical constraints"
 msgstr "Loogiset rajoitteet"
-
-#: components/navigation/loginModal.html:11
-#: components/navigation/loginModal.html:3
-#: components/navigation/navigationBar.html:17
-msgid "Login"
-msgstr "Kirjaudu"
-
-#: components/navigation/loginModal.html:7
-msgid "Login information"
-msgstr ""
-"Alla olevalla painikkeella ohjaudut eDuuni-palvelun kirjautumiseen. Palaa "
-"sen jälkeen takaisin palveluun."
-
-#: components/navigation/navigationBar.html:25
-msgid "Logout"
-msgstr "Kirjaudu ulos"
 
 #: components/maintenance.html:2 translations/misc.html:171
 msgid "Maintenance"
@@ -1522,7 +1465,7 @@ msgstr "Enimmäispituus"
 msgid "Max length info"
 msgstr "Sallitun arvon enimmäispituus"
 
-#: components/user/userPage.html:15 translations/misc.html:146
+#: translations/misc.html:146
 msgid "Member groups"
 msgstr "Käyttäjänä ryhmissä"
 
@@ -1561,10 +1504,6 @@ msgstr ""
 msgid "Model not found"
 msgstr " Mallia ei löydy"
 
-#: components/group/groupPage.html:31
-msgid "Models"
-msgstr "Tietokomponenttikirjastot"
-
 #: translations/misc.html:145
 msgid "Modified at"
 msgstr "Muokattu"
@@ -1602,6 +1541,10 @@ msgstr ""
 #: components/form/errorMessages.html:20
 msgid "Must be imported namespace"
 msgstr "Nimiavaruutta ei ole lisätty riippuvuudeksi"
+
+#: components/user/userPage.html:8
+msgid "Name"
+msgstr "Nimi"
 
 #: translations/titles.html:54
 msgid "Namespace"
@@ -1653,14 +1596,6 @@ msgstr ""
 msgid "No"
 msgstr "Ei"
 
-#: components/group/groupPage.html:33
-msgid "No models yet"
-msgstr "Ei vielä yhtään tietokomponenttikirjastoa"
-
-#: components/group/groupPage.html:48
-msgid "No profiles yet"
-msgstr "Ei vielä yhtään soveltamisprofiilia"
-
 #: components/editor/classForm.html:72
 msgid "No properties yet"
 msgstr "Ei vielä yhtään ominaisuutta"
@@ -1669,7 +1604,7 @@ msgstr "Ei vielä yhtään ominaisuutta"
 msgid "No referrers"
 msgstr "Ei viittauksia"
 
-#: components/advancedSearchModal.html:20 components/frontPage.html:19
+#: components/advancedSearchModal.html:20
 msgid "No search results"
 msgstr "Ei hakutuloksia"
 
@@ -1958,10 +1893,6 @@ msgid "Reference data URI info"
 msgstr ""
 "Koodiston URI tunniste on pysyvä ja yksilöivä viittaus koodiston sijaintiin"
 
-#: components/navigation/loginModal.html:12
-msgid "Register"
-msgstr "Luo tunnukset"
-
 #: translations/misc.html:192
 msgid "Remove"
 msgstr "Poista"
@@ -2028,7 +1959,7 @@ msgstr "Tallenna muutokset"
 msgid "Save visualization position"
 msgstr "Visualisoinnin sijaintien tallennus"
 
-#: components/frontPage.html:8
+#: components/frontPage.html:5
 msgid "Search"
 msgstr "Etsi"
 
@@ -2480,10 +2411,6 @@ msgstr "Näytä historia"
 msgid "Show technical namespaces"
 msgstr "Näytä tekniset nimiavaruudet"
 
-#: components/footer.html:11
-msgid "Source code"
-msgstr "Lähdekoodi"
-
 #: translations/misc.html:164
 msgid "Specialize class"
 msgstr "Tarkenna luokka"
@@ -2500,7 +2427,7 @@ msgstr "Tarkennettu luokasta"
 msgid "Specialized from class info"
 msgstr "Luokka jota soveltamisprofiilissa on tarkennettu"
 
-#: components/navigation/navigationBar.html:9 translations/help.html:1
+#: translations/help.html:1
 msgid "Start help"
 msgstr "Aloita ohje"
 
@@ -2709,7 +2636,7 @@ msgstr "Käytä luokkaa"
 msgid "Use selection"
 msgstr "Käytä valintaa"
 
-#: components/navigation/navigationBar.html:24 components/user/userPage.html:3
+#: components/navigation/navigationBar.html:42 components/user/userPage.html:4
 msgid "User details"
 msgstr "Käyttäjätiedot"
 
@@ -2728,10 +2655,6 @@ msgstr "Kohde"
 #: translations/titles.html:42
 msgid "Value class info"
 msgstr "Viite luokkaan joka toimii assosiaation kohteena"
-
-#: components/footer.html:7
-msgid "Version"
-msgstr "Versio"
 
 #: components/editor/visualizationView.html:5
 msgid "Visualization"
@@ -3000,6 +2923,76 @@ msgstr "Sinut uudelleenohjataan etusivulle"
 msgid "You will be redirected to the model"
 msgstr "Sinut uudelleenohjataan mallin sivulle"
 
+#~ msgid "Add library"
+#~ msgstr "Lisää tietokomponenttikirjasto"
+
+#~ msgid "Add profile"
+#~ msgstr "Lisää soveltamisprofiili"
+
+#~ msgid "Application profiles"
+#~ msgstr "Soveltamisprofiilit"
+
+#~ msgid "Ask for group rights"
+#~ msgstr "Pyydä käyttöoikeuksia ryhmään"
+
+#~ msgid "Backend"
+#~ msgstr "Taustajärjestelmä"
+
+#~ msgid "Contact info"
+#~ msgstr "Yhteystiedot"
+
+#~ msgid "CSC - IT Center for Science Ltd"
+#~ msgstr "CSC - Tieteen tietotekniikan keskus Oy"
+
+#~ msgid "Database"
+#~ msgstr "Tietokanta"
+
+#~ msgid "eDuuni information"
+#~ msgstr ""
+#~ "Palveluun kirjaudutaan eDuuni-tunnuksilla. Kirjautumista vaaditaan jos "
+#~ "haluat muokata palvelun sisältöä."
+
+#~ msgid "Frontend"
+#~ msgstr "Käyttöliittymä"
+
+#~ msgid "Interoperability method"
+#~ msgstr "Yhteentoimivuutta ja ymmärrettävyyttä"
+
+#~ msgid "IOW"
+#~ msgstr "Yhteentoimivuuden kuvaukset"
+
+#~ msgid "licensed under the"
+#~ msgstr "lisenssillä"
+
+#~ msgid "Login"
+#~ msgstr "Kirjaudu"
+
+#~ msgid "Login information"
+#~ msgstr ""
+#~ "Alla olevalla painikkeella ohjaudut eDuuni-palvelun kirjautumiseen. Palaa "
+#~ "sen jälkeen takaisin palveluun."
+
+#~ msgid "Logout"
+#~ msgstr "Kirjaudu ulos"
+
+#~ msgid "Models"
+#~ msgstr "Tietokomponenttikirjastot"
+
+#~ msgid "No models yet"
+#~ msgstr "Ei vielä yhtään tietokomponenttikirjastoa"
+
+#~ msgid "No profiles yet"
+#~ msgstr "Ei vielä yhtään soveltamisprofiilia"
+
+#~ msgid "Register"
+#~ msgstr "Luo tunnukset"
+
+#~ msgid "Source code"
+#~ msgstr "Lähdekoodi"
+
+#~ msgid "Version"
+#~ msgstr "Versio"
+
 #~ msgid "Permanent identifier"
 #~ msgstr "Pysyvä tunniste"
 
@@ -3094,9 +3087,6 @@ msgstr "Sinut uudelleenohjataan mallin sivulle"
 
 #~ msgid "Is defined by"
 #~ msgstr "Kirjasto"
-
-#~ msgid "Name"
-#~ msgstr "Nimi"
 
 #~ msgid "Type"
 #~ msgstr "Tyyppi"

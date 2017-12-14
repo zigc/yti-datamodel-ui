@@ -27,7 +27,7 @@ export function routeConfig($routeProvider: route.IRouteProvider) {
         $scope.prefix = params.prefix;
         $scope.label = params.label;
         $scope.group = new Uri(params.group, {});
-        $scope.languages = params.language;
+        $scope.availableLanguages = params.language;
         $scope.type = params.type;
         $scope.redirect = params.redirect && new Uri(params.redirect, {});
       }

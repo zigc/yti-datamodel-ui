@@ -1,33 +1,18 @@
-<div ng-show="!ctrl.loading">
+<div ng-show="!ctrl.loading" class="content-box">
 
-  <div class="row main-functions-row brand-primary-bg">
-    <div class="frontpage-container">
-
+  <div class="row">
     <div class="col-md-6">
-      <div class="frontpage-panel">
-        <div class="iow-panel-heading"><h3 translate>Search</h3></div>
-        <div class="frontpage-panel__body">
-
-          <div style="display: inline-block; width: 100%; margin-top: 20px">
-            <span class="advanced-search link" ng-click="ctrl.openAdvancedSearch()" translate>Advanced search</span>
-          </div>
-
-        </div>
-      </div>
+      <h3 translate>Search</h3>
+      <a class="advanced-search link" ng-click="ctrl.openAdvancedSearch()" translate>Advanced search</a>
     </div>
 
     <div class="col-md-6">
-      <div id="browse-panel" class="frontpage-panel">
-        <div class="iow-panel-heading"><h3 translate>Browse</h3></div>
-        <div class="frontpage-panel__body">
-          <ul class="selectable-panel__list">
-            <li ng-repeat="model in ctrl.models" ng-click="ctrl.selectModel(model)">
-              <span class="link">{{model | translateLabel}}</span>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
+      <h3 translate>Browse</h3>
+      <ul>
+        <li ng-repeat="model in ctrl.models">
+          <a ng-click="ctrl.selectModel(model)">{{model | translateLabel}}</a>
+        </li>
+      </ul>
     </div>
   </div>
 

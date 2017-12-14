@@ -6,7 +6,6 @@ export { module } from './module';
 
 import './application';
 import './frontPage';
-import './footer';
 import './googleAnalytics';
 import './maintenance';
 

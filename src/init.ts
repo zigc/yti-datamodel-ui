@@ -5,13 +5,11 @@ import './styles/loading.scss';
 import { config } from '../config';
 const pw = require('please-wait');
 
-const logo = require('./assets/logo-01.svg');
 const backgroundColor = '#375e97';
 
 function loadingScreen() {
   if (config.environment !== 'local') {
     return pw.pleaseWait({
-      logo,
       backgroundColor,
       loadingHtml: `<p class='loading-message'>Loading...</p><div class="spinner"></div>`
     });
@@ -32,7 +30,6 @@ if (Modernizr.es5syntax && Modernizr.svg) {
 } else {
 
   pw.pleaseWait({
-    logo,
     backgroundColor,
     loadingHtml: `<p class='loading-message'>Pahoittelemme, mutta selaimesi ei tue tätä sovellusta / Unfortunately your browser doesn't support this application</p>`
   });

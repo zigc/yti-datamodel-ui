@@ -7,6 +7,7 @@ import { ConfirmationModal } from './common/confirmationModal';
 import { module as mod } from './module';
 import { nextUrl, modalCancelHandler } from '../utils/angular';
 import { HelpProvider } from './common/helpProvider';
+import { LocationService } from '../services/locationService';
 
 mod.directive('application', () => {
   return {
@@ -30,7 +31,8 @@ export class ApplicationController {
               $location: ILocationService,
               $uibModalStack: IModalStackService,
               userService: UserService,
-              confirmationModal: ConfirmationModal) {
+              confirmationModal: ConfirmationModal,
+              private locationService: LocationService) {
 
     userService.loggedIn$.subscribe(() => this.applicationInitialized = true);
     $scope.$watch(() => $location.path(), path => this.showFooter = path === '/');
@@ -56,6 +58,10 @@ export class ApplicationController {
       // reset help provider since every route is not guaranteed to register provider
       this.helpProvider = null;
     });
+  }
+
+  get location() {
+    return this.locationService.location;
   }
 
   registerHelpProvider(helpProvider: HelpProvider) {

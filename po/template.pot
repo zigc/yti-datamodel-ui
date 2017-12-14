@@ -27,10 +27,6 @@ msgstr ""
 msgid "Add class description"
 msgstr ""
 
-#: components/group/groupPage.html:13
-msgid "Add library"
-msgstr ""
-
 #: translations/help.html:44
 msgid "Add library description"
 msgstr ""
@@ -41,10 +37,6 @@ msgstr ""
 
 #: components/model/searchNamespaceModal.html:30
 msgid "Add new namespace"
-msgstr ""
-
-#: components/group/groupPage.html:14
-msgid "Add profile"
 msgstr ""
 
 #: translations/help.html:43
@@ -71,7 +63,7 @@ msgstr ""
 msgid "Add properties from super class"
 msgstr ""
 
-#: components/editor/classView.html:7
+#: components/editor/classView.html:6
 msgid "Add property"
 msgstr ""
 
@@ -100,13 +92,12 @@ msgstr ""
 msgid "Additional information"
 msgstr ""
 
-#: components/user/userPage.html:22
 #: translations/misc.html:147
 msgid "Admin groups"
 msgstr ""
 
 #: components/advancedSearchModal.html:2
-#: components/frontPage.html:14
+#: components/frontPage.html:6
 msgid "Advanced search"
 msgstr ""
 
@@ -149,10 +140,6 @@ msgstr ""
 
 #: translations/misc.html:13
 msgid "and create new"
-msgstr ""
-
-#: components/group/groupPage.html:46
-msgid "Application profiles"
 msgstr ""
 
 #: translations/misc.html:133
@@ -198,13 +185,6 @@ msgstr ""
 
 #: translations/help.html:140
 msgid "Asia joka tuotetaan"
-msgstr ""
-
-#: components/editor/classView.html:6
-#: components/editor/predicateView.html:6
-#: components/group/groupPage.html:12
-#: components/model/modelView.html:11
-msgid "Ask for group rights"
 msgstr ""
 
 #: translations/misc.html:234
@@ -311,10 +291,6 @@ msgstr ""
 msgid "Attribute list"
 msgstr ""
 
-#: components/footer.html:13
-msgid "Backend"
-msgstr ""
-
 #: translations/titles.html:49
 msgid "Broader concept"
 msgstr ""
@@ -323,7 +299,7 @@ msgstr ""
 msgid "Broader concept info"
 msgstr ""
 
-#: components/frontPage.html:40
+#: components/frontPage.html:10
 msgid "Browse"
 msgstr ""
 
@@ -663,10 +639,6 @@ msgstr ""
 msgid "Constraint classes info"
 msgstr ""
 
-#: components/footer.html:3
-msgid "Contact info"
-msgstr ""
-
 #: translations/misc.html:199
 msgid "Controlled vocabularies"
 msgstr ""
@@ -772,10 +744,6 @@ msgstr ""
 msgid "Creator info"
 msgstr ""
 
-#: components/footer.html:3
-msgid "CSC - IT Center for Science Ltd"
-msgstr ""
-
 #: translations/misc.html:40
 msgid "data en"
 msgstr ""
@@ -794,10 +762,6 @@ msgstr ""
 
 #: translations/misc.html:41
 msgid "data sv"
-msgstr ""
-
-#: components/footer.html:14
-msgid "Database"
 msgstr ""
 
 #: translations/misc.html:141
@@ -1050,8 +1014,8 @@ msgstr ""
 msgid "Editorial note info"
 msgstr ""
 
-#: components/navigation/loginModal.html:6
-msgid "eDuuni information"
+#: components/user/userPage.html:13
+msgid "Email"
 msgstr ""
 
 #: translations/misc.html:37
@@ -1161,10 +1125,6 @@ msgstr ""
 msgid "Front page"
 msgstr ""
 
-#: components/footer.html:12
-msgid "Frontend"
-msgstr ""
-
 #: components/form/errorMessages.html:16
 msgid "Greater than max error"
 msgstr ""
@@ -1254,12 +1214,10 @@ msgstr ""
 msgid "Homepage info"
 msgstr ""
 
-#: components/frontPage.html:78
 #: translations/misc.html:77
 msgid "How content"
 msgstr ""
 
-#: components/frontPage.html:77
 #: translations/misc.html:76
 msgid "How?"
 msgstr ""
@@ -1317,11 +1275,6 @@ msgstr ""
 msgid "Internal vocabulary"
 msgstr ""
 
-#: components/frontPage.html:55
-msgid "Interoperability method"
-msgstr ""
-
-#: components/frontPage.html:56
 #: translations/misc.html:224
 msgid "Interoperability method description"
 msgstr ""
@@ -1344,10 +1297,6 @@ msgstr ""
 
 #: components/form/errorMessages.html:4
 msgid "Invalid url error"
-msgstr ""
-
-#: components/navigation/navigationBar.html:3
-msgid "IOW"
 msgstr ""
 
 #: components/form/errorMessages.html:21
@@ -1402,10 +1351,6 @@ msgstr ""
 msgid "Library label info"
 msgstr ""
 
-#: components/footer.html:15
-msgid "licensed under the"
-msgstr ""
-
 #: translations/misc.html:203
 msgid "Links"
 msgstr ""
@@ -1414,22 +1359,18 @@ msgstr ""
 msgid "Local ID"
 msgstr ""
 
+#: components/navigation/navigationBar.html:39
+#: components/navigation/navigationBar.html:8
+msgid "LOG IN"
+msgstr ""
+
+#: components/navigation/navigationBar.html:13
+#: components/navigation/navigationBar.html:35
+msgid "LOG OUT"
+msgstr ""
+
 #: components/editor/editableConstraint.html:5
 msgid "Logical constraints"
-msgstr ""
-
-#: components/navigation/loginModal.html:11
-#: components/navigation/loginModal.html:3
-#: components/navigation/navigationBar.html:17
-msgid "Login"
-msgstr ""
-
-#: components/navigation/loginModal.html:7
-msgid "Login information"
-msgstr ""
-
-#: components/navigation/navigationBar.html:25
-msgid "Logout"
 msgstr ""
 
 #: components/maintenance.html:2
@@ -1464,7 +1405,6 @@ msgstr ""
 msgid "Max length info"
 msgstr ""
 
-#: components/user/userPage.html:15
 #: translations/misc.html:146
 msgid "Member groups"
 msgstr ""
@@ -1501,10 +1441,6 @@ msgstr ""
 msgid "Model not found"
 msgstr ""
 
-#: components/group/groupPage.html:31
-msgid "Models"
-msgstr ""
-
 #: translations/misc.html:145
 msgid "Modified at"
 msgstr ""
@@ -1535,6 +1471,10 @@ msgstr ""
 
 #: components/form/errorMessages.html:20
 msgid "Must be imported namespace"
+msgstr ""
+
+#: components/user/userPage.html:8
+msgid "Name"
 msgstr ""
 
 #: translations/titles.html:54
@@ -1585,14 +1525,6 @@ msgstr ""
 msgid "No"
 msgstr ""
 
-#: components/group/groupPage.html:33
-msgid "No models yet"
-msgstr ""
-
-#: components/group/groupPage.html:48
-msgid "No profiles yet"
-msgstr ""
-
 #: components/editor/classForm.html:72
 msgid "No properties yet"
 msgstr ""
@@ -1603,7 +1535,6 @@ msgid "No referrers"
 msgstr ""
 
 #: components/advancedSearchModal.html:20
-#: components/frontPage.html:19
 msgid "No search results"
 msgstr ""
 
@@ -1879,10 +1810,6 @@ msgstr ""
 msgid "Reference data URI info"
 msgstr ""
 
-#: components/navigation/loginModal.html:12
-msgid "Register"
-msgstr ""
-
 #: translations/misc.html:192
 msgid "Remove"
 msgstr ""
@@ -1947,7 +1874,7 @@ msgstr ""
 msgid "Save visualization position"
 msgstr ""
 
-#: components/frontPage.html:8
+#: components/frontPage.html:5
 msgid "Search"
 msgstr ""
 
@@ -2387,10 +2314,6 @@ msgstr ""
 msgid "Show technical namespaces"
 msgstr ""
 
-#: components/footer.html:11
-msgid "Source code"
-msgstr ""
-
 #: translations/misc.html:164
 msgid "Specialize class"
 msgstr ""
@@ -2407,7 +2330,6 @@ msgstr ""
 msgid "Specialized from class info"
 msgstr ""
 
-#: components/navigation/navigationBar.html:9
 #: translations/help.html:1
 msgid "Start help"
 msgstr ""
@@ -2617,8 +2539,8 @@ msgstr ""
 msgid "Use selection"
 msgstr ""
 
-#: components/navigation/navigationBar.html:24
-#: components/user/userPage.html:3
+#: components/navigation/navigationBar.html:42
+#: components/user/userPage.html:4
 msgid "User details"
 msgstr ""
 
@@ -2636,10 +2558,6 @@ msgstr ""
 
 #: translations/titles.html:42
 msgid "Value class info"
-msgstr ""
-
-#: components/footer.html:7
-msgid "Version"
 msgstr ""
 
 #: components/editor/visualizationView.html:5

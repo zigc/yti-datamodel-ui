@@ -20,7 +20,7 @@ export const commonConfig = {
       { test: /\.js$/,                 use: ['strip-sourcemap-loader'] },
       { test: /\.css$/,                use: ['style-loader', 'css-loader'] },
       { test: /\.scss$/,               use: ['style-loader', 'css-loader', 'sass-loader'], exclude: new RegExp('.*?/components/.*') },
-      { test: /\.scss$/,               use: ['raw-loader', 'css-loader', 'sass-loader'], include: new RegExp('.*?/components/.*') },
+      { test: /\.scss$/,               use: ['exports-loader?module.exports.toString()', 'css-loader', 'sass-loader'], include: new RegExp('.*?/components/.*') },
       { test: /\.ts$/, enforce: 'pre', use: ['tslint-loader'], exclude: path.resolve(__dirname, 'node_modules')},
       {
         test: /\.ts$/,

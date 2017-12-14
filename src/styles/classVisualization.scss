@@ -1,4 +1,4 @@
-@import './variables';
+@import '~yti-common-ui/theme/variables';
 
 $enabledColor: #bbb;
 
@@ -15,7 +15,7 @@ $enabledColor: #bbb;
   .uml-class-methods-rect { display: none }
 
   text {
-    font-family: $font-family-base;
+    font-family: $font-family-sans-serif;
     font-weight: normal;
   }
 
@@ -24,7 +24,7 @@ $enabledColor: #bbb;
   }
 
   .uml-class-name-rect {
-    fill: $brand-primary;
+    fill: $primary;
     stroke: none;
   }
 
