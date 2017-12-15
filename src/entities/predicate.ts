@@ -1,9 +1,9 @@
-import { normalizePredicateType, SelectionType, PredicateType, State } from './type';
-import { requireDefined } from '../utils/object';
+import { SelectionType, PredicateType, State } from '../types/entity';
+import { normalizePredicateType } from '../utils/entity';
+import { requireDefined } from 'yti-common-ui/utils/object';
 import { resourceUrl, resolveConceptConstructor } from '../utils/entity';
-import { Uri, Urn } from '../entities/uri';
+import { Uri, Urn } from './uri';
 import { DefinedBy } from './definedBy';
-import { Localizable } from './contract';
 import { Moment } from 'moment';
 import { DataType } from './dataTypes';
 import { Concept, LegacyConcept } from './vocabulary';
@@ -15,6 +15,7 @@ import {
 } from './serializer/entitySerializer';
 import { localizableSerializer, dateSerializer, optional, identitySerializer } from './serializer/serializer';
 import { normalizingDefinedBySerializer } from './serializer/common';
+import { Localizable } from 'yti-common-ui/types/localization';
 
 export abstract class AbstractPredicate extends GraphNode {
 

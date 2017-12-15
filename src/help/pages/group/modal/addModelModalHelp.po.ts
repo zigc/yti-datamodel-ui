@@ -4,7 +4,7 @@ import {
   child
 } from '../../../selectors';
 import { editableMargin, editableMultipleMargin, initialInputValue, validInput } from '../../../utils';
-import { KnownModelType } from '../../../../entities/type';
+import { KnownModelType } from '../../../../types/entity';
 import { upperCaseFirst } from 'change-case';
 import gettextCatalog = angular.gettext.gettextCatalog;
 

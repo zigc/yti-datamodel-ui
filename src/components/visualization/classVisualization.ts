@@ -1,24 +1,24 @@
 import { IAttributes, IPromise, IQService, IScope, ITimeoutService, IWindowService } from 'angular';
 import { LanguageService } from '../../services/languageService';
 import { ClassVisualization, VisualizationService } from '../../services/visualizationService';
-import { ChangeListener, Show } from '../contracts';
+import { ClassInteractionListener } from '../../types/visualization';
+import { ChangeListener, Show } from '../../types/component';
 import * as joint from 'jointjs';
 import { module as mod } from './module';
 import { Uri } from '../../entities/uri';
-import { arraysAreEqual, first, normalizeAsArray } from '../../utils/array';
+import { arraysAreEqual, firstMatching, normalizeAsArray } from 'yti-common-ui/utils/array';
 import { UserService } from '../../services/userService';
 import { ConfirmationModal } from '../common/confirmationModal';
 import { FocusLevel, NameType, SessionService } from '../../services/sessionService';
 import { VisualizationPopoverDetails } from './popover';
 import { createAssociationLink, createClassElement, ShadowClass } from './diagram';
 import { PaperHolder } from './paperHolder';
-import { ClassInteractionListener } from './contract';
 import { centerToElement, focusElement, moveOrigin, scale, scaleToFit } from './paperUtil';
 import { adjustElementLinks, calculateLabelPosition, layoutGraph, VertexAction } from './layout';
-import { Localizer } from '../../utils/language';
+import { Localizer } from '../../types/language';
 import { ifChanged, modalCancelHandler } from '../../utils/angular';
 import { centerToPosition, coordinatesAreEqual, copyVertices } from '../../utils/entity';
-import { mapOptional, Optional, requireDefined } from '../../utils/object';
+import { mapOptional, Optional, requireDefined } from 'yti-common-ui/utils/object';
 import { Class, Property } from '../../entities/class';
 import { Predicate } from '../../entities/predicate';
 import { Model } from '../../entities/model';
@@ -28,7 +28,7 @@ import {
   ModelPositions,
   VisualizationClass
 } from '../../entities/visualization';
-import { Coordinate } from '../../entities/contract';
+import { Coordinate } from '../../types/visualization';
 import { InteractiveHelpService } from '../../help/services/interactiveHelpService';
 import * as moment from 'moment';
 import { ContextMenuTarget } from './contextMenu';
@@ -634,7 +634,7 @@ class ClassVisualizationController implements ChangeListener<Class|Predicate>, C
     if (klass) {
       this.$scope.$applyAsync(() => {
 
-        const property = requireDefined(first(klass.properties, prop => prop.internalId.toString() === propertyId));
+        const property = requireDefined(firstMatching(klass.properties, prop => prop.internalId.toString() === propertyId));
 
         this.popoverDetails = {
           coordinate: coordinate,

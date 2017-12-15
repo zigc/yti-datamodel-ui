@@ -1,9 +1,9 @@
-import { Uri } from '../../entities/uri';
+import { Uri } from '../uri';
 import { GraphNode } from '../graphNode';
-import { EntityFactory } from '../contract';
-import { isDefined, assertNever } from '../../utils/object';
-import { WithIdAndType } from '../../components/contracts';
-import { normalizeAsArray } from '../../utils/array';
+import { EntityFactory } from '../../types/entity';
+import { isDefined, assertNever } from 'yti-common-ui/utils/object';
+import { WithIdAndType } from '../../types/entity';
+import { normalizeAsArray } from 'yti-common-ui/utils/array';
 import { indexById } from '../../utils/entity';
 
 export interface EntityAwareSerializer<T, N> {

@@ -9,9 +9,10 @@ import { HistoryModal } from './historyModal';
 import { NotificationModal } from './notificationModal';
 import { HelpSelectionModal } from './helpSelectionModal';
 import { LanguageService } from '../../services/languageService';
-import { Localizable, LanguageContext } from '../../entities/contract';
+import { LanguageContext } from '../../types/language';
 import { OverlayService } from './overlay';
 import { upperCaseFirst } from 'change-case';
+import { Localizable } from 'yti-common-ui/types/localization';
 
 import './accordion';
 import './accordionChevron';

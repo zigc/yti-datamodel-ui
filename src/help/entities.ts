@@ -1,5 +1,5 @@
 import { modelIdFromPrefix } from '../../e2e/util/resource';
-import { KnownPredicateType } from '../entities/type';
+import { KnownPredicateType } from '../types/entity';
 
 const palveluNimiId = '6cfbd054-2bfc-4e92-8642-477b035f59ee';
 const palveluKuvausId = 'fe884237-f6e2-44ea-ac97-231516da4770';

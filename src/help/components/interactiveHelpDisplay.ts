@@ -3,15 +3,15 @@ import * as _ from 'lodash';
 import { OverlayService, OverlayInstance } from '../../components/common/overlay';
 import { IScope, IPromise, IDocumentService, ILocationService, ui } from 'angular';
 import IModalStackService = ui.bootstrap.IModalStackService;
-import { assertNever, requireDefined, areEqual, Optional } from '../../utils/object';
-import { tab, esc, enter } from '../../utils/keyCode';
+import { assertNever, requireDefined, areEqual, Optional } from 'yti-common-ui/utils/object';
+import { tab, esc, enter } from 'yti-common-ui/utils/key-code';
 import { isTargetElementInsideElement, nextUrl } from '../../utils/angular';
 import { InteractiveHelpService } from '../services/interactiveHelpService';
 import {
   NextCondition, Story, Notification, Click, ModifyingClick,
   NavigatingClick, InteractiveHelp, createScrollWithDefault
 } from '../contract';
-import { contains } from '../../utils/array';
+import { contains } from 'yti-common-ui/utils/array';
 import { ConfirmationModal } from '../../components/common/confirmationModal';
 import { moveCursorToEnd, scrollToTop } from '../utils';
 import gettextCatalog = angular.gettext.gettextCatalog;

@@ -1,11 +1,11 @@
 import { contextlessInternalUrl } from '../utils/entity';
-import { Uri } from '../entities/uri';
+import { Uri } from './uri';
 import { DefinedBy } from './definedBy';
-import { Localizable } from './contract';
 import { init } from './mapping';
 import { GraphNode } from './graphNode';
 import { uriSerializer, entityAwareOptional, entity } from './serializer/entitySerializer';
 import { localizableSerializer, optional, stringSerializer } from './serializer/serializer';
+import { Localizable } from 'yti-common-ui/types/localization';
 
 export class SearchResult extends GraphNode {
 

@@ -5,7 +5,7 @@ import {
 } from '../../modal/searchModalHelp.po';
 import { modal, child } from '../../../selectors';
 import { predicateIdFromNamespaceId } from '../../../utils';
-import { KnownPredicateType } from '../../../../entities/type';
+import { KnownPredicateType } from '../../../../types/entity';
 import * as SearchConceptModal from './searchConceptModalHelp.po';
 import * as PredicateForm from '../predicateFormHelp.po';
 import gettextCatalog = angular.gettext.gettextCatalog;

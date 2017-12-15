@@ -1,8 +1,8 @@
 import { IPromise, IQService } from 'angular';
 import * as moment from 'moment';
 import { Uri } from '../../entities/uri';
-import { availableLanguages } from '../../utils/language';
-import { contains } from '../../utils/array';
+import { availableLanguages } from '../../types/language';
+import { contains } from 'yti-common-ui/utils/array';
 import { DataType } from '../../entities/dataTypes';
 const URI = require('uri-js');
 

@@ -1,6 +1,6 @@
 import { IHttpService, IPromise } from 'angular';
 import { config } from '../../config';
-import { EditableEntity, GraphData } from '../entities/contract';
+import { EditableEntity, GraphData } from '../types/entity';
 import { FrameService } from './frameService';
 import { usageFrame } from '../entities/frames';
 import { Usage, EmptyUsage, DefaultUsage } from '../entities/usage';
@@ -26,7 +26,7 @@ export class UsageService {
       });
   }
 
-  private deserializeUsage(data: GraphData): IPromise<Usage> {
+  private deserializeUsage(data: GraphData): IPromise<Usage|null> {
     return this.frameService.frameAndMap(data, true, usageFrame(data), () => DefaultUsage);
   }
 }

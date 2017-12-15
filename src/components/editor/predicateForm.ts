@@ -1,6 +1,6 @@
 import { module as mod } from './module';
 import { IScope, IAttributes } from 'angular';
-import { isDefined } from '../../utils/object';
+import { isDefined } from 'yti-common-ui/utils/object';
 import { UsageService } from '../../services/usageService';
 import { ErrorModal } from '../form/errorModal';
 import { PredicateService } from '../../services/predicateService';
@@ -9,7 +9,7 @@ import { EditableForm } from '../form/editableEntityController';
 import { PredicateViewController } from './predicateView';
 import { Model } from '../../entities/model';
 import { Attribute, Association } from '../../entities/predicate';
-import { KnownPredicateType } from '../../entities/type';
+import { KnownPredicateType } from '../../types/entity';
 
 mod.directive('predicateForm', () => {
   return {

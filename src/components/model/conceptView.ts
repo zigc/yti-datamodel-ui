@@ -10,7 +10,7 @@ import { Concept, LegacyConcept } from '../../entities/vocabulary';
 import { Model } from '../../entities/model';
 import { Usage } from '../../entities/usage';
 import { GroupListItem } from '../../entities/group';
-import { LanguageContext } from '../../entities/contract';
+import { LanguageContext } from '../../types/language';
 
 mod.directive('conceptView', () => {
   return {

@@ -1,8 +1,8 @@
 import { IPromise, IQService } from 'angular';
 import { ImportedNamespace, Link, Model, ModelListItem } from '../../entities/model';
-import { Language } from '../../utils/language';
+import { Language } from '../../types/language';
 import { Uri, Urn } from '../../entities/uri';
-import { KnownModelType } from '../../entities/type';
+import { KnownModelType } from '../../types/entity';
 import { ModelService } from '../../services/modelService';
 import { ResetableService } from './resetableService';
 import moment = require('moment');

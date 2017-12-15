@@ -1,7 +1,7 @@
 import { IAttributes, IScope } from 'angular';
 import { module as mod } from './module';
 import { EditableForm } from './editableEntityController';
-import { State } from '../../entities/type';
+import { State } from '../../types/entity';
 import { Model } from '../../entities/model';
 import { AuthorizationManagerService } from '../../services/authorizationManagerService';
 

@@ -1,7 +1,7 @@
 import { module as mod } from './module';
-import { Destination } from '../../utils/entity';
+import { Destination } from '../../types/entity';
 import { Model } from '../../entities/model';
-import { normalizeModelType } from '../../entities/type';
+import { normalizeModelType } from '../../utils/entity';
 
 mod.directive('definedBy', () => {
   return {

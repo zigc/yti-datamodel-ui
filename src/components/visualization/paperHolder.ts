@@ -1,11 +1,10 @@
 import { IowClassElement, ShadowClass } from './diagram';
 import * as joint from 'jointjs';
-import { ClassInteractionListener } from './contract';
-import { Iterable } from '../../utils/iterable';
+import { ClassInteractionListener, Coordinate } from '../../types/visualization';
+import * as Iterable from 'yti-common-ui/utils/iterable';
 import { moveOrigin, scale } from './paperUtil';
 import { Model } from '../../entities/model';
-import { Coordinate } from '../../entities/contract';
-import { Optional } from '../../utils/object';
+import { Optional } from 'yti-common-ui/utils/object';
 
 interface Cached {
   element: JQuery;

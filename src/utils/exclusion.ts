@@ -1,10 +1,11 @@
-import { SearchClassType, WithId, WithDefinedBy, WithIdAndType } from '../components/contracts';
-import { containsAny, arraysAreEqual, first } from './array';
+import { SearchClassType } from '../types/component';
+import { WithId, WithDefinedBy, WithIdAndType } from '../types/entity';
+import { containsAny, arraysAreEqual, firstMatching } from 'yti-common-ui/utils/array';
 import { collectIds } from './entity';
 import { Uri } from '../entities/uri';
 import { IPromise, IQService } from 'angular';
 import { DataSource } from '../components/form/dataSource';
-import { isDefined } from './object';
+import { isDefined } from 'yti-common-ui/utils/object';
 import { Model } from '../entities/model';
 import { ClassListItem } from '../entities/class';
 
@@ -28,7 +29,7 @@ export function idExclusion<T extends { id: Uri }>(excludeId: Exclusion<Uri>,
       return $q.when(excludeIdReason);
     } else if (excludeItem) {
       return dataSource(id.toString()).then(items => {
-        const item = first(items, i => i.id.equals(id));
+        const item = firstMatching(items, i => i.id.equals(id));
         return item && excludeItem(item);
       });
     } else {

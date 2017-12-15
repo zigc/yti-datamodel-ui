@@ -1,10 +1,12 @@
-import { isDefined } from '../../utils/object';
-import { normalizeAsArray, filterDefined } from '../../utils/array';
+import { isDefined } from 'yti-common-ui/utils/object';
+import { normalizeAsArray, filterDefined } from 'yti-common-ui/utils/array';
 import Moment = moment.Moment;
 import moment = require('moment');
-import { Localizable, Coordinate, UserLogin } from '../contract';
-import { Language } from '../../utils/language';
-import { Type, mapType, reverseMapType } from '../type';
+import { Coordinate  } from '../../types/visualization';
+import { Language } from '../../types/language';
+import { Type } from '../../types/entity';
+import { mapType, reverseMapType } from '../../utils/entity';
+import { Localizable } from 'yti-common-ui/types/localization';
 
 export interface Serializer<T> {
   type: 'Normal';
@@ -106,8 +108,8 @@ export const booleanSerializer: Serializer<boolean> = createSerializer(
 
 const mailToUriPrefix = 'mailto:';
 
-export const userLoginSerializer: Serializer<UserLogin> = createSerializer(
-  (data: UserLogin) => mailToUriPrefix + data,
+export const userLoginSerializer: Serializer<string> = createSerializer(
+  (data: string) => mailToUriPrefix + data,
   (data: any) => data.substring(mailToUriPrefix.length)
 );
 

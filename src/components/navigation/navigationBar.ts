@@ -2,14 +2,14 @@ import { module as mod } from './module';
 import { LanguageService } from '../../services/languageService';
 import { UserService } from '../../services/userService';
 import { LoginModalService } from 'yti-common-ui/components/login-modal.component';
-import { UILanguage } from '../../utils/language';
+import { UILanguage } from '../../types/language';
 import { User } from '../../entities/user';
 import { HelpSelectionModal } from '../common/helpSelectionModal';
 import { InteractiveHelp } from '../../help/contract';
 import { HelpProvider } from '../common/helpProvider';
 import { IScope, ILocationService, route } from 'angular';
 import { InteractiveHelpService } from '../../help/services/interactiveHelpService';
-import { identity } from '../../utils/function';
+import { identity } from 'yti-common-ui/utils/object';
 import { modalCancelHandler } from '../../utils/angular';
 
 mod.directive('navigationBar', () => {

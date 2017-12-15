@@ -4,8 +4,8 @@ import IModalServiceInstance = ui.bootstrap.IModalServiceInstance;
 import gettextCatalog = angular.gettext.gettextCatalog;
 import { LanguageService } from '../../services/languageService';
 import { Property, Class } from '../../entities/class';
-import { flatten, groupBy } from '../../utils/array';
-import { stringMapToObject } from '../../utils/object';
+import { flatten, groupBy } from 'yti-common-ui/utils/array';
+import { stringMapToObject } from 'yti-common-ui/utils/object';
 import { Model } from '../../entities/model';
 
 const noExclude = (_property: Property) => false;

@@ -2,10 +2,10 @@ import { ui } from 'angular';
 import IModalService = ui.bootstrap.IModalService;
 import IModalServiceInstance = ui.bootstrap.IModalServiceInstance;
 import { Uri } from '../../entities/uri';
-import { Language } from '../../utils/language';
+import { Language } from '../../types/language';
 import { Model } from '../../entities/model';
 import { ReferenceData } from '../../entities/referenceData';
-import { identity } from '../../utils/function';
+import { identity } from 'yti-common-ui/utils/object';
 import { modalCancelHandler } from '../../utils/angular';
 
 export class EditReferenceDataModal {

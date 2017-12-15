@@ -1,7 +1,7 @@
 import { IAttributes, IScope } from 'angular';
 import { EditableForm } from '../form/editableEntityController';
 import { module as mod } from './module';
-import { isDefined } from '../../utils/object';
+import { isDefined } from 'yti-common-ui/utils/object';
 
 interface ModalTemplateAttributes extends IAttributes {
   'default': string;

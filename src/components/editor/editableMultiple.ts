@@ -3,8 +3,8 @@ import { EditableForm } from '../form/editableEntityController';
 import { arrayValidator, arrayAsyncValidator } from '../form/validators';
 import { extendNgModelOptions, formatWithFormatters, ValidationResult, validateWithValidators } from '../../utils/angular';
 import { module as mod } from './module';
-import { remove } from '../../utils/array';
-import { enter } from '../../utils/keyCode';
+import { remove } from 'yti-common-ui/utils/array';
+import { enter } from 'yti-common-ui/utils/key-code';
 
 const skipValidators = new Set<string>(['duplicate']);
 

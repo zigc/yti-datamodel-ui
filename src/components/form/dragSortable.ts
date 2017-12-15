@@ -1,5 +1,5 @@
 import { IAttributes, IRepeatScope, IScope } from 'angular';
-import { moveElement, resetWith } from '../../utils/array';
+import { moveElement, resetWith } from 'yti-common-ui/utils/array';
 import { module as mod } from './module';
 
 interface DragSortableAttributes extends IAttributes {

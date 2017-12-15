@@ -29,5 +29,5 @@
     ]
   },
   "include": [ "src/**/*.ts", "node_modules/yti-common-ui/**/*.ts" ],
-  "exclude": [ "types", "public", "src/**/*.d.ts", "src/**/*.spec.ts"]
+  "exclude": [ "types", "public", "src/**/*.d.ts", "src/**/*.spec.ts", "node_modules/yti-common-ui/**/*.spec.ts"]
 }

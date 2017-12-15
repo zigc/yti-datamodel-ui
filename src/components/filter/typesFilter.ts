@@ -1,10 +1,9 @@
 import { module as mod } from './module';
-import { SearchController, TextAnalysis } from './contract';
+import { SearchController, TextAnalysis } from '../../types/filter';
 import { IScope } from 'angular';
-import { WithIdAndType } from '../contracts';
-import { containsAny } from '../../utils/array';
+import { WithIdAndType, Type } from '../../types/entity';
+import { containsAny } from 'yti-common-ui/utils/array';
 import { ifChanged } from '../../utils/angular';
-import { Type } from '../../entities/type';
 
 mod.directive('typesFilter', () => {
   return {

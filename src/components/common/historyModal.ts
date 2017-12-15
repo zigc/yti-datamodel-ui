@@ -6,13 +6,14 @@ import { ModelService } from '../../services/modelService';
 import { HistoryService } from '../../services/historyService';
 import { UserService } from '../../services/userService';
 import { Uri } from '../../entities/uri';
-import { comparingDate, reversed } from '../../utils/comparators';
-import { containsAny } from '../../utils/array';
+import { comparingDate } from '../../utils/comparator';
+import { reversed } from 'yti-common-ui/utils/comparator';
+import { containsAny } from 'yti-common-ui/utils/array';
 import { Model } from '../../entities/model';
 import { Class } from '../../entities/class';
 import { Predicate } from '../../entities/predicate';
 import { Entity } from '../../entities/version';
-import { identity } from '../../utils/function';
+import { identity } from 'yti-common-ui/utils/object';
 import { modalCancelHandler } from '../../utils/angular';
 
 export class HistoryModal {

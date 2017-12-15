@@ -1,7 +1,7 @@
 import { Layout, Event, EventType, Link, Node } from 'webcola';
-import { Iterable } from '../../utils/iterable';
+import * as Iterable from 'yti-common-ui/utils/iterable';
 import * as joint from 'jointjs';
-import { requireDefined } from '../../utils/object';
+import { requireDefined } from 'yti-common-ui/utils/object';
 
 const debugPerformance = false;
 

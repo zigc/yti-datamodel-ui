@@ -2,13 +2,13 @@ import { IHttpService, IPromise, IQService } from 'angular';
 import { upperCaseFirst } from 'change-case';
 import { config } from '../../config';
 import { Uri, Url } from '../entities/uri';
-import { Language } from '../utils/language';
+import { Language } from '../types/language';
 import { FrameService } from './frameService';
-import { GraphData } from '../entities/contract';
+import { GraphData } from '../types/entity';
 import * as frames from '../entities/frames';
 import { Vocabulary, Concept, LegacyConcept } from '../entities/vocabulary';
 import { Model } from '../entities/model';
-import { requireSingle } from '../utils/array';
+import { requireSingle } from 'yti-common-ui/utils/array';
 import { resolveConceptConstructor } from '../utils/entity';
 
 export interface VocabularyService {

@@ -1,24 +1,24 @@
-import { IHttpPromise, IHttpService, IPromise, IQService } from 'angular';
+import { IHttpService, IPromise, IQService } from 'angular';
 import * as moment from 'moment';
 import { PredicateService } from './predicateService';
 import { upperCaseFirst } from 'change-case';
 import { config } from '../../config';
 import { Uri, Urn } from '../entities/uri';
-import { reverseMapType } from '../entities/type';
+import { reverseMapType } from '../utils/entity';
 import { expandContextWithKnownModels } from '../utils/entity';
-import { Language, hasLocalization } from '../utils/language';
+import { hasLocalization } from '../utils/language';
+import { Language } from '../types/language';
 import { DataSource } from '../components/form/dataSource';
 import { modelScopeCache } from '../components/form/cache';
-import { requireDefined } from '../utils/object';
-import { GraphData } from '../entities/contract';
+import { requireDefined } from 'yti-common-ui/utils/object';
+import { GraphData, KnownPredicateType } from '../types/entity';
 import { FrameService } from './frameService';
 import * as frames from '../entities/frames';
-import { KnownPredicateType } from '../entities/type';
 import { ClassListItem, Class, Property } from '../entities/class';
 import { Model } from '../entities/model';
 import { ExternalEntity } from '../entities/externalEntity';
 import { Predicate, Attribute, Association } from '../entities/predicate';
-import { flatten } from '../utils/array';
+import { flatten } from 'yti-common-ui/utils/array';
 
 export interface ClassService {
   getClass(id: Uri|Urn, model: Model): IPromise<Class>;
@@ -123,7 +123,7 @@ export class DefaultClassService implements ClassService {
       });
   }
 
-  deleteClass(id: Uri, model: Model): IHttpPromise<any> {
+  deleteClass(id: Uri, model: Model): IPromise<any> {
     const requestParams = {
       id: id.uri,
       model: model.id.uri
@@ -132,7 +132,7 @@ export class DefaultClassService implements ClassService {
       .then(() => this.modelClassesCache.delete(model.id.uri));
   }
 
-  assignClassToModel(classId: Uri, model: Model): IHttpPromise<any> {
+  assignClassToModel(classId: Uri, model: Model): IPromise<any> {
     const requestParams = {
       id: classId.uri,
       model: model.id.uri

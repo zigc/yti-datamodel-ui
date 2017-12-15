@@ -1,7 +1,8 @@
 import { module as mod } from './module';
 import { IScope } from 'angular';
 import { UsageService } from '../../services/usageService';
-import { EditableEntity, LanguageContext } from '../../entities/contract';
+import { EditableEntity } from '../../types/entity';
+import { LanguageContext } from '../../types/language';
 import { Usage } from '../../entities/usage';
 
 mod.directive('usagePanel', () => {

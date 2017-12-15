@@ -1,9 +1,9 @@
 import { IPromise, IQService } from 'angular';
 import { Model } from '../../entities/model';
 import { Uri, Url } from '../../entities/uri';
-import { flatten } from '../../utils/array';
+import { flatten } from 'yti-common-ui/utils/array';
 import { DefinedBy } from '../../entities/definedBy';
-import { Optional } from '../../utils/object';
+import { Optional } from 'yti-common-ui/utils/object';
 
 type ModelId = string;
 type ResourceId = string;

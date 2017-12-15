@@ -3,7 +3,7 @@ import IModalStackService = ui.bootstrap.IModalStackService;
 import { createHelpWithDefaultHandler, InteractiveHelp, StoryLine } from './contract';
 import { selectGroup } from './pages/frontPageHelp.po';
 import * as GroupPage from './groupPageHelp';
-import { KnownModelType } from '../entities/type';
+import { KnownModelType } from '../types/entity';
 import gettextCatalog = angular.gettext.gettextCatalog;
 
 function createNewModel(type: KnownModelType, gettextCatalog: gettextCatalog): StoryLine {

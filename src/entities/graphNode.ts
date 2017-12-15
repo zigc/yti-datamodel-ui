@@ -1,6 +1,6 @@
 import { glyphIconClassForType } from '../utils/entity';
-import { containsAny } from '../utils/array';
-import { Type } from './type';
+import { containsAny } from 'yti-common-ui/utils/array';
+import { Type } from '../types/entity';
 import { init } from './mapping';
 import { typeSerializer } from './serializer/serializer';
 

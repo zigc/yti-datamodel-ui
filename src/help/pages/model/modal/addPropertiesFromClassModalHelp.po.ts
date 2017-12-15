@@ -2,7 +2,7 @@ import { createStory, createExpectedStateNextCondition, Story } from '../../../c
 import { modalBody, child, modal } from '../../../selectors';
 import { confirm } from '../../modal/modalHelp.po';
 import { AddPropertiesFromClassModalController } from '../../../../components/editor/addPropertiesFromClassModal';
-import { arraysAreEqual } from '../../../../utils/array';
+import { arraysAreEqual } from 'yti-common-ui/utils/array';
 import { getModalController, propertyIdIsSame, onlyProperties } from '../../../utils';
 
 const selectPropertiesElement = modalBody;

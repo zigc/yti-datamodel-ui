@@ -1,7 +1,7 @@
 import { IPromise, IHttpService } from 'angular';
 import { config } from '../../config';
-import { Language } from '../utils/language';
-import { GraphData } from '../entities/contract';
+import { Language } from '../types/language';
+import { GraphData } from '../types/entity';
 import { FrameService } from './frameService';
 import { searchResultFrame } from '../entities/frames';
 import { SearchResult } from '../entities/search';

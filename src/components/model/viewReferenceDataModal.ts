@@ -1,8 +1,8 @@
 import { ui } from 'angular';
 import IModalService = ui.bootstrap.IModalService;
 import { ReferenceData } from '../../entities/referenceData';
-import { LanguageContext } from '../../entities/contract';
-import { identity } from '../../utils/function';
+import { LanguageContext } from '../../types/language';
+import { identity } from 'yti-common-ui/utils/object';
 import { modalCancelHandler } from '../../utils/angular';
 
 export class ViewReferenceDataModal {

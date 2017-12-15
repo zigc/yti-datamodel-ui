@@ -5,12 +5,13 @@ import { Predicate, PredicateListItem, Attribute, Association } from '../../enti
 import { Model } from '../../entities/model';
 import { Urn, Uri } from '../../entities/uri';
 import { DataSource } from '../../components/form/dataSource';
-import { KnownPredicateType, reverseMapType } from '../../entities/type';
-import { Language } from '../../utils/language';
-import { flatten } from '../../utils/array';
+import { KnownPredicateType } from '../../types/entity';
+import { reverseMapType } from '../../utils/entity';
+import { Language } from '../../types/language';
+import { flatten } from 'yti-common-ui/utils/array';
 import moment = require('moment');
 import { VocabularyService } from '../../services/vocabularyService';
-import { identity } from '../../utils/function';
+import { identity } from 'yti-common-ui/utils/object';
 import { upperCaseFirst } from 'change-case';
 import { dateSerializer } from '../../entities/serializer/serializer';
 import * as frames from '../../entities/frames';
@@ -122,7 +123,8 @@ export class InteractiveHelpPredicateService implements PredicateService, Reseta
         };
 
         const context = Object.assign({}, model.context, { [model.prefix]: model.namespace });
-        const newPredicate = new Predicate(graph, context, frames.predicateFrame(graph));
+        const newPredicate = type === 'attribute' ? new Attribute(graph, context, frames.predicateFrame(graph)) as T
+                                                  : new Association(graph, context, frames.predicateFrame(graph)) as T;
         newPredicate.unsaved = true;
         return newPredicate;
       });

@@ -6,7 +6,7 @@ import { DeleteConfirmationModal } from '../common/deleteConfirmationModal';
 import { module as mod } from './module';
 import { ErrorModal } from '../form/errorModal';
 import { Model } from '../../entities/model';
-import { LanguageContext } from '../../entities/contract';
+import { LanguageContext } from '../../types/language';
 import { ModelControllerService } from './modelControllerService';
 import { AuthorizationManagerService } from '../../services/authorizationManagerService';
 

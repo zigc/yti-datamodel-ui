@@ -1,13 +1,13 @@
 import { module as mod } from './module';
 import * as _ from 'lodash';
-import { SearchController, TextAnalysis } from './contract';
+import { SearchController, TextAnalysis } from '../../types/filter';
 import { IScope } from 'angular';
-import { isDefined } from '../../utils/object';
+import { isDefined } from 'yti-common-ui/utils/object';
 import { ClassService } from '../../services/classService';
 import { PredicateService } from '../../services/predicateService';
 import { collectIds } from '../../utils/entity';
 import { IPromise } from 'angular';
-import { comparingLocalizable } from '../../utils/comparators';
+import { comparingLocalizable } from '../../utils/comparator';
 import { LanguageService } from '../../services/languageService';
 import { ifChanged } from '../../utils/angular';
 import { ClassListItem } from '../../entities/class';

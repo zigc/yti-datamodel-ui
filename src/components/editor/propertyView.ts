@@ -2,7 +2,7 @@ import { IAttributes, IScope } from 'angular';
 import { ClassFormController } from './classForm';
 import { Uri } from '../../entities/uri';
 import { LanguageService } from '../../services/languageService';
-import { any, all } from '../../utils/array';
+import { anyMatching, allMatching } from 'yti-common-ui/utils/array';
 import { module as mod } from './module';
 import { hasLocalization } from '../../utils/language';
 import { Property, Class } from '../../entities/class';
@@ -44,7 +44,7 @@ mod.directive('propertyView', () => {
 
       $scope.$watchCollection(() => thisController.class && thisController.class.properties, (oldProperties) => {
 
-        const isPropertyAdded = all(oldProperties, p => thisController.property.internalId.notEquals(p.internalId));
+        const isPropertyAdded = allMatching(oldProperties, p => thisController.property.internalId.notEquals(p.internalId));
 
         if (thisController.isOpen() && isPropertyAdded) {
           scrollTo();
@@ -64,7 +64,7 @@ export class PropertyViewController {
   isOpen: () => boolean;
 
   valueClassExclude = (valueClass: Uri) =>
-    any(this.class.properties, p => p !== this.property && this.property.predicateId.equals(p.predicateId) && valueClass.equals(p.valueClass))
+    anyMatching(this.class.properties, p => p !== this.property && this.property.predicateId.equals(p.predicateId) && valueClass.equals(p.valueClass))
       ? 'Duplicate association target' : null;
 
   /* @ngInject */

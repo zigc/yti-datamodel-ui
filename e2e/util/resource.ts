@@ -1,7 +1,7 @@
 import { lowerCaseFirst, upperCaseFirst } from 'change-case';
 import { defaultModelNamespaceForEnvironmentAndPrefix } from '../../config';
-import { ClassType, KnownPredicateType } from '../../src/entities/type';
-import { assertNever } from '../../src/utils/object';
+import { ClassType, KnownPredicateType } from '../../src/types/entity';
+import { assertNever } from 'yti-common-ui/utils/object';
 
 export interface FromConceptSuggestion {
   type: 'conceptSuggestion',

@@ -1,8 +1,8 @@
 import { module as mod } from './module';
-import { Show } from '../contracts';
+import { Show } from '../../types/component';
 import { IScope, IAttributes } from 'angular';
 import { FloatController } from '../common/float';
-import { assertNever } from '../../utils/object';
+import { assertNever } from 'yti-common-ui/utils/object';
 import { Class } from '../../entities/class';
 import { Predicate } from '../../entities/predicate';
 import { Model } from '../../entities/model';

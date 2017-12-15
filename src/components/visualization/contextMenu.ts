@@ -1,7 +1,7 @@
 import { module as mod } from './module';
-import { Coordinate } from '../../entities/contract';
+import { Coordinate } from '../../types/visualization';
 import { IScope } from 'angular';
-import { Optional } from '../../utils/object';
+import { Optional } from 'yti-common-ui/utils/object';
 import { VisualizationClass } from '../../entities/visualization';
 import { Model } from '../../entities/model';
 import { ClassService } from '../../services/classService';

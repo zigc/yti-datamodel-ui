@@ -1,17 +1,18 @@
-import { Uri } from '../entities/uri';
-import { Type } from './type';
-import { Localizable, Coordinate } from './contract';
-import {  localizableSerializer, optional, coordinateSerializer, list, typeSerializer } from './serializer/serializer';
+import { Uri } from './uri';
+import { Type } from '../types/entity';
+import { Coordinate } from '../types/visualization';
+import { localizableSerializer, optional, coordinateSerializer, list, typeSerializer } from './serializer/serializer';
 import { createConstantLocalizable } from '../utils/language';
 import { Model } from './model';
 import { copyVertices, coordinatesAreEqual, copyCoordinate, indexById } from '../utils/entity';
-import { arraysAreEqual } from '../utils/array';
-import { areEqual, isDefined } from '../utils/object';
-import { Iterable } from '../utils/iterable';
+import { arraysAreEqual } from 'yti-common-ui/utils/array';
+import { areEqual, isDefined } from 'yti-common-ui/utils/object';
+import * as Iterable from 'yti-common-ui/utils/iterable';
 import { Property } from './class';
 import { init, serialize } from './mapping';
 import { GraphNode, GraphNodes } from './graphNode';
 import { uriSerializer, entityAwareOptional, entityAwareList, entity, entityAwareMap } from './serializer/entitySerializer';
+import { Localizable } from 'yti-common-ui/types/localization';
 
 export interface VisualizationClass {
 

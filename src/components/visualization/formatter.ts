@@ -1,10 +1,10 @@
-import { isDefined, assertNever } from '../../utils/object';
-import { Localizer } from '../../utils/language';
+import { isDefined, assertNever } from 'yti-common-ui/utils/object';
+import { Localizer } from '../../types/language';
 import { NameType } from '../../services/sessionService';
 import { DataType } from '../../entities/dataTypes';
 import { VisualizationClass } from '../../entities/visualization';
 import { Property } from '../../entities/class';
-import { comparingNumber } from '../../utils/comparators';
+import { comparingPrimitive } from 'yti-common-ui/utils/comparator';
 
 function formatDataTypeAsLabel(dataType: DataType|null, localizer: Localizer) {
   return localizer.getStringWithModelLanguageOrDefault(dataType, 'en');
@@ -165,7 +165,7 @@ export function formatAttributeNamesAndAnnotations(properties: Property[],
   const annotations: ClassAttributePropertyAnnotation[] = [];
 
   const propertiesInIndexOrder = properties.slice();
-  propertiesInIndexOrder.sort(comparingNumber<Property>(property => property.index));
+  propertiesInIndexOrder.sort(comparingPrimitive<Property>(property => property.index));
 
   for (const property of propertiesInIndexOrder) {
     if (property.isAttribute()) {

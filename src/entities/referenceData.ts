@@ -1,9 +1,9 @@
-import { Uri } from '../entities/uri';
-import { Localizable } from './contract';
+import { Uri } from './uri';
 import { init, serialize } from './mapping';
 import { GraphNode } from './graphNode';
 import { uriSerializer, entityAwareList, entity } from './serializer/entitySerializer';
 import { optional, stringSerializer, localizableSerializer } from './serializer/serializer';
+import { Localizable } from 'yti-common-ui/types/localization';
 
 export class ReferenceDataServer extends GraphNode {
 

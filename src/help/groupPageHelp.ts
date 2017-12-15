@@ -4,7 +4,7 @@ import {
   createHelpWithDefaultHandler, createNotification, InteractiveHelp, Story, Notification, StoryLine
 } from './contract';
 import { Group } from '../entities/group';
-import { KnownModelType } from '../entities/type';
+import { KnownModelType } from '../types/entity';
 import * as GroupPage from './pages/group/groupPageHelp.po';
 import * as NewModelPage from './pages/model/newModelPageHelp.po';
 import * as ModelPage from './pages/model/modelPageHelp.po';

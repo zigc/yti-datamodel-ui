@@ -3,7 +3,8 @@ import { LanguageService } from '../../services/languageService';
 import { isValidString, isValidLabelLength, isValidModelLabelLength } from './validators';
 import { allLocalizations, hasLocalization } from '../../utils/language';
 import { module as mod } from './module';
-import { LanguageContext, Localizable } from '../../entities/contract';
+import { LanguageContext } from '../../types/language';
+import { Localizable } from 'yti-common-ui/types/localization';
 
 interface LocalizedInputAttributes extends IAttributes {
   localizedInput: 'required' | 'label' | 'modelLabel' | 'free';

@@ -29,7 +29,7 @@ import {
   TranslateService
 } from 'ng2-translate';
 import { Observable } from 'rxjs/Observable';
-import { availableUILanguages } from './utils/language';
+import { availableUILanguages } from './types/language';
 
 import 'font-awesome/scss/font-awesome.scss';
 import './styles/app.scss';

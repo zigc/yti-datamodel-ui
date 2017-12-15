@@ -4,11 +4,11 @@ import {
   formatCardinality, allAttributePropertyNames, allClassNames
 } from './formatter';
 import { NameType } from '../../services/sessionService';
-import { Localizer } from '../../utils/language';
-import { requireDefined } from '../../utils/object';
+import { Localizer } from '../../types/language';
+import { requireDefined } from 'yti-common-ui/utils/object';
 import { VisualizationClass } from '../../entities/visualization';
 import { Property } from '../../entities/class';
-import { Dimensions } from '../../entities/contract';
+import { Dimensions } from '../../types/visualization';
 
 const zIndexAssociation = 5;
 const zIndexClass = 10;

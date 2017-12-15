@@ -3,17 +3,17 @@ import IModalService = ui.bootstrap.IModalService;
 import IModalServiceInstance = ui.bootstrap.IModalServiceInstance;
 import gettextCatalog = angular.gettext.gettextCatalog;
 import { LanguageService, Localizer } from '../../services/languageService';
-import { comparingLocalizable } from '../../utils/comparators';
+import { comparingLocalizable } from '../../utils/comparator';
 import { EditableForm } from '../form/editableEntityController';
 import { AddNew } from '../common/searchResults';
 import { Uri } from '../../entities/uri';
-import { any, limit } from '../../utils/array';
+import { anyMatching, limit } from 'yti-common-ui/utils/array';
 import { lowerCase, upperCaseFirst } from 'change-case';
-import { SearchController, SearchFilter } from '../filter/contract';
+import { SearchController, SearchFilter } from '../../types/filter';
 import { ifChanged } from '../../utils/angular';
 import { Concept } from '../../entities/vocabulary';
 import { Model, ModelVocabulary } from '../../entities/model';
-import { ClassType, KnownPredicateType } from '../../entities/type';
+import { ClassType, KnownPredicateType } from '../../types/entity';
 import { VocabularyService } from '../../services/vocabularyService';
 import { filterAndSortSearchResults, defaultLabelComparator } from '../filter/util';
 
@@ -133,7 +133,7 @@ class SearchConceptController implements SearchController<Concept> {
     this.loadingResults = false;
 
     this.addFilter(concept =>
-      !this.selectedVocabulary || any(concept.item.vocabularies, v => v.internalId === this.selectedVocabulary.internalId)
+      !this.selectedVocabulary || anyMatching(concept.item.vocabularies, v => v.internalId === this.selectedVocabulary.internalId)
     );
 
     $scope.$watch(() => this.searchText, () => this.query(this.searchText).then(() => this.search()));
@@ -167,7 +167,8 @@ class SearchConceptController implements SearchController<Concept> {
     if (searchText) {
       return this.vocabularyService.searchConcepts(searchText, this.selectedVocabulary ? this.selectedVocabulary.vocabulary : undefined)
         .then((results: Concept[]) => {
-          const resultsWithReferencedVocabularies = results.filter(concept => any(concept.vocabularies, cv => any(this.vocabularies, v => v.internalId === cv.internalId)));
+          const resultsWithReferencedVocabularies =
+            results.filter(concept => anyMatching(concept.vocabularies, cv => anyMatching(this.vocabularies, v => v.internalId === cv.internalId)));
           this.queryResults = limit(resultsWithReferencedVocabularies, limitQueryResults);
           this.loadingResults = false;
         });

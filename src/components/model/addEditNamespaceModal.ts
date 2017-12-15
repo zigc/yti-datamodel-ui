@@ -2,8 +2,8 @@ import { IScope, IPromise, ui } from 'angular';
 import IModalService = ui.bootstrap.IModalService;
 import IModalServiceInstance = ui.bootstrap.IModalServiceInstance;
 import { ModelService } from '../../services/modelService';
-import { Language } from '../../utils/language';
-import { isDefined } from '../../utils/object';
+import { Language } from '../../types/language';
+import { isDefined } from 'yti-common-ui/utils/object';
 import { Model, ImportedNamespace, NamespaceType } from '../../entities/model';
 
 export class AddEditNamespaceModal {

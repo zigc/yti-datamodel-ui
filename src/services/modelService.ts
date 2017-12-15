@@ -3,12 +3,11 @@ import * as moment from 'moment';
 import { config } from '../../config';
 import { upperCaseFirst } from 'change-case';
 import { Uri, Urn } from '../entities/uri';
-import { Language } from '../utils/language';
-import { assertNever } from '../utils/object';
+import { Language } from '../types/language';
+import { assertNever } from 'yti-common-ui/utils/object';
 import * as frames from '../entities/frames';
 import { FrameService } from './frameService';
-import { GraphData } from '../entities/contract';
-import { KnownModelType } from '../entities/type';
+import { GraphData, KnownModelType } from '../types/entity';
 import { Model, ModelListItem, ImportedNamespace, Link } from '../entities/model';
 
 export interface ModelService {

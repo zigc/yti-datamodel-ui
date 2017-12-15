@@ -4,7 +4,7 @@ import { EditableForm } from '../form/editableEntityController';
 import { IScope, IAttributes } from 'angular';
 import { Concept } from '../../entities/vocabulary';
 import { Model } from '../../entities/model';
-import { ClassType, KnownPredicateType } from '../../entities/type';
+import { ClassType, KnownPredicateType } from '../../types/entity';
 import { modalCancelHandler } from '../../utils/angular';
 
 mod.directive('editableConceptSelect', () => {

@@ -4,13 +4,13 @@ import { ClassService } from '../../services/classService';
 import { SearchPredicateModal } from './searchPredicateModal';
 import { UserService } from '../../services/userService';
 import { DeleteConfirmationModal } from '../common/deleteConfirmationModal';
-import { Show } from '../contracts';
+import { Show } from '../../types/component';
 import { module as mod } from './module';
 import { ErrorModal } from '../form/errorModal';
 import { modalCancelHandler, setSelectionStyles } from '../../utils/angular';
 import { Class } from '../../entities/class';
 import { Model } from '../../entities/model';
-import { LanguageContext } from '../../entities/contract';
+import { LanguageContext } from '../../types/language';
 import { ModelControllerService } from '../model/modelControllerService';
 import { AuthorizationManagerService } from '../../services/authorizationManagerService';
 

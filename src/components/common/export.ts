@@ -6,7 +6,7 @@ import { module as mod } from './module';
 import { Model } from '../../entities/model';
 import { Class } from '../../entities/class';
 import { Predicate } from '../../entities/predicate';
-import { LanguageContext } from '../../entities/contract';
+import { LanguageContext } from '../../types/language';
 
 const exportOptions = [
   {type: 'application/ld+json', extension: 'json'},

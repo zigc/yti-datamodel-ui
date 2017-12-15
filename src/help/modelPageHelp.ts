@@ -4,8 +4,8 @@ import {
   StoryLine, InteractiveHelp, createNotification, Story
 } from './contract';
 import { Model } from '../entities/model';
-import { KnownModelType, KnownPredicateType } from '../entities/type';
-import { requireDefined } from '../utils/object';
+import { KnownModelType, KnownPredicateType } from '../types/entity';
+import { requireDefined } from 'yti-common-ui/utils/object';
 import * as ModelPage from './pages/model/modelPageHelp.po';
 import * as ModelView from './pages/model/modelViewHelp.po';
 import * as ClassView from './pages/model/classViewHelp.po';
@@ -17,11 +17,11 @@ import {
 } from '../services/entityLoader';
 import { InteractiveHelpService } from './services/interactiveHelpService';
 import gettextCatalog = angular.gettext.gettextCatalog;
-import { Localizable } from '../entities/contract';
-import { availableUILanguages } from '../utils/language';
+import { availableUILanguages } from '../types/language';
 import * as ClassForm from './pages/model/classFormHelp.po';
 import * as VisualizationView from './pages/model/visualizationViewHelp.po';
 import { Attribute } from '../entities/predicate';
+import { Localizable } from 'yti-common-ui/types/localization';
 
 function addNamespace(type: KnownModelType, data: { prefix: string, namespaceId: string }, gettextCatalog: gettextCatalog): StoryLine {
   return {

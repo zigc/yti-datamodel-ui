@@ -1,5 +1,5 @@
 import { IQService } from 'angular';
-import { Language, availableLanguages } from '../../utils/language';
+import { Language, availableLanguages } from '../../types/language';
 import { module as mod } from './module';
 
 mod.directive('editableMultipleLanguageSelect', () => {

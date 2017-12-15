@@ -1,5 +1,5 @@
 import { IScope, IAttributes, INgModelController } from 'angular';
-import { isDefined } from '../../utils/object';
+import { isDefined } from 'yti-common-ui/utils/object';
 import { module as mod } from './module';
 
 mod.directive('maxInput', () => {

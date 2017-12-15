@@ -1,6 +1,6 @@
 import { IAttributes, IDocumentService, IParseService, IQService, IScope, ITranscludeFunction } from 'angular';
-import { isDefined } from '../../utils/object';
-import { esc, tab, enter, pageUp, pageDown, arrowUp, arrowDown } from '../../utils/keyCode';
+import { isDefined } from 'yti-common-ui/utils/object';
+import { esc, tab, enter, pageUp, pageDown, arrowUp, arrowDown } from 'yti-common-ui/utils/key-code';
 import { module as mod } from './module';
 import { InputWithPopupController } from './inputPopup';
 

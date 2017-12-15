@@ -3,7 +3,7 @@ import gettextCatalog = angular.gettext.gettextCatalog;
 import { ReferenceDataService } from '../../services/referenceDataService';
 import { LanguageService } from '../../services/languageService';
 import { module as mod } from './module';
-import { any } from '../../utils/array';
+import { anyMatching } from 'yti-common-ui/utils/array';
 import { ReferenceData } from '../../entities/referenceData';
 
 export function placeholderText(gettextCatalog: gettextCatalog) {
@@ -12,7 +12,7 @@ export function placeholderText(gettextCatalog: gettextCatalog) {
 
 export function createAsyncValidators($q: IQService, referenceData: ReferenceData[], referenceDataService: ReferenceDataService): IAsyncModelValidators {
 
-  const hasExternalReferenceData = any(referenceData, rd => rd.isExternal());
+  const hasExternalReferenceData = anyMatching(referenceData, rd => rd.isExternal());
 
   return {
     codeValue(codeValue: string) {

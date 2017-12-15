@@ -1,10 +1,10 @@
 import { localizableSerializer, stringSerializer, optional } from './serializer/serializer';
-import { Uri } from '../entities/uri';
+import { Uri } from './uri';
 import { createConstantLocalizable } from '../utils/language';
-import { Localizable } from './contract';
 import { init } from './mapping';
 import { GraphNode } from './graphNode';
 import { uriSerializer } from './serializer/entitySerializer';
+import { Localizable } from 'yti-common-ui/types/localization';
 
 export class DefinedBy extends GraphNode {
 

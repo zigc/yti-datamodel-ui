@@ -1,7 +1,9 @@
 import { module as mod } from './module';
 import { IScope, IAttributes, ITimeoutService } from 'angular';
 import { hasLocalization } from '../../utils/language';
-import { Coordinate, Localizable, LanguageContext, Dimensions } from '../../entities/contract';
+import { Coordinate, Dimensions } from '../../types/visualization';
+import { Localizable } from 'yti-common-ui/types/localization';
+import { LanguageContext } from '../../types/language';
 
 export interface VisualizationPopoverDetails {
   coordinate: Coordinate;

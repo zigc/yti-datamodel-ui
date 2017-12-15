@@ -1,4 +1,12 @@
-import { Coordinate } from '../../entities/contract';
+export interface Coordinate {
+  x: number;
+  y: number ;
+}
+
+export interface Dimensions {
+  width: number;
+  height: number
+}
 
 export interface ClassInteractionListener {
   onClassClick(classId: string): void;

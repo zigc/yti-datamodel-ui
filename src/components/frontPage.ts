@@ -4,7 +4,7 @@ import { LanguageService, Localizer } from '../services/languageService';
 import { AdvancedSearchModal } from './advancedSearchModal';
 import { Url } from '../entities/uri';
 import { module as mod } from './module';
-import { frontPageSearchLanguageContext, LanguageContext } from '../entities/contract';
+import { frontPageSearchLanguageContext, LanguageContext } from '../types/language';
 import { ApplicationController } from './application';
 import { HelpProvider } from './common/helpProvider';
 import { FrontPageHelpService } from '../help/frontPageHelp';

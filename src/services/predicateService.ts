@@ -1,18 +1,19 @@
-import { IHttpPromise, IHttpService, IPromise, IQService } from 'angular';
+import { IHttpService, IPromise, IQService } from 'angular';
 import * as moment from 'moment';
 import { upperCaseFirst } from 'change-case';
 import { config } from '../../config';
-import { reverseMapType, KnownPredicateType } from '../entities/type';
+import { KnownPredicateType } from '../types/entity';
+import { reverseMapType } from '../utils/entity';
 import { Urn, Uri } from '../entities/uri';
 import { expandContextWithKnownModels } from '../utils/entity';
-import { Language } from '../utils/language';
+import { Language } from '../types/language';
 import { DataSource } from '../components/form/dataSource';
 import { modelScopeCache } from '../components/form/cache';
-import { requireDefined } from '../utils/object';
+import { requireDefined } from 'yti-common-ui/utils/object';
 import { FrameService } from './frameService';
-import { GraphData, EntityFactory } from '../entities/contract';
+import { GraphData, EntityFactory } from '../types/entity';
 import * as frames from '../entities/frames';
-import { containsAny, flatten } from '../utils/array';
+import { containsAny, flatten } from 'yti-common-ui/utils/array';
 import { PredicateListItem, Predicate, Attribute, Association } from '../entities/predicate';
 import { Model } from '../entities/model';
 import { typeSerializer } from '../entities/serializer/serializer';
@@ -117,7 +118,7 @@ export class DefaultPredicateService implements PredicateService {
       .then(() => this.modelPredicatesCache.delete(predicate.definedBy.id.uri));
   }
 
-  deletePredicate(id: Uri, model: Model): IHttpPromise<any> {
+  deletePredicate(id: Uri, model: Model): IPromise<any> {
     const requestParams = {
       id: id.uri,
       model: model.id.uri
@@ -126,7 +127,7 @@ export class DefaultPredicateService implements PredicateService {
       .then(() => this.modelPredicatesCache.delete(model.id.uri));
   }
 
-  assignPredicateToModel(predicateId: Uri, model: Model): IHttpPromise<any> {
+  assignPredicateToModel(predicateId: Uri, model: Model): IPromise<any> {
     const requestParams = {
       id: predicateId.uri,
       model: model.id.uri
@@ -151,7 +152,7 @@ export class DefaultPredicateService implements PredicateService {
     return this.$http.get<GraphData>(config.apiEndpointWithName('predicateCreator'), {params})
       .then(expandContextWithKnownModels(model))
       .then(response => this.deserializePredicate(response.data!))
-      .then((predicate: Predicate) => {
+      .then((predicate: T) => {
         predicate.definedBy = model.asDefinedBy();
         if (predicate instanceof Attribute && !predicate.dataType) {
           predicate.dataType = 'xsd:string';

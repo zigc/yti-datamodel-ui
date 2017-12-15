@@ -5,7 +5,7 @@ import {
 } from '../../contract';
 import * as ClassForm from './classFormHelp.po';
 import * as SearchPredicateModal from './modal/searchPredicateModalHelp.po';
-import { KnownPredicateType } from '../../../entities/type';
+import { KnownPredicateType } from '../../../types/entity';
 import gettextCatalog = angular.gettext.gettextCatalog;
 
 export const element = () => angular.element('class-view');

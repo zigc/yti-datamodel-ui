@@ -4,10 +4,10 @@ import IModalServiceInstance = ui.bootstrap.IModalServiceInstance;
 import { LanguageService } from '../../services/languageService';
 import { ModelService } from '../../services/modelService';
 import { AddEditNamespaceModal } from './addEditNamespaceModal';
-import { comparingBoolean, comparingString } from '../../utils/comparators';
-import { Language } from '../../utils/language';
+import { comparingPrimitive } from 'yti-common-ui/utils/comparator';
+import { Language } from '../../types/language';
 import { Exclusion } from '../../utils/exclusion';
-import { SearchController, SearchFilter, TextAnalysis } from '../filter/contract';
+import { SearchController, SearchFilter, TextAnalysis } from '../../types/filter';
 import { ifChanged, modalCancelHandler } from '../../utils/angular';
 import { ImportedNamespace, Model } from '../../entities/model';
 import { filterAndSortSearchResults } from '../filter/util';
@@ -81,8 +81,8 @@ class SearchNamespaceController implements SearchController<ImportedNamespace> {
 
 
   search() {
-    const comparator = comparingBoolean<TextAnalysis<ImportedNamespace>>(item => !!this.exclude(item.item))
-      .andThen(comparingString<TextAnalysis<ImportedNamespace>>(item => item.item.namespace));
+    const comparator = comparingPrimitive<TextAnalysis<ImportedNamespace>>(item => !!this.exclude(item.item))
+      .andThen(comparingPrimitive<TextAnalysis<ImportedNamespace>>(item => item.item.namespace));
 
     this.searchResults = filterAndSortSearchResults(this.namespaces, this.searchText, this.contentExtractors, this.searchFilters, comparator);
   }

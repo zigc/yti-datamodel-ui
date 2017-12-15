@@ -1,6 +1,6 @@
 import { INgModelController } from 'angular';
 import { upperCaseFirst, lowerCaseFirst } from 'change-case';
-import { any, contains, keepMatching } from '../utils/array';
+import { anyMatching, contains, keepMatching } from 'yti-common-ui/utils/array';
 import { Property } from '../entities/class';
 import { createScrollWithDefault } from './contract';
 import { config } from '../../config';
@@ -105,7 +105,7 @@ export function predicateIdFromNamespaceId(namespaceId: string, name: string) {
 export const propertyIdIsSame = (l: string, r: string) => l.indexOf(r) !== -1 || r.indexOf(l) !== -1;
 
 export const isExpectedProperty = (expectedProperties: string[]) =>
-  (property: Property) => any(expectedProperties, uuid => propertyIdIsSame(uuid, property.internalId.uuid));
+  (property: Property) => anyMatching(expectedProperties, uuid => propertyIdIsSame(uuid, property.internalId.uuid));
 
 export function onlyProperties(properties: Property[], expectedProperties: string[]) {
   keepMatching(properties, isExpectedProperty(expectedProperties));

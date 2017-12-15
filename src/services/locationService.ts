@@ -1,6 +1,6 @@
-import { Localizable } from '../entities/contract';
 import { Model } from '../entities/model';
 import { Group } from '../entities/group';
+import { Localizable } from 'yti-common-ui/types/localization';
 
 export interface Location {
   localizationKey?: string;

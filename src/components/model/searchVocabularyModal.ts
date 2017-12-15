@@ -1,12 +1,13 @@
 import { IPromise, ui } from 'angular';
 import IModalService = ui.bootstrap.IModalService;
 import IModalServiceInstance = ui.bootstrap.IModalServiceInstance;
-import { comparingBoolean, comparingLocalizable } from '../../utils/comparators';
+import { comparingLocalizable } from '../../utils/comparator';
+import { comparingPrimitive } from 'yti-common-ui/utils/comparator';
 import { LanguageService, Localizer } from '../../services/languageService';
 import { Exclusion } from '../../utils/exclusion';
-import { SearchController, SearchFilter } from '../filter/contract';
+import { SearchController, SearchFilter } from '../../types/filter';
 import { Vocabulary } from '../../entities/vocabulary';
-import { LanguageContext } from '../../entities/contract';
+import { LanguageContext } from '../../types/language';
 import { VocabularyService } from '../../services/vocabularyService';
 import { filterAndSortSearchResults, defaultTitleComparator } from '../filter/util';
 
@@ -63,7 +64,7 @@ class SearchVocabularyController implements SearchController<Vocabulary> {
       this.vocabularies = vocabularies;
 
       this.vocabularies.sort(
-        comparingBoolean<Vocabulary>(vocabulary => !!this.exclude(vocabulary))
+        comparingPrimitive<Vocabulary>(vocabulary => !!this.exclude(vocabulary))
           .andThen(comparingLocalizable<Vocabulary>(this.localizer, vocabulary => vocabulary.title)));
 
       this.search();

@@ -1,12 +1,12 @@
-import { EditableEntity, Localizable } from './contract';
-import { Uri } from '../entities/uri';
+import { EditableEntity, Type } from '../types/entity';
+import { Uri } from './uri';
 import { localizableSerializer, stringSerializer, optional } from './serializer/serializer';
 import { DefinedBy } from './definedBy';
-import { contextlessInternalUrl } from '../utils/entity';
-import { normalizeReferrerType, Type } from './type';
+import { contextlessInternalUrl, normalizeReferrerType } from '../utils/entity';
 import { init } from './mapping';
 import { GraphNode } from './graphNode';
 import { uriSerializer, entityAwareOptional, entity, entityAwareList } from './serializer/entitySerializer';
+import { Localizable } from 'yti-common-ui/types/localization';
 
 export interface Usage {
   id: Uri;

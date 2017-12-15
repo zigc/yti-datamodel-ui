@@ -1,5 +1,5 @@
 import { module as mod } from './module';
-import { SearchController, ContentExtractor, ContentMatcher } from './contract';
+import { SearchController, ContentExtractor, ContentMatcher } from '../../types/filter';
 import { IScope } from 'angular';
 import { ifChanged } from '../../utils/angular';
 

@@ -1,10 +1,10 @@
 import { config } from '../../config';
 import { expandContextWithKnownModels } from '../utils/entity';
-import { index } from '../utils/array';
-import { requireDefined } from '../utils/object';
+import { index } from 'yti-common-ui/utils/array';
+import { requireDefined } from 'yti-common-ui/utils/object';
 import * as frames from '../entities/frames';
 import { FrameService } from './frameService';
-import { GraphData } from '../entities/contract';
+import { GraphData } from '../types/entity';
 import { ModelPositions, VisualizationClass, DefaultVisualizationClass } from '../entities/visualization';
 import { Model } from '../entities/model';
 import { IPromise, IQService, IHttpService } from 'angular';
@@ -53,7 +53,7 @@ export class DefaultVisualizationService implements VisualizationService {
   }
 
   private deserializeModelVisualization(data: GraphData): IPromise<VisualizationClass[]> {
-    return this.frameService.frameAndMapArray(data, frames.classVisualizationFrame(data), () => DefaultVisualizationClass);
+    return this.frameService.frameAndMapArray<DefaultVisualizationClass>(data, frames.classVisualizationFrame(data), () => DefaultVisualizationClass);
   }
 
   private deserializeModelPositions(data: GraphData): IPromise<ModelPositions> {

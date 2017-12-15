@@ -3,7 +3,7 @@ import {
   createExplicitNextCondition, createScrollNone, Story
 } from '../../contract';
 import { child } from '../../selectors';
-import { KnownModelType } from '../../../entities/type';
+import { KnownModelType } from '../../../types/entity';
 import gettextCatalog = angular.gettext.gettextCatalog;
 import * as SearchNamespaceModal from './modal/searchNamepaceModalHelp.po';
 

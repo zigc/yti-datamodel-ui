@@ -1,11 +1,11 @@
 import { IScope, IAttributes, INgModelController, IQService, IModelFormatter } from 'angular';
-import { isDefined } from '../../utils/object';
-import { esc, tab, enter, pageUp, pageDown, arrowUp, arrowDown } from '../../utils/keyCode';
+import { isDefined } from 'yti-common-ui/utils/object';
+import { esc, tab, enter, pageUp, pageDown, arrowUp, arrowDown } from 'yti-common-ui/utils/key-code';
 import { formatWithFormatters } from '../../utils/angular';
 import { module as mod } from './module';
 import { DataSource } from './dataSource';
 import { InputWithPopupController } from './inputPopup';
-import { limit } from '../../utils/array';
+import { limit } from 'yti-common-ui/utils/array';
 
 // TODO: similarities with iowSelect
 mod.directive('autocomplete', ($document: JQuery) => {

@@ -1,9 +1,18 @@
-import { Localizable } from '../../entities/contract';
-import { Localizer } from '../../utils/language';
+import { Localizer } from '../../types/language';
 import { Exclusion } from '../../utils/exclusion';
-import { ContentExtractor, SearchFilter, applyFilters, TextAnalysis } from './contract';
+import { ContentExtractor, SearchFilter, TextAnalysis } from '../../types/filter';
 import { analyze } from './textAnalyzer';
-import { comparingBoolean, comparingNumber, comparingLocalizable, Comparator } from '../../utils/comparators';
+import { comparingLocalizable} from '../../utils/comparator';
+import { Comparator, comparingPrimitive } from 'yti-common-ui/utils/comparator';
+import { allMatching, limit } from 'yti-common-ui/utils/array';
+import { Localizable } from 'yti-common-ui/types/localization';
+
+const defaultSearchLimit = 100;
+
+export function applyFilters<T>(searchResults: TextAnalysis<T>[], filters: SearchFilter<T>[], limitResults = defaultSearchLimit) {
+  return limit(searchResults.filter(results => allMatching(filters, filter => filter(results))), limitResults);
+}
+
 
 export function filterAndSortSearchResults<S>(items: S[],
                                               searchText: string,
@@ -20,7 +29,7 @@ export function filterAndSortSearchResults<S>(items: S[],
 }
 
 export function scoreComparator<S>() {
-  return comparingNumber<TextAnalysis<S>>(item => item.matchScore ? item.matchScore : item.score);
+  return comparingPrimitive<TextAnalysis<S>>(item => item.matchScore ? item.matchScore : item.score);
 }
 
 export function labelComparator<S extends { label: Localizable }>(localizer: Localizer) {
@@ -32,7 +41,7 @@ export function titleComparator<S extends { title: Localizable }>(localizer: Loc
 }
 
 export function exclusionComparator<S>(exclude: Exclusion<S>) {
-  return comparingBoolean<TextAnalysis<S>>(item => !!exclude(item.item));
+  return comparingPrimitive<TextAnalysis<S>>(item => !!exclude(item.item));
 }
 
 export function defaultLabelComparator<S extends { label: Localizable }>(localizer: Localizer, exclude?: Exclusion<S>) {

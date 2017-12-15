@@ -1,13 +1,13 @@
 import * as _ from 'lodash';
-import { requireDefined } from '../utils/object';
-import { normalizeModelType, KnownModelType, State, Type } from './type';
+import { requireDefined } from 'yti-common-ui/utils/object';
+import { KnownModelType, State, Type } from '../types/entity';
+import { normalizeModelType } from '../utils/entity';
 import { Uri, Url, Urn } from './uri';
-import { Localizable } from './contract';
 import { modelUrl, resourceUrl } from '../utils/entity';
 import { GroupListItem } from './group';
-import { Language } from '../utils/language';
+import { Language } from '../types/language';
 import { Moment } from 'moment';
-import { contains, containsAny, remove } from '../utils/array';
+import { contains, containsAny, remove } from 'yti-common-ui/utils/array';
 import { DefinedBy } from './definedBy';
 import { Vocabulary } from './vocabulary';
 import { ReferenceData } from './referenceData';
@@ -20,6 +20,7 @@ import {
   localizableSerializer, stringSerializer, identitySerializer, optional, list,
   languageSerializer, dateSerializer, typeSerializer
 } from './serializer/serializer';
+import { Localizable } from 'yti-common-ui/types/localization';
 
 
 function normalizeType(type: Type[]): KnownModelType {

@@ -2,16 +2,16 @@ import { IScope, IPromise, ui } from 'angular';
 import IModalService = ui.bootstrap.IModalService;
 import IModalServiceInstance = ui.bootstrap.IModalServiceInstance;
 import { ReferenceDataService } from '../../services/referenceDataService';
-import { comparingLocalizable } from '../../utils/comparators';
+import { comparingLocalizable } from '../../utils/comparator';
 import { Localizer, LanguageService } from '../../services/languageService';
 import { AddNew } from '../common/searchResults';
 import gettextCatalog = angular.gettext.gettextCatalog;
 import { EditableForm } from '../form/editableEntityController';
 import { Uri } from '../../entities/uri';
-import { any, all } from '../../utils/array';
+import { anyMatching, allMatching } from 'yti-common-ui/utils/array';
 import * as _ from 'lodash';
 import { Exclusion } from '../../utils/exclusion';
-import { SearchController, SearchFilter } from '../filter/contract';
+import { SearchController, SearchFilter } from '../../types/filter';
 import { ifChanged } from '../../utils/angular';
 import { ReferenceData, ReferenceDataServer, ReferenceDataGroup } from '../../entities/referenceData';
 import { Model } from '../../entities/model';
@@ -100,7 +100,7 @@ export class SearchReferenceDataModalController implements SearchController<Refe
         .value()
         .sort(comparingLocalizable<ReferenceDataGroup>(this.localizer, group => group.title));
 
-      if (this.showGroup && all(this.referenceDataGroups, group => !group.id.equals(this.showGroup!.id))) {
+      if (this.showGroup && allMatching(this.referenceDataGroups, group => !group.id.equals(this.showGroup!.id))) {
         this.showGroup = null;
       }
 
@@ -124,7 +124,7 @@ export class SearchReferenceDataModalController implements SearchController<Refe
     }
 
     this.addFilter(referenceData =>
-      !this.showGroup || any(referenceData.item.groups, group => group.id.equals(this.showGroup!.id))
+      !this.showGroup || anyMatching(referenceData.item.groups, group => group.id.equals(this.showGroup!.id))
     );
 
     $scope.$watch(() => this.showGroup, ifChanged<ReferenceDataGroup|null>(() => this.search()));

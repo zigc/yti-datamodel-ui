@@ -1,21 +1,92 @@
-import { containsAny, collectProperties, index } from './array';
-import { WithId } from '../components/contracts';
-import { areEqual, requireDefined, isDefined } from './object';
+import { containsAny, collectProperties, index } from 'yti-common-ui/utils/array';
+import { Destination, WithId } from '../types/entity';
+import { areEqual, requireDefined, isDefined } from 'yti-common-ui/utils/object';
 import { IHttpPromiseCallbackArg } from 'angular';
 import { Uri, Urn, RelativeUrl } from '../entities/uri';
-import { Localizable, Coordinate, Dimensions, GraphData, EntityConstructor } from '../entities/contract';
-import { Type } from '../entities/type';
-import { DefinedBy } from '../entities/definedBy';
+import { Coordinate, Dimensions } from '../types/visualization';
 import { Model } from '../entities/model';
 import { LegacyConcept, Concept } from '../entities/vocabulary';
+import { ClassType, GroupType, ModelType, PredicateType, Type, GraphData, EntityConstructor } from '../types/entity';
+import { firstMatchingValue } from 'yti-common-ui/utils/array';
 
-export interface Destination {
-  id: Uri;
-  type: Type[];
-  prefix: string|null;
-  definedBy: DefinedBy|null;
+const fromType = new Map<Type, string[]>();
+const toType = new Map<string, Type>();
+
+function registerType(type: Type, rdfTypes: string[]) {
+  fromType.set(type, rdfTypes);
+  for (const rdfType of rdfTypes) {
+    toType.set(rdfType, type);
+  }
 }
 
+registerType('class', ['rdfs:Class']);
+registerType('shape', ['sh:Shape']);
+registerType('attribute', ['owl:DatatypeProperty']);
+registerType('association', ['owl:ObjectProperty']);
+registerType('property', ['rdf:Property']);
+registerType('model', ['owl:Ontology']);
+registerType('profile', ['dcap:DCAP']);
+registerType('group', ['foaf:Group']);
+registerType('library', ['dcap:MetadataVocabulary']);
+registerType('constraint', ['sh:AbstractOrNodeConstraint', 'sh:AbstractAndNodeConstraint', 'sh:AbstractNotNodeConstraint']);
+registerType('user', ['foaf:Person']);
+registerType('concept', ['skos:Concept']);
+registerType('material', ['termed:Graph']);
+registerType('vocabulary', ['skos:ConceptScheme']);
+registerType('entity', ['prov:Entity']);
+registerType('activity', ['prov:Activity']);
+registerType('resource', ['rdfs:Resource']);
+registerType('collection', ['skos:Collection']);
+registerType('standard', ['dcterms:Standard']);
+registerType('referenceData', ['iow:FCodeScheme']);
+registerType('externalReferenceData', ['dcam:VocabularyEncodingScheme']);
+registerType('referenceDataGroup', ['iow:FCodeGroup']);
+registerType('referenceDataCode', ['iow:FCode']);
+
+export function mapType(type: string): Type|null {
+  const result = toType.get(type);
+  if (!result) {
+    console.log('Unknown type not mapped', type);
+  }
+  return result || null;
+}
+
+export function reverseMapType(type: Type): string|null {
+  const result = fromType.get(type);
+  if (!result) {
+    console.log('Unknown type not mapped: ' + type);
+    return null;
+  } else if (result.length !== 1) {
+    throw new Error(`Cannot map '${type}' because is not bijection: '${result}'`);
+  } else {
+    return result[0];
+  }
+}
+
+export function normalizeReferrerType(types: Type[]): Type|null {
+  return normalizePredicateType(types) || normalizeClassType(types) || normalizeModelType(types) || normalizeGroupType(types);
+}
+
+export function normalizePredicateType(types: Type[]): PredicateType|null {
+  return firstMatchingValue<Type>(['attribute', 'association', 'property'], types) as PredicateType;
+}
+
+export function normalizeClassType(types: Type[]): ClassType|null {
+  return firstMatchingValue<Type>(['shape', 'class'], types) as ClassType;
+}
+
+export function normalizeModelType(types: Type[]): ModelType|null {
+  const type = firstMatchingValue<Type>(['profile', 'library', 'model'], types) as ModelType;
+  if (type === 'model') {
+    return 'library';
+  } else {
+    return type;
+  }
+}
+
+export function normalizeGroupType(types: Type[]): GroupType|null {
+  return firstMatchingValue<Type>(types, ['group']) as GroupType;
+}
 
 export function modelUrl(prefix: string): RelativeUrl {
   return `/model/${prefix}` + '/';
@@ -61,10 +132,6 @@ export function isConcept(concept: Concept|LegacyConcept|null|undefined): concep
 
 export function resolveConceptConstructor(graph: any): EntityConstructor<Concept|LegacyConcept> {
   return graph.hasOwnProperty('graph') ? Concept : LegacyConcept;
-}
-
-export function isLocalizable(obj: any): obj is Localizable {
-  return typeof obj === 'object';
 }
 
 export function coordinatesAreEqual(l: Coordinate|null|undefined, r: Coordinate|null|undefined) {

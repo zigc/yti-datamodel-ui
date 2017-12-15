@@ -1,7 +1,3 @@
-import { Uri } from '../entities/uri';
-import { DefinedBy } from '../entities/definedBy';
-import { Type } from '../entities/type';
-
 export enum Show {
   Selection = 0, Both = 1, Visualization = 2
 }
@@ -19,17 +15,4 @@ export interface ChangeNotifier<T> {
 
 export enum SearchClassType {
   Class, Shape, SpecializedClass
-}
-
-export interface WithId {
-  id: Uri|string;
-}
-
-export interface WithDefinedBy {
-  definedBy: DefinedBy;
-}
-
-export interface WithIdAndType {
-  id: Uri;
-  type: Type[];
 }

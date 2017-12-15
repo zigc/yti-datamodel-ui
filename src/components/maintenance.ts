@@ -1,5 +1,5 @@
 import { ILogService, ui } from 'angular';
-import { identity } from '../utils/function';
+import { identity } from 'yti-common-ui/utils/object';
 import { modalCancelHandler } from '../utils/angular';
 
 export class MaintenanceModal {

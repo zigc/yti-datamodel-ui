@@ -5,16 +5,15 @@ import { PredicateService } from './predicateService';
 import { ResetService } from './resetService';
 import { Uri, Url } from '../entities/uri';
 import { DataType } from '../entities/dataTypes';
-import { identity } from '../utils/function';
-import { Localizable } from '../entities/contract';
-import { ConstraintType, KnownModelType, KnownPredicateType, State } from '../entities/type';
+import { identity, requireDefined } from 'yti-common-ui/utils/object';
+import { ConstraintType, KnownModelType, KnownPredicateType, State } from '../types/entity';
 import { ImportedNamespace, Model } from '../entities/model';
 import { Concept, Vocabulary } from '../entities/vocabulary';
 import { Class, Property } from '../entities/class';
 import { Association, Attribute, Predicate } from '../entities/predicate';
 import { VocabularyService } from './vocabularyService';
-import { first, keepMatching } from '../utils/array';
-import { requireDefined } from '../utils/object';
+import { firstMatching, keepMatching } from 'yti-common-ui/utils/array';
+import { Localizable } from 'yti-common-ui/types/localization';
 
 export const ktkGroupId = new Uri('https://tt.eduuni.fi/sites/csc-iow#KTK', {});
 export const jhsGroupId = new Uri('https://tt.eduuni.fi/sites/csc-iow#JHS', {});
@@ -175,7 +174,7 @@ export class EntityLoader {
           const promises: IPromise<any>[] = [];
 
           const resolveVocabulary = (importedVocabulary: string) => {
-            const vocabulary = first(this.vocabularies, (voc: Vocabulary) => voc.id.toString() === importedVocabulary);
+            const vocabulary = firstMatching(this.vocabularies, (voc: Vocabulary) => voc.id.toString() === importedVocabulary);
 
             if (!vocabulary) {
               throw new Error('Vocabulary not found: ' + vocabulary);
@@ -196,7 +195,7 @@ export class EntityLoader {
                   .then(importedNamespace =>
                     this.$q.all([this.$q.when(importedNamespace), this.modelService.getAllImportableNamespaces()]))
                   .then(([importedNamespace, importableNamespaces]: [Uri, ImportedNamespace[]]) =>
-                    model.addNamespace(requireDefined(first(importableNamespaces, ns => ns.id.equals(importedNamespace)))))
+                    model.addNamespace(requireDefined(firstMatching(importableNamespaces, ns => ns.id.equals(importedNamespace)))))
               );
             } else if (isExternalNamespace(namespace)) {
               promises.push(this.modelService.newNamespaceImport(namespace.namespace, namespace.prefix, namespace.label, 'fi')
@@ -492,7 +491,7 @@ function isExternalNamespace(obj: any): obj is ExternalNamespaceDetails {
   return !!obj.label && !!obj.namespace && !!obj.prefix;
 }
 
-function isUriResolvable<T>(obj: any): obj is UriResolvable<T> {
+function isUriResolvable<T extends { id: Uri }>(obj: any): obj is UriResolvable<T> {
   return typeof obj === 'string' || isPromiseProvider(obj) || isPromise(obj);
 }
 

@@ -3,7 +3,7 @@ import IModalService = ui.bootstrap.IModalService;
 import IModalServiceInstance = ui.bootstrap.IModalServiceInstance;
 import gettextCatalog = angular.gettext.gettextCatalog;
 import { LanguageService, Localizer } from '../../services/languageService';
-import { comparingLocalizable } from '../../utils/comparators';
+import { comparingLocalizable } from '../../utils/comparator';
 import { ConfirmationModal } from '../common/confirmationModal';
 import { ConceptViewController } from './conceptView';
 import { Uri } from '../../entities/uri';
@@ -13,10 +13,10 @@ import { Model } from '../../entities/model';
 import { Concept, Vocabulary, LegacyConcept } from '../../entities/vocabulary';
 import { DefinedBy } from '../../entities/definedBy';
 import { VocabularyService } from '../../services/vocabularyService';
-import { any } from '../../utils/array';
+import { anyMatching } from 'yti-common-ui/utils/array';
 import { isConcept } from '../../utils/entity';
 import { modalCancelHandler } from '../../utils/angular';
-import { identity } from '../../utils/function';
+import { identity } from 'yti-common-ui/utils/object';
 
 export class ConceptEditorModal {
 
@@ -146,7 +146,7 @@ export class ConceptEditorModalController {
   }
 
   private vocabularyFilter(concept: Concept|LegacyConcept): boolean {
-    return !this.showVocabulary || isConcept(concept) && any(concept.vocabularies, v => v.internalId === this.showVocabulary.internalId);
+    return !this.showVocabulary || isConcept(concept) && anyMatching(concept.vocabularies, v => v.internalId === this.showVocabulary.internalId);
   }
 
   private conceptTypeFilter(concept: Concept|LegacyConcept): boolean {

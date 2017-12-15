@@ -1,9 +1,10 @@
 import { IPromise, ui } from 'angular';
 import IModalService = ui.bootstrap.IModalService;
 import { UsageService } from '../../services/usageService';
-import { any } from '../../utils/array';
-import { isDefined } from '../../utils/object';
-import { EditableEntity, LanguageContext } from '../../entities/contract';
+import { anyMatching } from 'yti-common-ui/utils/array';
+import { isDefined } from 'yti-common-ui/utils/object';
+import { LanguageContext } from '../../types/language';
+import { EditableEntity } from '../../types/entity';
 import { Model } from '../../entities/model';
 import { Usage, Referrer } from '../../entities/usage';
 
@@ -41,7 +42,7 @@ class DeleteConfirmationModalController {
   constructor(public entity: EditableEntity, public context: LanguageContext, private onlyInDefinedModel: Model|null, usageService: UsageService) {
     usageService.getUsage(entity).then(usage => {
       this.usage = usage;
-      this.hasReferrers = usage && any(usage.referrers, referrer => !this.exclude(referrer));
+      this.hasReferrers = usage && anyMatching(usage.referrers, referrer => !this.exclude(referrer));
     });
   }
 }

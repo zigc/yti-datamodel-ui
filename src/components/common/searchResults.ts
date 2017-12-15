@@ -4,7 +4,7 @@ import { ConfirmationModal } from './confirmationModal';
 import { Uri } from '../../entities/uri';
 import { module as mod } from './module';
 import { Exclusion } from '../../utils/exclusion';
-import { WithId } from '../contracts';
+import { WithId } from '../../types/entity';
 import { modalCancelHandler } from '../../utils/angular';
 
 mod.directive('searchResults', () => {

@@ -1,5 +1,5 @@
 import { IAttributes, IScope } from 'angular';
-import { arrowDown, arrowUp, pageDown, pageUp, enter } from '../../utils/keyCode';
+import { arrowDown, arrowUp, pageDown, pageUp, enter } from 'yti-common-ui/utils/key-code';
 import { module as mod } from './module';
 
 mod.directive('keyControl', () => {

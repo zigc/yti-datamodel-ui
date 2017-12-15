@@ -1,12 +1,5 @@
-import { AddNew } from '../common/searchResults';
-import { all, limit } from '../../utils/array';
-import { Localizable } from '../../entities/contract';
-
-const defaultSearchLimit = 100;
-
-export function applyFilters<T>(searchResults: TextAnalysis<T>[], filters: SearchFilter<T>[], limitResults = defaultSearchLimit) {
-  return limit(searchResults.filter(results => all(filters, filter => filter(results))), limitResults);
-}
+import { AddNew } from '../components/common/searchResults';
+import { Localizable } from 'yti-common-ui/types/localization';
 
 export interface SearchController<T> {
   items: T[];

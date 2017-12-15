@@ -2,8 +2,8 @@ import { ILogService, IPromise } from 'angular';
 import {
   GraphData, EntityFactory, EntityConstructor,
   EntityArrayFactory, EntityArrayConstructor
-} from '../entities/contract';
-import { normalizeAsArray } from '../utils/array';
+} from '../types/entity';
+import { normalizeAsArray } from 'yti-common-ui/utils/array';
 import { GraphNode, GraphNodes } from '../entities/graphNode';
 
 const jsonld: any = require('jsonld');
@@ -25,7 +25,7 @@ export class FrameService {
   }
 
 
-  frameAndMap<T extends GraphNode>(data: GraphData, optional: boolean, frame: {}, entityFactory: EntityFactory<T>): IPromise<T> {
+  frameAndMap<T extends GraphNode>(data: GraphData, optional: boolean, frame: {}, entityFactory: EntityFactory<T>): IPromise<T|null> {
 
     return this.frameData(data, frame)
       .then(framed => {

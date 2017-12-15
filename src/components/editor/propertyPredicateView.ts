@@ -5,9 +5,9 @@ import { PredicateService } from '../../services/predicateService';
 import { SearchPredicateModal } from './searchPredicateModal';
 import { createDefinedByExclusion } from '../../utils/exclusion';
 import { ClassFormController } from './classForm';
-import { any } from '../../utils/array';
+import { anyMatching } from 'yti-common-ui/utils/array';
 import { CopyPredicateModal } from './copyPredicateModal';
-import { requireDefined } from '../../utils/object';
+import { requireDefined } from 'yti-common-ui/utils/object';
 import { Property } from '../../entities/class';
 import { Model } from '../../entities/model';
 import { Predicate, Association, Attribute } from '../../entities/predicate';
@@ -91,7 +91,7 @@ class PropertyPredicateViewController {
 
     return this.predicateService.getPredicatesAssignedToModel(this.model).then(predicates => {
 
-      const isAssignedToModel = any(predicates, assignedPredicate => assignedPredicate.id.equals(predicateId));
+      const isAssignedToModel = anyMatching(predicates, assignedPredicate => assignedPredicate.id.equals(predicateId));
 
       if (!isAssignedToModel) {
         if (predicate && (this.model.isOfType('profile') || predicate.definedBy.isOfType('library')) && this.model.isNamespaceKnownToBeModel(predicate.id.namespace)) {

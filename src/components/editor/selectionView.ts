@@ -1,4 +1,4 @@
-import { Show } from '../contracts';
+import { Show } from '../../types/component';
 import { module as mod } from './module';
 
 mod.directive('selectionView', () => {

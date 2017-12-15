@@ -1,20 +1,19 @@
-import { requireDefined, assertNever } from '../utils/object';
+import { requireDefined, assertNever } from 'yti-common-ui/utils/object';
 import {
   resourceUrl, glyphIconClassForType, glyphIconClassUnknown, resolveConceptConstructor
 } from '../utils/entity';
-import {
-  normalizeClassType, SelectionType, PredicateType,
-  KnownPredicateType, mapType, ConstraintType, State, reverseMapType
-} from './type';
-import { Uri, Urn } from '../entities/uri';
+import { SelectionType, PredicateType, KnownPredicateType, ConstraintType, State } from '../types/entity';
+import { normalizeClassType, mapType, reverseMapType } from '../utils/entity';
+import { Uri, Urn } from './uri';
 import { DefinedBy } from './definedBy';
-import { EntityConstructor, Localizable } from './contract';
+import { EntityConstructor } from '../types/entity';
 import { DataType } from './dataTypes';
-import { containsAny, swapElements, remove, removeMatching } from '../utils/array';
+import { containsAny, swapElements, remove, removeMatching } from 'yti-common-ui/utils/array';
 import { ReferenceData } from './referenceData';
-import { Language, hasLocalization } from '../utils/language';
+import { hasLocalization } from '../utils/language';
+import { Language } from '../types/language';
 import { VisualizationClass } from './visualization';
-import { comparingNumber } from '../utils/comparators';
+import { comparingPrimitive } from 'yti-common-ui/utils/comparator';
 import { Predicate, Attribute, Association } from './predicate';
 import { init, serialize, initSingle } from './mapping';
 import { Concept, LegacyConcept } from './vocabulary';
@@ -30,6 +29,7 @@ import {
 } from './serializer/serializer';
 import { normalizingDefinedBySerializer } from './serializer/common';
 import { Model } from './model';
+import { Localizable } from 'yti-common-ui/types/localization';
 
 export abstract class AbstractClass extends GraphNode {
 
@@ -114,7 +114,7 @@ export class Class extends AbstractClass implements VisualizationClass {
     super(graph, context, frame);
 
     init(this, Class.classMappings);
-    this.properties.sort(comparingNumber<Property>(property => property.index));
+    this.properties.sort(comparingPrimitive<Property>(property => property.index));
 
     // normalize indices
     for (let i = 0; i < this.properties.length; i++) {

@@ -1,5 +1,5 @@
 import { createStory, createExpectedStateNextCondition } from '../../contract';
-import { KnownPredicateType } from '../../../entities/type';
+import { KnownPredicateType } from '../../../types/entity';
 import { upperCaseFirst } from 'change-case';
 import { editableByTitle, input, editableFocus } from '../../selectors';
 import { validInput, initialInputValue, editableMarginInColumn } from '../../utils';

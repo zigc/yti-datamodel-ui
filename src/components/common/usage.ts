@@ -2,9 +2,9 @@ import { module as mod } from '../module';
 import { IAttributes, IScope } from 'angular';
 import { EditableForm } from '../form/editableEntityController';
 import { Referrer, Usage } from '../../entities/usage';
-import { LanguageContext } from '../../entities/contract';
-import { groupBy } from '../../utils/array';
-import { stringMapToObject } from '../../utils/object';
+import { LanguageContext } from '../../types/language';
+import { groupBy } from 'yti-common-ui/utils/array';
+import { stringMapToObject } from 'yti-common-ui/utils/object';
 
 interface UsageAttributes extends IAttributes {
   showLinks: string;

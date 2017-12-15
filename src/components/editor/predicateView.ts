@@ -3,13 +3,13 @@ import { PredicateService } from '../../services/predicateService';
 import { UserService } from '../../services/userService';
 import { EditableEntityController, EditableScope, Rights } from '../form/editableEntityController';
 import { DeleteConfirmationModal } from '../common/deleteConfirmationModal';
-import { Show } from '../contracts';
+import { Show } from '../../types/component';
 import { ErrorModal } from '../form/errorModal';
 import { module as mod } from './module';
 import { setSelectionStyles } from '../../utils/angular';
 import { Association, Attribute } from '../../entities/predicate';
 import { Model } from '../../entities/model';
-import { LanguageContext } from '../../entities/contract';
+import { LanguageContext } from '../../types/language';
 import { ModelControllerService } from '../model/modelControllerService';
 import { AuthorizationManagerService } from '../../services/authorizationManagerService';
 

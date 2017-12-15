@@ -2,7 +2,7 @@ import { module as mod } from './module';
 import { ReferenceDataService } from '../../services/referenceDataService';
 import { LanguageService, Localizer } from '../../services/languageService';
 import { ReferenceData, ReferenceDataCode } from '../../entities/referenceData';
-import { LanguageContext } from '../../entities/contract';
+import { LanguageContext } from '../../types/language';
 
 mod.directive('codeValueInputAutocomplete', () => {
   return {

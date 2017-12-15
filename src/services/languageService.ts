@@ -1,12 +1,6 @@
-import { LanguageContext, Localizable } from '../entities/contract';
-import {
-  availableUILanguages,
-  Language,
-  Localizer as AngularJSLocalizer,
-  translate,
-  UILanguage
-} from '../utils/language';
-import { Localizer as AngularLocalizer } from 'yti-common-ui/types/localization';
+import { LanguageContext, UILanguage, Language, availableUILanguages, Localizer as AngularJSLocalizer } from '../types/language';
+import { translate } from '../utils/language';
+import { Localizable, Localizer as AngularLocalizer } from 'yti-common-ui/types/localization';
 import { SessionService } from './sessionService';
 import { TranslateService } from 'ng2-translate';
 import { Observable } from 'rxjs/Observable';

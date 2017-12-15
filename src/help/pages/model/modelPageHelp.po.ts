@@ -3,7 +3,7 @@ import {
   createScrollWithDefault, Story
 } from '../../contract';
 import { child, modelPanelElement } from '../../selectors';
-import { KnownModelType, KnownPredicateType } from '../../../entities/type';
+import { KnownModelType, KnownPredicateType } from '../../../types/entity';
 import { scrollToTop, classIdFromNamespaceId } from '../../utils';
 import gettextCatalog = angular.gettext.gettextCatalog;
 import * as SearchClassModal from './modal/searchClassModalHelp.po';

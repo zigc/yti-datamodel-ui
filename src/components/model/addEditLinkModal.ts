@@ -3,7 +3,7 @@ import IModalService = ui.bootstrap.IModalService;
 import IModalServiceInstance = ui.bootstrap.IModalServiceInstance;
 import { ModelService } from '../../services/modelService';
 import { Uri } from '../../entities/uri';
-import { Language } from '../../utils/language';
+import { Language } from '../../types/language';
 import { Model, Link } from '../../entities/model';
 
 export class AddEditLinkModal {

@@ -1,7 +1,7 @@
 import { module as mod } from './module';
 import { IScope, IAttributes } from 'angular';
 import { FloatController } from '../common/float';
-import { Show } from '../contracts';
+import { Show } from '../../types/component';
 
 interface FloatSizeAdjusterScope extends IScope {
   width: number;

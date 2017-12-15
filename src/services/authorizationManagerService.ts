@@ -1,9 +1,8 @@
 import { UserService } from './userService';
 import { Model } from '../entities/model';
 import { User } from '../entities/user';
-import { State } from '../entities/type';
+import { State, WithDefinedBy } from '../types/entity';
 import { Association, Attribute } from '../entities/predicate';
-import { WithDefinedBy } from '../components/contracts';
 import { Class } from '../entities/class';
 
 const userStates: State[] = ['Unstable', 'Draft'];

@@ -1,7 +1,7 @@
 import { VocabularyService } from '../../services/vocabularyService';
 import { ResetableService } from './resetableService';
 import { IPromise, IQService } from 'angular';
-import { Language } from '../../utils/language';
+import { Language } from '../../types/language';
 import { Vocabulary, Concept } from '../../entities/vocabulary';
 import { Uri } from '../../entities/uri';
 import { Model } from '../../entities/model';

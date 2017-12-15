@@ -1,8 +1,8 @@
-import { assertNever, isDefined } from '../utils/object';
+import { assertNever, isDefined } from 'yti-common-ui/utils/object';
 import { Serializer } from './serializer/serializer';
 import { EntityAwareSerializer } from './serializer/entitySerializer';
 import { GraphNode } from './graphNode';
-import { first, contains } from '../utils/array';
+import { firstMatching, contains } from 'yti-common-ui/utils/array';
 
 export interface Mapping<T, N extends GraphNode> {
   name: string|string[];
@@ -23,7 +23,7 @@ export function initSingle<T, N extends GraphNode>(instance: N, mapping: Mapping
 
   function resolveValue(name: string|string[]): string {
     if (Array.isArray(name)) {
-      return first(name.map(n => instance.graph[n]), isDefined);
+      return firstMatching(name.map(n => instance.graph[n]), isDefined);
     } else {
       return instance.graph[name];
     }

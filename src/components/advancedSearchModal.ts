@@ -3,9 +3,9 @@ import IModalService = ui.bootstrap.IModalService;
 import IModalServiceInstance = ui.bootstrap.IModalServiceInstance;
 import { SearchService } from '../services/searchService';
 import { LanguageService, Localizer } from '../services/languageService';
-import { SearchController, SearchFilter } from './filter/contract';
-import { Type } from '../entities/type';
-import { frontPageSearchLanguageContext, LanguageContext } from '../entities/contract';
+import { SearchController, SearchFilter } from '../types/filter';
+import { Type } from '../types/entity';
+import { frontPageSearchLanguageContext, LanguageContext } from '../types/language';
 import { SearchResult } from '../entities/search';
 import { filterAndSortSearchResults, defaultLabelComparator } from './filter/util';
 

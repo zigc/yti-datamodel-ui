@@ -4,14 +4,14 @@ import { SearchClassModal } from './searchClassModal';
 import { Uri } from '../../entities/uri';
 import { module as mod } from './module';
 import { EditableForm } from '../form/editableEntityController';
-import { collectProperties } from '../../utils/array';
+import { collectProperties } from 'yti-common-ui/utils/array';
 import { createExistsExclusion } from '../../utils/exclusion';
 import { DataSource } from '../form/dataSource';
 import { ClassService } from '../../services/classService';
 import { PredicateService } from '../../services/predicateService';
 import { ClassListItem } from '../../entities/class';
 import { PredicateListItem } from '../../entities/predicate';
-import { ClassType, KnownPredicateType } from '../../entities/type';
+import { ClassType, KnownPredicateType } from '../../types/entity';
 import { Model } from '../../entities/model';
 import { modalCancelHandler } from '../../utils/angular';
 

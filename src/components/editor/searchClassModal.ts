@@ -9,12 +9,12 @@ import gettextCatalog = angular.gettext.gettextCatalog;
 import { EditableForm } from '../form/editableEntityController';
 import { glyphIconClassForType } from '../../utils/entity';
 import { Exclusion } from '../../utils/exclusion';
-import { SearchFilter, SearchController } from '../filter/contract';
+import { SearchFilter, SearchController } from '../../types/filter';
 import { AbstractClass, Class, ClassListItem } from '../../entities/class';
 import { Model } from '../../entities/model';
 import { ExternalEntity } from '../../entities/externalEntity';
 import { filterAndSortSearchResults, defaultLabelComparator } from '../filter/util';
-import { Optional } from '../../utils/object';
+import { Optional } from 'yti-common-ui/utils/object';
 
 export const noExclude = (_item: AbstractClass) => null;
 export const defaultTextForSelection = (_klass: Class) => 'Use class';

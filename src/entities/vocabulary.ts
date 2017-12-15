@@ -2,13 +2,13 @@ import {
   localizableSerializer,
   stringSerializer, identitySerializer, valueOrDefault
 } from './serializer/serializer';
-import { Uri } from '../entities/uri';
-import { Localizable } from './contract';
+import { Uri } from './uri';
 import { glyphIconClassForType } from '../utils/entity';
 import { init, serialize } from './mapping';
 import { GraphNode } from './graphNode';
 import { uriSerializer, entity, entityAwareOptional, entityAwareList } from './serializer/entitySerializer';
-import { ConceptType, State } from './type';
+import { ConceptType, State } from '../types/entity';
+import { Localizable } from 'yti-common-ui/types/localization';
 
 export class Material extends GraphNode {
 

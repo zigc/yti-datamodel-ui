@@ -5,11 +5,11 @@ import { module as mod } from './module';
 import { ViewReferenceDataModal } from '../model/viewReferenceDataModal';
 import { TableDescriptor, ColumnDescriptor } from '../form/editableTable';
 import { Localizer, LanguageService } from '../../services/languageService';
-import { collectProperties } from '../../utils/array';
+import { collectProperties } from 'yti-common-ui/utils/array';
 import { createExistsExclusion } from '../../utils/exclusion';
 import { ReferenceData } from '../../entities/referenceData';
 import { Model } from '../../entities/model';
-import { remove } from '../../utils/array';
+import { remove } from 'yti-common-ui/utils/array';
 import { modalCancelHandler } from '../../utils/angular';
 
 mod.directive('editableReferenceDataSelect', () => {

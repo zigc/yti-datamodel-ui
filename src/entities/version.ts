@@ -1,9 +1,8 @@
-import { Uri } from '../entities/uri';
-import { UserLogin } from './contract';
+import { Uri } from './uri';
 import { Moment } from 'moment';
-import { requireDefined } from '../utils/object';
+import { requireDefined } from 'yti-common-ui/utils/object';
 import { idToIndexMap } from '../utils/entity';
-import { comparingDate } from '../utils/comparators';
+import { comparingDate } from '../utils/comparator';
 import { init } from './mapping';
 import { GraphNode } from './graphNode';
 import { uriSerializer, entityAwareList, entity, entityAwareOptional } from './serializer/entitySerializer';
@@ -21,7 +20,7 @@ export class Activity extends GraphNode {
 
   id: Uri;
   createdAt: Moment;
-  lastModifiedBy: UserLogin;
+  lastModifiedBy: string;
   versions: Entity[];
   latestVersion: Uri;
   private versionIndex: Map<string, number>;
@@ -54,7 +53,7 @@ export class Entity extends GraphNode {
 
   id: Uri;
   createdAt: Moment;
-  createdBy: UserLogin;
+  createdBy: string;
   previousVersion: Uri|null;
 
   constructor(graph: any, context: any, frame: any) {

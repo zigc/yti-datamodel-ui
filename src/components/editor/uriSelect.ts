@@ -10,7 +10,7 @@ import { PredicateService } from '../../services/predicateService';
 import { itemExclusion, idExclusion } from '../../utils/exclusion';
 import { ClassListItem } from '../../entities/class';
 import { PredicateListItem } from '../../entities/predicate';
-import { ClassType, KnownPredicateType } from '../../entities/type';
+import { ClassType, KnownPredicateType } from '../../types/entity';
 import { Model } from '../../entities/model';
 import { modalCancelHandler } from '../../utils/angular';
 

@@ -1,13 +1,13 @@
-import { Language } from '../utils/language';
+import { Language } from '../types/language';
 import { groupUrl } from '../utils/entity';
 import { localizableSerializer, identitySerializer, optional } from './serializer/serializer';
-import { Uri, Url } from '../entities/uri';
-import { GroupType } from './type';
-import { Localizable } from './contract';
+import { Uri, Url } from './uri';
+import { GroupType } from '../types/entity';
 import { init } from './mapping';
 import { GraphNode } from './graphNode';
 import { uriSerializer, entity, entityAwareList } from './serializer/entitySerializer';
 import { Vocabulary } from './vocabulary';
+import { Localizable } from 'yti-common-ui/types/localization';
 
 export abstract class AbstractGroup extends GraphNode {
 

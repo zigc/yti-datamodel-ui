@@ -1,7 +1,7 @@
 import { IAttributes, IScope } from 'angular';
 import { EditableForm } from '../form/editableEntityController';
 import { SearchClassModal } from '../editor/searchClassModal';
-import { requireDefined } from '../../utils/object';
+import { requireDefined } from 'yti-common-ui/utils/object';
 import { Model } from '../../entities/model';
 import { ClassListItem } from '../../entities/class';
 import { module as mod } from './module';
