@@ -185,9 +185,9 @@
 "@types/node-uuid@file:./types/node-uuid":
   version "0.0.27"
 
-"@types/node@*", "@types/node@6.0.*", "@types/node@6.0.38":
-  version "6.0.38"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-6.0.38.tgz#7371eb8b4d62951c420298dbfeecf054971fb918"
+"@types/node@6.0.60":
+  version "6.0.60"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-6.0.60.tgz#e7e134ebc674ae6ed93c36c767739b110d2c57fc"
 
 "@types/node@^6.0.46":
   version "6.0.88"

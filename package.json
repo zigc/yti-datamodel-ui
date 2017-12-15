@@ -80,7 +80,7 @@
     "@types/karma-jasmine": "0.0.27",
     "@types/lodash": "4.14.88",
     "@types/modernizr": "3.2.26",
-    "@types/node": "6.0.38",
+    "@types/node": "6.0.60",
     "@types/node-uuid": "file:./types/node-uuid",
     "@types/protractor": "1.5.18",
     "@types/selenium-webdriver": "2.44.28",
