@@ -736,43 +736,6 @@ $input-select: 80px;
   }
 }
 
-visualization-view ajax-loading-indicator {
-  display: inline-block;
-  position: relative;
-  top: 0;
-}
-
-.search-results ajax-loading-indicator {
-  width: calc(100% - 30px);
-}
-
-ajax-loading-indicator {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  z-index: 1000;
-  background-color: #ffffff;
-
-  &.inline {
-    position: inherit;
-
-    .uil-default-css, img {
-      position: relative;
-      display: inline-block;
-      top: inherit;
-      left: calc(50% - 100px);
-      margin: inherit;
-    }
-  }
-
-  .uil-default-css, img {
-    position: absolute;
-    top: calc(50% - 100px);
-    left: calc(50% - 100px);
-    margin: 0 auto;
-  }
-}
-
 ajax-loading-indicator-small {
   float: right;
   padding-right: 10px

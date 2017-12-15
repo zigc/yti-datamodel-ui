@@ -42,6 +42,8 @@ import IInjectorService = angular.auto.IInjectorService;
 import IAnimateProvider = animate.IAnimateProvider;
 import ITooltipProvider = ui.bootstrap.ITooltipProvider;
 import { MenuComponent } from 'yti-common-ui/components/menu.component';
+import { AjaxLoadingIndicatorComponent } from 'yti-common-ui/components/ajax-loading-indicator.component';
+import { AjaxLoadingIndicatorSmallComponent } from 'yti-common-ui/components/ajax-loading-indicator-small.component';
 
 require('./vendor/modernizr');
 require('imports-loader?define=>false!jquery-mousewheel/jquery.mousewheel')(jQuery);
@@ -95,7 +97,9 @@ export function createMissingTranslationHandler(): MissingTranslationHandler {
   ],
   entryComponents: [
     FooterComponent,
-    MenuComponent
+    MenuComponent,
+    AjaxLoadingIndicatorComponent,
+    AjaxLoadingIndicatorSmallComponent
   ],
   providers: [
     { provide: AUTHENTICATED_USER_ENDPOINT, useFactory: resolveAuthenticatedUserEndpoint },
@@ -149,6 +153,8 @@ const mod = angular.module('iow-ui', [
 
 mod.directive('appMenu', downgradeComponent({component: MenuComponent}));
 mod.directive('appFooter', downgradeComponent({component: FooterComponent}));
+mod.directive('ajaxLoadingIndicator', downgradeComponent({component: AjaxLoadingIndicatorComponent}));
+mod.directive('ajaxLoadingIndicatorSmall', downgradeComponent({component: AjaxLoadingIndicatorSmallComponent}));
 
 mod.factory('translateService', downgradeInjectable(TranslateService));
 mod.factory('loginModal', downgradeInjectable(LoginModalService));

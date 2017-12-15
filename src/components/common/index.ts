@@ -16,8 +16,6 @@ import { Localizable } from 'yti-common-ui/types/localization';
 
 import './accordion';
 import './accordionChevron';
-import './ajaxLoadingIndicator';
-import './ajaxLoadingIndicatorSmall';
 import './buttonWithOptions';
 import './clipboard';
 import './export';
