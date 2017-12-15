@@ -124,6 +124,7 @@
     "style-loader": "0.13.1",
     "ts-loader": "^3.2.0",
     "ts-node": "1.7.0",
+    "tsconfig-paths": "^2.6.0",
     "tslint": "5.1.0",
     "tslint-loader": "^3.5.3",
     "typescript": "2.3.1",
