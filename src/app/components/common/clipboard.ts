@@ -3,7 +3,7 @@ import { IScope, IAttributes, ITimeoutService } from 'angular';
 import { EditableForm } from '../form/editableEntityController';
 import gettextCatalog = angular.gettext.gettextCatalog;
 
-const clipboardImage = require('../../assets/clippy.svg');
+const clipboardImage = require('../../../assets/clippy.svg');
 
 mod.directive('clipboard', () => {
   return {

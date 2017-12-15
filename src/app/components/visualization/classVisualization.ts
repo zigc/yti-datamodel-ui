@@ -281,7 +281,7 @@ class ClassVisualizationController implements ChangeListener<Class|Predicate>, C
   svgToString() {
     // brutal way to inject styles to the document but creating new dom hierarchy seems to be impossible to get to work with IE
     return new XMLSerializer().serializeToString(this.svg())
-      .replace('</svg>', '<style>' + require('!raw-loader!sass-loader!../../styles/classVisualizationSvgExport.scss') + '</style></svg>');
+      .replace('</svg>', '<style>' + require('!raw-loader!sass-loader!../../../styles/classVisualizationSvgExport.scss') + '</style></svg>');
   }
 
   get selectionFocus() {

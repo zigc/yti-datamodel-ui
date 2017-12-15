@@ -1,6 +1,3 @@
-import './shim';
-import * as jQuery from 'jquery';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import * as angular from 'angular';
 import { animate, ICompileProvider, ILocationProvider, ILogProvider, ui } from 'angular';
 import { routeConfig } from './routes';
@@ -31,8 +28,6 @@ import {
 import { Observable } from 'rxjs/Observable';
 import { availableUILanguages } from './types/language';
 
-import 'font-awesome/scss/font-awesome.scss';
-import './styles/app.scss';
 import { LoginModalService } from 'yti-common-ui/components/login-modal.component';
 import { FooterComponent } from 'yti-common-ui/components/footer.component';
 import { LOCALIZER } from 'yti-common-ui/pipes/translate-value.pipe';
@@ -45,8 +40,6 @@ import { MenuComponent } from 'yti-common-ui/components/menu.component';
 import { AjaxLoadingIndicatorComponent } from 'yti-common-ui/components/ajax-loading-indicator.component';
 import { AjaxLoadingIndicatorSmallComponent } from 'yti-common-ui/components/ajax-loading-indicator-small.component';
 
-require('./vendor/modernizr');
-require('imports-loader?define=>false!jquery-mousewheel/jquery.mousewheel')(jQuery);
 require('angular-gettext');
 require('checklist-model');
 require('ngclipboard');
@@ -55,7 +48,7 @@ export const localizationStrings: { [key: string]: { [key: string]: string } } =
 
 for (const language of availableUILanguages) {
   localizationStrings[language] = Object.assign({},
-    require(`../po/${language}.po`),
+    require(`../../po/${language}.po`),
     require(`yti-common-ui/po/${language}.po`)
   );
 }
@@ -182,20 +175,15 @@ mod.config(($locationProvider: ILocationProvider,
   $uibTooltipProvider.setTriggers({'mouseenter': 'mouseleave click'});
 });
 
-export const done = new Promise((resolve) => {
-  mod.run((gettextCatalog: any) => {
 
-    gettextCatalog.debug = true;
+mod.run((gettextCatalog: any) => {
 
-    for (const language of availableUILanguages) {
-      gettextCatalog.setStrings(language, localizationStrings[language]);
-    }
+  gettextCatalog.debug = true;
 
-    resolve(true);
-  });
+  for (const language of availableUILanguages) {
+    gettextCatalog.setStrings(language, localizationStrings[language]);
+  }
 });
-
-platformBrowserDynamic().bootstrapModule(AppModule);
 
 // TODO replace with angular 1.6 @types when available
 interface Angular16ICompileProvider extends ICompileProvider {

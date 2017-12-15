@@ -1,4 +1,4 @@
-import { modelIdFromPrefix } from '../../e2e/util/resource';
+import { modelIdFromPrefix } from '../../../e2e/util/resource';
 import { KnownPredicateType } from '../types/entity';
 
 const palveluNimiId = '6cfbd054-2bfc-4e92-8642-477b035f59ee';
