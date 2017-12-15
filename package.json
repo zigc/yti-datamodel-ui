@@ -111,7 +111,7 @@
     "ng-annotate-loader": "0.1.0",
     "node-sass": "4.7.2",
     "optimist": "0.6.1",
-    "phantomjs-prebuilt": "2.1.8",
+    "phantomjs-prebuilt": "^2.1.16",
     "po-loader": "0.3.1",
     "po2json": "0.4.2",
     "progress-bar-webpack-plugin": "1.10.0",

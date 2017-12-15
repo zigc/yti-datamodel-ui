@@ -4,7 +4,7 @@ import { Configuration } from 'webpack';
 const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-export const commonConfig = {
+export const commonConfig: Configuration = {
 
   resolve: {
     modules: [path.resolve(__dirname, 'src'), 'node_modules'],

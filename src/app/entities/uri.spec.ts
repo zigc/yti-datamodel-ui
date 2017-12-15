@@ -1,40 +1,40 @@
 import { Uri } from './uri';
 
 const context = {
-  "label" : {
-    "@id" : "http://www.w3.org/2000/01/rdf-schema#label",
-    "@type" : "http://www.w3.org/1999/02/22-rdf-syntax-ns#langString"
+  'label' : {
+    '@id' : 'http://www.w3.org/2000/01/rdf-schema#label',
+    '@type' : 'http://www.w3.org/1999/02/22-rdf-syntax-ns#langString'
   },
-  "created" : {
-    "@id" : "http://purl.org/dc/terms/created",
-    "@type" : "http://www.w3.org/2001/XMLSchema#dateTime"
+  'created' : {
+    '@id' : 'http://purl.org/dc/terms/created',
+    '@type' : 'http://www.w3.org/2001/XMLSchema#dateTime'
   },
-  "modified" : {
-    "@id" : "http://purl.org/dc/terms/modified",
-    "@type" : "http://www.w3.org/2001/XMLSchema#dateTime"
+  'modified' : {
+    '@id' : 'http://purl.org/dc/terms/modified',
+    '@type' : 'http://www.w3.org/2001/XMLSchema#dateTime'
   },
-  "schema" : "http://schema.org/",
-  "dcap" : "http://purl.org/ws-mmi-dc/terms/",
-  "void" : "http://rdfs.org/ns/void#",
-  "adms" : "http://www.w3.org/ns/adms#",
-  "dcam" : "http://purl.org/dc/dcam/",
-  "owl" : "http://www.w3.org/2002/07/owl#",
-  "foo" : "http://iow.csc.fi/ns/foo#",
-  "afn" : "http://jena.hpl.hp.com/ARQ/function#",
-  "xsd" : "http://www.w3.org/2001/XMLSchema#",
-  "skos" : "http://www.w3.org/2004/02/skos/core#",
-  "rdfs" : "http://www.w3.org/2000/01/rdf-schema#",
-  "iow" : "http://iow.csc.fi/ns/iow#",
-  "sd" : "http://www.w3.org/ns/sparql-service-description#",
-  "sh" : "http://www.w3.org/ns/shacl#",
-  "rdf" : "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
-  "edu" : "http://iow.csc.fi/ns/edu#",
-  "dcterms" : "http://purl.org/dc/terms/",
-  "text" : "http://jena.apache.org/text#",
-  "prov" : "http://www.w3.org/ns/prov#",
-  "foaf" : "http://xmlns.com/foaf/0.1/",
-  "ts" : "http://www.w3.org/2003/06/sw-vocab-status/ns#",
-  "dc" : "http://purl.org/dc/elements/1.1/"
+  'schema' : 'http://schema.org/',
+  'dcap' : 'http://purl.org/ws-mmi-dc/terms/',
+  'void' : 'http://rdfs.org/ns/void#',
+  'adms' : 'http://www.w3.org/ns/adms#',
+  'dcam' : 'http://purl.org/dc/dcam/',
+  'owl' : 'http://www.w3.org/2002/07/owl#',
+  'foo' : 'http://iow.csc.fi/ns/foo#',
+  'afn' : 'http://jena.hpl.hp.com/ARQ/function#',
+  'xsd' : 'http://www.w3.org/2001/XMLSchema#',
+  'skos' : 'http://www.w3.org/2004/02/skos/core#',
+  'rdfs' : 'http://www.w3.org/2000/01/rdf-schema#',
+  'iow' : 'http://iow.csc.fi/ns/iow#',
+  'sd' : 'http://www.w3.org/ns/sparql-service-description#',
+  'sh' : 'http://www.w3.org/ns/shacl#',
+  'rdf' : 'http://www.w3.org/1999/02/22-rdf-syntax-ns#',
+  'edu' : 'http://iow.csc.fi/ns/edu#',
+  'dcterms' : 'http://purl.org/dc/terms/',
+  'text' : 'http://jena.apache.org/text#',
+  'prov' : 'http://www.w3.org/ns/prov#',
+  'foaf' : 'http://xmlns.com/foaf/0.1/',
+  'ts' : 'http://www.w3.org/2003/06/sw-vocab-status/ns#',
+  'dc' : 'http://purl.org/dc/elements/1.1/'
 };
 
 describe('Contextual URL with value as URL', () => {

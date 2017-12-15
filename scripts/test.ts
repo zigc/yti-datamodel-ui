@@ -1,13 +1,13 @@
 import * as karma from 'karma';
-import * as webpack from 'webpack';
+import { Configuration } from 'webpack';
 import { commonConfig } from '../webpack.config';
 
-const webpackTestConfig: webpack.Configuration = Object.assign({}, commonConfig, {
+const webpackTestConfig: Configuration = Object.assign({}, commonConfig, {
   devtool: 'inline-source-map'
 });
 
 interface ConfigOptions extends karma.ConfigOptions {
-  webpack?: webpack.Configuration;
+  webpack?: Configuration;
   webpackServer?: any;
 }
 
