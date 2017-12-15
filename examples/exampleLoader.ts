@@ -1,14 +1,14 @@
 /// <reference types="node" />
 
 import { ILogCall, ILogService, IQService } from 'angular';
-import { EntityLoader } from '../src/services/entityLoader';
+import { EntityLoader } from '../src/app/services/entityLoader';
 import { httpService } from './requestToAngularHttpService';
-import { DefaultPredicateService } from '../src/services/predicateService';
-import { DefaultModelService } from '../src/services/modelService';
-import { DefaultClassService } from '../src/services/classService';
-import { DefaultVocabularyService } from '../src/services/vocabularyService';
-import { ResetService } from '../src/services/resetService';
-import { FrameService } from '../src/services/frameService';
+import { DefaultPredicateService } from '../src/app/services/predicateService';
+import { DefaultModelService } from '../src/app/services/modelService';
+import { DefaultClassService } from '../src/app/services/classService';
+import { DefaultVocabularyService } from '../src/app/services/vocabularyService';
+import { ResetService } from '../src/app/services/resetService';
+import { FrameService } from '../src/app/services/frameService';
 
 const argv = require('optimist')
   .default({

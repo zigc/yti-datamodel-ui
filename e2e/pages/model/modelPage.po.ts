@@ -1,12 +1,12 @@
 import { ModelView } from './modelView.po';
-import { Language } from '../../../src/utils/language';
-import { KnownModelType, ClassType, KnownPredicateType } from '../../../src/entities/type';
+import { Language } from '../../../src/app/types/language';
+import { KnownModelType, ClassType, KnownPredicateType } from '../../../src/app/types/entity';
 import { SearchClassModal } from '../editor/modal/searchClassModal.po';
 import { ClassView } from '../editor/classView.po';
 import { PredicateView } from '../editor/predicateView.po';
 import { SearchPredicateModal } from '../editor/modal/searchPredicateModal.po';
 import EC = protractor.ExpectedConditions;
-import { assertNever } from '../../../src/utils/object';
+import { assertNever } from 'yti-common-ui/utils/object';
 import {
   AddResourceParameters, ClassDescriptor, resolveResourceId, PredicateDescriptor
 } from '../../util/resource';

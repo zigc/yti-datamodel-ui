@@ -1,7 +1,7 @@
 import { SearchModal } from '../../common/searchModal.po';
 import { SearchConceptModal } from './searchConceptModal.po';
-import { KnownPredicateType } from '../../../../src/entities/type';
-import { isDefined, assertNever } from '../../../../src/utils/object';
+import { KnownPredicateType } from '../../../../src/app/types/entity';
+import { isDefined, assertNever } from 'yti-common-ui/utils/object';
 import { EditableComponent } from '../../common/component/editableComponent.po';
 
 export class SearchPredicateModal extends SearchModal {

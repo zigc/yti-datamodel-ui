@@ -1,7 +1,7 @@
 import { EditableComponent } from '../common/component/editableComponent.po';
 import ElementFinder = protractor.ElementFinder;
 import { upperCaseFirst } from 'change-case';
-import { ClassType, KnownPredicateType } from '../../../src/entities/type';
+import { ClassType, KnownPredicateType } from '../../../src/app/types/entity';
 import { PropertyView } from './propertyView.po';
 import EC = protractor.ExpectedConditions;
 import { defaultTimeout } from '../../util/expectation';

@@ -1,10 +1,10 @@
 import { EditableEntityButtons } from '../common/component/editableEntityButtons.po';
 import { NavBar } from '../common/navbar.po';
 import { ClassForm } from './classForm.po';
-import { ClassType } from '../../../src/entities/type';
+import { ClassType } from '../../../src/app/types/entity';
 import ElementFinder = protractor.ElementFinder;
 import { SearchPredicateModal } from './modal/searchPredicateModal.po';
-import { assertNever } from '../../../src/utils/object';
+import { assertNever } from 'yti-common-ui/utils/object';
 import { PropertyDescriptor } from '../../util/resource';
 import EC = protractor.ExpectedConditions;
 import { defaultTimeout } from '../../util/expectation';

@@ -1,6 +1,6 @@
 import { SearchModal } from '../../common/searchModal.po';
 import { EditableComponent } from '../../common/component/editableComponent.po';
-import { Uri } from '../../../../src/entities/uri';
+import { Uri } from '../../../../src/app/entities/uri';
 
 export class SearchConceptModal extends SearchModal {
 

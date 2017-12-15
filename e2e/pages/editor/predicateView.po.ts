@@ -1,7 +1,7 @@
 import { EditableEntityButtons } from '../common/component/editableEntityButtons.po';
 import { NavBar } from '../common/navbar.po';
 import { PredicateForm } from './predicateForm.po';
-import { KnownPredicateType } from '../../../src/entities/type';
+import { KnownPredicateType } from '../../../src/app/types/entity';
 import { defaultTimeout } from '../../util/expectation';
 import EC = protractor.ExpectedConditions;
 

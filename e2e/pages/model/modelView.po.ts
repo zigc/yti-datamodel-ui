@@ -1,6 +1,6 @@
 import { EditableEntityButtons } from '../common/component/editableEntityButtons.po';
 import { NavBar } from '../common/navbar.po';
-import { KnownModelType } from '../../../src/entities/type';
+import { KnownModelType } from '../../../src/app/types/entity';
 import { ModelForm } from './modelForm.po';
 
 const navbar = new NavBar();

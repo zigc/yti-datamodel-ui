@@ -4,7 +4,7 @@ import { upperCaseFirst } from 'change-case';
 import { ModelPage } from '../model/modelPage.po';
 import { EditableMultipleComponent } from '../common/component/editableMultipleComponent.po';
 import { SubmitButton } from '../common/component/submitButton.po';
-import { KnownModelType } from '../../../src/entities/type';
+import { KnownModelType } from '../../../src/app/types/entity';
 
 export class AddModelModal extends Modal {
 

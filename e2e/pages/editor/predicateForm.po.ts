@@ -1,4 +1,4 @@
-import { KnownPredicateType } from '../../../src/entities/type';
+import { KnownPredicateType } from '../../../src/app/types/entity';
 import ElementFinder = protractor.ElementFinder;
 import { EditableComponent } from '../common/component/editableComponent.po';
 import { upperCaseFirst } from 'change-case';

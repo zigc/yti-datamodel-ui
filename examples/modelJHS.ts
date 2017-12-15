@@ -1,5 +1,5 @@
 import { loader } from './exampleLoader';
-import { jhsGroupId } from '../src/services/entityLoader';
+import { jhsGroupId } from '../src/app/services/entityLoader';
 
 export const model = loader.createLibrary(jhsGroupId, {
   prefix: 'jhs',

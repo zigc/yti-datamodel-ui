@@ -1,7 +1,7 @@
 import { isDefined } from 'yti-common-ui/utils/object';
 import { normalizeAsArray, filterDefined } from 'yti-common-ui/utils/array';
 import Moment = moment.Moment;
-import moment = require('moment');
+import * as moment from 'moment';
 import { Coordinate  } from '../../types/visualization';
 import { Language } from '../../types/language';
 import { Type } from '../../types/entity';

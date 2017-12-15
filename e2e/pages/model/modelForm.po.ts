@@ -5,7 +5,7 @@ import { VocabulariesView } from './vocabulariesView.po';
 import { EditableMultipleComponent } from '../common/component/editableMultipleComponent.po';
 import { EditableComponent } from '../common/component/editableComponent.po';
 import ElementFinder = protractor.ElementFinder;
-import { KnownModelType } from '../../../src/entities/type';
+import { KnownModelType } from '../../../src/app/types/entity';
 import { upperCaseFirst } from 'change-case';
 
 export class ModelForm {

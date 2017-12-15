@@ -1,6 +1,6 @@
 import ElementFinder = protractor.ElementFinder;
 import { NonEditableComponent } from '../common/component/nonEditableComponent.po';
-import { KnownPredicateType } from '../../../src/entities/type';
+import { KnownPredicateType } from '../../../src/app/types/entity';
 import { upperCaseFirst } from 'change-case';
 
 export class PropertyPredicateView {

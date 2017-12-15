@@ -1,5 +1,5 @@
 import { IPromise, IHttpPromise, IRequestShortcutConfig, IHttpPromiseCallback, IHttpPromiseCallbackArg, IRequestConfig, IHttpService } from 'angular';
-import { remove } from '../src/utils/array';
+import { remove } from 'yti-common-ui/utils/array';
 const request = require('request');
 const hstd = require('http-status-to-description');
 

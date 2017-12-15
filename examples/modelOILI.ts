@@ -1,5 +1,5 @@
 import { loader } from './exampleLoader';
-import { ktkGroupId } from '../src/services/entityLoader';
+import { ktkGroupId } from '../src/app/services/entityLoader';
 import * as Jhs from './modelJHS';
 
 export const model = loader.createProfile(ktkGroupId, {

@@ -5,7 +5,7 @@ import { Uri, Urn } from '../../entities/uri';
 import { KnownModelType } from '../../types/entity';
 import { ModelService } from '../../services/modelService';
 import { ResetableService } from './resetableService';
-import moment = require('moment');
+import * as moment from 'moment';
 import * as _ from 'lodash';
 import { InteractiveHelpClassService } from './helpClassService';
 import { InteractiveHelpPredicateService } from './helpPredicateService';

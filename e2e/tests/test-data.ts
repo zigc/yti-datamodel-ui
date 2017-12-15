@@ -1,6 +1,6 @@
-import { Language } from '../../src/utils/language';
+import { Language } from '../../src/app/types/language';
 import { GroupPage } from '../pages/group/groupPage.po';
-import { KnownModelType, ClassType, KnownPredicateType } from '../../src/entities/type';
+import { KnownModelType, ClassType, KnownPredicateType } from '../../src/app/types/entity';
 import {
   fromExistingConcept, fromExistingResource, fromConceptSuggestion, fromExternalResource,
   predicateIdFromPrefix, classIdFromPrefix

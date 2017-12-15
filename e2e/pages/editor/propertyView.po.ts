@@ -1,7 +1,7 @@
 import ElementFinder = protractor.ElementFinder;
 import { EditableComponent } from '../common/component/editableComponent.po';
 import { PropertyPredicateView } from './propertyPredicateView.po';
-import { KnownPredicateType } from '../../../src/entities/type';
+import { KnownPredicateType } from '../../../src/app/types/entity';
 
 export class PropertyView {
 

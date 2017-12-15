@@ -10,7 +10,7 @@ import { Predicate, Association, Attribute } from '../../entities/predicate';
 import { KnownPredicateType } from '../../types/entity';
 import { reverseMapType } from '../../utils/entity';
 import { ResetableService } from './resetableService';
-import moment = require('moment');
+import * as moment from 'moment';
 import { upperCaseFirst } from 'change-case';
 import * as frames from '../../entities/frames';
 import { VocabularyService } from '../../services/vocabularyService';

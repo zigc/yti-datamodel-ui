@@ -9,7 +9,7 @@ import { KnownPredicateType } from '../../types/entity';
 import { reverseMapType } from '../../utils/entity';
 import { Language } from '../../types/language';
 import { flatten } from 'yti-common-ui/utils/array';
-import moment = require('moment');
+import * as moment from 'moment';
 import { VocabularyService } from '../../services/vocabularyService';
 import { identity } from 'yti-common-ui/utils/object';
 import { upperCaseFirst } from 'change-case';
