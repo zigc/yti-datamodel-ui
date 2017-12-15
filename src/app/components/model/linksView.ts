@@ -1,11 +1,11 @@
 import { IAttributes, IScope } from 'angular';
 import { AddEditLinkModal } from './addEditLinkModal';
-import { LanguageService } from '../../services/languageService';
-import { TableDescriptor, ColumnDescriptor } from '../form/editableTable';
+import { LanguageService } from 'app/services/languageService';
+import { TableDescriptor, ColumnDescriptor } from 'app/components/form/editableTable';
 import { ModelViewController } from './modelView';
 import { module as mod } from './module';
-import { Model, Link } from '../../entities/model';
-import { modalCancelHandler } from '../../utils/angular';
+import { Model, Link } from 'app/entities/model';
+import { modalCancelHandler } from 'app/utils/angular';
 
 mod.directive('linksView', () => {
   return {

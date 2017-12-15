@@ -1,9 +1,9 @@
 import { INgModelController } from 'angular';
 import { upperCaseFirst, lowerCaseFirst } from 'change-case';
 import { anyMatching, contains, keepMatching } from 'yti-common-ui/utils/array';
-import { Property } from '../entities/class';
+import { Property } from 'app/entities/class';
 import { createScrollWithDefault } from './contract';
-import { config } from '../../config';
+import { config } from 'config';
 
 export const editableMargin = { left: 20, right: 20 };
 export const editableMarginInColumn = Object.assign({}, editableMargin, { bottom: 15 });

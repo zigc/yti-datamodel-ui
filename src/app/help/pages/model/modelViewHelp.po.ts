@@ -1,9 +1,9 @@
 import {
   createClickNextCondition, createStory, createModifyingClickNextCondition,
   createExplicitNextCondition, createScrollNone, Story
-} from '../../contract';
-import { child } from '../../selectors';
-import { KnownModelType } from '../../../types/entity';
+} from 'app/help/contract';
+import { child } from 'app/help/selectors';
+import { KnownModelType } from 'app/types/entity';
 import gettextCatalog = angular.gettext.gettextCatalog;
 import * as SearchNamespaceModal from './modal/searchNamepaceModalHelp.po';
 

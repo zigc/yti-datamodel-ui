@@ -1,19 +1,19 @@
 import { module as mod } from '../module';
 import * as _ from 'lodash';
-import { OverlayService, OverlayInstance } from '../../components/common/overlay';
+import { OverlayService, OverlayInstance } from 'app/components/common/overlay';
 import { IScope, IPromise, IDocumentService, ILocationService, ui } from 'angular';
 import IModalStackService = ui.bootstrap.IModalStackService;
 import { assertNever, requireDefined, areEqual, Optional } from 'yti-common-ui/utils/object';
 import { tab, esc, enter } from 'yti-common-ui/utils/key-code';
-import { isTargetElementInsideElement, nextUrl } from '../../utils/angular';
-import { InteractiveHelpService } from '../services/interactiveHelpService';
+import { isTargetElementInsideElement, nextUrl } from 'app/utils/angular';
+import { InteractiveHelpService } from 'app/help/services/interactiveHelpService';
 import {
   NextCondition, Story, Notification, Click, ModifyingClick,
   NavigatingClick, InteractiveHelp, createScrollWithDefault
-} from '../contract';
+} from 'app/help/contract';
 import { contains } from 'yti-common-ui/utils/array';
-import { ConfirmationModal } from '../../components/common/confirmationModal';
-import { moveCursorToEnd, scrollToTop } from '../utils';
+import { ConfirmationModal } from 'app/components/common/confirmationModal';
+import { moveCursorToEnd, scrollToTop } from 'app/help/utils';
 import gettextCatalog = angular.gettext.gettextCatalog;
 
 const popupAnimationTimeInMs = 300; // should match css help-popover transition time

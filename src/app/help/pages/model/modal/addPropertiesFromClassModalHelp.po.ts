@@ -1,9 +1,9 @@
-import { createStory, createExpectedStateNextCondition, Story } from '../../../contract';
-import { modalBody, child, modal } from '../../../selectors';
-import { confirm } from '../../modal/modalHelp.po';
-import { AddPropertiesFromClassModalController } from '../../../../components/editor/addPropertiesFromClassModal';
+import { createStory, createExpectedStateNextCondition, Story } from 'app/help/contract';
+import { modalBody, child, modal } from 'app/help/selectors';
+import { confirm } from 'app/help/pages/modal/modalHelp.po';
+import { AddPropertiesFromClassModalController } from 'app/components/editor/addPropertiesFromClassModal';
 import { arraysAreEqual } from 'yti-common-ui/utils/array';
-import { getModalController, propertyIdIsSame, onlyProperties } from '../../../utils';
+import { getModalController, propertyIdIsSame, onlyProperties } from 'app/help/utils';
 
 const selectPropertiesElement = modalBody;
 

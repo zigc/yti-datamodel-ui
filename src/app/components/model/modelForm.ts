@@ -1,7 +1,7 @@
 import { IAttributes, IScope } from 'angular';
 import { module as mod } from './module';
 import { ModelViewController } from './modelView';
-import { Model } from '../../entities/model';
+import { Model } from 'app/entities/model';
 import { ModelControllerService } from './modelControllerService';
 
 mod.directive('modelForm', () => {

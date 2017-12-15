@@ -1,7 +1,7 @@
 import { requireDefined } from 'yti-common-ui/utils/object';
 import { DefinedBy } from '../definedBy';
 import { entityAsId, normalized } from './entitySerializer';
-import { WithIdAndType } from '../../types/entity';
+import { WithIdAndType } from 'app/types/entity';
 import { GraphNode } from '../graphNode';
 import { Uri } from '../uri';
 

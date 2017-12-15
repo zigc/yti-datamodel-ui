@@ -1,6 +1,6 @@
 import { module as mod } from './module';
 import { IScope, IAttributes, ITimeoutService } from 'angular';
-import { EditableForm } from '../form/editableEntityController';
+import { EditableForm } from 'app/components/form/editableEntityController';
 import gettextCatalog = angular.gettext.gettextCatalog;
 
 const clipboardImage = require('../../../assets/clippy.svg');

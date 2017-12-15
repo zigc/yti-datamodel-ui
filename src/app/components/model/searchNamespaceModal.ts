@@ -1,16 +1,16 @@
 import { IPromise, IScope, ui } from 'angular';
 import IModalService = ui.bootstrap.IModalService;
 import IModalServiceInstance = ui.bootstrap.IModalServiceInstance;
-import { LanguageService } from '../../services/languageService';
-import { ModelService } from '../../services/modelService';
+import { LanguageService } from 'app/services/languageService';
+import { ModelService } from 'app/services/modelService';
 import { AddEditNamespaceModal } from './addEditNamespaceModal';
 import { comparingPrimitive } from 'yti-common-ui/utils/comparator';
-import { Language } from '../../types/language';
-import { Exclusion } from '../../utils/exclusion';
-import { SearchController, SearchFilter, TextAnalysis } from '../../types/filter';
-import { ifChanged, modalCancelHandler } from '../../utils/angular';
-import { ImportedNamespace, Model } from '../../entities/model';
-import { filterAndSortSearchResults } from '../filter/util';
+import { Language } from 'app/types/language';
+import { Exclusion } from 'app/utils/exclusion';
+import { SearchController, SearchFilter, TextAnalysis } from 'app/types/filter';
+import { ifChanged, modalCancelHandler } from 'app/utils/angular';
+import { ImportedNamespace, Model } from 'app/entities/model';
+import { filterAndSortSearchResults } from 'app/components/filter/util';
 
 const noExclude = (_ns: ImportedNamespace) => null;
 

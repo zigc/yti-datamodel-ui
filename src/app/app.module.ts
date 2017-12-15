@@ -18,7 +18,7 @@ import { downgradeComponent, downgradeInjectable, UpgradeModule } from '@angular
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { YtiCommonModule } from 'yti-common-ui';
-import { config } from '../config';
+import { config } from 'config';
 import { AUTHENTICATED_USER_ENDPOINT } from 'yti-common-ui/services/user.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {

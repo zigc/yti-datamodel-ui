@@ -1,7 +1,7 @@
 import { IScope, IAttributes, INgModelController, IQService, IModelFormatter } from 'angular';
 import { isDefined } from 'yti-common-ui/utils/object';
 import { esc, tab, enter, pageUp, pageDown, arrowUp, arrowDown } from 'yti-common-ui/utils/key-code';
-import { formatWithFormatters } from '../../utils/angular';
+import { formatWithFormatters } from 'app/utils/angular';
 import { module as mod } from './module';
 import { DataSource } from './dataSource';
 import { InputWithPopupController } from './inputPopup';

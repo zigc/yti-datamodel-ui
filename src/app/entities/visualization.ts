@@ -1,10 +1,10 @@
 import { Uri } from './uri';
-import { Type } from '../types/entity';
-import { Coordinate } from '../types/visualization';
+import { Type } from 'app/types/entity';
+import { Coordinate } from 'app/types/visualization';
 import { localizableSerializer, optional, coordinateSerializer, list, typeSerializer } from './serializer/serializer';
-import { createConstantLocalizable } from '../utils/language';
+import { createConstantLocalizable } from 'app/utils/language';
 import { Model } from './model';
-import { copyVertices, coordinatesAreEqual, copyCoordinate, indexById } from '../utils/entity';
+import { copyVertices, coordinatesAreEqual, copyCoordinate, indexById } from 'app/utils/entity';
 import { arraysAreEqual } from 'yti-common-ui/utils/array';
 import { areEqual, isDefined } from 'yti-common-ui/utils/object';
 import * as Iterable from 'yti-common-ui/utils/iterable';

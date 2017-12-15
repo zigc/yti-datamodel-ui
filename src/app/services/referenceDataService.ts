@@ -1,12 +1,12 @@
 import { IHttpService, IPromise, IQService } from 'angular';
-import { config } from '../../config';
-import { Uri } from '../entities/uri';
-import { Language } from '../types/language';
+import { config } from 'config';
+import { Uri } from 'app/entities/uri';
+import { Language } from 'app/types/language';
 import { normalizeAsArray, flatten } from 'yti-common-ui/utils/array';
-import * as frames from '../entities/frames';
+import * as frames from 'app/entities/frames';
 import { FrameService } from './frameService';
-import { GraphData } from '../types/entity';
-import { ReferenceDataCode, ReferenceData, ReferenceDataServer } from '../entities/referenceData';
+import { GraphData } from 'app/types/entity';
+import { ReferenceDataCode, ReferenceData, ReferenceDataServer } from 'app/entities/referenceData';
 
 export class ReferenceDataService {
 

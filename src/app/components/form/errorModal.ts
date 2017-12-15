@@ -1,9 +1,9 @@
 import { ui } from 'angular';
 import IModalService = ui.bootstrap.IModalService;
-import { Usage } from '../../entities/usage';
-import { LanguageContext } from '../../types/language';
+import { Usage } from 'app/entities/usage';
+import { LanguageContext } from 'app/types/language';
 import { identity } from 'yti-common-ui/utils/object';
-import { modalCancelHandler } from '../../utils/angular';
+import { modalCancelHandler } from 'app/utils/angular';
 
 interface UsageParameters {
   usage: Usage;

@@ -1,8 +1,8 @@
-import { module as mod } from '../module';
+import { module as mod } from 'app/components/module';
 import { IAttributes, IScope } from 'angular';
-import { EditableForm } from '../form/editableEntityController';
-import { Referrer, Usage } from '../../entities/usage';
-import { LanguageContext } from '../../types/language';
+import { EditableForm } from 'app/components/form/editableEntityController';
+import { Referrer, Usage } from 'app/entities/usage';
+import { LanguageContext } from 'app/types/language';
 import { groupBy } from 'yti-common-ui/utils/array';
 import { stringMapToObject } from 'yti-common-ui/utils/object';
 

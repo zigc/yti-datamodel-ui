@@ -1,10 +1,10 @@
 import { IPromise, ui } from 'angular';
 import IModalService = ui.bootstrap.IModalService;
 import IModalServiceInstance = ui.bootstrap.IModalServiceInstance;
-import { PredicateService } from '../../services/predicateService';
-import { Uri } from '../../entities/uri';
-import { Predicate } from '../../entities/predicate';
-import { Model } from '../../entities/model';
+import { PredicateService } from 'app/services/predicateService';
+import { Uri } from 'app/entities/uri';
+import { Predicate } from 'app/entities/predicate';
+import { Model } from 'app/entities/model';
 
 export class CopyPredicateModal {
   /* @ngInject */

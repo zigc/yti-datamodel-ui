@@ -1,10 +1,10 @@
 import { IScope, IAttributes, INgModelController, IModelValidators } from 'angular';
 import gettextCatalog = angular.gettext.gettextCatalog;
 import { isValidUri, isValidUrl, isValidUriStem } from './validators';
-import { Uri } from '../../entities/uri';
+import { Uri } from 'app/entities/uri';
 import { module as mod } from './module';
-import { Model } from '../../entities/model';
-import { LanguageService } from '../../services/languageService';
+import { Model } from 'app/entities/model';
+import { LanguageService } from 'app/services/languageService';
 
 type UriInputType = 'required-namespace' | 'free-url' | 'free-uri' | 'stem';
 

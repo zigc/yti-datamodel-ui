@@ -1,8 +1,8 @@
 import {
   createStory, createClickNextCondition, createExplicitNextCondition, createScrollNone, createScrollWithDefault, Story
-} from '../../contract';
-import { editableByTitle, child, editableFocus } from '../../selectors';
-import { editableMarginInColumn } from '../../utils';
+} from 'app/help/contract';
+import { editableByTitle, child, editableFocus } from 'app/help/selectors';
+import { editableMarginInColumn } from 'app/help/utils';
 import * as SearchClassModal from './modal/searchClassModalHelp.po';
 import * as AddPropertiesFromClassModal from './modal/addPropertiesFromClassModalHelp.po';
 import gettextCatalog = angular.gettext.gettextCatalog;

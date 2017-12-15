@@ -1,10 +1,10 @@
 import { IPromise, IHttpService } from 'angular';
-import { config } from '../../config';
-import { Language } from '../types/language';
-import { GraphData } from '../types/entity';
+import { config } from 'config';
+import { Language } from 'app/types/language';
+import { GraphData } from 'app/types/entity';
 import { FrameService } from './frameService';
-import { searchResultFrame } from '../entities/frames';
-import { SearchResult } from '../entities/search';
+import { searchResultFrame } from 'app/entities/frames';
+import { SearchResult } from 'app/entities/search';
 
 export class SearchService {
 

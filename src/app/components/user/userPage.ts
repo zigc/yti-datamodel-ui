@@ -1,9 +1,9 @@
 import { IScope, ILocationService } from 'angular';
-import { UserService } from '../../services/userService';
-import { LocationService } from '../../services/locationService';
+import { UserService } from 'app/services/userService';
+import { LocationService } from 'app/services/locationService';
 import { module as mod } from './module';
-import { Uri } from '../../entities/uri';
-import { groupUrl } from '../../utils/entity';
+import { Uri } from 'app/entities/uri';
+import { groupUrl } from 'app/utils/entity';
 import { User } from 'yti-common-ui/services/user.service';
 
 mod.directive('userPage', () => {

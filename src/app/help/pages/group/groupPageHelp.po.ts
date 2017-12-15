@@ -1,5 +1,5 @@
-import { createClickNextCondition, createStory } from '../../contract';
-import { KnownModelType } from '../../../types/entity';
+import { createClickNextCondition, createStory } from 'app/help/contract';
+import { KnownModelType } from 'app/types/entity';
 import * as AddModelModal from './modal/addModelModalHelp.po';
 import gettextCatalog = angular.gettext.gettextCatalog;
 

@@ -1,21 +1,21 @@
 import { IAttributes, IScope } from 'angular';
 import { ClassViewController } from './classView';
 import { AddPropertiesFromClassModal } from './addPropertiesFromClassModal';
-import { Uri } from '../../entities/uri';
-import { ClassService } from '../../services/classService';
+import { Uri } from 'app/entities/uri';
+import { ClassService } from 'app/services/classService';
 import { module as mod } from './module';
 import { isDefined } from 'yti-common-ui/utils/object';
 import { SearchPredicateModal } from './searchPredicateModal';
-import { EditableForm } from '../form/editableEntityController';
-import { Option } from '../common/buttonWithOptions';
+import { EditableForm } from 'app/components/form/editableEntityController';
+import { Option } from 'app/components/common/buttonWithOptions';
 import { SearchClassModal, noExclude } from './searchClassModal';
-import { SessionService } from '../../services/sessionService';
-import { LanguageService } from '../../services/languageService';
-import { Localizer } from '../../types/language';
-import { comparingLocalizable } from '../../utils/comparator';
-import { Class, Property, ClassListItem } from '../../entities/class';
-import { Model } from '../../entities/model';
-import { modalCancelHandler } from '../../utils/angular';
+import { SessionService } from 'app/services/sessionService';
+import { LanguageService } from 'app/services/languageService';
+import { Localizer } from 'app/types/language';
+import { comparingLocalizable } from 'app/utils/comparator';
+import { Class, Property, ClassListItem } from 'app/entities/class';
+import { Model } from 'app/entities/model';
+import { modalCancelHandler } from 'app/utils/angular';
 
 mod.directive('classForm', () => {
   return {

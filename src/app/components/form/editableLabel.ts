@@ -1,8 +1,8 @@
 import { IAttributes, IScope } from 'angular';
 import gettextCatalog = angular.gettext.gettextCatalog;
 import { EditableForm } from './editableEntityController';
-import { LanguageService } from '../../services/languageService';
-import { isLocalizationDefined } from '../../utils/language';
+import { LanguageService } from 'app/services/languageService';
+import { isLocalizationDefined } from 'app/utils/language';
 import { module as mod } from './module';
 
 mod.directive('editableLabel', () => {

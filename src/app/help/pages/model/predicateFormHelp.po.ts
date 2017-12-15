@@ -1,8 +1,8 @@
-import { createStory, createExpectedStateNextCondition } from '../../contract';
-import { KnownPredicateType } from '../../../types/entity';
+import { createStory, createExpectedStateNextCondition } from 'app/help/contract';
+import { KnownPredicateType } from 'app/types/entity';
 import { upperCaseFirst } from 'change-case';
-import { editableByTitle, input, editableFocus } from '../../selectors';
-import { validInput, initialInputValue, editableMarginInColumn } from '../../utils';
+import { editableByTitle, input, editableFocus } from 'app/help/selectors';
+import { validInput, initialInputValue, editableMarginInColumn } from 'app/help/utils';
 import gettextCatalog = angular.gettext.gettextCatalog;
 
 export function enterPredicateLabel(parent: () => JQuery, type: KnownPredicateType, initialValue: string, gettextCatalog: gettextCatalog) {

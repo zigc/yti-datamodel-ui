@@ -1,20 +1,20 @@
 import { IPromise, ui } from 'angular';
 import IModalService = ui.bootstrap.IModalService;
-import { ClassService } from '../../services/classService';
-import { PredicateService } from '../../services/predicateService';
-import { ModelService } from '../../services/modelService';
-import { HistoryService } from '../../services/historyService';
-import { UserService } from '../../services/userService';
-import { Uri } from '../../entities/uri';
-import { comparingDate } from '../../utils/comparator';
+import { ClassService } from 'app/services/classService';
+import { PredicateService } from 'app/services/predicateService';
+import { ModelService } from 'app/services/modelService';
+import { HistoryService } from 'app/services/historyService';
+import { UserService } from 'app/services/userService';
+import { Uri } from 'app/entities/uri';
+import { comparingDate } from 'app/utils/comparator';
 import { reversed } from 'yti-common-ui/utils/comparator';
 import { containsAny } from 'yti-common-ui/utils/array';
-import { Model } from '../../entities/model';
-import { Class } from '../../entities/class';
-import { Predicate } from '../../entities/predicate';
-import { Entity } from '../../entities/version';
+import { Model } from 'app/entities/model';
+import { Class } from 'app/entities/class';
+import { Predicate } from 'app/entities/predicate';
+import { Entity } from 'app/entities/version';
 import { identity } from 'yti-common-ui/utils/object';
-import { modalCancelHandler } from '../../utils/angular';
+import { modalCancelHandler } from 'app/utils/angular';
 
 export class HistoryModal {
   /* @ngInject */

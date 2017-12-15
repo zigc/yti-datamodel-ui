@@ -1,11 +1,11 @@
 import { IAttributes, IScope, ITranscludeFunction, ICompiledExpression } from 'angular';
 import gettextCatalog = angular.gettext.gettextCatalog;
 import { ConfirmationModal } from './confirmationModal';
-import { Uri } from '../../entities/uri';
+import { Uri } from 'app/entities/uri';
 import { module as mod } from './module';
-import { Exclusion } from '../../utils/exclusion';
-import { WithId } from '../../types/entity';
-import { modalCancelHandler } from '../../utils/angular';
+import { Exclusion } from 'app/utils/exclusion';
+import { WithId } from 'app/types/entity';
+import { modalCancelHandler } from 'app/utils/angular';
 
 mod.directive('searchResults', () => {
   return {

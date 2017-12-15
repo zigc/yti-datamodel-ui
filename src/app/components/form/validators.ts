@@ -1,9 +1,9 @@
 import { IPromise, IQService } from 'angular';
 import * as moment from 'moment';
-import { Uri } from '../../entities/uri';
-import { availableLanguages } from '../../types/language';
+import { Uri } from 'app/entities/uri';
+import { availableLanguages } from 'app/types/language';
 import { contains } from 'yti-common-ui/utils/array';
-import { DataType } from '../../entities/dataTypes';
+import { DataType } from 'app/entities/dataTypes';
 const URI = require('uri-js');
 
 export type Validator<T> = (input: T, raw?: any) =>  boolean;

@@ -1,5 +1,5 @@
-import { Model } from '../entities/model';
-import { Group } from '../entities/group';
+import { Model } from 'app/entities/model';
+import { Group } from 'app/entities/group';
 import { Localizable } from 'yti-common-ui/types/localization';
 
 export interface Location {

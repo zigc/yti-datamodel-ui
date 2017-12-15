@@ -1,15 +1,15 @@
 import { IHttpService, IPromise, IQService } from 'angular';
 import { upperCaseFirst } from 'change-case';
-import { config } from '../../config';
-import { Uri, Url } from '../entities/uri';
-import { Language } from '../types/language';
+import { config } from 'config';
+import { Uri, Url } from 'app/entities/uri';
+import { Language } from 'app/types/language';
 import { FrameService } from './frameService';
-import { GraphData } from '../types/entity';
-import * as frames from '../entities/frames';
-import { Vocabulary, Concept, LegacyConcept } from '../entities/vocabulary';
-import { Model } from '../entities/model';
+import { GraphData } from 'app/types/entity';
+import * as frames from 'app/entities/frames';
+import { Vocabulary, Concept, LegacyConcept } from 'app/entities/vocabulary';
+import { Model } from 'app/entities/model';
 import { requireSingle } from 'yti-common-ui/utils/array';
-import { resolveConceptConstructor } from '../utils/entity';
+import { resolveConceptConstructor } from 'app/utils/entity';
 
 export interface VocabularyService {
   getAllVocabularies(): IPromise<Vocabulary[]>;

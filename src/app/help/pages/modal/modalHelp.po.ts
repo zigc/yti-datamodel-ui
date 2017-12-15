@@ -1,5 +1,5 @@
-import { createModifyingClickNextCondition, createStory, createNavigatingClickNextCondition } from '../../contract';
-import { child } from '../../selectors';
+import { createModifyingClickNextCondition, createStory, createNavigatingClickNextCondition } from 'app/help/contract';
+import { child } from 'app/help/selectors';
 
 export function confirm(parent: () => JQuery, navigates: boolean) {
 

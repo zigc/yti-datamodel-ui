@@ -1,17 +1,17 @@
 import { IAttributes, ILogService, IScope } from 'angular';
-import { PredicateService } from '../../services/predicateService';
-import { UserService } from '../../services/userService';
-import { EditableEntityController, EditableScope, Rights } from '../form/editableEntityController';
-import { DeleteConfirmationModal } from '../common/deleteConfirmationModal';
-import { Show } from '../../types/component';
-import { ErrorModal } from '../form/errorModal';
+import { PredicateService } from 'app/services/predicateService';
+import { UserService } from 'app/services/userService';
+import { EditableEntityController, EditableScope, Rights } from 'app/components/form/editableEntityController';
+import { DeleteConfirmationModal } from 'app/components/common/deleteConfirmationModal';
+import { Show } from 'app/types/component';
+import { ErrorModal } from 'app/components/form/errorModal';
 import { module as mod } from './module';
-import { setSelectionStyles } from '../../utils/angular';
-import { Association, Attribute } from '../../entities/predicate';
-import { Model } from '../../entities/model';
-import { LanguageContext } from '../../types/language';
-import { ModelControllerService } from '../model/modelControllerService';
-import { AuthorizationManagerService } from '../../services/authorizationManagerService';
+import { setSelectionStyles } from 'app/utils/angular';
+import { Association, Attribute } from 'app/entities/predicate';
+import { Model } from 'app/entities/model';
+import { LanguageContext } from 'app/types/language';
+import { ModelControllerService } from 'app/components/model/modelControllerService';
+import { AuthorizationManagerService } from 'app/services/authorizationManagerService';
 
 mod.directive('predicateView', () => {
   return {

@@ -2,10 +2,10 @@ import { isDefined } from 'yti-common-ui/utils/object';
 import { normalizeAsArray, filterDefined } from 'yti-common-ui/utils/array';
 import Moment = moment.Moment;
 import * as moment from 'moment';
-import { Coordinate  } from '../../types/visualization';
-import { Language } from '../../types/language';
-import { Type } from '../../types/entity';
-import { mapType, reverseMapType } from '../../utils/entity';
+import { Coordinate  } from 'app/types/visualization';
+import { Language } from 'app/types/language';
+import { Type } from 'app/types/entity';
+import { mapType, reverseMapType } from 'app/utils/entity';
 import { Localizable } from 'yti-common-ui/types/localization';
 
 export interface Serializer<T> {

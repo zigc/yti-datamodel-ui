@@ -1,7 +1,7 @@
 import { module as mod } from './module';
 import { IScope, ISCEService } from 'angular';
-import { LanguageService } from '../../services/languageService';
-import { Language, LanguageContext } from '../../types/language';
+import { LanguageService } from 'app/services/languageService';
+import { Language, LanguageContext } from 'app/types/language';
 import { Localizable } from 'yti-common-ui/types/localization';
 
 mod.directive('highlight', () => {

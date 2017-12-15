@@ -1,7 +1,7 @@
 import * as levenshtein from 'fast-levenshtein';
-import { valueContains } from '../../utils/searchFilter';
-import { ContentExtractor, TextAnalysis } from '../../types/filter';
-import { isLocalizable } from '../../utils/language';
+import { valueContains } from 'app/utils/searchFilter';
+import { ContentExtractor, TextAnalysis } from 'app/types/filter';
+import { isLocalizable } from 'app/utils/language';
 import { isDefined } from 'yti-common-ui/utils/object';
 
 export function analyze<T>(search: string, item: T, extractors: ContentExtractor<T>[]): TextAnalysis<T> {

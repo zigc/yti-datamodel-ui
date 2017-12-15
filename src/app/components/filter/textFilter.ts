@@ -1,7 +1,7 @@
 import { module as mod } from './module';
-import { SearchController, TextAnalysis } from '../../types/filter';
+import { SearchController, TextAnalysis } from 'app/types/filter';
 import { IScope } from 'angular';
-import { ifChanged } from '../../utils/angular';
+import { ifChanged } from 'app/utils/angular';
 import { isDefined } from 'yti-common-ui/utils/object';
 
 mod.directive('textFilter', () => {

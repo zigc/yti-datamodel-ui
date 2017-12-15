@@ -1,6 +1,6 @@
 import { localizableSerializer, stringSerializer, optional } from './serializer/serializer';
 import { Uri } from './uri';
-import { createConstantLocalizable } from '../utils/language';
+import { createConstantLocalizable } from 'app/utils/language';
 import { init } from './mapping';
 import { GraphNode } from './graphNode';
 import { uriSerializer } from './serializer/entitySerializer';

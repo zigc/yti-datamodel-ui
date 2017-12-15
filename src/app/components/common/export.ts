@@ -1,12 +1,12 @@
 import { IScope, IWindowService } from 'angular';
 import * as moment from 'moment';
-import { config } from '../../../config';
-import { LanguageService } from '../../services/languageService';
+import { config } from 'config';
+import { LanguageService } from 'app/services/languageService';
 import { module as mod } from './module';
-import { Model } from '../../entities/model';
-import { Class } from '../../entities/class';
-import { Predicate } from '../../entities/predicate';
-import { LanguageContext } from '../../types/language';
+import { Model } from 'app/entities/model';
+import { Class } from 'app/entities/class';
+import { Predicate } from 'app/entities/predicate';
+import { LanguageContext } from 'app/types/language';
 
 const exportOptions = [
   {type: 'application/ld+json', extension: 'json'},

@@ -1,9 +1,9 @@
 import { module as mod } from './module';
-import { SearchController, TextAnalysis } from '../../types/filter';
+import { SearchController, TextAnalysis } from 'app/types/filter';
 import { IScope } from 'angular';
 import { isDefined } from 'yti-common-ui/utils/object';
-import { ifChanged } from '../../utils/angular';
-import { Type } from '../../types/entity';
+import { ifChanged } from 'app/utils/angular';
+import { Type } from 'app/types/entity';
 import * as _ from 'lodash';
 
 mod.directive('typeFilter', () => {

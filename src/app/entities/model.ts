@@ -1,11 +1,11 @@
 import * as _ from 'lodash';
 import { requireDefined } from 'yti-common-ui/utils/object';
-import { KnownModelType, State, Type } from '../types/entity';
-import { normalizeModelType } from '../utils/entity';
+import { KnownModelType, State, Type } from 'app/types/entity';
+import { normalizeModelType } from 'app/utils/entity';
 import { Uri, Url, Urn } from './uri';
-import { modelUrl, resourceUrl } from '../utils/entity';
+import { modelUrl, resourceUrl } from 'app/utils/entity';
 import { GroupListItem } from './group';
-import { Language } from '../types/language';
+import { Language } from 'app/types/language';
 import { Moment } from 'moment';
 import { contains, containsAny, remove } from 'yti-common-ui/utils/array';
 import { DefinedBy } from './definedBy';

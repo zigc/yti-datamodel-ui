@@ -1,8 +1,8 @@
 import { IPromise, IQService, IQResolveReject } from 'angular';
-import { Uri } from '../../entities/uri';
+import { Uri } from 'app/entities/uri';
 import { layout as colaLayout } from './colaLayout';
 import * as joint from 'jointjs';
-import { ModelPositions } from '../../entities/visualization';
+import { ModelPositions } from 'app/entities/visualization';
 
 export function layoutGraph($q: IQService, graph: joint.dia.Graph, directed: boolean, onlyNodeIds: Uri[]): IPromise<any> {
   if (directed && onlyNodeIds.length === 0) {

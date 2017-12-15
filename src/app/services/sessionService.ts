@@ -1,6 +1,6 @@
 import { isDefined } from 'yti-common-ui/utils/object';
-import { Language, UILanguage } from '../types/language';
-import { Show } from '../types/component';
+import { Language, UILanguage } from 'app/types/language';
+import { Show } from 'app/types/component';
 
 const modelLanguageKey = 'modelLanguage';
 const uiLanguageKey = 'UILanguage';

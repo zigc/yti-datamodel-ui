@@ -1,5 +1,5 @@
-import { filterForSearchResult, selectSearchResult } from '../../modal/searchModalHelp.po';
-import { modal, child } from '../../../selectors';
+import { filterForSearchResult, selectSearchResult } from 'app/help/pages/modal/searchModalHelp.po';
+import { modal, child } from 'app/help/selectors';
 import gettextCatalog = angular.gettext.gettextCatalog;
 
 const searchNamespaceModal = child(modal, '.search-namespace');

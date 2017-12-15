@@ -1,7 +1,7 @@
-import { Uri } from '../entities/uri';
-import { GraphNode, GraphNodes } from '../entities/graphNode';
+import { Uri } from 'app/entities/uri';
+import { GraphNode, GraphNodes } from 'app/entities/graphNode';
 import { Localizable } from 'yti-common-ui/types/localization';
-import { DefinedBy } from '../entities/definedBy';
+import { DefinedBy } from 'app/entities/definedBy';
 
 export type Type = ModelType
                  | ClassType

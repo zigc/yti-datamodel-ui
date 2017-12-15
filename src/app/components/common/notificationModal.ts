@@ -1,8 +1,8 @@
 import { IPromise, ILocationService, ui } from 'angular';
 import IModalService = ui.bootstrap.IModalService;
-import { Model } from '../../entities/model';
+import { Model } from 'app/entities/model';
 import { identity } from 'yti-common-ui/utils/object';
-import { modalCancelHandler } from '../../utils/angular';
+import { modalCancelHandler } from 'app/utils/angular';
 
 export class NotificationModal {
   /* @ngInject */

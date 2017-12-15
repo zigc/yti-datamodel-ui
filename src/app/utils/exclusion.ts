@@ -1,13 +1,13 @@
-import { SearchClassType } from '../types/component';
-import { WithId, WithDefinedBy, WithIdAndType } from '../types/entity';
+import { SearchClassType } from 'app/types/component';
+import { WithId, WithDefinedBy, WithIdAndType } from 'app/types/entity';
 import { containsAny, arraysAreEqual, firstMatching } from 'yti-common-ui/utils/array';
 import { collectIds } from './entity';
-import { Uri } from '../entities/uri';
+import { Uri } from 'app/entities/uri';
 import { IPromise, IQService } from 'angular';
-import { DataSource } from '../components/form/dataSource';
+import { DataSource } from 'app/components/form/dataSource';
 import { isDefined } from 'yti-common-ui/utils/object';
-import { Model } from '../entities/model';
-import { ClassListItem } from '../entities/class';
+import { Model } from 'app/entities/model';
+import { ClassListItem } from 'app/entities/class';
 
 
 export type Exclusion<T> = (obj: T) => string|null;

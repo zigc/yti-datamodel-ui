@@ -1,8 +1,8 @@
-import { Localizer } from '../../types/language';
-import { Exclusion } from '../../utils/exclusion';
-import { ContentExtractor, SearchFilter, TextAnalysis } from '../../types/filter';
+import { Localizer } from 'app/types/language';
+import { Exclusion } from 'app/utils/exclusion';
+import { ContentExtractor, SearchFilter, TextAnalysis } from 'app/types/filter';
 import { analyze } from './textAnalyzer';
-import { comparingLocalizable} from '../../utils/comparator';
+import { comparingLocalizable} from 'app/utils/comparator';
 import { Comparator, comparingPrimitive } from 'yti-common-ui/utils/comparator';
 import { allMatching, limit } from 'yti-common-ui/utils/array';
 import { Localizable } from 'yti-common-ui/types/localization';

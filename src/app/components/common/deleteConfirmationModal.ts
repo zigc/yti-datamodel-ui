@@ -1,12 +1,12 @@
 import { IPromise, ui } from 'angular';
 import IModalService = ui.bootstrap.IModalService;
-import { UsageService } from '../../services/usageService';
+import { UsageService } from 'app/services/usageService';
 import { anyMatching } from 'yti-common-ui/utils/array';
 import { isDefined } from 'yti-common-ui/utils/object';
-import { LanguageContext } from '../../types/language';
-import { EditableEntity } from '../../types/entity';
-import { Model } from '../../entities/model';
-import { Usage, Referrer } from '../../entities/usage';
+import { LanguageContext } from 'app/types/language';
+import { EditableEntity } from 'app/types/entity';
+import { Model } from 'app/entities/model';
+import { Usage, Referrer } from 'app/entities/usage';
 
 export class DeleteConfirmationModal {
   /* @ngInject */

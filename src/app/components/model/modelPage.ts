@@ -1,45 +1,45 @@
 import { IAttributes, ILocationService, IPromise, IQService, IScope, route } from 'angular';
 import * as _ from 'lodash';
-import { ClassService } from '../../services/classService';
-import { LanguageService, Localizer } from '../../services/languageService';
-import { LocationService } from '../../services/locationService';
-import { ModelService } from '../../services/modelService';
-import { PredicateService } from '../../services/predicateService';
-import { ConfirmationModal } from '../common/confirmationModal';
-import { SearchClassModal } from '../editor/searchClassModal';
-import { SearchPredicateModal } from '../editor/searchPredicateModal';
-import { EntityCreation } from '../editor/searchConceptModal';
-import { WithDefinedBy } from '../../types/entity';
-import { ChangeListener, ChangeNotifier, SearchClassType, Show } from '../../types/component';
-import { Uri } from '../../entities/uri';
-import { comparingLocalizable } from '../../utils/comparator';
-import { AddPropertiesFromClassModal } from '../editor/addPropertiesFromClassModal';
+import { ClassService } from 'app/services/classService';
+import { LanguageService, Localizer } from 'app/services/languageService';
+import { LocationService } from 'app/services/locationService';
+import { ModelService } from 'app/services/modelService';
+import { PredicateService } from 'app/services/predicateService';
+import { ConfirmationModal } from 'app/components/common/confirmationModal';
+import { SearchClassModal } from 'app/components/editor/searchClassModal';
+import { SearchPredicateModal } from 'app/components/editor/searchPredicateModal';
+import { EntityCreation } from 'app/components/editor/searchConceptModal';
+import { WithDefinedBy } from 'app/types/entity';
+import { ChangeListener, ChangeNotifier, SearchClassType, Show } from 'app/types/component';
+import { Uri } from 'app/entities/uri';
+import { comparingLocalizable } from 'app/utils/comparator';
+import { AddPropertiesFromClassModal } from 'app/components/editor/addPropertiesFromClassModal';
 import { module as mod } from './module';
-import { isDifferentUrl, modalCancelHandler, nextUrl } from '../../utils/angular';
+import { isDifferentUrl, modalCancelHandler, nextUrl } from 'app/utils/angular';
 import {
   combineExclusions,
   createClassTypeExclusion,
   createDefinedByExclusion,
   createExistsExclusion,
   Exclusion
-} from '../../utils/exclusion';
-import { collectIds, glyphIconClassForType } from '../../utils/entity';
-import { SessionService } from '../../services/sessionService';
+} from 'app/utils/exclusion';
+import { collectIds, glyphIconClassForType } from 'app/utils/entity';
+import { SessionService } from 'app/services/sessionService';
 import { areEqual, isDefined, Optional } from 'yti-common-ui/utils/object';
-import { AbstractPredicate, Predicate, PredicateListItem } from '../../entities/predicate';
-import { AbstractClass, Class, ClassListItem, Property } from '../../entities/class';
-import { Model } from '../../entities/model';
-import { ExternalEntity } from '../../entities/externalEntity';
-import { ClassType, KnownPredicateType, SelectionType } from '../../types/entity';
-import { NotificationModal } from '../common/notificationModal';
+import { AbstractPredicate, Predicate, PredicateListItem } from 'app/entities/predicate';
+import { AbstractClass, Class, ClassListItem, Property } from 'app/entities/class';
+import { Model } from 'app/entities/model';
+import { ExternalEntity } from 'app/entities/externalEntity';
+import { ClassType, KnownPredicateType, SelectionType } from 'app/types/entity';
+import { NotificationModal } from 'app/components/common/notificationModal';
 import { removeMatching } from 'yti-common-ui/utils/array';
-import { ApplicationController } from '../application';
-import { HelpProvider } from '../common/helpProvider';
-import { InteractiveHelp } from '../../help/contract';
-import { ModelPageHelpService } from '../../help/modelPageHelp';
-import { InteractiveHelpService } from '../../help/services/interactiveHelpService';
+import { ApplicationController } from 'app/components/application';
+import { HelpProvider } from 'app/components/common/helpProvider';
+import { InteractiveHelp } from 'app/help/contract';
+import { ModelPageHelpService } from 'app/help/modelPageHelp';
+import { InteractiveHelpService } from 'app/help/services/interactiveHelpService';
 import { ModelControllerService, View } from './modelControllerService';
-import { AuthorizationManagerService } from '../../services/authorizationManagerService';
+import { AuthorizationManagerService } from 'app/services/authorizationManagerService';
 import IRouteService = route.IRouteService;
 import ICurrentRoute = route.ICurrentRoute;
 

@@ -1,14 +1,14 @@
 import { ILogService, IPromise } from 'angular';
-import { EditableEntityController, EditableScope, Rights } from '../form/editableEntityController';
-import { ModelService } from '../../services/modelService';
-import { UserService } from '../../services/userService';
-import { DeleteConfirmationModal } from '../common/deleteConfirmationModal';
+import { EditableEntityController, EditableScope, Rights } from 'app/components/form/editableEntityController';
+import { ModelService } from 'app/services/modelService';
+import { UserService } from 'app/services/userService';
+import { DeleteConfirmationModal } from 'app/components/common/deleteConfirmationModal';
 import { module as mod } from './module';
-import { ErrorModal } from '../form/errorModal';
-import { Model } from '../../entities/model';
-import { LanguageContext } from '../../types/language';
+import { ErrorModal } from 'app/components/form/errorModal';
+import { Model } from 'app/entities/model';
+import { LanguageContext } from 'app/types/language';
 import { ModelControllerService } from './modelControllerService';
-import { AuthorizationManagerService } from '../../services/authorizationManagerService';
+import { AuthorizationManagerService } from 'app/services/authorizationManagerService';
 
 mod.directive('modelView', () => {
   return {

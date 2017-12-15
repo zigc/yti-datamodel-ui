@@ -1,9 +1,9 @@
 import { IAttributes, INgModelController, IScope } from 'angular';
-import { LanguageService } from '../../services/languageService';
+import { LanguageService } from 'app/services/languageService';
 import { isValidString, isValidLabelLength, isValidModelLabelLength } from './validators';
-import { allLocalizations, hasLocalization } from '../../utils/language';
+import { allLocalizations, hasLocalization } from 'app/utils/language';
 import { module as mod } from './module';
-import { LanguageContext } from '../../types/language';
+import { LanguageContext } from 'app/types/language';
 import { Localizable } from 'yti-common-ui/types/localization';
 
 interface LocalizedInputAttributes extends IAttributes {

@@ -1,4 +1,4 @@
-import { AddNew } from '../components/common/searchResults';
+import { AddNew } from 'app/components/common/searchResults';
 import { Localizable } from 'yti-common-ui/types/localization';
 
 export interface SearchController<T> {

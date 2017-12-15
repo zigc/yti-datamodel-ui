@@ -1,8 +1,8 @@
 import { IPromise, IQService } from 'angular';
-import { ModelPositions } from '../../entities/visualization';
-import { Model } from '../../entities/model';
-import { ClassVisualization } from '../../services/visualizationService';
-import { DefaultVisualizationService, VisualizationService } from '../../services/visualizationService';
+import { ModelPositions } from 'app/entities/visualization';
+import { Model } from 'app/entities/model';
+import { ClassVisualization } from 'app/services/visualizationService';
+import { DefaultVisualizationService, VisualizationService } from 'app/services/visualizationService';
 import { ResetableService } from './resetableService';
 import { InteractiveHelpClassService } from './helpClassService';
 

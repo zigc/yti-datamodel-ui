@@ -1,13 +1,13 @@
 import { IScope, ILocationService } from 'angular';
 import { module as mod } from './module';
-import { ModelService } from '../../services/modelService';
-import { Uri } from '../../entities/uri';
-import { Language } from '../../types/language';
-import { KnownModelType } from '../../types/entity';
-import { Model } from '../../entities/model';
+import { ModelService } from 'app/services/modelService';
+import { Uri } from 'app/entities/uri';
+import { Language } from 'app/types/language';
+import { KnownModelType } from 'app/types/entity';
+import { Model } from 'app/entities/model';
 import { ModelControllerService, View } from './modelControllerService';
-import { Class } from '../../entities/class';
-import { Predicate } from '../../entities/predicate';
+import { Class } from 'app/entities/class';
+import { Predicate } from 'app/entities/predicate';
 
 mod.directive('newModelPage', () => {
   return {

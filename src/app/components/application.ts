@@ -1,13 +1,13 @@
 import { ILocationService, IScope, ui } from 'angular';
 import IModalScope = ui.bootstrap.IModalScope;
 import IModalStackService = ui.bootstrap.IModalStackService;
-import { UserService } from '../services/userService';
-import { config } from '../../config';
+import { UserService } from 'app/services/userService';
+import { config } from 'config';
 import { ConfirmationModal } from './common/confirmationModal';
 import { module as mod } from './module';
-import { nextUrl, modalCancelHandler } from '../utils/angular';
+import { nextUrl, modalCancelHandler } from 'app/utils/angular';
 import { HelpProvider } from './common/helpProvider';
-import { LocationService } from '../services/locationService';
+import { LocationService } from 'app/services/locationService';
 
 mod.directive('application', () => {
   return {

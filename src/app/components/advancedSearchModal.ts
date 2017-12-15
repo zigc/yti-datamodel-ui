@@ -1,12 +1,12 @@
 import { IPromise, IScope, ui } from 'angular';
 import IModalService = ui.bootstrap.IModalService;
 import IModalServiceInstance = ui.bootstrap.IModalServiceInstance;
-import { SearchService } from '../services/searchService';
-import { LanguageService, Localizer } from '../services/languageService';
-import { SearchController, SearchFilter } from '../types/filter';
-import { Type } from '../types/entity';
-import { frontPageSearchLanguageContext, LanguageContext } from '../types/language';
-import { SearchResult } from '../entities/search';
+import { SearchService } from 'app/services/searchService';
+import { LanguageService, Localizer } from 'app/services/languageService';
+import { SearchController, SearchFilter } from 'app/types/filter';
+import { Type } from 'app/types/entity';
+import { frontPageSearchLanguageContext, LanguageContext } from 'app/types/language';
+import { SearchResult } from 'app/entities/search';
 import { filterAndSortSearchResults, defaultLabelComparator } from './filter/util';
 
 export class AdvancedSearchModal {

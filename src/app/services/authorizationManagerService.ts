@@ -1,9 +1,9 @@
 import { UserService } from './userService';
-import { Model } from '../entities/model';
-import { User } from '../entities/user';
-import { State, WithDefinedBy } from '../types/entity';
-import { Association, Attribute } from '../entities/predicate';
-import { Class } from '../entities/class';
+import { Model } from 'app/entities/model';
+import { User } from 'app/entities/user';
+import { State, WithDefinedBy } from 'app/types/entity';
+import { Association, Attribute } from 'app/entities/predicate';
+import { Class } from 'app/entities/class';
 
 const userStates: State[] = ['Unstable', 'Draft'];
 const adminStates: State[] = userStates.concat(['Recommendation', 'Deprecated']);

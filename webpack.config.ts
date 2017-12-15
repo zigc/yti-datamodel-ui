@@ -9,6 +9,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 export const commonConfig = {
 
   resolve: {
+    modules: [path.resolve(__dirname, 'src'), 'node_modules'],
     extensions: ['.ts', '.js'],
     alias: {
       'proxy-polyfill': path.resolve(__dirname, 'node_modules/proxy-polyfill/proxy.min.js')

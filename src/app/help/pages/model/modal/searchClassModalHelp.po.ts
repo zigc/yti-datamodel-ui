@@ -1,13 +1,13 @@
-import { confirm } from '../../modal/modalHelp.po';
+import { confirm } from 'app/help/pages/modal/modalHelp.po';
 import {
   filterForSearchResult, selectSearchResult, focusSearchSelection,
   filterForAddNewResult, selectAddNewResult
-} from '../../modal/searchModalHelp.po';
-import { modal, child } from '../../../selectors';
-import { classIdFromNamespaceId } from '../../../utils';
+} from 'app/help/pages/modal/searchModalHelp.po';
+import { modal, child } from 'app/help/selectors';
+import { classIdFromNamespaceId } from 'app/help/utils';
 import * as SearchConceptModal from './searchConceptModalHelp.po';
 import gettextCatalog = angular.gettext.gettextCatalog;
-import { Story } from '../../../contract';
+import { Story } from 'app/help/contract';
 
 const searchClassModal = child(modal, '.search-class');
 

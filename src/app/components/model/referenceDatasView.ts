@@ -1,16 +1,16 @@
 import { IAttributes, IScope } from 'angular';
 import { ModelViewController } from './modelView';
-import { LanguageService, Localizer } from '../../services/languageService';
-import { TableDescriptor, ColumnDescriptor } from '../form/editableTable';
+import { LanguageService, Localizer } from 'app/services/languageService';
+import { TableDescriptor, ColumnDescriptor } from 'app/components/form/editableTable';
 import { module as mod } from './module';
-import { createExistsExclusion } from '../../utils/exclusion';
-import { collectIds } from '../../utils/entity';
+import { createExistsExclusion } from 'app/utils/exclusion';
+import { collectIds } from 'app/utils/entity';
 import { SearchReferenceDataModal } from './searchReferenceDataModal';
 import { EditReferenceDataModal } from './editReferenceDataModal';
 import { ViewReferenceDataModal } from './viewReferenceDataModal';
-import { Model } from '../../entities/model';
-import { ReferenceData } from '../../entities/referenceData';
-import { modalCancelHandler } from '../../utils/angular';
+import { Model } from 'app/entities/model';
+import { ReferenceData } from 'app/entities/referenceData';
+import { modalCancelHandler } from 'app/utils/angular';
 
 mod.directive('referenceDatasView', () => {
   return {

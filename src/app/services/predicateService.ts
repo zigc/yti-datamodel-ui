@@ -1,22 +1,22 @@
 import { IHttpService, IPromise, IQService } from 'angular';
 import * as moment from 'moment';
 import { upperCaseFirst } from 'change-case';
-import { config } from '../../config';
-import { KnownPredicateType } from '../types/entity';
-import { reverseMapType } from '../utils/entity';
-import { Urn, Uri } from '../entities/uri';
-import { expandContextWithKnownModels } from '../utils/entity';
-import { Language } from '../types/language';
-import { DataSource } from '../components/form/dataSource';
-import { modelScopeCache } from '../components/form/cache';
+import { config } from 'config';
+import { KnownPredicateType } from 'app/types/entity';
+import { reverseMapType } from 'app/utils/entity';
+import { Urn, Uri } from 'app/entities/uri';
+import { expandContextWithKnownModels } from 'app/utils/entity';
+import { Language } from 'app/types/language';
+import { DataSource } from 'app/components/form/dataSource';
+import { modelScopeCache } from 'app/components/form/cache';
 import { requireDefined } from 'yti-common-ui/utils/object';
 import { FrameService } from './frameService';
-import { GraphData, EntityFactory } from '../types/entity';
-import * as frames from '../entities/frames';
+import { GraphData, EntityFactory } from 'app/types/entity';
+import * as frames from 'app/entities/frames';
 import { containsAny, flatten } from 'yti-common-ui/utils/array';
-import { PredicateListItem, Predicate, Attribute, Association } from '../entities/predicate';
-import { Model } from '../entities/model';
-import { typeSerializer } from '../entities/serializer/serializer';
+import { PredicateListItem, Predicate, Attribute, Association } from 'app/entities/predicate';
+import { Model } from 'app/entities/model';
+import { typeSerializer } from 'app/entities/serializer/serializer';
 
 export interface PredicateService {
   getPredicate(id: Uri|Urn, model?: Model): IPromise<Predicate>;

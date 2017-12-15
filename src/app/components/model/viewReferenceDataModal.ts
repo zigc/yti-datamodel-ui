@@ -1,9 +1,9 @@
 import { ui } from 'angular';
 import IModalService = ui.bootstrap.IModalService;
-import { ReferenceData } from '../../entities/referenceData';
-import { LanguageContext } from '../../types/language';
+import { ReferenceData } from 'app/entities/referenceData';
+import { LanguageContext } from 'app/types/language';
 import { identity } from 'yti-common-ui/utils/object';
-import { modalCancelHandler } from '../../utils/angular';
+import { modalCancelHandler } from 'app/utils/angular';
 
 export class ViewReferenceDataModal {
   /* @ngInject */

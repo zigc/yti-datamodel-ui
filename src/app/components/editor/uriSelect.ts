@@ -1,18 +1,18 @@
 import { IAttributes, ICompiledExpression, IPromise, IScope, IQService } from 'angular';
 import { SearchPredicateModal } from './searchPredicateModal';
 import { SearchClassModal } from './searchClassModal';
-import { EditableForm } from '../form/editableEntityController';
-import { Uri } from '../../entities/uri';
+import { EditableForm } from 'app/components/form/editableEntityController';
+import { Uri } from 'app/entities/uri';
 import { module as mod } from './module';
-import { DataSource } from '../form/dataSource';
-import { ClassService } from '../../services/classService';
-import { PredicateService } from '../../services/predicateService';
-import { itemExclusion, idExclusion } from '../../utils/exclusion';
-import { ClassListItem } from '../../entities/class';
-import { PredicateListItem } from '../../entities/predicate';
-import { ClassType, KnownPredicateType } from '../../types/entity';
-import { Model } from '../../entities/model';
-import { modalCancelHandler } from '../../utils/angular';
+import { DataSource } from 'app/components/form/dataSource';
+import { ClassService } from 'app/services/classService';
+import { PredicateService } from 'app/services/predicateService';
+import { itemExclusion, idExclusion } from 'app/utils/exclusion';
+import { ClassListItem } from 'app/entities/class';
+import { PredicateListItem } from 'app/entities/predicate';
+import { ClassType, KnownPredicateType } from 'app/types/entity';
+import { Model } from 'app/entities/model';
+import { modalCancelHandler } from 'app/utils/angular';
 
 mod.directive('uriSelect', () => {
   return {

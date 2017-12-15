@@ -1,12 +1,12 @@
 import { containsAny, collectProperties, index } from 'yti-common-ui/utils/array';
-import { Destination, WithId } from '../types/entity';
+import { Destination, WithId } from 'app/types/entity';
 import { areEqual, requireDefined, isDefined } from 'yti-common-ui/utils/object';
 import { IHttpPromiseCallbackArg } from 'angular';
-import { Uri, Urn, RelativeUrl } from '../entities/uri';
-import { Coordinate, Dimensions } from '../types/visualization';
-import { Model } from '../entities/model';
-import { LegacyConcept, Concept } from '../entities/vocabulary';
-import { ClassType, GroupType, ModelType, PredicateType, Type, GraphData, EntityConstructor } from '../types/entity';
+import { Uri, Urn, RelativeUrl } from 'app/entities/uri';
+import { Coordinate, Dimensions } from 'app/types/visualization';
+import { Model } from 'app/entities/model';
+import { LegacyConcept, Concept } from 'app/entities/vocabulary';
+import { ClassType, GroupType, ModelType, PredicateType, Type, GraphData, EntityConstructor } from 'app/types/entity';
 import { firstMatchingValue } from 'yti-common-ui/utils/array';
 
 const fromType = new Map<Type, string[]>();

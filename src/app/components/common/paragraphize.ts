@@ -1,6 +1,6 @@
 import { module as mod } from './module';
 import { ISCEService } from 'angular';
-import { LanguageContext } from '../../types/language';
+import { LanguageContext } from 'app/types/language';
 import { Localizable } from 'yti-common-ui/types/localization';
 
 mod.directive('paragraphize', () => {

@@ -1,8 +1,8 @@
 import { module as mod } from './module';
-import { ReferenceDataService } from '../../services/referenceDataService';
-import { LanguageService, Localizer } from '../../services/languageService';
-import { ReferenceData, ReferenceDataCode } from '../../entities/referenceData';
-import { LanguageContext } from '../../types/language';
+import { ReferenceDataService } from 'app/services/referenceDataService';
+import { LanguageService, Localizer } from 'app/services/languageService';
+import { ReferenceData, ReferenceDataCode } from 'app/entities/referenceData';
+import { LanguageContext } from 'app/types/language';
 
 mod.directive('codeValueInputAutocomplete', () => {
   return {

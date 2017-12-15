@@ -1,7 +1,7 @@
 import gettextCatalog = angular.gettext.gettextCatalog;
-import { editableByTitle, editableFocus, input } from '../../selectors';
-import { createStory, createExpectedStateNextCondition } from '../../contract';
-import { editableMarginInColumn, validInput, initialInputValue } from '../../utils';
+import { editableByTitle, editableFocus, input } from 'app/help/selectors';
+import { createStory, createExpectedStateNextCondition } from 'app/help/contract';
+import { editableMarginInColumn, validInput, initialInputValue } from 'app/help/utils';
 
 export function enterModelComment(parent: () => JQuery, initialValue: string, gettextCatalog: gettextCatalog) {
 

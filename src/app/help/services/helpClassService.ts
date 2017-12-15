@@ -1,25 +1,25 @@
 import { IPromise, IQService } from 'angular';
-import { ClassService } from '../../services/classService';
-import { Class, ClassListItem, Property } from '../../entities/class';
-import { Model } from '../../entities/model';
-import { Urn, Uri } from '../../entities/uri';
-import { DataSource } from '../../components/form/dataSource';
-import { Language } from '../../types/language';
-import { ExternalEntity } from '../../entities/externalEntity';
-import { Predicate, Association, Attribute } from '../../entities/predicate';
-import { KnownPredicateType } from '../../types/entity';
-import { reverseMapType } from '../../utils/entity';
+import { ClassService } from 'app/services/classService';
+import { Class, ClassListItem, Property } from 'app/entities/class';
+import { Model } from 'app/entities/model';
+import { Urn, Uri } from 'app/entities/uri';
+import { DataSource } from 'app/components/form/dataSource';
+import { Language } from 'app/types/language';
+import { ExternalEntity } from 'app/entities/externalEntity';
+import { Predicate, Association, Attribute } from 'app/entities/predicate';
+import { KnownPredicateType } from 'app/types/entity';
+import { reverseMapType } from 'app/utils/entity';
 import { ResetableService } from './resetableService';
 import * as moment from 'moment';
 import { upperCaseFirst } from 'change-case';
-import * as frames from '../../entities/frames';
-import { VocabularyService } from '../../services/vocabularyService';
+import * as frames from 'app/entities/frames';
+import { VocabularyService } from 'app/services/vocabularyService';
 import { identity } from 'yti-common-ui/utils/object';
 import { flatten } from 'yti-common-ui/utils/array';
-import { dateSerializer } from '../../entities/serializer/serializer';
+import { dateSerializer } from 'app/entities/serializer/serializer';
 import { ModelResourceStore } from './resourceStore';
-import { DefinedBy } from '../../entities/definedBy';
-import { classNameToResourceIdName } from '../utils';
+import { DefinedBy } from 'app/entities/definedBy';
+import { classNameToResourceIdName } from 'app/help/utils';
 
 export class InteractiveHelpClassService implements ClassService, ResetableService {
 

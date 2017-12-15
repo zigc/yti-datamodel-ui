@@ -1,17 +1,17 @@
 import { requireDefined, assertNever } from 'yti-common-ui/utils/object';
 import {
   resourceUrl, glyphIconClassForType, glyphIconClassUnknown, resolveConceptConstructor
-} from '../utils/entity';
-import { SelectionType, PredicateType, KnownPredicateType, ConstraintType, State } from '../types/entity';
-import { normalizeClassType, mapType, reverseMapType } from '../utils/entity';
+} from 'app/utils/entity';
+import { SelectionType, PredicateType, KnownPredicateType, ConstraintType, State } from 'app/types/entity';
+import { normalizeClassType, mapType, reverseMapType } from 'app/utils/entity';
 import { Uri, Urn } from './uri';
 import { DefinedBy } from './definedBy';
-import { EntityConstructor } from '../types/entity';
+import { EntityConstructor } from 'app/types/entity';
 import { DataType } from './dataTypes';
 import { containsAny, swapElements, remove, removeMatching } from 'yti-common-ui/utils/array';
 import { ReferenceData } from './referenceData';
-import { hasLocalization } from '../utils/language';
-import { Language } from '../types/language';
+import { hasLocalization } from 'app/utils/language';
+import { Language } from 'app/types/language';
 import { VisualizationClass } from './visualization';
 import { comparingPrimitive } from 'yti-common-ui/utils/comparator';
 import { Predicate, Attribute, Association } from './predicate';

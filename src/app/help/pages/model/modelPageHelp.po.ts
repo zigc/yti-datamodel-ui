@@ -1,10 +1,10 @@
 import {
   createClickNextCondition, createStory, createNavigatingClickNextCondition,
   createScrollWithDefault, Story
-} from '../../contract';
-import { child, modelPanelElement } from '../../selectors';
-import { KnownModelType, KnownPredicateType } from '../../../types/entity';
-import { scrollToTop, classIdFromNamespaceId } from '../../utils';
+} from 'app/help/contract';
+import { child, modelPanelElement } from 'app/help/selectors';
+import { KnownModelType, KnownPredicateType } from 'app/types/entity';
+import { scrollToTop, classIdFromNamespaceId } from 'app/help/utils';
 import gettextCatalog = angular.gettext.gettextCatalog;
 import * as SearchClassModal from './modal/searchClassModalHelp.po';
 import * as AddPropertiesFromClass from './modal/addPropertiesFromClassModalHelp.po';

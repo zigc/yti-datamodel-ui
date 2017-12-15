@@ -1,8 +1,8 @@
-import { User } from '../../entities/user';
+import { User } from 'app/entities/user';
 import { IPromise, IQService } from 'angular';
 import { ResetableService } from './resetableService';
 import { Role, UUID } from 'yti-common-ui/services/user.service';
-import { UserService } from '../../services/userService';
+import { UserService } from 'app/services/userService';
 import { Observable } from 'rxjs/Observable';
 
 // TODO fix to align with yti-common-ui UserService

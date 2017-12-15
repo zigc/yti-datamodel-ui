@@ -1,12 +1,12 @@
-import { config } from '../../config';
-import { expandContextWithKnownModels } from '../utils/entity';
+import { config } from 'config';
+import { expandContextWithKnownModels } from 'app/utils/entity';
 import { index } from 'yti-common-ui/utils/array';
 import { requireDefined } from 'yti-common-ui/utils/object';
-import * as frames from '../entities/frames';
+import * as frames from 'app/entities/frames';
 import { FrameService } from './frameService';
-import { GraphData } from '../types/entity';
-import { ModelPositions, VisualizationClass, DefaultVisualizationClass } from '../entities/visualization';
-import { Model } from '../entities/model';
+import { GraphData } from 'app/types/entity';
+import { ModelPositions, VisualizationClass, DefaultVisualizationClass } from 'app/entities/visualization';
+import { Model } from 'app/entities/model';
 import { IPromise, IQService, IHttpService } from 'angular';
 
 export interface VisualizationService {

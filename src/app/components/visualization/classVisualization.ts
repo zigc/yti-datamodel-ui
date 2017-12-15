@@ -1,39 +1,39 @@
 import { IAttributes, IPromise, IQService, IScope, ITimeoutService, IWindowService } from 'angular';
-import { LanguageService } from '../../services/languageService';
-import { ClassVisualization, VisualizationService } from '../../services/visualizationService';
-import { ClassInteractionListener } from '../../types/visualization';
-import { ChangeListener, Show } from '../../types/component';
+import { LanguageService } from 'app/services/languageService';
+import { ClassVisualization, VisualizationService } from 'app/services/visualizationService';
+import { ClassInteractionListener } from 'app/types/visualization';
+import { ChangeListener, Show } from 'app/types/component';
 import * as joint from 'jointjs';
 import { module as mod } from './module';
-import { Uri } from '../../entities/uri';
+import { Uri } from 'app/entities/uri';
 import { arraysAreEqual, firstMatching, normalizeAsArray } from 'yti-common-ui/utils/array';
-import { UserService } from '../../services/userService';
-import { ConfirmationModal } from '../common/confirmationModal';
-import { FocusLevel, NameType, SessionService } from '../../services/sessionService';
+import { UserService } from 'app/services/userService';
+import { ConfirmationModal } from 'app/components/common/confirmationModal';
+import { FocusLevel, NameType, SessionService } from 'app/services/sessionService';
 import { VisualizationPopoverDetails } from './popover';
 import { createAssociationLink, createClassElement, ShadowClass } from './diagram';
 import { PaperHolder } from './paperHolder';
 import { centerToElement, focusElement, moveOrigin, scale, scaleToFit } from './paperUtil';
 import { adjustElementLinks, calculateLabelPosition, layoutGraph, VertexAction } from './layout';
-import { Localizer } from '../../types/language';
-import { ifChanged, modalCancelHandler } from '../../utils/angular';
-import { centerToPosition, coordinatesAreEqual, copyVertices } from '../../utils/entity';
+import { Localizer } from 'app/types/language';
+import { ifChanged, modalCancelHandler } from 'app/utils/angular';
+import { centerToPosition, coordinatesAreEqual, copyVertices } from 'app/utils/entity';
 import { mapOptional, Optional, requireDefined } from 'yti-common-ui/utils/object';
-import { Class, Property } from '../../entities/class';
-import { Predicate } from '../../entities/predicate';
-import { Model } from '../../entities/model';
+import { Class, Property } from 'app/entities/class';
+import { Predicate } from 'app/entities/predicate';
+import { Model } from 'app/entities/model';
 import {
   AssociationPropertyPosition,
   AssociationTargetPlaceholderClass,
   ModelPositions,
   VisualizationClass
-} from '../../entities/visualization';
-import { Coordinate } from '../../types/visualization';
-import { InteractiveHelpService } from '../../help/services/interactiveHelpService';
+} from 'app/entities/visualization';
+import { Coordinate } from 'app/types/visualization';
+import { InteractiveHelpService } from 'app/help/services/interactiveHelpService';
 import * as moment from 'moment';
 import { ContextMenuTarget } from './contextMenu';
-import { ModelPageActions } from '../model/modelPage';
-import { AuthorizationManagerService } from '../../services/authorizationManagerService';
+import { ModelPageActions } from 'app/components/model/modelPage';
+import { AuthorizationManagerService } from 'app/services/authorizationManagerService';
 
 mod.directive('classVisualization', () => {
   return {

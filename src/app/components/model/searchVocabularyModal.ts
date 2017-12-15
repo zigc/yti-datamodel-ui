@@ -1,15 +1,15 @@
 import { IPromise, ui } from 'angular';
 import IModalService = ui.bootstrap.IModalService;
 import IModalServiceInstance = ui.bootstrap.IModalServiceInstance;
-import { comparingLocalizable } from '../../utils/comparator';
+import { comparingLocalizable } from 'app/utils/comparator';
 import { comparingPrimitive } from 'yti-common-ui/utils/comparator';
-import { LanguageService, Localizer } from '../../services/languageService';
-import { Exclusion } from '../../utils/exclusion';
-import { SearchController, SearchFilter } from '../../types/filter';
-import { Vocabulary } from '../../entities/vocabulary';
-import { LanguageContext } from '../../types/language';
-import { VocabularyService } from '../../services/vocabularyService';
-import { filterAndSortSearchResults, defaultTitleComparator } from '../filter/util';
+import { LanguageService, Localizer } from 'app/services/languageService';
+import { Exclusion } from 'app/utils/exclusion';
+import { SearchController, SearchFilter } from 'app/types/filter';
+import { Vocabulary } from 'app/entities/vocabulary';
+import { LanguageContext } from 'app/types/language';
+import { VocabularyService } from 'app/services/vocabularyService';
+import { filterAndSortSearchResults, defaultTitleComparator } from 'app/components/filter/util';
 
 const noExclude = (_vocabulary: Vocabulary) => null;
 

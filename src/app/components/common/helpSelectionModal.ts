@@ -1,8 +1,8 @@
 import { ui } from 'angular';
 import IModalService = ui.bootstrap.IModalService;
 import IModalServiceInstance = ui.bootstrap.IModalServiceInstance;
-import { InteractiveHelp } from '../../help/contract';
-import { InteractiveHelpDisplay } from '../../help/components/interactiveHelpDisplay';
+import { InteractiveHelp } from 'app/help/contract';
+import { InteractiveHelpDisplay } from 'app/help/components/interactiveHelpDisplay';
 
 export class HelpSelectionModal {
 

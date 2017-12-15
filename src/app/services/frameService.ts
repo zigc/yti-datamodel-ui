@@ -2,9 +2,9 @@ import { ILogService, IPromise } from 'angular';
 import {
   GraphData, EntityFactory, EntityConstructor,
   EntityArrayFactory, EntityArrayConstructor
-} from '../types/entity';
+} from 'app/types/entity';
 import { normalizeAsArray } from 'yti-common-ui/utils/array';
-import { GraphNode, GraphNodes } from '../entities/graphNode';
+import { GraphNode, GraphNodes } from 'app/entities/graphNode';
 
 const jsonld: any = require('jsonld');
 

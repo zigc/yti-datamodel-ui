@@ -1,15 +1,15 @@
 import { module as mod } from './module';
 import { IScope, IAttributes } from 'angular';
 import { isDefined } from 'yti-common-ui/utils/object';
-import { UsageService } from '../../services/usageService';
-import { ErrorModal } from '../form/errorModal';
-import { PredicateService } from '../../services/predicateService';
-import { glyphIconClassForType } from '../../utils/entity';
-import { EditableForm } from '../form/editableEntityController';
+import { UsageService } from 'app/services/usageService';
+import { ErrorModal } from 'app/components/form/errorModal';
+import { PredicateService } from 'app/services/predicateService';
+import { glyphIconClassForType } from 'app/utils/entity';
+import { EditableForm } from 'app/components/form/editableEntityController';
 import { PredicateViewController } from './predicateView';
-import { Model } from '../../entities/model';
-import { Attribute, Association } from '../../entities/predicate';
-import { KnownPredicateType } from '../../types/entity';
+import { Model } from 'app/entities/model';
+import { Attribute, Association } from 'app/entities/predicate';
+import { KnownPredicateType } from 'app/types/entity';
 
 mod.directive('predicateForm', () => {
   return {

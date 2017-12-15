@@ -1,16 +1,16 @@
 import { ILogService, IQService } from 'angular';
-import { EditableEntityController, EditableScope, Rights } from '../form/editableEntityController';
-import { UserService } from '../../services/userService';
-import { DeleteConfirmationModal } from '../common/deleteConfirmationModal';
+import { EditableEntityController, EditableScope, Rights } from 'app/components/form/editableEntityController';
+import { UserService } from 'app/services/userService';
+import { DeleteConfirmationModal } from 'app/components/common/deleteConfirmationModal';
 import { module as mod } from './module';
 import { ConceptEditorModalController } from './conceptEditorModal';
-import { UsageService } from '../../services/usageService';
-import { ErrorModal } from '../form/errorModal';
-import { Concept, LegacyConcept } from '../../entities/vocabulary';
-import { Model } from '../../entities/model';
-import { Usage } from '../../entities/usage';
-import { GroupListItem } from '../../entities/group';
-import { LanguageContext } from '../../types/language';
+import { UsageService } from 'app/services/usageService';
+import { ErrorModal } from 'app/components/form/errorModal';
+import { Concept, LegacyConcept } from 'app/entities/vocabulary';
+import { Model } from 'app/entities/model';
+import { Usage } from 'app/entities/usage';
+import { GroupListItem } from 'app/entities/group';
+import { LanguageContext } from 'app/types/language';
 
 mod.directive('conceptView', () => {
   return {

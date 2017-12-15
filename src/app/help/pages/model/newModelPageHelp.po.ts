@@ -1,5 +1,5 @@
-import { child } from '../../selectors';
-import { createStory, createNavigatingClickNextCondition } from '../../contract';
+import { child } from 'app/help/selectors';
+import { createStory, createNavigatingClickNextCondition } from 'app/help/contract';
 import * as ModelView from './modelViewHelp.po';
 
 const saveUnsavedModelElement = child(ModelView.element, 'button.save');

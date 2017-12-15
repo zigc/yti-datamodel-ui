@@ -1,10 +1,10 @@
 import { IFormController, ILogService, IPromise, IScope } from 'angular';
-import { UserService } from '../../services/userService';
-import { DeleteConfirmationModal } from '../common/deleteConfirmationModal';
-import { isModalCancel } from '../../utils/angular';
+import { UserService } from 'app/services/userService';
+import { DeleteConfirmationModal } from 'app/components/common/deleteConfirmationModal';
+import { isModalCancel } from 'app/utils/angular';
 import { ErrorModal } from './errorModal';
-import { LanguageContext } from '../../types/language';
-import { EditableEntity } from '../../types/entity';
+import { LanguageContext } from 'app/types/language';
+import { EditableEntity } from 'app/types/entity';
 
 export interface EditableForm extends IFormController {
   editing: boolean;

@@ -1,5 +1,5 @@
 import * as joint from 'jointjs';
-import { FocusLevel } from '../../services/sessionService';
+import { FocusLevel } from 'app/services/sessionService';
 
 export const minScale = 0.02;
 export const maxScale = 3;

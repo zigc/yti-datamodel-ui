@@ -1,15 +1,15 @@
-import { confirm } from '../../modal/modalHelp.po';
+import { confirm } from 'app/help/pages/modal/modalHelp.po';
 import {
   filterForSearchResult, selectSearchResult, focusSearchSelection,
   filterForAddNewResult, selectAddNewResult
-} from '../../modal/searchModalHelp.po';
-import { modal, child } from '../../../selectors';
-import { predicateIdFromNamespaceId } from '../../../utils';
-import { KnownPredicateType } from '../../../../types/entity';
+} from 'app/help/pages/modal/searchModalHelp.po';
+import { modal, child } from 'app/help/selectors';
+import { predicateIdFromNamespaceId } from 'app/help/utils';
+import { KnownPredicateType } from 'app/types/entity';
 import * as SearchConceptModal from './searchConceptModalHelp.po';
-import * as PredicateForm from '../predicateFormHelp.po';
+import * as PredicateForm from 'app/help/pages/model/predicateFormHelp.po';
 import gettextCatalog = angular.gettext.gettextCatalog;
-import { Story } from '../../../contract';
+import { Story } from 'app/help/contract';
 
 export const searchPredicateModalElement = child(modal, '.search-predicate');
 

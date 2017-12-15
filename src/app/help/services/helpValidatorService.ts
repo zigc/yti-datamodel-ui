@@ -1,7 +1,7 @@
 import { IPromise, IQService } from 'angular';
-import { ValidatorService } from '../../services/validatorService';
+import { ValidatorService } from 'app/services/validatorService';
 import { ResetableService } from './resetableService';
-import { Uri } from '../../entities/uri';
+import { Uri } from 'app/entities/uri';
 import { InteractiveHelpClassService } from './helpClassService';
 import { InteractiveHelpPredicateService } from './helpPredicateService';
 

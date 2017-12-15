@@ -1,8 +1,8 @@
 import { INgModelController, IModelFormatter, ILocationService, IPromise, IQService } from 'angular';
-import { Validator, AsyncValidator } from '../components/form/validators';
+import { Validator, AsyncValidator } from 'app/components/form/validators';
 import { normalizeAsArray, allMatching } from 'yti-common-ui/utils/array';
 import { valuesExcludingKeys } from 'yti-common-ui/utils/object';
-import { Show } from '../types/component';
+import { Show } from 'app/types/component';
 
 export function hasFixedPositioningParent(e: JQuery) {
   for (let p = e.parent(); p && p.length > 0 && !p.is('body'); p = p.parent()) {

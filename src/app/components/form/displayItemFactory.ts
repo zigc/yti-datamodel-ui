@@ -1,13 +1,13 @@
 import { ILocationService } from 'angular';
 import gettextCatalog = angular.gettext.gettextCatalog;
-import { LanguageService } from '../../services/languageService';
-import { Uri } from '../../entities/uri';
+import { LanguageService } from 'app/services/languageService';
+import { Uri } from 'app/entities/uri';
 import { isString, isNumber, isBoolean } from 'yti-common-ui/utils/object';
-import { isDifferentUrl } from '../../utils/angular';
+import { isDifferentUrl } from 'app/utils/angular';
 import { Moment } from 'moment';
 import * as moment from 'moment';
-import { LanguageContext } from '../../types/language';
-import { isLocalizable } from '../../utils/language';
+import { LanguageContext } from 'app/types/language';
+import { isLocalizable } from 'app/utils/language';
 import { Localizable } from 'yti-common-ui/types/localization';
 
 export type Value = string|Localizable|number|Uri|Moment;

@@ -1,14 +1,14 @@
-import { confirm } from '../../modal/modalHelp.po';
-import { modal, child, editableByTitle, input, editableFocus } from '../../../selectors';
-import { createStory, createExpectedStateNextCondition, Story } from '../../../contract';
+import { confirm } from 'app/help/pages/modal/modalHelp.po';
+import { modal, child, editableByTitle, input, editableFocus } from 'app/help/selectors';
+import { createStory, createExpectedStateNextCondition, Story } from 'app/help/contract';
 import {
   initialInputValue, validInput,
   editableSelectMargin, editableMargin
-} from '../../../utils';
+} from 'app/help/utils';
 import {
   filterForAddNewResult, selectAddNewResult, selectSearchResult,
   focusSearchSelection, filterForSearchResult
-} from '../../modal/searchModalHelp.po';
+} from 'app/help/pages/modal/searchModalHelp.po';
 import gettextCatalog = angular.gettext.gettextCatalog;
 
 const searchConceptModal = child(modal, '.search-concept');

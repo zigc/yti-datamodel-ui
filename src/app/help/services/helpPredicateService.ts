@@ -1,23 +1,23 @@
 import { IQService, IPromise } from 'angular';
-import { PredicateService } from '../../services/predicateService';
+import { PredicateService } from 'app/services/predicateService';
 import { ResetableService } from './resetableService';
-import { Predicate, PredicateListItem, Attribute, Association } from '../../entities/predicate';
-import { Model } from '../../entities/model';
-import { Urn, Uri } from '../../entities/uri';
-import { DataSource } from '../../components/form/dataSource';
-import { KnownPredicateType } from '../../types/entity';
-import { reverseMapType } from '../../utils/entity';
-import { Language } from '../../types/language';
+import { Predicate, PredicateListItem, Attribute, Association } from 'app/entities/predicate';
+import { Model } from 'app/entities/model';
+import { Urn, Uri } from 'app/entities/uri';
+import { DataSource } from 'app/components/form/dataSource';
+import { KnownPredicateType } from 'app/types/entity';
+import { reverseMapType } from 'app/utils/entity';
+import { Language } from 'app/types/language';
 import { flatten } from 'yti-common-ui/utils/array';
 import * as moment from 'moment';
-import { VocabularyService } from '../../services/vocabularyService';
+import { VocabularyService } from 'app/services/vocabularyService';
 import { identity } from 'yti-common-ui/utils/object';
 import { upperCaseFirst } from 'change-case';
-import { dateSerializer } from '../../entities/serializer/serializer';
-import * as frames from '../../entities/frames';
+import { dateSerializer } from 'app/entities/serializer/serializer';
+import * as frames from 'app/entities/frames';
 import { ModelResourceStore } from './resourceStore';
-import { DefinedBy } from '../../entities/definedBy';
-import { predicateNameToResourceIdName } from '../utils';
+import { DefinedBy } from 'app/entities/definedBy';
+import { predicateNameToResourceIdName } from 'app/help/utils';
 
 export class InteractiveHelpPredicateService implements PredicateService, ResetableService {
 

@@ -1,8 +1,8 @@
-import { Language } from '../types/language';
-import { groupUrl } from '../utils/entity';
+import { Language } from 'app/types/language';
+import { groupUrl } from 'app/utils/entity';
 import { localizableSerializer, identitySerializer, optional } from './serializer/serializer';
 import { Uri, Url } from './uri';
-import { GroupType } from '../types/entity';
+import { GroupType } from 'app/types/entity';
 import { init } from './mapping';
 import { GraphNode } from './graphNode';
 import { uriSerializer, entity, entityAwareList } from './serializer/entitySerializer';

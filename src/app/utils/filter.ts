@@ -1,4 +1,4 @@
-import { SearchFilter, TextAnalysis } from '../types/filter';
+import { SearchFilter, TextAnalysis } from 'app/types/filter';
 import { limit, allMatching } from 'yti-common-ui/utils/array';
 
 const defaultSearchLimit = 100;

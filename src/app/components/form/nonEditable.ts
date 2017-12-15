@@ -2,7 +2,7 @@ import { IAttributes, IParseService, IScope } from 'angular';
 import { DisplayItemFactory, DisplayItem, Value } from './displayItemFactory';
 import { EditableForm } from './editableEntityController';
 import { module as mod } from './module';
-import { LanguageContext } from '../../types/language';
+import { LanguageContext } from 'app/types/language';
 
 mod.directive('nonEditable', () => {
   return {

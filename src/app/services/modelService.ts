@@ -1,14 +1,14 @@
 import { IHttpService, IPromise, IQService } from 'angular';
 import * as moment from 'moment';
-import { config } from '../../config';
+import { config } from 'config';
 import { upperCaseFirst } from 'change-case';
-import { Uri, Urn } from '../entities/uri';
-import { Language } from '../types/language';
+import { Uri, Urn } from 'app/entities/uri';
+import { Language } from 'app/types/language';
 import { assertNever } from 'yti-common-ui/utils/object';
-import * as frames from '../entities/frames';
+import * as frames from 'app/entities/frames';
 import { FrameService } from './frameService';
-import { GraphData, KnownModelType } from '../types/entity';
-import { Model, ModelListItem, ImportedNamespace, Link } from '../entities/model';
+import { GraphData, KnownModelType } from 'app/types/entity';
+import { Model, ModelListItem, ImportedNamespace, Link } from 'app/entities/model';
 
 export interface ModelService {
   getModels(): IPromise<ModelListItem[]>;

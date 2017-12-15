@@ -1,10 +1,10 @@
 import { IAttributes, IAsyncModelValidators, IQService, IScope, INgModelController } from 'angular';
 import gettextCatalog = angular.gettext.gettextCatalog;
-import { ReferenceDataService } from '../../services/referenceDataService';
-import { LanguageService } from '../../services/languageService';
+import { ReferenceDataService } from 'app/services/referenceDataService';
+import { LanguageService } from 'app/services/languageService';
 import { module as mod } from './module';
 import { anyMatching } from 'yti-common-ui/utils/array';
-import { ReferenceData } from '../../entities/referenceData';
+import { ReferenceData } from 'app/entities/referenceData';
 
 export function placeholderText(gettextCatalog: gettextCatalog) {
   return gettextCatalog.getString('Write reference data code');

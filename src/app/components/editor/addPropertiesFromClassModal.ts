@@ -2,11 +2,11 @@ import { IPromise, ui } from 'angular';
 import IModalService = ui.bootstrap.IModalService;
 import IModalServiceInstance = ui.bootstrap.IModalServiceInstance;
 import gettextCatalog = angular.gettext.gettextCatalog;
-import { LanguageService } from '../../services/languageService';
-import { Property, Class } from '../../entities/class';
+import { LanguageService } from 'app/services/languageService';
+import { Property, Class } from 'app/entities/class';
 import { flatten, groupBy } from 'yti-common-ui/utils/array';
 import { stringMapToObject } from 'yti-common-ui/utils/object';
-import { Model } from '../../entities/model';
+import { Model } from 'app/entities/model';
 
 const noExclude = (_property: Property) => false;
 

@@ -1,5 +1,5 @@
-import { LanguageContext, UILanguage, Language, availableUILanguages, Localizer as AngularJSLocalizer } from '../types/language';
-import { translate } from '../utils/language';
+import { LanguageContext, UILanguage, Language, availableUILanguages, Localizer as AngularJSLocalizer } from 'app/types/language';
+import { translate } from 'app/utils/language';
 import { Localizable, Localizer as AngularLocalizer } from 'yti-common-ui/types/localization';
 import { SessionService } from './sessionService';
 import { TranslateService } from 'ng2-translate';

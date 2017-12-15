@@ -1,6 +1,6 @@
 import { ILogService, ui } from 'angular';
 import { identity } from 'yti-common-ui/utils/object';
-import { modalCancelHandler } from '../utils/angular';
+import { modalCancelHandler } from 'app/utils/angular';
 
 export class MaintenanceModal {
   /* @ngInject */

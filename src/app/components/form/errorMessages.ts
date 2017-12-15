@@ -2,7 +2,7 @@ import { IScope, IAttributes, INgModelController } from 'angular';
 import { resolveValidator } from './validators';
 import { normalizeAsArray } from 'yti-common-ui/utils/array';
 import { module as mod } from './module';
-import { dataTypes } from '../../entities/dataTypes';
+import { dataTypes } from 'app/entities/dataTypes';
 
 interface Error {
   key: string;

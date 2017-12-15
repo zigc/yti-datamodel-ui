@@ -1,5 +1,5 @@
 import { hasValue } from 'yti-common-ui/utils/object';
-import { availableLanguages, Language } from '../types/language';
+import { availableLanguages, Language } from 'app/types/language';
 import { Localizable } from 'yti-common-ui/types/localization';
 
 export function isLocalizable(obj: any): obj is Localizable {

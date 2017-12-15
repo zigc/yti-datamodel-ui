@@ -1,10 +1,10 @@
 import { IPromise, ui } from 'angular';
 import IModalService = ui.bootstrap.IModalService;
 import IModalServiceInstance = ui.bootstrap.IModalServiceInstance;
-import { ModelService } from '../../services/modelService';
-import { Uri } from '../../entities/uri';
-import { Language } from '../../types/language';
-import { Model, Link } from '../../entities/model';
+import { ModelService } from 'app/services/modelService';
+import { Uri } from 'app/entities/uri';
+import { Language } from 'app/types/language';
+import { Model, Link } from 'app/entities/model';
 
 export class AddEditLinkModal {
   /* @ngInject */

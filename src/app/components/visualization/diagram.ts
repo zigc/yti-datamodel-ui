@@ -3,12 +3,12 @@ import {
   formatClassName, formatAttributeNamesAndAnnotations, formatAssociationPropertyName,
   formatCardinality, allAttributePropertyNames, allClassNames
 } from './formatter';
-import { NameType } from '../../services/sessionService';
-import { Localizer } from '../../types/language';
+import { NameType } from 'app/services/sessionService';
+import { Localizer } from 'app/types/language';
 import { requireDefined } from 'yti-common-ui/utils/object';
-import { VisualizationClass } from '../../entities/visualization';
-import { Property } from '../../entities/class';
-import { Dimensions } from '../../types/visualization';
+import { VisualizationClass } from 'app/entities/visualization';
+import { Property } from 'app/entities/class';
+import { Dimensions } from 'app/types/visualization';
 
 const zIndexAssociation = 5;
 const zIndexClass = 10;

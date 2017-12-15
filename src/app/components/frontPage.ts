@@ -1,16 +1,16 @@
 import { IAttributes, ILocationService, IScope } from 'angular';
-import { LocationService } from '../services/locationService';
-import { LanguageService, Localizer } from '../services/languageService';
+import { LocationService } from 'app/services/locationService';
+import { LanguageService, Localizer } from 'app/services/languageService';
 import { AdvancedSearchModal } from './advancedSearchModal';
-import { Url } from '../entities/uri';
+import { Url } from 'app/entities/uri';
 import { module as mod } from './module';
-import { frontPageSearchLanguageContext, LanguageContext } from '../types/language';
+import { frontPageSearchLanguageContext, LanguageContext } from 'app/types/language';
 import { ApplicationController } from './application';
 import { HelpProvider } from './common/helpProvider';
-import { FrontPageHelpService } from '../help/frontPageHelp';
-import { modalCancelHandler } from '../utils/angular';
-import { ModelService } from '../services/modelService';
-import { ModelListItem } from '../entities/model';
+import { FrontPageHelpService } from 'app/help/frontPageHelp';
+import { modalCancelHandler } from 'app/utils/angular';
+import { ModelService } from 'app/services/modelService';
+import { ModelListItem } from 'app/entities/model';
 
 mod.directive('frontPage', () => {
   return {

@@ -1,10 +1,10 @@
 import { IHttpService, IPromise } from 'angular';
-import { config } from '../../config';
-import { Uri } from '../entities/uri';
-import { GraphData } from '../types/entity';
+import { config } from 'config';
+import { Uri } from 'app/entities/uri';
+import { GraphData } from 'app/types/entity';
 import { FrameService } from './frameService';
-import * as frames from '../entities/frames';
-import { Activity } from '../entities/version';
+import * as frames from 'app/entities/frames';
+import { Activity } from 'app/entities/version';
 
 export class HistoryService {
 

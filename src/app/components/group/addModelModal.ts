@@ -1,10 +1,10 @@
 import { IPromise, ui } from 'angular';
 import IModalService = ui.bootstrap.IModalService;
 import IModalServiceInstance = ui.bootstrap.IModalServiceInstance;
-import { ModelService } from '../../services/modelService';
-import { Uri } from '../../entities/uri';
-import { Language } from '../../types/language';
-import { KnownModelType } from '../../types/entity';
+import { ModelService } from 'app/services/modelService';
+import { Uri } from 'app/entities/uri';
+import { Language } from 'app/types/language';
+import { KnownModelType } from 'app/types/entity';
 
 export class AddModelModal {
   /* @ngInject */

@@ -1,14 +1,14 @@
 import { IAttributes, IScope } from 'angular';
-import { LanguageService } from '../../services/languageService';
-import { ColumnDescriptor, TableDescriptor } from '../form/editableTable';
+import { LanguageService } from 'app/services/languageService';
+import { ColumnDescriptor, TableDescriptor } from 'app/components/form/editableTable';
 import { AddEditNamespaceModal } from './addEditNamespaceModal';
 import { SearchNamespaceModal } from './searchNamespaceModal';
 import { ModelViewController } from './modelView';
-import { combineExclusions } from '../../utils/exclusion';
+import { combineExclusions } from 'app/utils/exclusion';
 import { module as mod } from './module';
-import { Model, ImportedNamespace, NamespaceType } from '../../entities/model';
+import { Model, ImportedNamespace, NamespaceType } from 'app/entities/model';
 import { ModelControllerService } from './modelControllerService';
-import { modalCancelHandler } from '../../utils/angular';
+import { modalCancelHandler } from 'app/utils/angular';
 
 mod.directive('importedNamespacesView', () => {
   return {

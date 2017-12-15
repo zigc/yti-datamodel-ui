@@ -1,21 +1,21 @@
 import { IScope, IPromise, ui } from 'angular';
 import IModalService = ui.bootstrap.IModalService;
 import IModalServiceInstance = ui.bootstrap.IModalServiceInstance;
-import { ReferenceDataService } from '../../services/referenceDataService';
-import { comparingLocalizable } from '../../utils/comparator';
-import { Localizer, LanguageService } from '../../services/languageService';
-import { AddNew } from '../common/searchResults';
+import { ReferenceDataService } from 'app/services/referenceDataService';
+import { comparingLocalizable } from 'app/utils/comparator';
+import { Localizer, LanguageService } from 'app/services/languageService';
+import { AddNew } from 'app/components/common/searchResults';
 import gettextCatalog = angular.gettext.gettextCatalog;
-import { EditableForm } from '../form/editableEntityController';
-import { Uri } from '../../entities/uri';
+import { EditableForm } from 'app/components/form/editableEntityController';
+import { Uri } from 'app/entities/uri';
 import { anyMatching, allMatching } from 'yti-common-ui/utils/array';
 import * as _ from 'lodash';
-import { Exclusion } from '../../utils/exclusion';
-import { SearchController, SearchFilter } from '../../types/filter';
-import { ifChanged } from '../../utils/angular';
-import { ReferenceData, ReferenceDataServer, ReferenceDataGroup } from '../../entities/referenceData';
-import { Model } from '../../entities/model';
-import { filterAndSortSearchResults, defaultTitleComparator } from '../filter/util';
+import { Exclusion } from 'app/utils/exclusion';
+import { SearchController, SearchFilter } from 'app/types/filter';
+import { ifChanged } from 'app/utils/angular';
+import { ReferenceData, ReferenceDataServer, ReferenceDataGroup } from 'app/entities/referenceData';
+import { Model } from 'app/entities/model';
+import { filterAndSortSearchResults, defaultTitleComparator } from 'app/components/filter/util';
 
 const noExclude = (_referenceData: ReferenceData) => null;
 

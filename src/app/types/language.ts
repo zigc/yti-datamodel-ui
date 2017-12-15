@@ -1,4 +1,4 @@
-import { Uri } from '../entities/uri';
+import { Uri } from 'app/entities/uri';
 import { Localizable } from 'yti-common-ui/types/localization';
 
 // language codes according to ISO_639-1 specification

@@ -1,8 +1,8 @@
-import { EditableEntity, Type } from '../types/entity';
+import { EditableEntity, Type } from 'app/types/entity';
 import { Uri } from './uri';
 import { localizableSerializer, stringSerializer, optional } from './serializer/serializer';
 import { DefinedBy } from './definedBy';
-import { contextlessInternalUrl, normalizeReferrerType } from '../utils/entity';
+import { contextlessInternalUrl, normalizeReferrerType } from 'app/utils/entity';
 import { init } from './mapping';
 import { GraphNode } from './graphNode';
 import { uriSerializer, entityAwareOptional, entity, entityAwareList } from './serializer/entitySerializer';

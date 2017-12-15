@@ -1,5 +1,5 @@
 import { IAttributes, INgModelController, IScope } from 'angular';
-import { Uri } from '../../entities/uri';
+import { Uri } from 'app/entities/uri';
 import { contains, containsAny, flatten } from 'yti-common-ui/utils/array';
 import { referenceEquality } from 'yti-common-ui/utils/object';
 import { module as mod } from './module';

@@ -1,11 +1,11 @@
-import { child } from '../../selectors';
+import { child } from 'app/help/selectors';
 import {
   createStory, createModifyingClickNextCondition,
   createClickNextCondition, createScrollWithDefault, createScrollNone, Story
-} from '../../contract';
+} from 'app/help/contract';
 import * as ClassForm from './classFormHelp.po';
 import * as SearchPredicateModal from './modal/searchPredicateModalHelp.po';
-import { KnownPredicateType } from '../../../types/entity';
+import { KnownPredicateType } from 'app/types/entity';
 import gettextCatalog = angular.gettext.gettextCatalog;
 
 export const element = () => angular.element('class-view');

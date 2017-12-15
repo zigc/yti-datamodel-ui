@@ -1,6 +1,6 @@
 import { module as mod } from './module';
 import { IScope, IAttributes, ITranscludeFunction, IRepeatScope } from 'angular';
-import { scrollToElement, hasFixedPositioningParent } from '../../utils/angular';
+import { scrollToElement, hasFixedPositioningParent } from 'app/utils/angular';
 
 export interface InputWithPopupController<T> {
   popupItemName: string;

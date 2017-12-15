@@ -1,4 +1,4 @@
-import { User } from '../entities/user';
+import { User } from 'app/entities/user';
 import { Observable } from 'rxjs/Observable';
 
 export interface UserService {

@@ -1,7 +1,7 @@
 import { module as mod } from './module';
-import { SearchController, ContentExtractor, ContentMatcher } from '../../types/filter';
+import { SearchController, ContentExtractor, ContentMatcher } from 'app/types/filter';
 import { IScope } from 'angular';
-import { ifChanged } from '../../utils/angular';
+import { ifChanged } from 'app/utils/angular';
 
 mod.directive('contentFilter', () => {
   return {

@@ -1,17 +1,17 @@
 import { IAttributes, IScope } from 'angular';
-import { EditableForm } from '../form/editableEntityController';
+import { EditableForm } from 'app/components/form/editableEntityController';
 import { SearchClassModal } from './searchClassModal';
-import { SearchClassType } from '../../types/component';
+import { SearchClassType } from 'app/types/component';
 import {
   createClassTypeExclusion, createExistsExclusion, createDefinedByExclusion,
   createSelfExclusion, combineExclusions
-} from '../../utils/exclusion';
+} from 'app/utils/exclusion';
 import { collectProperties } from 'yti-common-ui/utils/array';
 import { module as mod } from './module';
-import { Constraint, Class, ConstraintListItem, ClassListItem } from '../../entities/class';
-import { Model } from '../../entities/model';
-import { ConstraintType } from '../../types/entity';
-import { modalCancelHandler } from '../../utils/angular';
+import { Constraint, Class, ConstraintListItem, ClassListItem } from 'app/entities/class';
+import { Model } from 'app/entities/model';
+import { ConstraintType } from 'app/types/entity';
+import { modalCancelHandler } from 'app/utils/angular';
 
 mod.directive('editableConstraint', () => {
   return {

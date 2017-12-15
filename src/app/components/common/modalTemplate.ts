@@ -1,5 +1,5 @@
 import { IAttributes, IScope } from 'angular';
-import { EditableForm } from '../form/editableEntityController';
+import { EditableForm } from 'app/components/form/editableEntityController';
 import { module as mod } from './module';
 import { isDefined } from 'yti-common-ui/utils/object';
 

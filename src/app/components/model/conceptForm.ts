@@ -1,7 +1,7 @@
-import { Localizer } from '../../services/languageService';
+import { Localizer } from 'app/services/languageService';
 import { module as mod } from './module';
-import { Concept, LegacyConcept } from '../../entities/vocabulary';
-import { Model } from '../../entities/model';
+import { Concept, LegacyConcept } from 'app/entities/vocabulary';
+import { Model } from 'app/entities/model';
 
 mod.directive('conceptForm', () => {
   return {

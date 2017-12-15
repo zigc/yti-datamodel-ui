@@ -2,6 +2,7 @@
   "compilerOptions": {
     "target": "es5",
     "lib": ["es2016", "es2017.object", "dom"],
+    "baseUrl": "./src",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "noImplicitAny": true,

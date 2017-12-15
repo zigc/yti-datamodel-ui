@@ -1,9 +1,9 @@
 import { IHttpService, IPromise } from 'angular';
-import { config } from '../../config';
-import { EditableEntity, GraphData } from '../types/entity';
+import { config } from 'config';
+import { EditableEntity, GraphData } from 'app/types/entity';
 import { FrameService } from './frameService';
-import { usageFrame } from '../entities/frames';
-import { Usage, EmptyUsage, DefaultUsage } from '../entities/usage';
+import { usageFrame } from 'app/entities/frames';
+import { Usage, EmptyUsage, DefaultUsage } from 'app/entities/usage';
 
 export class UsageService {
   /* @ngInject */

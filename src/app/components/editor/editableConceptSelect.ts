@@ -1,11 +1,11 @@
 import { module as mod } from './module';
 import { SearchConceptModal } from './searchConceptModal';
-import { EditableForm } from '../form/editableEntityController';
+import { EditableForm } from 'app/components/form/editableEntityController';
 import { IScope, IAttributes } from 'angular';
-import { Concept } from '../../entities/vocabulary';
-import { Model } from '../../entities/model';
-import { ClassType, KnownPredicateType } from '../../types/entity';
-import { modalCancelHandler } from '../../utils/angular';
+import { Concept } from 'app/entities/vocabulary';
+import { Model } from 'app/entities/model';
+import { ClassType, KnownPredicateType } from 'app/types/entity';
+import { modalCancelHandler } from 'app/utils/angular';
 
 mod.directive('editableConceptSelect', () => {
   return {

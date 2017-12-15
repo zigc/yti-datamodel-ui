@@ -1,9 +1,9 @@
 import { IScope } from 'angular';
 import gettextCatalog = angular.gettext.gettextCatalog;
-import { LanguageService } from '../../services/languageService';
-import { isLocalizationDefined } from '../../utils/language';
+import { LanguageService } from 'app/services/languageService';
+import { isLocalizationDefined } from 'app/utils/language';
 import { module as mod } from './module';
-import { Language, LanguageContext } from '../../types/language';
+import { Language, LanguageContext } from 'app/types/language';
 
 mod.directive('modelLanguageChooser', () => {
   return {

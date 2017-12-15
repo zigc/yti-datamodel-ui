@@ -1,9 +1,9 @@
 import { module as mod } from './module';
 import { SearchConceptModal } from './searchConceptModal';
-import { Class } from '../../entities/class';
-import { Predicate } from '../../entities/predicate';
-import { Model } from '../../entities/model';
-import { modalCancelHandler } from '../../utils/angular';
+import { Class } from 'app/entities/class';
+import { Predicate } from 'app/entities/predicate';
+import { Model } from 'app/entities/model';
+import { modalCancelHandler } from 'app/utils/angular';
 
 mod.directive('subjectView', () => {
   return {

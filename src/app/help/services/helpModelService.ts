@@ -1,9 +1,9 @@
 import { IPromise, IQService } from 'angular';
-import { ImportedNamespace, Link, Model, ModelListItem } from '../../entities/model';
-import { Language } from '../../types/language';
-import { Uri, Urn } from '../../entities/uri';
-import { KnownModelType } from '../../types/entity';
-import { ModelService } from '../../services/modelService';
+import { ImportedNamespace, Link, Model, ModelListItem } from 'app/entities/model';
+import { Language } from 'app/types/language';
+import { Uri, Urn } from 'app/entities/uri';
+import { KnownModelType } from 'app/types/entity';
+import { ModelService } from 'app/services/modelService';
 import { ResetableService } from './resetableService';
 import * as moment from 'moment';
 import * as _ from 'lodash';

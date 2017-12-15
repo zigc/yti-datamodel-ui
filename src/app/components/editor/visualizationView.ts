@@ -1,12 +1,12 @@
 import { module as mod } from './module';
-import { Show } from '../../types/component';
+import { Show } from 'app/types/component';
 import { IScope, IAttributes } from 'angular';
-import { FloatController } from '../common/float';
+import { FloatController } from 'app/components/common/float';
 import { assertNever } from 'yti-common-ui/utils/object';
-import { Class } from '../../entities/class';
-import { Predicate } from '../../entities/predicate';
-import { Model } from '../../entities/model';
-import { ModelPageActions } from '../model/modelPage';
+import { Class } from 'app/entities/class';
+import { Predicate } from 'app/entities/predicate';
+import { Model } from 'app/entities/model';
+import { ModelPageActions } from 'app/components/model/modelPage';
 
 mod.directive('visualizationView', () => {
   return {

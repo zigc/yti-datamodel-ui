@@ -1,8 +1,8 @@
 import { Uri } from './uri';
 import { Moment } from 'moment';
 import { requireDefined } from 'yti-common-ui/utils/object';
-import { idToIndexMap } from '../utils/entity';
-import { comparingDate } from '../utils/comparator';
+import { idToIndexMap } from 'app/utils/entity';
+import { comparingDate } from 'app/utils/comparator';
 import { init } from './mapping';
 import { GraphNode } from './graphNode';
 import { uriSerializer, entityAwareList, entity, entityAwareOptional } from './serializer/entitySerializer';

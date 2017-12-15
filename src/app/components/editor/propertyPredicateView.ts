@@ -1,17 +1,17 @@
 import { IAttributes, IScope } from 'angular';
-import { Uri } from '../../entities/uri';
+import { Uri } from 'app/entities/uri';
 import { module as mod } from './module';
-import { PredicateService } from '../../services/predicateService';
+import { PredicateService } from 'app/services/predicateService';
 import { SearchPredicateModal } from './searchPredicateModal';
-import { createDefinedByExclusion } from '../../utils/exclusion';
+import { createDefinedByExclusion } from 'app/utils/exclusion';
 import { ClassFormController } from './classForm';
 import { anyMatching } from 'yti-common-ui/utils/array';
 import { CopyPredicateModal } from './copyPredicateModal';
 import { requireDefined } from 'yti-common-ui/utils/object';
-import { Property } from '../../entities/class';
-import { Model } from '../../entities/model';
-import { Predicate, Association, Attribute } from '../../entities/predicate';
-import { modalCancelHandler } from '../../utils/angular';
+import { Property } from 'app/entities/class';
+import { Model } from 'app/entities/model';
+import { Predicate, Association, Attribute } from 'app/entities/predicate';
+import { modalCancelHandler } from 'app/utils/angular';
 
 mod.directive('propertyPredicateView', () => {
   return {

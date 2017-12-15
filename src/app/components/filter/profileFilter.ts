@@ -1,8 +1,8 @@
 import { module as mod } from './module';
-import { SearchController, TextAnalysis } from '../../types/filter';
+import { SearchController, TextAnalysis } from 'app/types/filter';
 import { IScope } from 'angular';
-import { WithDefinedBy } from '../../types/entity';
-import { ifChanged } from '../../utils/angular';
+import { WithDefinedBy } from 'app/types/entity';
+import { ifChanged } from 'app/utils/angular';
 
 mod.directive('profileFilter', () => {
   return {

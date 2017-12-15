@@ -1,7 +1,7 @@
 import { Moment } from 'moment';
 import { Optional } from 'yti-common-ui/utils/object';
 import { ChainableComparator, makeChainable, optional, property } from 'yti-common-ui/utils/comparator';
-import { Localizer } from '../types/language';
+import { Localizer } from 'app/types/language';
 import { Localizable } from 'yti-common-ui/types/localization';
 import { Comparator, primitiveComparator } from 'yti-common-ui/utils/comparator';
 

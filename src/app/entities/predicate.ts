@@ -1,7 +1,7 @@
-import { SelectionType, PredicateType, State } from '../types/entity';
-import { normalizePredicateType } from '../utils/entity';
+import { SelectionType, PredicateType, State } from 'app/types/entity';
+import { normalizePredicateType } from 'app/utils/entity';
 import { requireDefined } from 'yti-common-ui/utils/object';
-import { resourceUrl, resolveConceptConstructor } from '../utils/entity';
+import { resourceUrl, resolveConceptConstructor } from 'app/utils/entity';
 import { Uri, Urn } from './uri';
 import { DefinedBy } from './definedBy';
 import { Moment } from 'moment';

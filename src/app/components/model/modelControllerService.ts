@@ -1,5 +1,5 @@
-import { Predicate } from '../../entities/predicate';
-import { Class } from '../../entities/class';
+import { Predicate } from 'app/entities/predicate';
+import { Class } from 'app/entities/class';
 
 export interface View {
   isEditing(): boolean;

@@ -3,8 +3,8 @@ import IModalStackService = ui.bootstrap.IModalStackService;
 import {
   StoryLine, InteractiveHelp, createNotification, Story
 } from './contract';
-import { Model } from '../entities/model';
-import { KnownModelType, KnownPredicateType } from '../types/entity';
+import { Model } from 'app/entities/model';
+import { KnownModelType, KnownPredicateType } from 'app/types/entity';
 import { requireDefined } from 'yti-common-ui/utils/object';
 import * as ModelPage from './pages/model/modelPageHelp.po';
 import * as ModelView from './pages/model/modelViewHelp.po';
@@ -14,13 +14,13 @@ import { classIdFromNamespaceId, predicateIdFromNamespaceId, modelIdFromPrefix, 
 import {
   EntityLoaderService, EntityLoader, PropertyDetails, PredicateDetails,
   ClassDetails
-} from '../services/entityLoader';
+} from 'app/services/entityLoader';
 import { InteractiveHelpService } from './services/interactiveHelpService';
 import gettextCatalog = angular.gettext.gettextCatalog;
-import { availableUILanguages } from '../types/language';
+import { availableUILanguages } from 'app/types/language';
 import * as ClassForm from './pages/model/classFormHelp.po';
 import * as VisualizationView from './pages/model/visualizationViewHelp.po';
-import { Attribute } from '../entities/predicate';
+import { Attribute } from 'app/entities/predicate';
 import { Localizable } from 'yti-common-ui/types/localization';
 
 function addNamespace(type: KnownModelType, data: { prefix: string, namespaceId: string }, gettextCatalog: gettextCatalog): StoryLine {

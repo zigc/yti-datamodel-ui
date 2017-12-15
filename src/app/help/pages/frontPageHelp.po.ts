@@ -1,5 +1,5 @@
-import { child } from '../selectors';
-import { createStory, createNavigatingClickNextCondition } from '../contract';
+import { child } from 'app/help/selectors';
+import { createStory, createNavigatingClickNextCondition } from 'app/help/contract';
 
 const browsePanel = () => angular.element('#browse-panel');
 const selectGroupElement = child(browsePanel, '.selectable-panel__list');

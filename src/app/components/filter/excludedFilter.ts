@@ -1,8 +1,8 @@
 import { module as mod } from './module';
-import { SearchController, TextAnalysis } from '../../types/filter';
+import { SearchController, TextAnalysis } from 'app/types/filter';
 import { IScope } from 'angular';
-import { Exclusion } from '../../utils/exclusion';
-import { ifChanged } from '../../utils/angular';
+import { Exclusion } from 'app/utils/exclusion';
+import { ifChanged } from 'app/utils/angular';
 
 mod.directive('excludedFilter', () => {
   return {

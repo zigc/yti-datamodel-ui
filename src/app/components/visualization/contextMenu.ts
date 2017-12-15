@@ -1,11 +1,11 @@
 import { module as mod } from './module';
-import { Coordinate } from '../../types/visualization';
+import { Coordinate } from 'app/types/visualization';
 import { IScope } from 'angular';
 import { Optional } from 'yti-common-ui/utils/object';
-import { VisualizationClass } from '../../entities/visualization';
-import { Model } from '../../entities/model';
-import { ClassService } from '../../services/classService';
-import { ModelPageActions } from '../model/modelPage';
+import { VisualizationClass } from 'app/entities/visualization';
+import { Model } from 'app/entities/model';
+import { ClassService } from 'app/services/classService';
+import { ModelPageActions } from 'app/components/model/modelPage';
 
 export interface ContextMenuTarget {
   coordinate: Coordinate;

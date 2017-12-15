@@ -1,8 +1,8 @@
 import { IPromise, IQService } from 'angular';
-import { Model } from '../../entities/model';
-import { Uri, Url } from '../../entities/uri';
+import { Model } from 'app/entities/model';
+import { Uri, Url } from 'app/entities/uri';
 import { flatten } from 'yti-common-ui/utils/array';
-import { DefinedBy } from '../../entities/definedBy';
+import { DefinedBy } from 'app/entities/definedBy';
 import { Optional } from 'yti-common-ui/utils/object';
 
 type ModelId = string;

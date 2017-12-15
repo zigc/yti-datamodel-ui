@@ -1,9 +1,9 @@
 import { isDefined, assertNever } from 'yti-common-ui/utils/object';
-import { Localizer } from '../../types/language';
-import { NameType } from '../../services/sessionService';
-import { DataType } from '../../entities/dataTypes';
-import { VisualizationClass } from '../../entities/visualization';
-import { Property } from '../../entities/class';
+import { Localizer } from 'app/types/language';
+import { NameType } from 'app/services/sessionService';
+import { DataType } from 'app/entities/dataTypes';
+import { VisualizationClass } from 'app/entities/visualization';
+import { Property } from 'app/entities/class';
 import { comparingPrimitive } from 'yti-common-ui/utils/comparator';
 
 function formatDataTypeAsLabel(dataType: DataType|null, localizer: Localizer) {

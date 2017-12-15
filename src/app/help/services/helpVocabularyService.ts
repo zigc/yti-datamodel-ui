@@ -1,11 +1,11 @@
-import { VocabularyService } from '../../services/vocabularyService';
+import { VocabularyService } from 'app/services/vocabularyService';
 import { ResetableService } from './resetableService';
 import { IPromise, IQService } from 'angular';
-import { Language } from '../../types/language';
-import { Vocabulary, Concept } from '../../entities/vocabulary';
-import { Uri } from '../../entities/uri';
-import { Model } from '../../entities/model';
-import * as frames from '../../entities/frames';
+import { Language } from 'app/types/language';
+import { Vocabulary, Concept } from 'app/entities/vocabulary';
+import { Uri } from 'app/entities/uri';
+import { Model } from 'app/entities/model';
+import * as frames from 'app/entities/frames';
 import { ResourceStore } from './resourceStore';
 
 export class InteractiveHelpVocabularyService implements VocabularyService, ResetableService {

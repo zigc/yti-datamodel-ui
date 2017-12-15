@@ -1,13 +1,13 @@
 import { IAttributes, IScope } from 'angular';
 import { ClassFormController } from './classForm';
-import { Uri } from '../../entities/uri';
-import { LanguageService } from '../../services/languageService';
+import { Uri } from 'app/entities/uri';
+import { LanguageService } from 'app/services/languageService';
 import { anyMatching, allMatching } from 'yti-common-ui/utils/array';
 import { module as mod } from './module';
-import { hasLocalization } from '../../utils/language';
-import { Property, Class } from '../../entities/class';
-import { Model } from '../../entities/model';
-import { Predicate } from '../../entities/predicate';
+import { hasLocalization } from 'app/utils/language';
+import { Property, Class } from 'app/entities/class';
+import { Model } from 'app/entities/model';
+import { Predicate } from 'app/entities/predicate';
 
 mod.directive('propertyView', () => {
   return {

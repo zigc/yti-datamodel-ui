@@ -1,10 +1,10 @@
-import { createStory, createNavigatingClickNextCondition, createExpectedStateNextCondition } from '../../../contract';
+import { createStory, createNavigatingClickNextCondition, createExpectedStateNextCondition } from 'app/help/contract';
 import {
   input, modal, editableByTitle, editableFocus, editableMultipleByTitle, multiInput,
   child
-} from '../../../selectors';
-import { editableMargin, editableMultipleMargin, initialInputValue, validInput } from '../../../utils';
-import { KnownModelType } from '../../../../types/entity';
+} from 'app/help/selectors';
+import { editableMargin, editableMultipleMargin, initialInputValue, validInput } from 'app/help/utils';
+import { KnownModelType } from 'app/types/entity';
 import { upperCaseFirst } from 'change-case';
 import gettextCatalog = angular.gettext.gettextCatalog;
 

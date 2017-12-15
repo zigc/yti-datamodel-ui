@@ -1,6 +1,6 @@
 import { module as mod } from './module';
 import { IScope, IAttributes } from 'angular';
-import { InteractiveHelpService } from '../../help/services/interactiveHelpService';
+import { InteractiveHelpService } from 'app/help/services/interactiveHelpService';
 
 interface FloatAttributes extends IAttributes {
   float: string;

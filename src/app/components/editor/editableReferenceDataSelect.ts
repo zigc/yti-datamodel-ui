@@ -1,16 +1,16 @@
 import { IScope, IAttributes } from 'angular';
-import { EditableForm } from '../form/editableEntityController';
-import { SearchReferenceDataModal } from '../model/searchReferenceDataModal';
+import { EditableForm } from 'app/components/form/editableEntityController';
+import { SearchReferenceDataModal } from 'app/components/model/searchReferenceDataModal';
 import { module as mod } from './module';
-import { ViewReferenceDataModal } from '../model/viewReferenceDataModal';
-import { TableDescriptor, ColumnDescriptor } from '../form/editableTable';
-import { Localizer, LanguageService } from '../../services/languageService';
+import { ViewReferenceDataModal } from 'app/components/model/viewReferenceDataModal';
+import { TableDescriptor, ColumnDescriptor } from 'app/components/form/editableTable';
+import { Localizer, LanguageService } from 'app/services/languageService';
 import { collectProperties } from 'yti-common-ui/utils/array';
-import { createExistsExclusion } from '../../utils/exclusion';
-import { ReferenceData } from '../../entities/referenceData';
-import { Model } from '../../entities/model';
+import { createExistsExclusion } from 'app/utils/exclusion';
+import { ReferenceData } from 'app/entities/referenceData';
+import { Model } from 'app/entities/model';
 import { remove } from 'yti-common-ui/utils/array';
-import { modalCancelHandler } from '../../utils/angular';
+import { modalCancelHandler } from 'app/utils/angular';
 
 mod.directive('editableReferenceDataSelect', () => {
   return {

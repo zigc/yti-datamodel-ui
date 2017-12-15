@@ -1,11 +1,11 @@
 import { IAttributes, IScope } from 'angular';
-import { EditableForm } from '../form/editableEntityController';
-import { SearchClassModal } from '../editor/searchClassModal';
+import { EditableForm } from 'app/components/form/editableEntityController';
+import { SearchClassModal } from 'app/components/editor/searchClassModal';
 import { requireDefined } from 'yti-common-ui/utils/object';
-import { Model } from '../../entities/model';
-import { ClassListItem } from '../../entities/class';
+import { Model } from 'app/entities/model';
+import { ClassListItem } from 'app/entities/class';
 import { module as mod } from './module';
-import { modalCancelHandler } from '../../utils/angular';
+import { modalCancelHandler } from 'app/utils/angular';
 
 mod.directive('editableRootClass', () => {
   return {

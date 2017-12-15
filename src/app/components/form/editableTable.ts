@@ -1,7 +1,7 @@
 import { IAttributes, IScope } from 'angular';
 import { EditableForm } from './editableEntityController';
 import { module as mod } from './module';
-import { Url } from '../../entities/uri';
+import { Url } from 'app/entities/uri';
 
 mod.directive('editableTable', () => {
   return {

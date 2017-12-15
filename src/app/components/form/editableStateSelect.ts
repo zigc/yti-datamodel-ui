@@ -1,9 +1,9 @@
 import { IAttributes, IScope } from 'angular';
 import { module as mod } from './module';
 import { EditableForm } from './editableEntityController';
-import { State } from '../../types/entity';
-import { Model } from '../../entities/model';
-import { AuthorizationManagerService } from '../../services/authorizationManagerService';
+import { State } from 'app/types/entity';
+import { Model } from 'app/entities/model';
+import { AuthorizationManagerService } from 'app/services/authorizationManagerService';
 
 mod.directive('editableStateSelect', () => {
   return {

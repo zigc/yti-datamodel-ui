@@ -1,16 +1,16 @@
 import { IAttributes, IScope } from 'angular';
 import { ModelViewController } from './modelView';
-import { LanguageService } from '../../services/languageService';
-import { TableDescriptor, ColumnDescriptor } from '../form/editableTable';
+import { LanguageService } from 'app/services/languageService';
+import { TableDescriptor, ColumnDescriptor } from 'app/components/form/editableTable';
 import { SearchVocabularyModal } from './searchVocabularyModal';
 import { module as mod } from './module';
-import { createExistsExclusion } from '../../utils/exclusion';
+import { createExistsExclusion } from 'app/utils/exclusion';
 import { ConceptEditorModal } from './conceptEditorModal';
 import { collectProperties } from 'yti-common-ui/utils/array';
 import { requireDefined } from 'yti-common-ui/utils/object';
-import { Model, ModelVocabulary } from '../../entities/model';
-import { Vocabulary } from '../../entities/vocabulary';
-import { modalCancelHandler } from '../../utils/angular';
+import { Model, ModelVocabulary } from 'app/entities/model';
+import { Vocabulary } from 'app/entities/vocabulary';
+import { modalCancelHandler } from 'app/utils/angular';
 
 mod.directive('vocabulariesView', () => {
   return {

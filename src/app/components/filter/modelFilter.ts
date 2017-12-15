@@ -1,19 +1,19 @@
 import { module as mod } from './module';
 import * as _ from 'lodash';
-import { SearchController, TextAnalysis } from '../../types/filter';
+import { SearchController, TextAnalysis } from 'app/types/filter';
 import { IScope } from 'angular';
 import { isDefined } from 'yti-common-ui/utils/object';
-import { ClassService } from '../../services/classService';
-import { PredicateService } from '../../services/predicateService';
-import { collectIds } from '../../utils/entity';
+import { ClassService } from 'app/services/classService';
+import { PredicateService } from 'app/services/predicateService';
+import { collectIds } from 'app/utils/entity';
 import { IPromise } from 'angular';
-import { comparingLocalizable } from '../../utils/comparator';
-import { LanguageService } from '../../services/languageService';
-import { ifChanged } from '../../utils/angular';
-import { ClassListItem } from '../../entities/class';
-import { PredicateListItem } from '../../entities/predicate';
-import { Model } from '../../entities/model';
-import { DefinedBy } from '../../entities/definedBy';
+import { comparingLocalizable } from 'app/utils/comparator';
+import { LanguageService } from 'app/services/languageService';
+import { ifChanged } from 'app/utils/angular';
+import { ClassListItem } from 'app/entities/class';
+import { PredicateListItem } from 'app/entities/predicate';
+import { Model } from 'app/entities/model';
+import { DefinedBy } from 'app/entities/definedBy';
 
 mod.directive('modelFilter', () => {
   return {

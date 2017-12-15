@@ -1,4 +1,4 @@
-import { contextlessInternalUrl } from '../utils/entity';
+import { contextlessInternalUrl } from 'app/utils/entity';
 import { Uri } from './uri';
 import { DefinedBy } from './definedBy';
 import { init } from './mapping';

@@ -1,7 +1,7 @@
 import { IAttributes, INgModelController, IQService, IScope, IModelFormatter } from 'angular';
-import { EditableForm } from '../form/editableEntityController';
-import { arrayValidator, arrayAsyncValidator } from '../form/validators';
-import { extendNgModelOptions, formatWithFormatters, ValidationResult, validateWithValidators } from '../../utils/angular';
+import { EditableForm } from 'app/components/form/editableEntityController';
+import { arrayValidator, arrayAsyncValidator } from 'app/components/form/validators';
+import { extendNgModelOptions, formatWithFormatters, ValidationResult, validateWithValidators } from 'app/utils/angular';
 import { module as mod } from './module';
 import { remove } from 'yti-common-ui/utils/array';
 import { enter } from 'yti-common-ui/utils/key-code';

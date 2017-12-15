@@ -1,4 +1,4 @@
-import { createStory, createExplicitNextCondition, createScrollWithDefault } from '../../contract';
+import { createStory, createExplicitNextCondition, createScrollWithDefault } from 'app/help/contract';
 const focusVisualizationElement = () => angular.element('class-visualization');
 
 export const focusVisualization = createStory({
