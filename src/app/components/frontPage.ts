@@ -1,4 +1,4 @@
-import { ILocationService } from 'angular';
+import { ILocationService, IScope } from 'angular';
 import { LocationService } from 'app/services/locationService';
 import { LanguageService } from 'app/services/languageService';
 import { AdvancedSearchModal } from './advancedSearchModal';
@@ -33,7 +33,6 @@ export class FrontPageController implements HelpProvider {
 
   applicationCtrl: ApplicationController;
 
-  models: ModelListItem[];
   helps = this.frontPageHelpService.getHelps();
 
   search$ = new BehaviorSubject('');
@@ -43,9 +42,11 @@ export class FrontPageController implements HelpProvider {
   filteredModels: ModelListItem[] = [];
 
   subscriptionsToClean: Subscription[] = [];
+  modelsLoaded = false;
 
   /* @ngInject */
-  constructor(private $location: ILocationService,
+  constructor($scope: IScope,
+              private $location: ILocationService,
               locationService: LocationService,
               modelService: ModelService,
               languageService: LanguageService,
@@ -56,14 +57,8 @@ export class FrontPageController implements HelpProvider {
     locationService.atFrontPage();
     const localizer = languageService.createLocalizer();
 
-    const models$ = fromIPromise(modelService.getModels());
+    const models$ = fromIPromise(modelService.getModels()).do(() => this.modelsLoaded = true);
     const classifications$ = fromIPromise(classificationService.getClassifications(this.classification$.getValue()));
-
-    this.subscriptionsToClean.push(Observable.combineLatest(models$, languageService.language$)
-      .subscribe(([models]) => {
-        this.models = models;
-        this.models.sort(comparingLocalizable<ModelListItem>(localizer, m => m.label));
-      }));
 
     function searchMatches(search: string, model: ModelListItem) {
       return !search || anyMatching(Object.values(model.label), value => matches(value, search));
@@ -73,7 +68,7 @@ export class FrontPageController implements HelpProvider {
       return !classification || anyMatching(model.classification, c => c.id.equals(classification.id));
     }
 
-    Observable.combineLatest(classifications$, models$, this.search$)
+    this.subscriptionsToClean.push(Observable.combineLatest(classifications$, models$, this.search$, languageService.language$)
       .subscribe(([classifications, vocabularies, search]) => {
 
         const matchingVocabularies = vocabularies.filter(vocabulary =>
@@ -85,16 +80,18 @@ export class FrontPageController implements HelpProvider {
 
         this.classifications = classifications.map(c => ({ node: c, count: modelCount(c) }));
         this.classifications.sort(comparingLocalizable<{ node: Classification }>(localizer, c => c.node.label));
-      });
+      }));
 
-    Observable.combineLatest(models$, this.search$, this.classification$)
+    this.subscriptionsToClean.push(Observable.combineLatest(models$, this.search$, this.classification$, languageService.language$)
       .subscribe(([models, search, classification]) => {
 
         this.filteredModels = models.filter(model =>
           searchMatches(search, model) &&
           classificationMatches(classification, model)
         );
-      });
+
+        this.filteredModels.sort(comparingLocalizable<ModelListItem>(localizer, m => m.label));
+      }));
   }
 
   $onInit() {
@@ -108,7 +105,7 @@ export class FrontPageController implements HelpProvider {
   }
 
   get loading() {
-    return this.models == null || this.classifications == null; // || !this.organizations$;
+    return !this.modelsLoaded || this.classifications == null;
   }
 
   get search() {
