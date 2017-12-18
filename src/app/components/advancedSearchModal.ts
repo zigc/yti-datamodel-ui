@@ -5,9 +5,15 @@ import { SearchService } from 'app/services/searchService';
 import { LanguageService, Localizer } from 'app/services/languageService';
 import { SearchController, SearchFilter } from 'app/types/filter';
 import { Type } from 'app/types/entity';
-import { frontPageSearchLanguageContext, LanguageContext } from 'app/types/language';
+import { availableUILanguages, LanguageContext } from 'app/types/language';
 import { SearchResult } from 'app/entities/search';
 import { filterAndSortSearchResults, defaultLabelComparator } from './filter/util';
+import { Uri } from '../entities/uri';
+
+export const languageContext: LanguageContext = {
+  id: new Uri('http://advanvedSearch', {}),
+  language: availableUILanguages
+};
 
 export class AdvancedSearchModal {
   /* @ngInject */
@@ -43,7 +49,7 @@ class AdvancedSearchController implements SearchController<SearchResult> {
               private searchService: SearchService,
               languageService: LanguageService) {
 
-    this.localizer = languageService.createLocalizer(frontPageSearchLanguageContext);
+    this.localizer = languageService.createLocalizer(languageContext);
 
     $scope.$watch(() => this.searchText, text => {
       if (text) {
@@ -65,7 +71,7 @@ class AdvancedSearchController implements SearchController<SearchResult> {
     return this.apiSearchResults;
   }
 
-  get context(): LanguageContext {
+  get context() {
     return this.localizer.context;
   }
 

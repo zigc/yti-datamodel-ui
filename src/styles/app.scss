@@ -57,6 +57,73 @@ input[type=checkbox][disabled] + span {
   text-decoration: line-through;
 }
 
+.classification {
+
+  display: inline-block;
+  width: 100%;
+  padding: 5px 10px 5px 5px;
+  cursor: pointer;
+  border-left: $active-indicator-width solid $white;
+
+  &:hover, &.active {
+    border-left: $active-indicator-width solid $primary;
+  }
+
+  &.active {
+    font-weight: 500;
+  }
+
+  .name {
+    float: left;
+  }
+
+  .count {
+    float: right;
+    color: $primary;
+  }
+}
+
+.model {
+
+  display: inline-block;
+  width: 100%;
+  padding: 5px 10px 5px 5px;
+  cursor: pointer;
+  border-left: $active-indicator-width solid $white;
+
+  &:hover {
+    border-left: $active-indicator-width solid $primary;
+  }
+
+  .name {
+    color: $primary;
+    font-size: large;
+    float: left;
+    clear: left;
+    width: calc(100% - 300px);
+  }
+
+  @mixin info() {
+    float: right;
+    clear: right;
+    color: $gray-700;
+  }
+
+  .organization {
+    @include info;
+  }
+
+  .group {
+    @include info;
+  }
+
+  .type {
+    @include info;
+  }
+}
+
+
+
 [float] {
   will-change: scroll-position;
 }

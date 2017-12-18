@@ -108,8 +108,6 @@ const versionContext = Object.assign({}, coreContext, {
   used: { '@id': 'http://www.w3.org/ns/prov#used', '@type': '@id' }
 });
 
-const groupContext = Object.assign({}, coreContext, {});
-
 const namespaceContext = Object.assign({}, coreContext, {
   preferredXMLNamespaceName: { '@id': 'http://purl.org/ws-mmi-dc/terms/preferredXMLNamespaceName' },
   preferredXMLNamespacePrefix: { '@id': 'http://purl.org/ws-mmi-dc/terms/preferredXMLNamespacePrefix' }
@@ -139,28 +137,6 @@ const searchResultContext = Object.assign({}, coreContext, modelContext, {});
 
 function frame(data: any, context: {}, frame?: {}) {
   return Object.assign({ '@context': Object.assign({}, data['@context'], context) }, frame);
-}
-
-export function groupFrame(data: any, id: Uri) {
-  return frame(data, groupContext, {
-    '@id': id.toString(),
-    graph: {
-      '@omitDefault': true,
-      '@default': [],
-      '@embed': '@always'
-    }
-  });
-}
-
-export function groupListFrame(data: any) {
-  return frame(data, groupContext, {
-    '@type': 'foaf:Group',
-    graph: {
-      '@omitDefault': true,
-      '@default': [],
-      '@embed': '@always'
-    }
-  });
 }
 
 export function modelFrame(data: any, options: { id?: Uri|Urn, prefix?: string } = {}) {
@@ -304,6 +280,14 @@ export function conceptListFrame(data: any) {
       '@default': [],
       '@embed': '@always'
     }
+  });
+}
+
+export function classificationListFrame(data: any) {
+
+  return frame(data, conceptContext, {
+    '@type': 'skos:Concept',
+    identifier: {}
   });
 }
 

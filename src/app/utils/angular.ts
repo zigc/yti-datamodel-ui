@@ -1,8 +1,25 @@
-import { INgModelController, IModelFormatter, ILocationService, IPromise, IQService } from 'angular';
-import { Validator, AsyncValidator } from 'app/components/form/validators';
-import { normalizeAsArray, allMatching } from 'yti-common-ui/utils/array';
+import {
+  IComponentController, IComponentOptions, ILocationService, IModelFormatter, IModule, INgModelController,
+  IPromise, IQService
+} from 'angular';
+import { AsyncValidator, Validator } from 'app/components/form/validators';
+import { allMatching, normalizeAsArray } from 'yti-common-ui/utils/array';
 import { valuesExcludingKeys } from 'yti-common-ui/utils/object';
 import { Show } from 'app/types/component';
+import { ForwardRefFn, resolveForwardRef } from '@angular/core';
+
+export interface ComponentDeclaration extends IComponentOptions {
+  selector: string;
+  controller?: string | Function | (string | Function)[] | IComponentController | ForwardRefFn;
+}
+
+export function registerComponent(module: IModule, componentDeclaration: ComponentDeclaration) {
+
+  const { selector, controller, ...options } = componentDeclaration;
+  const resolvedController = resolveForwardRef(controller);
+
+  module.component(selector, Object.assign({}, options, resolvedController ? { controller: resolvedController} : {}));
+}
 
 export function hasFixedPositioningParent(e: JQuery) {
   for (let p = e.parent(); p && p.length > 0 && !p.is('body'); p = p.parent()) {

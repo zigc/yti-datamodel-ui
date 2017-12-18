@@ -1,9 +1,8 @@
 import * as _ from 'lodash';
 import { requireDefined } from 'yti-common-ui/utils/object';
 import { KnownModelType, State, Type } from 'app/types/entity';
-import { normalizeModelType } from 'app/utils/entity';
+import { modelUrl, normalizeModelType, resourceUrl } from 'app/utils/entity';
 import { Uri, Url, Urn } from './uri';
-import { modelUrl, resourceUrl } from 'app/utils/entity';
 import { GroupListItem } from './group';
 import { Language } from 'app/types/language';
 import { Moment } from 'moment';
@@ -13,14 +12,13 @@ import { Vocabulary } from './vocabulary';
 import { ReferenceData } from './referenceData';
 import { init, serialize } from './mapping';
 import { GraphNode } from './graphNode';
+import { entity, entityAwareList, entityAwareOptional, normalized, uriSerializer } from './serializer/entitySerializer';
 import {
-  uriSerializer, entityAwareList, entity, entityAwareOptional, normalized
-} from './serializer/entitySerializer';
-import {
-  localizableSerializer, stringSerializer, identitySerializer, optional, list,
-  languageSerializer, dateSerializer, typeSerializer
+  dateSerializer, identitySerializer, languageSerializer, list, localizableSerializer, optional,
+  stringSerializer, typeSerializer
 } from './serializer/serializer';
 import { Localizable } from 'yti-common-ui/types/localization';
+import { Organization } from './organization';
 
 
 function normalizeType(type: Type[]): KnownModelType {
@@ -59,8 +57,18 @@ export abstract class AbstractModel extends GraphNode {
 }
 
 export class ModelListItem extends AbstractModel {
+
+  static modelListItemMappings = {
+    classification: { name: 'isPartOf',    serializer: entityAwareList(entity(() => GroupListItem)) },
+    organization:   { name: 'contributor', serializer: entityAwareList(entity(() => Organization)) }
+  };
+
+  classification: GroupListItem[];
+  organization: Organization[];
+
   constructor(graph: any, context: any, frame: any) {
     super(graph, context, frame);
+    init(this, ModelListItem.modelListItemMappings);
   }
 }
 

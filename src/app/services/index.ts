@@ -23,6 +23,7 @@ import { InteractiveHelpValidatorService } from 'app/help/services/helpValidator
 import { UserService } from 'yti-common-ui/services/user.service';
 import { downgradeInjectable } from '@angular/upgrade/static';
 import { AuthorizationManagerService } from './authorizationManagerService';
+import { ClassificationService } from './classificationService';
 
 function proxyConditionallyToHelp<T>(interactiveHelpService: InteractiveHelpService, defaultService: T, helpService: T) {
   return proxyToInstance(() => interactiveHelpService.isOpen() ? helpService : defaultService);
@@ -77,3 +78,4 @@ mod.service('entityLoaderService', EntityLoaderService);
 mod.service('sessionService', SessionService);
 mod.service('frameService', FrameService);
 mod.service('authorizationManagerService', AuthorizationManagerService);
+mod.service('classificationService', ClassificationService);

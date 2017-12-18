@@ -20,11 +20,11 @@ msgstr "Lisää assosiaatio"
 msgid "Add attribute"
 msgstr "Lisää attribuutti"
 
-#: components/editor/searchPredicateModal.html:9
+#: app/components/editor/searchPredicateModal.html:9
 msgid "Add attribute or association"
 msgstr "Lisää attribuutti tai assosiaatio"
 
-#: components/editor/searchClassModal.html:5 translations/misc.html:51
+#: app/components/editor/searchClassModal.html:5 translations/misc.html:51
 msgid "Add class"
 msgstr "Lisää luokka"
 
@@ -44,7 +44,7 @@ msgstr ""
 msgid "Add link"
 msgstr "Lisää linkki"
 
-#: components/model/searchNamespaceModal.html:30
+#: app/components/model/searchNamespaceModal.html:30
 msgid "Add new namespace"
 msgstr "Luo uusi nimiavaruus"
 
@@ -75,11 +75,11 @@ msgstr "Lisää ominaisuudet tarkennettavasta luokasta"
 msgid "Add properties from super class"
 msgstr "Lisää ominaisuudet yläluokasta"
 
-#: components/editor/classView.html:6
+#: app/components/editor/classView.html:6
 msgid "Add property"
 msgstr "Lisää ominaisuus"
 
-#: components/editor/editableReferenceDataSelect.html:12
+#: app/components/editor/editableReferenceDataSelect.html:12
 #: translations/misc.html:207
 msgid "Add reference data"
 msgstr "Lisää koodisto"
@@ -98,9 +98,11 @@ msgstr ""
 msgid "Add vocabulary"
 msgstr "Lisää sanasto"
 
-#: components/editor/classForm.html:78 components/editor/predicateForm.html:59
-#: components/editor/propertyView.html:151 components/model/conceptForm.html:31
-#: components/model/modelForm.html:20
+#: app/components/editor/classForm.html:78
+#: app/components/editor/predicateForm.html:59
+#: app/components/editor/propertyView.html:151
+#: app/components/model/conceptForm.html:31
+#: app/components/model/modelForm.html:20
 msgid "Additional information"
 msgstr "Lisätiedot"
 
@@ -108,19 +110,19 @@ msgstr "Lisätiedot"
 msgid "Admin groups"
 msgstr "Pääkäyttäjänä ryhmissä"
 
-#: components/advancedSearchModal.html:2 components/frontPage.html:6
+#: app/components/advancedSearchModal.html:2
 msgid "Advanced search"
 msgstr "Tarkennettu haku"
 
-#: components/model/searchReferenceDataModal.html:32
+#: app/components/model/searchReferenceDataModal.html:32
 msgid "All groups"
 msgstr "Kaikki ryhmät"
 
-#: components/model/searchReferenceDataModal.html:21
+#: app/components/model/searchReferenceDataModal.html:21
 msgid "All servers"
 msgstr "Kaikki palvelimet"
 
-#: components/model/conceptEditorModal.html:42
+#: app/components/model/conceptEditorModal.html:42
 msgid "All states"
 msgstr "Kaikki tilat"
 
@@ -128,8 +130,8 @@ msgstr "Kaikki tilat"
 msgid "All types"
 msgstr "Kaikki tyypit"
 
-#: components/editor/searchConceptModal.html:25
-#: components/model/conceptEditorModal.html:31
+#: app/components/editor/searchConceptModal.html:25
+#: app/components/model/conceptEditorModal.html:31
 msgid "All vocabularies"
 msgstr "Kaikki sanastot"
 
@@ -189,7 +191,8 @@ msgstr ""
 "Oletko varma, että haluat jatkaa? Jatkaessasi tallentamattomat muutokset "
 "katoavat."
 
-#: components/common/deleteConfirmationModal.html:12 translations/misc.html:48
+#: app/components/common/deleteConfirmationModal.html:12
+#: translations/misc.html:48
 msgid "Are you sure that you want to delete?"
 msgstr "Oletko varma, että haluat poistaa?"
 
@@ -323,19 +326,15 @@ msgstr "Laajempi käsite"
 msgid "Broader concept info"
 msgstr "Käsitteeseen liittyvä yläkäsite"
 
-#: components/frontPage.html:10
-msgid "Browse"
-msgstr "Selaa"
-
-#: components/model/conceptEditorModal.html:3 translations/misc.html:215
+#: app/components/model/conceptEditorModal.html:3 translations/misc.html:215
 msgid "Browse concepts"
 msgstr "Selaa käsitteitä"
 
-#: components/model/referenceDataView.html:10
+#: app/components/model/referenceDataView.html:10
 msgid "Browse reference data codes"
 msgstr "Selaa koodistoa"
 
-#: components/editor/searchConceptModal.html:32
+#: app/components/editor/searchConceptModal.html:32
 msgid "Browse vocabulary"
 msgstr "Selaa sanastoa"
 
@@ -351,23 +350,23 @@ msgstr "Valinta on tehtävä tietokomponenettikirjaston luokista"
 msgid "Can be selected only from this profile"
 msgstr "Valinta on tehtävä soveltamisprofiilin luokista"
 
-#: components/advancedSearchModal.html:35
-#: components/common/modalTemplate.html:16
-#: components/editor/addPropertiesFromClassModal.html:27
-#: components/editor/searchClassModal.html:84
-#: components/editor/searchConceptModal.html:97
-#: components/editor/searchPredicateModal.html:105
-#: components/group/addModelModal.html:31
-#: components/model/addEditLinkModal.html:20
-#: components/model/addEditNamespaceModal.html:46
-#: components/model/editReferenceDataModal.html:26
-#: components/model/searchNamespaceModal.html:45
-#: components/model/searchReferenceDataModal.html:95
-#: components/model/searchVocabularyModal.html:35
+#: app/components/advancedSearchModal.html:35
+#: app/components/common/modalTemplate.html:16
+#: app/components/editor/addPropertiesFromClassModal.html:27
+#: app/components/editor/searchClassModal.html:84
+#: app/components/editor/searchConceptModal.html:97
+#: app/components/editor/searchPredicateModal.html:105
+#: app/components/group/addModelModal.html:31
+#: app/components/model/addEditLinkModal.html:20
+#: app/components/model/addEditNamespaceModal.html:46
+#: app/components/model/editReferenceDataModal.html:26
+#: app/components/model/searchNamespaceModal.html:45
+#: app/components/model/searchReferenceDataModal.html:95
+#: app/components/model/searchVocabularyModal.html:35
 msgid "Cancel"
 msgstr "Peruuta"
 
-#: components/form/editableEntityButtons.html:3
+#: app/components/form/editableEntityButtons.html:3
 msgid "Cancel edit"
 msgstr "Peruuta muokkaus"
 
@@ -375,8 +374,8 @@ msgstr "Peruuta muokkaus"
 msgid "Cannot import profile"
 msgstr "Soveltamisprofiili ei voi olla nimiavaruutena"
 
-#: components/editor/subjectView.html:10 components/editor/subjectView.html:41
-#: translations/misc.html:241
+#: app/components/editor/subjectView.html:10
+#: app/components/editor/subjectView.html:41 translations/misc.html:241
 msgid "Change concept"
 msgstr "Vaihda käsite"
 
@@ -388,7 +387,7 @@ msgstr "Vaihda uudelleenkäytettävä ominaisuus"
 msgid "Changes need to be saved"
 msgstr "Jos haluat tallettaa muutokset paina \"Tallenna\""
 
-#: components/editor/choosePredicateTypeModal.html:13
+#: app/components/editor/choosePredicateTypeModal.html:13
 msgid "Choose"
 msgstr "valitse"
 
@@ -400,11 +399,12 @@ msgstr "valitse assosiaatio"
 msgid "Choose attribute"
 msgstr "valitse attribuutti"
 
-#: components/editor/editableConstraint.html:35 translations/misc.html:67
+#: app/components/editor/editableConstraint.html:35 translations/misc.html:67
 msgid "Choose class"
 msgstr "valitse luokka"
 
-#: components/editor/editableConceptSelect.html:18 translations/misc.html:242
+#: app/components/editor/editableConceptSelect.html:18
+#: translations/misc.html:242
 msgid "Choose concept"
 msgstr "valitse käsite"
 
@@ -412,7 +412,7 @@ msgstr "valitse käsite"
 msgid "Choose reference data"
 msgstr "valitse koodisto"
 
-#: components/model/editableRootClass.html:7
+#: app/components/model/editableRootClass.html:7
 msgid "Choose root class"
 msgstr "valitse juurisolmu"
 
@@ -478,11 +478,11 @@ msgstr "Luokan ominaisuuden nimi"
 msgid "Class property label info"
 msgstr "Luokan ominaisuuden ihmisluettava nimi"
 
-#: components/editor/searchClassModal.html:17
+#: app/components/editor/searchClassModal.html:17
 msgid "Class search info"
 msgstr "Hae tarvitsemaasi luokkaa yhteentoimivuuden kuvauksista."
 
-#: components/editor/searchClassModal.html:16
+#: app/components/editor/searchClassModal.html:16
 msgid "Class search or create info"
 msgstr ""
 "Hae ensin tarvitsemaasi luokkaa yhteentoimivuuden kuvauksista. Jos et löydä "
@@ -508,8 +508,12 @@ msgstr "Luokkaa voidaan muokata täältä"
 msgid "Classes can be seen visually here"
 msgstr "Luokat ja niiden väliset assosiaatiot näkyvät visuaalisesti täällä"
 
-#: components/editor/editableConceptSelect.html:19
-#: components/model/editableRootClass.html:8
+#: app/components/frontPage.html:18
+msgid "Classification"
+msgstr "Luokitus"
+
+#: app/components/editor/editableConceptSelect.html:19
+#: app/components/model/editableRootClass.html:8
 msgid "Clear selection"
 msgstr "poista valinta"
 
@@ -517,8 +521,8 @@ msgstr "poista valinta"
 msgid "close"
 msgstr "sulje"
 
-#: components/common/historyModal.html:36
-#: components/model/conceptEditorModal.html:84 translations/misc.html:168
+#: app/components/common/historyModal.html:36
+#: app/components/model/conceptEditorModal.html:84 translations/misc.html:168
 msgid "Close"
 msgstr "Sulje"
 
@@ -544,8 +548,8 @@ msgstr "Käsitteen tunniste"
 msgid "Concept id info"
 msgstr "Käsitteen yksilöivä uri tunniste"
 
-#: components/editor/subjectView.html:4 components/model/conceptForm.html:3
-#: translations/misc.html:126
+#: app/components/editor/subjectView.html:4
+#: app/components/model/conceptForm.html:3 translations/misc.html:126
 msgid "Concept information"
 msgstr "Käsitteen tiedot"
 
@@ -557,7 +561,7 @@ msgstr ""
 msgid "Concept is here info"
 msgstr ""
 
-#: components/editor/searchConceptModal.html:87
+#: app/components/editor/searchConceptModal.html:87
 msgid "Concept is suggested to vocabulary"
 msgstr "Käsitettä ehdotetaan sanastoon"
 
@@ -569,13 +573,13 @@ msgstr "Käsitteen nimi"
 msgid "Concept label info"
 msgstr "Käsitteen suositeltava termi"
 
-#: components/editor/searchConceptModal.html:13
+#: app/components/editor/searchConceptModal.html:13
 msgid "Concept search info"
 msgstr ""
 "Hae ensin tarvitsemaasi käsitettä sanastoista. Jos et löydä tarpeisiisi "
 "sopivaa, voit luoda uuden käsite-ehdotuksen."
 
-#: components/model/conceptEditorModal.html:38
+#: app/components/model/conceptEditorModal.html:38
 msgid "Concept state"
 msgstr "Käsitteen tila"
 
@@ -595,7 +599,7 @@ msgstr ""
 "täsmällisesti jonkin asian merkityssisällön, ottamalla huomioon vain "
 "välttämättömät mutta kuitenkin riittävät asian piirteet."
 
-#: components/model/conceptForm.html:2 translations/misc.html:127
+#: app/components/model/conceptForm.html:2 translations/misc.html:127
 msgid "Concept suggestion information"
 msgstr "Käsite-ehdotuksen tiedot"
 
@@ -607,7 +611,8 @@ msgstr "Käsite-ehdotuksen nimi"
 msgid "Concept suggestion label info"
 msgstr "Ehdotettu termi käsitteelle"
 
-#: components/common/deleteConfirmationModal.html:3 translations/misc.html:47
+#: app/components/common/deleteConfirmationModal.html:3
+#: translations/misc.html:47
 msgid "Confirm delete"
 msgstr "Poistamisen hyväksyntä"
 
@@ -727,8 +732,8 @@ msgstr "Luo assosiaatio ja käytä"
 msgid "Create and use attribute"
 msgstr "Luo attribuutti ja käytä"
 
-#: components/group/addModelModal.html:32
-#: components/model/searchReferenceDataModal.html:97
+#: app/components/group/addModelModal.html:32
+#: app/components/model/searchReferenceDataModal.html:97
 msgid "Create new"
 msgstr "Luo uusi"
 
@@ -838,7 +843,7 @@ msgstr "Määrittele käsite uudelle luokalle"
 msgid "Define concept for the shape"
 msgstr "Määrittele käsite tarkennetulle luokalle"
 
-#: components/editor/choosePredicateTypeModal.html:2
+#: app/components/editor/choosePredicateTypeModal.html:2
 msgid "Define type for class property"
 msgstr "Määrittele luokan ominaisuuden tyyppi"
 
@@ -942,7 +947,7 @@ msgstr "Poista tietokomponenttikirjasto"
 msgid "Delete profile"
 msgstr "Poista soveltamisprofiili"
 
-#: components/editor/propertyView.html:11
+#: app/components/editor/propertyView.html:11
 msgid "Delete property"
 msgstr "Poista ominaisuus"
 
@@ -966,7 +971,7 @@ msgstr "Kuvaus"
 msgid "Description info"
 msgstr "Tietosisällön kuvaus"
 
-#: components/editor/addPropertiesFromClassModal.html:22
+#: app/components/editor/addPropertiesFromClassModal.html:22
 msgid "Deselect all"
 msgstr "Poista kaikki valinnat"
 
@@ -984,7 +989,7 @@ msgstr ""
 "cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat "
 "non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
 
-#: components/editor/addPropertiesFromClassModal.html:5
+#: app/components/editor/addPropertiesFromClassModal.html:5
 msgid "Do you want to add following properties from ' + ctrl.classType + '?"
 msgstr ""
 
@@ -1008,7 +1013,7 @@ msgstr "Haluatko lisätä seuraavat ominaisuudet tarkennettavasta luokasta?"
 msgid "Do you want to add following properties from super class?"
 msgstr "Haluatko lisätä seuraavat ominaisuudet yläluokasta?"
 
-#: components/common/export.html:9
+#: app/components/common/export.html:9
 msgid "Download"
 msgstr "tallenna"
 
@@ -1020,12 +1025,12 @@ msgstr "Luonnos"
 msgid "Duplicate association target"
 msgstr "Assosiaation kohde on jo lisätty"
 
-#: components/form/errorMessages.html:11
+#: app/components/form/errorMessages.html:11
 msgid "Duplicate error"
 msgstr "Syöte on jo lisätty"
 
-#: components/form/editableEntityButtons.html:5
-#: components/model/editReferenceDataModal.html:27
+#: app/components/form/editableEntityButtons.html:5
+#: app/components/model/editReferenceDataModal.html:27
 msgid "Edit"
 msgstr "Muokkaa"
 
@@ -1041,7 +1046,8 @@ msgstr "Muokkaa linkkiä"
 msgid "Edit namespace"
 msgstr "Muokkaa nimiavaruutta"
 
-#: components/model/editReferenceDataModal.html:3 translations/misc.html:212
+#: app/components/model/editReferenceDataModal.html:3
+#: translations/misc.html:212
 msgid "Edit reference data"
 msgstr "Muokkaa koodistoa"
 
@@ -1053,7 +1059,7 @@ msgstr "Muokkaajan kommentti"
 msgid "Editorial note info"
 msgstr ""
 
-#: components/user/userPage.html:13
+#: app/components/user/userPage.html:13
 msgid "Email"
 msgstr "Sähköposti"
 
@@ -1108,11 +1114,11 @@ msgstr "Esimerkki"
 msgid "Example info"
 msgstr "Esimerkkiarvo ominaisuudelle"
 
-#: components/form/errorMessages.html:8
+#: app/components/form/errorMessages.html:8
 msgid "Existing id error"
 msgstr "Tunniste on jo käytössä"
 
-#: components/common/export.html:2
+#: app/components/common/export.html:2
 msgid "Export"
 msgstr "Lataa"
 
@@ -1140,14 +1146,14 @@ msgstr "Viite ulkoiseen URI tunnisteeseen"
 msgid "fi"
 msgstr "Suomeksi"
 
-#: components/advancedSearchModal.html:13
-#: components/editor/searchClassModal.html:22
-#: components/editor/searchConceptModal.html:18
-#: components/editor/searchPredicateModal.html:30
-#: components/model/conceptEditorModal.html:23
-#: components/model/searchNamespaceModal.html:13
-#: components/model/searchReferenceDataModal.html:14
-#: components/model/searchVocabularyModal.html:12
+#: app/components/advancedSearchModal.html:13
+#: app/components/editor/searchClassModal.html:22
+#: app/components/editor/searchConceptModal.html:18
+#: app/components/editor/searchPredicateModal.html:30
+#: app/components/model/conceptEditorModal.html:23
+#: app/components/model/searchNamespaceModal.html:13
+#: app/components/model/searchReferenceDataModal.html:14
+#: app/components/model/searchVocabularyModal.html:12
 msgid "Filter results"
 msgstr "Rajaa hakutuloksia"
 
@@ -1159,7 +1165,7 @@ msgstr "Pakollinen arvo"
 msgid "Fixed value info"
 msgstr "Ennaltamääritelty pakollinen arvo joka täytyy löytyä datasta"
 
-#: components/common/deleteConfirmationModal.html:7
+#: app/components/common/deleteConfirmationModal.html:7
 msgid "Following items are depending on the deleted"
 msgstr "Seuraavat asiat riippuvat poistettavasta"
 
@@ -1171,7 +1177,7 @@ msgstr "Framed JSON-LD"
 msgid "Front page"
 msgstr "Etusivu"
 
-#: components/form/errorMessages.html:16
+#: app/components/form/errorMessages.html:16
 msgid "Greater than max error"
 msgstr "Ei saa olla suurempi kuin maksimi"
 
@@ -1179,7 +1185,7 @@ msgstr "Ei saa olla suurempi kuin maksimi"
 msgid "group"
 msgstr "Ryhmä"
 
-#: components/model/searchReferenceDataModal.html:28
+#: app/components/model/searchReferenceDataModal.html:28
 msgid "Group"
 msgstr "Ryhmä"
 
@@ -1257,7 +1263,7 @@ msgstr "Ohje on avattuna"
 msgid "Hide"
 msgstr "Piilota"
 
-#: components/common/historyModal.html:3 translations/misc.html:167
+#: app/components/common/historyModal.html:3 translations/misc.html:167
 msgid "Historical versions"
 msgstr "Historialliset versiot"
 
@@ -1288,11 +1294,11 @@ msgstr "ID"
 msgid "ID is already in use"
 msgstr "Tunniste on jo käytössä"
 
-#: components/form/errorMessages.html:19
+#: app/components/form/errorMessages.html:19
 msgid "Id name is required"
 msgstr "Tunniste puuttuu nimiavaruuden sisältä"
 
-#: components/model/referenceDataView.html:19 translations/misc.html:201
+#: app/components/model/referenceDataView.html:19 translations/misc.html:201
 msgid "Identifier"
 msgstr "Tunniste"
 
@@ -1345,27 +1351,27 @@ msgstr ""
 msgid "Invalid ID"
 msgstr "Virheellinen tunniste"
 
-#: components/form/errorMessages.html:7
+#: app/components/form/errorMessages.html:7
 msgid "Invalid id error"
 msgstr "Virheellinen tunniste"
 
-#: components/form/errorMessages.html:6
+#: app/components/form/errorMessages.html:6
 msgid "Invalid namespace error"
 msgstr "Nimiavaruuden täytyy päättyä ‘#’ tai ‘/‘ -merkkeihin"
 
-#: components/form/errorMessages.html:5
+#: app/components/form/errorMessages.html:5
 msgid "Invalid stem error"
 msgstr "Virheellinen URI muoto"
 
-#: components/form/errorMessages.html:4
+#: app/components/form/errorMessages.html:4
 msgid "Invalid url error"
 msgstr "Syöte ei ole URL"
 
-#: components/form/errorMessages.html:21
+#: app/components/form/errorMessages.html:21
 msgid "Is not valid language code"
 msgstr "Ei ole tunnettu kielikoodi"
 
-#: components/form/errorMessages.html:22
+#: app/components/form/errorMessages.html:22
 msgid "Is not valid reference data code"
 msgstr "Ei tunnettu koodiston arvo"
 
@@ -1389,11 +1395,11 @@ msgstr "kielikoodi"
 msgid "ld+json frame"
 msgstr "JSON-LD Frame"
 
-#: components/form/errorMessages.html:13
+#: app/components/form/errorMessages.html:13
 msgid "Length error"
 msgstr "Syöte on liian pitkä"
 
-#: components/form/errorMessages.html:17
+#: app/components/form/errorMessages.html:17
 msgid "Less than min error"
 msgstr "Ei saa olla pienempi kuin minimi"
 
@@ -1421,25 +1427,25 @@ msgstr "Linkit"
 msgid "Local ID"
 msgstr "Paikallinen ID"
 
-#: components/navigation/navigationBar.html:39
-#: components/navigation/navigationBar.html:8
+#: app/components/navigation/navigationBar.html:39
+#: app/components/navigation/navigationBar.html:8
 msgid "LOG IN"
 msgstr "KIRJAUDU SISÄÄN"
 
-#: components/navigation/navigationBar.html:13
-#: components/navigation/navigationBar.html:35
+#: app/components/navigation/navigationBar.html:13
+#: app/components/navigation/navigationBar.html:35
 msgid "LOG OUT"
 msgstr "KIRJAUDU ULOS"
 
-#: components/editor/editableConstraint.html:5
+#: app/components/editor/editableConstraint.html:5
 msgid "Logical constraints"
 msgstr "Loogiset rajoitteet"
 
-#: components/maintenance.html:2 translations/misc.html:171
+#: app/components/maintenance.html:2 translations/misc.html:171
 msgid "Maintenance"
 msgstr "Huoltokatko"
 
-#: components/maintenance.html:5 translations/misc.html:172
+#: app/components/maintenance.html:5 translations/misc.html:172
 msgid "Maintenance content"
 msgstr ""
 "Järjestelmä on valitettavasti toistaiseksi poissa käytöstä huoltokatkon "
@@ -1485,7 +1491,7 @@ msgstr "Vähimmäispituus"
 msgid "Min length info"
 msgstr "Sallitun arvon minimipituus"
 
-#: translations/misc.html:28
+#: app/components/frontPage.html:45 translations/misc.html:28
 msgid "model"
 msgstr "Tietokomponenttikirjasto"
 
@@ -1503,6 +1509,10 @@ msgstr ""
 #: translations/misc.html:254
 msgid "Model not found"
 msgstr " Mallia ei löydy"
+
+#: app/components/frontPage.html:46
+msgid "models"
+msgstr "tietomallia"
 
 #: translations/misc.html:145
 msgid "Modified at"
@@ -1538,11 +1548,11 @@ msgstr ""
 "Soveltamisprofiilia voidaan muokata kun halutaan tarkentaa kuvailutietoja, "
 "lisätä uusia sanastoja, koodistoja tai nimiavaruuksia"
 
-#: components/form/errorMessages.html:20
+#: app/components/form/errorMessages.html:20
 msgid "Must be imported namespace"
 msgstr "Nimiavaruutta ei ole lisätty riippuvuudeksi"
 
-#: components/user/userPage.html:8
+#: app/components/user/userPage.html:8
 msgid "Name"
 msgstr "Nimi"
 
@@ -1572,7 +1582,7 @@ msgstr ""
 "Nimiavaruuden uudelleenohjauksen avulla voidaan määritellä tietomalleja "
 "joissa käytetään jotain ulkoista nimiavaruutta"
 
-#: components/form/errorMessages.html:15
+#: app/components/form/errorMessages.html:15
 msgid "Negative error"
 msgstr "Ei saa olla negatiivinen"
 
@@ -1596,15 +1606,15 @@ msgstr ""
 msgid "No"
 msgstr "Ei"
 
-#: components/editor/classForm.html:72
+#: app/components/editor/classForm.html:72
 msgid "No properties yet"
 msgstr "Ei vielä yhtään ominaisuutta"
 
-#: components/common/usage.html:1 components/common/usagePanel.html:8
+#: app/components/common/usage.html:1 app/components/common/usagePanel.html:8
 msgid "No referrers"
 msgstr "Ei viittauksia"
 
-#: components/advancedSearchModal.html:20
+#: app/components/advancedSearchModal.html:20
 msgid "No search results"
 msgstr "Ei hakutuloksia"
 
@@ -1616,9 +1626,9 @@ msgstr "Erikoistamattomia luokkia ei saavalita"
 msgid "None added"
 msgstr "Ei yhtään lisätty"
 
-#: components/editor/editableConceptSelect.html:4
-#: components/editor/editableReferenceDataSelect.html:4
-#: components/editor/subjectView.html:17
+#: app/components/editor/editableConceptSelect.html:4
+#: app/components/editor/editableReferenceDataSelect.html:4
+#: app/components/editor/subjectView.html:17
 msgid "Not defined"
 msgstr "Ei määritelty"
 
@@ -1638,7 +1648,7 @@ msgstr "Ei ole lisätty nimiavaruudeksi"
 msgid "Not removed"
 msgstr "Ei saatu poistettua"
 
-#: components/model/editableRootClass.html:4
+#: app/components/model/editableRootClass.html:4
 msgid "Not selected"
 msgstr "Ei valittu"
 
@@ -1704,7 +1714,7 @@ msgstr ""
 "koodistot löytyvät tämän paneelin alta. Täältä voit myös ladata profiilin "
 "eri formaateissa, kuten XML tai JSON skeemana."
 
-#: components/editor/propertyView.html:58
+#: app/components/editor/propertyView.html:58
 msgid "Optional metadata"
 msgstr "Valinnaiset metatiedot"
 
@@ -1745,7 +1755,7 @@ msgstr "Ole hyvä ja kirjaudu suorittaaksesi toiminto"
 msgid "Predicate in use"
 msgstr "Predikaatti on käytössä"
 
-#: components/editor/propertyPredicateView.html:28
+#: app/components/editor/propertyPredicateView.html:28
 msgid "Predicate information not found"
 msgstr "Uudelleenkäytettävää ominaisuutta ei löydy"
 
@@ -1768,7 +1778,7 @@ msgstr "Ominaisuus voi olla joko Attribuutti tai Assosiaatio"
 msgid "Prefix"
 msgstr "Etuliite"
 
-#: components/form/errorMessages.html:14
+#: app/components/form/errorMessages.html:14
 msgid "Prefix error"
 msgstr "Etuliite saa sisältää vain pieniä kirjaimia"
 
@@ -1810,7 +1820,7 @@ msgstr "Ominaisuuden tunniste"
 msgid "Property id info"
 msgstr "Ominaisuuden yksilöivä tunniste"
 
-#: components/editor/propertyView.html:4 translations/misc.html:124
+#: app/components/editor/propertyView.html:4 translations/misc.html:124
 msgid "Property information"
 msgstr "Ominaisuuden tiedot"
 
@@ -1856,7 +1866,7 @@ msgstr "Literaali"
 msgid "rdfs:Literal error"
 msgstr "Virheellinen literaali"
 
-#: components/model/conceptEditorModal.html:43 translations/misc.html:17
+#: app/components/model/conceptEditorModal.html:43 translations/misc.html:17
 msgid "Recommendation"
 msgstr "Suositus"
 
@@ -1880,7 +1890,7 @@ msgstr "Koodisto on sovittu joukko koodiarvoja"
 msgid "Reference data name"
 msgstr "Koodiston nimi"
 
-#: components/model/searchReferenceDataModal.html:17
+#: app/components/model/searchReferenceDataModal.html:17
 msgid "Reference data server"
 msgstr "Koodistopalvelin"
 
@@ -1901,11 +1911,11 @@ msgstr "Poista"
 msgid "Required"
 msgstr "Pakollinen kenttä"
 
-#: components/form/errorMessages.html:9
+#: app/components/form/errorMessages.html:9
 msgid "Required error"
 msgstr "Pakollinen kenttä"
 
-#: components/form/errorMessages.html:10
+#: app/components/form/errorMessages.html:10
 msgid "Required localized error"
 msgstr "Täytyy olla määritelty vähintään yhdellä kielellä"
 
@@ -1933,11 +1943,11 @@ msgstr "Resurssia ei löydy"
 msgid "Resource status restricts removing"
 msgstr "Ei ole poistettavassa tilassa"
 
-#: components/editor/propertyView.html:162
+#: app/components/editor/propertyView.html:162
 msgid "Reusable predicate"
 msgstr "Uudelleenkäytettävä ominaisuus"
 
-#: components/editor/propertyPredicateView.html:5
+#: app/components/editor/propertyPredicateView.html:5
 msgid "Reusable predicate information"
 msgstr "Uudelleenkäytettävän ominaisuuden tiedot"
 
@@ -1951,7 +1961,7 @@ msgstr ""
 "Juurisolmua käytetään määrittelemään hierarkkisen tietomallin lähtöpiste, "
 "esimerkiksi XML tai JSON sanoman ensimmäinen entiteetti."
 
-#: components/form/editableEntityButtons.html:4
+#: app/components/form/editableEntityButtons.html:4
 msgid "Save changes"
 msgstr "Tallenna muutokset"
 
@@ -1959,7 +1969,7 @@ msgstr "Tallenna muutokset"
 msgid "Save visualization position"
 msgstr "Visualisoinnin sijaintien tallennus"
 
-#: components/frontPage.html:5
+#: app/components/frontPage.html:9
 msgid "Search"
 msgstr "Etsi"
 
@@ -1979,7 +1989,7 @@ msgstr "Hae attribuuttia tai assosiaatiota…"
 msgid "search class"
 msgstr "Hae luokkaa…"
 
-#: components/model/conceptEditorModal.html:15
+#: app/components/model/conceptEditorModal.html:15
 msgid "search concept"
 msgstr "Hae käsitettä…"
 
@@ -2153,17 +2163,17 @@ msgstr "Hae sanastosta…"
 msgid "search namespace"
 msgstr "Hae nimiavaruutta…"
 
-#: components/model/searchNamespaceModal.html:2
+#: app/components/model/searchNamespaceModal.html:2
 msgid "Search namespaces"
 msgstr "Hae nimiavaruuksia"
 
-#: components/editor/searchPredicateModal.html:23
+#: app/components/editor/searchPredicateModal.html:23
 msgid "Search or create predicate info"
 msgstr ""
 "Hae ensin tarvitsemaasi attribuuttia tai assosiaatiota yhteentoimivuuden "
 "kuvauksista. Jos et löydä tarpeisiisi sopivaa, voit luoda uuden ominaisuuden."
 
-#: components/editor/searchPredicateModal.html:22
+#: app/components/editor/searchPredicateModal.html:22
 msgid "Search predicate info"
 msgstr ""
 "Hae tarvitsemaasi attribuuttia tai assosiaatiota yhteentoimivuuden "
@@ -2173,11 +2183,12 @@ msgstr ""
 msgid "search reference data"
 msgstr "Hae koodistoa…"
 
-#: components/model/searchReferenceDataModal.html:3 translations/misc.html:208
+#: app/components/model/searchReferenceDataModal.html:3
+#: translations/misc.html:208
 msgid "Search reference data"
 msgstr "Hae koodistoja"
 
-#: components/model/searchVocabularyModal.html:3
+#: app/components/model/searchVocabularyModal.html:3
 msgid "Search vocabularies"
 msgstr "Hae sanastoja"
 
@@ -2185,7 +2196,7 @@ msgstr "Hae sanastoja"
 msgid "search vocabulary"
 msgstr "Hae sanastoa…"
 
-#: components/editor/addPropertiesFromClassModal.html:21
+#: app/components/editor/addPropertiesFromClassModal.html:21
 msgid "Select all"
 msgstr "Valitse kaikki"
 
@@ -2205,11 +2216,11 @@ msgstr "Assosiaation kohteella tarkoitetaan luokkaa johon halutaan viitata"
 msgid "Select attribute"
 msgstr "Valitse attribuutti"
 
-#: components/editor/searchPredicateModal.html:5
+#: app/components/editor/searchPredicateModal.html:5
 msgid "Select attribute or association"
 msgstr "Valitse attribuutti tai assosiaatio"
 
-#: components/editor/searchClassModal.html:4
+#: app/components/editor/searchClassModal.html:4
 msgid "Select class"
 msgstr "Valitse luokka"
 
@@ -2391,7 +2402,7 @@ msgstr "Tarkennetun luokan ominaisuudet"
 msgid "Shapes are not allowed"
 msgstr "Erikoistettuja luokkia ei saa valita"
 
-#: components/common/export.html:4 translations/misc.html:20
+#: app/components/common/export.html:4 translations/misc.html:20
 msgid "Show"
 msgstr "Näytä"
 
@@ -2407,7 +2418,7 @@ msgstr "Näytä myös ne, joita ei voi lisätä"
 msgid "Show history"
 msgstr "Näytä historia"
 
-#: components/model/searchNamespaceModal.html:19
+#: app/components/model/searchNamespaceModal.html:19
 msgid "Show technical namespaces"
 msgstr "Näytä tekniset nimiavaruudet"
 
@@ -2439,7 +2450,7 @@ msgstr "Tila"
 msgid "State info"
 msgstr "Hallintamalliin liittyvä resurssin tila"
 
-#: components/form/errorMessages.html:12
+#: app/components/form/errorMessages.html:12
 msgid "String error"
 msgstr "Literaalin täytyy alkaa kirjaimella"
 
@@ -2460,12 +2471,12 @@ msgid "Suggest definition or description for the concept"
 msgstr ""
 "Ehdota käsitteelle määritelmää kuvailemalla käsite mahdollisimman hyvin"
 
-#: components/editor/searchConceptModal.html:44
-#: components/model/conceptEditorModal.html:61 translations/misc.html:12
+#: app/components/editor/searchConceptModal.html:44
+#: app/components/model/conceptEditorModal.html:61 translations/misc.html:12
 msgid "suggestion"
 msgstr "ehdotus"
 
-#: components/model/conceptEditorModal.html:44 translations/misc.html:19
+#: app/components/model/conceptEditorModal.html:44 translations/misc.html:19
 msgid "Suggestion"
 msgstr "Ehdotus"
 
@@ -2517,7 +2528,7 @@ msgstr "Yleistettävissä oleva ominaisuus, joka on semantiikaltaan laajempi"
 msgid "tapahtumaketju joka toteuttaa jotain"
 msgstr ""
 
-#: components/editor/propertyView.html:126
+#: app/components/editor/propertyView.html:126
 msgid "Technical metadata"
 msgstr "Tekninen metadata"
 
@@ -2560,7 +2571,7 @@ msgstr ""
 msgid "This tutorial shows how to import new namespace to the model"
 msgstr "Tässä ohjeessa näytetään nimiavaruuden lisääminen"
 
-#: components/model/referenceDataView.html:20 translations/titles.html:73
+#: app/components/model/referenceDataView.html:20 translations/titles.html:73
 msgid "Title"
 msgstr "Nimi"
 
@@ -2600,7 +2611,7 @@ msgstr "Tapahtui odottamaton virhe"
 msgid "Unique label"
 msgstr "Yksilöllinen nimi"
 
-#: components/form/errorMessages.html:18
+#: app/components/form/errorMessages.html:18
 msgid "Unknown namespace"
 msgstr "Tuntematon nimiavaruus"
 
@@ -2612,7 +2623,7 @@ msgstr "Keskeneräinen"
 msgid "URI stem"
 msgstr "URI muoto"
 
-#: components/common/usagePanel.html:4
+#: app/components/common/usagePanel.html:4
 msgid "Usage"
 msgstr "Viittaukset muista komponenteista"
 
@@ -2632,11 +2643,13 @@ msgstr "Käytä attribuuttia"
 msgid "Use class"
 msgstr "Käytä luokkaa"
 
-#: components/model/searchReferenceDataModal.html:98 translations/misc.html:101
+#: app/components/model/searchReferenceDataModal.html:98
+#: translations/misc.html:101
 msgid "Use selection"
 msgstr "Käytä valintaa"
 
-#: components/navigation/navigationBar.html:42 components/user/userPage.html:4
+#: app/components/navigation/navigationBar.html:42
+#: app/components/user/userPage.html:4
 msgid "User details"
 msgstr "Käyttäjätiedot"
 
@@ -2656,7 +2669,7 @@ msgstr "Kohde"
 msgid "Value class info"
 msgstr "Viite luokkaan joka toimii assosiaation kohteena"
 
-#: components/editor/visualizationView.html:5
+#: app/components/editor/visualizationView.html:5
 msgid "Visualization"
 msgstr "Visualisointi"
 
@@ -2664,11 +2677,11 @@ msgstr "Visualisointi"
 msgid "Vocabularies"
 msgstr "Sanastot"
 
-#: components/model/conceptEditorModal.html:26 translations/titles.html:53
+#: app/components/model/conceptEditorModal.html:26 translations/titles.html:53
 msgid "Vocabulary"
 msgstr "Sanasto"
 
-#: components/editor/searchConceptModal.html:20
+#: app/components/editor/searchConceptModal.html:20
 msgid "Vocabulary filter"
 msgstr "Sanasto"
 
@@ -2903,8 +2916,8 @@ msgstr "Aika"
 msgid "xsd:time error"
 msgstr "Virheellinen aika"
 
-#: components/common/modalTemplate.html:15
-#: components/editor/addPropertiesFromClassModal.html:26
+#: app/components/common/modalTemplate.html:15
+#: app/components/editor/addPropertiesFromClassModal.html:26
 #: translations/misc.html:262
 msgid "Yes"
 msgstr "Kyllä"
@@ -2922,6 +2935,9 @@ msgstr "Sinut uudelleenohjataan etusivulle"
 #: translations/misc.html:259
 msgid "You will be redirected to the model"
 msgstr "Sinut uudelleenohjataan mallin sivulle"
+
+#~ msgid "Browse"
+#~ msgstr "Selaa"
 
 #~ msgid "Add library"
 #~ msgstr "Lisää tietokomponenttikirjasto"

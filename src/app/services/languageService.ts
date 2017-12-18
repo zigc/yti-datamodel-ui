@@ -73,7 +73,7 @@ export class LanguageService {
     return translate(data, this.getModelLanguage(context), context ? context.language : availableUILanguages);
   }
 
-  createLocalizer(context: LanguageContext) {
+  createLocalizer(context?: LanguageContext) {
     return new DefaultAngularJSLocalizer(this, context);
   }
 
@@ -99,7 +99,7 @@ export class DefaultAngularLocalizer implements AngularLocalizer {
 
 export class DefaultAngularJSLocalizer implements AngularJSLocalizer {
 
-  constructor(private languageService: LanguageService, public context: LanguageContext) {
+  constructor(private languageService: LanguageService, public context?: LanguageContext) {
   }
 
   get language(): Language {

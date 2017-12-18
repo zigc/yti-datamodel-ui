@@ -27,6 +27,7 @@ registerType('property', ['rdf:Property']);
 registerType('model', ['owl:Ontology']);
 registerType('profile', ['dcap:DCAP']);
 registerType('group', ['foaf:Group']);
+registerType('organization', ['foaf:Organization']);
 registerType('library', ['dcap:MetadataVocabulary']);
 registerType('constraint', ['sh:AbstractOrNodeConstraint', 'sh:AbstractAndNodeConstraint', 'sh:AbstractNotNodeConstraint']);
 registerType('user', ['foaf:Person']);

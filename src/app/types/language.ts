@@ -46,13 +46,8 @@ export interface LanguageContext {
 
 export interface Localizer {
   language: Language;
-  context: LanguageContext;
+  context?: LanguageContext;
   translate(localizable: Localizable): string;
   getStringWithModelLanguageOrDefault(key: string|undefined|null, defaultLanguage: UILanguage): string;
   allUILocalizationsForKey(localizationKey: string): string[];
 }
-
-export const frontPageSearchLanguageContext: LanguageContext = {
-  id: new Uri('http://iow/frontpage', {}),
-  language: availableUILanguages
-};

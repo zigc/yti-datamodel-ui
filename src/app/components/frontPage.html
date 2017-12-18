@@ -1,19 +1,74 @@
-<div ng-show="!ctrl.loading" class="content-box">
+<div ng-if="!$ctrl.loading">
 
   <div class="row">
-    <div class="col-md-6">
-      <h3 translate>Search</h3>
-      <a class="advanced-search link" ng-click="ctrl.openAdvancedSearch()" translate>Advanced search</a>
-    </div>
-
-    <div class="col-md-6">
-      <h3 translate>Browse</h3>
-      <ul>
-        <li ng-repeat="model in ctrl.models">
-          <a ng-click="ctrl.selectModel(model)">{{model | translateLabel}}</a>
-        </li>
-      </ul>
+    <div class="col-md-3 mb-3">
+      <div class="input-group input-group-lg input-group-search">
+        <input class="form-control"
+               type="text"
+               ng-model="$ctrl.search"
+               placeholder="{{'Search' | translate}}"/>
+      </div>
     </div>
   </div>
 
+  <div class="row">
+
+    <div class="col-md-3">
+      <div class="content-box">
+        <h4 class="strong" translate>Classification</h4>
+
+        <div ng-repeat="classification in $ctrl.classifications"
+             class="classification"
+             ng-class="{ active: $ctrl.isClassificationSelected(classification.node) }"
+             ng-click="$ctrl.toggleClassification(classification.node)">
+
+          <span class="name">{{classification.node.label | translateValue}}</span>
+          <span class="count">({{classification.count}})</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-9">
+
+      <div class="row mb-4">
+        <div class="col-md-12">
+          <!--TODO filters-->
+        </div>
+      </div>
+
+      <div class="content-box">
+
+        <div class="row mb-4">
+          <div class="col-md-12">
+            <div>
+              <strong>{{$ctrl.filteredModels.length}}</strong>
+              <span ng-show="$ctrl.filteredModels.length === 1" translate>model</span>
+              <span ng-show="$ctrl.filteredModels.length !== 1" translate>models</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12">
+            <div class="model" ng-repeat="model in $ctrl.filteredModels" ng-click="$ctrl.selectModel(filteredModel)">
+
+              <span class="name">{{model.label | translateValue}}</span>
+
+              <span class="organization" ng-repeat="organization in model.organization">
+                {{organization.label | translateValue}}
+              </span>
+
+              <span class="group" ng-repeat="classification in model.classification">
+                {{classification.label | translateValue}}
+              </span>
+
+              <!--<span class="type">{{model.type | translateValue}}</span>-->
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
 </div>
