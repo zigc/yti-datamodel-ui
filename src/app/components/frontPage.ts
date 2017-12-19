@@ -72,7 +72,7 @@ export class FrontPageController implements HelpProvider {
     });
 
     const models$ = fromIPromise(modelService.getModels()).do(() => this.modelsLoaded = true);
-    const classifications$ = fromIPromise(classificationService.getClassifications(this.classification$.getValue()));
+    const classifications$ = fromIPromise(classificationService.getClassifications());
 
     function searchMatches(search: string, model: ModelListItem) {
       return !search || anyMatching(Object.values(model.label), value => matches(value, search));

@@ -12,15 +12,10 @@ export class ClassificationService {
               private frameService: FrameService) {
   }
 
-  getClassifications(classification: Classification|null): IPromise<Classification[]> {
-
-    const params = !classification ? {} : {
-      serviceCategory: classification.identifier
-    };
+  getClassifications(): IPromise<Classification[]> {
 
     return this.$http.get<GraphData>(config.apiEndpointWithName('serviceCategories'), {
-      headers: { Accept: 'application/ld+json'},
-      params
+      headers: { Accept: 'application/ld+json'}
     })
       .then(response => this.deserializeClassification(response.data!));
   }
