@@ -32,7 +32,12 @@
 
       <div class="row mb-4">
         <div class="col-md-12">
+
           <app-filter-dropdown class="pull-left"
+                               [options]="$ctrl.organizations"
+                               [filter-subject]="$ctrl.organization$"></app-filter-dropdown>
+
+          <app-filter-dropdown class="pull-left ml-2"
                                [options]="$ctrl.modelTypes"
                                [filter-subject]="$ctrl.modelType$"></app-filter-dropdown>
         </div>

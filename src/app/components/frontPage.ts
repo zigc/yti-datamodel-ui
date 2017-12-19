@@ -22,6 +22,8 @@ import { forwardRef } from '@angular/core';
 import { FilterOptions } from 'yti-common-ui/components/filter-dropdown.component';
 import { KnownModelType } from '../types/entity';
 import gettextCatalog = angular.gettext.gettextCatalog;
+import { OrganizationService } from '../services/organizationService';
+import { OrganizationListItem } from '../entities/organization';
 
 export const component: ComponentDeclaration = {
   selector: 'frontPage',
@@ -39,10 +41,12 @@ export class FrontPageController implements HelpProvider {
   helps = this.frontPageHelpService.getHelps();
 
   modelTypes: FilterOptions<KnownModelType>;
+  organizations: FilterOptions<OrganizationListItem>;
 
   search$ = new BehaviorSubject('');
   classification$ = new BehaviorSubject<Classification|null>(null);
   modelType$ = new BehaviorSubject<KnownModelType|null>(null);
+  organization$ = new BehaviorSubject<OrganizationListItem|null>(null);
 
   classifications: { node: Classification, count: number }[];
   filteredModels: ModelListItem[] = [];
@@ -59,7 +63,8 @@ export class FrontPageController implements HelpProvider {
               gettextCatalog: gettextCatalog,
               private advancedSearchModal: AdvancedSearchModal,
               private frontPageHelpService: FrontPageHelpService,
-              classificationService: ClassificationService) {
+              classificationService: ClassificationService,
+              organizationService: OrganizationService) {
 
     locationService.atFrontPage();
     const localizer = languageService.createLocalizer();
@@ -69,6 +74,15 @@ export class FrontPageController implements HelpProvider {
         value: type as KnownModelType,
         name: () => gettextCatalog.getString(type ? type : 'All types')
       }
+    });
+
+    organizationService.getOrganizations().then(organizations => {
+      this.organizations = [null, ...organizations].map(org => {
+        return {
+          value: org,
+          name: () => org ? languageService.translate(org.label) : gettextCatalog.getString('All organizations')
+        }
+      });
     });
 
     const models$ = fromIPromise(modelService.getModels()).do(() => this.modelsLoaded = true);
@@ -86,12 +100,17 @@ export class FrontPageController implements HelpProvider {
       return !type || model.normalizedType === type;
     }
 
-    this.subscriptionsToClean.push(Observable.combineLatest(classifications$, models$, this.search$, this.modelType$, languageService.language$)
-      .subscribe(([classifications, models, search, modelType]) => {
+    function organizationMatches(org: OrganizationListItem|null, model: ModelListItem) {
+      return !org || anyMatching(model.organization, modelOrg => modelOrg.id.uuid === org.uuid);
+    }
+
+    this.subscriptionsToClean.push(Observable.combineLatest(classifications$, models$, this.search$, this.modelType$, this.organization$, languageService.language$)
+      .subscribe(([classifications, models, search, modelType, org]) => {
 
         const matchingVocabularies = models.filter(model =>
           searchMatches(search, model) &&
-          typeMatches(modelType, model)
+          typeMatches(modelType, model) &&
+          organizationMatches(org, model)
         );
 
         const modelCount = (classification: Classification) =>
@@ -101,13 +120,14 @@ export class FrontPageController implements HelpProvider {
         this.classifications.sort(comparingLocalizable<{ node: Classification }>(localizer, c => c.node.label));
       }));
 
-    this.subscriptionsToClean.push(Observable.combineLatest(models$, this.search$, this.classification$, this.modelType$, languageService.language$)
-      .subscribe(([models, search, classification, modelType]) => {
+    this.subscriptionsToClean.push(Observable.combineLatest(models$, this.search$, this.classification$, this.modelType$, this.organization$, languageService.language$)
+      .subscribe(([models, search, classification, modelType, org]) => {
 
         this.filteredModels = models.filter(model =>
           searchMatches(search, model) &&
           classificationMatches(classification, model) &&
-          typeMatches(modelType, model)
+          typeMatches(modelType, model) &&
+          organizationMatches(org, model)
         );
 
         this.filteredModels.sort(comparingLocalizable<ModelListItem>(localizer, m => m.label));
@@ -125,7 +145,7 @@ export class FrontPageController implements HelpProvider {
   }
 
   get loading() {
-    return !this.modelsLoaded || this.classifications == null;
+    return !this.modelsLoaded || this.classifications == null || this.modelTypes == null || this.organizations == null;
   }
 
   get search() {

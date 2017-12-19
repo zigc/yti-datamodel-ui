@@ -21,3 +21,18 @@ export class Organization extends GraphNode {
     init(this, Organization.organizationMappings);
   }
 }
+
+export class OrganizationListItem {
+
+  uuid: string;
+  label: Localizable;
+  description: Localizable;
+  url: string;
+
+  constructor(json: any) {
+    this.uuid = json.uuid;
+    this.label = json.prefLabel;
+    this.description = json.description;
+    this.url = json.url;
+  }
+}
