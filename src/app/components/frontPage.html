@@ -32,7 +32,9 @@
 
       <div class="row mb-4">
         <div class="col-md-12">
-          <!--TODO filters-->
+          <app-filter-dropdown class="pull-left"
+                               [options]="$ctrl.modelTypes"
+                               [filter-subject]="$ctrl.modelType$"></app-filter-dropdown>
         </div>
       </div>
 
@@ -54,6 +56,8 @@
 
               <span class="name">{{model.label | translateValue}}</span>
 
+              <span class="type">{{model.normalizedType | translate}}</span>
+
               <span class="organization" ng-repeat="organization in model.organization">
                 {{organization.label | translateValue}}
               </span>
@@ -61,8 +65,6 @@
               <span class="group" ng-repeat="classification in model.classification">
                 {{classification.label | translateValue}}
               </span>
-
-              <!--<span class="type">{{model.type | translateValue}}</span>-->
 
             </div>
           </div>

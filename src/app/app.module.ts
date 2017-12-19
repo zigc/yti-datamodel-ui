@@ -39,6 +39,7 @@ import ITooltipProvider = ui.bootstrap.ITooltipProvider;
 import { MenuComponent } from 'yti-common-ui/components/menu.component';
 import { AjaxLoadingIndicatorComponent } from 'yti-common-ui/components/ajax-loading-indicator.component';
 import { AjaxLoadingIndicatorSmallComponent } from 'yti-common-ui/components/ajax-loading-indicator-small.component';
+import { FilterDropdownComponent } from 'yti-common-ui/components/filter-dropdown.component';
 
 require('angular-gettext');
 require('checklist-model');
@@ -92,7 +93,8 @@ export function createMissingTranslationHandler(): MissingTranslationHandler {
     FooterComponent,
     MenuComponent,
     AjaxLoadingIndicatorComponent,
-    AjaxLoadingIndicatorSmallComponent
+    AjaxLoadingIndicatorSmallComponent,
+    FilterDropdownComponent
   ],
   providers: [
     { provide: AUTHENTICATED_USER_ENDPOINT, useFactory: resolveAuthenticatedUserEndpoint },
@@ -148,6 +150,10 @@ mod.directive('appMenu', downgradeComponent({component: MenuComponent}));
 mod.directive('appFooter', downgradeComponent({component: FooterComponent}));
 mod.directive('ajaxLoadingIndicator', downgradeComponent({component: AjaxLoadingIndicatorComponent}));
 mod.directive('ajaxLoadingIndicatorSmall', downgradeComponent({component: AjaxLoadingIndicatorSmallComponent}));
+mod.directive('appFilterDropdown', downgradeComponent({
+  component: FilterDropdownComponent,
+  inputs: ['options', 'filterSubject']
+}));
 
 mod.factory('translateService', downgradeInjectable(TranslateService));
 mod.factory('loginModal', downgradeInjectable(LoginModalService));

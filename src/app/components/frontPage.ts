@@ -19,6 +19,9 @@ import { fromIPromise } from 'app/utils/observable';
 import { anyMatching } from 'yti-common-ui/utils/array';
 import { matches } from 'yti-common-ui/utils/string';
 import { forwardRef } from '@angular/core';
+import { FilterOptions } from 'yti-common-ui/components/filter-dropdown.component';
+import { KnownModelType } from '../types/entity';
+import gettextCatalog = angular.gettext.gettextCatalog;
 
 export const component: ComponentDeclaration = {
   selector: 'frontPage',
@@ -35,8 +38,11 @@ export class FrontPageController implements HelpProvider {
 
   helps = this.frontPageHelpService.getHelps();
 
+  modelTypes: FilterOptions<KnownModelType>;
+
   search$ = new BehaviorSubject('');
   classification$ = new BehaviorSubject<Classification|null>(null);
+  modelType$ = new BehaviorSubject<KnownModelType|null>(null);
 
   classifications: { node: Classification, count: number }[];
   filteredModels: ModelListItem[] = [];
@@ -50,12 +56,20 @@ export class FrontPageController implements HelpProvider {
               locationService: LocationService,
               modelService: ModelService,
               languageService: LanguageService,
+              gettextCatalog: gettextCatalog,
               private advancedSearchModal: AdvancedSearchModal,
               private frontPageHelpService: FrontPageHelpService,
               classificationService: ClassificationService) {
 
     locationService.atFrontPage();
     const localizer = languageService.createLocalizer();
+
+    this.modelTypes = [null, 'library', 'profile'].map(type => {
+      return {
+        value: type as KnownModelType,
+        name: () => gettextCatalog.getString(type ? type : 'All types')
+      }
+    });
 
     const models$ = fromIPromise(modelService.getModels()).do(() => this.modelsLoaded = true);
     const classifications$ = fromIPromise(classificationService.getClassifications(this.classification$.getValue()));
@@ -68,11 +82,16 @@ export class FrontPageController implements HelpProvider {
       return !classification || anyMatching(model.classification, c => c.id.equals(classification.id));
     }
 
-    this.subscriptionsToClean.push(Observable.combineLatest(classifications$, models$, this.search$, languageService.language$)
-      .subscribe(([classifications, vocabularies, search]) => {
+    function typeMatches(type: KnownModelType|null, model: ModelListItem) {
+      return !type || model.normalizedType === type;
+    }
 
-        const matchingVocabularies = vocabularies.filter(vocabulary =>
-          searchMatches(search, vocabulary)
+    this.subscriptionsToClean.push(Observable.combineLatest(classifications$, models$, this.search$, this.modelType$, languageService.language$)
+      .subscribe(([classifications, models, search, modelType]) => {
+
+        const matchingVocabularies = models.filter(model =>
+          searchMatches(search, model) &&
+          typeMatches(modelType, model)
         );
 
         const modelCount = (classification: Classification) =>
@@ -82,12 +101,13 @@ export class FrontPageController implements HelpProvider {
         this.classifications.sort(comparingLocalizable<{ node: Classification }>(localizer, c => c.node.label));
       }));
 
-    this.subscriptionsToClean.push(Observable.combineLatest(models$, this.search$, this.classification$, languageService.language$)
-      .subscribe(([models, search, classification]) => {
+    this.subscriptionsToClean.push(Observable.combineLatest(models$, this.search$, this.classification$, this.modelType$, languageService.language$)
+      .subscribe(([models, search, classification, modelType]) => {
 
         this.filteredModels = models.filter(model =>
           searchMatches(search, model) &&
-          classificationMatches(classification, model)
+          classificationMatches(classification, model) &&
+          typeMatches(modelType, model)
         );
 
         this.filteredModels.sort(comparingLocalizable<ModelListItem>(localizer, m => m.label));
