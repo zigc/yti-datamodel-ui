@@ -14,11 +14,11 @@ mod.directive('typesFilter', () => {
     controllerAs: 'ctrl',
     restrict: 'E',
     template: `
-          <div class="input-group input-group-md">
-            <div class="checkbox" ng-repeat="type in ctrl.types">
-              <label><input class="" type="checkbox" checklist-model="ctrl.searchTypes" checklist-value="type" /> {{type | translate}}</label>
-            </div>
-          </div>
+      <div class="form-check form-check-inline" ng-repeat="type in ctrl.types">
+        <label class="form-check-label">
+          <input class="form-check-input" type="checkbox" checklist-model="ctrl.searchTypes" checklist-value="type" /> {{type | translate}}
+        </label>
+      </div>
     `,
     controller: TypesFilterController
   };

@@ -16,13 +16,12 @@ mod.directive('textFilter', () => {
     controllerAs: 'ctrl',
     restrict: 'E',
     template: `
-          <div class="input-group input-group-lg">
+          <div class="input-group input-group-lg input-group-search">
             <input autofocus type="text" class="form-control" placeholder="{{ctrl.placeholder | translate}}"
                    ng-model="ctrl.searchText"
                    ignore-dirty
                    ng-model-options="{ debounce: { 'default': 500, 'blur': 0 } }"
                    key-control="ctrl.searchController.searchResults" />
-            <i class="glyphicon glyphicon-search form-control-feedback"></i>
           </div>
     `,
     controller: TextSearchController
