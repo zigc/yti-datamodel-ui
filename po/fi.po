@@ -1979,23 +1979,23 @@ msgstr "Etsi"
 
 #: translations/misc.html:101
 msgid "search association"
-msgstr "Hae assosiaatiota…"
+msgstr "Hae assosiaatiota"
 
 #: translations/misc.html:98
 msgid "search attribute"
-msgstr "Hae attribuuttia…"
+msgstr "Hae attribuuttia"
 
 #: translations/misc.html:89
 msgid "search attribute or association"
-msgstr "Hae attribuuttia tai assosiaatiota…"
+msgstr "Hae attribuuttia tai assosiaatiota"
 
 #: translations/misc.html:90
 msgid "search class"
-msgstr "Hae luokkaa…"
+msgstr "Hae luokkaa"
 
 #: app/components/model/conceptEditorModal.html:15
 msgid "search concept"
-msgstr "Hae käsitettä…"
+msgstr "Hae käsitettä"
 
 #: translations/misc.html:217
 msgid "Search concept"
@@ -2003,7 +2003,7 @@ msgstr "Valitse käsite"
 
 #: translations/misc.html:91
 msgid "search descriptions"
-msgstr "Etsi yhteensopivuuden kuvauksista..."
+msgstr "Etsi yhteensopivuuden kuvauksista"
 
 #: translations/help.html:53
 msgid "Search for henkilö"
