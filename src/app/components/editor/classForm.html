@@ -41,7 +41,7 @@
 
     <div class="clearfix">
       <h4 class="pull-left" style="margin-bottom: 0">{{ctrl.class.normalizedType + ' properties' | capitalize | translate}}
-        <a ng-show="!ctrl.isEditing()" class="btn btn-default btn-xs" uib-btn-checkbox ng-model="ctrl.sortAlphabetically"><i class="fa fa-sort-alpha-asc"></i></a>
+        <a ng-show="!ctrl.isEditing()" class="btn btn-action btn-xs" uib-btn-checkbox ng-model="ctrl.sortAlphabetically"><i class="fa fa-sort-alpha-asc"></i></a>
       </h4>
       <button-with-options icon-class="glyphicon glyphicon-plus" ng-show="ctrl.isEditing()" options="ctrl.addPropertyActions"></button-with-options>
     </div>

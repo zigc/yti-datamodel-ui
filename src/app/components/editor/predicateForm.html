@@ -4,7 +4,7 @@
 
     <button ng-if="ctrl.isEditing() && !ctrl.predicate.unsaved"
             type="button"
-            class="btn btn-default pull-right"
+            class="btn btn-action pull-right"
             style="margin-left: 5px"
             ng-disabled="!ctrl.predicate.inUnstableState"
             ng-click="ctrl.changeType()" uib-tooltip="{{'Convert to ' + ctrl.changedType | translate}}">

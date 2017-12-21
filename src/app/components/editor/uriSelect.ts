@@ -44,7 +44,7 @@ mod.directive('uriSelect', () => {
                autocomplete="off" />
       </autocomplete>
 
-      <button ng-if="formController.editing" type="button" class="btn btn-default btn-sm" ng-click="ctrl.selectUri()">{{('Choose ' + ctrl.type) | translate}}</button>
+      <button ng-if="formController.editing" type="button" class="btn btn-action btn-sm" ng-click="ctrl.selectUri()">{{('Choose ' + ctrl.type) | translate}}</button>
     `,
     require: '?^form',
     link($scope: EditableScope, _element: JQuery, _attributes: IAttributes, formController: EditableForm) {

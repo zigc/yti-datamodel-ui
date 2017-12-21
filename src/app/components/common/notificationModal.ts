@@ -22,7 +22,7 @@ export class NotificationModal {
             </modal-body>
           
             <modal-buttons>
-              <button class="btn btn-primary" type="button" ng-click="$close('cancel')" translate>Close</button>
+              <button class="btn btn-link" type="button" ng-click="$close('cancel')" translate>Close</button>
             </modal-buttons>
                       
           </modal-template>

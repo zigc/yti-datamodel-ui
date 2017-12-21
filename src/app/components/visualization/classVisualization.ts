@@ -45,24 +45,24 @@ mod.directive('classVisualization', () => {
     },
     template: `
      <div class="visualization-buttons">
-       <a role="button" class="btn btn-default btn-xs" ng-mousedown="ctrl.zoomOut()" ng-mouseup="ctrl.zoomOutEnded()"><i class="fa fa-search-minus"></i></a>
-       <a role="button" class="btn btn-default btn-xs" ng-mousedown="ctrl.zoomIn()" ng-mouseup="ctrl.zoomInEnded()"><i class="fa fa-search-plus"></i></a>
-       <a role="button" class="btn btn-default btn-xs" ng-click="ctrl.fitToContent()"><i class="fa fa-arrows-alt"></i></a>
-       <a role="button" ng-show="ctrl.canFocus()" class="btn btn-default btn-xs" ng-click="ctrl.centerToSelectedClass()"><i class="fa fa-crosshairs"></i></a>
+       <a role="button" class="btn btn-action btn-xs" ng-mousedown="ctrl.zoomOut()" ng-mouseup="ctrl.zoomOutEnded()"><i class="fa fa-search-minus"></i></a>
+       <a role="button" class="btn btn-action btn-xs" ng-mousedown="ctrl.zoomIn()" ng-mouseup="ctrl.zoomInEnded()"><i class="fa fa-search-plus"></i></a>
+       <a role="button" class="btn btn-action btn-xs" ng-click="ctrl.fitToContent()"><i class="fa fa-arrows-alt"></i></a>
+       <a role="button" ng-show="ctrl.canFocus()" class="btn btn-action btn-xs" ng-click="ctrl.centerToSelectedClass()"><i class="fa fa-crosshairs"></i></a>
        <span ng-show="ctrl.canFocus()">
-         <a role="button" class="btn btn-default btn-xs" ng-click="ctrl.focusOut()"><i class="fa fa-angle-left"></i></a>
+         <a role="button" class="btn btn-action btn-xs" ng-click="ctrl.focusOut()"><i class="fa fa-angle-left"></i></a>
          <div class="focus-indicator"><i>{{ctrl.renderSelectionFocus()}}</i></div>
-         <a role="button" class="btn btn-default btn-xs" ng-click="ctrl.focusIn()"><i class="fa fa-angle-right"></i></a>
+         <a role="button" class="btn btn-action btn-xs" ng-click="ctrl.focusIn()"><i class="fa fa-angle-right"></i></a>
        </span>
-       <a role="button" class="btn btn-default btn-xs" ng-click="ctrl.toggleShowName()"><i>{{ctrl.showNameLabel | translate}}</i></a>
-       <a role="button" class="btn btn-default btn-xs" ng-show="ctrl.canSave()" ng-disabled="ctrl.modelPositions.isPristine()" ng-click="ctrl.savePositions()">
+       <a role="button" class="btn btn-action btn-xs" ng-click="ctrl.toggleShowName()"><i>{{ctrl.showNameLabel | translate}}</i></a>
+       <a role="button" class="btn btn-action btn-xs" ng-show="ctrl.canSave()" ng-disabled="ctrl.modelPositions.isPristine()" ng-click="ctrl.savePositions()">
         <i class="fa fa-save"></i>
        </a>
-       <a role="button" class="btn btn-default btn-xs" ng-disabled="ctrl.saving" ng-click="ctrl.layoutPersistentPositions()" ng-context-menu="ctrl.relayoutPositions()">
+       <a role="button" class="btn btn-action btn-xs" ng-disabled="ctrl.saving" ng-click="ctrl.layoutPersistentPositions()" ng-context-menu="ctrl.relayoutPositions()">
         <i class="fa fa-refresh"></i>
        </a>
        <div class="btn-group" uib-dropdown is-open="ctrl.exportOpen" ng-if="ctrl.downloads">
-        <button class="btn btn-default btn-xs" uib-dropdown-toggle><i class="fa fa-download"></i>&nbsp;<span class="caret"></span></button>
+        <button class="btn btn-action btn-xs" uib-dropdown-toggle><i class="fa fa-download"></i>&nbsp;<span class="caret"></span></button>
           <ul class="dropdown-menu" role="menu" ng-if="ctrl.exportOpen">
             <li role="menuitem" ng-repeat="download in ctrl.downloads track by download.name">
               <a target="_self" download="{{download.filename}}" ng-href="{{download.href}}" ng-click="download.onClick()">{{download.name}}</a>

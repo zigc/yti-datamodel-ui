@@ -13,7 +13,7 @@
           </uib-tab-heading>
 
           <div ng-if="$index === ctrl.activeTab">
-            <button ng-if="ctrl.canEdit()" type="button" class="btn btn-default btn-md add-new-button" ng-click="tab.addNew()">
+            <button ng-if="ctrl.canEdit()" type="button" class="btn btn-action btn-md add-new-button" ng-click="tab.addNew()">
               <span class="glyphicon glyphicon-plus"></span>
               <span>{{tab.addLabel | translate}}</span>
             </button>
