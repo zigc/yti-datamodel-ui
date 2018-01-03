@@ -7,13 +7,11 @@ mod.directive('input', () => {
     require: '?ngModel',
     link($scope: IScope, element: JQuery, _attributes: IAttributes, modelController: INgModelController) {
 
-      const formGroup = element.closest('.form-group');
-
       function setClasses(invalid: boolean) {
         if ((modelController.$dirty || modelController.$viewValue) && invalid) {
-          formGroup.addClass('has-error');
+          element.addClass('is-invalid');
         } else {
-          formGroup.removeClass('has-error');
+          element.removeClass('is-invalid');
         }
       }
 
