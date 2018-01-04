@@ -27,12 +27,32 @@ nav.navbar {
   display: none !important;
 }
 
+.dropdown-menu-right {
+  right: 0;
+  left: auto;
+}
+
 .breadcrumb {
   border: none;
   font-size: 10px;
   font-weight: 400;
   margin-bottom: 0;
 }
+
+ul.errors {
+  border-left: 5px solid $danger;
+  padding-left: 15px;
+  margin-bottom: 0;
+
+  li {
+    list-style-type: none;
+  }
+
+  li:before {
+    content: '\b7\a0';
+  }
+}
+
 
 .nav-item.logged-in {
 
@@ -233,6 +253,16 @@ reference-data-view.popup {
   }
 }
 
+.fa.info {
+  color: $primary;
+  font-size: small;
+}
+
+.fa-asterisk {
+  color: $danger;
+  font-size: small;
+}
+
 autocomplete, iow-select {
 
   div[iow-select-input] {
@@ -422,13 +452,13 @@ table.editable-table {
       }
 
       &.dragged {
-        background-color: $body-bg;
+        background-color: $white;
         border: 1px dashed $warning;
-        color: $body-bg;
+        color: $white;
 
         .delete-item {
-          background-color: $body-bg;
-          color: $body-bg;
+          background-color: $white;
+          color: $white;
         }
       }
 
@@ -440,11 +470,14 @@ table.editable-table {
         display: inline-block;
         cursor: pointer;
         padding: 0 2px;
+        border-radius: 10px;
+        font-size: 100%;
         margin-left: 5px;
+        background-color: $gray-300;
       }
 
       .delete-item:hover {
-        // TODO
+        background-color: $gray-500;
       }
     }
   }
@@ -886,49 +919,26 @@ ajax-loading-indicator-small {
   cursor: pointer;
 }
 
-.main-editable-content {
-  @include clearfix;
-  padding-bottom: 10px;
-}
-
 .bottom {
   border-top: solid 1px #ddd;
 }
 
-[float="top-actions-placeholder"] {
-  z-index: 1000;
-}
-
-.top-actions-placeholder {
-  z-index: 1000;
-
-  @media (max-width: map-get($grid-breakpoints, md)) {
-    display: none !important;
-  }
-}
-
 .top-actions {
-  @include clearfix;
 
+  @include clearfix;
   background-color: white;
-  padding: 10px 10px 10px 10px;
+  margin-bottom: 20px;
 
   p.button-label {
     padding-top: 8px;
   }
 
-  .left {
-    float: left;
-    margin-right: 5px;
+  button {
+    margin: 0 0 0 10px !important;
   }
 
-  .right {
-    float: right;
-    margin-left: 5px;
-  }
-
-  .alert {
-    clear: both;
+  app-ajax-loading-indicator-small {
+    margin-top: 10px;
   }
 }
 
