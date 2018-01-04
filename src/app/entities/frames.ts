@@ -286,7 +286,7 @@ export function conceptListFrame(data: any) {
 export function classificationListFrame(data: any) {
 
   return frame(data, conceptContext, {
-    '@type': 'skos:Concept',
+    '@type': 'foaf:Group',
     identifier: {}
   });
 }
