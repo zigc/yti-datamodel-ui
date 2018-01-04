@@ -9,7 +9,6 @@ import { ErrorModal } from 'app/components/form/errorModal';
 import { Concept, LegacyConcept } from 'app/entities/vocabulary';
 import { Model } from 'app/entities/model';
 import { Usage } from 'app/entities/usage';
-import { GroupListItem } from 'app/entities/group';
 import { LanguageContext } from 'app/types/language';
 
 mod.directive('conceptView', () => {
@@ -78,10 +77,6 @@ export class ConceptViewController extends EditableEntityController<Concept|Lega
       edit: () => false,
       remove: () => false
     };
-  }
-
-  getGroup(): GroupListItem {
-    return this.model.group;
   }
 
   getEditable(): Concept|null {
