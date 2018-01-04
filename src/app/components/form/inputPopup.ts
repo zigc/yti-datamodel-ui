@@ -23,15 +23,16 @@ mod.directive('inputPopup', () => {
       ctrl: '<'
     },
     template: `
-        <div ng-if-body="ctrl.ctrl.show" class="input-popup">
+        <div ng-if-body="ctrl.ctrl.show" class="input-popup show">
           <ul class="dropdown-menu" ng-style="ctrl.popupStyle">
-            <li ng-repeat="item in ctrl.ctrl.popupItems"
+            <a ng-repeat="item in ctrl.ctrl.popupItems"
+                class="dropdown-item"
                 ng-class="{ active: ctrl.ctrl.isSelected($index) }" 
                 ng-mouseenter="ctrl.ctrl.setSelection($index)" 
                 ng-mousedown="ctrl.ctrl.selectSelection(event)"
                 input-popup-select-item="ctrl.ctrl">
-              <a href=""><input-popup-item-transclude></input-popup-item-transclude></a>
-            </li>
+              <input-popup-item-transclude></input-popup-item-transclude>
+            </a>
           </ul>
         </div>
     `,
@@ -50,42 +51,41 @@ class InputPopupController<T> {
   /* @ngInject */
   constructor($scope: InputPopupScope) {
 
-
-      const calculatePopupStyle = (e: JQuery) => {
-        const offset = e.offset();
-        const fixed = hasFixedPositioningParent(e);
-        return {
-          position: fixed ? 'fixed' : 'absolute',
-          top: offset.top + e.prop('offsetHeight') - (fixed ? window.pageYOffset : 0),
-          left: offset.left,
-          width: e.prop('offsetWidth')
-        };
+    const calculatePopupStyle = (e: JQuery) => {
+      const offset = e.offset();
+      const fixed = hasFixedPositioningParent(e);
+      return {
+        position: fixed ? 'fixed' : 'absolute',
+        top: offset.top + e.prop('offsetHeight') - (fixed ? window.pageYOffset : 0),
+        left: offset.left,
+        width: e.prop('offsetWidth')
       };
+    };
 
-      $scope.$watch(() => this.ctrl.show, () => this.popupStyle = calculatePopupStyle(this.ctrl.element));
+    $scope.$watch(() => this.ctrl.show, () => this.popupStyle = calculatePopupStyle(this.ctrl.element));
 
-      $scope.$watch(() => {
-        const offset = this.ctrl.element.offset();
-        return {
-          left: offset.left,
-          top: offset.top
-        };
-      }, () => this.popupStyle = calculatePopupStyle(this.ctrl.element), true);
-
-      const setPopupStyleToElement = () => {
-        if (this.ctrl.show) {
-          this.popupStyle = calculatePopupStyle(this.ctrl.element);
-          // apply styles without invoking scope for performance reasons
-          angular.element('div.input-popup .dropdown-menu').css(this.popupStyle);
-        }
+    $scope.$watch(() => {
+      const offset = this.ctrl.element.offset();
+      return {
+        left: offset.left,
+        top: offset.top
       };
+    }, () => this.popupStyle = calculatePopupStyle(this.ctrl.element), true);
 
-      window.addEventListener('resize', setPopupStyleToElement);
+    const setPopupStyleToElement = () => {
+      if (this.ctrl.show) {
+        this.popupStyle = calculatePopupStyle(this.ctrl.element);
+        // apply styles without invoking scope for performance reasons
+        angular.element('div.input-popup .dropdown-menu').css(this.popupStyle);
+      }
+    };
 
-      $scope.$on('$destroy', () => {
-        window.removeEventListener('resize', setPopupStyleToElement);
-      });
-    }
+    window.addEventListener('resize', setPopupStyleToElement);
+
+    $scope.$on('$destroy', () => {
+      window.removeEventListener('resize', setPopupStyleToElement);
+    });
+  }
 }
 
 interface SelectItemScope extends IRepeatScope, InputPopupScope {
