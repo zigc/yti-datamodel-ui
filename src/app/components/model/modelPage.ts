@@ -144,7 +144,7 @@ export class ModelPageController implements ModelPageActions, HelpProvider, Mode
 
     $scope.$watch(() => this.model, (newModel: Model, oldModel: Model) => {
       if (oldModel && !newModel) { // model removed
-        $location.url(oldModel.group.iowUrl());
+        $location.url('/');
       }
 
       this.helps = modelPageHelpService.getHelps(newModel);

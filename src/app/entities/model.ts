@@ -12,13 +12,14 @@ import { Vocabulary } from './vocabulary';
 import { ReferenceData } from './referenceData';
 import { init, serialize } from './mapping';
 import { GraphNode } from './graphNode';
-import { entity, entityAwareList, entityAwareOptional, normalized, uriSerializer } from './serializer/entitySerializer';
+import { entity, entityAwareList, entityAwareOptional, uriSerializer } from './serializer/entitySerializer';
 import {
   dateSerializer, identitySerializer, languageSerializer, list, localizableSerializer, optional,
   stringSerializer, typeSerializer
 } from './serializer/serializer';
 import { Localizable } from 'yti-common-ui/types/localization';
 import { Organization } from './organization';
+import { ClassificationGroup } from './classification';
 
 
 function normalizeType(type: Type[]): KnownModelType {
@@ -74,31 +75,20 @@ export class ModelListItem extends AbstractModel {
 
 export class Model extends AbstractModel {
 
-  static groupSerializer = normalized(
-    entity(() => GroupListItem),
-    (data: any) => {
-      if (!data['@type']) {
-        // TODO: Shouldn't be needed but in all cases API doesn't return it
-        return Object.assign({}, data, { '@type': 'foaf:Group' });
-      } else {
-        return data;
-      }
-    }
-  );
-
   static modelMappings = {
-    comment:        { name: 'comment',      serializer: localizableSerializer },
-    state:          { name: 'versionInfo',  serializer: identitySerializer<State>() },
-    vocabularies:   { name: 'references',   serializer: entityAwareList(entity(() => Vocabulary)) },
-    namespaces:     { name: 'requires',     serializer: entityAwareList(entity(() => ImportedNamespace)) },
-    links:          { name: 'relations',    serializer: entityAwareList(entity(() => Link)) },
-    referenceDatas: { name: 'codeLists',    serializer: entityAwareList(entity(() => ReferenceData)) },
-    group:          { name: 'isPartOf',     serializer: Model.groupSerializer },
-    version:        { name: 'identifier',   serializer: optional(identitySerializer<Urn>()) },
-    rootClass:      { name: 'rootResource', serializer: entityAwareOptional(uriSerializer) },
-    language:       { name: 'language',     serializer: list<Language>(languageSerializer, ['fi', 'en']) },
-    modifiedAt:     { name: 'modified',     serializer: optional(dateSerializer) },
-    createdAt:      { name: 'created',      serializer: optional(dateSerializer) }
+    comment:         { name: 'comment',      serializer: localizableSerializer },
+    state:           { name: 'versionInfo',  serializer: identitySerializer<State>() },
+    vocabularies:    { name: 'references',   serializer: entityAwareList(entity(() => Vocabulary)) },
+    namespaces:      { name: 'requires',     serializer: entityAwareList(entity(() => ImportedNamespace)) },
+    links:           { name: 'relations',    serializer: entityAwareList(entity(() => Link)) },
+    referenceDatas:  { name: 'codeLists',    serializer: entityAwareList(entity(() => ReferenceData)) },
+    classifications: { name: 'isPartOf',     serializer: entityAwareList(entity(() => ClassificationGroup)) },
+    contributors:    { name: 'contributor',  serializer: entityAwareList(entity(() => Organization)) },
+    version:         { name: 'identifier',   serializer: optional(identitySerializer<Urn>()) },
+    rootClass:       { name: 'rootResource', serializer: entityAwareOptional(uriSerializer) },
+    language:        { name: 'language',     serializer: list<Language>(languageSerializer, ['fi', 'en']) },
+    modifiedAt:      { name: 'modified',     serializer: optional(dateSerializer) },
+    createdAt:       { name: 'created',      serializer: optional(dateSerializer) }
   };
 
   comment: Localizable;
@@ -108,8 +98,9 @@ export class Model extends AbstractModel {
   namespaces: ImportedNamespace[];
   links: Link[];
   referenceDatas: ReferenceData[];
+  classifications: ClassificationGroup[];
+  contributors: Organization[];
   unsaved = false;
-  group: GroupListItem;
   version: Urn|null;
   rootClass: Uri|null;
   language: Language[];
@@ -124,10 +115,6 @@ export class Model extends AbstractModel {
     this.updateModelVocabularies();
   }
 
-  get groupId() {
-    return this.group.id;
-  }
-
   addVocabulary(vocabulary: Vocabulary) {
     this.vocabularies.push(vocabulary);
     this.updateModelVocabularies();
@@ -139,10 +126,7 @@ export class Model extends AbstractModel {
   }
 
   private updateModelVocabularies() {
-    this.modelVocabularies = [
-      ...this.group.vocabularies.map(v => new ModelVocabulary(v, true)),
-      ...this.vocabularies.map(v => new ModelVocabulary(v, false))
-    ];
+    this.modelVocabularies = this.vocabularies.map(v => new ModelVocabulary(v, false));
   }
 
   addNamespace(ns: ImportedNamespace) {
