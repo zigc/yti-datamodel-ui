@@ -3,14 +3,14 @@
   <model-language-chooser context="context"></model-language-chooser>
 
   <button type="button"
-          class="btn btn-link right cancel"
+          class="btn btn-link pull-right cancel"
           ng-click="ctrl.cancelEditing()"
           ng-show="ctrl.isEditing()">
     <span translate>Cancel</span>
   </button>
 
   <button type="button"
-          class="btn btn-action right save"
+          class="btn btn-action pull-right save"
           ng-click="ctrl.saveEdited()"
           ng-show="ctrl.isEditing()"
           ng-disabled="form.$invalid || form.$pending">
@@ -18,14 +18,14 @@
   </button>
 
   <button type="button"
-          class="btn btn-action right edit"
+          class="btn btn-action pull-right edit"
           ng-click="ctrl.edit()"
           ng-show="ctrl.canEdit()">
     <span translate>Edit</span>
   </button>
 
   <button type="button"
-          class="btn btn-link right remove"
+          class="btn btn-link pull-right remove"
           ng-click="ctrl.removeEdited()"
           ng-show="ctrl.canRemove()">
     <i class="fa fa-trash"></i>
