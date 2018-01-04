@@ -27,6 +27,10 @@ msgstr ""
 msgid "Add class description"
 msgstr ""
 
+#: app/components/frontPage.html:52
+msgid "Add library"
+msgstr ""
+
 #: translations/help.html:44
 msgid "Add library description"
 msgstr ""
@@ -35,8 +39,16 @@ msgstr ""
 msgid "Add link"
 msgstr ""
 
+#: app/components/frontPage.html:48
+msgid "Add model"
+msgstr ""
+
 #: app/components/model/searchNamespaceModal.html:30
 msgid "Add new namespace"
+msgstr ""
+
+#: app/components/frontPage.html:53
+msgid "Add profile"
 msgstr ""
 
 #: translations/help.html:43
@@ -96,7 +108,8 @@ msgstr ""
 msgid "Admin groups"
 msgstr ""
 
-#: app/components/advancedSearchModal.html:2
+#: app/components/advancedSearchModal.html:4
+#: app/components/frontPage.html:11
 msgid "Advanced search"
 msgstr ""
 
@@ -328,7 +341,7 @@ msgstr ""
 msgid "Can be selected only from this profile"
 msgstr ""
 
-#: app/components/advancedSearchModal.html:35
+#: app/components/advancedSearchModal.html:65
 #: app/components/common/modalTemplate.html:16
 #: app/components/editor/addPropertiesFromClassModal.html:27
 #: app/components/editor/searchClassModal.html:84
@@ -484,7 +497,7 @@ msgstr ""
 msgid "Classes can be seen visually here"
 msgstr ""
 
-#: app/components/frontPage.html:18
+#: app/components/frontPage.html:19
 msgid "Classification"
 msgstr ""
 
@@ -1098,7 +1111,6 @@ msgstr ""
 msgid "fi"
 msgstr ""
 
-#: app/components/advancedSearchModal.html:13
 #: app/components/editor/searchClassModal.html:22
 #: app/components/editor/searchConceptModal.html:18
 #: app/components/editor/searchPredicateModal.html:30
@@ -1429,7 +1441,7 @@ msgstr ""
 msgid "Min length info"
 msgstr ""
 
-#: app/components/frontPage.html:52
+#: app/components/frontPage.html:66
 #: translations/misc.html:28
 msgid "model"
 msgstr ""
@@ -1446,7 +1458,7 @@ msgstr ""
 msgid "Model not found"
 msgstr ""
 
-#: app/components/frontPage.html:53
+#: app/components/frontPage.html:67
 msgid "models"
 msgstr ""
 
@@ -1543,7 +1555,7 @@ msgstr ""
 msgid "No referrers"
 msgstr ""
 
-#: app/components/advancedSearchModal.html:20
+#: app/components/advancedSearchModal.html:33
 msgid "No search results"
 msgstr ""
 

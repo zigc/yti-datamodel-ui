@@ -1,5 +1,48 @@
-<div ng-show="ctrl.loading">
-  <ajax-loading-indicator></ajax-loading-indicator>
-</div>
+<div class="content-box">
+  <form name="ctrl.form" class="editable-form">
+    <fieldset ng-disabled="ctrl.persisting">
 
-<model-view ng-if="ctrl.model" model="ctrl.model" model-controller="ctrl"></model-view>
+      <div class="top-actions">
+
+        <button type="button"
+                class="btn btn-link pull-right cancel"
+                ng-click="ctrl.cancel()">
+          <span translate>Cancel</span>
+        </button>
+
+        <button type="button"
+                class="btn btn-action pull-right save"
+                ng-click="ctrl.save()"
+                ng-disabled="ctrl.form.$invalid || ctrl.form.$pending">
+          <span translate>Save</span>
+        </button>
+      </div>
+
+      <div class="row">
+        <div class="col-md-5">
+
+          <editable data-title="{{ctrl.type + ' label' | capitalize}}" context="ctrl.context" autofocus>
+            <input id="modelLabel" class="form-control" type="text" autocomplete="off" required ng-model="ctrl.label" />
+          </editable>
+
+          <editable data-title="Description" context="ctrl.context">
+            <textarea id="modelComment" class="form-control" autocomplete="off" ng-model="ctrl.comment"></textarea>
+          </editable>
+
+          <editable-multiple-language-select data-title="Model languages" id="modelLanguage" ng-model="ctrl.languages" required="true"></editable-multiple-language-select>
+
+          <editable data-title="Prefix" context="ctrl.context">
+            <input id="modelPrefix" class="form-control" type="text" ng-model="ctrl.prefix" autocomplete="off" required />
+          </editable>
+
+          <non-editable data-title="Namespace" context="ctrl.context" value="ctrl.namespace"></non-editable>
+
+        </div>
+
+        <div class="col-md-6 col-md-offset-1">
+        </div>
+      </div>
+
+    </fieldset>
+  </form>
+</div>

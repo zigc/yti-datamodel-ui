@@ -250,7 +250,7 @@ class ModelBuilder {
 
     const type = this.contextModel.normalizedType;
 
-    this.model = this.entityLoader.createModel(type, this.contextModel.groupId, {
+    this.model = this.entityLoader.createModel(type, {
       prefix,
       label: this.asLocalizable(name),
       namespaces: namespaces

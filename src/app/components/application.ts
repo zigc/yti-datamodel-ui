@@ -35,7 +35,11 @@ export class ApplicationController {
               private locationService: LocationService) {
 
     userService.loggedIn$.subscribe(() => this.applicationInitialized = true);
-    $scope.$watch(() => $location.path(), path => this.showFooter = path === '/');
+
+    $scope.$watch(() => $location.path(), path => {
+      this.showFooter = !path.startsWith('/model');
+    });
+
     this.production = config.environment === 'production';
 
     $scope.$on('$locationChangeStart', (event, next) => {

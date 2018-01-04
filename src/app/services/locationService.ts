@@ -1,6 +1,7 @@
 import { Model } from 'app/entities/model';
 import { Group } from 'app/entities/group';
 import { Localizable } from 'yti-common-ui/types/localization';
+import { KnownModelType } from '../types/entity';
 
 export interface Location {
   localizationKey?: string;
@@ -18,18 +19,12 @@ export class LocationService {
     this.location = location;
   }
 
+  atNewModel(type: KnownModelType) {
+    this.changeLocation([{ localizationKey: `New ${type} creation` }])
+  }
+
   atModel(model: Model, selection: Location|null): void {
-    if (model) {
-      if (model.unsaved) {
-        this.changeLocation([model.group, { localizationKey: `New ${model.normalizedType} creation` }]);
-      } else {
-        if (selection) {
-          this.changeLocation([model.group, model, selection]);
-        } else {
-          this.changeLocation([model.group, model]);
-        }
-      }
-    }
+    this.changeLocation(selection ? [model, selection] : [model]);
   }
 
   atGroup(group: Group): void {

@@ -1,5 +1,4 @@
 import { loader } from './exampleLoader';
-import { ktkGroupId } from '../src/app/services/entityLoader';
 import * as Jhs from './modelJHS';
 
 const modelPrefix = 'edu';
@@ -9,7 +8,7 @@ function breakCyclicDependency(id: string) {
   return modelPrefix + ':' + id;
 }
 
-export const model = loader.createLibrary(ktkGroupId, {
+export const model = loader.createLibrary({
   prefix: modelPrefix,
   label:   { fi: 'Opiskelun, opetuksen ja koulutuksen tietokomponentit',
              en: 'Core Vocabulary of Education' },

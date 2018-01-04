@@ -20,16 +20,10 @@ export function routeConfig($routeProvider: route.IRouteProvider) {
       }
     })
     .when('/newModel', {
-      template: '<new-model-page prefix="prefix" label="label" group="group" languages="languages" type="type" redirect="redirect"></new-model-page>',
+      template: '<new-model-page type="type"></new-model-page>',
       controller($scope: any, $route: route.IRouteService) {
         const params: any = $route.current!.params;
-
-        $scope.prefix = params.prefix;
-        $scope.label = params.label;
-        $scope.group = new Uri(params.group, {});
-        $scope.availableLanguages = params.language;
         $scope.type = params.type;
-        $scope.redirect = params.redirect && new Uri(params.redirect, {});
       }
     })
     .when('/ns/:prefix*', {

@@ -1,7 +1,6 @@
 import { loader } from './exampleLoader';
-import { jhsGroupId } from '../src/app/services/entityLoader';
 
-export const model = loader.createLibrary(jhsGroupId, {
+export const model = loader.createLibrary({
   prefix: 'jhs',
   label:   { fi: 'Julkishallinnon tietokomponentit' },
   comment: { fi: 'Julkisessa hallinnossa ja kaikilla toimialoilla yleisesti käytössä olevat tietosisällöt' }

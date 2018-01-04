@@ -15,9 +15,6 @@ import { VocabularyService } from './vocabularyService';
 import { firstMatching, keepMatching } from 'yti-common-ui/utils/array';
 import { Localizable } from 'yti-common-ui/types/localization';
 
-export const ktkGroupId = new Uri('https://tt.eduuni.fi/sites/csc-iow#KTK', {});
-export const jhsGroupId = new Uri('https://tt.eduuni.fi/sites/csc-iow#JHS', {});
-
 export type Resolvable<T> = IPromise<T>|(() => IPromise<T>);
 export type UriResolvable<T extends { id: Uri }> = Url|IPromise<T>|(() => IPromise<T>);
 
@@ -164,10 +161,18 @@ export class EntityLoader {
     return this.modelService.getModelByUrn(id);
   }
 
-  createModel(type: KnownModelType, groupId: Uri, details: ModelDetails): IPromise<Model> {
+  createModel(type: KnownModelType, details: ModelDetails): IPromise<Model> {
     const result =
       this.initialized.then(() =>
-        this.modelService.newModel(details.prefix, details.label['fi'], groupId, ['fi', 'en'], type))
+        this.modelService.newModel(
+          details.prefix,
+          details.label['fi'],
+          ['EDUC'],
+          ['88ce73b9-376c-4ff1-8c51-e4159b0af75c'],
+          ['fi', 'en'],
+          type
+        )
+      )
         .then(model => {
           setDetails(model, details);
 
@@ -184,7 +189,7 @@ export class EntityLoader {
           };
 
           for (const importedVocabulary of details.vocabularies || []) {
-              model.addVocabulary(resolveVocabulary(importedVocabulary));
+            model.addVocabulary(resolveVocabulary(importedVocabulary));
           }
 
           for (const namespace of details.namespaces || []) {
@@ -214,12 +219,12 @@ export class EntityLoader {
     return this.addAction(result, details);
   }
 
-  createLibrary(groupId: Uri, details: ModelDetails): IPromise<Model> {
-    return this.createModel('library', groupId, details);
+  createLibrary(details: ModelDetails): IPromise<Model> {
+    return this.createModel('library', details);
   }
 
-  createProfile(groupId: Uri, details: ModelDetails): IPromise<Model> {
-    return this.createModel('profile', groupId, details);
+  createProfile(details: ModelDetails): IPromise<Model> {
+    return this.createModel('profile', details);
   }
 
   getClass(modelPromise: IPromise<Model>, id: Uri|Url) {

@@ -24,6 +24,7 @@ import { KnownModelType } from '../types/entity';
 import gettextCatalog = angular.gettext.gettextCatalog;
 import { OrganizationService } from '../services/organizationService';
 import { OrganizationListItem } from '../entities/organization';
+import { AuthorizationManagerService } from 'app/services/authorizationManagerService';
 
 export const component: ComponentDeclaration = {
   selector: 'frontPage',
@@ -64,7 +65,8 @@ export class FrontPageController implements HelpProvider {
               private advancedSearchModal: AdvancedSearchModal,
               private frontPageHelpService: FrontPageHelpService,
               classificationService: ClassificationService,
-              organizationService: OrganizationService) {
+              organizationService: OrganizationService,
+              private authorizationManagerService: AuthorizationManagerService) {
 
     locationService.atFrontPage();
     const localizer = languageService.createLocalizer();
@@ -171,6 +173,23 @@ export class FrontPageController implements HelpProvider {
   openAdvancedSearch() {
     this.advancedSearchModal.open()
       .then(searchResult => this.go(searchResult), modalCancelHandler);
+  }
+
+  canAddModel() {
+    return this.authorizationManagerService.canAddModel();
+  }
+
+  addLibrary() {
+    this.addModel('library');
+  }
+
+  addProfile() {
+    this.addModel('profile');
+  }
+
+  addModel(type: KnownModelType) {
+    this.$location.path('/newModel');
+    this.$location.search({ type });
   }
 
   private go(withIowUrl: {iowUrl(): Url|null}) {

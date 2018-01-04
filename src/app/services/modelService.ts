@@ -17,7 +17,7 @@ export interface ModelService {
   createModel(model: Model): IPromise<any>;
   updateModel(model: Model): IPromise<any>;
   deleteModel(id: Uri): IPromise<any>;
-  newModel(prefix: string, label: string, groupId: Uri, lang: Language[], type: KnownModelType, redirect?: Uri): IPromise<Model>;
+  newModel(prefix: string, label: string, classifications: string[], organizations: string[], lang: Language[], type: KnownModelType, redirect?: Uri): IPromise<Model>;
   newLink(title: string, description: string, homepage: Uri, lang: Language, context: any): IPromise<Link>;
   getAllImportableNamespaces(): IPromise<ImportedNamespace[]>;
   newNamespaceImport(namespace: string, prefix: string, label: string, lang: Language): IPromise<ImportedNamespace>;
@@ -45,7 +45,7 @@ export class DefaultModelService implements ModelService {
   }
 
   createModel(model: Model): IPromise<any> {
-    return this.$http.put<{ identifier: Urn }>(config.apiEndpointWithName('model'), model.serialize(), { params: { id: model.id.uri, group: model.group.id.uri } })
+    return this.$http.put<{ identifier: Urn }>(config.apiEndpointWithName('model'), model.serialize())
       .then(response => {
         model.unsaved = false;
         model.version = response.data!.identifier;
@@ -65,7 +65,8 @@ export class DefaultModelService implements ModelService {
     return this.$http.delete(config.apiEndpointWithName('model'), { params: { id: id.uri } });
   }
 
-  newModel(prefix: string, label: string, _groupId: Uri, lang: Language[], type: KnownModelType, redirect?: Uri): IPromise<Model> {
+  newModel(prefix: string, label: string, classifications: string[], organizations: string[], lang: Language[], type: KnownModelType, redirect?: Uri): IPromise<Model> {
+
     function mapEndpoint() {
       switch (type) {
         case 'library':
@@ -76,6 +77,7 @@ export class DefaultModelService implements ModelService {
           return assertNever(type, 'Unknown type: ' + type);
       }
     }
+
     return this.$http.get<GraphData>(config.apiEndpointWithName(mapEndpoint()), {
       params: {
         prefix,
@@ -83,8 +85,8 @@ export class DefaultModelService implements ModelService {
         lang: lang[0],
         langList: lang.join(' '),
         redirect: redirect && redirect.uri,
-        serviceList: 'EDUC', // FIXME
-        orgList: ['88ce73b9-376c-4ff1-8c51-e4159b0af75c'] // FIXME
+        serviceList: classifications.join(' '),
+        orgList: organizations.join(' ')
       }
     })
       .then(response => this.deserializeModel(response.data!))

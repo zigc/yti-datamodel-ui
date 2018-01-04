@@ -54,4 +54,8 @@ export class AuthorizationManagerService {
   canSaveVisualization(model: Model) {
     return !this.user.anonymous; // TODO
   }
+
+  canAddModel() {
+    return !this.user.anonymous; // TODO
+  }
 }

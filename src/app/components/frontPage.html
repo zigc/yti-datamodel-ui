@@ -43,6 +43,18 @@
           <app-filter-dropdown class="pull-left ml-2"
                                [options]="$ctrl.modelTypes"
                                [filter-subject]="$ctrl.modelType$"></app-filter-dropdown>
+
+          <div class="pull-right" uib-dropdown ng-if="$ctrl.canAddModel()">
+            <button class="btn btn-action" id="modelCreation" uib-dropdown-toggle>
+              <span translate>Add model</span>
+            </button>
+
+            <div uib-dropdown-menu class="dropdown-menu-right" aria-labelledby="modelCreation">
+              <button class="dropdown-item" ng-click="$ctrl.addLibrary()" translate>Add library</button>
+              <button class="dropdown-item" ng-click="$ctrl.addProfile()" translate>Add profile</button>
+            </div>
+          </div>
+
         </div>
       </div>
 

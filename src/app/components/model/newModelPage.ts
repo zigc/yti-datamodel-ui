@@ -1,24 +1,20 @@
-import { IScope, ILocationService } from 'angular';
+import { IFormController, ILocationService } from 'angular';
 import { module as mod } from './module';
 import { ModelService } from 'app/services/modelService';
 import { Uri } from 'app/entities/uri';
-import { Language } from 'app/types/language';
+import { Language, LanguageContext } from 'app/types/language';
 import { KnownModelType } from 'app/types/entity';
-import { Model } from 'app/entities/model';
-import { ModelControllerService, View } from './modelControllerService';
-import { Class } from 'app/entities/class';
-import { Predicate } from 'app/entities/predicate';
+import { LocationService } from 'app/services/locationService';
+
+interface EditableForm extends IFormController {
+  editing: boolean;
+}
 
 mod.directive('newModelPage', () => {
   return {
     restrict: 'E',
     scope: {
-      prefix: '=',
-      label: '=',
-      group: '=',
-      languages: '=',
-      type: '=',
-      redirect: '='
+      type: '='
     },
     template: require('./newModelPage.html'),
     controllerAs: 'ctrl',
@@ -27,49 +23,53 @@ mod.directive('newModelPage', () => {
   };
 });
 
-export class NewModelPageController implements ModelControllerService {
+export class NewModelPageController {
 
   prefix: string;
   label: string;
-  group: Uri;
-  languages: Language[];
+  classifications = ['EDUC']; // FIXME
+  organizations =  ['88ce73b9-376c-4ff1-8c51-e4159b0af75c']; // FIXME
+  languages: Language[] = ['fi', 'en'];
   type: KnownModelType;
-  redirect: Uri;
 
-  loading: boolean;
-  model: Model;
+  context: LanguageContext = {
+    id: new Uri('http://newModel', {}),
+    language: this.languages
+  };
+
+  persisting = false;
+  form: EditableForm;
 
   /* @ngInject */
-  constructor($scope: IScope,
-              $location: ILocationService,
-              modelService: ModelService) {
+  constructor(private $location: ILocationService,
+              private modelService: ModelService,
+              locationService: LocationService) {
 
-    modelService.newModel(this.prefix, this.label, this.group, this.languages, this.type, this.redirect)
-      .then(model => this.model = model)
-      .then(() => this.loading = false);
-
-    $scope.$watch(() => this.model, (newModel: Model, oldModel: Model) => {
-      // new model creation cancelled
-      if (oldModel && !newModel) {
-        $location.url(oldModel.group.iowUrl());
-      }
-
-      if (newModel && !newModel.unsaved) {
-        $location.url(newModel.iowUrl());
-      }
-    });
+    locationService.atNewModel(this.type);
   }
 
-  getUsedNamespaces(): Set<string> {
-    return new Set();
+  $postLink() {
+    this.form.editing = true;
   }
 
-  registerView(_view: View) {
+  get namespace() {
+    // TODO
+    return 'http://todo/' + (this.prefix || '');
   }
 
-  selectionEdited(_oldSelection: Class|Predicate|null, _newSelection: Class|Predicate) {
+  save() {
+
+    this.persisting = true;
+
+    this.modelService.newModel(this.prefix, this.label, this.classifications, this.organizations, this.languages, this.type)
+      .then(model => {
+        this.modelService.createModel(model).then(() => {
+          this.$location.url(model.iowUrl());
+        }, () => this.persisting = false);
+      });
   }
 
-  selectionDeleted(_selection: Class|Predicate) {
+  cancel() {
+    this.$location.url('/');
   }
 }

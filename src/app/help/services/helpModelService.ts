@@ -76,9 +76,9 @@ export class InteractiveHelpModelService implements ModelService, ResetableServi
     return this.$q.when();
   }
 
-  newModel(prefix: string, label: string, groupId: Uri, lang: Language[], type: KnownModelType, redirect?: Uri): IPromise<Model> {
+  newModel(prefix: string, label: string, classifications: string[], organizations: string[], lang: Language[], type: KnownModelType, redirect?: Uri): IPromise<Model> {
     const temporaryNonConflictingPrefix = 'mkowhero';
-    return this.defaultModelService.newModel(temporaryNonConflictingPrefix, label, groupId, lang, type, redirect)
+    return this.defaultModelService.newModel(temporaryNonConflictingPrefix, label, classifications, organizations, lang, type, redirect)
       .then(model => {
         const id = new Uri(_.trimEnd(model.namespace, '#'), model.context).withName(prefix);
         model.prefix = prefix;
