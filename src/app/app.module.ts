@@ -5,7 +5,6 @@ import { module as commonModule } from './components/common';
 import { module as editorModule } from './components/editor';
 import { module as visualizationModule } from './components/visualization';
 import { module as formModule } from './components/form';
-import { module as groupModule } from './components/group';
 import { module as modelModule } from './components/model';
 import { module as navigationModule } from './components/navigation';
 import { module as userModule } from './components/user';
@@ -136,7 +135,6 @@ const mod = angular.module('iow-ui', [
   editorModule.name,
   visualizationModule.name,
   formModule.name,
-  groupModule.name,
   modelModule.name,
   navigationModule.name,
   userModule.name,
