@@ -93,7 +93,7 @@ export class FrontPageController implements HelpProvider {
     }
 
     function classificationMatches(classification: Classification|null, model: ModelListItem) {
-      return !classification || anyMatching(model.classification, c => c.id.equals(classification.id));
+      return !classification || anyMatching(model.classifications, c => c.id.equals(classification.id));
     }
 
     function typeMatches(type: KnownModelType|null, model: ModelListItem) {
@@ -101,7 +101,7 @@ export class FrontPageController implements HelpProvider {
     }
 
     function organizationMatches(org: OrganizationListItem|null, model: ModelListItem) {
-      return !org || anyMatching(model.organization, modelOrg => modelOrg.id.uuid === org.uuid);
+      return !org || anyMatching(model.contributors, modelOrg => modelOrg.id.uuid === org.uuid);
     }
 
     this.subscriptionsToClean.push(Observable.combineLatest(classifications$, models$, this.search$, this.modelType$, this.organization$, languageService.language$)

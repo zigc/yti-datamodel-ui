@@ -3,7 +3,6 @@ import { requireDefined } from 'yti-common-ui/utils/object';
 import { KnownModelType, State, Type } from 'app/types/entity';
 import { modelUrl, normalizeModelType, resourceUrl } from 'app/utils/entity';
 import { Uri, Url, Urn } from './uri';
-import { GroupListItem } from './group';
 import { Language } from 'app/types/language';
 import { Moment } from 'moment';
 import { contains, containsAny, remove } from 'yti-common-ui/utils/array';
@@ -60,12 +59,12 @@ export abstract class AbstractModel extends GraphNode {
 export class ModelListItem extends AbstractModel {
 
   static modelListItemMappings = {
-    classification: { name: 'isPartOf',    serializer: entityAwareList(entity(() => GroupListItem)) },
-    organization:   { name: 'contributor', serializer: entityAwareList(entity(() => Organization)) }
+    classifications: { name: 'isPartOf',    serializer: entityAwareList(entity(() => ClassificationGroup)) },
+    contributors:    { name: 'contributor', serializer: entityAwareList(entity(() => Organization)) }
   };
 
-  classification: GroupListItem[];
-  organization: Organization[];
+  classifications: ClassificationGroup[];
+  contributors: Organization[];
 
   constructor(graph: any, context: any, frame: any) {
     super(graph, context, frame);

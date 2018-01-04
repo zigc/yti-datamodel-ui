@@ -35,7 +35,7 @@
         <div class="col-md-12">
 
           <app-filter-dropdown class="pull-left"
-                               [options]="$ctrl.organizations"
+                               [options]="$ctrl.contributors"
                                [filter-subject]="$ctrl.organization$"></app-filter-dropdown>
 
           <app-filter-dropdown class="pull-left ml-2"
@@ -64,11 +64,11 @@
 
               <span class="type">{{model.normalizedType | translate}}</span>
 
-              <span class="organization" ng-repeat="organization in model.organization">
+              <span class="organization" ng-repeat="organization in model.contributors">
                 {{organization.label | translateValue}}
               </span>
 
-              <span class="group" ng-repeat="classification in model.classification">
+              <span class="group" ng-repeat="classification in model.classifications">
                 {{classification.label | translateValue}}
               </span>
 
