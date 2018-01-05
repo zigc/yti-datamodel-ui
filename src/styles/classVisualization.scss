@@ -1,6 +1,6 @@
 @import '~yti-common-ui/theme/variables';
 
-$enabledColor: #bbb;
+$enabledColor: $primary;
 
 @mixin class-visualization() {
 
@@ -20,7 +20,7 @@ $enabledColor: #bbb;
   }
 
   .uml-class-name-text {
-    fill: #fff;
+    fill: $white;
   }
 
   .uml-class-name-rect {
@@ -29,8 +29,8 @@ $enabledColor: #bbb;
   }
 
   .uml-class-attrs-rect {
-    fill: #f5f5f5;
-    stroke: #ddd;
+    fill: $gray-200;
+    stroke: none;
     stroke-width: 1px;
   }
 
@@ -40,12 +40,20 @@ $enabledColor: #bbb;
     }
 
     > g.shadow .uml-class-name-rect {
-      fill: $gray;
+      fill: $gray-700;
     }
 
     &.selected {
       .uml-class-name-rect {
-        fill: #c2606e;
+        fill: $brand-color;
+      }
+
+      .uml-class-attrs-rect {
+        stroke: $brand-color;
+      }
+
+      .uml-class-name-rect {
+        stroke: $brand-color;
       }
     }
   }
@@ -54,7 +62,7 @@ $enabledColor: #bbb;
     fill-opacity: 0.3;
 
     path {
-      stroke: #ddd;
+      stroke: $gray;
     }
   }
 }

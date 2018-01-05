@@ -23,9 +23,11 @@ mod.directive('visualizationContextMenu', () => {
     controllerAs: 'ctrl',
     restrict: 'E',
     template: `
-      <ul class="dropdown-menu" role="menu" ng-style="ctrl.style" ng-if="ctrl.actions.length > 0">
-        <li role="menuitem" ng-repeat="action in ctrl.actions"><a ng-click="ctrl.invokeAction(action)">{{action.name | translate}}</a></li>
-      </ul>
+      <div class="dropdown-menu show" role="menu" ng-style="ctrl.style" ng-if="ctrl.actions.length > 0">
+        <div class="dropdown-item" role="menuitem" ng-repeat="action in ctrl.actions">
+          <a ng-click="ctrl.invokeAction(action)">{{action.name | translate}}</a>
+        </div>
+      </div>
     `,
     controller: VisualizationContextMenuController
   };

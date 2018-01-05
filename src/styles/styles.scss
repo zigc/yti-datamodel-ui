@@ -818,7 +818,6 @@ $input-select: 80px;
   width: 100%;
   height: calc(100vh - 77px);
   overflow: hidden;
-  $enabledColor: #bbb;
 
   .paper {
     z-index: 10;
@@ -830,18 +829,21 @@ $input-select: 80px;
     z-index: 20;
     padding: 10px 0 0 10px;
 
+    .btn-secondary-action {
+      background-color: $white;
+    }
+
     .focus-indicator {
       @include no-select;
       display: inline-block;
-      height: 28px;
+      height: 29px;
       width: 30px;
-      background-color: $light;
-      border: 1px solid $light;
-      color: white;
+      line-height: 29px;
+      background-color: $gray-100;
+      border: 1px solid $gray-300;
+      color: $black;
       text-align: center;
-      padding-top: 1px;
-      margin-left: -4px;
-      margin-right: -4px;
+      vertical-align: middle;
     }
   }
 
@@ -858,7 +860,7 @@ $input-select: 80px;
     }
 
     .arrow {
-      border-left-color: #555555;
+      border-left-color: $gray;
       &:after {
         border-left-color: rgba(85, 85, 85, 0.9);
       }
