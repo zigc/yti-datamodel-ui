@@ -14,8 +14,8 @@ mod.directive('history', () => {
     bindToController: true,
     controllerAs: 'ctrl',
     template: `
-      <button type="button" class="btn btn-action pull-right" ng-click="ctrl.openHistory()" uib-tooltip="{{'Show history' | translate}}">
-        <i class="fa fa-history"></i>
+      <button type="button" class="btn btn-secondary-action pull-right" ng-click="ctrl.openHistory()">
+        <span translate>Show history</span>
       </button>`,
     controller: HistoryController
   };
