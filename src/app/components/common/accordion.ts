@@ -13,9 +13,7 @@ mod.directive('accordion', () => {
     bindToController: true,
     transclude: true,
     template: `
-      <div class="panel-group">
-        <ng-transclude></ng-transclude>
-      </div>
+      <ng-transclude></ng-transclude>
     `
   };
 });
@@ -49,20 +47,20 @@ mod.directive('accordionGroup', () => {
       body: 'accordionBody'
     },
     template: `
-      <div class="panel panel-default">
-        <div ng-click="toggleVisibility()">
+      <div class="card">
+        <div class="card-header" ng-click="toggleVisibility()">
           <div accordion-transclude="heading" is-open="isOpen"></div>
         </div>
         <div uib-collapse="!isOpen()" ng-if="isAnimate()">
-          <div class="panel-body">
+          <div class="card-body" ng-class="{ show: isOpen }">
             <div accordion-transclude="body" is-open="isOpen"></div>
           </div>
         </div>
-        <div class="panel-collapse" ng-show="isOpen()" ng-if="!isAnimate()">
-          <div class="panel-body">
+        <divc class="collapse" ng-show="isOpen()" ng-if="!isAnimate()">
+          <div class="card-body">
             <div accordion-transclude="body" is-open="isOpen"></div>
           </div>
-        </div>
+        </divc>
       </div>
     `,
     require: '^accordion',

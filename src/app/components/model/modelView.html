@@ -1,11 +1,32 @@
 <div>
-  <div ng-class="{'model-header': !ctrl.model.unsaved, 'main-header': ctrl.model.unsaved}" ng-click="ctrl.visible = ctrl.model.unsaved || !ctrl.visible">
-    <h2>{{ctrl.model | translateLabel: ctrl.model}} <accordion-chevron ng-show="!ctrl.model.unsaved" no-pull="true" is-open="ctrl.visible"></accordion-chevron></h2>
+
+  <div ng-if="ctrl.model" class="row header">
+    <div class="col-12">
+
+      <h2>
+
+        <span class="mr-4">{{ctrl.model | translateLabel: ctrl.model}}</span>
+
+        <button class="btn btn-action"
+                ng-hide="ctrl.visible"
+                ng-click="ctrl.visible = true" translate>Show model details</button>
+
+        <button class="btn btn-action"
+                ng-show="ctrl.visible"
+                ng-click="ctrl.visible = false" translate>Hide model details</button>
+
+      </h2>
+
+      <model-language-chooser context="ctrl.model" class="pull-right mt-2"></model-language-chooser>
+
+    </div>
   </div>
 
   <form name="form" class="editable-form">
-    <fieldset ng-disabled="ctrl.persisting">
-      <div ng-if="ctrl.model" uib-collapse="!ctrl.visible" class="main-editable-content">
+    <fieldset ng-if="ctrl.model" ng-disabled="ctrl.persisting">
+      <div uib-collapse="!ctrl.visible" class="main-editable-content">
+
+        <hr />
 
         <editable-entity-buttons context="ctrl.model" editable-controller="ctrl">
           <export ng-hide="ctrl.isEditing()" entity="ctrl.model" context="ctrl.model"></export>

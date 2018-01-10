@@ -25,7 +25,10 @@ class DividerController {
   selectionWidth: number;
 
   /* @ngInject */
-  constructor(private $scope: IScope, private $window: IWindowService, private sessionService: SessionService) {
+  constructor(private $scope: IScope,
+              private $window: IWindowService,
+              private sessionService: SessionService,
+              $element: JQuery) {
 
     this.initWidth();
 
@@ -36,6 +39,9 @@ class DividerController {
 
     $window.addEventListener('resize', onResize);
     $scope.$on('$destroy', () => $window.removeEventListener('resize', onResize));
+
+    console.log($element);
+    $element.on('click', () => console.log('jq'));
   }
 
   initWidth() {
@@ -47,6 +53,8 @@ class DividerController {
   }
 
   moveDivider(mouseDown: MouseEvent) {
+
+    console.log('foo!');
 
     mouseDown.preventDefault();
 

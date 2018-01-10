@@ -1,64 +1,95 @@
 <div ng-show="ctrl.loading"><ajax-loading-indicator></ajax-loading-indicator></div>
 
-<div ng-if="!ctrl.loading">
-  <model-view model="ctrl.model" model-controller="ctrl"></model-view>
+<div class="content-box" ng-if="!ctrl.loading">
 
-  <div class="bottom">
-    <div class="model-panel--left">
-      <!-- FIXME: float temporarily disabled -->
-      <uib-tabset active="ctrl.activeTab" always="true" snap="true">
-        <uib-tab ng-repeat="tab in ctrl.tabs">
-          <uib-tab-heading>
-            <i ng-class="tab.glyphIconClass"></i><p>{{tab.type | translate}}</p>
-          </uib-tab-heading>
-
-          <div ng-if="$index === ctrl.activeTab">
-            <button ng-if="ctrl.canEdit()" type="button" class="btn btn-action btn-md add-new-button" ng-click="tab.addNew()">
-              <span class="glyphicon glyphicon-plus"></span>
-              <span>{{tab.addLabel | translate}}</span>
-            </button>
-
-            <ul class="panel__list" ng-class="{'has-button': ctrl.canEdit()}">
-              <li ng-repeat="item in tab.items() track by item.id.uri"
-                  id="{{item.id.uri}}"
-                  ng-class="{'model-panel__selection': ctrl.isSelected(item)}"
-                  ng-click="ctrl.select(item)">
-                {{item.label}} <ajax-loading-indicator-small ng-if="ctrl.isLoading(item)"></ajax-loading-indicator-small>
-              </li>
-            </ul>
-          </div>
-        </uib-tab>
-      </uib-tabset>
+  <div class="row top">
+    <div class="col-12">
+      <model-view model="ctrl.model" model-controller="ctrl"></model-view>
     </div>
+  </div>
 
-    <div class="model-panel--right">
-      <class-view ng-if="ctrl.selection.isClass()"
-                  data-class="ctrl.selection"
-                  open-property-id="ctrl.openPropertyId"
-                  model="ctrl.model"
-                  model-controller="ctrl"
-                  show="ctrl.show"
-                  width="ctrl.selectionWidth">
-      </class-view>
+  <div class="row bottom">
+    <div class="col-12">
 
-      <predicate-view ng-if="ctrl.selection.isPredicate()"
-                      predicate="ctrl.selection"
+      <div class="panel-left" float always="true" snap="true">
+        <!-- FIXME: float temporarily disabled -->
+        <uib-tabset active="ctrl.activeTab" justified="true">
+          <uib-tab ng-repeat="tab in ctrl.tabs">
+            <uib-tab-heading>
+              <i ng-class="tab.glyphIconClass"></i><p>{{tab.type | translate}}</p>
+            </uib-tab-heading>
+
+            <div ng-if="$index === ctrl.activeTab">
+
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="selectable-actions">
+                    <button ng-if="ctrl.canEdit()" type="button" class="btn btn-action btn-md add-new-button" ng-click="tab.addNew()">
+                      <span class="glyphicon glyphicon-plus"></span>
+                      <span>{{tab.addLabel | translate}}</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="selectable-items">
+                    <ul ng-class="{'has-button': ctrl.canEdit()}">
+                      <li ng-repeat="item in tab.items() track by item.id.uri"
+                          id="{{item.id.uri}}"
+                          ng-class="{'selection': ctrl.isSelected(item)}"
+                          ng-click="ctrl.select(item)">
+                        {{item.label}} <ajax-loading-indicator-small ng-if="ctrl.isLoading(item)"></ajax-loading-indicator-small>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </uib-tab>
+        </uib-tabset>
+      </div>
+
+      <div class="panel-right">
+
+        <div class="selection-container"
+             ng-style="{ width: ctrl.selectionWidth }"
+             ng-show="ctrl.show !== 2">
+
+          <class-view ng-if="ctrl.selection.isClass()"
+                      data-class="ctrl.selection"
+                      open-property-id="ctrl.openPropertyId"
                       model="ctrl.model"
-                      model-controller="ctrl"
                       show="ctrl.show"
-                      width="ctrl.selectionWidth">
-      </predicate-view>
+                      model-controller="ctrl">
+          </class-view>
 
-      <divider ng-if="ctrl.show === 1" selection-width="ctrl.selectionWidth"></divider>
-
-      <visualization-view ng-if="ctrl.model"
-                          selection="ctrl.selection"
+          <predicate-view ng-if="ctrl.selection.isPredicate()"
+                          predicate="ctrl.selection"
                           model="ctrl.model"
-                          show="ctrl.show"
-                          model-page-actions="ctrl"
-                          selection-width="ctrl.selectionWidth"
-                          float>
-      </visualization-view>
+                          model-controller="ctrl"
+                          show="ctrl.show">
+          </predicate-view>
+        </div>
+
+        <div class="visualization-container"
+             ng-style="{ width: ctrl.visualizationWidth }"
+             ng-show="ctrl.show !== 0">
+
+          <divider ng-if="ctrl.show === 1" selection-width="ctrl.selectionWidth"></divider>
+
+          <visualization-view ng-if="ctrl.model"
+                              ng-class="{'without-divider': ctrl.show !== 1}"
+                              selection="ctrl.selection"
+                              model="ctrl.model"
+                              show="ctrl.show"
+                              model-page-actions="ctrl"
+                              float>
+          </visualization-view>
+        </div>
+
+      </div>
     </div>
   </div>
 </div>

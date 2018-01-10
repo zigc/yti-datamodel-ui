@@ -5,7 +5,6 @@ import {
 import { AsyncValidator, Validator } from 'app/components/form/validators';
 import { allMatching, normalizeAsArray } from 'yti-common-ui/utils/array';
 import { valuesExcludingKeys } from 'yti-common-ui/utils/object';
-import { Show } from 'app/types/component';
 import { ForwardRefFn, resolveForwardRef } from '@angular/core';
 
 export interface ComponentDeclaration extends IComponentOptions {
@@ -128,19 +127,6 @@ export function validateWithValidators<T>($q: IQService, ngModelController: INgM
   }
 
   return $q.all(asyncValidationResults).then(() => new ValidationResult(result));
-}
-
-export function setSelectionStyles(element: JQuery, show: Show, selectionWidth: number) {
-  element.css({
-    'padding-left': '5px',
-    width: show === Show.Both ? `${selectionWidth + 5}px` : '100%'
-  });
-
-  if (show === Show.Visualization) {
-    element.addClass('hide');
-  } else {
-    element.removeClass('hide');
-  }
 }
 
 export function ifChanged<T>(cb: (newItem: T, oldItem: T) => void ) {

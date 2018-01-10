@@ -249,6 +249,10 @@ export class ModelPageController implements ModelPageActions, HelpProvider, Mode
     }
   }
 
+  get visualizationWidth() {
+    return this.show !== 2 ? `calc(100% - ${this.selectionWidth}px)` : '100%';
+  }
+
   get show() {
     return isDefined(this._show) ? this._show : Show.Both;
   }

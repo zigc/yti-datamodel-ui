@@ -1,4 +1,4 @@
-import { IAttributes, ILogService, IScope } from 'angular';
+import { ILogService } from 'angular';
 import { EditableEntityController, EditableScope, Rights } from 'app/components/form/editableEntityController';
 import { ClassService } from 'app/services/classService';
 import { SearchPredicateModal } from './searchPredicateModal';
@@ -7,7 +7,7 @@ import { DeleteConfirmationModal } from 'app/components/common/deleteConfirmatio
 import { Show } from 'app/types/component';
 import { module as mod } from './module';
 import { ErrorModal } from 'app/components/form/errorModal';
-import { modalCancelHandler, setSelectionStyles } from 'app/utils/angular';
+import { modalCancelHandler } from 'app/utils/angular';
 import { Class } from 'app/entities/class';
 import { Model } from 'app/entities/model';
 import { LanguageContext } from 'app/types/language';
@@ -21,20 +21,14 @@ mod.directive('classView', () => {
       model: '=',
       modelController: '=',
       show: '=',
-      openPropertyId: '=',
-      width: '='
+      openPropertyId: '='
     },
     restrict: 'E',
     template: require('./classView.html'),
     controllerAs: 'ctrl',
     bindToController: true,
     controller: ClassViewController,
-    require: 'classView',
-    link($scope: IScope, element: JQuery, _attributes: IAttributes, ctrl: ClassViewController) {
-      $scope.$watchGroup([() => ctrl.width, () => ctrl.show], ([selectionWidth, show]: [number, Show]) => {
-        setSelectionStyles(element, show, selectionWidth);
-      });
-    }
+    require: 'classView'
   };
 });
 
@@ -45,7 +39,6 @@ export class ClassViewController extends EditableEntityController<Class> {
   modelController: ModelControllerService;
   show: Show;
   openPropertyId: string;
-  width: number;
 
   /* @ngInject */
   constructor($scope: EditableScope,
