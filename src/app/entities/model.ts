@@ -18,7 +18,7 @@ import {
 } from './serializer/serializer';
 import { Localizable } from 'yti-common-ui/types/localization';
 import { Organization } from './organization';
-import { ClassificationGroup } from './classification';
+import { Classification } from './classification';
 
 
 function normalizeType(type: Type[]): KnownModelType {
@@ -59,11 +59,11 @@ export abstract class AbstractModel extends GraphNode {
 export class ModelListItem extends AbstractModel {
 
   static modelListItemMappings = {
-    classifications: { name: 'isPartOf',    serializer: entityAwareList(entity(() => ClassificationGroup)) },
+    classifications: { name: 'isPartOf',    serializer: entityAwareList(entity(() => Classification)) },
     contributors:    { name: 'contributor', serializer: entityAwareList(entity(() => Organization)) }
   };
 
-  classifications: ClassificationGroup[];
+  classifications: Classification[];
   contributors: Organization[];
 
   constructor(graph: any, context: any, frame: any) {
@@ -81,7 +81,7 @@ export class Model extends AbstractModel {
     namespaces:      { name: 'requires',     serializer: entityAwareList(entity(() => ImportedNamespace)) },
     links:           { name: 'relations',    serializer: entityAwareList(entity(() => Link)) },
     referenceDatas:  { name: 'codeLists',    serializer: entityAwareList(entity(() => ReferenceData)) },
-    classifications: { name: 'isPartOf',     serializer: entityAwareList(entity(() => ClassificationGroup)) },
+    classifications: { name: 'isPartOf',     serializer: entityAwareList(entity(() => Classification)) },
     contributors:    { name: 'contributor',  serializer: entityAwareList(entity(() => Organization)) },
     version:         { name: 'identifier',   serializer: optional(identitySerializer<Urn>()) },
     rootClass:       { name: 'rootResource', serializer: entityAwareOptional(uriSerializer) },
@@ -97,7 +97,7 @@ export class Model extends AbstractModel {
   namespaces: ImportedNamespace[];
   links: Link[];
   referenceDatas: ReferenceData[];
-  classifications: ClassificationGroup[];
+  classifications: Classification[];
   contributors: Organization[];
   unsaved = false;
   version: Urn|null;

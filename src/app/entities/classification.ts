@@ -9,7 +9,7 @@ export class Classification extends GraphNode {
 
   static classificationMappings = {
     id:             { name: '@id',          serializer: uriSerializer },
-    label:          { name: 'prefLabel',    serializer: localizableSerializer },
+    label:          { name: 'label',        serializer: localizableSerializer },
     identifier:     { name: 'identifier',   serializer: stringSerializer }
   };
 
@@ -21,24 +21,5 @@ export class Classification extends GraphNode {
     super(graph, context, frame);
 
     init(this, Classification.classificationMappings);
-  }
-}
-
-export class ClassificationGroup extends GraphNode {
-
-  static classificationGroupMappings = {
-    id:             { name: '@id',       serializer: uriSerializer },
-    label:          { name: 'label',     serializer: localizableSerializer },
-    identifier:     { name: 'op-code',   serializer: stringSerializer }
-  };
-
-  id: Uri;
-  label: Localizable;
-  identifier: string;
-
-  constructor(graph: any, context: any, frame: any) {
-    super(graph, context, frame);
-
-    init(this, ClassificationGroup.classificationGroupMappings);
   }
 }
