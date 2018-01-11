@@ -114,13 +114,13 @@ requests.get = function<T>(url: string, config?: IRequestShortcutConfig): IHttpP
   return makeRequest<T>('GET', url, config);
 };
 requests.post = function<T>(url: string, data: any, config?: IRequestShortcutConfig): IHttpPromise<T> {
-  return makeRequest<T>('POST', url, Object.assign(config, {data}));
+  return makeRequest<T>('POST', url, Object.assign({}, config, {data}));
 };
 requests.put = function<T>(url: string, data: any, config?: IRequestShortcutConfig): IHttpPromise<T> {
-  return makeRequest<T>('PUT', url, Object.assign(config, {data}));
+  return makeRequest<T>('PUT', url, Object.assign({}, config, {data}));
 };
 requests.patch = function<T>(url: string, data: any, config?: IRequestShortcutConfig): IHttpPromise<T> {
-  return makeRequest<T>('PATCH', url, Object.assign(config, {data}));
+  return makeRequest<T>('PATCH', url, Object.assign({}, config, {data}));
 };
 requests.delete = function<T>(url: string, config?: IRequestShortcutConfig): IHttpPromise<T> {
   return makeRequest<T>('DELETE', url, config);
