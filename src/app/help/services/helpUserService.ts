@@ -11,6 +11,7 @@ class InteractiveHelpUser implements User {
 
   name = 'Ohjekäyttäjä';
   anonymous = false;
+  superuser = false;
 
   getRoles(organizationIds: UUID | UUID[]): Set<Role> {
     return new Set<Role>();

@@ -1,4 +1,3 @@
-
 import { SearchNamespaceModal } from './searchNamespaceModal';
 import { SearchVocabularyModal } from './searchVocabularyModal';
 import { AddEditLinkModal } from './addEditLinkModal';
@@ -7,6 +6,8 @@ import { SearchReferenceDataModal } from './searchReferenceDataModal';
 import { EditReferenceDataModal } from './editReferenceDataModal';
 import { ViewReferenceDataModal} from './viewReferenceDataModal';
 import { ConceptEditorModal } from './conceptEditorModal';
+import { SearchClassificationModal } from './searchClassificationModal';
+import { SearchOrganizationModal } from './searchOrganizationModal';
 import { module as mod } from './module';
 export { module } from './module';
 
@@ -25,6 +26,8 @@ import './referenceDataView';
 import './referenceDatasView';
 import './technicalNamespaces';
 import './nonEditableVocabularies';
+import './classificationsView';
+import './contributorsView';
 
 mod.service('addEditLinkModal', AddEditLinkModal);
 mod.service('addEditNamespaceModal', AddEditNamespaceModal);
@@ -34,3 +37,5 @@ mod.service('searchReferenceDataModal', SearchReferenceDataModal);
 mod.service('editReferenceDataModal', EditReferenceDataModal);
 mod.service('viewReferenceDataModal', ViewReferenceDataModal);
 mod.service('conceptEditorModal', ConceptEditorModal);
+mod.service('searchClassificationModal', SearchClassificationModal);
+mod.service('searchOrganizationModal', SearchOrganizationModal);

@@ -1,15 +1,23 @@
 import { IHttpService, IPromise } from 'angular';
 import { config } from 'config';
-import { OrganizationListItem } from '../entities/organization';
+import { Organization } from '../entities/organization';
+import * as frames from '../entities/frames';
+import { GraphData } from '../types/entity';
+import { FrameService } from './frameService';
 
 export class OrganizationService {
 
   /* @ngInject */
-  constructor(private $http: IHttpService) {
+  constructor(private $http: IHttpService,
+              private frameService: FrameService) {
   }
 
-  getOrganizations(): IPromise<OrganizationListItem[]> {
-    return this.$http.get<any[]>(config.apiEndpointWithName('organizations'))
-      .then(response => response.data!.map(datum => new OrganizationListItem(datum)));
+  getOrganizations(): IPromise<Organization[]> {
+    return this.$http.get<GraphData>(config.apiEndpointWithName('organizations'))
+      .then(response => this.deserializeOrganization(response.data!));
+  }
+
+  private deserializeOrganization(data: GraphData): IPromise<Organization[]> {
+    return this.frameService.frameAndMapArray(data, frames.organizationFrame(data), () => Organization);
   }
 }

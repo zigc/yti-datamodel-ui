@@ -4,6 +4,7 @@ export interface User {
 
   anonymous: boolean;
   name: string;
+  superuser: boolean;
 
   getRoles(organizationIds: UUID|UUID[]): Set<Role>;
   getOrganizations(roles: Role|Role[]): Set<UUID>;

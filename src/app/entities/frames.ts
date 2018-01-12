@@ -42,6 +42,13 @@ const conceptContext = Object.assign({}, coreContext, {
   inScheme
 });
 
+const classificationContext = Object.assign({}, coreContext, {
+});
+
+const organizationContext = Object.assign({}, coreContext, {
+  description
+});
+
 const referenceDataServerContext = Object.assign({}, coreContext, {
   description
 });
@@ -285,9 +292,16 @@ export function conceptListFrame(data: any) {
 
 export function classificationListFrame(data: any) {
 
-  return frame(data, conceptContext, {
+  return frame(data, classificationContext, {
     '@type': 'foaf:Group',
     identifier: {}
+  });
+}
+
+
+export function organizationFrame(data: any) {
+  return frame(data, organizationContext, {
+    '@type': 'foaf:Organization'
   });
 }
 

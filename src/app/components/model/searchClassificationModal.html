@@ -1,0 +1,33 @@
+<div class="modal-header">
+  <h4 class="modal-title">
+    <a><i ng-click="$dismiss('cancel')" class="fa fa-times"></i></a>
+    <span translate>Select classification</span>
+  </h4>
+</div>
+
+<div class="modal-body full-height">
+
+  <div class="row full-height" style="height: 100%">
+    <div class="col-12">
+      <div class="content-box">
+        <div class="search-results">
+          <div ng-repeat="classification in ctrl.classifications"
+               class="search-result"
+               ng-click="ctrl.select(classification)"
+               key-control-selection>
+
+            <div class="content" ng-class="{last: last}">
+              <span class="title">{{classification.label | translateValue}}</span>
+              <span class="body"></span>
+              <div class="origin"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-footer">
+  <button type="button" class="btn btn-link cancel" ng-click="ctrl.close()" translate>Cancel</button>
+</div>

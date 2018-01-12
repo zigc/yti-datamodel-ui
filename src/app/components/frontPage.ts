@@ -23,8 +23,8 @@ import { FilterOptions } from 'yti-common-ui/components/filter-dropdown.componen
 import { KnownModelType } from '../types/entity';
 import gettextCatalog = angular.gettext.gettextCatalog;
 import { OrganizationService } from '../services/organizationService';
-import { OrganizationListItem } from '../entities/organization';
 import { AuthorizationManagerService } from 'app/services/authorizationManagerService';
+import { Organization } from '../entities/organization';
 
 export const component: ComponentDeclaration = {
   selector: 'frontPage',
@@ -42,12 +42,12 @@ export class FrontPageController implements HelpProvider {
   helps = this.frontPageHelpService.getHelps();
 
   modelTypes: FilterOptions<KnownModelType>;
-  organizations: FilterOptions<OrganizationListItem>;
+  organizations: FilterOptions<Organization>;
 
   search$ = new BehaviorSubject('');
   classification$ = new BehaviorSubject<Classification|null>(null);
   modelType$ = new BehaviorSubject<KnownModelType|null>(null);
-  organization$ = new BehaviorSubject<OrganizationListItem|null>(null);
+  organization$ = new BehaviorSubject<Organization|null>(null);
 
   classifications: { node: Classification, count: number }[];
   filteredModels: ModelListItem[] = [];
@@ -79,6 +79,7 @@ export class FrontPageController implements HelpProvider {
     });
 
     organizationService.getOrganizations().then(organizations => {
+
       this.organizations = [null, ...organizations].map(org => {
         return {
           value: org,
@@ -102,8 +103,8 @@ export class FrontPageController implements HelpProvider {
       return !type || model.normalizedType === type;
     }
 
-    function organizationMatches(org: OrganizationListItem|null, model: ModelListItem) {
-      return !org || anyMatching(model.contributors, modelOrg => modelOrg.id.uuid === org.uuid);
+    function organizationMatches(org: Organization|null, model: ModelListItem) {
+      return !org || anyMatching(model.contributors, modelOrg => modelOrg.id.equals(org.id));
     }
 
     this.subscriptionsToClean.push(Observable.combineLatest(classifications$, models$, this.search$, this.modelType$, this.organization$, languageService.language$)

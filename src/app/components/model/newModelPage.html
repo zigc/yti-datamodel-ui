@@ -3,7 +3,6 @@
     <fieldset ng-disabled="ctrl.persisting">
 
       <div class="top-actions">
-
         <button type="button"
                 class="btn btn-link pull-right cancel"
                 ng-click="ctrl.cancel()">
@@ -13,13 +12,13 @@
         <button type="button"
                 class="btn btn-action pull-right save"
                 ng-click="ctrl.save()"
-                ng-disabled="ctrl.form.$invalid || ctrl.form.$pending">
+                ng-disabled="!ctrl.isValid() || ctrl.form.$pending">
           <span translate>Save</span>
         </button>
       </div>
 
       <div class="row">
-        <div class="col-md-5">
+        <div class="col-lg-5">
 
           <editable data-title="{{ctrl.type + ' label' | capitalize}}" context="ctrl.context" autofocus>
             <input id="modelLabel" class="form-control" type="text" autocomplete="off" required ng-model="ctrl.label" />
@@ -39,7 +38,9 @@
 
         </div>
 
-        <div class="col-md-6 col-md-offset-1">
+        <div class="col-lg-6 offset-lg-1">
+          <classifications-view value="ctrl" context="ctrl.context"></classifications-view>
+          <contributors-view value="ctrl" context="ctrl.context"></contributors-view>
         </div>
       </div>
 

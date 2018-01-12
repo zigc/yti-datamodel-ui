@@ -271,6 +271,10 @@ export class Model extends AbstractModel {
     this.copyNamespacesFromRequires();
     return serialize(this, clone, Object.assign({}, AbstractModel.abstractModelMappings, Model.modelMappings));
   }
+
+  removeClassification(classification: Classification) {
+
+  }
 }
 
 export class ModelVocabulary {

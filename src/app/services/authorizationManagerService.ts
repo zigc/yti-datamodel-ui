@@ -4,6 +4,7 @@ import { User } from 'app/entities/user';
 import { State, WithDefinedBy } from 'app/types/entity';
 import { Association, Attribute } from 'app/entities/predicate';
 import { Class } from 'app/entities/class';
+import { Organization } from '../entities/organization';
 
 const userStates: State[] = ['Unstable', 'Draft'];
 const adminStates: State[] = userStates.concat(['Recommendation', 'Deprecated']);
@@ -33,6 +34,11 @@ export class AuthorizationManagerService {
   getAllowedStates(model: Model) {
     return adminStates; // TODO
     // return isAdminOf(model) ? adminStates : userStates;
+  }
+
+  filterOrganizationsAllowedForUser(organizations: Organization[]) {
+    return organizations.filter(org =>
+      this.user.superuser || this.user.isInRole(['ADMIN', 'DATA_MODEL_EDITOR'], org.id.uuid));
   }
 
   canEditPredicate(model: Model, predicate: Association | Attribute) {
