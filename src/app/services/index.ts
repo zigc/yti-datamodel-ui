@@ -25,6 +25,7 @@ import { downgradeInjectable } from '@angular/upgrade/static';
 import { AuthorizationManagerService } from './authorizationManagerService';
 import { ClassificationService } from './classificationService';
 import { OrganizationService } from './organizationService';
+import { ImpersonationService } from './impersonationService';
 
 function proxyConditionallyToHelp<T>(interactiveHelpService: InteractiveHelpService, defaultService: T, helpService: T) {
   return proxyToInstance(() => interactiveHelpService.isOpen() ? helpService : defaultService);
@@ -81,3 +82,4 @@ mod.service('frameService', FrameService);
 mod.service('authorizationManagerService', AuthorizationManagerService);
 mod.service('classificationService', ClassificationService);
 mod.service('organizationService', OrganizationService);
+mod.service('impersonationService', ImpersonationService);

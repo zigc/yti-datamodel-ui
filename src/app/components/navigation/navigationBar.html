@@ -4,6 +4,15 @@
 
   <ul class="navbar-nav ml-auto">
 
+    <li ng-if="ctrl.fakeableUsers.length > 0" class="nav-item dropdown pl-0" uib-dropdown>
+      <a class="nav-link" uib-dropdown-toggle translate>Impersonate user</a>
+      <div uib-dropdown-menu>
+        <a class="dropdown-item" ng-repeat="user in ctrl.fakeableUsers" ng-click="ctrl.fakeUser(user.email)">
+          {{user.firstName}} {{user.lastName}}
+        </a>
+      </div>
+    </li>
+
     <li class="nav-item" ng-if="!ctrl.isLoggedIn()">
       <a class="nav-link" ng-click="ctrl.logIn()" translate>LOG IN</a>
     </li>

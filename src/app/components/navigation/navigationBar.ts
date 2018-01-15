@@ -11,6 +11,7 @@ import { IScope, ILocationService, route } from 'angular';
 import { InteractiveHelpService } from 'app/help/services/interactiveHelpService';
 import { identity } from 'yti-common-ui/utils/object';
 import { modalCancelHandler } from 'app/utils/angular';
+import { ImpersonationService } from '../../services/impersonationService';
 
 mod.directive('navigationBar', () => {
   return {
@@ -37,15 +38,21 @@ class NavigationController {
 
   helps: InteractiveHelp[];
 
+  fakeableUsers: { email: string, firstName: string, lastName: string }[] = [];
+
   /* @ngInject */
   constructor($scope: IScope,
               $route: route.IRouteService,
               $location: ILocationService,
               private languageService: LanguageService,
               private userService: UserService,
+              impersonationService: ImpersonationService,
               private loginModal: LoginModalService,
               private interactiveHelpService: InteractiveHelpService,
               private helpSelectionModal: HelpSelectionModal) {
+
+    impersonationService.getFakeableUsers()
+      .then(users => this.fakeableUsers = users);
 
     const helps = () => this.helpProvider && this.helpProvider.helps || [];
 
@@ -58,6 +65,10 @@ class NavigationController {
         });
       }
     });
+  }
+
+  fakeUser(userEmail: string) {
+    this.userService.updateLoggedInUser(userEmail);
   }
 
   get language(): UILanguage {
