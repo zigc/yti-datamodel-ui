@@ -1,16 +1,18 @@
 import { UserService } from './userService';
 import { Model } from 'app/entities/model';
 import { User } from 'app/entities/user';
-import { State, WithDefinedBy } from 'app/types/entity';
+import { WithDefinedBy } from 'app/types/entity';
 import { Association, Attribute } from 'app/entities/predicate';
 import { Class } from 'app/entities/class';
 import { Organization } from '../entities/organization';
-
-const userStates: State[] = ['Unstable', 'Draft'];
-const adminStates: State[] = userStates.concat(['Recommendation', 'Deprecated']);
+import { selectableStatuses, Status } from 'yti-common-ui/entities/status';
 
 function isReference(model: Model, resource: WithDefinedBy): boolean {
   return resource.definedBy.id.notEquals(model.id);
+}
+
+function isRemovableStatus(status: Status|null): boolean {
+  return status === 'SUGGESTED' || status === 'DRAFT' || status === null;
 }
 
 export class AuthorizationManagerService {
@@ -24,16 +26,15 @@ export class AuthorizationManagerService {
   }
 
   canEditModel(model: Model): boolean {
-    return !this.user.anonymous; // TODO
+    return this.hasRightToModifyModel(model);
   }
 
   canRemoveModel(model: Model): boolean {
-    return model.state === 'Unstable' && !this.user.anonymous; // TODO
+    return isRemovableStatus(model.status) && this.hasRightToModifyModel(model);
   }
 
-  getAllowedStates(model: Model) {
-    return adminStates; // TODO
-    // return isAdminOf(model) ? adminStates : userStates;
+  getAllowedStatuses(model: Model) {
+    return selectableStatuses; // TODO
   }
 
   filterOrganizationsAllowedForUser(organizations: Organization[]) {
@@ -42,26 +43,35 @@ export class AuthorizationManagerService {
   }
 
   canEditPredicate(model: Model, predicate: Association | Attribute) {
-    return !isReference(model, predicate) && !this.user.anonymous; // TODO
+    return !isReference(model, predicate) && this.hasRightToModifyModel(model);
   }
 
   canRemovePredicate(model: Model, predicate: Association | Attribute) {
-    return (isReference(model, predicate) || predicate.state === 'Unstable') && !this.user.anonymous; // TODO
+    return (isReference(model, predicate) || isRemovableStatus(predicate.status)) && this.hasRightToModifyModel(model);
   }
 
   canEditClass(model: Model, klass: Class) {
-    return !isReference(model, klass) && !this.user.anonymous; // TODO
+    return !isReference(model, klass) && this.hasRightToModifyModel(model);
   }
 
   canRemoveClass(model: Model, klass: Class) {
-    return (isReference(model, klass) || klass.state === 'Unstable') && !this.user.anonymous; // TODO
+    return (isReference(model, klass) || isRemovableStatus(klass.status)) && this.hasRightToModifyModel(model);
   }
 
   canSaveVisualization(model: Model) {
-    return !this.user.anonymous; // TODO
+    return this.hasRightToModifyModel(model);
+  }
+
+  private hasRightToModifyModel(model: Model): boolean {
+
+    if (this.user.superuser) {
+      return true;
+    }
+
+    return this.user.isInRole(['ADMIN', 'DATA_MODEL_EDITOR'], model.contributors.map(org => org.id.uuid));
   }
 
   canAddModel() {
-    return !this.user.anonymous; // TODO
+    return this.user.getOrganizations(['ADMIN', 'DATA_MODEL_EDITOR']).size > 0;
   }
 }

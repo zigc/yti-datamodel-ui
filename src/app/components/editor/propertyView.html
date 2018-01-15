@@ -10,7 +10,7 @@
                 ng-disabled="!ctrl.property.inUnstableState"
                 ng-click="ctrl.removeProperty(ctrl.property)" uib-tooltip="{{'Delete property' | translate}}"><i class="fa fa-trash"></i></button>
 
-        <editable-state-select class="pull-right" id="{{ctrl.property.internalId + 'state'}}" state="ctrl.property.state" model="ctrl.model"></editable-state-select>
+        <editable-state-select class="pull-right" id="{{ctrl.property.internalId + 'state'}}" state="ctrl.property.status" model="ctrl.model"></editable-state-select>
     </div>
   </div>
 

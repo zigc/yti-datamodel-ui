@@ -171,7 +171,7 @@ export class DefaultPredicateService implements PredicateService {
         changedPredicate.createdAt = predicate.createdAt;
         changedPredicate.modifiedAt = predicate.modifiedAt;
         changedPredicate.editorialNote = predicate.editorialNote;
-        changedPredicate.state = predicate.state;
+        changedPredicate.status = predicate.status;
         changedPredicate.unsaved = predicate.unsaved;
         return changedPredicate;
       });

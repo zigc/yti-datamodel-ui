@@ -1,4 +1,4 @@
-import { SelectionType, PredicateType, State } from 'app/types/entity';
+import { SelectionType, PredicateType } from 'app/types/entity';
 import { normalizePredicateType } from 'app/utils/entity';
 import { requireDefined } from 'yti-common-ui/utils/object';
 import { resourceUrl, resolveConceptConstructor } from 'app/utils/entity';
@@ -16,6 +16,7 @@ import {
 import { localizableSerializer, dateSerializer, optional, identitySerializer } from './serializer/serializer';
 import { normalizingDefinedBySerializer } from './serializer/common';
 import { Localizable } from 'yti-common-ui/types/localization';
+import { Status } from 'yti-common-ui/entities/status';
 
 export abstract class AbstractPredicate extends GraphNode {
 
@@ -70,7 +71,7 @@ export class PredicateListItem extends AbstractPredicate {
 export class Predicate extends AbstractPredicate {
 
   static predicateMappings = {
-    state:                { name: 'versionInfo',        serializer: optional(identitySerializer<State>()) },
+    status:               { name: 'versionInfo',        serializer: optional(identitySerializer<Status>()) },
     subPropertyOf:        { name: 'subPropertyOf',      serializer: entityAwareOptional(uriSerializer) },
     subject:              { name: 'subject',            serializer: entityAwareOptional(entity(resolveConceptConstructor)) },
     equivalentProperties: { name: 'equivalentProperty', serializer: entityAwareList(uriSerializer) },
@@ -80,7 +81,7 @@ export class Predicate extends AbstractPredicate {
     createdAt:            { name: 'created',            serializer: optional(dateSerializer) }
   };
 
-  state: State|null; // External don't have state
+  status: Status|null; // External don't have status
   subPropertyOf: Uri|null;
   subject: Concept|LegacyConcept|null;
   equivalentProperties: Uri[];
@@ -98,7 +99,7 @@ export class Predicate extends AbstractPredicate {
   }
 
   get inUnstableState(): boolean {
-    return this.state === 'Unstable';
+    return this.status === 'DRAFT' || this.status === 'SUGGESTED';
   }
 
   serializationValues(_inline: boolean, clone: boolean): {} {

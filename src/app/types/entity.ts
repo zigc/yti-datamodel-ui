@@ -45,11 +45,6 @@ export type ConceptType = 'concept'
 export type SelectionType = 'class'
                           | 'predicate';
 
-export type State = 'Unstable'
-                  | 'Draft'
-                  | 'Recommendation'
-                  | 'Deprecated';
-
 export type ConstraintType = 'or'
                            | 'and'
                            | 'not';

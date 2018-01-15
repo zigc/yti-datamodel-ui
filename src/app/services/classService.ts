@@ -190,10 +190,10 @@ export class DefaultClassService implements ClassService {
         }
 
         for (const property of shape.properties) {
-          property.state = 'Unstable';
+          property.status = 'DRAFT';
         }
 
-        shape.state = 'Unstable';
+        shape.status = 'DRAFT';
 
         return shape;
       });
@@ -261,7 +261,7 @@ export class DefaultClassService implements ClassService {
           property.valueClass = predicate.valueClass;
         }
 
-        property.state = 'Unstable';
+        property.status = 'DRAFT';
 
         return property;
       });

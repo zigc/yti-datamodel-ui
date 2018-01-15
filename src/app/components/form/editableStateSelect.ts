@@ -1,9 +1,9 @@
 import { IAttributes, IScope } from 'angular';
 import { module as mod } from './module';
 import { EditableForm } from './editableEntityController';
-import { State } from 'app/types/entity';
 import { Model } from 'app/entities/model';
 import { AuthorizationManagerService } from 'app/services/authorizationManagerService';
+import { Status } from 'yti-common-ui/entities/status';
 
 mod.directive('editableStateSelect', () => {
   return {
@@ -39,7 +39,7 @@ mod.directive('editableStateSelect', () => {
 class StateSelectController {
 
   model: Model;
-  state: State;
+  state: Status;
   id: string;
   isEditing: () => boolean;
 
@@ -48,20 +48,10 @@ class StateSelectController {
   }
 
   getStates() {
-    return this.authorizationManagerService.getAllowedStates(this.model);
+    return this.authorizationManagerService.getAllowedStatuses(this.model);
   }
 
-  classForState(state: State) {
-    switch (state) {
-      case 'Unstable':
-      case 'Deprecated':
-        return ['fa', 'fa-exclamation-circle', 'danger'];
-      case 'Draft':
-        return ['fa', 'fa-check-circle', 'warning'];
-      case 'Recommendation':
-        return ['fa', 'fa-check-circle', 'success'];
-      default:
-        throw new Error('Unsupported state: ' + state);
-    }
+  classForState(state: Status) {
+    return [];
   }
 }

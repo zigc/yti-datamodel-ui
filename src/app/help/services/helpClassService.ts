@@ -179,7 +179,7 @@ export class InteractiveHelpClassService implements ClassService, ResetableServi
       }
 
       const newProperty = new Property(graph, context, frames.propertyFrame(graph));
-      newProperty.state = 'Unstable';
+      newProperty.status = 'DRAFT';
 
       return this.$q.when(newProperty);
     }

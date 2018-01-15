@@ -7,8 +7,9 @@ import { glyphIconClassForType } from 'app/utils/entity';
 import { init, serialize } from './mapping';
 import { GraphNode } from './graphNode';
 import { uriSerializer, entity, entityAwareOptional, entityAwareList } from './serializer/entitySerializer';
-import { ConceptType, State } from 'app/types/entity';
+import { ConceptType } from 'app/types/entity';
 import { Localizable } from 'yti-common-ui/types/localization';
+import { Status } from 'yti-common-ui/entities/status';
 
 export class Material extends GraphNode {
 
@@ -68,7 +69,7 @@ export class Concept extends GraphNode {
     vocabularies:   { name: 'inScheme',          serializer: entityAwareList(entity(() => Vocabulary)) },
     material:       { name: 'graph',             serializer: entity(() => Material) },
     broaderConcept: { name: 'broader',           serializer: entityAwareOptional(entity(() => Concept)) },
-    state:          { name: 'term_status',       serializer: valueOrDefault(identitySerializer<State>(), 'Unstable') }
+    status:          { name: 'term_status',       serializer: valueOrDefault(identitySerializer<Status>(), 'DRAFT') }
   };
 
   id: Uri;
@@ -78,7 +79,7 @@ export class Concept extends GraphNode {
   vocabularies: Vocabulary[];
   material: Material;
   broaderConcept: Concept|null;
-  state: State;
+  status: Status;
 
   constructor(graph: any, context: any, frame: any) {
     super(graph, context, frame);
@@ -90,7 +91,7 @@ export class Concept extends GraphNode {
   }
 
   get suggestion() {
-    return this.state !== 'Recommendation';
+    return this.status === 'SUGGESTED';
   }
 
   get unsaved() {

@@ -1,6 +1,6 @@
 import * as _ from 'lodash';
 import { requireDefined } from 'yti-common-ui/utils/object';
-import { KnownModelType, State, Type } from 'app/types/entity';
+import { KnownModelType, Type } from 'app/types/entity';
 import { modelUrl, normalizeModelType, resourceUrl } from 'app/utils/entity';
 import { Uri, Url, Urn } from './uri';
 import { Language } from 'app/types/language';
@@ -19,7 +19,7 @@ import {
 import { Localizable } from 'yti-common-ui/types/localization';
 import { Organization } from './organization';
 import { Classification } from './classification';
-
+import { Status } from 'yti-common-ui/entities/status';
 
 function normalizeType(type: Type[]): KnownModelType {
   const normalizedType = requireDefined(normalizeModelType(type));
@@ -76,7 +76,7 @@ export class Model extends AbstractModel {
 
   static modelMappings = {
     comment:         { name: 'comment',      serializer: localizableSerializer },
-    state:           { name: 'versionInfo',  serializer: identitySerializer<State>() },
+    status:          { name: 'versionInfo',  serializer: identitySerializer<Status>() },
     vocabularies:    { name: 'references',   serializer: entityAwareList(entity(() => Vocabulary)) },
     namespaces:      { name: 'requires',     serializer: entityAwareList(entity(() => ImportedNamespace)) },
     links:           { name: 'relations',    serializer: entityAwareList(entity(() => Link)) },
@@ -91,7 +91,7 @@ export class Model extends AbstractModel {
   };
 
   comment: Localizable;
-  state: State;
+  status: Status;
   vocabularies: Vocabulary[];
   modelVocabularies: ModelVocabulary[];
   namespaces: ImportedNamespace[];

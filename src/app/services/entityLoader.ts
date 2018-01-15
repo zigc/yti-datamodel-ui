@@ -6,7 +6,7 @@ import { ResetService } from './resetService';
 import { Uri, Url } from 'app/entities/uri';
 import { DataType } from 'app/entities/dataTypes';
 import { identity, requireDefined } from 'yti-common-ui/utils/object';
-import { ConstraintType, KnownModelType, KnownPredicateType, State } from 'app/types/entity';
+import { ConstraintType, KnownModelType, KnownPredicateType } from 'app/types/entity';
 import { ImportedNamespace, Model } from 'app/entities/model';
 import { Concept, Vocabulary } from 'app/entities/vocabulary';
 import { Class, Property } from 'app/entities/class';
@@ -14,6 +14,7 @@ import { Association, Attribute, Predicate } from 'app/entities/predicate';
 import { VocabularyService } from './vocabularyService';
 import { firstMatching, keepMatching } from 'yti-common-ui/utils/array';
 import { Localizable } from 'yti-common-ui/types/localization';
+import { Status } from 'yti-common-ui/entities/status';
 
 export type Resolvable<T> = IPromise<T>|(() => IPromise<T>);
 export type UriResolvable<T extends { id: Uri }> = Url|IPromise<T>|(() => IPromise<T>);
@@ -21,7 +22,7 @@ export type UriResolvable<T extends { id: Uri }> = Url|IPromise<T>|(() => IPromi
 export interface EntityDetails {
   label?: Localizable;
   comment?: Localizable;
-  state?: State;
+  status?: Status;
 }
 
 export interface ExternalNamespaceDetails {
@@ -445,7 +446,7 @@ function failWithDetails(details: any): (err: any) => void {
   };
 }
 
-function setDetails(entity: { label: Localizable, comment: Localizable, state: State|null }, details: EntityDetails) {
+function setDetails(entity: { label: Localizable, comment: Localizable, status: Status|null }, details: EntityDetails) {
   if (details.label) {
     entity.label = details.label;
   }
@@ -454,8 +455,8 @@ function setDetails(entity: { label: Localizable, comment: Localizable, state: S
     entity.comment = details.comment;
   }
 
-  if (details.state) {
-    entity.state = details.state;
+  if (details.status) {
+    entity.status = details.status;
   }
 }
 

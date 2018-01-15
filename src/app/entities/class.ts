@@ -2,7 +2,7 @@ import { requireDefined, assertNever } from 'yti-common-ui/utils/object';
 import {
   resourceUrl, glyphIconClassForType, glyphIconClassUnknown, resolveConceptConstructor
 } from 'app/utils/entity';
-import { SelectionType, PredicateType, KnownPredicateType, ConstraintType, State } from 'app/types/entity';
+import { SelectionType, PredicateType, KnownPredicateType, ConstraintType } from 'app/types/entity';
 import { normalizeClassType, mapType, reverseMapType } from 'app/utils/entity';
 import { Uri, Urn } from './uri';
 import { DefinedBy } from './definedBy';
@@ -30,6 +30,7 @@ import {
 import { normalizingDefinedBySerializer } from './serializer/common';
 import { Model } from './model';
 import { Localizable } from 'yti-common-ui/types/localization';
+import { Status } from 'yti-common-ui/entities/status';
 
 export abstract class AbstractClass extends GraphNode {
 
@@ -82,7 +83,7 @@ export class Class extends AbstractClass implements VisualizationClass {
   static classMappings = {
     subClassOf:        { name: 'subClassOf',      serializer: entityAwareOptional(uriSerializer) },
     scopeClass:        { name: 'scopeClass',      serializer: entityAwareOptional(uriSerializer) },
-    state:             { name: 'versionInfo',     serializer: optional(identitySerializer<State>()) },
+    status:            { name: 'versionInfo',     serializer: optional(identitySerializer<Status>()) },
     properties:        { name: 'property',        serializer: entityAwareList(entity(() => Property)) },
     subject:           { name: 'subject',         serializer: entityAwareOptional(entity(resolveConceptConstructor)) },
     equivalentClasses: { name: 'equivalentClass', serializer: entityAwareList(uriSerializer) },
@@ -96,7 +97,7 @@ export class Class extends AbstractClass implements VisualizationClass {
 
   subClassOf: Uri|null;
   scopeClass: Uri|null;
-  state: State|null;
+  status: Status|null;
   properties: Property[];
   subject: Concept|LegacyConcept|null;
   equivalentClasses: Uri[];
@@ -123,7 +124,7 @@ export class Class extends AbstractClass implements VisualizationClass {
   }
 
   get inUnstableState(): boolean {
-    return this.state === 'Unstable';
+    return this.status === 'DRAFT' || this.status === 'SUGGESTED';
   }
 
   movePropertyUp(property: Property) {
@@ -321,7 +322,7 @@ export class Property extends GraphNode {
   static propertyMapping = {
     internalId:         { name: '@id',                  serializer: uriSerializer },
     externalId:         { name: 'identifier',           serializer: optional(stringSerializer) },
-    state:              { name: 'versionInfo',          serializer: valueOrDefault(identitySerializer<State>(), 'Unstable') },
+    status:             { name: 'versionInfo',          serializer: valueOrDefault(identitySerializer<Status>(), 'DRAFT') },
     label:              { name: 'label',                serializer: localizableSerializer },
     comment:            { name: 'comment',              serializer: localizableSerializer },
     example:            { name: 'example',              serializer: list(stringSerializer) },
@@ -351,7 +352,7 @@ export class Property extends GraphNode {
 
   internalId: Uri;
   externalId: string|null;
-  state: State;
+  status: Status;
   label: Localizable;
   comment: Localizable;
   example: string[];
@@ -430,7 +431,7 @@ export class Property extends GraphNode {
   }
 
   get inUnstableState(): boolean {
-    return this.state === 'Unstable';
+    return this.status === 'DRAFT' || this.status === 'SUGGESTED';
   }
 
   get normalizedPredicateType(): PredicateType|null {
