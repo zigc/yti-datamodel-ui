@@ -57,7 +57,7 @@ class VisualizationPopoverController {
   constructor($scope: IScope, $timeout: ITimeoutService) {
     $scope.$watch(() => this.details, details => {
       // Hide by keeping off screen absolute position
-      this.style = { top: -1000 + 'px',  left: -1000 + 'px' };
+      this.style = { top: -10000 + 'px',  left: -10000 + 'px' };
 
       if (details && hasLocalization(details.comment)) {
         this.style.comment = details.comment;
