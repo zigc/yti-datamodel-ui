@@ -31,7 +31,7 @@
         <editable-entity-buttons context="ctrl.model" editable-controller="ctrl">
           <export ng-hide="ctrl.isEditing()" entity="ctrl.model" context="ctrl.model"></export>
           <history model="ctrl.model" resource="ctrl.model" ng-hide="ctrl.isEditing()"></history>
-          <editable-state-select class="pull-right" ng-if="!ctrl.model.unsaved" id="modelState" state="ctrl.editableInEdit.status" model="ctrl.model"></editable-state-select>
+          <app-status [status]="ctrl.model.status"></app-status>
         </editable-entity-buttons>
 
         <model-form model="ctrl.editableInEdit" model-controller="ctrl.modelController"></model-form>

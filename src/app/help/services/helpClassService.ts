@@ -123,7 +123,7 @@ export class InteractiveHelpClassService implements ClassService, ResetableServi
           label: { [lang]: upperCaseFirst(classLabel) },
           comment: Object.assign({}, concept.comment),
           isDefinedBy: model.asDefinedBy().serialize(true, false),
-          versionInfo: 'Unstable'
+          versionInfo: 'DRAFT'
         };
 
         const context = Object.assign({}, model.context, { [model.prefix]: model.namespace });

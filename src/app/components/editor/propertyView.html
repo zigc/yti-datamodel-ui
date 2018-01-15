@@ -1,7 +1,7 @@
 <div ng-if="ctrl.isOpen()">
   <div class="row">
     <div class="col-md-12">
-        <h4 class="pull-left" translate>Property information</h4>
+        <app-status class="mb-2" [status]="ctrl.model.status"></app-status>
 
         <button ng-if="ctrl.isEditing()"
                 type="button"
@@ -9,10 +9,10 @@
                 style="margin-left: 5px"
                 ng-disabled="!ctrl.property.inUnstableState"
                 ng-click="ctrl.removeProperty(ctrl.property)" uib-tooltip="{{'Delete property' | translate}}"><i class="fa fa-trash"></i></button>
-
-        <editable-state-select class="pull-right" id="{{ctrl.property.internalId + 'state'}}" state="ctrl.property.status" model="ctrl.model"></editable-state-select>
     </div>
   </div>
+
+  <h4 translate>Property information</h4>
 
   <div class="row">
 
@@ -37,6 +37,14 @@
                                          required="false">
       </editable-multiple-language-select>
 
+      <editable-state-select id="{{ctrl.property.internalId + 'state'}}" state="ctrl.property.status" model="ctrl.model"></editable-state-select>
+    </div>
+
+    <div class="col-md-6">
+      <editable data-title="Description" context="ctrl.model">
+        <textarea id="{{ctrl.property.internalId + 'comment'}}" class="form-control" localized-input context="ctrl.model" ng-model="ctrl.property.comment"></textarea>
+      </editable>
+
       <editable ng-if="ctrl.property.isAssociation()" data-title="Value class" link="ctrl.linkToValueClass()" context="ctrl.model">
         <uri-select id="{{ctrl.property.internalId + 'valueClass'}}"
                     type="class" uri="ctrl.property.valueClass"
@@ -45,12 +53,6 @@
                     model="ctrl.model"
                     default-to-current-model="true">
         </uri-select>
-      </editable>
-    </div>
-
-    <div class="col-md-6">
-      <editable data-title="Description" context="ctrl.model">
-        <textarea id="{{ctrl.property.internalId + 'comment'}}" class="form-control" localized-input context="ctrl.model" ng-model="ctrl.property.comment"></textarea>
       </editable>
     </div>
   </div>

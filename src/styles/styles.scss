@@ -523,30 +523,6 @@ reference-data-view.popup {
   font-size: small;
 }
 
-autocomplete, iow-select {
-
-  div[iow-select-input] {
-
-    iow-selection-transclude, ng-transclude {
-      overflow-x: hidden;
-      width: calc(100% - 10px);
-      display: inline-block;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-    }
-
-    .caret {
-      float: right;
-      margin-top: 10px;
-
-      &.ng-hide {
-        display: inherit !important;
-        visibility: hidden;
-      }
-    }
-  }
-}
-
 div.input-popup > .dropdown-menu {
 
   will-change: scroll-position;

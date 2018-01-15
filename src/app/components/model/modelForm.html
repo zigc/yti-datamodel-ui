@@ -19,6 +19,8 @@
     <non-editable data-title="Prefix" value="ctrl.model.prefix" context="ctrl.model"></non-editable>
     <non-editable data-title="Namespace" value="ctrl.model.namespace" context="ctrl.model" clipboard="ctrl.model.namespace"></non-editable>
 
+    <editable-state-select ng-if="!ctrl.model.unsaved" id="modelState" state="ctrl.model.status" model="ctrl.model"></editable-state-select>
+
     <h4 translate>Additional information</h4>
 
     <div class="row">

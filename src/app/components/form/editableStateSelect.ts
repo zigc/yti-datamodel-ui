@@ -14,16 +14,17 @@ mod.directive('editableStateSelect', () => {
     },
     restrict: 'E',
     template: `
-      <div>
+      <div class="form-group">
+      
+        <label translate>Status</label>
+      
         <iow-select ng-if="ctrl.isEditing()" id="{{ctrl.id}}" options="state in ctrl.getStates()" ng-model="ctrl.state">
           <i ng-class="ctrl.classForState(state)"></i>
           <span>{{state | translate}}</span>
         </iow-select>
 
-        <div class="non-editable" ng-if="!ctrl.isEditing()">
-          <i ng-class="ctrl.classForState(ctrl.state)"></i>
-          <span>{{ctrl.state | translate}}</span>
-        </div>
+       
+        <p ng-if="!ctrl.isEditing()" class="form-control-static">{{ctrl.state | translate}}</p>
       </div>
     `,
     controllerAs: 'ctrl',

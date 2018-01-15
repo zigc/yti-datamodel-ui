@@ -119,7 +119,7 @@ export class InteractiveHelpPredicateService implements PredicateService, Reseta
           label: { [lang]: upperCaseFirst(predicateLabel) },
           comment: Object.assign({}, concept.comment),
           isDefinedBy: model.asDefinedBy().serialize(true, false),
-          versionInfo: 'Unstable'
+          versionInfo: 'DRAFT'
         };
 
         const context = Object.assign({}, model.context, { [model.prefix]: model.namespace });

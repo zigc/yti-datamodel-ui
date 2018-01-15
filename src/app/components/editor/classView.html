@@ -8,7 +8,7 @@
           </button>
           <export ng-hide="ctrl.isEditing()" entity="ctrl.class" context="ctrl.model"></export>
           <history model="ctrl.model" resource="ctrl.class" ng-hide="ctrl.isEditing()"></history>
-          <editable-state-select class="pull-right" ng-if="!ctrl.editableInEdit.unsaved" id="classState" state="ctrl.editableInEdit.status" model="ctrl.model"></editable-state-select>
+          <app-status [status]="ctrl.class.status"></app-status>
         </selection-buttons>
 
         <selection-content>

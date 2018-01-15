@@ -16,9 +16,8 @@ mod.directive('iowSelect', () => {
     bindToController: true,
     template: `
       <div>
-        <div class="form-control" tabindex="0" iow-select-input>
+        <div class="btn btn-dropdown dropdown-toggle" tabindex="0" iow-select-input>
           <iow-selection-transclude></iow-selection-transclude>       
-          <i class="caret" ng-hide="ctrl.show"></i>
         </div>
         <input-popup ctrl="ctrl"><iow-selectable-item-transclude></iow-selectable-item-transclude></input-popup>
       </div>

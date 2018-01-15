@@ -5,7 +5,7 @@
         <selection-buttons>
           <export ng-hide="ctrl.isEditing()" entity="ctrl.predicate" context="ctrl.model"></export>
           <history model="ctrl.model" resource="ctrl.predicate" ng-hide="ctrl.isEditing()"></history>
-          <editable-state-select class="pull-right" ng-if="!ctrl.predicate.unsaved" id="predicateState" state="ctrl.editableInEdit.status" model="ctrl.model"></editable-state-select>
+          <app-status [status]="ctrl.predicate.status"></app-status>
         </selection-buttons>
 
         <selection-content>

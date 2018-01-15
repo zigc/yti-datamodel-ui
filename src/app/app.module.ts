@@ -39,6 +39,7 @@ import { MenuComponent } from 'yti-common-ui/components/menu.component';
 import { AjaxLoadingIndicatorComponent } from 'yti-common-ui/components/ajax-loading-indicator.component';
 import { AjaxLoadingIndicatorSmallComponent } from 'yti-common-ui/components/ajax-loading-indicator-small.component';
 import { FilterDropdownComponent } from 'yti-common-ui/components/filter-dropdown.component';
+import { StatusComponent } from 'yti-common-ui/components/status.component';
 
 require('angular-gettext');
 require('checklist-model');
@@ -86,14 +87,18 @@ export function createMissingTranslationHandler(): MissingTranslationHandler {
     UpgradeModule,
     YtiCommonModule,
     TranslateModule.forRoot({ provide: TranslateLoader, useFactory: createTranslateLoader }),
-    NgbModule.forRoot()
+    NgbModule.forRoot(),
+  ],
+  declarations: [
+    StatusComponent // FIXME should be declared in YtiCommonModule
   ],
   entryComponents: [
     FooterComponent,
     MenuComponent,
     AjaxLoadingIndicatorComponent,
     AjaxLoadingIndicatorSmallComponent,
-    FilterDropdownComponent
+    FilterDropdownComponent,
+    StatusComponent
   ],
   providers: [
     { provide: AUTHENTICATED_USER_ENDPOINT, useFactory: resolveAuthenticatedUserEndpoint },
@@ -152,6 +157,7 @@ mod.directive('appFilterDropdown', downgradeComponent({
   component: FilterDropdownComponent,
   inputs: ['options', 'filterSubject']
 }));
+mod.directive('appStatus', downgradeComponent({component: StatusComponent}));
 
 mod.factory('translateService', downgradeInjectable(TranslateService));
 mod.factory('loginModal', downgradeInjectable(LoginModalService));
