@@ -42,7 +42,7 @@ export class CopyPredicateModal {
           </modal-template>
         </form>
       `,
-      size: 'medium',
+      size: 'md',
       controllerAs: 'ctrl',
       resolve: {
         predicate: () => predicate,

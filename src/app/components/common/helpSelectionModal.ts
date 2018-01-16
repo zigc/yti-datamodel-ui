@@ -32,7 +32,7 @@ export class HelpSelectionModal {
           </modal-buttons>
         </modal-template>
       `,
-      size: 'medium',
+      size: 'md',
       controllerAs: 'ctrl',
       controller: HelpSelectionModalController,
       resolve: {

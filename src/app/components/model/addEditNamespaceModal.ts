@@ -14,7 +14,7 @@ export class AddEditNamespaceModal {
   private open(model: Model, language: Language, namespaceToEdit: ImportedNamespace|null): IPromise<ImportedNamespace> {
     return this.$uibModal.open({
       template: require('./addEditNamespaceModal.html'),
-      size: 'small',
+      size: 'sm',
       controller: AddEditNamespaceController,
       controllerAs: 'ctrl',
       backdrop: true,

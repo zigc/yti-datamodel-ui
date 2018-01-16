@@ -23,7 +23,7 @@ export class AdvancedSearchModal {
   open(): IPromise<SearchResult> {
     return this.$uibModal.open({
       template: require('./advancedSearchModal.html'),
-      size: 'medium',
+      size: 'md',
       controller: AdvancedSearchController,
       controllerAs: 'ctrl'
     }).result;

@@ -15,7 +15,7 @@ export class SearchOrganizationModal {
   open(exclude: Exclusion<Organization>): IPromise<Organization> {
     return this.$uibModal.open({
       template: require('./searchOrganizationModal.html'),
-      size: 'medium',
+      size: 'md',
       resolve: {
         exclude: () => exclude
       },

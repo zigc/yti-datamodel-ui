@@ -33,7 +33,7 @@ export class SearchPredicateModal {
   private openModal(model: Model, type: KnownPredicateType|null, exclude: Exclusion<AbstractPredicate>, onlySelection: boolean) {
     return this.$uibModal.open({
       template: require('./searchPredicateModal.html'),
-      size: 'large',
+      size: 'lg',
       controller: SearchPredicateController,
       controllerAs: 'ctrl',
       backdrop: true,
@@ -259,7 +259,7 @@ export class SearchPredicateController implements SearchController<PredicateList
   }
 
   createNew(type: KnownPredicateType) {
-    return this.searchConceptModal.openNewEntityCreation(this.model.modelVocabularies, this.model, type, this.searchText)
+    return this.searchConceptModal.openNewEntityCreation(this.model.vocabularies, this.model, type, this.searchText)
       .then(result => {
         if (!this.typeSelectable) {
           this.$uibModalInstance.close(result);

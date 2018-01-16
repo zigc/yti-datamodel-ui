@@ -13,7 +13,7 @@ export class MaintenanceModal {
 
     return this.$uibModal.open({
       template: require('./maintenance.html'),
-      size: 'large',
+      size: 'lg',
       backdrop: 'static'
     }).result.then(identity, modalCancelHandler);
   }

@@ -31,7 +31,7 @@ export class ViewReferenceDataModal {
           </modal-template>
         </form>
       `,
-      size: 'medium',
+      size: 'md',
       controller: ViewReferenceDataModalController,
       controllerAs: 'ctrl',
       backdrop: true,

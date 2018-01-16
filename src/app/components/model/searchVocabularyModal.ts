@@ -21,7 +21,7 @@ export class SearchVocabularyModal {
   open(context: LanguageContext, exclude: Exclusion<Vocabulary> = noExclude): IPromise<Vocabulary> {
     return this.$uibModal.open({
       template: require('./searchVocabularyModal.html'),
-      size: 'medium',
+      size: 'md',
       controller: SearchVocabularyController,
       controllerAs: 'ctrl',
       backdrop: true,

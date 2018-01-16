@@ -14,7 +14,7 @@ export class AddEditLinkModal {
   private open(model: Model, lang: Language, linkToEdit: Link|null): IPromise<Link> {
     return this.$uibModal.open({
       template: require('./addEditLinkModal.html'),
-      size: 'small',
+      size: 'sm',
       controller: AddEditLinkModalController,
       controllerAs: 'ctrl',
       backdrop: true,

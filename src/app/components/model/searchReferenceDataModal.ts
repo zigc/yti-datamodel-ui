@@ -27,7 +27,7 @@ export class SearchReferenceDataModal {
   private open(model: Model, referenceDatasFromModel: boolean, exclude: Exclusion<ReferenceData>): IPromise<ReferenceData> {
     return this.$uibModal.open({
       template: require('./searchReferenceDataModal.html'),
-      size: 'large',
+      size: 'lg',
       controller: SearchReferenceDataModalController,
       controllerAs: 'ctrl',
       backdrop: true,
