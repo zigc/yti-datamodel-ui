@@ -32,7 +32,7 @@ export class SearchClassModal {
 
     return this.$uibModal.open({
       template: require('./searchClassModal.html'),
-      size: 'large',
+      size: 'lg',
       controller: SearchClassController,
       controllerAs: 'ctrl',
       backdrop: true,
@@ -223,7 +223,7 @@ class SearchClassController implements SearchController<ClassListItem> {
   }
 
   createNewClass() {
-    return this.searchConceptModal.openNewEntityCreation(this.model.modelVocabularies, this.model, 'class', this.searchText)
+    return this.searchConceptModal.openNewEntityCreation(this.model.vocabularies, this.model, 'class', this.searchText)
       .then(conceptCreation => this.$uibModalInstance.close(conceptCreation));
   }
 }

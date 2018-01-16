@@ -14,7 +14,7 @@ export class SearchClassificationModal {
   open(exclude: Exclusion<WithId>): IPromise<Classification> {
     return this.$uibModal.open({
       template: require('./searchClassificationModal.html'),
-      size: 'medium',
+      size: 'md',
       resolve: {
         exclude: () => exclude
       },

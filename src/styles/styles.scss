@@ -27,6 +27,12 @@ nav.navbar {
   display: none !important;
 }
 
+h4, .h4 {
+  // TODO consider more generic overwrite in theme variables $h4-font-size
+  font-size: 1.00625rem;
+  font-weight: bold;
+}
+
 .dropdown-menu-right {
   right: 0;
   left: auto;
@@ -180,6 +186,19 @@ input[type=checkbox][disabled] + span {
   .search-results, form {
     height: 100%;
     overflow-y: auto;
+  }
+}
+
+.modal-footer {
+  .alert {
+    margin-bottom: 0;
+    border: 0;
+  }
+}
+
+.search-results {
+  .no-search-results {
+    padding: 15px;
   }
 }
 

@@ -22,7 +22,7 @@ export class SearchNamespaceModal {
   open(model: Model, language: Language, exclude: Exclusion<ImportedNamespace> = noExclude): IPromise<ImportedNamespace> {
     return this.$uibModal.open({
       template: require('./searchNamespaceModal.html'),
-      size: 'medium',
+      size: 'md',
       controller: SearchNamespaceController,
       controllerAs: 'ctrl',
       backdrop: true,

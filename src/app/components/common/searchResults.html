@@ -1,15 +1,20 @@
 <div ng-repeat="searchResult in ctrl.searchResults | filter : ctrl.isVisible track by searchResult.id.toString()"
      id="{{searchResult.id.toString()}}"
-     ng-class="['search-result', {selected: ctrl.isSelected(searchResult), disabled: searchResult.disabled, 'add-new': searchResult.isAddNew()}]"
+     ng-class="['search-result', { active: ctrl.isSelected(searchResult), disabled: searchResult.disabled, 'add-new': searchResult.isAddNew()} ]"
      title="{{ctrl.title(searchResult)}}"
      ng-click="ctrl.selectItem(searchResult)"
      key-control-selection>
 
-  <div ng-show="searchResult.isAddNew()">
-    <i ng-show="searchResult.glyphiconClass" ng-class="searchResult.glyphiconClass"></i>
-    <i class="glyphicon glyphicon-plus pull-left"></i>
-    <h5 style="margin-left: 23px">{{searchResult.label}}</h5>
-  </div>
+  <div class="content">
 
-  <search-result-transclude ng-hide="searchResult.isAddNew()"></search-result-transclude>
+    <div ng-if="searchResult.isAddNew()">
+      <span class="title">
+        <i ng-show="searchResult.glyphiconClass" ng-class="searchResult.glyphiconClass"></i>
+        <i class="glyphicon glyphicon-plus pull-left"></i>
+        {{searchResult.label}}
+      </span>
+    </div>
+
+    <search-result-transclude ng-hide="searchResult.isAddNew()"></search-result-transclude>
+  </div>
 </div>

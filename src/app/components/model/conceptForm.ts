@@ -1,6 +1,6 @@
 import { Localizer } from 'app/services/languageService';
 import { module as mod } from './module';
-import { Concept, LegacyConcept } from 'app/entities/vocabulary';
+import { Concept } from 'app/entities/vocabulary';
 import { Model } from 'app/entities/model';
 
 mod.directive('conceptForm', () => {
@@ -20,11 +20,7 @@ mod.directive('conceptForm', () => {
 
 export class ConceptFormController {
 
-  concept: Concept|LegacyConcept;
+  concept: Concept;
   model: Model;
   localizer: Localizer;
-
-  isConceptEditable() {
-    return this.concept.suggestion;
-  }
 }

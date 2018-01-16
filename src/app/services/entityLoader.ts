@@ -153,7 +153,7 @@ export class EntityLoader {
 
   createConceptSuggestion(details: ConceptSuggestionDetails, modelPromise: IPromise<Model>): IPromise<Concept> {
     const result = modelPromise.then((model: Model) =>
-      this.vocabularyService.createConceptSuggestion(model.modelVocabularies[0].vocabulary, details.label, details.comment, null, 'fi', model));
+      this.vocabularyService.createConceptSuggestion(model.vocabularies[0], details.label, details.comment, 'fi', model));
 
     return this.addAction(result, details);
   }

@@ -1,6 +1,6 @@
 import { requireDefined, assertNever } from 'yti-common-ui/utils/object';
 import {
-  resourceUrl, glyphIconClassForType, glyphIconClassUnknown, resolveConceptConstructor
+  resourceUrl, glyphIconClassForType, glyphIconClassUnknown
 } from 'app/utils/entity';
 import { SelectionType, PredicateType, KnownPredicateType, ConstraintType } from 'app/types/entity';
 import { normalizeClassType, mapType, reverseMapType } from 'app/utils/entity';
@@ -16,7 +16,7 @@ import { VisualizationClass } from './visualization';
 import { comparingPrimitive } from 'yti-common-ui/utils/comparator';
 import { Predicate, Attribute, Association } from './predicate';
 import { init, serialize, initSingle } from './mapping';
-import { Concept, LegacyConcept } from './vocabulary';
+import { Concept } from './vocabulary';
 import { Moment } from 'moment';
 import { GraphNode } from './graphNode';
 import {
@@ -85,7 +85,7 @@ export class Class extends AbstractClass implements VisualizationClass {
     scopeClass:        { name: 'scopeClass',      serializer: entityAwareOptional(uriSerializer) },
     status:            { name: 'versionInfo',     serializer: optional(identitySerializer<Status>()) },
     properties:        { name: 'property',        serializer: entityAwareList(entity(() => Property)) },
-    subject:           { name: 'subject',         serializer: entityAwareOptional(entity(resolveConceptConstructor)) },
+    subject:           { name: 'subject',         serializer: entityAwareOptional(entity(() => Concept)) },
     equivalentClasses: { name: 'equivalentClass', serializer: entityAwareList(uriSerializer) },
     constraint:        { name: 'constraint',      serializer: entityAwareValueOrDefault(entity(() => Constraint), {},
         (constraint: Constraint) => constraint.items.length > 0 || hasLocalization(constraint.comment)) },
@@ -99,7 +99,7 @@ export class Class extends AbstractClass implements VisualizationClass {
   scopeClass: Uri|null;
   status: Status|null;
   properties: Property[];
-  subject: Concept|LegacyConcept|null;
+  subject: Concept|null;
   equivalentClasses: Uri[];
   constraint: Constraint;
   version: Urn;

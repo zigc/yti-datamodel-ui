@@ -29,7 +29,7 @@ export class InteractiveHelpVocabularyService implements VocabularyService, Rese
     return this.defaultVocabularyService.searchConcepts(searchText, vocabulary);
   }
 
-  createConceptSuggestion(vocabulary: Vocabulary, label: string, comment: string, _broaderConceptId: Uri|any, lang: Language, model: Model): IPromise<Concept> {
+  createConceptSuggestion(vocabulary: Vocabulary, label: string, comment: string, lang: Language, model: Model): IPromise<Concept> {
 
     const id = Uri.randomUUID();
 
@@ -39,8 +39,7 @@ export class InteractiveHelpVocabularyService implements VocabularyService, Rese
       '@type': [ 'skos:Concept' ],
       prefLabel: { [lang]: label },
       definition: { [lang]: comment },
-      inScheme: vocabulary.serialize(true, true),
-      graph: vocabulary.material.serialize(true, true)
+      inScheme: vocabulary.serialize(true, true) /* , graph: vocabulary.material.serialize(true, true) */ // TODO
     };
 
     const conceptSuggestion = new Concept(graph, model.context, frames.conceptFrame);

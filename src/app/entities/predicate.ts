@@ -1,12 +1,12 @@
 import { SelectionType, PredicateType } from 'app/types/entity';
 import { normalizePredicateType } from 'app/utils/entity';
 import { requireDefined } from 'yti-common-ui/utils/object';
-import { resourceUrl, resolveConceptConstructor } from 'app/utils/entity';
+import { resourceUrl } from 'app/utils/entity';
 import { Uri, Urn } from './uri';
 import { DefinedBy } from './definedBy';
 import { Moment } from 'moment';
 import { DataType } from './dataTypes';
-import { Concept, LegacyConcept } from './vocabulary';
+import { Concept } from './vocabulary';
 import { init, serialize } from './mapping';
 import { GraphNode } from './graphNode';
 import {
@@ -73,7 +73,7 @@ export class Predicate extends AbstractPredicate {
   static predicateMappings = {
     status:               { name: 'versionInfo',        serializer: optional(identitySerializer<Status>()) },
     subPropertyOf:        { name: 'subPropertyOf',      serializer: entityAwareOptional(uriSerializer) },
-    subject:              { name: 'subject',            serializer: entityAwareOptional(entity(resolveConceptConstructor)) },
+    subject:              { name: 'subject',            serializer: entityAwareOptional(entity(() => Concept)) },
     equivalentProperties: { name: 'equivalentProperty', serializer: entityAwareList(uriSerializer) },
     version:              { name: 'identifier',         serializer: optional(identitySerializer<Urn>()) },
     editorialNote:        { name: 'editorialNote',      serializer: localizableSerializer },
@@ -83,7 +83,7 @@ export class Predicate extends AbstractPredicate {
 
   status: Status|null; // External don't have status
   subPropertyOf: Uri|null;
-  subject: Concept|LegacyConcept|null;
+  subject: Concept|null;
   equivalentProperties: Uri[];
   version: Urn|null;
   editorialNote: Localizable;

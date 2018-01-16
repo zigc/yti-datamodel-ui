@@ -14,15 +14,12 @@ mod.directive('contentFilter', () => {
     controllerAs: 'ctrl',
     restrict: 'E',
     template: `
-        <div class="form-group">
-          <label translate>Match to content</label>
-        
-          <div class="input-group input-group-md">
-            <div class="checkbox" ng-repeat="matcher in ctrl.contentMatchers">
-              <label><input class="" type="checkbox" checklist-model="ctrl.contentExtractors" checklist-value="matcher.extractor" /> {{matcher.name | translate}}</label>
-            </div>
-          </div>
-        </div>
+      <div class="form-check form-check-inline" ng-repeat="matcher in ctrl.contentMatchers">
+        <label>
+          <input type="checkbox" checklist-model="ctrl.contentExtractors" checklist-value="matcher.extractor" />
+          {{matcher.name | translate}}
+        </label>              
+      </div>
     `,
     controller: ProfileFilterController
   };

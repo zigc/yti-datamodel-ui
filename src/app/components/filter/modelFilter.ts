@@ -27,20 +27,16 @@ mod.directive('modelFilter', () => {
     controllerAs: 'ctrl',
     restrict: 'E',
     template: `
-            <div class="form-group">
-              <label for="model" translate>Defined by</label>
-              <div class="input-group input-group-md">
-                <div class="selectContainer">
-                  <select id="model" class="form-control" ng-model="ctrl.showModel"
-                          ng-options="ctrl.isThisModel(model)
-                                    ? ('Assigned to this ' + ctrl.model.normalizedType | translate)
-                                    : (model | translateLabel: ctrl.model)
-                                    for model in ctrl.models">
-                    <option value="" translate>All models</option>
-                  </select>
-                </div>
-              </div>
-            </div>
+      <select id="model" 
+              class="form-control" 
+              style="width: auto"
+              ng-model="ctrl.showModel"
+              ng-options="ctrl.isThisModel(model)
+                        ? ('Assigned to this ' + ctrl.model.normalizedType | translate)
+                        : (model | translateLabel: ctrl.model)
+                        for model in ctrl.models">
+        <option value="" translate>All models</option>
+      </select>
     `,
     controller: ModelFilterController
   };

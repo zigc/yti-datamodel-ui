@@ -14,11 +14,12 @@ mod.directive('profileFilter', () => {
     controllerAs: 'ctrl',
     restrict: 'E',
     template: `
-            <div class="form-group" ng-hide="ctrl.onlySelection">
-              <div class="checkbox">
-                <label><input type="checkbox" ng-model="ctrl.showProfiles">{{'Show classes defined in profiles' | translate}}</label>
-              </div>
-            </div>
+      <div class="form-check form-check-inline" ng-hide="ctrl.onlySelection">
+        <label>
+          <input type="checkbox" ng-model="ctrl.showProfiles">
+          {{'Show classes defined in profiles' | translate}}
+        </label>
+      </div>
     `,
     controller: ProfileFilterController
   };

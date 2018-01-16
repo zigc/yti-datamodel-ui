@@ -93,7 +93,6 @@ export class Model extends AbstractModel {
   comment: Localizable;
   status: Status;
   vocabularies: Vocabulary[];
-  modelVocabularies: ModelVocabulary[];
   namespaces: ImportedNamespace[];
   links: Link[];
   referenceDatas: ReferenceData[];
@@ -111,21 +110,14 @@ export class Model extends AbstractModel {
 
     init(this, Model.modelMappings);
     this.copyNamespacesFromRequires();
-    this.updateModelVocabularies();
   }
 
   addVocabulary(vocabulary: Vocabulary) {
     this.vocabularies.push(vocabulary);
-    this.updateModelVocabularies();
   }
 
   removeVocabulary(vocabulary: Vocabulary) {
     remove(this.vocabularies, vocabulary);
-    this.updateModelVocabularies();
-  }
-
-  private updateModelVocabularies() {
-    this.modelVocabularies = this.vocabularies.map(v => new ModelVocabulary(v, false));
   }
 
   addNamespace(ns: ImportedNamespace) {
@@ -274,36 +266,6 @@ export class Model extends AbstractModel {
 
   removeClassification(classification: Classification) {
 
-  }
-}
-
-export class ModelVocabulary {
-
-  constructor(public vocabulary: Vocabulary, public fixed: boolean) {
-  }
-
-  get id() {
-    return this.vocabulary.id;
-  }
-
-  get internalId() {
-    return this.vocabulary.internalId;
-  }
-
-  get material() {
-    return this.vocabulary.material;
-  }
-
-  get title() {
-    return this.vocabulary.title;
-  }
-
-  get description() {
-    return this.vocabulary.description;
-  }
-
-  get href() {
-    return this.vocabulary.href;
   }
 }
 

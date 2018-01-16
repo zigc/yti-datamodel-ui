@@ -12,7 +12,6 @@ import './classView';
 import './definedBy';
 import './selectionFloatSizeAdjuster';
 import './uriSelect';
-import './editableConceptSelect';
 import './editableConstraint';
 import './editableMultiple';
 import './editableMultipleUriSelect';

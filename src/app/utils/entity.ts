@@ -1,13 +1,10 @@
-import { containsAny, collectProperties, index } from 'yti-common-ui/utils/array';
-import { Destination, WithId } from 'app/types/entity';
-import { areEqual, requireDefined, isDefined } from 'yti-common-ui/utils/object';
+import { collectProperties, containsAny, firstMatchingValue, index } from 'yti-common-ui/utils/array';
+import { ClassType, Destination, GraphData, GroupType, ModelType, PredicateType, Type, WithId } from 'app/types/entity';
+import { areEqual, requireDefined } from 'yti-common-ui/utils/object';
 import { IHttpPromiseCallbackArg } from 'angular';
-import { Uri, Urn, RelativeUrl } from 'app/entities/uri';
+import { RelativeUrl, Uri, Urn } from 'app/entities/uri';
 import { Coordinate, Dimensions } from 'app/types/visualization';
 import { Model } from 'app/entities/model';
-import { LegacyConcept, Concept } from 'app/entities/vocabulary';
-import { ClassType, GroupType, ModelType, PredicateType, Type, GraphData, EntityConstructor } from 'app/types/entity';
-import { firstMatchingValue } from 'yti-common-ui/utils/array';
 
 const fromType = new Map<Type, string[]>();
 const toType = new Map<string, Type>();
@@ -32,7 +29,6 @@ registerType('library', ['dcap:MetadataVocabulary']);
 registerType('constraint', ['sh:AbstractOrNodeConstraint', 'sh:AbstractAndNodeConstraint', 'sh:AbstractNotNodeConstraint']);
 registerType('user', ['foaf:Person']);
 registerType('concept', ['skos:Concept']);
-registerType('material', ['termed:Graph']);
 registerType('vocabulary', ['skos:ConceptScheme']);
 registerType('entity', ['prov:Entity']);
 registerType('activity', ['prov:Activity']);
@@ -125,14 +121,6 @@ export function groupUrl(id: string): RelativeUrl {
 
 export function idToIndexMap<T extends {id: Uri }>(items: T[]): Map<Urn, number> {
   return new Map(items.map<[string, number]>((item: T, index: number) => [item.id.toString(), index]));
-}
-
-export function isConcept(concept: Concept|LegacyConcept|null|undefined): concept is Concept {
-  return isDefined(concept) && !concept.legacy;
-}
-
-export function resolveConceptConstructor(graph: any): EntityConstructor<Concept|LegacyConcept> {
-  return graph.hasOwnProperty('graph') ? Concept : LegacyConcept;
 }
 
 export function coordinatesAreEqual(l: Coordinate|null|undefined, r: Coordinate|null|undefined) {

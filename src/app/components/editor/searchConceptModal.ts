@@ -6,13 +6,12 @@ import { LanguageService, Localizer } from 'app/services/languageService';
 import { comparingLocalizable } from 'app/utils/comparator';
 import { EditableForm } from 'app/components/form/editableEntityController';
 import { AddNew } from 'app/components/common/searchResults';
-import { Uri } from 'app/entities/uri';
-import { anyMatching, limit } from 'yti-common-ui/utils/array';
+import { limit } from 'yti-common-ui/utils/array';
 import { lowerCase, upperCaseFirst } from 'change-case';
 import { SearchController, SearchFilter } from 'app/types/filter';
 import { ifChanged } from 'app/utils/angular';
-import { Concept } from 'app/entities/vocabulary';
-import { Model, ModelVocabulary } from 'app/entities/model';
+import { Concept, Vocabulary } from 'app/entities/vocabulary';
+import { Model } from 'app/entities/model';
 import { ClassType, KnownPredicateType } from 'app/types/entity';
 import { VocabularyService } from 'app/services/vocabularyService';
 import { filterAndSortSearchResults, defaultLabelComparator } from 'app/components/filter/util';
@@ -30,9 +29,8 @@ export class EntityCreation {
 
 class NewConceptData {
   comment: string;
-  broaderConcept: Concept;
 
-  constructor(public label: string, public vocabulary: ModelVocabulary) {
+  constructor(public label: string, public vocabulary: Vocabulary) {
   }
 }
 
@@ -42,7 +40,7 @@ export class SearchConceptModal {
   constructor(private $uibModal: IModalService) {
   }
 
-  private open(vocabularies: ModelVocabulary[],
+  private open(vocabularies: Vocabulary[],
                model: Model,
                type: ClassType|KnownPredicateType|null,
                allowSuggestions: boolean,
@@ -51,7 +49,7 @@ export class SearchConceptModal {
 
     return this.$uibModal.open({
       template: require('./searchConceptModal.html'),
-      size: 'large',
+      size: 'lg',
       controller: SearchConceptController,
       controllerAs: 'ctrl',
       backdrop: true,
@@ -66,11 +64,11 @@ export class SearchConceptModal {
     }).result;
   }
 
-  openSelection(vocabularies: ModelVocabulary[], model: Model, allowSuggestions: boolean, type?: ClassType|KnownPredicateType): IPromise<Concept> {
+  openSelection(vocabularies: Vocabulary[], model: Model, allowSuggestions: boolean, type?: ClassType|KnownPredicateType): IPromise<Concept> {
     return this.open(vocabularies, model, type || null, allowSuggestions, false, '');
   }
 
-  openNewEntityCreation(vocabularies: ModelVocabulary[], model: Model, type: ClassType|KnownPredicateType, initialSearch: string): IPromise<EntityCreation> {
+  openNewEntityCreation(vocabularies: Vocabulary[], model: Model, type: ClassType|KnownPredicateType, initialSearch: string): IPromise<EntityCreation> {
     return this.open(vocabularies, model, type, true, true, initialSearch);
   }
 }
@@ -96,12 +94,12 @@ class SearchConceptController implements SearchController<Concept> {
   defineConceptTitle: string;
   buttonTitle: string;
   labelTitle: string;
-  selectedVocabulary: ModelVocabulary;
+  selectedVocabulary: Vocabulary;
   searchText = '';
   submitError: string|null = null;
   loadingResults: boolean;
   selectedItem: Concept|AddNewConcept;
-  vocabularies: ModelVocabulary[];
+  vocabularies: Vocabulary[];
   private localizer: Localizer;
 
   contentExtractors = [ (concept: Concept) => concept.label ];
@@ -118,7 +116,7 @@ class SearchConceptController implements SearchController<Concept> {
               initialSearch: string,
               public newEntityCreation: boolean,
               private allowSuggestions: boolean,
-              vocabularies: ModelVocabulary[],
+              vocabularies: Vocabulary[],
               public model: Model,
               private vocabularyService: VocabularyService,
               private gettextCatalog: gettextCatalog) {
@@ -133,7 +131,7 @@ class SearchConceptController implements SearchController<Concept> {
     this.loadingResults = false;
 
     this.addFilter(concept =>
-      !this.selectedVocabulary || anyMatching(concept.item.vocabularies, v => v.internalId === this.selectedVocabulary.internalId)
+      !this.selectedVocabulary // TODO || anyMatching(concept.item.vocabularies, v => v.id === this.selectedVocabulary.internalId)
     );
 
     $scope.$watch(() => this.searchText, () => this.query(this.searchText).then(() => this.search()));
@@ -150,7 +148,7 @@ class SearchConceptController implements SearchController<Concept> {
   }
 
   get vocabularyComparator() {
-    return comparingLocalizable<ModelVocabulary>(this.localizer, vocabulary => vocabulary.title);
+    return comparingLocalizable<Vocabulary>(this.localizer, vocabulary => vocabulary.title);
   }
 
   isSelectionConcept() {
@@ -165,10 +163,10 @@ class SearchConceptController implements SearchController<Concept> {
     this.loadingResults = true;
 
     if (searchText) {
-      return this.vocabularyService.searchConcepts(searchText, this.selectedVocabulary ? this.selectedVocabulary.vocabulary : undefined)
+      return this.vocabularyService.searchConcepts(searchText, this.selectedVocabulary ? this.selectedVocabulary : undefined)
         .then((results: Concept[]) => {
           const resultsWithReferencedVocabularies =
-            results.filter(concept => anyMatching(concept.vocabularies, cv => anyMatching(this.vocabularies, v => v.internalId === cv.internalId)));
+            results.filter(concept => true) // TODO anyMatching(concept.vocabularies, cv => anyMatching(this.vocabularies, v => v.internalId === cv.id)));
           this.queryResults = limit(resultsWithReferencedVocabularies, limitQueryResults);
           this.loadingResults = false;
         });
@@ -236,10 +234,6 @@ class SearchConceptController implements SearchController<Concept> {
 
   private resolveResult(): IPromise<Concept|EntityCreation> {
 
-    function extractId(entity: {id: Uri}) {
-      return entity && entity.id;
-    }
-
     function newEntity(concept: Concept) {
       return { label: concept.label[language] };
     }
@@ -251,10 +245,9 @@ class SearchConceptController implements SearchController<Concept> {
 
       const conceptSuggestion =
         this.vocabularyService.createConceptSuggestion(
-          selection.vocabulary.vocabulary,
+          selection.vocabulary,
           selection.label,
           selection.comment,
-          extractId(selection.broaderConcept),
           language,
           this.model
         );

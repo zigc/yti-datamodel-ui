@@ -6,15 +6,14 @@ import { Language } from 'app/types/language';
 import { FrameService } from './frameService';
 import { GraphData } from 'app/types/entity';
 import * as frames from 'app/entities/frames';
-import { Vocabulary, Concept, LegacyConcept } from 'app/entities/vocabulary';
+import { Vocabulary, Concept } from 'app/entities/vocabulary';
 import { Model } from 'app/entities/model';
 import { requireSingle } from 'yti-common-ui/utils/array';
-import { resolveConceptConstructor } from 'app/utils/entity';
 
 export interface VocabularyService {
   getAllVocabularies(): IPromise<Vocabulary[]>;
   searchConcepts(searchText: string, vocabulary?: Vocabulary): IPromise<Concept[]>;
-  createConceptSuggestion(vocabulary: Vocabulary, label: string, comment: string, broaderConceptId: Uri|null, lang: Language, model: Model): IPromise<Concept>;
+  createConceptSuggestion(vocabulary: Vocabulary, label: string, comment: string, lang: Language, model: Model): IPromise<Concept>;
   getConcept(id: Uri): IPromise<Concept>;
   getConceptsForModel(model: Model): IPromise<Concept[]>;
 }
@@ -25,20 +24,15 @@ export class DefaultVocabularyService implements VocabularyService {
   }
 
   getAllVocabularies(): IPromise<Vocabulary[]> {
-
-    // FIXME
-
-    return this.$q.when([]);
-
-    // return this.$http.get<GraphData>(config.apiEndpointWithName('conceptSchemes'))
-    //   .then(response => this.deserializeVocabularies(response.data!));
+    return this.$http.get<GraphData>(config.apiEndpointWithName('conceptSchemes'))
+      .then(response => this.deserializeVocabularies(response.data!));
   }
 
   searchConcepts(searchText: string, vocabulary?: Vocabulary): IPromise<Concept[]> {
 
     const params: any = {
       // XXX: api wants search strings as lower case otherwise it finds nothing
-      term: searchText ? searchText.toLowerCase() : ''
+      term: (searchText ? searchText.toLowerCase() : '') + '*'
     };
 
     if (vocabulary) {
@@ -49,15 +43,14 @@ export class DefaultVocabularyService implements VocabularyService {
       .then(response => this.deserializeConcepts(response.data!));
   }
 
-  createConceptSuggestion(vocabulary: Vocabulary, label: string, comment: string, broaderConceptId: Uri|null, lang: Language, model: Model): IPromise<Concept> {
+  createConceptSuggestion(vocabulary: Vocabulary, label: string, comment: string, lang: Language, model: Model): IPromise<Concept> {
     return this.$http.put<GraphData>(config.apiEndpointWithName('conceptSuggestion'), null, {
       params: {
         schemeID: vocabulary.id.uri,
-        graphUUID: vocabulary.material.internalId,
+        graphUUID: vocabulary.graph,
         label: upperCaseFirst(label),
         comment,
         lang,
-        topConceptID: broaderConceptId && broaderConceptId.uri,
         modelID: model.id.uri
       }})
       .then(response => this.deserializeConcepts(response.data!))
@@ -77,7 +70,7 @@ export class DefaultVocabularyService implements VocabularyService {
       });
   }
 
-  getConceptsForModel(model: Model): IPromise<(Concept|LegacyConcept)[]> {
+  getConceptsForModel(model: Model): IPromise<Concept[]> {
     return this.$http.get<GraphData>(config.apiEndpointWithName('modelConcepts'), {params: {model: model.id.uri}})
       .then(response => this.deserializeModelConcepts(response.data!));
   }
@@ -90,8 +83,8 @@ export class DefaultVocabularyService implements VocabularyService {
     return this.frameService.frameAndMapArray(data, frames.conceptListFrame(data), () => Concept);
   }
 
-  deserializeModelConcepts(data: GraphData): IPromise<(Concept|LegacyConcept)[]> {
-    return this.frameService.frameAndMapArray(data, frames.conceptListFrame(data), resolveConceptConstructor);
+  deserializeModelConcepts(data: GraphData): IPromise<Concept[]> {
+    return this.frameService.frameAndMapArray(data, frames.conceptListFrame(data), () => Concept);
   }
 
   deserializeVocabularies(data: GraphData): IPromise<Vocabulary[]> {

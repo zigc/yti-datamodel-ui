@@ -16,7 +16,7 @@ export class EditReferenceDataModal {
   private open(model: Model, lang: Language, referenceDataToEdit: ReferenceData) {
     this.$uibModal.open({
       template: require('./editReferenceDataModal.html'),
-      size: 'small',
+      size: 'sm',
       controller: EditReferenceDataModalController,
       controllerAs: 'ctrl',
       backdrop: true,

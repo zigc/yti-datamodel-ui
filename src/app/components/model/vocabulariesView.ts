@@ -1,14 +1,12 @@
 import { IAttributes, IScope } from 'angular';
 import { ModelViewController } from './modelView';
 import { LanguageService } from 'app/services/languageService';
-import { TableDescriptor, ColumnDescriptor } from 'app/components/form/editableTable';
+import { ColumnDescriptor, TableDescriptor } from 'app/components/form/editableTable';
 import { SearchVocabularyModal } from './searchVocabularyModal';
 import { module as mod } from './module';
 import { createExistsExclusion } from 'app/utils/exclusion';
-import { ConceptEditorModal } from './conceptEditorModal';
 import { collectProperties } from 'yti-common-ui/utils/array';
-import { requireDefined } from 'yti-common-ui/utils/object';
-import { Model, ModelVocabulary } from 'app/entities/model';
+import { Model } from 'app/entities/model';
 import { Vocabulary } from 'app/entities/vocabulary';
 import { modalCancelHandler } from 'app/utils/angular';
 
@@ -24,10 +22,6 @@ mod.directive('vocabulariesView', () => {
         <button type="button" class="btn btn-link btn-xs pull-right" ng-click="ctrl.addVocabulary()" ng-show="ctrl.isEditing()">
           <span class="glyphicon glyphicon-plus"></span>
           <span translate>Add vocabulary</span>
-        </button>
-        <button type="button" class="btn btn-link btn-xs pull-right" ng-click="ctrl.browseConcepts()">
-          <span class="fa fa-th"></span>
-          <span translate>Browse concepts</span>
         </button>
       </h4>
       <editable-table descriptor="ctrl.descriptor" expanded="ctrl.expanded"></editable-table>
@@ -53,19 +47,15 @@ class VocabulariesViewController {
   /* @ngInject */
   constructor($scope: IScope,
               private searchVocabularyModal: SearchVocabularyModal,
-              private conceptEditorModal: ConceptEditorModal,
               languageService: LanguageService) {
+
     $scope.$watch(() => this.model, model => {
       this.descriptor = new VocabularyTableDescriptor(model, languageService);
     });
   }
 
-  browseConcepts() {
-    this.conceptEditorModal.open(this.model);
-  }
-
   addVocabulary() {
-    const vocabularies = collectProperties(this.model.modelVocabularies, vocabulary => vocabulary.id.uri);
+    const vocabularies = collectProperties(this.model.vocabularies, vocabulary => vocabulary.id.uri);
     const exclude = createExistsExclusion(vocabularies);
 
     this.searchVocabularyModal.open(this.model, exclude)
@@ -76,36 +66,35 @@ class VocabulariesViewController {
   }
 }
 
-class VocabularyTableDescriptor extends TableDescriptor<ModelVocabulary> {
+class VocabularyTableDescriptor extends TableDescriptor<Vocabulary> {
 
   constructor(private model: Model, private languageService: LanguageService) {
     super();
   }
 
-  columnDescriptors(): ColumnDescriptor<ModelVocabulary>[] {
+  columnDescriptors(): ColumnDescriptor<Vocabulary>[] {
     return [
-      { headerName: 'Identifier', nameExtractor: vocabulary => requireDefined(vocabulary.material.code), cssClass: 'prefix', hrefExtractor: vocabulary => vocabulary.href},
       { headerName: 'Vocabulary name', nameExtractor: vocabulary => this.languageService.translate(vocabulary.title, this.model)}
     ];
   }
 
-  values(): ModelVocabulary[] {
-    return this.model && this.model.modelVocabularies;
+  values(): Vocabulary[] {
+    return this.model && this.model.vocabularies;
   }
 
-  canEdit(_vocabulary: ModelVocabulary): boolean {
+  canEdit(_vocabulary: Vocabulary): boolean {
     return false;
   }
 
-  canRemove(vocabulary: ModelVocabulary): boolean {
-    return !vocabulary.fixed;
+  canRemove(vocabulary: Vocabulary): boolean {
+    return true;
   }
 
-  remove(vocabulary: ModelVocabulary): any {
-    this.model.removeVocabulary(vocabulary.vocabulary);
+  remove(vocabulary: Vocabulary): any {
+    this.model.removeVocabulary(vocabulary);
   }
 
-  orderBy(vocabulary: ModelVocabulary): any {
+  orderBy(vocabulary: Vocabulary): any {
     return vocabulary.id;
   }
 }

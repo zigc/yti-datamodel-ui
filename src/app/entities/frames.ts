@@ -29,13 +29,11 @@ const coreContext = {
 };
 
 const vocabularyContext = Object.assign({}, coreContext, {
-  code: { '@id' : 'http://termed.thl.fi/meta/code' },
-  graphCode: { '@id' : 'http://termed.thl.fi/meta/graphCode' },
-  graphId: { '@id' : 'http://termed.thl.fi/meta/graphId' },
-  typeId: { '@id' : 'http://termed.thl.fi/meta/typeId' },
-  id: { '@id' : 'http://termed.thl.fi/meta/id' },
-  graph: { '@id' : 'http://termed.thl.fi/meta/graph',  '@type' : '@id' },
-  hasTopConcept: { '@id' : 'http://www.w3.org/2004/02/skos/core#hasTopConcept', '@type' : '@id' }
+  graph: { '@id' : 'termed:property:graph' },
+  id: { '@id' : 'termed:property:id' },
+  type: { '@id' : 'termed:property:type' },
+  uri: { '@id' : 'termed:property:uri' },
+  description
 });
 
 const conceptContext = Object.assign({}, coreContext, {
@@ -250,21 +248,7 @@ export function conceptFrame(data: any, id: Uri|Url) {
 
   return frame(data, conceptContext, {
     '@id': id.toString(),
-    inScheme: {
-      '@omitDefault': true,
-      '@default': [],
-      '@embed': '@always'
-    },
-    graph: {
-      '@omitDefault': true,
-      '@default': [],
-      '@embed': '@always'
-    },
-    broader: {
-      '@omitDefault': true,
-      '@default': [],
-      '@embed': '@always'
-    }
+    '@type': 'skos:Concept'
   });
 }
 
@@ -272,21 +256,6 @@ export function conceptListFrame(data: any) {
 
   return frame(data, conceptContext, {
     '@type': 'skos:Concept',
-    inScheme: {
-      '@omitDefault': true,
-      '@default': [],
-      '@embed': '@always'
-    },
-    graph: {
-      '@omitDefault': true,
-      '@default': [],
-      '@embed': '@always'
-    },
-    broader: {
-      '@omitDefault': true,
-      '@default': [],
-      '@embed': '@always'
-    }
   });
 }
 
@@ -298,7 +267,6 @@ export function classificationListFrame(data: any) {
   });
 }
 
-
 export function organizationFrame(data: any) {
   return frame(data, organizationContext, {
     '@type': 'foaf:Organization'
@@ -307,17 +275,7 @@ export function organizationFrame(data: any) {
 
 export function vocabularyFrame(data: any) {
   return frame(data, vocabularyContext, {
-    '@type': ['skos:ConceptScheme'],
-    graph: {
-      '@omitDefault': true,
-      '@default': [],
-      '@embed': '@always'
-    },
-    hasTopConcept: {
-      '@omitDefault': true,
-      '@default': [],
-      '@embed': '@never'
-    }
+    '@type': ['skos:ConceptScheme']
   });
 }
 
