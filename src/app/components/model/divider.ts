@@ -15,8 +15,8 @@ mod.directive('divider', () => {
   };
 });
 
-const modelPanelLeft = 275;
-const minSelectionWidth = 500;
+const modelPanelLeft = 350;
+const minSelectionWidth = 520;
 const normalSelectionWidth = 720;
 const minVisualizationWidth = 321;
 
