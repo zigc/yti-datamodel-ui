@@ -30,10 +30,13 @@ class SubjectViewController {
   }
 
   changeSubject() {
+
     const normalizedType = this.entity.normalizedType;
+
     if (normalizedType === 'property') {
       throw new Error('Must be known predicate type');
     }
+
     this.searchConceptModal.openSelection(this.model.vocabularies, this.model, true, normalizedType)
       .then(concept => this.entity.subject = concept, modalCancelHandler);
   }

@@ -121,7 +121,7 @@ export class InteractiveHelpClassService implements ClassService, ResetableServi
           modified: currentTime,
           subject: concept.serialize(true, false),
           label: { [lang]: upperCaseFirst(classLabel) },
-          comment: Object.assign({}, concept.comment),
+          comment: Object.assign({}, concept.definition),
           isDefinedBy: model.asDefinedBy().serialize(true, false),
           versionInfo: 'DRAFT'
         };

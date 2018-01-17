@@ -117,7 +117,7 @@ export class InteractiveHelpPredicateService implements PredicateService, Reseta
           modified: currentTime,
           subject: concept.serialize(true, false),
           label: { [lang]: upperCaseFirst(predicateLabel) },
-          comment: Object.assign({}, concept.comment),
+          comment: Object.assign({}, concept.definition),
           isDefinedBy: model.asDefinedBy().serialize(true, false),
           versionInfo: 'DRAFT'
         };

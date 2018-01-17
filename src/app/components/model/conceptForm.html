@@ -13,13 +13,13 @@
 
     <editable data-title="Definition" context="ctrl.model">
       <div class="input-group input-group-md">
-        <textarea id="conceptComment" class="form-control" localized-input="required" context="ctrl.model" ng-model="ctrl.concept.comment"></textarea>
+        <textarea id="conceptComment" class="form-control" localized-input="required" context="ctrl.model" ng-model="ctrl.concept.definition"></textarea>
       </div>
     </editable>
 
     <non-editable data-title="Concept id" value="ctrl.concept.id" context="ctrl.context" link="ctrl.concept.href"></non-editable>
 
-    <non-editable-vocabulary ng-if="!ctrl.concept.legacy" vocabularies="ctrl.concept.vocabularies"></non-editable-vocabulary>
+    <non-editable-vocabulary vocabularies="ctrl.concept.vocabularies"></non-editable-vocabulary>
   </div>
 </div>
 

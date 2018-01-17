@@ -36,12 +36,12 @@ export class Concept extends GraphNode {
   static conceptMappings = {
     id:             { name: '@id',               serializer: uriSerializer },
     label:          { name: 'prefLabel',         serializer: localizableSerializer },
-    comment:        { name: 'definition',        serializer: localizableSerializer }
+    definition:     { name: 'definition',        serializer: localizableSerializer }
   };
 
   id: Uri;
   label: Localizable;
-  comment: Localizable;
+  definition: Localizable;
 
   constructor(graph: any, context: any, frame: any) {
     super(graph, context, frame);

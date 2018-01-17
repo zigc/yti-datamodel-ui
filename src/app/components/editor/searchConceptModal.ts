@@ -130,10 +130,6 @@ class SearchConceptController implements SearchController<Concept> {
     this.vocabularies.sort(this.vocabularyComparator);
     this.loadingResults = false;
 
-    this.addFilter(concept =>
-      !this.selectedVocabulary // TODO || anyMatching(concept.item.vocabularies, v => v.id === this.selectedVocabulary.internalId)
-    );
-
     $scope.$watch(() => this.searchText, () => this.query(this.searchText).then(() => this.search()));
     $scope.$watch(() => this.selectedVocabulary, ifChanged(() => this.query(this.searchText).then(() => this.search())));
     $scope.$watch(() => this.localizer.language, ifChanged(() => this.query(this.searchText).then(() => this.search())));

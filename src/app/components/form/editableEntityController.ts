@@ -51,7 +51,8 @@ export abstract class EditableEntityController<T extends EditableEntity> {
     this.editableInEdit = editable ? <T> editable.clone() : null;
 
     if (editable && editable.unsaved) {
-      this.edit();
+      // XXX: prevent problems with unsaved navigation confirmation
+      setTimeout(() => this.edit());
     } else {
       this.cancelEditing();
     }
