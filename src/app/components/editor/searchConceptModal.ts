@@ -15,6 +15,7 @@ import { Model } from 'app/entities/model';
 import { ClassType, KnownPredicateType } from 'app/types/entity';
 import { VocabularyService } from 'app/services/vocabularyService';
 import { filterAndSortSearchResults, defaultLabelComparator } from 'app/components/filter/util';
+import { Uri } from 'app/entities/uri';
 
 const limitQueryResults = 1000;
 
@@ -23,7 +24,7 @@ export interface NewEntityData {
 }
 
 export class EntityCreation {
-  constructor(public concept: Concept, public entity: NewEntityData) {
+  constructor(public conceptId: Uri, public entity: NewEntityData) {
   }
 }
 
@@ -45,7 +46,7 @@ export class SearchConceptModal {
                type: ClassType|KnownPredicateType|null,
                allowSuggestions: boolean,
                newEntityCreation: boolean,
-               initialSearch: string) {
+               initialSearch: string): IPromise<Concept|EntityCreation> {
 
     return this.$uibModal.open({
       template: require('./searchConceptModal.html'),
@@ -230,16 +231,12 @@ class SearchConceptController implements SearchController<Concept> {
 
   private resolveResult(): IPromise<Concept|EntityCreation> {
 
-    function newEntity(concept: Concept) {
-      return { label: concept.label[language] };
-    }
-
     const selection = this.selection;
     const language = this.languageService.getModelLanguage(this.model);
 
     if (isNewConceptData(selection)) {
 
-      const conceptSuggestion =
+      const conceptSuggestionId =
         this.vocabularyService.createConceptSuggestion(
           selection.vocabulary,
           selection.label,
@@ -249,13 +246,15 @@ class SearchConceptController implements SearchController<Concept> {
         );
 
       if (this.newEntityCreation) {
-        return conceptSuggestion.then(cs => new EntityCreation(cs, newEntity(cs)));
+        return conceptSuggestionId
+          .then(csId => new EntityCreation(csId, { label: selection.label }));
       } else {
-        return conceptSuggestion;
+        return conceptSuggestionId
+          .then(csId => this.vocabularyService.getConcept(csId));
       }
     } else if (isConcept(selection)) {
       if (this.newEntityCreation) {
-        return this.$q.when(new EntityCreation(selection, newEntity(selection)));
+        return this.$q.when(new EntityCreation(selection.id, { label: selection.label[language] }));
       } else {
         return this.$q.when(selection);
       }

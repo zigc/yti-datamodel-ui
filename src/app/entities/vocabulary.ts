@@ -3,7 +3,7 @@ import { Uri } from './uri';
 import { glyphIconClassForType } from 'app/utils/entity';
 import { init, serialize } from './mapping';
 import { GraphNode } from './graphNode';
-import { uriSerializer } from './serializer/entitySerializer';
+import {entity, entityAwareOptional, uriSerializer} from 'app/entities/serializer/entitySerializer';
 import { ConceptType } from 'app/types/entity';
 import { Localizable } from 'yti-common-ui/types/localization';
 
@@ -36,12 +36,14 @@ export class Concept extends GraphNode {
   static conceptMappings = {
     id:             { name: '@id',               serializer: uriSerializer },
     label:          { name: 'prefLabel',         serializer: localizableSerializer },
-    definition:     { name: 'definition',        serializer: localizableSerializer }
+    definition:     { name: 'definition',        serializer: localizableSerializer },
+    vocabulary:     { name: 'inScheme',          serializer: entityAwareOptional(entity(() => ConceptVocabulary)) } // TODO should be mandatory
   };
 
   id: Uri;
   label: Localizable;
   definition: Localizable;
+  vocabulary: ConceptVocabulary;
 
   constructor(graph: any, context: any, frame: any) {
     super(graph, context, frame);
@@ -70,3 +72,18 @@ export class Concept extends GraphNode {
   }
 }
 
+export class ConceptVocabulary extends GraphNode {
+
+  static conceptVocabularyMappings = {
+    id:              { name: '@id',         serializer: uriSerializer },
+    title:           { name: 'title',       serializer: localizableSerializer }
+  };
+
+  id: Uri;
+  title: Localizable;
+
+  constructor(graph: any, context: any, frame: any) {
+    super(graph, context, frame);
+    init(this, ConceptVocabulary.conceptVocabularyMappings);
+  }
+}

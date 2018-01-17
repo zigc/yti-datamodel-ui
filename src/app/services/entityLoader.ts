@@ -8,7 +8,7 @@ import { DataType } from 'app/entities/dataTypes';
 import { identity, requireDefined } from 'yti-common-ui/utils/object';
 import { ConstraintType, KnownModelType, KnownPredicateType } from 'app/types/entity';
 import { ImportedNamespace, Model } from 'app/entities/model';
-import { Concept, Vocabulary } from 'app/entities/vocabulary';
+import { Vocabulary } from 'app/entities/vocabulary';
 import { Class, Property } from 'app/entities/class';
 import { Association, Attribute, Predicate } from 'app/entities/predicate';
 import { VocabularyService } from './vocabularyService';
@@ -151,7 +151,7 @@ export class EntityLoader {
     return this.$q.all(this.actions);
   }
 
-  createConceptSuggestion(details: ConceptSuggestionDetails, modelPromise: IPromise<Model>): IPromise<Concept> {
+  createConceptSuggestion(details: ConceptSuggestionDetails, modelPromise: IPromise<Model>): IPromise<Uri> {
     const result = modelPromise.then((model: Model) =>
       this.vocabularyService.createConceptSuggestion(model.vocabularies[0], details.label, details.comment, 'fi', model));
 
@@ -294,8 +294,8 @@ export class EntityLoader {
 
     const concept = details.concept;
     const conceptIdPromise = isConceptSuggestion(concept)
-      ? this.createConceptSuggestion(concept, modelPromise).then(conceptSuggestion => conceptSuggestion.id)
-      : concept ? this.$q.when(this.createUri(<string> concept)) : this.$q.when(null);
+      ? this.createConceptSuggestion(concept, modelPromise)
+      : this.$q.when(null);
 
     const result =
       this.$q.all([modelPromise, conceptIdPromise])
@@ -356,8 +356,8 @@ export class EntityLoader {
 
     const concept = details.concept;
     const conceptIdPromise = isConceptSuggestion(concept)
-      ? this.createConceptSuggestion(concept, modelPromise).then(conceptSuggestion => conceptSuggestion.id)
-      : concept ? this.$q.when(this.createUri(<string> concept)) : this.$q.when(null);
+      ? this.createConceptSuggestion(concept, modelPromise)
+      : this.$q.when(null);
 
     const result =
       this.$q.all([modelPromise, conceptIdPromise])

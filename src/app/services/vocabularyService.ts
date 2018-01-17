@@ -8,12 +8,11 @@ import { GraphData } from 'app/types/entity';
 import * as frames from 'app/entities/frames';
 import { Vocabulary, Concept } from 'app/entities/vocabulary';
 import { Model } from 'app/entities/model';
-import { requireSingle } from 'yti-common-ui/utils/array';
 
 export interface VocabularyService {
   getAllVocabularies(): IPromise<Vocabulary[]>;
   searchConcepts(searchText: string, vocabulary?: Vocabulary): IPromise<Concept[]>;
-  createConceptSuggestion(vocabulary: Vocabulary, label: string, comment: string, lang: Language, model: Model): IPromise<Concept>;
+  createConceptSuggestion(vocabulary: Vocabulary, label: string, comment: string, lang: Language, model: Model): IPromise<Uri>;
   getConcept(id: Uri): IPromise<Concept>;
   getConceptsForModel(model: Model): IPromise<Concept[]>;
 }
@@ -44,22 +43,20 @@ export class DefaultVocabularyService implements VocabularyService {
       .then(response => this.deserializeConcepts(response.data!));
   }
 
-  createConceptSuggestion(vocabulary: Vocabulary, label: string, definition: string, lang: Language, model: Model): IPromise<Concept> {
-    return this.$http.put<GraphData>(config.apiEndpointWithName('conceptSuggestion'), null, {
+  createConceptSuggestion(vocabulary: Vocabulary, label: string, definition: string, lang: Language, model: Model): IPromise<Uri> {
+    return this.$http.put<{ identifier: string }>(config.apiEndpointWithName('conceptSuggestion'), null, {
       params: {
-        schemeID: vocabulary.id.uri,
         graphUUID: vocabulary.vocabularyGraph,
         label: upperCaseFirst(label),
         comment: definition,
         lang,
         modelID: model.id.uri
       }})
-      .then(response => this.deserializeConcepts(response.data!))
-      .then(concepts => requireSingle(concepts));
+      .then(response => new Uri(response.data!.identifier, {}));
   }
 
   getConcept(id: Uri): IPromise<Concept> {
-    return this.$http.get<GraphData>(config.apiEndpointWithName('concept'), {params: {uri: id.uri}})
+    return this.$http.get<GraphData>(config.apiEndpointWithName('concept'), {params: {id: id.isUuid() ? id.uuid : id.uri}})
       .then(response => this.deserializeConcept(response.data!, id.uri));
   }
 

@@ -445,7 +445,7 @@ export class ModelPageController implements ModelPageActions, HelpProvider, Mode
   }
 
   createClass(conceptCreation: EntityCreation) {
-    this.classService.newClass(this.model, conceptCreation.entity.label, conceptCreation.concept.id, this.languageService.getModelLanguage(this.model))
+    this.classService.newClass(this.model, conceptCreation.entity.label, conceptCreation.conceptId, this.languageService.getModelLanguage(this.model))
       .then(klass => this.selectNewlyCreatedOrAssignedEntity(klass));
   }
 
@@ -481,7 +481,7 @@ export class ModelPageController implements ModelPageActions, HelpProvider, Mode
   }
 
   createPredicate(conceptCreation: EntityCreation, type: KnownPredicateType) {
-    return this.predicateService.newPredicate(this.model, conceptCreation.entity.label, conceptCreation.concept.id, type, this.languageService.getModelLanguage(this.model))
+    return this.predicateService.newPredicate(this.model, conceptCreation.entity.label, conceptCreation.conceptId, type, this.languageService.getModelLanguage(this.model))
       .then(predicate => this.selectNewlyCreatedOrAssignedEntity(predicate));
   }
 

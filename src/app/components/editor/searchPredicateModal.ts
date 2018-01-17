@@ -264,7 +264,7 @@ export class SearchPredicateController implements SearchController<PredicateList
         if (!this.typeSelectable) {
           this.$uibModalInstance.close(result);
         } else {
-          this.predicateService.newPredicate(this.model, result.entity.label, result.concept.id, type, this.localizer.language)
+          this.predicateService.newPredicate(this.model, result.entity.label, result.conceptId, type, this.localizer.language)
             .then(predicate => {
               this.cannotConfirm = null;
               this.selection = predicate;

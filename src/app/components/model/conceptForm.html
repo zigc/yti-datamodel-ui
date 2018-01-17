@@ -1,6 +1,5 @@
 <h4>
-  <span translate ng-if="ctrl.concept.isOfType('conceptSuggestion')">Concept suggestion information</span>
-  <span translate ng-if="!ctrl.concept.isOfType('conceptSuggestion')">Concept information</span>
+  <span translate>Concept information</span>
 </h4>
 
 <div class="row">
@@ -19,15 +18,7 @@
 
     <non-editable data-title="Concept id" value="ctrl.concept.id" context="ctrl.context" link="ctrl.concept.href"></non-editable>
 
-    <non-editable-vocabulary vocabularies="ctrl.concept.vocabularies"></non-editable-vocabulary>
-  </div>
-</div>
-
-
-<div class="row">
-  <div class="col-md-12">
-    <h4 translate>Additional information</h4>
-
-    <usage-panel entity="ctrl.concept" context="ctrl.model"></usage-panel>
+    <span></span>
+    <non-editable-vocabulary vocabulary="ctrl.concept.vocabulary"></non-editable-vocabulary>
   </div>
 </div>

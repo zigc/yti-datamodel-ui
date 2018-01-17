@@ -29,7 +29,7 @@ export class InteractiveHelpVocabularyService implements VocabularyService, Rese
     return this.defaultVocabularyService.searchConcepts(searchText, vocabulary);
   }
 
-  createConceptSuggestion(vocabulary: Vocabulary, label: string, comment: string, lang: Language, model: Model): IPromise<Concept> {
+  createConceptSuggestion(vocabulary: Vocabulary, label: string, comment: string, lang: Language, model: Model): IPromise<Uri> {
 
     const id = Uri.randomUUID();
 
@@ -44,7 +44,7 @@ export class InteractiveHelpVocabularyService implements VocabularyService, Rese
 
     const conceptSuggestion = new Concept(graph, model.context, frames.conceptFrame);
     this.store.add(conceptSuggestion);
-    return this.$q.when(conceptSuggestion);
+    return this.$q.when(id);
   }
 
   getConcept(id: Uri): IPromise<Concept> {
