@@ -658,9 +658,8 @@ table.editable-table {
 }
 
 .multi-input {
-  border: 1px solid #ccc;
-  height: auto !important;
-  min-height: calc(#{$input-height} - 3px);
+
+  min-height: 2.7735em;
   padding: 0;
   display: inline-block;
   margin-bottom: -5px;
@@ -740,9 +739,17 @@ table.editable-table {
   input {
     display: inline-block;
     float: left;
-    height: 37px;
-    padding: 0 12px 0 12px;
+    line-height: 1.5;
+    font-size: 0.9375rem;
+    padding: 8.8px;
     border: 0;
+
+    &::placeholder {
+      color: $input-placeholder-color;
+      font-style: italic;
+      font-size: small;
+      font-weight: 600;
+    }
   }
 
   input:focus {
