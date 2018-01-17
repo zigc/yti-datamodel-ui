@@ -78,11 +78,11 @@ export interface SearchPredicateScope extends IScope {
   form: EditableForm;
 }
 
-function isConcept(obj: Concept|NewConceptData): obj is Concept {
+function isConcept(obj: Concept|NewConceptData|null): obj is Concept {
   return obj instanceof Concept;
 }
 
-function isNewConceptData(obj: Concept|NewConceptData): obj is NewConceptData {
+function isNewConceptData(obj: Concept|NewConceptData|null): obj is NewConceptData {
   return obj instanceof NewConceptData;
 }
 
@@ -91,7 +91,7 @@ class SearchConceptController implements SearchController<Concept> {
   close = this.$uibModalInstance.dismiss;
   queryResults: Concept[];
   searchResults: (Concept|AddNewConcept)[];
-  selection: Concept|NewConceptData;
+  selection: Concept|NewConceptData|null = null;
   defineConceptTitle: string;
   buttonTitle: string;
   labelTitle: string;
@@ -199,6 +199,7 @@ class SearchConceptController implements SearchController<Concept> {
       this.$scope.form.editing = true;
       this.selection = new NewConceptData(lowerCase(this.searchText, this.localizer.language), this.resolveInitialVocabulary());
     } else {
+      this.selection = null;
       this.vocabularyService.getConcept(item.id).then(concept => this.selection = concept);
     }
   }
