@@ -28,7 +28,7 @@ export class EntityCreation {
 }
 
 class NewConceptData {
-  comment: string;
+  definition: string;
 
   constructor(public label: string, public vocabulary: Vocabulary) {
   }
@@ -243,7 +243,7 @@ class SearchConceptController implements SearchController<Concept> {
         this.vocabularyService.createConceptSuggestion(
           selection.vocabulary,
           selection.label,
-          selection.comment,
+          selection.definition,
           language,
           this.model
         );

@@ -44,13 +44,13 @@ export class DefaultVocabularyService implements VocabularyService {
       .then(response => this.deserializeConcepts(response.data!));
   }
 
-  createConceptSuggestion(vocabulary: Vocabulary, label: string, comment: string, lang: Language, model: Model): IPromise<Concept> {
+  createConceptSuggestion(vocabulary: Vocabulary, label: string, definition: string, lang: Language, model: Model): IPromise<Concept> {
     return this.$http.put<GraphData>(config.apiEndpointWithName('conceptSuggestion'), null, {
       params: {
         schemeID: vocabulary.id.uri,
-        graphUUID: vocabulary.graph,
+        graphUUID: vocabulary.vocabularyGraph,
         label: upperCaseFirst(label),
-        comment,
+        comment: definition,
         lang,
         modelID: model.id.uri
       }})
