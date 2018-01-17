@@ -26,7 +26,7 @@ const frameService = new FrameService(log);
 const modelService = new DefaultModelService(httpService, q, frameService);
 const predicateService = new DefaultPredicateService(httpService, q, frameService);
 const classService = new DefaultClassService(httpService, q, predicateService, frameService);
-const vocabularyService = new DefaultVocabularyService(httpService, q, frameService);
+const vocabularyService = new DefaultVocabularyService(httpService, frameService);
 const resetService = new ResetService(httpService);
 
 
