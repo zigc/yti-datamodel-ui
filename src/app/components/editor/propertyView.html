@@ -5,10 +5,12 @@
 
         <button ng-if="ctrl.isEditing()"
                 type="button"
-                class="btn btn-action pull-right remove"
-                style="margin-left: 5px"
+                class="btn btn-link pull-right remove"
                 ng-disabled="!ctrl.property.inUnstableState"
-                ng-click="ctrl.removeProperty(ctrl.property)" uib-tooltip="{{'Delete property' | translate}}"><i class="fa fa-trash"></i></button>
+                ng-click="ctrl.removeProperty(ctrl.property)">
+          <i class="fa fa-trash"></i>
+          <span translate>Delete property</span>
+        </button>
     </div>
   </div>
 
@@ -74,7 +76,12 @@
                                          ng-model="ctrl.property.example">
       </editable-multiple-data-type-input>
 
-      <editable-multiple-data-type-input data-title="Allowed values" id="{{ctrl.property.internalId + 'allowedValues'}}" input-type="ctrl.property.inputType" ng-model="ctrl.property.in" reference-data="ctrl.property.referenceData" context="ctrl.model"></editable-multiple-data-type-input>
+      <editable-multiple-data-type-input data-title="Allowed values"
+                                         id="{{ctrl.property.internalId + 'allowedValues'}}"
+                                         input-type="ctrl.property.inputType"
+                                         ng-model="ctrl.property.in"
+                                         reference-data="ctrl.property.referenceData"
+                                         context="ctrl.model"></editable-multiple-data-type-input>
 
       <div class="range-input">
         <editable data-title="Min length" context="ctrl.model">

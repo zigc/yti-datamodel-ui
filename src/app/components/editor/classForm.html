@@ -50,7 +50,10 @@
          ng-model="ctrl.sortAlphabetically">
         <i class="fa fa-sort-alpha-asc"></i>
       </a>
-      <button-with-options icon-class="glyphicon glyphicon-plus" ng-show="ctrl.isEditing()" options="ctrl.addPropertyActions"></button-with-options>
+      <button-with-options ng-show="ctrl.isEditing()"
+                           options="ctrl.addPropertyActions">
+        <span translate>Add property</span>
+      </button-with-options>
     </div>
 
     <accordion class="properties" ng-if="ctrl.class.properties.length > 0"

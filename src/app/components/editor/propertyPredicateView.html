@@ -1,9 +1,14 @@
 <div ng-if="ctrl.predicate && !ctrl.loading">
 
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12 mb-2">
       <h4 class="pull-left" translate>Reusable predicate information</h4>
-      <button-with-options ng-show="ctrl.isEditing()" icon-class="fa fa-repeat" options="ctrl.changeActions" class="pull-right" disabled="!ctrl.property.inUnstableState"></button-with-options>
+      <button-with-options ng-show="ctrl.isEditing()"
+                           options="ctrl.changeActions"
+                           class="pull-right"
+                           disabled="!ctrl.property.inUnstableState">
+        <span translate>Change reusable predicate</span>
+      </button-with-options>
     </div>
   </div>
 
@@ -26,5 +31,9 @@
 
 <div ng-if="ctrl.predicate === null && !ctrl.loading">
   <span class="pull-left" translate>Predicate information not found</span>
-  <button-with-options icon-class="fa fa-repeat" options="ctrl.changeActions" class="pull-right" disabled="!ctrl.property.inUnstableState"></button-with-options>
+  <button-with-options options="ctrl.changeActions"
+                       class="pull-right"
+                       disabled="!ctrl.property.inUnstableState">
+    <span translate>Change reusable predicate</span>
+  </button-with-options>
 </div>

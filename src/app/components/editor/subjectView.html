@@ -5,9 +5,11 @@
 
       <button ng-if="ctrl.isEditing()"
               type="button"
-              class="btn btn-action pull-right"
+              class="btn btn-link pull-right"
               ng-disabled="!ctrl.entity.inUnstableState"
-              ng-click="ctrl.changeSubject()" uib-tooltip="{{'Change concept' | translate}}"><i class="fa fa-repeat"></i></button>
+              ng-click="ctrl.changeSubject()">
+        <span translate>Change concept</span>
+      </button>
     </div>
   </div>
 
