@@ -1,5 +1,5 @@
 import { module as mod } from './module';
-import { IScope, IAttributes } from 'angular';
+import { IScope, IAttributes, IWindowService } from 'angular';
 import { InteractiveHelpService } from 'app/help/services/interactiveHelpService';
 
 interface FloatAttributes extends IAttributes {
@@ -8,7 +8,7 @@ interface FloatAttributes extends IAttributes {
   snap: string;
 }
 
-mod.directive('float', (interactiveHelpService: InteractiveHelpService) => {
+mod.directive('float', (interactiveHelpService: InteractiveHelpService, $window: IWindowService) => {
   return {
     restrict: 'A',
     controller: FloatController,
@@ -79,7 +79,9 @@ mod.directive('float', (interactiveHelpService: InteractiveHelpService) => {
         }
       }
 
-      window.addEventListener('scroll', scrollHandler, true);
+      $window.Zone.current.parent.run(() => {
+        window.addEventListener('scroll', scrollHandler, true);
+      });
 
       $scope.$on('$destroy', () => {
         window.removeEventListener('scroll', scrollHandler);

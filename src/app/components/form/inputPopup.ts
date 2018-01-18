@@ -1,5 +1,5 @@
 import { module as mod } from './module';
-import { IScope, IAttributes, ITranscludeFunction, IRepeatScope } from 'angular';
+import { IScope, IAttributes, ITranscludeFunction, IRepeatScope, IWindowService } from 'angular';
 import { scrollToElement, hasFixedPositioningParent } from 'app/utils/angular';
 
 export interface InputWithPopupController<T> {
@@ -49,7 +49,8 @@ class InputPopupController<T> {
   popupStyle: { top: string|number, left: string|number, width: string|number, position: string };
 
   /* @ngInject */
-  constructor($scope: InputPopupScope) {
+  constructor($scope: InputPopupScope,
+              $window: IWindowService) {
 
     const calculatePopupStyle = (e: JQuery) => {
       const offset = e.offset();
@@ -80,7 +81,9 @@ class InputPopupController<T> {
       }
     };
 
-    window.addEventListener('resize', setPopupStyleToElement);
+    $window.Zone.current.parent.run(() => {
+      window.addEventListener('resize', setPopupStyleToElement);
+    });
 
     $scope.$on('$destroy', () => {
       window.removeEventListener('resize', setPopupStyleToElement);

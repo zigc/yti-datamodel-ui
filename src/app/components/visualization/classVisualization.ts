@@ -169,8 +169,11 @@ mod.directive('classVisualization', ($window: IWindowService) => {
       // init
       window.setTimeout(setDimensions);
       controller.setDimensions = () => window.setTimeout(setDimensionsIfNotAlreadyInProgress);
-      window.addEventListener('resize', setDimensionsIfNotAlreadyInProgress);
-      window.addEventListener('mousedown', setClickType);
+
+      $window.Zone.current.parent.run(() => {
+        window.addEventListener('resize', setDimensionsIfNotAlreadyInProgress);
+        window.addEventListener('mousedown', setClickType);
+      });
 
       $scope.$on('$destroy', () => {
         window.removeEventListener('resize', setDimensions);

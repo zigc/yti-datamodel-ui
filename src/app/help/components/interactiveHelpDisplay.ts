@@ -1,7 +1,7 @@
 import { module as mod } from '../module';
 import * as _ from 'lodash';
 import { OverlayService, OverlayInstance } from 'app/components/common/overlay';
-import { IScope, IPromise, IDocumentService, ILocationService, ui } from 'angular';
+import { IScope, IPromise, IDocumentService, ILocationService, ui, IWindowService } from 'angular';
 import IModalStackService = ui.bootstrap.IModalStackService;
 import { assertNever, requireDefined, areEqual, Optional } from 'yti-common-ui/utils/object';
 import { tab, esc, enter } from 'yti-common-ui/utils/key-code';
@@ -94,7 +94,8 @@ class InteractiveHelpController {
               private $uibModalStack: IModalStackService,
               confirmationModal: ConfirmationModal,
               private help: InteractiveHelp,
-              stateInitialization: () => IPromise<boolean>) {
+              stateInitialization: () => IPromise<boolean>,
+              $window: IWindowService) {
 
     let continuing = false;
 
@@ -169,8 +170,11 @@ class InteractiveHelpController {
 
     $scope.$watch(() => this.getPopoverDimensions(), debounceUpdatePositions, true);
 
-    window.addEventListener('resize', debounceUpdatePositions);
-    window.addEventListener('scroll', debounceUpdatePositions);
+    $window.Zone.current.parent.run(() => {
+      window.addEventListener('resize', debounceUpdatePositions);
+      window.addEventListener('scroll', debounceUpdatePositions);
+    });
+
     // Lazy initialization of listeners so that it doesn't intervene with help opening event
     setTimeout(() => {
       $document.on('keydown', keyDownHandler);
