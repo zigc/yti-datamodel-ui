@@ -1,4 +1,3 @@
-import './shim';
 import * as jQuery from 'jquery';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { AppModule } from './app/app.module';

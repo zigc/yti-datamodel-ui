@@ -1,5 +1,6 @@
 /// <reference path="augment.d.ts" />
 
+import './shim';
 import './vendor/modernizr';
 import './styles/loading.scss';
 import { config } from './config';
