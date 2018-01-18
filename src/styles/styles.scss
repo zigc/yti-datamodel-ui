@@ -83,6 +83,20 @@ input[type=checkbox][disabled] + span {
   text-decoration: line-through;
 }
 
+visualization-view ajax-loading-indicator {
+
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  background-color: $white;
+
+  .uil-default-css, img {
+    top: calc(50% - 100px);
+    left: calc(50% - 100px);
+  }
+}
+
 .classification {
 
   display: inline-block;

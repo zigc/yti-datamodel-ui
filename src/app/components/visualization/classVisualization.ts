@@ -128,7 +128,7 @@ mod.directive('classVisualization', () => {
                                  model="ctrl.model" 
                                  model-page-actions="ctrl.modelPageActions"></visualization-context-menu>
                                  
-     <ajax-loading-indicator class="loading-indicator" ng-show="ctrl.loading"></ajax-loading-indicator>
+     <ajax-loading-indicator ng-if="ctrl.loading"></ajax-loading-indicator>
     `,
     bindToController: true,
     controllerAs: 'ctrl',
