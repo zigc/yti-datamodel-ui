@@ -116,11 +116,11 @@ function registerHandlers(paper: joint.dia.Paper, listener: ClassInteractionList
 
       if (targetElement.prop('tagName') === 'tspan') {
         if (cellView.model instanceof IowClassElement && targetElement.attr('id').startsWith('urn:uuid')) {
-          listener.onPropertyHover(cellView.model.id, targetElement.attr('id'), { x: event.pageX, y: event.pageY });
+          listener.onPropertyHover(cellView.model.id, targetElement.attr('id'), { x: event.offsetX, y: event.offsetY });
         } else if (cellView.model instanceof joint.dia.Link && targetParentElement.attr('id').startsWith('urn:uuid')) {
-          listener.onPropertyHover(cellView.model.get('source').id, targetParentElement.attr('id'), { x: event.pageX, y: event.pageY });
+          listener.onPropertyHover(cellView.model.get('source').id, targetParentElement.attr('id'), { x: event.offsetX, y: event.offsetY });
         } else if (cellView.model instanceof IowClassElement && targetParentElement.hasClass('uml-class-name-text')) {
-          listener.onClassHover(cellView.model.id, { x: event.pageX, y: event.pageY });
+          listener.onClassHover(cellView.model.id, { x: event.offsetX, y: event.offsetY });
         }
       }
     }
