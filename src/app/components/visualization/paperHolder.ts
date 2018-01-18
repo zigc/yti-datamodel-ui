@@ -5,6 +5,7 @@ import * as Iterable from 'yti-common-ui/utils/iterable';
 import { moveOrigin, scale } from './paperUtil';
 import { Model } from 'app/entities/model';
 import { Optional } from 'yti-common-ui/utils/object';
+import { IWindowService } from 'angular';
 
 interface Cached {
   element: JQuery;
@@ -20,7 +21,9 @@ export class PaperHolder implements Cleanable {
 
   private cache = new Map<string, Cached>();
 
-  constructor(private element: JQuery, private listener: ClassInteractionListener) {
+  constructor(private element: JQuery,
+              private listener: ClassInteractionListener,
+              private $window: IWindowService) {
   }
 
   getPaper(model: Model): joint.dia.Paper {
@@ -33,7 +36,7 @@ export class PaperHolder implements Cleanable {
       const newElement = jQuery(document.createElement('div'));
       this.element.append(newElement);
       const newPaper = createPaper(newElement, new joint.dia.Graph);
-      const cleanable = registerHandlers(newPaper, this.listener);
+      const cleanable = registerHandlers(newPaper, this.listener, this.$window);
       this.cache.set(model.id.uri, { element: newElement, paper: newPaper, clean: () => cleanable.clean() });
       return newPaper;
     }
@@ -68,7 +71,7 @@ function createPaper(element: JQuery, graph: joint.dia.Graph): joint.dia.Paper {
   });
 }
 
-function registerHandlers(paper: joint.dia.Paper, listener: ClassInteractionListener): Cleanable {
+function registerHandlers(paper: joint.dia.Paper, listener: ClassInteractionListener, $window: IWindowService): Cleanable {
 
   const paperElement = paper.$el;
   let movingElementOrVertex = false;
@@ -153,18 +156,20 @@ function registerHandlers(paper: joint.dia.Paper, listener: ClassInteractionList
     showMenu = null;
   };
 
-  paper.on('blank:pointerdown', startDragHandler);
-  window.addEventListener('mouseup', stopDragHandler);
-  window.addEventListener('mousemove', dragMoveHandler);
-  angular.element(paperElement).mousewheel(mouseWheelHandler);
-  paper.on('cell:pointerdown', startCellMoveHandler);
-  paper.on('cell:pointerclick', classClickHandler);
-  paper.on('cell:mouseover', hoverHandler);
-  paper.on('cell:mouseout', hoverExitHandler);
-  paperElement.on('contextmenu', prepareShowContextMenuHandler);
-  paperElement.on('mousemove', cancelShowMenuHandler);
-  paperElement.on('mouseup', showContextMenuHandler);
-  paperElement.on('click', hideContextMenuHandler);
+  $window.Zone.current.parent.run(() => {
+    paper.on('blank:pointerdown', startDragHandler);
+    window.addEventListener('mouseup', stopDragHandler);
+    window.addEventListener('mousemove', dragMoveHandler);
+    angular.element(paperElement).mousewheel(mouseWheelHandler);
+    paper.on('cell:pointerdown', startCellMoveHandler);
+    paper.on('cell:pointerclick', classClickHandler);
+    paper.on('cell:mouseover', hoverHandler);
+    paper.on('cell:mouseout', hoverExitHandler);
+    paperElement.on('contextmenu', prepareShowContextMenuHandler);
+    paperElement.on('mousemove', cancelShowMenuHandler);
+    paperElement.on('mouseup', showContextMenuHandler);
+    paperElement.on('click', hideContextMenuHandler);
+  });
 
   return {
     clean() {

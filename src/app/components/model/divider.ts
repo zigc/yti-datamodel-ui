@@ -36,7 +36,10 @@ class DividerController {
       $scope.$apply();
     };
 
-    $window.addEventListener('resize', onResize);
+    $window.Zone.current.parent.run(() => {
+      $window.addEventListener('resize', onResize);
+    });
+
     $scope.$on('$destroy', () => $window.removeEventListener('resize', onResize));
   }
 
@@ -71,7 +74,9 @@ class DividerController {
       this.$window.removeEventListener('mouseup', onMouseUp);
     };
 
-    this.$window.addEventListener('mousemove', onMouseMove);
-    this.$window.addEventListener('mouseup', onMouseUp);
+    this.$window.Zone.current.parent.run(() => {
+      this.$window.addEventListener('mousemove', onMouseMove);
+      this.$window.addEventListener('mouseup', onMouseUp);
+    });
   }
 }

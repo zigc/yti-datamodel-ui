@@ -35,7 +35,8 @@ import { ContextMenuTarget } from './contextMenu';
 import { ModelPageActions } from 'app/components/model/modelPage';
 import { AuthorizationManagerService } from 'app/services/authorizationManagerService';
 
-mod.directive('classVisualization', () => {
+/* @ngInject */
+mod.directive('classVisualization', ($window: IWindowService) => {
   return {
     restrict: 'E',
     scope: {
@@ -135,7 +136,7 @@ mod.directive('classVisualization', () => {
     require: 'classVisualization',
     link($scope: IScope, element: JQuery, _attributes: IAttributes, controller: ClassVisualizationController) {
       element.addClass('visualization-container');
-      controller.paperHolder = new PaperHolder(element, controller);
+      controller.paperHolder = new PaperHolder(element, controller, $window);
       controller.svg = () => element.find('svg')[0] as any as SVGElement;
       controller.canvas = element.find('canvas')[0] as HTMLCanvasElement;
 
