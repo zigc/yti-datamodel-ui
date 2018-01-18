@@ -35,7 +35,17 @@ export class PaperHolder implements Cleanable {
     } else {
       const newElement = jQuery(document.createElement('div'));
       this.element.append(newElement);
-      const newPaper = createPaper(newElement, new joint.dia.Graph);
+
+      let newPaper: joint.dia.Paper|null = null;
+
+      this.$window.Zone.current.parent.run(() => {
+        newPaper = createPaper(newElement, new joint.dia.Graph);
+      });
+
+      if (!newPaper) {
+        throw new Error();
+      }
+
       const cleanable = registerHandlers(newPaper, this.listener, this.$window);
       this.cache.set(model.id.uri, { element: newElement, paper: newPaper, clean: () => cleanable.clean() });
       return newPaper;
