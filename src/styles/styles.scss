@@ -449,26 +449,6 @@ model-page {
             }
           }
 
-          .popover {
-            position: absolute;
-            display: block;
-            background-color: #555555;
-            background-color: rgba(85, 85, 85, 0.9);
-            border-color: #555555;
-            max-width: 500px;
-
-            p {
-              font-size: medium;
-            }
-
-            .arrow {
-              border-left-color: $gray;
-              &:after {
-                border-left-color: rgba(85, 85, 85, 0.9);
-              }
-            }
-          }
-
           visualization-context-menu {
 
             position: absolute;

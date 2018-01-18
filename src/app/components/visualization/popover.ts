@@ -22,13 +22,13 @@ mod.directive('visualizationPopover', () => {
     controllerAs: 'ctrl',
     controller: VisualizationPopoverController,
     template: `
-       <div class="popover left" ng-style="ctrl.style">
-         <div class="arrow"></div>
-         <div class="popover-inner">
-           <div class="popover-content">
-             <h4>{{ctrl.details.heading | translateValue: ctrl.context}}</h4>
-             <p>{{ctrl.details.comment | translateValue: ctrl.context}}</p>
-           </div>
+       <div class="popover fade show bs-popover-left" ng-style="ctrl.style">
+         <div class="arrow" ng-style="{ top: ctrl.arrowTopOffset }"></div>
+         <div class="popover-header">
+           <h4 class="mb-0">{{ctrl.details.heading | translateValue: ctrl.context}}</h4>
+         </div>
+         <div class="popover-body">
+           {{ctrl.details.comment | translateValue: ctrl.context}}
          </div>
        </div>
     `,
@@ -70,5 +70,9 @@ class VisualizationPopoverController {
         });
       }
     });
+  }
+
+  get arrowTopOffset() {
+    return this.getDimensions().height / 2;
   }
 }
