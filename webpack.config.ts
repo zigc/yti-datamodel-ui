@@ -48,7 +48,7 @@ const fastRebuild = true;
 export function createConfig(build: boolean): Configuration {
 
   const outputPath = path.join(__dirname, 'public');
-  const assetsPath = build ? path.join(outputPath, 'assets') : outputPath;
+  const assetsPath = outputPath;
 
   const buildEnv = {
     NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'development'),
@@ -76,7 +76,11 @@ export function createConfig(build: boolean): Configuration {
       context: __dirname,
       manifest: require(path.join(outputPath, 'vendor-manifest.json'))
     }),
-    new HtmlWebpackPlugin({ template: 'src/index.html', filename: build ? '../index.html' : 'index.html' }),
+    new HtmlWebpackPlugin({
+      favicon: 'src/favicon.ico',
+      template: 'src/index.html',
+      filename: 'index.html'
+    }),
     new AddAssetHtmlPlugin({
       filepath: require.resolve(path.join(outputPath, require(path.join(outputPath, 'assets.json')).vendor.js)),
       includeSourcemap: true
@@ -93,7 +97,7 @@ export function createConfig(build: boolean): Configuration {
     output: {
       path: assetsPath,
       filename: build ? '[name].[chunkhash].js' : '[name].js',
-      publicPath: build ? '/assets/' : '/'
+      publicPath: '/'
     },
     devtool: build ? 'source-map' : fastRebuild ? 'cheap-module-source-map' : 'source-map' as 'source-map'|'cheap-module-source-map',
     plugins
