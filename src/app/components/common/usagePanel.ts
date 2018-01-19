@@ -24,7 +24,7 @@ class UsagePanelController {
   entity: EditableEntity;
   context: LanguageContext;
   usage: Usage|null = null;
-  open: boolean;
+  open = false;
   loading: boolean;
 
   /* @ngInject */

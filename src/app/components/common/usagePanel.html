@@ -1,12 +1,19 @@
-<uib-accordion>
-  <div uib-accordion-group is-open="ctrl.open">
-    <uib-accordion-heading>
-      <accordion-chevron is-open="ctrl.open"></accordion-chevron>
-      <span>{{'Usage' | translate}}</span>
-    </uib-accordion-heading>
-    <div ng-if="ctrl.open">
-      <usage ng-show="ctrl.hasReferrers()" usage="ctrl.usage" show-links="true" context="ctrl.context"></usage>
-      <p ng-hide="ctrl.loading || ctrl.hasReferrers()" translate>No referrers</p>
-    </div>
-  </div>
-</uib-accordion>
+<accordion open-id="ctrl.open">
+  <accordion-group identifier="'default'">
+    <accordion-heading>
+      <h5 class="mb-0">
+        <a href>
+          <accordion-chevron is-open="isOpen()"></accordion-chevron>
+          <span>{{'Usage' | translate}}</span>
+        </a>
+      </h5>
+    </accordion-heading>
+    <accordion-body>
+      <ajax-loading-indicator ng-if="ctrl.loading"></ajax-loading-indicator>
+      <div ng-if="!loading">
+        <usage ng-show="ctrl.hasReferrers()" usage="ctrl.usage" show-links="true" context="ctrl.context"></usage>
+        <p ng-hide="ctrl.loading || ctrl.hasReferrers()" translate>No referrers</p>
+      </div>
+    </accordion-body>
+  </accordion-group>
+</accordion>
