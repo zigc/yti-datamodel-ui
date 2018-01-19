@@ -772,6 +772,10 @@ uib-accordion,accordion {
     height: 30px;
     line-height: 30px;
     cursor: pointer;
+
+    a:hover {
+      text-decoration: none;
+    }
   }
 
   .card {
