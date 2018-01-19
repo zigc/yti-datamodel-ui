@@ -170,16 +170,23 @@
 
   <h4 translate>Reusable predicate</h4>
 
-  <uib-accordion class="reusable-predicate">
-    <div uib-accordion-group is-open="predicateOpen">
+  <accordion open-id="predicateOpen" class="reusable-predicate">
+    <accordion-group identifier="'default'">
 
-      <uib-accordion-heading>
-        <span accordion-chevron is-open="predicateOpen">{{ctrl.predicateName}}</span>
-      </uib-accordion-heading>
+      <accordion-heading>
+        <h5>
+          <a href>
+            <accordion-chevron is-open="isOpen()"></accordion-chevron>
+            <span>{{ctrl.predicateName}}</span>
+          </a>
+        </h5>
+      </accordion-heading>
 
-      <property-predicate-view ng-if="predicateOpen" property="ctrl.property" model="ctrl.model"></property-predicate-view>
+      <accordion-body>
+        <property-predicate-view ng-if="isOpen()" property="ctrl.property" model="ctrl.model"></property-predicate-view>
+      </accordion-body>
 
-    </div>
-  </uib-accordion>
+    </accordion-group>
+  </accordion>
 
 </div>

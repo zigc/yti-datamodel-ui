@@ -47,7 +47,7 @@ mod.directive('accordionGroup', () => {
       body: 'accordionBody'
     },
     template: `
-      <div class="card">
+      <div class="card" ng-class="{ show: isOpen() }">
         <div class="card-header" ng-click="toggleVisibility()">
           <div accordion-transclude="heading" is-open="isOpen"></div>
         </div>

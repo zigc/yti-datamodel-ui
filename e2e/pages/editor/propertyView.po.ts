@@ -8,7 +8,7 @@ export class PropertyView {
   label = EditableComponent.byTitleLocalizationKey(this.element, 'Class property label');
   description = EditableComponent.byTitleLocalizationKey(this.element, 'Description');
   removeButton  = this.element.$('button.remove');
-  reusablePredicate = this.element.$('uib-accordion.reusable-predicate');
+  reusablePredicate = this.element.$('accordion.reusable-predicate');
 
   constructor(public element: ElementFinder, public type: KnownPredicateType) {
   }

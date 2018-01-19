@@ -64,7 +64,7 @@
       <accordion-group ng-repeat="property in ctrl.properties track by property.internalId" identifier="property.internalId.uuid">
         <accordion-heading>
           <div drag-sortable-item>
-            <h5 class="mb-0">
+            <h5>
               <a ng-class="{collapsed: !isOpen()}" href>
                 <span class="accordion-icon" ng-class="property.glyphIconClass"></span>
                 <span>{{property | translateLabel: ctrl.model}}</span>

@@ -375,7 +375,7 @@ model-page {
             font-size: xx-small;
             position: absolute;
             padding: 10px;
-            top: -30px;
+            top: -45px;
             left: -10px;
             color: $gray;
           }
@@ -752,16 +752,28 @@ table.editable-table {
   }
 }
 
-uib-accordion,accordion {
+accordion {
+
+  $height: 35px;
 
   display: inline-block;
   margin-top: 15px;
   margin-bottom: 15px;
   width: 100%;
 
-  accordion-chevron, [accordion-chevron] {
-    font-size: x-large;
-    line-height: 30px;
+  .card {
+
+    border: 1px solid $white;
+
+    &.show {
+      border: 1px solid $gray-300;
+      margin-bottom: 5px;
+    }
+  }
+
+  accordion-group {
+    display: inline-block;
+    width: 100%;
   }
 
   .card-header {
@@ -769,24 +781,22 @@ uib-accordion,accordion {
     border: none;
     padding: 0;
     margin-bottom: 5px;
-    height: 30px;
-    line-height: 30px;
+    height: $height;
     cursor: pointer;
+
+    h5, .fa {
+      line-height: $height;
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+
+    accordion-chevron, [accordion-chevron] {
+      font-size: x-large;
+    }
 
     a:hover {
       text-decoration: none;
     }
-  }
-
-  .card {
-    border: none;
-  }
-
-  .card-block {
-    padding: 0 30px 0 0;
-    border: 1px solid $light;
-    margin-top: -5px;
-    margin-bottom: 5px;
   }
 
   .dragged {

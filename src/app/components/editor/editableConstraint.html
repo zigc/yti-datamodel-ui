@@ -1,10 +1,16 @@
+<accordion open-id="ctrl.open">
+  <accordion-group identifier="'default'">
 
-<uib-accordion>
-  <div uib-accordion-group is-open="ctrl.open">
-    <uib-accordion-heading>
-      <span accordion-chevron is-open="ctrl.open">{{'Logical constraints' | translate}}</span>
-    </uib-accordion-heading>
-    <div ng-if="ctrl.open">
+    <accordion-heading>
+      <h5>
+        <a href>
+          <accordion-chevron is-open="isOpen()"></accordion-chevron>
+          {{'Logical constraints' | translate}}
+        </a>
+      </h5>
+    </accordion-heading>
+
+    <accordion-body>
 
       <editable data-title="Description" context="ctrl.model">
         <textarea id="constraintComment" class="form-control" localized-input context="ctrl.model" ng-model="ctrl.constraint.comment"></textarea>
@@ -36,6 +42,7 @@
         </div>
       </div>
 
-    </div>
-  </div>
-</uib-accordion>
+    </accordion-body>
+
+  </accordion-group>
+</accordion>
