@@ -64,14 +64,16 @@
       <accordion-group ng-repeat="property in ctrl.properties track by property.internalId" identifier="property.internalId.uuid">
         <accordion-heading>
           <div drag-sortable-item>
-            <a ng-class="{collapsed: !isOpen()}">
-              <span class="accordion-icon" ng-class="property.glyphIconClass"></span>
-              <span>{{property | translateLabel: ctrl.model}}</span>
-              <accordion-chevron is-open="isOpen()"></accordion-chevron>
-              <div class="property-ordering" ng-show="ctrl.isEditing()">
-                <span class="fa fa-bars"></span>
-              </div>
-            </a>
+            <h5 class="mb-0">
+              <a ng-class="{collapsed: !isOpen()}" href>
+                <span class="accordion-icon" ng-class="property.glyphIconClass"></span>
+                <span>{{property | translateLabel: ctrl.model}}</span>
+                <accordion-chevron is-open="isOpen()"></accordion-chevron>
+                <div class="property-ordering" ng-show="ctrl.isEditing()">
+                  <span class="fa fa-bars"></span>
+                </div>
+              </a>
+            </h5>
           </div>
         </accordion-heading>
 
