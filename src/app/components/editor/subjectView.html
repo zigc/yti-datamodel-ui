@@ -1,63 +1,37 @@
-<div ng-if="!ctrl.entity.subject">
-  <div class="row">
-    <div class="col-md-12">
-      <h4 class="pull-left" translate>Concept information</h4>
 
-      <button ng-if="ctrl.isEditing()"
-              type="button"
-              class="btn btn-link pull-right"
-              ng-disabled="!ctrl.entity.inUnstableState"
-              ng-click="ctrl.changeSubject()">
-        <span translate>Change concept</span>
-      </button>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-md-12">
-      <div class="editable-wrap">
-        <div translate>Not defined</div>
-      </div>
-    </div>
+<div class="row">
+  <div class="col-12">
+    <button ng-if="ctrl.isEditing()"
+            type="button"
+            class="btn btn-link pull-right"
+            ng-disabled="!ctrl.entity.inUnstableState"
+            ng-click="ctrl.changeSubject()">
+      <span translate>Change concept</span>
+    </button>
   </div>
 </div>
 
-<accordion ng-if="ctrl.entity.subject" open-id="subjectViewOpen">
-  <accordion-group>
-    <accordion-heading>
-      <div class="panel-heading">
-        <h4 class="panel-title">
-          <span class="accordion-icon" ng-class="ctrl.entity.subject.glyphIconClass"></span>
+<div class="row">
+  <div class="col-12">
+
+    <div ng-if="!ctrl.entity.subject" class="concept-box">
+      <h5 translate>No concept defined</h5>
+    </div>
+
+    <div ng-if="ctrl.entity.subject" class="concept-box">
+
+        <h5>
+          <i class="fa fa-lightbulb-o"></i>
           <span>{{ctrl.entity.subject | translateLabel: ctrl.model}}</span>
-        </h4>
-      </div>
-    </accordion-heading>
+        </h5>
 
-    <accordion-body>
+        <non-editable data-title="Concept definition" value="ctrl.entity.subject.definition"
+                      context="ctrl.model"></non-editable>
 
-      <div class="row" ng-if="ctrl.isEditing()">
-        <div class="col-md-12">
-          <button type="button"
-                  class="btn btn-link pull-right"
-                  ng-disabled="!ctrl.entity.inUnstableState"
-                  ng-click="ctrl.changeSubject()">
-            <span translate>Change concept</span>
-          </button>
-        </div>
-      </div>
+        <non-editable-vocabulary vocabulary="ctrl.entity.subject.vocabulary"
+                                 context="ctrl.model"
+                                 link="ctrl.conceptLink"></non-editable-vocabulary>
+    </div>
 
-      <div class="row">
-        <div class="col-md-12">
-          <non-editable data-title="Concept definition" value="ctrl.entity.subject.definition" context="ctrl.model"></non-editable>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-md-12">
-          <non-editable-vocabulary vocabulary="ctrl.entity.subject.vocabulary" context="ctrl.model"></non-editable-vocabulary>
-        </div>
-      </div>
-
-    </accordion-body>
-  </accordion-group>
-</accordion>
+  </div>
+</div>

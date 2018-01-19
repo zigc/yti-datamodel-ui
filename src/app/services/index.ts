@@ -26,6 +26,7 @@ import { AuthorizationManagerService } from './authorizationManagerService';
 import { ClassificationService } from './classificationService';
 import { OrganizationService } from './organizationService';
 import { ImpersonationService } from './impersonationService';
+import { ConfigService } from './configService';
 
 function proxyConditionallyToHelp<T>(interactiveHelpService: InteractiveHelpService, defaultService: T, helpService: T) {
   return proxyToInstance(() => interactiveHelpService.isOpen() ? helpService : defaultService);
@@ -83,3 +84,4 @@ mod.service('authorizationManagerService', AuthorizationManagerService);
 mod.service('classificationService', ClassificationService);
 mod.service('organizationService', OrganizationService);
 mod.service('impersonationService', ImpersonationService);
+mod.service('configService', ConfigService);

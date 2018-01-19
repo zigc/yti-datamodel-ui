@@ -5,12 +5,15 @@ mod.directive('nonEditableVocabulary', () => {
     restrict: 'E',
     scope: {
       vocabulary: '=',
-      context: '='
+      context: '=',
+      link: '='
     },
     template: `
       <div class="editable-wrap form-group">
         <editable-label data-title="'Vocabulary'"></editable-label>
-        <p class="form-control-static">{{vocabulary.title | translateValue: ctrl.context}}</p>
+        <span ng-if="!link">{{vocabulary.title | translateValue: ctrl.context}}</span>
+        <pre>{{link}}</pre>
+        <a ng-if="link" ng-href="{{link}}">{{vocabulary.title | translateValue: ctrl.context}}</a>       
       </div>
     `
   };

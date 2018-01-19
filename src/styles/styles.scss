@@ -752,6 +752,13 @@ table.editable-table {
   }
 }
 
+.concept-box {
+  border: 1px solid $gray;
+  background-color: lighten($primary, 52%);
+  padding: 15px 15px 0 15px;
+  margin-bottom: 15px;
+}
+
 accordion {
 
   $height: 35px;

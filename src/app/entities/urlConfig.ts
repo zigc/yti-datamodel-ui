@@ -1,4 +1,4 @@
-import { Vocabulary } from './vocabulary';
+import { Concept } from './vocabulary';
 
 export class UrlConfig {
 
@@ -6,7 +6,11 @@ export class UrlConfig {
               public terminologyEditorUrl: string) {
   }
 
-  vocabularyUrl(vocabulary: Vocabulary) {
-    return this.terminologyEditorUrl + '/concepts/' + vocabulary.graph;
+  conceptUrl(concept: Concept|null) {
+    if (!concept) {
+      return '';
+    } else {
+      return ''; // TODO
+    }
   }
 }
