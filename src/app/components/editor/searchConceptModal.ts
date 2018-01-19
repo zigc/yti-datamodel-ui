@@ -6,7 +6,7 @@ import { LanguageService, Localizer } from 'app/services/languageService';
 import { comparingLocalizable } from 'app/utils/comparator';
 import { EditableForm } from 'app/components/form/editableEntityController';
 import { AddNew } from 'app/components/common/searchResults';
-import { limit } from 'yti-common-ui/utils/array';
+import { anyMatching, limit } from 'yti-common-ui/utils/array';
 import { lowerCase, upperCaseFirst } from 'change-case';
 import { SearchController, SearchFilter } from 'app/types/filter';
 import { ifChanged } from 'app/utils/angular';
@@ -162,8 +162,11 @@ class SearchConceptController implements SearchController<Concept> {
     if (searchText) {
       return this.vocabularyService.searchConcepts(searchText, this.selectedVocabulary ? this.selectedVocabulary : undefined)
         .then((results: Concept[]) => {
+
           const resultsWithReferencedVocabularies =
-            results.filter(concept => true) // TODO anyMatching(concept.vocabularies, cv => anyMatching(this.vocabularies, v => v.internalId === cv.id)));
+            results.filter(concept =>
+              anyMatching(this.vocabularies, v => v.id.equals(concept.vocabulary.id)));
+
           this.queryResults = limit(resultsWithReferencedVocabularies, limitQueryResults);
           this.loadingResults = false;
         });
