@@ -264,8 +264,20 @@ export class Model extends AbstractModel {
     return serialize(this, clone, Object.assign({}, AbstractModel.abstractModelMappings, Model.modelMappings));
   }
 
-  removeClassification(classification: Classification) {
+  addClassification(classification: Classification) {
+    this.classifications.push(classification);
+  }
 
+  removeClassification(classification: Classification) {
+    remove(this.classifications, classification);
+  }
+
+  addContributor(organization: Organization) {
+    this.contributors.push(organization);
+  }
+
+  removeContributor(organization: Organization) {
+    remove(this.contributors, organization);
   }
 }
 
