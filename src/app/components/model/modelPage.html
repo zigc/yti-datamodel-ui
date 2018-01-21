@@ -1,6 +1,8 @@
-<div ng-show="ctrl.loading"><ajax-loading-indicator></ajax-loading-indicator></div>
+<div ng-if="ctrl.loading">
+  <ajax-loading-indicator></ajax-loading-indicator>
+</div>
 
-<div class="content-box" ng-if="!ctrl.loading">
+<div class="content-box main" ng-if="!ctrl.loading">
 
   <div class="row top">
     <div class="col-12">
