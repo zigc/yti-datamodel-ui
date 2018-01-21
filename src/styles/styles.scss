@@ -263,72 +263,75 @@ model-page {
 
     width: $left-width;
     float: left;
-    border: 1px solid $gray;
 
-    ul.nav-tabs {
+    .selection-box {
+      border: 1px solid $gray;
 
-      padding: 0;
-      width: 100%;
-      margin: 10px 0;
+      ul.nav-tabs {
 
-      .nav-item {
+        padding: 0;
+        width: 100%;
+        margin: 10px 0;
 
-        margin-left: 10px;
-        margin-right: 10px;
+        .nav-item {
 
-        > a {
-          font-size: small;
-          padding: 5px 0;
+          margin-left: 10px;
+          margin-right: 10px;
 
-          > p {
-            margin-bottom: 10px;
+          > a {
+            font-size: small;
+            padding: 5px 0;
+
+            > p {
+              margin-bottom: 10px;
+            }
           }
         }
       }
-    }
 
-    .selectable-actions {
-      text-align: center;
-      padding: 0 15px;
-    }
+      .selectable-actions {
+        text-align: center;
+        padding: 0 15px;
+      }
 
-    .selectable-items {
+      .selectable-items {
 
-      padding: 5px 15px;
+        padding: 5px 15px;
 
-      ul {
+        ul {
 
-        $button-height: 57px;
-        $buttonless-height: 127px;
+          $button-height: 57px;
+          $buttonless-height: 127px;
 
-        overflow-y: auto;
-        height: calc(100vh - #{$buttonless-height});
-        padding: 0;
-        margin-bottom: 0;
+          overflow-y: auto;
+          height: calc(100vh - #{$buttonless-height});
+          padding: 0;
+          margin-bottom: 0;
 
-        &.has-button {
-          height: calc(100vh - #{$buttonless-height + $button-height});
-        }
-
-        li {
-          cursor: pointer;
-          padding: 5px 5px 5px 10px;
-          margin: 0;
-          font-size: 14px;
-          list-style: none;
-
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
-
-          border-left: $active-indicator-width solid $white;
-
-          &.selection {
-            font-weight: bold;
+          &.has-button {
+            height: calc(100vh - #{$buttonless-height + $button-height});
           }
 
-          &:hover, &.selection {
-            border-left: $active-indicator-width solid $primary;
+          li {
+            cursor: pointer;
+            padding: 5px 5px 5px 10px;
+            margin: 0;
+            font-size: 14px;
+            list-style: none;
+
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+
+            border-left: $active-indicator-width solid $white;
+
+            &.selection {
+              font-weight: bold;
+            }
+
+            &:hover, &.selection {
+              border-left: $active-indicator-width solid $primary;
+            }
           }
         }
       }
@@ -390,6 +393,7 @@ model-page {
 
       float: right;
       $divider-width: 10px;
+      overflow: hidden;
 
       divider {
         display: inline-block;
@@ -415,9 +419,11 @@ model-page {
 
       visualization-view {
 
+        float: left;
         display: inline-block;
         width: calc(100% - 10px);
         height: calc(100vh - 20px);
+        border: 1px solid $gray;
 
         &.without-divider {
           width: 100%;
@@ -425,11 +431,9 @@ model-page {
 
         class-visualization {
 
-          float: left;
           width: 100%;
           height: 100%;
           display: inline-block;
-          border: 1px solid $gray;
           position: relative;
 
           @include class-visualization();

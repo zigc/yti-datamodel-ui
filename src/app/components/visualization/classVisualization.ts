@@ -135,25 +135,36 @@ mod.directive('classVisualization', ($window: IWindowService) => {
     controllerAs: 'ctrl',
     require: 'classVisualization',
     link($scope: IScope, element: JQuery, _attributes: IAttributes, controller: ClassVisualizationController) {
-      element.addClass('visualization-container');
+
       controller.paperHolder = new PaperHolder(element, controller, $window);
       controller.svg = () => element.find('svg')[0] as any as SVGElement;
       controller.canvas = element.find('canvas')[0] as HTMLCanvasElement;
 
+      const visualizationContainerElement = element.closest('.visualization-container');
+
+      const dividerWidth = 10;
+      const borderWidth = 1;
+
+      const canvasWidthOffset = dividerWidth + (2 * borderWidth);
+
       const setDimensions = () => {
+
+        const canvasWidth = visualizationContainerElement.width() - canvasWidthOffset;
+        const canvasHeight = element.height();
+
         controller.dimensionChangeInProgress = true;
         const paper = controller.paper;
-        const xd = paper.options.width! - element.width();
-        const yd = paper.options.height! - element.height();
+        const xd = paper.options.width! - canvasWidth;
+        const yd = paper.options.height! - canvasHeight;
 
         if (xd || yd) {
-          paper.setDimensions(element.width(), element.height());
+          paper.setDimensions(canvasWidth, canvasHeight);
           moveOrigin(paper, xd / 2, yd / 2);
           window.setTimeout(setDimensions);
         } else {
           const canvas = controller.canvas;
-          canvas.width = element.width();
-          canvas.height = element.height();
+          canvas.width = canvasWidth;
+          canvas.height = canvasHeight;
           controller.dimensionChangeInProgress = false;
         }
       };

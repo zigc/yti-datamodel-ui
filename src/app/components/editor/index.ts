@@ -10,7 +10,6 @@ export { module } from './module';
 import './classForm';
 import './classView';
 import './definedBy';
-import './selectionFloatSizeAdjuster';
 import './uriSelect';
 import './editableConstraint';
 import './editableMultiple';

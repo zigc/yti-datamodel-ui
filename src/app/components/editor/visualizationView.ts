@@ -26,7 +26,6 @@ export class VisualizationViewController {
   selection: Class|Predicate;
   model: Model;
   show: Show;
-  selectionWidth: number;
   modelPageActions: ModelPageActions;
 
   enlargeVisualization() {

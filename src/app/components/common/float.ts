@@ -6,6 +6,7 @@ interface FloatAttributes extends IAttributes {
   float: string;
   always: string;
   snap: string;
+  width: string;
 }
 
 mod.directive('float', (interactiveHelpService: InteractiveHelpService, $window: IWindowService) => {
@@ -21,6 +22,7 @@ mod.directive('float', (interactiveHelpService: InteractiveHelpService, $window:
 
       ctrl.element = element;
       ctrl.always = attributes.always === 'true';
+      ctrl.width = attributes.width;
       ctrl.placeholder =
         jQuery(document.createElement('div'))
           .hide()
@@ -141,39 +143,5 @@ export class FloatController {
     }
 
     this.placeholder.hide();
-  }
-
-  enableFloating() {
-    this.enabled = true;
-
-    if (this.isInitialized() && this.isFloatingPosition()) {
-      if (this.floating) {
-        this.placeholder.show();
-      } else {
-        this.setFloating();
-      }
-    }
-
-    this.element.removeClass('no-floating');
-  }
-
-  disableFloating() {
-    this.enabled = false;
-
-    if (this.isStaticPosition()) {
-      if (this.floating) {
-        this.setStatic();
-      }
-    } else if (this.floating) {
-      this.placeholder.hide();
-    }
-
-    this.element.addClass('no-floating');
-  }
-
-  setWidth(width: string|number) {
-    this.width = width;
-    this.placeholder.css('width', width);
-    this.element.css('width', width);
   }
 }
