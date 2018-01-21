@@ -35,7 +35,13 @@ mod.directive('visualizationPopover', () => {
     require: 'visualizationPopover',
     link(_$scope: IScope, element: JQuery, _attributes: IAttributes, ctrl: VisualizationPopoverController) {
 
+      const classVisualizationElement = element.closest('class-visualization');
       const popoverElement = element.find('.popover');
+
+      ctrl.visualizationOffset = () => ({
+        x: classVisualizationElement.offset().left,
+        y: classVisualizationElement.offset().top
+      });
 
       ctrl.getDimensions = () => {
         return {
@@ -53,6 +59,7 @@ class VisualizationPopoverController {
 
   getDimensions: () => Dimensions;
   style: any = {};
+  visualizationOffset: () => Coordinate;
 
   constructor($scope: IScope, $timeout: ITimeoutService) {
     $scope.$watch(() => this.details, details => {
@@ -65,8 +72,9 @@ class VisualizationPopoverController {
         // Let the comment render before accessing calculated dimensions
         $timeout(() => {
           const dimensions = this.getDimensions();
-          this.style.top = (details.coordinate.y - (dimensions.height / 2)) + 'px';
-          this.style.left = (details.coordinate.x - dimensions.width - 15) + 'px';
+          const offset = this.visualizationOffset();
+          this.style.top = (details.coordinate.y - offset.y - (dimensions.height / 2)) + 'px';
+          this.style.left = (details.coordinate.x - offset.x - dimensions.width - 15) + 'px';
         });
       }
     });

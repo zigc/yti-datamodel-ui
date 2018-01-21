@@ -127,13 +127,16 @@ function registerHandlers(paper: joint.dia.Paper, listener: ClassInteractionList
       const targetElement = jQuery(event.target);
       const targetParentElement = targetElement.parent();
 
+      const x = event.pageX;
+      const y = event.pageY;
+
       if (targetElement.prop('tagName') === 'tspan') {
         if (cellView.model instanceof IowClassElement && targetElement.attr('id').startsWith('urn:uuid')) {
-          listener.onPropertyHover(cellView.model.id, targetElement.attr('id'), { x: event.offsetX, y: event.offsetY });
+          listener.onPropertyHover(cellView.model.id, targetElement.attr('id'), { x, y });
         } else if (cellView.model instanceof joint.dia.Link && targetParentElement.attr('id').startsWith('urn:uuid')) {
-          listener.onPropertyHover(cellView.model.get('source').id, targetParentElement.attr('id'), { x: event.offsetX, y: event.offsetY });
+          listener.onPropertyHover(cellView.model.get('source').id, targetParentElement.attr('id'), { x, y });
         } else if (cellView.model instanceof IowClassElement && targetParentElement.hasClass('uml-class-name-text')) {
-          listener.onClassHover(cellView.model.id, { x: event.offsetX, y: event.offsetY });
+          listener.onClassHover(cellView.model.id, { x, y });
         }
       }
     }
