@@ -267,6 +267,10 @@ model-page {
     .selection-box {
       border: 1px solid $gray;
 
+      &.floating {
+        border-bottom: none;
+      }
+
       ul.nav-tabs {
 
         padding: 0;
@@ -300,8 +304,8 @@ model-page {
 
         ul {
 
-          $button-height: 57px;
-          $buttonless-height: 127px;
+          $button-height: 42px;
+          $buttonless-height: 82px;
 
           overflow-y: auto;
           height: calc(100vh - #{$buttonless-height});
@@ -422,7 +426,7 @@ model-page {
         float: left;
         display: inline-block;
         width: calc(100% - 10px);
-        height: calc(100vh - 20px);
+        height: calc(100vh - 2px);
         border: 1px solid $gray;
 
         &.without-divider {
