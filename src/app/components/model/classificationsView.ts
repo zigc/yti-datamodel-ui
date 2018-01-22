@@ -103,7 +103,7 @@ class ClassificationTableDescriptor extends TableDescriptor<Classification> {
     this.value.removeClassification(classification);
   }
 
-  orderBy(classification: Classification): any {
-    return classification.identifier;
+  hasOrder(): boolean {
+    return true;
   }
 }

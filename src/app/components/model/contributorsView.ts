@@ -103,7 +103,7 @@ class ContributorsTableDescriptor extends TableDescriptor<Organization> {
     this.value.removeContributor(organization);
   }
 
-  orderBy(organization: Organization): any {
-    return organization.label;
+  hasOrder(): boolean {
+    return true;
   }
 }
