@@ -49,7 +49,7 @@ mod.directive('float', (interactiveHelpService: InteractiveHelpService, $window:
 
       function scrollHandler() {
 
-        if (shouldSnap) {
+        if (shouldSnap()) {
           if (timeoutId) {
             clearTimeout(timeoutId);
           }
