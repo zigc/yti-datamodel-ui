@@ -12,7 +12,7 @@ mod.directive('editableTable', () => {
     restrict: 'E',
     template: `
     <p ng-if="ctrl.visibleValues === 0" translate>None added</p>
-    <table ng-if="ctrl.visibleValues > 0" class="table table-hover editable-table" drag-sortable="ctrl.values" drag-disabled="!ctrl.canSort()">
+    <table ng-if="ctrl.visibleValues > 0" class="table table-hover table-sm editable-table" drag-sortable="ctrl.values" drag-disabled="!ctrl.canSort()">
       <thead>
         <tr>
           <th ng-class="property.cssClass" ng-repeat="property in ctrl.properties">{{property.headerName | translate}}</th>

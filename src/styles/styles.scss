@@ -569,6 +569,8 @@ iow-select {
 
 table.editable-table {
 
+  border: none;
+
   a:hover {
     cursor: pointer;
   }
@@ -614,8 +616,12 @@ table.editable-table {
     width: 100px;
   }
 
-  th.action {
-    width: 20px;
+  th {
+    border-top: none;
+
+    &.action {
+      width: 20px;
+    }
   }
 
   td.action {
