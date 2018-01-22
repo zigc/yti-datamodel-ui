@@ -19,11 +19,9 @@ mod.directive('editableStateSelect', () => {
         <label translate>Status</label>
       
         <iow-select ng-if="ctrl.isEditing()" id="{{ctrl.id}}" options="state in ctrl.getStates()" ng-model="ctrl.state">
-          <i ng-class="ctrl.classForState(state)"></i>
           <span>{{state | translate}}</span>
         </iow-select>
 
-       
         <p ng-if="!ctrl.isEditing()" class="form-control-static">{{ctrl.state | translate}}</p>
       </div>
     `,
@@ -50,9 +48,5 @@ class StateSelectController {
 
   getStates() {
     return this.authorizationManagerService.getAllowedStatuses(this.model);
-  }
-
-  classForState(state: Status) {
-    return [];
   }
 }
