@@ -55,11 +55,6 @@ export class NewModelPageController {
     this.form.editing = true;
   }
 
-  get namespace() {
-    // TODO
-    return 'http://todo/' + (this.prefix || '');
-  }
-
   isValid() {
     return this.form.$valid && this.classifications.length > 0 && this.contributors.length > 0;
   }
