@@ -407,7 +407,7 @@ model-page {
       divider {
         display: inline-block;
         float: left;
-        height: calc(100vh - 1px);
+        height: calc(100vh - 5px);
         width: $divider-width;
 
         -webkit-user-select: none;
@@ -431,7 +431,7 @@ model-page {
         float: left;
         display: inline-block;
         width: calc(100% - 10px);
-        height: calc(100vh - 1px);
+        height: calc(100vh - 5px);
         border: 1px solid $gray;
 
         &.without-divider {
