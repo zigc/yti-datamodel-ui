@@ -15,6 +15,7 @@ import { Model } from 'app/entities/model';
 import { ExternalEntity } from 'app/entities/externalEntity';
 import { filterAndSortSearchResults, defaultLabelComparator } from 'app/components/filter/util';
 import { Optional } from 'yti-common-ui/utils/object';
+import { ignoreModalClose } from 'yti-common-ui/utils/modal';
 
 export const noExclude = (_item: AbstractClass) => null;
 export const defaultTextForSelection = (_klass: Class) => 'Use class';
@@ -227,7 +228,7 @@ class SearchClassController implements SearchController<ClassListItem> {
 
   createNewClass() {
     return this.searchConceptModal.openNewEntityCreation(this.model.vocabularies, this.model, 'class', this.searchText)
-      .then(conceptCreation => this.$uibModalInstance.close(conceptCreation));
+      .then(conceptCreation => this.$uibModalInstance.close(conceptCreation), ignoreModalClose);
   }
 }
 

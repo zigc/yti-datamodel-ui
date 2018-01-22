@@ -19,6 +19,7 @@ import { KnownPredicateType } from 'app/types/entity';
 import { ExternalEntity } from 'app/entities/externalEntity';
 import { Class, Property } from 'app/entities/class';
 import { filterAndSortSearchResults, defaultLabelComparator } from 'app/components/filter/util';
+import { ignoreModalClose } from 'yti-common-ui/utils/modal';
 
 const noExclude = (_item: PredicateListItem) => null;
 
@@ -274,7 +275,7 @@ export class SearchPredicateController implements SearchController<PredicateList
               this.$scope.form.editing = true;
             });
         }
-      });
+      }, ignoreModalClose);
   }
 
   isEditing(): boolean {
