@@ -418,6 +418,12 @@ export class Property extends GraphNode {
       || this.referenceData.length > 0;
   }
 
+  hasTechnicalMetadata() {
+    return this.resourceIdentifier
+      || this.xmlWrapper
+      || this.xmlAttribute;
+  }
+
   hasAssociationTarget() {
     return !!this.valueClass;
   }
