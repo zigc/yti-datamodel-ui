@@ -41,6 +41,7 @@ import { AjaxLoadingIndicatorComponent } from 'yti-common-ui/components/ajax-loa
 import { AjaxLoadingIndicatorSmallComponent } from 'yti-common-ui/components/ajax-loading-indicator-small.component';
 import { FilterDropdownComponent } from 'yti-common-ui/components/filter-dropdown.component';
 import { StatusComponent } from 'yti-common-ui/components/status.component';
+import { DropdownComponent } from 'yti-common-ui/components/dropdown.component';
 
 require('angular-gettext');
 require('checklist-model');
@@ -98,6 +99,7 @@ export function createMissingTranslationHandler(): MissingTranslationHandler {
     MenuComponent,
     AjaxLoadingIndicatorComponent,
     AjaxLoadingIndicatorSmallComponent,
+    DropdownComponent,
     FilterDropdownComponent,
     StatusComponent
   ],
@@ -155,6 +157,10 @@ mod.directive('appMenu', downgradeComponent({component: MenuComponent}));
 mod.directive('appFooter', downgradeComponent({component: FooterComponent}));
 mod.directive('ajaxLoadingIndicator', downgradeComponent({component: AjaxLoadingIndicatorComponent}));
 mod.directive('ajaxLoadingIndicatorSmall', downgradeComponent({component: AjaxLoadingIndicatorSmallComponent}));
+mod.directive('appDropdown', downgradeComponent({
+  component: DropdownComponent,
+  inputs: ['options', 'showNullOption', 'placement']
+}));
 mod.directive('appFilterDropdown', downgradeComponent({
   component: FilterDropdownComponent,
   inputs: ['options', 'filterSubject']

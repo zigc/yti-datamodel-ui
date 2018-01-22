@@ -1,4 +1,6 @@
-<div class="content-box" ng-show="ctrl.user">
+<ajax-loading-indicator ng-if="ctrl.loading"></ajax-loading-indicator>
+
+<div class="content-box" ng-if="!ctrl.loading">
 
   <div class="page-header">
     <h2 translate>User details</h2>
@@ -12,6 +14,42 @@
   <div class="form-group">
     <label translate>Email</label>
     <p class="form-control-static">{{ctrl.user.email}}</p>
+  </div>
+
+  <div class="form-group">
+    <label translate>Organizations and roles</label>
+    <div class="form-control-static">
+      <div ng-repeat="userOrganization in ctrl.userOrganizations">
+        <div ng-if="userOrganization.organization">{{userOrganization.organization.label | translateValue}}</div>
+        <div ng-if="!userOrganization.organization" translate>Unknown organization</div>
+        <ul>
+          <li ng-repeat="role in userOrganization.roles">{{role | translate}}</li>
+          <li ng-repeat="requestRole in userOrganization.requests">
+            {{requestRole | translate}} (<span translate>Waiting for approval</span>)
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+
+    <label translate>Send access request</label>
+
+    <div class="input-group">
+
+      <app-dropdown [options]="ctrl.organizationOptions"
+                    [show-null-option]="false"
+                    [placement]="'top-left'"
+                    ng-model="ctrl.selectedOrganization"></app-dropdown>
+
+      <div class="input-group-btn">
+        <button type="button"
+                class="btn btn-action"
+                ng-disabled="!ctrl.selectedOrganization"
+                ng-click="ctrl.sendRequest()" translate>Send</button>
+      </div>
+    </div>
   </div>
 
 </div>

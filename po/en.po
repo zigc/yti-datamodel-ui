@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2018-01-22 17:00+0200\n"
+"PO-Revision-Date: 2018-01-22 20:23+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -117,6 +117,10 @@ msgstr ""
 #: app/components/editor/propertyView.html:160
 #: app/components/model/modelForm.html:24
 msgid "Additional information"
+msgstr ""
+
+#: translations/misc.html:283
+msgid "ADMIN"
 msgstr ""
 
 #: translations/misc.html:153
@@ -413,6 +417,10 @@ msgstr ""
 msgid "Choose concept"
 msgstr ""
 
+#: translations/misc.html:282
+msgid "Choose organization"
+msgstr ""
+
 #: translations/misc.html:223
 msgid "Choose reference data"
 msgstr ""
@@ -517,9 +525,13 @@ msgstr ""
 msgid "close"
 msgstr ""
 
-#: app/components/common/historyModal.html:36
+#: app/components/common/historyModal.html:50
 #: app/components/model/modelView.html:37 translations/misc.html:174
 msgid "Close"
+msgstr ""
+
+#: translations/misc.html:286
+msgid "CODE_LIST_EDITOR"
 msgstr ""
 
 #: translations/misc.html:137
@@ -721,6 +733,10 @@ msgstr ""
 msgid "Create new"
 msgstr ""
 
+#: app/components/editor/searchConceptModal.html:72
+msgid "Create new ' + ctrl.type + ' without referencing concept"
+msgstr ""
+
 #: translations/misc.html:185
 msgid "Create new association"
 msgstr ""
@@ -799,6 +815,10 @@ msgstr "Data in russian"
 #: translations/misc.html:47
 msgid "data sv"
 msgstr "Data in swedish"
+
+#: translations/misc.html:284
+msgid "DATA_MODEL_EDITOR"
+msgstr ""
 
 #: translations/misc.html:147
 msgid "date format"
@@ -1251,7 +1271,7 @@ msgstr ""
 msgid "Hide model details"
 msgstr ""
 
-#: app/components/common/historyModal.html:3 translations/misc.html:173
+#: app/components/common/historyModal.html:6 translations/misc.html:173
 msgid "Historical versions"
 msgstr ""
 
@@ -1705,6 +1725,10 @@ msgstr ""
 
 #: app/components/editor/propertyView.html:62
 msgid "Optional metadata"
+msgstr ""
+
+#: app/components/user/userPage.html:18
+msgid "Organizations and roles"
 msgstr ""
 
 #: translations/type.html:4
@@ -2334,6 +2358,14 @@ msgstr ""
 msgid "Self reference not allowed"
 msgstr ""
 
+#: app/components/user/userPage.html:45
+msgid "Send"
+msgstr ""
+
+#: app/components/user/userPage.html:35
+msgid "Send access request"
+msgstr ""
+
 #: translations/misc.html:263
 msgid "Session expired"
 msgstr ""
@@ -2510,6 +2542,10 @@ msgstr "Technical metadata"
 msgid "Technical namespaces"
 msgstr ""
 
+#: translations/misc.html:285
+msgid "TERMINOLOGY_EDITOR"
+msgstr ""
+
 #: translations/help.html:137
 msgid "Testikirjasto"
 msgstr "Test library"
@@ -2584,6 +2620,10 @@ msgstr ""
 
 #: app/components/form/errorMessages.html:18
 msgid "Unknown namespace"
+msgstr ""
+
+#: app/components/user/userPage.html:22
+msgid "Unknown organization"
 msgstr ""
 
 #: translations/misc.html:20
@@ -2663,6 +2703,10 @@ msgstr "Terminology info"
 #: translations/misc.html:208
 msgid "Vocabulary name"
 msgstr "Terminology name"
+
+#: app/components/user/userPage.html:26
+msgid "Waiting for approval"
+msgstr ""
 
 #: translations/misc.html:81
 msgid "What can I do content"
