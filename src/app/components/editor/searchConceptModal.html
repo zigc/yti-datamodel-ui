@@ -67,6 +67,12 @@
 
         <div ng-if="ctrl.selection">
 
+          <div ng-if="ctrl.isSelectionAddWithoutConceptData()">
+            <p>
+              <span>{{'Create new ' + ctrl.type + ' without referencing concept' | translate}}</span>
+            </p>
+          </div>
+
           <concept-form ng-if="ctrl.isSelectionConcept()" concept="ctrl.selection" model="ctrl.model"></concept-form>
 
           <div ng-if="ctrl.isSelectionNewConceptData()">

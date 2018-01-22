@@ -30,7 +30,7 @@ export interface ClassService {
   updateClass(klass: Class, originalId: Uri): IPromise<any>;
   deleteClass(id: Uri, model: Model): IPromise<any>;
   assignClassToModel(classId: Uri, model: Model): IPromise<any>;
-  newClass(model: Model, classLabel: string, conceptID: Uri, lang: Language): IPromise<Class>;
+  newClass(model: Model, classLabel: string, conceptID: Uri|null, lang: Language): IPromise<Class>;
   newShape(classOrExternal: Class|ExternalEntity, profile: Model, external: boolean, lang: Language): IPromise<Class>;
   newClassFromExternal(externalId: Uri, model: Model): IPromise<Class>;
   getExternalClass(externalId: Uri, model: Model): IPromise<Class>;

@@ -28,7 +28,7 @@ export interface PredicateService {
   updatePredicate(predicate: Predicate, originalId: Uri): IPromise<any>;
   deletePredicate(id: Uri, model: Model): IPromise<any>;
   assignPredicateToModel(predicateId: Uri, model: Model): IPromise<any>;
-  newPredicate<T extends Attribute|Association>(model: Model, predicateLabel: string, conceptID: Uri, type: KnownPredicateType, lang: Language): IPromise<T>;
+  newPredicate<T extends Attribute|Association>(model: Model, predicateLabel: string, conceptID: Uri|null, type: KnownPredicateType, lang: Language): IPromise<T>;
   changePredicateType(predicate: Attribute|Association, newType: KnownPredicateType, model: Model): IPromise<Attribute|Association>;
   copyPredicate(predicate: Predicate|Uri, type: KnownPredicateType, model: Model): IPromise<Predicate>;
   getExternalPredicate(externalId: Uri, model: Model): IPromise<Predicate>;

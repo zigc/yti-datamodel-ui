@@ -24,14 +24,19 @@ export interface NewEntityData {
 }
 
 export class EntityCreation {
-  constructor(public conceptId: Uri, public entity: NewEntityData) {
+  constructor(public conceptId: Uri|null, public entity: NewEntityData) {
   }
 }
 
-class NewConceptData {
+class NewConceptData implements NewEntityData {
   definition: string;
 
   constructor(public label: string, public vocabulary: Vocabulary) {
+  }
+}
+
+class AddWithoutConceptData implements NewEntityData {
+  constructor(public label: string) {
   }
 }
 
@@ -78,19 +83,23 @@ export interface SearchPredicateScope extends IScope {
   form: EditableForm;
 }
 
-function isConcept(obj: Concept|NewConceptData|null): obj is Concept {
+function isConcept(obj: Concept|NewConceptData|AddWithoutConceptData|null): obj is Concept {
   return obj instanceof Concept;
 }
 
-function isNewConceptData(obj: Concept|NewConceptData|null): obj is NewConceptData {
+function isNewConceptData(obj: Concept|NewConceptData|AddWithoutConceptData|null): obj is NewConceptData {
   return obj instanceof NewConceptData;
+}
+
+function isAddWithoutConceptData(obj: Concept|NewConceptData|AddWithoutConceptData|null): obj is AddWithoutConceptData {
+  return obj instanceof AddWithoutConceptData;
 }
 
 class SearchConceptController implements SearchController<Concept> {
 
   queryResults: Concept[];
   searchResults: (Concept|AddNewConcept)[];
-  selection: Concept|NewConceptData|null = null;
+  selection: Concept|NewConceptData|AddWithoutConceptData|null = null;
   defineConceptTitle: string;
   buttonTitle: string;
   labelTitle: string;
@@ -98,7 +107,7 @@ class SearchConceptController implements SearchController<Concept> {
   searchText = '';
   submitError: string|null = null;
   loadingResults: boolean;
-  selectedItem: Concept|AddNewConcept;
+  selectedItem: Concept|AddNewConcept|AddWithoutConcept;
   vocabularies: Vocabulary[];
   private localizer: Localizer;
 
@@ -155,6 +164,10 @@ class SearchConceptController implements SearchController<Concept> {
     return isNewConceptData(this.selection);
   }
 
+  isSelectionAddWithoutConceptData() {
+    return isAddWithoutConceptData(this.selection);
+  }
+
   query(searchText: string): IPromise<any> {
     this.loadingResults = true;
 
@@ -180,9 +193,12 @@ class SearchConceptController implements SearchController<Concept> {
 
       const suggestText = `${this.gettextCatalog.getString('suggest')} '${this.searchText}'`;
       const toVocabularyText = `${this.gettextCatalog.getString('to vocabulary')}`;
+      const addNewText = suggestText + ' ' + toVocabularyText;
+      const addWithoutConcept = this.gettextCatalog.getString('Create new ' + this.type + ' without referencing concept');
 
       this.searchResults = [
-        new AddNewConcept(suggestText + ' ' + toVocabularyText, () => this.canAddNew()),
+        new AddNewConcept(addNewText,  () => this.canAddNew()),
+        new AddWithoutConcept(addWithoutConcept,  () => this.newEntityCreation),
         ...filterAndSortSearchResults<Concept>(this.queryResults, this.searchText, this.contentExtractors, this.searchFilters, defaultLabelComparator(this.localizer))
       ];
     } else {
@@ -190,7 +206,7 @@ class SearchConceptController implements SearchController<Concept> {
     }
   }
 
-  selectItem(item: Concept|AddNewConcept) {
+  selectItem(item: Concept|AddNewConcept|AddWithoutConcept) {
 
     this.selectedItem = item;
     this.submitError = null;
@@ -200,6 +216,8 @@ class SearchConceptController implements SearchController<Concept> {
     if (item instanceof AddNewConcept) {
       this.$scope.form.editing = true;
       this.selection = new NewConceptData(lowerCase(this.searchText, this.localizer.language), this.resolveInitialVocabulary());
+    } else if (item instanceof AddWithoutConcept) {
+      this.selection = new AddWithoutConceptData(this.searchText);
     } else {
       this.selection = null;
       this.vocabularyService.getConcept(item.id).then(concept => this.selection = concept);
@@ -259,6 +277,14 @@ class SearchConceptController implements SearchController<Concept> {
         return conceptSuggestionId
           .then(csId => this.vocabularyService.getConcept(csId));
       }
+    } else if (isAddWithoutConceptData(selection)) {
+
+      if (!this.newEntityCreation) {
+        throw new Error('Must be new entity creation');
+      }
+
+      return this.$q.when(new EntityCreation(null, { label: selection.label }))
+
     } else if (isConcept(selection)) {
       if (this.newEntityCreation) {
         return this.$q.when(new EntityCreation(selection.id, { label: selection.label[language] }));
@@ -272,7 +298,15 @@ class SearchConceptController implements SearchController<Concept> {
 }
 
 class AddNewConcept extends AddNew {
-  constructor(public label: string, public show: () => boolean) {
+  constructor(public label: string,
+              public show: () => boolean) {
+    super(label, show);
+  }
+}
+
+class AddWithoutConcept extends AddNew {
+  constructor(public label: string,
+              public show: () => boolean) {
     super(label, show);
   }
 }
