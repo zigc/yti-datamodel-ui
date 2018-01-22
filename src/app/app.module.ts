@@ -8,6 +8,7 @@ import { module as formModule } from './components/form';
 import { module as modelModule } from './components/model';
 import { module as navigationModule } from './components/navigation';
 import { module as userModule } from './components/user';
+import { module as informationModule } from './components/information';
 import { module as filterModule } from './components/filter';
 import { module as componentsModule } from './components';
 import { module as servicesModule } from './services';
@@ -143,6 +144,7 @@ const mod = angular.module('iow-ui', [
   modelModule.name,
   navigationModule.name,
   userModule.name,
+  informationModule.name,
   filterModule.name,
   componentsModule.name,
   servicesModule.name,

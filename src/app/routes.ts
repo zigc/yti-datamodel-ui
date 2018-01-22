@@ -10,6 +10,9 @@ export function routeConfig($routeProvider: route.IRouteProvider) {
     .when('/', {
       template: '<front-page></front-page>'
     })
+    .when('/information', {
+      template: '<information-about-service-page></information-about-service-page>'
+    })
     .when('/user', {
       template: '<user-page></user-page>'
     })

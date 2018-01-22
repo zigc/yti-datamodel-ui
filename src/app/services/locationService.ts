@@ -40,6 +40,12 @@ export class LocationService {
     }]);
   }
 
+  atInformationAboutService() {
+    this.changeLocation([{
+      localizationKey: 'Information about the web service'
+    }]);
+  }
+
   atFrontPage(): void {
     this.changeLocation([]);
   }

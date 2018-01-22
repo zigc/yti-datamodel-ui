@@ -26,9 +26,11 @@ export class ApplicationController {
   production: boolean;
   helpProvider: HelpProvider|null;
 
+  navigateToInformation = () => this.$location.url('/information');
+
   /* @ngInject */
   constructor($scope: IScope,
-              $location: ILocationService,
+              private $location: ILocationService,
               $uibModalStack: IModalStackService,
               userService: UserService,
               confirmationModal: ConfirmationModal,
