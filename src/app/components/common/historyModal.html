@@ -1,39 +1,53 @@
-<modal-template>
+<!--FIXME figure out better css and remove inline styles -->
 
-  <modal-title translate>Historical versions</modal-title>
+<div class="modal-header">
+  <h4 class="modal-title">
+    <a><i ng-click="$dismiss('cancel')" class="fa fa-times"></i></a>
+    <span translate>Historical versions</span>
+  </h4>
+</div>
 
-  <modal-body class="full-height">
+<div class="modal-body" style="height: calc(100vh - 225px)">
 
-    <div class="version-panel--left">
-      <ul class="panel__list">
-        <li ng-repeat="version in ctrl.versions track by version.id"
-            ng-class="{'model-panel__selection': ctrl.isSelected(version)}"
-            ng-click="ctrl.select(version)">
-          {{version.createdAt | localizedDate}} <span ng-if="ctrl.showAuthor">- {{version.createdBy}}</span>
-          <ajax-loading-indicator-small ng-if="ctrl.isLoading(version)"></ajax-loading-indicator-small>
-        </li>
-      </ul>
+  <div class="row mb-2">
+    <div class="col-12">
+      <model-language-chooser class="pull-right" context="ctrl.model"></model-language-chooser>
+      <export ng-if="ctrl.selection" class="pull-right mr-2" entity="ctrl.selection" context="ctrl.model"></export>
+    </div>
+  </div>
+
+  <div class="row" style="height: calc(100% - 40px); padding-bottom: 0">
+    <div class="col-4">
+      <div style="height: 100%; border: 1px solid #A5ACB0">
+        <div class="selectable-items" style="height: 100%">
+          <ul style="height: 100%; overflow-y: auto">
+            <li ng-repeat="version in ctrl.versions track by version.id"
+                ng-class="{'selection': ctrl.isSelected(version)}"
+                ng-click="ctrl.select(version)">
+              {{version.createdAt | localizedDate}}
+              <span ng-if="ctrl.showAuthor">
+              <br />
+              {{version.createdBy}}
+            </span>
+              <ajax-loading-indicator-small ng-if="ctrl.isLoading(version)"></ajax-loading-indicator-small>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
 
-    <div class="version-panel--right">
+    <div class="col-8" style="height: 100%; overflow-y: auto">
       <form class="editable-form">
-        <div ng-if="ctrl.selection">
-          <div>
-            <div class="top-actions">
-              <model-language-chooser context="ctrl.model"></model-language-chooser>
-              <export entity="ctrl.selection" context="ctrl.model"></export>
-            </div>
-          </div>
+        <div ng-if="ctrl.selection" style="height: 100%">
           <model-form ng-if="ctrl.selection.isOfType('model')" model="ctrl.selection"></model-form>
           <class-form ng-if="ctrl.selection.isClass()" class="ctrl.selection" old-class="ctrl.selection" model="ctrl.model" open-property-id="openPropertyId"></class-form>
           <predicate-form ng-if="ctrl.selection.isPredicate()" predicate="ctrl.selection" old-predicate="ctrl.selection" model="ctrl.model"></predicate-form>
         </div>
       </form>
     </div>
-  </modal-body>
+  </div>
+</div>
 
-  <modal-buttons>
-    <button class="btn btn-link" type="button" ng-click="$dismiss('cancel')" translate>Close</button>
-  </modal-buttons>
-
-</modal-template>
+<div vlass="modal-footer">
+  <button class="btn btn-link" type="button" ng-click="$dismiss('cancel')" translate>Close</button>
+</div>
