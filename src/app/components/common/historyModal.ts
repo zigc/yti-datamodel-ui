@@ -24,7 +24,7 @@ export class HistoryModal {
   open(model: Model, resource: Class|Predicate|Model) {
     this.$uibModal.open({
       template: require('./historyModal.html'),
-      size: resource instanceof Model ? 'large' : 'medium',
+      size: resource instanceof Model ? 'lg' : 'md',
       controllerAs: 'ctrl',
       controller: HistoryModalController,
       resolve: {
