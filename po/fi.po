@@ -20,7 +20,7 @@ msgstr "Lisää assosiaatio"
 msgid "Add attribute"
 msgstr "Lisää attribuutti"
 
-#: app/components/editor/searchPredicateModal.html:9
+#: app/components/editor/searchPredicateModal.html:11
 msgid "Add attribute or association"
 msgstr "Lisää attribuutti tai assosiaatio"
 
@@ -60,7 +60,7 @@ msgstr "Lisää linkki"
 msgid "Add model"
 msgstr "Lisää tietomalli"
 
-#: app/components/model/searchNamespaceModal.html:30
+#: app/components/model/searchNamespaceModal.html:37
 msgid "Add new namespace"
 msgstr "Luo uusi nimiavaruus"
 
@@ -133,15 +133,19 @@ msgstr "Pääkäyttäjänä ryhmissä"
 msgid "Advanced search"
 msgstr "Tarkennettu haku"
 
-#: app/components/model/searchReferenceDataModal.html:32
+#: app/components/model/searchReferenceDataModal.html:47
 msgid "All groups"
 msgstr "Kaikki ryhmät"
+
+#: translations/misc.html:275
+msgid "All models"
+msgstr "Kaikki tietomallit"
 
 #: translations/misc.html:273
 msgid "All organizations"
 msgstr "Kaikki organisaatiot"
 
-#: app/components/model/searchReferenceDataModal.html:21
+#: app/components/model/searchReferenceDataModal.html:39
 msgid "All servers"
 msgstr "Kaikki palvelimet"
 
@@ -369,16 +373,16 @@ msgstr "Valinta on tehtävä soveltamisprofiilin luokista"
 #: app/components/editor/addPropertiesFromClassModal.html:27
 #: app/components/editor/searchClassModal.html:116
 #: app/components/editor/searchConceptModal.html:106
-#: app/components/editor/searchPredicateModal.html:105
+#: app/components/editor/searchPredicateModal.html:136
 #: app/components/form/editableEntityButtons.html:7
-#: app/components/model/addEditLinkModal.html:20
+#: app/components/model/addEditLinkModal.html:21
 #: app/components/model/addEditNamespaceModal.html:46
 #: app/components/model/editReferenceDataModal.html:26
 #: app/components/model/newModelPage.html:9
 #: app/components/model/searchClassificationModal.html:32
-#: app/components/model/searchNamespaceModal.html:45
+#: app/components/model/searchNamespaceModal.html:74
 #: app/components/model/searchOrganizationModal.html:31
-#: app/components/model/searchReferenceDataModal.html:95
+#: app/components/model/searchReferenceDataModal.html:119
 #: app/components/model/searchVocabularyModal.html:62
 msgid "Cancel"
 msgstr "Peruuta"
@@ -527,7 +531,8 @@ msgstr "poista valinta"
 msgid "close"
 msgstr "sulje"
 
-#: app/components/common/historyModal.html:36 translations/misc.html:169
+#: app/components/common/historyModal.html:36
+#: app/components/model/modelView.html:37 translations/misc.html:169
 msgid "Close"
 msgstr "Sulje"
 
@@ -730,7 +735,7 @@ msgstr "Luo assosiaatio ja käytä"
 msgid "Create and use attribute"
 msgstr "Luo attribuutti ja käytä"
 
-#: app/components/model/searchReferenceDataModal.html:97
+#: app/components/model/searchReferenceDataModal.html:115
 msgid "Create new"
 msgstr "Luo uusi"
 
@@ -1143,12 +1148,6 @@ msgstr "Viite ulkoiseen URI tunnisteeseen"
 msgid "fi"
 msgstr "Suomeksi"
 
-#: app/components/editor/searchPredicateModal.html:30
-#: app/components/model/searchNamespaceModal.html:13
-#: app/components/model/searchReferenceDataModal.html:14
-msgid "Filter results"
-msgstr "Rajaa hakutuloksia"
-
 #: translations/titles.html:61
 msgid "Fixed value"
 msgstr "Pakollinen arvo"
@@ -1175,10 +1174,6 @@ msgstr "Ei saa olla suurempi kuin maksimi"
 
 #: translations/misc.html:27
 msgid "group"
-msgstr "Ryhmä"
-
-#: app/components/model/searchReferenceDataModal.html:28
-msgid "Group"
 msgstr "Ryhmä"
 
 #: translations/help.html:9
@@ -1893,10 +1888,6 @@ msgstr "Koodisto on sovittu joukko koodiarvoja"
 msgid "Reference data name"
 msgstr "Koodiston nimi"
 
-#: app/components/model/searchReferenceDataModal.html:17
-msgid "Reference data server"
-msgstr "Koodistopalvelin"
-
 #: translations/titles.html:13
 msgid "Reference data URI"
 msgstr "Koodiston URI"
@@ -2163,27 +2154,15 @@ msgstr "Hae sanastosta…"
 msgid "search namespace"
 msgstr "Hae nimiavaruutta…"
 
-#: app/components/model/searchNamespaceModal.html:2
+#: app/components/model/searchNamespaceModal.html:5
 msgid "Search namespaces"
 msgstr "Hae nimiavaruuksia"
-
-#: app/components/editor/searchPredicateModal.html:23
-msgid "Search or create predicate info"
-msgstr ""
-"Hae ensin tarvitsemaasi attribuuttia tai assosiaatiota yhteentoimivuuden "
-"kuvauksista. Jos et löydä tarpeisiisi sopivaa, voit luoda uuden ominaisuuden."
-
-#: app/components/editor/searchPredicateModal.html:22
-msgid "Search predicate info"
-msgstr ""
-"Hae tarvitsemaasi attribuuttia tai assosiaatiota yhteentoimivuuden "
-"kuvauksista."
 
 #: translations/misc.html:214 translations/misc.html:95
 msgid "search reference data"
 msgstr "Hae koodistoa…"
 
-#: app/components/model/searchReferenceDataModal.html:3
+#: app/components/model/searchReferenceDataModal.html:6
 #: translations/misc.html:213
 msgid "Search reference data"
 msgstr "Hae koodistoja"
@@ -2216,7 +2195,7 @@ msgstr "Assosiaation kohteella tarkoitetaan luokkaa johon halutaan viitata"
 msgid "Select attribute"
 msgstr "Valitse attribuutti"
 
-#: app/components/editor/searchPredicateModal.html:5
+#: app/components/editor/searchPredicateModal.html:7
 msgid "Select attribute or association"
 msgstr "Valitse attribuutti tai assosiaatio"
 
@@ -2430,7 +2409,7 @@ msgstr "Näytä historia"
 msgid "Show model details"
 msgstr "Näytä tietomallin tiedot"
 
-#: app/components/model/searchNamespaceModal.html:19
+#: app/components/model/searchNamespaceModal.html:30
 msgid "Show technical namespaces"
 msgstr "Näytä tekniset nimiavaruudet"
 
@@ -2658,7 +2637,7 @@ msgstr "Käytä attribuuttia"
 msgid "Use class"
 msgstr "Käytä luokkaa"
 
-#: app/components/model/searchReferenceDataModal.html:98
+#: app/components/model/searchReferenceDataModal.html:116
 #: translations/misc.html:102
 msgid "Use selection"
 msgstr "Käytä valintaa"
@@ -2943,6 +2922,26 @@ msgstr "Sinut uudelleenohjataan etusivulle"
 msgid "You will be redirected to the model"
 msgstr "Sinut uudelleenohjataan mallin sivulle"
 
+#~ msgid "Filter results"
+#~ msgstr "Rajaa hakutuloksia"
+
+#~ msgid "Group"
+#~ msgstr "Ryhmä"
+
+#~ msgid "Reference data server"
+#~ msgstr "Koodistopalvelin"
+
+#~ msgid "Search or create predicate info"
+#~ msgstr ""
+#~ "Hae ensin tarvitsemaasi attribuuttia tai assosiaatiota yhteentoimivuuden "
+#~ "kuvauksista. Jos et löydä tarpeisiisi sopivaa, voit luoda uuden "
+#~ "ominaisuuden."
+
+#~ msgid "Search predicate info"
+#~ msgstr ""
+#~ "Hae tarvitsemaasi attribuuttia tai assosiaatiota yhteentoimivuuden "
+#~ "kuvauksista."
+
 #~ msgid "All states"
 #~ msgstr "Kaikki tilat"
 
@@ -3054,9 +3053,6 @@ msgstr "Sinut uudelleenohjataan mallin sivulle"
 #~ msgstr ""
 #~ "Pysyvillä ja yksilöivä tunniste joka yksilöidään valitun nimiavaruuden "
 #~ "avulla"
-
-#~ msgid "All models"
-#~ msgstr "Kaikki kirjastot"
 
 #~ msgid "Suggested in"
 #~ msgstr "Ehdotettu kirjastossa"

@@ -98,6 +98,6 @@ class SearchVocabularyController implements SearchController<Vocabulary> {
   }
 
   close() {
-    this.$uibModalInstance.dismiss();
+    this.$uibModalInstance.dismiss('cancel');
   }
 }

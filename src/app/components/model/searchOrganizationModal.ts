@@ -28,7 +28,6 @@ export class SearchOrganizationModal {
 class SearchOrganizationModalController {
 
   organizations: Organization[];
-  close = this.$uibModalInstance.dismiss;
 
   /* @ngInject */
   constructor($scope: IScope,
@@ -48,5 +47,9 @@ class SearchOrganizationModalController {
 
   select(classification: Classification) {
     this.$uibModalInstance.close(classification);
+  }
+
+  close() {
+    this.$uibModalInstance.dismiss('cancel');
   }
 }

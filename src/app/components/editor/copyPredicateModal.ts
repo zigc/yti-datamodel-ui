@@ -21,7 +21,7 @@ export class CopyPredicateModal {
             <modal-body>
               <div class="row">
                 <div class="col-md-12">
-                  <model-language-chooser context="ctrl.model"></model-language-chooser>
+                  <model-language-chooser class="pull-right" context="ctrl.model"></model-language-chooser>
                 </div>
               </div>
               <div class="row">
@@ -32,12 +32,13 @@ export class CopyPredicateModal {
             </modal-body>
           
             <modal-buttons>
-              <button class="btn btn-link" type="button" ng-click="$dismiss('cancel')" translate>Cancel</button>
               <button type="button"
                       class="btn btn-action confirm"
                       ng-click="ctrl.confirm()"
                       ng-disabled="form.$invalid || form.$pending || !ctrl.predicate.subject">{{'Copy' | translate}}
               </button>
+              
+              <button class="btn btn-link" type="button" ng-click="$dismiss('cancel')" translate>Cancel</button>
             </modal-buttons>
           </modal-template>
         </form>

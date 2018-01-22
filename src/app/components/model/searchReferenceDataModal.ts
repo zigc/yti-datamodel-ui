@@ -203,7 +203,7 @@ export class SearchReferenceDataModalController implements SearchController<Refe
   }
 
   close() {
-    this.$uibModalInstance.dismiss();
+    this.$uibModalInstance.dismiss('cancel');
   }
 }
 

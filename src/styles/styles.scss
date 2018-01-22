@@ -200,6 +200,12 @@ visualization-view ajax-loading-indicator {
   .search-results, form {
     height: 100%;
     overflow-y: auto;
+
+    .search-result {
+      &.add-new {
+        background-color: lighten($primary, 52%);
+      }
+    }
   }
 }
 

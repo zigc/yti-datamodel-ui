@@ -109,6 +109,6 @@ class SearchNamespaceController implements SearchController<ImportedNamespace> {
   }
 
   close() {
-    this.$uibModalInstance.dismiss();
+    this.$uibModalInstance.dismiss('cancel');
   }
 }

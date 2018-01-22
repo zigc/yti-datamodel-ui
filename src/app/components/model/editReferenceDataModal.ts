@@ -39,8 +39,6 @@ class EditReferenceDataModalController {
   title: string;
   description: string;
 
-  cancel = this.$uibModalInstance.dismiss;
-
   /* @ngInject */
   constructor(private $uibModalInstance: IModalServiceInstance, private lang: Language, public model: Model, private referenceDataToEdit: ReferenceData) {
     this.id = referenceDataToEdit.id;
@@ -54,5 +52,9 @@ class EditReferenceDataModalController {
     this.referenceDataToEdit.description[this.lang] = this.description;
 
     this.$uibModalInstance.close(this.referenceDataToEdit);
+  }
+
+  cancel() {
+    this.$uibModalInstance.dismiss('cancel');
   }
 }

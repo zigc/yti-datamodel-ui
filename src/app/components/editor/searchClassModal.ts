@@ -70,7 +70,6 @@ class SearchClassController implements SearchController<ClassListItem> {
 
   private classes: ClassListItem[] = [];
 
-  close = this.$uibModalInstance.dismiss;
   searchResults: (ClassListItem|AddNewClass)[] = [];
   selection: Class|ExternalEntity;
   searchText = '';
@@ -220,6 +219,10 @@ class SearchClassController implements SearchController<ClassListItem> {
     } else {
       throw new Error('Unsupported selection: ' + selection);
     }
+  }
+
+  close() {
+    this.$uibModalInstance.dismiss('cancel');
   }
 
   createNewClass() {

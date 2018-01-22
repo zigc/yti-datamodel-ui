@@ -34,7 +34,6 @@ class AdvancedSearchController implements SearchController<SearchResult> {
 
   private apiSearchResults: SearchResult[] = [];
 
-  close = this.$uibModalInstance.dismiss;
   searchResults: SearchResult[];
   types: Type[] = ['model', 'class', 'shape', 'attribute', 'association'];
   searchText = '';
@@ -61,6 +60,10 @@ class AdvancedSearchController implements SearchController<SearchResult> {
         this.search();
       }
     });
+  }
+
+  close() {
+    this.$uibModalInstance.dismiss('cancel');
   }
 
   addFilter(filter: SearchFilter<SearchResult>) {

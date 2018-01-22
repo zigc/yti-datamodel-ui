@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2018-01-22 10:00+0200\n"
+"PO-Revision-Date: 2018-01-22 13:25+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -21,7 +21,7 @@ msgstr ""
 msgid "Add attribute"
 msgstr ""
 
-#: app/components/editor/searchPredicateModal.html:9
+#: app/components/editor/searchPredicateModal.html:11
 msgid "Add attribute or association"
 msgstr ""
 
@@ -57,7 +57,7 @@ msgstr ""
 msgid "Add model"
 msgstr ""
 
-#: app/components/model/searchNamespaceModal.html:30
+#: app/components/model/searchNamespaceModal.html:37
 msgid "Add new namespace"
 msgstr ""
 
@@ -127,15 +127,19 @@ msgstr ""
 msgid "Advanced search"
 msgstr ""
 
-#: app/components/model/searchReferenceDataModal.html:32
+#: app/components/model/searchReferenceDataModal.html:47
 msgid "All groups"
+msgstr ""
+
+#: translations/misc.html:275
+msgid "All models"
 msgstr ""
 
 #: translations/misc.html:273
 msgid "All organizations"
 msgstr ""
 
-#: app/components/model/searchReferenceDataModal.html:21
+#: app/components/model/searchReferenceDataModal.html:39
 msgid "All servers"
 msgstr ""
 
@@ -357,16 +361,16 @@ msgstr ""
 #: app/components/editor/addPropertiesFromClassModal.html:27
 #: app/components/editor/searchClassModal.html:116
 #: app/components/editor/searchConceptModal.html:106
-#: app/components/editor/searchPredicateModal.html:105
+#: app/components/editor/searchPredicateModal.html:136
 #: app/components/form/editableEntityButtons.html:7
-#: app/components/model/addEditLinkModal.html:20
+#: app/components/model/addEditLinkModal.html:21
 #: app/components/model/addEditNamespaceModal.html:46
 #: app/components/model/editReferenceDataModal.html:26
 #: app/components/model/newModelPage.html:9
 #: app/components/model/searchClassificationModal.html:32
-#: app/components/model/searchNamespaceModal.html:45
+#: app/components/model/searchNamespaceModal.html:74
 #: app/components/model/searchOrganizationModal.html:31
-#: app/components/model/searchReferenceDataModal.html:95
+#: app/components/model/searchReferenceDataModal.html:119
 #: app/components/model/searchVocabularyModal.html:62
 msgid "Cancel"
 msgstr ""
@@ -513,7 +517,8 @@ msgstr ""
 msgid "close"
 msgstr ""
 
-#: app/components/common/historyModal.html:36 translations/misc.html:169
+#: app/components/common/historyModal.html:36
+#: app/components/model/modelView.html:37 translations/misc.html:169
 msgid "Close"
 msgstr ""
 
@@ -712,7 +717,7 @@ msgstr ""
 msgid "Create and use attribute"
 msgstr ""
 
-#: app/components/model/searchReferenceDataModal.html:97
+#: app/components/model/searchReferenceDataModal.html:115
 msgid "Create new"
 msgstr ""
 
@@ -1118,12 +1123,6 @@ msgstr "URI of an external resource"
 msgid "fi"
 msgstr "Finnish"
 
-#: app/components/editor/searchPredicateModal.html:30
-#: app/components/model/searchNamespaceModal.html:13
-#: app/components/model/searchReferenceDataModal.html:14
-msgid "Filter results"
-msgstr ""
-
 #: translations/titles.html:61
 msgid "Fixed value"
 msgstr ""
@@ -1151,10 +1150,6 @@ msgstr ""
 #: translations/misc.html:27
 msgid "group"
 msgstr "Group"
-
-#: app/components/model/searchReferenceDataModal.html:28
-msgid "Group"
-msgstr ""
 
 #: translations/help.html:9
 msgid ""
@@ -1861,10 +1856,6 @@ msgstr ""
 msgid "Reference data name"
 msgstr ""
 
-#: app/components/model/searchReferenceDataModal.html:17
-msgid "Reference data server"
-msgstr ""
-
 #: translations/titles.html:13
 msgid "Reference data URI"
 msgstr ""
@@ -2122,23 +2113,15 @@ msgstr ""
 msgid "search namespace"
 msgstr "Search namespace…"
 
-#: app/components/model/searchNamespaceModal.html:2
+#: app/components/model/searchNamespaceModal.html:5
 msgid "Search namespaces"
-msgstr ""
-
-#: app/components/editor/searchPredicateModal.html:23
-msgid "Search or create predicate info"
-msgstr ""
-
-#: app/components/editor/searchPredicateModal.html:22
-msgid "Search predicate info"
 msgstr ""
 
 #: translations/misc.html:214 translations/misc.html:95
 msgid "search reference data"
 msgstr "Search reference data…"
 
-#: app/components/model/searchReferenceDataModal.html:3
+#: app/components/model/searchReferenceDataModal.html:6
 #: translations/misc.html:213
 msgid "Search reference data"
 msgstr ""
@@ -2171,7 +2154,7 @@ msgstr "You can create new association from here"
 msgid "Select attribute"
 msgstr ""
 
-#: app/components/editor/searchPredicateModal.html:5
+#: app/components/editor/searchPredicateModal.html:7
 msgid "Select attribute or association"
 msgstr ""
 
@@ -2387,7 +2370,7 @@ msgstr ""
 msgid "Show model details"
 msgstr ""
 
-#: app/components/model/searchNamespaceModal.html:19
+#: app/components/model/searchNamespaceModal.html:30
 msgid "Show technical namespaces"
 msgstr ""
 
@@ -2611,7 +2594,7 @@ msgstr ""
 msgid "Use class"
 msgstr ""
 
-#: app/components/model/searchReferenceDataModal.html:98
+#: app/components/model/searchReferenceDataModal.html:116
 #: translations/misc.html:102
 msgid "Use selection"
 msgstr ""

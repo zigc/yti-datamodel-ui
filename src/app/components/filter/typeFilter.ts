@@ -17,14 +17,13 @@ mod.directive('typeFilter', () => {
     controllerAs: 'ctrl',
     restrict: 'E',
     template: `
-            <div class="form-group">
-              <label for="type">{{ctrl.label | translate}}</label>
-              <div class="input-group input-group-md">
-                  <select id="type" class="form-control" ng-model="ctrl.type" ng-options="type | translate for type in ctrl.types">
-                    <option value="" translate>All types</option>
-                  </select>
-              </div>
-            </div>
+      <select id="type" 
+              class="form-control"
+              style="width: auto" 
+              ng-model="ctrl.type" 
+              ng-options="type | translate for type in ctrl.types">
+        <option value="" translate>All types</option>
+      </select>
     `,
     controller: TypeFilterController
   };

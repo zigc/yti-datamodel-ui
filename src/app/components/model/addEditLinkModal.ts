@@ -42,8 +42,6 @@ class AddEditLinkModalController {
   homepage: Uri;
   edit: boolean;
 
-  cancel = this.$uibModalInstance.dismiss;
-
   /* @ngInject */
   constructor(private $uibModalInstance: IModalServiceInstance, private modelService: ModelService, private lang: Language, private model: Model, private linkToEdit: Link|null) {
     this.edit = !!linkToEdit;
@@ -74,5 +72,9 @@ class AddEditLinkModalController {
       this.modelService.newLink(this.title, this.description, this.homepage, this.lang, this.model.context)
         .then(link => this.$uibModalInstance.close(link));
     }
+  }
+
+  cancel() {
+    this.$uibModalInstance.dismiss('cancel');
   }
 }

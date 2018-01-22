@@ -88,7 +88,6 @@ function isNewConceptData(obj: Concept|NewConceptData|null): obj is NewConceptDa
 
 class SearchConceptController implements SearchController<Concept> {
 
-  close = this.$uibModalInstance.dismiss;
   queryResults: Concept[];
   searchResults: (Concept|AddNewConcept)[];
   selection: Concept|NewConceptData|null = null;
@@ -231,6 +230,10 @@ class SearchConceptController implements SearchController<Concept> {
 
   confirm() {
     this.$uibModalInstance.close(this.resolveResult());
+  }
+
+  close() {
+    this.$uibModalInstance.dismiss('cancel');
   }
 
   private resolveResult(): IPromise<Concept|EntityCreation> {

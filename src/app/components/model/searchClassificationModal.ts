@@ -27,7 +27,6 @@ export class SearchClassificationModal {
 class SearchClassificationModalController {
 
   classifications: Classification[];
-  close = this.$uibModalInstance.dismiss;
 
   /* @ngInject */
   constructor($scope: IScope,
@@ -45,5 +44,9 @@ class SearchClassificationModalController {
 
   select(classification: Classification) {
     this.$uibModalInstance.close(classification);
+  }
+
+  close() {
+    this.$uibModalInstance.dismiss('cancel');
   }
 }

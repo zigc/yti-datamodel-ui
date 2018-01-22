@@ -85,7 +85,6 @@ export class SearchPredicateController implements SearchController<PredicateList
 
   private predicates: PredicateListItem[] = [];
 
-  close = this.$uibModalInstance.dismiss;
   searchResults: (PredicateListItem|AddNewPredicate)[] = [];
   selection: Predicate|ExternalEntity;
   searchText = '';
@@ -256,6 +255,10 @@ export class SearchPredicateController implements SearchController<PredicateList
     } else {
       throw new Error('Unsupported selection: ' + selection);
     }
+  }
+
+  close() {
+    this.$uibModalInstance.dismiss('cancel');
   }
 
   createNew(type: KnownPredicateType) {
