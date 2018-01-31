@@ -154,7 +154,12 @@ const mod = angular.module('iow-ui', [
 ]);
 
 mod.directive('appMenu', downgradeComponent({component: MenuComponent}));
-mod.directive('appFooter', downgradeComponent({component: FooterComponent}));
+mod.directive('appFooter', downgradeComponent({
+  component: FooterComponent,
+  inputs: ['title'],
+  outputs: ['informationClick']
+}));
+
 mod.directive('ajaxLoadingIndicator', downgradeComponent({component: AjaxLoadingIndicatorComponent}));
 mod.directive('ajaxLoadingIndicatorSmall', downgradeComponent({component: AjaxLoadingIndicatorSmallComponent}));
 mod.directive('appDropdown', downgradeComponent({

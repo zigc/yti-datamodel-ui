@@ -26,8 +26,6 @@ export class ApplicationController {
   production: boolean;
   helpProvider: HelpProvider|null;
 
-  navigateToInformation = () => this.$location.url('/information');
-
   /* @ngInject */
   constructor($scope: IScope,
               private $location: ILocationService,
@@ -72,5 +70,9 @@ export class ApplicationController {
 
   registerHelpProvider(helpProvider: HelpProvider) {
     this.helpProvider = helpProvider;
+  }
+
+  navigateToInformation() {
+    this.$location.url('/information');
   }
 }
