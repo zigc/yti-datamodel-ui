@@ -1,6 +1,7 @@
 import { module as mod } from './module';
 import { IScope, IAttributes, ITranscludeFunction, IRepeatScope, IWindowService } from 'angular';
 import { scrollToElement, hasFixedPositioningParent } from 'app/utils/angular';
+import { NgZone } from '@angular/core';
 
 export interface InputWithPopupController<T> {
   popupItemName: string;
@@ -50,7 +51,8 @@ class InputPopupController<T> {
 
   /* @ngInject */
   constructor($scope: InputPopupScope,
-              $window: IWindowService) {
+              $window: IWindowService,
+              zone: NgZone) {
 
     const calculatePopupStyle = (e: JQuery) => {
       const offset = e.offset();
@@ -81,7 +83,7 @@ class InputPopupController<T> {
       }
     };
 
-    $window.Zone.current.parent.run(() => {
+    zone.runOutsideAngular(() => {
       window.addEventListener('resize', setPopupStyleToElement);
     });
 

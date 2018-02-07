@@ -6,6 +6,7 @@ import { moveOrigin, scale } from './paperUtil';
 import { Model } from 'app/entities/model';
 import { Optional } from 'yti-common-ui/utils/object';
 import { IWindowService } from 'angular';
+import { NgZone } from '@angular/core';
 
 interface Cached {
   element: JQuery;
@@ -23,7 +24,8 @@ export class PaperHolder implements Cleanable {
 
   constructor(private element: JQuery,
               private listener: ClassInteractionListener,
-              private $window: IWindowService) {
+              private $window: IWindowService,
+              private zone: NgZone) {
   }
 
   getPaper(model: Model): joint.dia.Paper {
@@ -38,7 +40,7 @@ export class PaperHolder implements Cleanable {
 
       let newPaper: joint.dia.Paper|null = null;
 
-      this.$window.Zone.current.parent.run(() => {
+      this.zone.runOutsideAngular(() => {
         newPaper = createPaper(newElement, new joint.dia.Graph);
       });
 
@@ -46,7 +48,7 @@ export class PaperHolder implements Cleanable {
         throw new Error();
       }
 
-      const cleanable = registerHandlers(newPaper, this.listener, this.$window);
+      const cleanable = registerHandlers(newPaper, this.listener, this.$window, this.zone);
       this.cache.set(model.id.uri, { element: newElement, paper: newPaper, clean: () => cleanable.clean() });
       return newPaper;
     }
@@ -81,7 +83,7 @@ function createPaper(element: JQuery, graph: joint.dia.Graph): joint.dia.Paper {
   });
 }
 
-function registerHandlers(paper: joint.dia.Paper, listener: ClassInteractionListener, $window: IWindowService): Cleanable {
+function registerHandlers(paper: joint.dia.Paper, listener: ClassInteractionListener, $window: IWindowService, zone: NgZone): Cleanable {
 
   const paperElement = paper.$el;
   let movingElementOrVertex = false;
@@ -169,10 +171,10 @@ function registerHandlers(paper: joint.dia.Paper, listener: ClassInteractionList
     showMenu = null;
   };
 
-  $window.Zone.current.parent.run(() => {
+  zone.runOutsideAngular(() => {
     paper.on('blank:pointerdown', startDragHandler);
-    window.addEventListener('mouseup', stopDragHandler);
-    window.addEventListener('mousemove', dragMoveHandler);
+    $window.addEventListener('mouseup', stopDragHandler);
+    $window.addEventListener('mousemove', dragMoveHandler);
     angular.element(paperElement).mousewheel(mouseWheelHandler);
     paper.on('cell:pointerdown', startCellMoveHandler);
     paper.on('cell:pointerclick', classClickHandler);
@@ -187,8 +189,8 @@ function registerHandlers(paper: joint.dia.Paper, listener: ClassInteractionList
   return {
     clean() {
       paper.remove();
-      window.removeEventListener('mouseup', stopDragHandler);
-      window.removeEventListener('mousemove', dragMoveHandler);
+      $window.removeEventListener('mouseup', stopDragHandler);
+      $window.removeEventListener('mousemove', dragMoveHandler);
     }
   };
 }

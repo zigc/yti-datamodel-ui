@@ -1,6 +1,7 @@
 import { IWindowService, IScope } from 'angular';
 import { module as mod } from './module';
 import { SessionService } from 'app/services/sessionService';
+import { NgZone } from '@angular/core';
 
 mod.directive('divider', () => {
   return {
@@ -27,6 +28,7 @@ class DividerController {
   /* @ngInject */
   constructor(private $scope: IScope,
               private $window: IWindowService,
+              private zone: NgZone,
               private sessionService: SessionService) {
 
     this.initWidth();
@@ -36,7 +38,7 @@ class DividerController {
       $scope.$apply();
     };
 
-    $window.Zone.current.parent.run(() => {
+    zone.runOutsideAngular(() => {
       $window.addEventListener('resize', onResize);
     });
 
@@ -74,7 +76,7 @@ class DividerController {
       this.$window.removeEventListener('mouseup', onMouseUp);
     };
 
-    this.$window.Zone.current.parent.run(() => {
+    this.zone.runOutsideAngular(() => {
       this.$window.addEventListener('mousemove', onMouseMove);
       this.$window.addEventListener('mouseup', onMouseUp);
     });

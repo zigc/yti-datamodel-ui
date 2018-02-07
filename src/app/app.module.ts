@@ -15,7 +15,7 @@ import { module as servicesModule } from './services';
 import { module as helpModule } from './help';
 import { BrowserModule } from '@angular/platform-browser';
 import { downgradeComponent, downgradeInjectable, UpgradeModule } from '@angular/upgrade/static';
-import { NgModule } from '@angular/core';
+import { NgModule, NgZone } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { YtiCommonModule } from 'yti-common-ui';
 import { config } from 'config';
@@ -170,11 +170,15 @@ mod.directive('appFilterDropdown', downgradeComponent({
   component: FilterDropdownComponent,
   inputs: ['options', 'filterSubject']
 }));
-mod.directive('appStatus', downgradeComponent({component: StatusComponent}));
+mod.directive('appStatus', downgradeComponent({
+  component: StatusComponent,
+  inputs: ['status']
+}));
 
 mod.factory('translateService', downgradeInjectable(TranslateService));
 mod.factory('loginModal', downgradeInjectable(LoginModalService));
 mod.factory('localizationStrings', () => localizationStrings);
+mod.factory('zone', downgradeInjectable(NgZone));
 
 mod.config(routeConfig);
 

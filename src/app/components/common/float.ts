@@ -1,6 +1,7 @@
 import { module as mod } from './module';
 import { IScope, IAttributes, IWindowService } from 'angular';
 import { InteractiveHelpService } from 'app/help/services/interactiveHelpService';
+import { NgZone } from '@angular/core';
 
 interface FloatAttributes extends IAttributes {
   float: string;
@@ -9,7 +10,7 @@ interface FloatAttributes extends IAttributes {
   width: string;
 }
 
-mod.directive('float', (interactiveHelpService: InteractiveHelpService, $window: IWindowService) => {
+mod.directive('float', (interactiveHelpService: InteractiveHelpService, $window: IWindowService, zone: NgZone) => {
   return {
     restrict: 'A',
     controller: FloatController,
@@ -81,7 +82,7 @@ mod.directive('float', (interactiveHelpService: InteractiveHelpService, $window:
         }
       }
 
-      $window.Zone.current.parent.run(() => {
+      zone.runOutsideAngular(() => {
         window.addEventListener('scroll', scrollHandler, true);
       });
 

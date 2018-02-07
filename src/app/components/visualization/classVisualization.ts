@@ -34,9 +34,10 @@ import * as moment from 'moment';
 import { ContextMenuTarget } from './contextMenu';
 import { ModelPageActions } from 'app/components/model/modelPage';
 import { AuthorizationManagerService } from 'app/services/authorizationManagerService';
+import { NgZone } from '@angular/core';
 
 /* @ngInject */
-mod.directive('classVisualization', ($window: IWindowService) => {
+mod.directive('classVisualization', ($window: IWindowService, zone: NgZone) => {
   return {
     restrict: 'E',
     scope: {
@@ -136,7 +137,7 @@ mod.directive('classVisualization', ($window: IWindowService) => {
     require: 'classVisualization',
     link($scope: IScope, element: JQuery, _attributes: IAttributes, controller: ClassVisualizationController) {
 
-      controller.paperHolder = new PaperHolder(element, controller, $window);
+      controller.paperHolder = new PaperHolder(element, controller, $window, zone);
       controller.svg = () => element.find('svg')[0] as any as SVGElement;
       controller.canvas = element.find('canvas')[0] as HTMLCanvasElement;
 
@@ -181,7 +182,7 @@ mod.directive('classVisualization', ($window: IWindowService) => {
       window.setTimeout(setDimensions);
       controller.setDimensions = () => window.setTimeout(setDimensionsIfNotAlreadyInProgress);
 
-      $window.Zone.current.parent.run(() => {
+      zone.runOutsideAngular(() => {
         window.addEventListener('resize', setDimensionsIfNotAlreadyInProgress);
         window.addEventListener('mousedown', setClickType);
       });

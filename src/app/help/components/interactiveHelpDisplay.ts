@@ -15,6 +15,7 @@ import { contains } from 'yti-common-ui/utils/array';
 import { ConfirmationModal } from 'app/components/common/confirmationModal';
 import { moveCursorToEnd, scrollToTop } from 'app/help/utils';
 import gettextCatalog = angular.gettext.gettextCatalog;
+import { NgZone } from '@angular/core';
 
 const popupAnimationTimeInMs = 300; // should match css help-popover transition time
 const arrowHeight = 13;
@@ -95,7 +96,8 @@ class InteractiveHelpController {
               confirmationModal: ConfirmationModal,
               private help: InteractiveHelp,
               stateInitialization: () => IPromise<boolean>,
-              $window: IWindowService) {
+              $window: IWindowService,
+              zone: NgZone) {
 
     let continuing = false;
 
@@ -170,7 +172,7 @@ class InteractiveHelpController {
 
     $scope.$watch(() => this.getPopoverDimensions(), debounceUpdatePositions, true);
 
-    $window.Zone.current.parent.run(() => {
+    zone.runOutsideAngular(() => {
       window.addEventListener('resize', debounceUpdatePositions);
       window.addEventListener('scroll', debounceUpdatePositions);
     });
