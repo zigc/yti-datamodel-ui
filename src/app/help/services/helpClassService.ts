@@ -178,7 +178,7 @@ export class InteractiveHelpClassService implements ClassService, ResetableServi
         graph.valueShape = predicateOrExternal.valueClass && predicateOrExternal.valueClass.curie;
       }
 
-      const newProperty = new Property(graph, context, frames.propertyFrame(graph));
+      const newProperty = new Property(graph, context, frames.propertyFrame({ '@context': context, '@graph': [graph]}));
       newProperty.status = 'DRAFT';
 
       return this.$q.when(newProperty);
