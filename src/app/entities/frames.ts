@@ -41,6 +41,7 @@ const conceptContext = Object.assign({}, coreContext, {
 });
 
 const classificationContext = Object.assign({}, coreContext, {
+  order: { '@id': 'http://www.w3.org/ns/shacl#order' },
 });
 
 const organizationContext = Object.assign({}, coreContext, {
@@ -187,7 +188,7 @@ export function usageFrame(data: any) {
 }
 
 export function propertyFrame(data: any) {
-  return frame(data, propertyContext, { '@id': data['@id'] });
+  return frame(data, propertyContext, { '@id': data['@graph'][0]['@id'] });
 }
 
 export function predicateListFrame(data: any) {
@@ -264,7 +265,11 @@ export function classificationListFrame(data: any) {
   return frame(data, classificationContext, {
     '@type': 'foaf:Group',
     identifier: {},
-    order: { '@id': 'http://www.w3.org/ns/shacl#order', '@type': '@id' }
+    hasPart: {
+      '@omitDefault': true,
+      '@default': [],
+      '@embed': false
+    }
   });
 }
 
