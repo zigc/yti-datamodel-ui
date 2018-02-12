@@ -28,6 +28,10 @@ class InteractiveHelpUser implements User {
   isInOrganization(organizationIds: UUID | UUID[], roles: Role | Role[]): boolean {
     return true;
   }
+
+  isInRoleInAnyOrganization(role: Role|Role[]) {
+    return true;
+  }
 }
 
 export class InteractiveHelpUserService implements UserService, ResetableService {

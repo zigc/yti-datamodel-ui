@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2018-01-22 20:23+0200\n"
+"PO-Revision-Date: 2018-02-12 17:31+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -1081,7 +1081,7 @@ msgstr ""
 msgid "Editorial note info"
 msgstr ""
 
-#: app/components/user/userPage.html:13
+#: app/components/user/userPage.html:15
 msgid "Email"
 msgstr ""
 
@@ -1558,7 +1558,7 @@ msgstr "You can modify Application Profile from here"
 msgid "Must be imported namespace"
 msgstr ""
 
-#: app/components/user/userPage.html:8
+#: app/components/user/userPage.html:10
 msgid "Name"
 msgstr ""
 
@@ -1727,7 +1727,7 @@ msgstr ""
 msgid "Optional metadata"
 msgstr ""
 
-#: app/components/user/userPage.html:18
+#: app/components/user/userPage.html:20
 msgid "Organizations and roles"
 msgstr ""
 
@@ -2358,11 +2358,11 @@ msgstr ""
 msgid "Self reference not allowed"
 msgstr ""
 
-#: app/components/user/userPage.html:45
+#: app/components/user/userPage.html:47
 msgid "Send"
 msgstr ""
 
-#: app/components/user/userPage.html:35
+#: app/components/user/userPage.html:37
 msgid "Send access request"
 msgstr ""
 
@@ -2622,7 +2622,7 @@ msgstr ""
 msgid "Unknown namespace"
 msgstr ""
 
-#: app/components/user/userPage.html:22
+#: app/components/user/userPage.html:24
 msgid "Unknown organization"
 msgstr ""
 
@@ -2660,7 +2660,7 @@ msgid "Use selection"
 msgstr ""
 
 #: app/components/navigation/navigationBar.html:51
-#: app/components/user/userPage.html:4
+#: app/components/user/userPage.html:6
 msgid "User details"
 msgstr ""
 
@@ -2670,6 +2670,10 @@ msgstr ""
 
 #: translations/misc.html:149
 msgid "User name"
+msgstr ""
+
+#: app/components/navigation/navigationBar.html:55
+msgid "User right management"
 msgstr ""
 
 #: translations/titles.html:42
@@ -2704,7 +2708,7 @@ msgstr "Terminology info"
 msgid "Vocabulary name"
 msgstr "Terminology name"
 
-#: app/components/user/userPage.html:26
+#: app/components/user/userPage.html:28
 msgid "Waiting for approval"
 msgstr ""
 

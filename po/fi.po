@@ -546,7 +546,7 @@ msgstr "Sulje"
 
 #: translations/misc.html:286
 msgid "CODE_LIST_EDITOR"
-msgstr "Kqodistotyöntekijä"
+msgstr "Koodistotyöntekijä"
 
 #: translations/misc.html:137
 msgid "Concept"
@@ -1101,7 +1101,7 @@ msgstr "Muokkaajan kommentti"
 msgid "Editorial note info"
 msgstr ""
 
-#: app/components/user/userPage.html:13
+#: app/components/user/userPage.html:15
 msgid "Email"
 msgstr "Sähköposti"
 
@@ -1587,7 +1587,7 @@ msgstr ""
 msgid "Must be imported namespace"
 msgstr "Nimiavaruutta ei ole lisätty riippuvuudeksi"
 
-#: app/components/user/userPage.html:8
+#: app/components/user/userPage.html:10
 msgid "Name"
 msgstr "Nimi"
 
@@ -1756,7 +1756,7 @@ msgstr ""
 msgid "Optional metadata"
 msgstr "Valinnaiset metatiedot"
 
-#: app/components/user/userPage.html:18
+#: app/components/user/userPage.html:20
 msgid "Organizations and roles"
 msgstr "Organisaatiot ja roolit"
 
@@ -2397,11 +2397,11 @@ msgstr ""
 msgid "Self reference not allowed"
 msgstr "Viittaus itseensä ei ole sallittu"
 
-#: app/components/user/userPage.html:45
+#: app/components/user/userPage.html:47
 msgid "Send"
 msgstr "Lähetä"
 
-#: app/components/user/userPage.html:35
+#: app/components/user/userPage.html:37
 msgid "Send access request"
 msgstr "Lähetä käyttöoikeuspyyntö"
 
@@ -2665,7 +2665,7 @@ msgstr "Yksilöllinen nimi"
 msgid "Unknown namespace"
 msgstr "Tuntematon nimiavaruus"
 
-#: app/components/user/userPage.html:22
+#: app/components/user/userPage.html:24
 msgid "Unknown organization"
 msgstr "Tuntematon organisaatio"
 
@@ -2703,7 +2703,7 @@ msgid "Use selection"
 msgstr "Käytä valintaa"
 
 #: app/components/navigation/navigationBar.html:51
-#: app/components/user/userPage.html:4
+#: app/components/user/userPage.html:6
 msgid "User details"
 msgstr "Käyttäjätiedot"
 
@@ -2714,6 +2714,10 @@ msgstr "Käyttäjätunnus"
 #: translations/misc.html:149
 msgid "User name"
 msgstr "Nimi"
+
+#: app/components/navigation/navigationBar.html:55
+msgid "User right management"
+msgstr "Oikeuksienhallinta"
 
 #: translations/titles.html:42
 msgid "Value class"
@@ -2747,7 +2751,7 @@ msgstr ""
 msgid "Vocabulary name"
 msgstr "Sanaston nimi"
 
-#: app/components/user/userPage.html:26
+#: app/components/user/userPage.html:28
 msgid "Waiting for approval"
 msgstr "Odottaa hyväksyntää"
 

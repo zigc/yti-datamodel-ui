@@ -12,6 +12,7 @@ import { InteractiveHelpService } from 'app/help/services/interactiveHelpService
 import { identity } from 'yti-common-ui/utils/object';
 import { modalCancelHandler } from 'app/utils/angular';
 import { ImpersonationService } from '../../services/impersonationService';
+import { ConfigService } from 'app/services/configService';
 
 mod.directive('navigationBar', () => {
   return {
@@ -39,6 +40,7 @@ class NavigationController {
   helps: InteractiveHelp[];
 
   fakeableUsers: { email: string, firstName: string, lastName: string }[] = [];
+  groupManagementUrl: string;
 
   /* @ngInject */
   constructor($scope: IScope,
@@ -49,7 +51,8 @@ class NavigationController {
               impersonationService: ImpersonationService,
               private loginModal: LoginModalService,
               private interactiveHelpService: InteractiveHelpService,
-              private helpSelectionModal: HelpSelectionModal) {
+              private helpSelectionModal: HelpSelectionModal,
+              configService: ConfigService) {
 
     impersonationService.getFakeableUsers()
       .then(users => this.fakeableUsers = users);
@@ -65,6 +68,9 @@ class NavigationController {
         });
       }
     });
+
+    configService.getUrlConfig()
+      .then(config => this.groupManagementUrl = config.groupsManagementUrl);
   }
 
   fakeUser(userEmail: string) {
@@ -89,6 +95,10 @@ class NavigationController {
 
   isLoggedIn() {
     return !this.user.anonymous;
+  }
+
+  showGroupManagementLink() {
+    return this.user.superuser || this.user.isInRoleInAnyOrganization('ADMIN');
   }
 
   logOut() {

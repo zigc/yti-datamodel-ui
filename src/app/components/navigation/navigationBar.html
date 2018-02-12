@@ -52,6 +52,9 @@
            ng-if="ctrl.isLoggedIn()"
            ng-href="/user"
            translate>User details</a>
+        <a class="dropdown-item"
+           ng-if="ctrl.showGroupManagementLink()"
+           ng-href="{{ctrl.groupManagementUrl}}" target="_blank" translate>User right management</a>
       </div>
     </li>
   </ul>
