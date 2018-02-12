@@ -107,7 +107,7 @@ export class FrontPageController implements HelpProvider {
       return !org || anyMatching(model.contributors, modelOrg => modelOrg.id.equals(org.id));
     }
 
-    this.subscriptionsToClean.push(Observable.combineLatest(classifications$, models$, this.search$, this.modelType$, this.organization$, languageService.language$)
+    Observable.combineLatest(classifications$, models$, this.search$, this.modelType$, this.organization$)
       .subscribe(([classifications, models, search, modelType, org]) => {
 
         const matchingVocabularies = models.filter(model =>
@@ -119,9 +119,8 @@ export class FrontPageController implements HelpProvider {
         const modelCount = (classification: Classification) =>
           matchingVocabularies.filter(voc => classificationMatches(classification, voc)).length;
 
-        this.classifications = classifications.map(c => ({ node: c, count: modelCount(c) }));
-        this.classifications.sort(comparingLocalizable<{ node: Classification }>(localizer, c => c.node.label));
-      }));
+        this.classifications = classifications.map(c => ({ node: c, count: modelCount(c) })).filter(c => c.count > 0);
+      });
 
     this.subscriptionsToClean.push(Observable.combineLatest(models$, this.search$, this.classification$, this.modelType$, this.organization$, languageService.language$)
       .subscribe(([models, search, classification, modelType, org]) => {

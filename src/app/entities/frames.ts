@@ -263,7 +263,8 @@ export function classificationListFrame(data: any) {
 
   return frame(data, classificationContext, {
     '@type': 'foaf:Group',
-    identifier: {}
+    identifier: {},
+    order: { '@id': 'http://www.w3.org/ns/shacl#order', '@type': '@id' }
   });
 }
 

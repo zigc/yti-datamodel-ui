@@ -4,6 +4,7 @@ import { config } from 'config';
 import * as frames from 'app/entities/frames';
 import { Classification } from 'app/entities/classification';
 import { FrameService } from './frameService';
+import { comparingPrimitive } from 'yti-common-ui/utils/comparator';
 
 export class ClassificationService {
 
@@ -17,7 +18,11 @@ export class ClassificationService {
     return this.$http.get<GraphData>(config.apiEndpointWithName('serviceCategories'), {
       headers: { Accept: 'application/ld+json'}
     })
-      .then(response => this.deserializeClassification(response.data!));
+      .then(response => this.deserializeClassification(response.data!))
+      .then(classifications => {
+        classifications.sort(comparingPrimitive<Classification>(c => c.order));
+        return classifications;
+      });
   }
 
   private deserializeClassification(data: GraphData): IPromise<Classification[]> {
