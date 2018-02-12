@@ -2,8 +2,6 @@
 /// <reference types="jasmine" />
 
 import { FrontPage } from '../pages/frontPage.po';
-import { GroupPage } from '../pages/group/groupPage.po';
-import { expectCurrentUrlToEqualPath } from '../util/url';
 
 describe('Front page', () => {
 
@@ -19,10 +17,4 @@ describe('Front page', () => {
     expect(page.footer.isPresent()).toBe(true);
   });
 
-  it('group should be navigable', () => {
-    const firstLink = page.groupLinks.first();
-    expect(firstLink.getText()).toBe('Yhteiset tietokomponentit');
-    firstLink.click();
-    expectCurrentUrlToEqualPath(GroupPage.path(GroupPage.JHS_ID));
-  });
 });

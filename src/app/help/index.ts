@@ -11,7 +11,6 @@ import { InteractiveHelpVisualizationService } from './services/helpVisualizatio
 import { InteractiveHelpValidatorService } from './services/helpValidatorService';
 
 import { FrontPageHelpService } from './frontPageHelp';
-import { GroupPageHelpService } from './groupPageHelp';
 import { ModelPageHelpService } from './modelPageHelp';
 
 import { InteractiveHelpDisplay } from './components/interactiveHelpDisplay';
@@ -26,7 +25,6 @@ mod.service('helpVisualizationService', InteractiveHelpVisualizationService);
 mod.service('helpValidatorService', InteractiveHelpValidatorService);
 
 mod.service('frontPageHelpService', FrontPageHelpService);
-mod.service('groupPageHelpService', GroupPageHelpService);
 mod.service('modelPageHelpService', ModelPageHelpService);
 
 mod.service('interactiveHelpDisplay', InteractiveHelpDisplay);

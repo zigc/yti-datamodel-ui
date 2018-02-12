@@ -1,5 +1,4 @@
 import { Model } from 'app/entities/model';
-import { Group } from 'app/entities/group';
 import { Localizable } from 'yti-common-ui/types/localization';
 import { KnownModelType } from '../types/entity';
 
@@ -25,10 +24,6 @@ export class LocationService {
 
   atModel(model: Model, selection: Location|null): void {
     this.changeLocation(selection ? [model, selection] : [model]);
-  }
-
-  atGroup(group: Group): void {
-    this.changeLocation([group]);
   }
 
   atUser(): void {
