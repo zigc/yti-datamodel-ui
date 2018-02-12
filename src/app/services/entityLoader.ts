@@ -168,7 +168,7 @@ export class EntityLoader {
         this.modelService.newModel(
           details.prefix,
           details.label['fi'],
-          ['EDUC'],
+          ['P1'],
           ['88ce73b9-376c-4ff1-8c51-e4159b0af75c'],
           ['fi', 'en'],
           type
