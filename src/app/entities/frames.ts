@@ -188,7 +188,9 @@ export function usageFrame(data: any) {
 }
 
 export function propertyFrame(data: any) {
-  return frame(data, propertyContext, { '@id': data['@graph'][0]['@id'] });
+  return frame(data, propertyContext, {
+    predicate: {}
+  });
 }
 
 export function predicateListFrame(data: any) {
