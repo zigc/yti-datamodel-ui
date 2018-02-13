@@ -215,11 +215,21 @@ export class ModelPageController implements ModelPageActions, HelpProvider, Mode
         .then(() => true, modelNotFoundHandler)
         .then(() => this.$q.all([this.selectRouteOrDefault(routeData).then(() => true, resourceNotFoundHandler), this.updateSelectables()]))
         .then(() => this.updateLocation())
-        .then(() => this.loading = false);
+        .then(() => this.loading = false)
+        .catch(err => {
+          // TODO handle with error modal
+          console.log(err);
+          throw err;
+        });
 
     } else if (selectionChanged) {
       this.selectRouteOrDefault(routeData).then(() => true, resourceNotFoundHandler)
-        .then(() => this.updateLocation());
+        .then(() => this.updateLocation())
+        .catch(err => {
+          // TODO handle with error modal
+          console.log(err);
+          throw err;
+        });
     }
   }
 
