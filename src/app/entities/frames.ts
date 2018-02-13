@@ -370,7 +370,7 @@ export function classVisualizationFrame(data: any) {
       '@embed': false
     },
     scopeClass: {
-      'embed': false
+      '@embed': false
     },
     isDefinedBy: {
       '@embed': false
