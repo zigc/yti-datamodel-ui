@@ -86,10 +86,10 @@ const propertyContext = Object.assign({}, coreContext, predicateContext, referen
   memberOf: { '@id': 'http://purl.org/dc/dcam/memberOf'},
   stem: { '@id': 'http://www.w3.org/ns/shacl#stem', '@type': '@id' },
   language: { '@id': 'http://purl.org/dc/terms/language', '@container': '@list' },
-  isResourceIdentifier: { '@id': 'http://iow.csc.fi/ns/iow#isResourceIdentifier' },
+  isResourceIdentifier: { '@id': 'http://uri.suomi.fi/datamodel/ns/iow#isResourceIdentifier' },
   uniqueLang: { '@id': 'http://www.w3.org/ns/shacl#uniqueLang' },
-  isXmlWrapper: { '@id': 'http://iow.csc.fi/ns/iow#isXmlWrapper' },
-  isXmlAttribute: { '@id': 'http://iow.csc.fi/ns/iow#isXmlAttribute' }
+  isXmlWrapper: { '@id': 'http://uri.suomi.fi/datamodel/ns/iow#isXmlWrapper' },
+  isXmlAttribute: { '@id': 'http://uri.suomi.fi/datamodel/ns/iow#isXmlAttribute' }
 });
 
 const classContext = Object.assign({}, coreContext, propertyContext, conceptContext, {
@@ -124,7 +124,7 @@ const modelContext = Object.assign({}, coreContext, namespaceContext, referenceD
   references: { '@id': 'http://purl.org/dc/terms/references', '@type': '@id' },
   requires: { '@id': 'http://purl.org/dc/terms/requires', '@type': '@id' },
   relations: { '@id': 'http://purl.org/dc/terms/relation', '@container': '@list' },
-  codeLists: { '@id': 'http://iow.csc.fi/ns/iow#codeLists', '@type': '@id' },
+  codeLists: { '@id': 'http://http://uri.suomi.fi/datamodel/ns/iow#codeLists', '@type': '@id' },
   language: { '@id': 'http://purl.org/dc/terms/language', '@container': '@list' }
 });
 
@@ -135,8 +135,8 @@ const usageContext = Object.assign({}, coreContext, modelContext, {
 const modelPositionContext = Object.assign({}, coreContext, {
   predicate,
   property,
-  pointXY: { '@id': 'http://iow.csc.fi/ns/iow#pointXY' },
-  vertexXY: { '@id': 'http://iow.csc.fi/ns/iow#vertexXY', '@container': '@list' }
+  pointXY: { '@id': 'http://http://uri.suomi.fi/datamodel/ns/iow#pointXY' },
+  vertexXY: { '@id': 'http://http://uri.suomi.fi/datamodel/ns/iow#vertexXY', '@container': '@list' }
 });
 
 const searchResultContext = Object.assign({}, coreContext, modelContext, {});
