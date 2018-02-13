@@ -18,8 +18,7 @@ export class Uri {
       throw new Error('Context not defined');
     }
     if (typeof value !== 'string') {
-      console.log(value);
-      throw new Error('Uri value must be string: ' + value);
+      throw new Error('Uri value must be string: \n' + JSON.stringify(value, null, 2));
     }
   }
 
