@@ -1,6 +1,6 @@
 /// <reference types="node" />
 
-import { ILogCall, ILogService, IQService } from 'angular';
+import { IQService } from 'angular';
 import { EntityLoader } from '../src/app/services/entityLoader';
 import { httpService } from './requestToAngularHttpService';
 import { DefaultPredicateService } from '../src/app/services/predicateService';
@@ -19,10 +19,8 @@ const argv = require('optimist')
 
 process.env['API_ENDPOINT'] = `http://${argv.host}:${argv.port}/api`;
 
-const logFn: ILogCall = (...args: any[]) => console.log(args);
-const log: ILogService = { debug: logFn, error: logFn, info: logFn, log: logFn, warn: logFn };
 const q = <IQService> require('q');
-const frameService = new FrameService(log);
+const frameService = new FrameService();
 const modelService = new DefaultModelService(httpService, q, frameService);
 const predicateService = new DefaultPredicateService(httpService, q, frameService);
 const classService = new DefaultClassService(httpService, q, predicateService, frameService);

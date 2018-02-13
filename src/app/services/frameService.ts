@@ -1,4 +1,4 @@
-import { ILogService, IPromise } from 'angular';
+import { IPromise } from 'angular';
 import {
   GraphData, EntityFactory, EntityConstructor,
   EntityArrayFactory, EntityArrayConstructor
@@ -10,36 +10,52 @@ const jsonld: any = require('jsonld');
 
 export class FrameService {
 
-  /* @ngInject */
-  constructor(private $log: ILogService) {
-  }
-
   private frameData(data: GraphData, frame: any): IPromise<GraphData> {
     return jsonld.promises.frame(data, frame)
       .then((framed: any) => framed, (err: any) => {
-        this.$log.error(frame);
-        this.$log.error(data);
-        this.$log.error(err.message);
-        this.$log.error(err.details.cause);
+        console.log('Error: ' + err.message);
+        console.log('Cause: ' + err.details.cause);
+        this.logDataForError(data, frame);
       });
   }
 
+  private logDataForError(data: any, frame: any, framed?: any): void {
+
+    console.log('==== Data ===');
+    console.log(JSON.stringify(data, null, 2));
+    console.log('==== Frame ===');
+    console.log(JSON.stringify(frame, null, 2));
+
+    if (framed) {
+      console.log('==== Framed ===');
+      console.log(JSON.stringify(framed, null, 2));
+    }
+  }
 
   frameAndMap<T extends GraphNode>(data: GraphData, optional: boolean, frame: {}, entityFactory: EntityFactory<T>): IPromise<T|null> {
 
     return this.frameData(data, frame)
       .then(framed => {
         try {
-          if (optional && framed['@graph'].length === 0) {
-            return null;
-          } else if (framed['@graph'].length > 1) {
+          if (framed['@graph'].length > 1) {
             throw new Error('Multiple graphs found: \n' + JSON.stringify(framed, null, 2));
           } else {
+
+            if (framed['@graph'].length === 0) {
+              if (optional) {
+                return null;
+              } else {
+                throw new Error('Required object but after framing got none');
+              }
+            }
+
             const entity: EntityConstructor<T> = entityFactory(framed);
+
             return new entity(framed['@graph'][0], framed['@context'], frame);
           }
         } catch (error) {
-          this.$log.error(error);
+          console.log(error);
+          this.logDataForError(data, frame, framed);
           throw error;
         }
       });
@@ -55,7 +71,8 @@ export class FrameService {
             return new entity(element, framed['@context'], frame);
           });
         } catch (error) {
-          this.$log.error(error);
+          console.log(error);
+          this.logDataForError(data, frame, framed);
           throw error;
         }
       });
@@ -69,7 +86,8 @@ export class FrameService {
           const entity: EntityArrayConstructor<T, A> = entityArrayFactory(framed);
           return new entity(framed['@graph'], framed['@context'], frame);
         } catch (error) {
-          this.$log.error(error);
+          console.log(error);
+          this.logDataForError(data, frame, framed);
           throw error;
         }
       });
