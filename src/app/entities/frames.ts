@@ -212,7 +212,15 @@ export function predicateFrame(data: any) {
   return frame(data, predicateContext, {
     '@type': ['owl:DatatypeProperty', 'owl:ObjectProperty', 'rdf:Property'],
     isDefinedBy: {'@embed': '@always'},
-    subject: embeddedSubject
+    subject: embeddedSubject,
+    equivalentProperty: {
+      '@omitDefault': true,
+      '@default': [],
+      '@embed': false
+    },
+    subPropertyOf: {
+      '@embed': false
+    }
   });
 }
 
@@ -221,6 +229,12 @@ export function classFrame(data: any) {
     '@type': ['rdfs:Class', 'sh:Shape'],
     isDefinedBy: { '@embed': '@always' },
     subject: embeddedSubject,
+    scopeClass: {
+      '@embed': false
+    },
+    subClassOf: {
+      '@embed': false
+    },
     property: {
       valueShape: {
         '@omitDefault': true,
