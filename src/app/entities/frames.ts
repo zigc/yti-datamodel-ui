@@ -367,6 +367,9 @@ export function classVisualizationFrame(data: any) {
     subClassOf: {
       '@embed': false
     },
+    scopeClass: {
+      'embed': false
+    },
     isDefinedBy: {
       '@embed': false
     }
