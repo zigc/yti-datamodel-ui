@@ -46,7 +46,7 @@ export class DefaultPredicateService implements PredicateService {
   getPredicate(id: Uri|Urn, model?: Model): IPromise<Predicate> {
     return this.$http.get<GraphData>(config.apiEndpointWithName('predicate'), {params: {id: id.toString()}})
       .then(expandContextWithKnownModels(model))
-      .then(response => this.deserializePredicate(response.data!));
+      .then(response => this.deserializePredicate(response.data!, false));
   }
 
   getAllPredicates(model: Model): IPromise<PredicateListItem[]> {
@@ -151,7 +151,7 @@ export class DefaultPredicateService implements PredicateService {
 
     return this.$http.get<GraphData>(config.apiEndpointWithName('predicateCreator'), {params})
       .then(expandContextWithKnownModels(model))
-      .then(response => this.deserializePredicate(response.data!))
+      .then(response => this.deserializePredicate(response.data!, false))
       .then((predicate: T) => {
         predicate.definedBy = model.asDefinedBy();
         if (predicate instanceof Attribute && !predicate.dataType) {
@@ -226,7 +226,7 @@ export class DefaultPredicateService implements PredicateService {
   getExternalPredicate(externalId: Uri, model: Model) {
     return this.$http.get<GraphData>(config.apiEndpointWithName('externalPredicate'), {params: {model: model.id.uri, id: externalId.uri}})
       .then(expandContextWithKnownModels(model))
-      .then(response => this.deserializePredicate(response.data!))
+      .then(response => this.deserializePredicate(response.data!, true))
       .then(predicate => {
         if (predicate) {
           predicate.external = true;
@@ -245,7 +245,7 @@ export class DefaultPredicateService implements PredicateService {
     return this.frameService.frameAndMapArray(data, frames.predicateListFrame(data), () => PredicateListItem);
   }
 
-  private deserializePredicate(data: GraphData): IPromise<Attribute|Association|Predicate> {
+  private deserializePredicate(data: GraphData, optional: boolean): IPromise<Attribute|Association|Predicate> {
 
     const entityFactory: EntityFactory<Predicate> = (framedData) => {
       const types = typeSerializer.deserialize(framedData['@graph'][0]['@type']);
@@ -261,6 +261,6 @@ export class DefaultPredicateService implements PredicateService {
       }
     };
 
-    return this.frameService.frameAndMap(data, true, frames.predicateFrame(data), entityFactory);
+    return this.frameService.frameAndMap(data, optional, frames.predicateFrame(data), entityFactory);
   }
 }
