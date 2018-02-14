@@ -8,6 +8,7 @@ import { LocationService } from 'app/services/locationService';
 import { Classification } from '../../entities/classification';
 import { remove } from 'yti-common-ui/utils/array';
 import { Organization } from '../../entities/organization';
+import { ErrorModal } from '../form/errorModal';
 
 interface EditableForm extends IFormController {
   editing: boolean;
@@ -46,7 +47,8 @@ export class NewModelPageController {
   /* @ngInject */
   constructor(private $location: ILocationService,
               private modelService: ModelService,
-              locationService: LocationService) {
+              locationService: LocationService,
+              private errorModal: ErrorModal) {
 
     locationService.atNewModel(this.type);
   }
@@ -87,6 +89,9 @@ export class NewModelPageController {
         this.modelService.createModel(model).then(() => {
           this.$location.url(model.iowUrl());
         }, () => this.persisting = false);
+      }, err => {
+        this.errorModal.openSubmitError((err.data && err.data.errorMessage) || 'Unexpected error');
+        this.persisting = false;
       });
   }
 
