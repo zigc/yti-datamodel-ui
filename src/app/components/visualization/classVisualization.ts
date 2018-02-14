@@ -150,7 +150,7 @@ mod.directive('classVisualization', ($window: IWindowService, zone: NgZone) => {
 
       const setDimensions = () => {
 
-        const canvasWidth = visualizationContainerElement.width() - canvasWidthOffset;
+        const canvasWidth = Math.max(visualizationContainerElement.width() - canvasWidthOffset, 0);
         const canvasHeight = element.height();
 
         controller.dimensionChangeInProgress = true;
