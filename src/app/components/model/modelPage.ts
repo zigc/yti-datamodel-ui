@@ -193,6 +193,17 @@ export class ModelPageController implements ModelPageActions, HelpProvider, Mode
         this.updateLocation();
       }
     });
+
+    $scope.$watch(() => this.visualizationMaximized, maximized => {
+
+      const body = angular.element('body');
+
+      if (maximized) {
+        body.addClass('visualization-maximized');
+      } else {
+        body.removeClass('visualization-maximized');
+      }
+    });
   }
 
   private init(routeData: RouteData) {

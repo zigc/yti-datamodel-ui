@@ -949,3 +949,7 @@ ajax-loading-indicator-small {
     box-shadow: 2px 2px 2px $light;
   }
 }
+
+body.visualization-maximized {
+  overflow: hidden !important;
+}
