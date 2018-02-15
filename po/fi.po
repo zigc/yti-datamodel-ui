@@ -1506,6 +1506,10 @@ msgstr "Enimmäispituus"
 msgid "Max length info"
 msgstr "Sallitun arvon enimmäispituus"
 
+#: translations/misc.html:287
+msgid "Maximize"
+msgstr "Suurenna"
+
 #: translations/misc.html:152
 msgid "Member groups"
 msgstr "Käyttäjänä ryhmissä"
@@ -1525,6 +1529,10 @@ msgstr "Vähimmäispituus"
 #: translations/titles.html:65
 msgid "Min length info"
 msgstr "Sallitun arvon minimipituus"
+
+#: translations/misc.html:288
+msgid "Minimize"
+msgstr "Pienennä"
 
 #: app/components/frontPage.html:67 translations/misc.html:33
 msgid "model"

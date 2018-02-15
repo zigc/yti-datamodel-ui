@@ -1443,6 +1443,10 @@ msgstr ""
 msgid "Max length info"
 msgstr ""
 
+#: translations/misc.html:287
+msgid "Maximize"
+msgstr ""
+
 #: translations/misc.html:152
 msgid "Member groups"
 msgstr ""
@@ -1461,6 +1465,10 @@ msgstr ""
 
 #: translations/titles.html:65
 msgid "Min length info"
+msgstr ""
+
+#: translations/misc.html:288
+msgid "Minimize"
 msgstr ""
 
 #: app/components/frontPage.html:67

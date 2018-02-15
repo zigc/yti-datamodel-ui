@@ -84,11 +84,12 @@
             <divider ng-if="ctrl.show === 1" selection-width="ctrl.selectionWidth"></divider>
 
             <visualization-view ng-if="ctrl.model"
-                                ng-class="{'without-divider': ctrl.show !== 1}"
+                                ng-class="{'without-divider': ctrl.show !== 1, maximized: ctrl.visualizationMaximized}"
                                 selection="ctrl.selection"
                                 model="ctrl.model"
                                 show="ctrl.show"
-                                model-page-actions="ctrl">
+                                model-page-actions="ctrl"
+                                maximized="ctrl.visualizationMaximized">
             </visualization-view>
           </div>
         </div>

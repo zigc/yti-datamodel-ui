@@ -81,6 +81,7 @@ export class ModelPageController implements ModelPageActions, HelpProvider, Mode
   attributes: SelectableItem[] = [];
   selectionWidth: number;
   private _show: Show;
+  visualizationMaximized = false;
 
   activeTab = 0;
   tabs = [

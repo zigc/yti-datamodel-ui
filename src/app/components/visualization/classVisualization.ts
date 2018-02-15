@@ -1,7 +1,7 @@
 import { IAttributes, IPromise, IQService, IScope, ITimeoutService, IWindowService } from 'angular';
 import { LanguageService } from 'app/services/languageService';
 import { ClassVisualization, VisualizationService } from 'app/services/visualizationService';
-import { ClassInteractionListener } from 'app/types/visualization';
+import { ClassInteractionListener, Dimensions } from 'app/types/visualization';
 import { ChangeListener, Show } from 'app/types/component';
 import * as joint from 'jointjs';
 import { module as mod } from './module';
@@ -43,10 +43,27 @@ mod.directive('classVisualization', ($window: IWindowService, zone: NgZone) => {
     scope: {
       selection: '=',
       model: '=',
-      modelPageActions: '='
+      modelPageActions: '=',
+      maximized: '='
     },
     template: `
      <div class="visualization-buttons">
+       
+       <button ng-if="!ctrl.maximized" 
+               class="btn btn-link btn-lg pull-right"
+               uib-tooltip="{{'Maximize' | translate}}"
+               tooltip-placement="left"
+               ng-click="ctrl.maximized = true">
+        <i class="fa fa-window-maximize"></i>
+       </button>
+       
+       <button ng-if="ctrl.maximized" 
+               class="btn btn-link btn-lg pull-right"
+               uib-tooltip="{{'Minimize' | translate}}"
+               tooltip-placement="left"
+               ng-click="ctrl.maximized = false">
+        <i class="fa fa-window-minimize"></i>
+       </button>
        
        <button class="btn btn-secondary-action btn-sm" 
           ng-mousedown="ctrl.zoomOut()" 
@@ -141,54 +158,56 @@ mod.directive('classVisualization', ($window: IWindowService, zone: NgZone) => {
       controller.svg = () => element.find('svg')[0] as any as SVGElement;
       controller.canvas = element.find('canvas')[0] as HTMLCanvasElement;
 
-      const visualizationContainerElement = element.closest('.visualization-container');
+      const visualizationViewElement = element.closest('visualization-view');
 
-      const dividerWidth = 10;
-      const borderWidth = 1;
+      const currentDimensions = () => ({
+        width: visualizationViewElement.width(),
+        height: visualizationViewElement.height()
+      });
 
-      const canvasWidthOffset = dividerWidth + (2 * borderWidth);
+      const refreshDimensionsWaitingToStabilize = (initial: Dimensions) => {
 
-      const setDimensions = () => {
-
-        const canvasWidth = Math.max(visualizationContainerElement.width() - canvasWidthOffset, 0);
-        const canvasHeight = element.height();
-
-        controller.dimensionChangeInProgress = true;
         const paper = controller.paper;
-        const xd = paper.options.width! - canvasWidth;
-        const yd = paper.options.height! - canvasHeight;
 
-        if (xd || yd) {
-          paper.setDimensions(canvasWidth, canvasHeight);
-          moveOrigin(paper, xd / 2, yd / 2);
-          window.setTimeout(setDimensions);
+        const isDimensionChanged = (lhs: Dimensions, rhs: Dimensions) =>
+          lhs.width !== rhs.width || lhs.height !== rhs.height;
+
+        const previous = { width: paper.options.width!, height: paper.options.height! };
+        const current = currentDimensions();
+
+        if (isDimensionChanged(previous, current)) {
+          paper.setDimensions(current.width, current.height);
+          window.setTimeout(() => refreshDimensionsWaitingToStabilize(initial));
         } else {
-          const canvas = controller.canvas;
-          canvas.width = canvasWidth;
-          canvas.height = canvasHeight;
+          moveOrigin(paper, (initial.width - current.width) / 2, (initial.height - current.height) / 2);
           controller.dimensionChangeInProgress = false;
         }
       };
 
-      const setDimensionsIfNotAlreadyInProgress = () => {
+      const refreshDimensions = () => {
         if (!controller.dimensionChangeInProgress) {
-          setDimensions();
+
+          controller.dimensionChangeInProgress = true;
+          const initial = currentDimensions();
+
+          window.setTimeout(() =>
+            refreshDimensionsWaitingToStabilize(initial));
         }
       };
 
       const setClickType = (event: MouseEvent) => controller.clickType = event.which === 3 ? 'right' : 'left';
 
       // init
-      window.setTimeout(setDimensions);
-      controller.setDimensions = () => window.setTimeout(setDimensionsIfNotAlreadyInProgress);
+      controller.refreshDimensions = () => window.setTimeout(refreshDimensions);
 
       zone.runOutsideAngular(() => {
-        window.addEventListener('resize', setDimensionsIfNotAlreadyInProgress);
+        window.addEventListener('resize', refreshDimensions);
+        $scope.$watch(() => controller.maximized, refreshDimensions);
         window.addEventListener('mousedown', setClickType);
       });
 
       $scope.$on('$destroy', () => {
-        window.removeEventListener('resize', setDimensions);
+        window.removeEventListener('resize', refreshDimensions);
         window.removeEventListener('mousedown', setClickType);
       });
     },
@@ -219,7 +238,7 @@ class ClassVisualizationController implements ChangeListener<Class|Predicate>, C
   classVisualization: ClassVisualization;
   persistentPositions: ModelPositions;
 
-  setDimensions: () => void;
+  refreshDimensions: () => void;
 
   popoverDetails: VisualizationPopoverDetails|null;
 
@@ -232,6 +251,8 @@ class ClassVisualizationController implements ChangeListener<Class|Predicate>, C
   svg: () => SVGElement;
   canvas: HTMLCanvasElement;
   downloads: Download[];
+
+  maximized: boolean;
 
   /* @ngInject */
   constructor(private $scope: IScope,
@@ -581,7 +602,7 @@ class ClassVisualizationController implements ChangeListener<Class|Predicate>, C
   onResize(show: Show) {
 
     this.visible = show !== Show.Selection;
-    this.setDimensions();
+    this.refreshDimensions();
 
     if (this.visible) {
       this.executeQueue();

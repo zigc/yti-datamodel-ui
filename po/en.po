@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2018-02-12 17:31+0200\n"
+"PO-Revision-Date: 2018-02-15 09:27+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -1484,6 +1484,10 @@ msgstr ""
 msgid "Max length info"
 msgstr "Maximum length of the property value"
 
+#: translations/misc.html:287
+msgid "Maximize"
+msgstr ""
+
 #: translations/misc.html:152
 msgid "Member groups"
 msgstr ""
@@ -1503,6 +1507,10 @@ msgstr ""
 #: translations/titles.html:65
 msgid "Min length info"
 msgstr "Minimum length of the property value"
+
+#: translations/misc.html:288
+msgid "Minimize"
+msgstr ""
 
 #: app/components/frontPage.html:67 translations/misc.html:33
 msgid "model"
