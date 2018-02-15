@@ -50,7 +50,7 @@ mod.directive('classVisualization', ($window: IWindowService, zone: NgZone) => {
      <div class="visualization-buttons">
        
        <button ng-if="!ctrl.maximized" 
-               class="btn btn-link btn-lg pull-right"
+               class="btn btn-link btn-lg pull-right pt-0 pb-0 pr-0"
                uib-tooltip="{{'Maximize' | translate}}"
                tooltip-placement="left"
                ng-click="ctrl.maximized = true">
@@ -58,7 +58,7 @@ mod.directive('classVisualization', ($window: IWindowService, zone: NgZone) => {
        </button>
        
        <button ng-if="ctrl.maximized" 
-               class="btn btn-link btn-lg pull-right"
+               class="btn btn-link btn-lg pull-right pt-0 pb-0 pr-0"
                uib-tooltip="{{'Minimize' | translate}}"
                tooltip-placement="left"
                ng-click="ctrl.maximized = false">
