@@ -56,38 +56,33 @@
       <div class="panel-right">
 
         <div class="selection-container"
-             ng-style="{ width: ctrl.selectionWidth }"
-             ng-show="ctrl.show !== 2">
+             ng-style="{ width: ctrl.selectionWidth }">
 
           <class-view ng-if="ctrl.selection.isClass()"
                       data-class="ctrl.selection"
                       open-property-id="ctrl.openPropertyId"
                       model="ctrl.model"
-                      show="ctrl.show"
                       model-controller="ctrl">
           </class-view>
 
           <predicate-view ng-if="ctrl.selection.isPredicate()"
                           predicate="ctrl.selection"
                           model="ctrl.model"
-                          model-controller="ctrl"
-                          show="ctrl.show">
+                          model-controller="ctrl">
           </predicate-view>
         </div>
 
         <div class="visualization-container"
-             ng-style="{ width: ctrl.visualizationWidth }"
-             ng-show="ctrl.show !== 0">
+             ng-style="{ width: ctrl.visualizationWidth }">
 
           <div float width="auto">
 
-            <divider ng-if="ctrl.show === 1" selection-width="ctrl.selectionWidth"></divider>
+            <divider ng-if="ctrl.selection" selection-width="ctrl.selectionWidth"></divider>
 
             <visualization-view ng-if="ctrl.model"
-                                ng-class="{'without-divider': ctrl.show !== 1, maximized: ctrl.visualizationMaximized}"
+                                ng-class="{'without-divider': !ctrl.selection, maximized: ctrl.visualizationMaximized}"
                                 selection="ctrl.selection"
                                 model="ctrl.model"
-                                show="ctrl.show"
                                 model-page-actions="ctrl"
                                 maximized="ctrl.visualizationMaximized">
             </visualization-view>

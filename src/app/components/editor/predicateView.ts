@@ -3,7 +3,6 @@ import { PredicateService } from 'app/services/predicateService';
 import { UserService } from 'app/services/userService';
 import { EditableEntityController, EditableScope, Rights } from 'app/components/form/editableEntityController';
 import { DeleteConfirmationModal } from 'app/components/common/deleteConfirmationModal';
-import { Show } from 'app/types/component';
 import { ErrorModal } from 'app/components/form/errorModal';
 import { module as mod } from './module';
 import { Association, Attribute } from 'app/entities/predicate';
@@ -18,7 +17,6 @@ mod.directive('predicateView', () => {
       predicate: '=',
       model: '=',
       modelController: '=',
-      show: '=',
       width: '='
     },
     restrict: 'E',
@@ -35,7 +33,6 @@ export class PredicateViewController extends EditableEntityController<Associatio
   predicate: Association|Attribute;
   model: Model;
   modelController: ModelControllerService;
-  show: Show;
 
   /* @ngInject */
   constructor($scope: EditableScope,

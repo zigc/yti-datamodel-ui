@@ -1,10 +1,8 @@
-import { Show } from 'app/types/component';
 import { module as mod } from './module';
 
 mod.directive('selectionView', () => {
   return {
     scope: {
-      show: '=',
       editableController: '=',
       model: '='
     },
@@ -22,13 +20,4 @@ mod.directive('selectionView', () => {
 
 class SelectionViewController {
 
-  show: Show;
-
-  enlargeSelection() {
-    this.show--;
-  }
-
-  shrinkSelection() {
-    this.show++;
-  }
 }

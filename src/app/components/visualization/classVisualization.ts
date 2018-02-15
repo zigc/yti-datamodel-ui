@@ -2,7 +2,7 @@ import { IAttributes, IPromise, IQService, IScope, ITimeoutService, IWindowServi
 import { LanguageService } from 'app/services/languageService';
 import { ClassVisualization, VisualizationService } from 'app/services/visualizationService';
 import { ClassInteractionListener, Dimensions } from 'app/types/visualization';
-import { ChangeListener, Show } from 'app/types/component';
+import { ChangeListener } from 'app/types/component';
 import * as joint from 'jointjs';
 import { module as mod } from './module';
 import { Uri } from 'app/entities/uri';
@@ -599,9 +599,8 @@ class ClassVisualizationController implements ChangeListener<Class|Predicate>, C
     }
   }
 
-  onResize(show: Show) {
+  onResize() {
 
-    this.visible = show !== Show.Selection;
     this.refreshDimensions();
 
     if (this.visible) {

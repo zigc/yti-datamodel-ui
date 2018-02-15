@@ -4,7 +4,6 @@ import { ClassService } from 'app/services/classService';
 import { SearchPredicateModal } from './searchPredicateModal';
 import { UserService } from 'app/services/userService';
 import { DeleteConfirmationModal } from 'app/components/common/deleteConfirmationModal';
-import { Show } from 'app/types/component';
 import { module as mod } from './module';
 import { ErrorModal } from 'app/components/form/errorModal';
 import { modalCancelHandler } from 'app/utils/angular';
@@ -20,7 +19,6 @@ mod.directive('classView', () => {
       class: '=',
       model: '=',
       modelController: '=',
-      show: '=',
       openPropertyId: '='
     },
     restrict: 'E',
@@ -37,7 +35,6 @@ export class ClassViewController extends EditableEntityController<Class> {
   class: Class;
   model: Model;
   modelController: ModelControllerService;
-  show: Show;
   openPropertyId: string;
 
   /* @ngInject */

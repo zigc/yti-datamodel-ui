@@ -10,7 +10,7 @@ import { SearchClassModal } from 'app/components/editor/searchClassModal';
 import { SearchPredicateModal } from 'app/components/editor/searchPredicateModal';
 import { EntityCreation } from 'app/components/editor/searchConceptModal';
 import { WithDefinedBy } from 'app/types/entity';
-import { ChangeListener, ChangeNotifier, SearchClassType, Show } from 'app/types/component';
+import { ChangeListener, ChangeNotifier, SearchClassType } from 'app/types/component';
 import { Uri } from 'app/entities/uri';
 import { comparingLocalizable } from 'app/utils/comparator';
 import { AddPropertiesFromClassModal } from 'app/components/editor/addPropertiesFromClassModal';
@@ -24,8 +24,7 @@ import {
   Exclusion
 } from 'app/utils/exclusion';
 import { collectIds, glyphIconClassForType } from 'app/utils/entity';
-import { SessionService } from 'app/services/sessionService';
-import { areEqual, isDefined, Optional } from 'yti-common-ui/utils/object';
+import { areEqual, Optional } from 'yti-common-ui/utils/object';
 import { AbstractPredicate, Predicate, PredicateListItem } from 'app/entities/predicate';
 import { AbstractClass, Class, ClassListItem, Property } from 'app/entities/class';
 import { Model } from 'app/entities/model';
@@ -80,7 +79,6 @@ export class ModelPageController implements ModelPageActions, HelpProvider, Mode
   associations: SelectableItem[] = [];
   attributes: SelectableItem[] = [];
   selectionWidth: number;
-  private _show: Show;
   visualizationMaximized = false;
 
   activeTab = 0;
@@ -111,14 +109,12 @@ export class ModelPageController implements ModelPageActions, HelpProvider, Mode
               private confirmationModal: ConfirmationModal,
               private notificationModal: NotificationModal,
               private addPropertiesFromClassModal: AddPropertiesFromClassModal,
-              private sessionService: SessionService,
               public languageService: LanguageService,
               interactiveHelpService: InteractiveHelpService,
               modelPageHelpService: ModelPageHelpService,
               private authorizationManagerService: AuthorizationManagerService) {
 
     this.localizerProvider = () => languageService.createLocalizer(this.model);
-    this._show = sessionService.show;
 
     this.initialRoute = $route.current!;
     this.currentRouteParams = this.initialRoute.params;
@@ -161,12 +157,6 @@ export class ModelPageController implements ModelPageActions, HelpProvider, Mode
         }
         this.updateLocation();
       }
-
-      if (!selection) {
-        this._show = Show.Visualization;
-      } else if (!oldSelection) {
-        this._show = this.sessionService.show !== Show.Visualization ? this.sessionService.show : Show.Both;
-      }
     });
 
     $scope.$watch(() => this.model && this.languageService.getModelLanguage(this.model), () => {
@@ -175,15 +165,15 @@ export class ModelPageController implements ModelPageActions, HelpProvider, Mode
       }
     });
 
-    $scope.$watch(() => this.show, show => {
+    $scope.$watch(() => this.selection, () => {
       for (const changeListener of this.changeListeners) {
-        changeListener.onResize(show);
+        changeListener.onResize();
       }
     });
 
     $scope.$watch(() => this.selectionWidth, () => {
       for (const changeListener of this.changeListeners) {
-        changeListener.onResize(this.show);
+        changeListener.onResize();
       }
     });
 
@@ -272,16 +262,7 @@ export class ModelPageController implements ModelPageActions, HelpProvider, Mode
   }
 
   get visualizationWidth() {
-    return this.show !== 2 ? `calc(100% - ${this.selectionWidth}px)` : '100%';
-  }
-
-  get show() {
-    return isDefined(this._show) ? this._show : Show.Both;
-  }
-
-  set show(value: Show) {
-    this._show = value;
-    this.sessionService.show = value;
+    return this.selection ? `calc(100% - ${this.selectionWidth}px)` : '100%';
   }
 
   addListener(listener: ChangeListener<Class|Predicate>) {
