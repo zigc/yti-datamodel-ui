@@ -124,7 +124,7 @@ const modelContext = Object.assign({}, coreContext, namespaceContext, referenceD
   references: { '@id': 'http://purl.org/dc/terms/references', '@type': '@id' },
   requires: { '@id': 'http://purl.org/dc/terms/requires', '@type': '@id' },
   relations: { '@id': 'http://purl.org/dc/terms/relation', '@container': '@list' },
-  codeLists: { '@id': 'http://http://uri.suomi.fi/datamodel/ns/iow#codeLists', '@type': '@id' },
+  codeLists: { '@id': 'http://uri.suomi.fi/datamodel/ns/iow#codeLists', '@type': '@id' },
   language: { '@id': 'http://purl.org/dc/terms/language', '@container': '@list' }
 });
 
@@ -135,8 +135,8 @@ const usageContext = Object.assign({}, coreContext, modelContext, {
 const modelPositionContext = Object.assign({}, coreContext, {
   predicate,
   property,
-  pointXY: { '@id': 'http://http://uri.suomi.fi/datamodel/ns/iow#pointXY' },
-  vertexXY: { '@id': 'http://http://uri.suomi.fi/datamodel/ns/iow#vertexXY', '@container': '@list' }
+  pointXY: { '@id': 'http://uri.suomi.fi/datamodel/ns/iow#pointXY' },
+  vertexXY: { '@id': 'http://uri.suomi.fi/datamodel/ns/iow#vertexXY', '@container': '@list' }
 });
 
 const searchResultContext = Object.assign({}, coreContext, modelContext, {});
