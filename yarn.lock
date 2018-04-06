@@ -6397,9 +6397,9 @@ yn@^1.2.0:
   dependencies:
     object-assign "^4.1.1"
 
-"yti-common-ui@https://github.com/VRK-YTI/yti-common-ui.git#908582fbce099516a22b975137040a1a57695cb8":
+"yti-common-ui@https://github.com/VRK-YTI/yti-common-ui.git/#8f51962ff23da1955f611aa207c84e4f35064dce":
   version "0.0.0"
-  resolved "https://github.com/VRK-YTI/yti-common-ui.git#908582fbce099516a22b975137040a1a57695cb8"
+  resolved "https://github.com/VRK-YTI/yti-common-ui.git/#8f51962ff23da1955f611aa207c84e4f35064dce"
 
 zone.js@^0.8.18:
   version "0.8.18"
