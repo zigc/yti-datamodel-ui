@@ -89,7 +89,9 @@ const propertyContext = Object.assign({}, coreContext, predicateContext, referen
   isResourceIdentifier: { '@id': 'http://uri.suomi.fi/datamodel/ns/iow#isResourceIdentifier' },
   uniqueLang: { '@id': 'http://www.w3.org/ns/shacl#uniqueLang' },
   isXmlWrapper: { '@id': 'http://uri.suomi.fi/datamodel/ns/iow#isXmlWrapper' },
-  isXmlAttribute: { '@id': 'http://uri.suomi.fi/datamodel/ns/iow#isXmlAttribute' }
+  isXmlAttribute: { '@id': 'http://uri.suomi.fi/datamodel/ns/iow#isXmlAttribute' },
+  name: { '@id': 'http://www.w3.org/ns/shacl#name', '@container': '@language' },
+  description: { '@id': 'http://www.w3.org/ns/shacl#description', '@container': '@language' }
 });
 
 const classContext = Object.assign({}, coreContext, propertyContext, conceptContext, {
