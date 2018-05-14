@@ -17,7 +17,8 @@ function registerType(type: Type, rdfTypes: string[]) {
 }
 
 registerType('class', ['rdfs:Class']);
-registerType('shape', ['sh:Shape']);
+registerType('shape', ['sh:PropertyShape']);
+registerType('shape', ['sh:NodeShape']);
 registerType('attribute', ['owl:DatatypeProperty']);
 registerType('association', ['owl:ObjectProperty']);
 registerType('property', ['rdf:Property']);

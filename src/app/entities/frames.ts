@@ -193,6 +193,7 @@ export function usageFrame(data: any) {
 
 export function propertyFrame(data: any) {
   return frame(data, propertyContext, {
+    '@type': 'sh:PropertyShape',
     path: {}
   });
 }
@@ -232,7 +233,7 @@ export function predicateFrame(data: any) {
 
 export function classFrame(data: any) {
   return frame(data, classContext, {
-    '@type': ['rdfs:Class', 'sh:Shape'],
+    '@type': ['rdfs:Class', 'sh:NodeShape'],
     isDefinedBy: { '@embed': '@always' },
     subject: embeddedSubject,
     targetClass: {
@@ -344,7 +345,7 @@ export function searchResultFrame(data: any) {
 
 export function classVisualizationFrame(data: any) {
   return frame(data, classContext, {
-    '@type': ['rdfs:Class', 'sh:Shape'],
+    '@type': ['rdfs:Class', 'sh:NodeShape'],
     property: {
       path: {
         '@embed': false
@@ -384,7 +385,7 @@ export function classVisualizationFrame(data: any) {
 
 export function modelPositionsFrame(data: any) {
   return frame(data, modelPositionContext, {
-    '@type': ['rdfs:Class', 'sh:Shape'],
+    '@type': ['rdfs:Class', 'sh:NodeShape'],
     property: {
       vertexXY: {},
       '@omitDefault': true,
