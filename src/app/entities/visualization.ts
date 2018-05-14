@@ -31,9 +31,9 @@ export class DefaultVisualizationClass extends GraphNode implements Visualizatio
 
   static defaultVisualizationClassMappings = {
     id:         { name: '@id',        serializer: uriSerializer },
-    label:      { name: 'label',      serializer: localizableSerializer },
-    comment:    { name: 'comment',    serializer: localizableSerializer },
-    scopeClass: { name: 'scopeClass', serializer: entityAwareOptional(uriSerializer) },
+    label:      { name: 'name',      serializer: localizableSerializer },
+    comment:    { name: 'description',    serializer: localizableSerializer },
+    scopeClass: { name: 'targetClass', serializer: entityAwareOptional(uriSerializer) },
     properties: { name: 'property',   serializer: entityAwareList(entity(() => Property)) }
   };
 
