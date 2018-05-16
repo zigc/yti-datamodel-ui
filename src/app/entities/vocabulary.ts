@@ -14,7 +14,7 @@ export class Vocabulary extends GraphNode {
     vocabularyGraph: { name: 'graph',       serializer: stringSerializer },
     vocabularyType:  { name: 'type',        serializer: stringSerializer },
     uri:             { name: 'uri',         serializer: uriSerializer },
-    title:           { name: 'title',       serializer: localizableSerializer },
+    title:           { name: 'prefLabel',       serializer: localizableSerializer },
     description:     { name: 'description', serializer: localizableSerializer }
   };
 

@@ -321,7 +321,7 @@ export class Property extends GraphNode {
 
   static propertyMapping = {
     internalId:         { name: '@id',                  serializer: uriSerializer },
-    externalId:         { name: 'identifier',           serializer: optional(stringSerializer) },
+    externalId:         { name: 'localName',           serializer: optional(stringSerializer) },
     status:             { name: 'versionInfo',          serializer: valueOrDefault(identitySerializer<Status>(), 'DRAFT') },
     label:              { name: 'name',                serializer: localizableSerializer },
     comment:            { name: 'description',              serializer: localizableSerializer },

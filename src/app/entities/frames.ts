@@ -25,7 +25,8 @@ const coreContext = {
   prov: 'http://www.w3.org/ns/prov#',
   title: { '@id': 'http://purl.org/dc/terms/title', '@container': '@language' },
   versionInfo: { '@id': 'http://www.w3.org/2002/07/owl#versionInfo' },
-  editorialNote: { '@id': 'http://www.w3.org/2004/02/skos/core#editorialNote', '@container': '@language' }
+  editorialNote: { '@id': 'http://www.w3.org/2004/02/skos/core#editorialNote', '@container': '@language' },
+  localName: { '@id': 'http://uri.suomi.fi/datamodel/ns/iow#localName' }
 };
 
 const vocabularyContext = Object.assign({}, coreContext, {
