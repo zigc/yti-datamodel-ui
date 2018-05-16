@@ -1,6 +1,6 @@
 import { config } from 'config';
 import { expandContextWithKnownModels } from 'app/utils/entity';
-import { index } from 'yti-common-ui/utils/array';
+import { index, normalizeAsArray } from 'yti-common-ui/utils/array';
 import { requireDefined } from 'yti-common-ui/utils/object';
 import * as frames from 'app/entities/frames';
 import { FrameService } from './frameService';
@@ -32,7 +32,7 @@ export class DefaultVisualizationService implements VisualizationService {
       'content-type': 'application/ld+json'
     };
 
-    return this.$http.get<GraphData>(config.apiEndpointWithName('exportModel'), { params })
+    return this.$http.get<GraphData>(config.apiEndpointWithName('framedGraphs'), { params })
       .then(expandContextWithKnownModels(model))
       .then(response => this.deserializeModelVisualization(response.data!));
   }
@@ -52,8 +52,9 @@ export class DefaultVisualizationService implements VisualizationService {
     return new ModelPositions([], frame['@context'], frame);
   }
 
-  private deserializeModelVisualization(data: GraphData): IPromise<VisualizationClass[]> {
-    return this.frameService.frameAndMapArray<DefaultVisualizationClass>(data, frames.classVisualizationFrame(data), () => DefaultVisualizationClass);
+  private deserializeModelVisualization(data: GraphData): VisualizationClass[] {
+    return normalizeAsArray(data['@graph']).map(element =>
+      new DefaultVisualizationClass(element, data['@context'], {}));
   }
 
   private deserializeModelPositions(data: GraphData): IPromise<ModelPositions> {
