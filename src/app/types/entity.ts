@@ -8,6 +8,7 @@ export type Type = ModelType
                  | PredicateType
                  | ConceptType
                  | GroupType
+                 | 'propertyShape'
                  | 'organization'
                  | 'constraint'
                  | 'user'

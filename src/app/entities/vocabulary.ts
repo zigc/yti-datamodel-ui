@@ -13,7 +13,7 @@ export class Vocabulary extends GraphNode {
     id:              { name: '@id',         serializer: uriSerializer },
     vocabularyGraph: { name: 'graph',       serializer: stringSerializer },
     vocabularyType:  { name: 'type',        serializer: stringSerializer },
-    uri:             { name: 'uri',         serializer: uriSerializer },
+    uri:             { name: 'uri',         serializer: entityAwareOptional(uriSerializer) },
     title:           { name: 'prefLabel',       serializer: localizableSerializer },
     description:     { name: 'description', serializer: localizableSerializer }
   };
@@ -21,7 +21,7 @@ export class Vocabulary extends GraphNode {
   id: Uri;
   vocabularyGraph: string;
   vocabularyType: string;
-  uri: Uri;
+  uri: Uri|null;
   title: Localizable;
   description: Localizable;
 
