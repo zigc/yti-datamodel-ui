@@ -8,7 +8,7 @@ import { Uri, Urn } from './uri';
 import { DefinedBy } from './definedBy';
 import { EntityConstructor } from 'app/types/entity';
 import { DataType } from './dataTypes';
-import { containsAny, swapElements, remove, removeMatching } from 'yti-common-ui/utils/array';
+import { containsAny, remove, removeMatching } from 'yti-common-ui/utils/array';
 import { ReferenceData } from './referenceData';
 import { hasLocalization } from 'app/utils/language';
 import { Language } from 'app/types/language';
@@ -125,18 +125,6 @@ export class Class extends AbstractClass implements VisualizationClass {
 
   get inUnstableState(): boolean {
     return this.status === 'DRAFT' || this.status === 'SUGGESTED';
-  }
-
-  movePropertyUp(property: Property) {
-    this.swapProperties(property.index, property.index - 1);
-  }
-
-  movePropertyDown(property: Property) {
-    this.swapProperties(property.index, property.index + 1);
-  }
-
-  private swapProperties(index1: number, index2: number) {
-    swapElements(this.properties, index1, index2, (property, index) => property.index = index);
   }
 
   addProperty(property: Property): void {

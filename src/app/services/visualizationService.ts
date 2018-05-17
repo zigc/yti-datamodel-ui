@@ -28,8 +28,7 @@ export class DefaultVisualizationService implements VisualizationService {
   private getVisualizationClasses(model: Model) {
 
     const params = {
-      graph: model.id.uri,
-      'content-type': 'application/ld+json'
+      graph: model.id.uri
     };
 
     return this.$http.get<GraphData>(config.apiEndpointWithName('exportModel'), { params })
