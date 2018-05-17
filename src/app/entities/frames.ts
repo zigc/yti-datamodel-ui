@@ -22,8 +22,8 @@ const coreContext = {
   modified: { '@id': 'http://purl.org/dc/terms/modified', '@type': 'http://www.w3.org/2001/XMLSchema#dateTime' },
   nodeKind: { '@id': 'http://www.w3.org/ns/shacl#nodeKind', '@type': '@id' },
   prefLabel: { '@id': 'http://www.w3.org/2004/02/skos/core#prefLabel', '@container': '@language' },
-  prov: 'http://www.w3.org/ns/prov#',
   title: { '@id': 'http://purl.org/dc/terms/title', '@container': '@language' },
+  prov: 'http://www.w3.org/ns/prov#',
   versionInfo: { '@id': 'http://www.w3.org/2002/07/owl#versionInfo' },
   editorialNote: { '@id': 'http://www.w3.org/2004/02/skos/core#editorialNote', '@container': '@language' },
   localName: { '@id': 'http://uri.suomi.fi/datamodel/ns/iow#localName' }
@@ -102,9 +102,9 @@ const classContext = Object.assign({}, coreContext, propertyContext, conceptCont
   subClassOf: { '@id': 'http://www.w3.org/2000/01/rdf-schema#subClassOf', '@type': '@id' },
   equivalentClass: { '@id' : 'http://www.w3.org/2002/07/owl#equivalentClass', '@type' : '@id' },
   constraint: { '@id': 'http://www.w3.org/ns/shacl#constraint', '@type': '@id' },
-  or: { '@id': 'http://www.w3.org/ns/shacl#or', '@container': '@list' },
-  and: { '@id': 'http://www.w3.org/ns/shacl#and', '@container': '@list' },
-  not: { '@id': 'http://www.w3.org/ns/shacl#not', '@container': '@list' },
+  orCond: { '@id': 'http://www.w3.org/ns/shacl#or', '@container': '@list' },
+  andCond: { '@id': 'http://www.w3.org/ns/shacl#and', '@container': '@list' },
+  notCond: { '@id': 'http://www.w3.org/ns/shacl#not', '@container': '@list' },
   name: { '@id': 'http://www.w3.org/ns/shacl#name', '@container': '@language' },
   description: { '@id': 'http://www.w3.org/ns/shacl#description', '@container': '@language' },
   subject
@@ -278,7 +278,7 @@ export function conceptFrame(data: any, id: Uri|Url) {
 export function conceptListFrame(data: any) {
 
   return frame(data, conceptContext, {
-    '@type': 'skos:Concept',
+    '@type': 'skos:Concept'
   });
 }
 
