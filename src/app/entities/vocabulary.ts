@@ -76,7 +76,7 @@ export class ConceptVocabulary extends GraphNode {
 
   static conceptVocabularyMappings = {
     id:              { name: '@id',         serializer: uriSerializer },
-    title:           { name: 'title',       serializer: localizableSerializer }
+    title:           { name: 'prefLabel',       serializer: localizableSerializer }
   };
 
   id: Uri;
