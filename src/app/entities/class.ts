@@ -36,8 +36,8 @@ export abstract class AbstractClass extends GraphNode {
 
   static abstractClassMappings = {
     id:        { name: '@id',         serializer: uriSerializer },
-    label:     { name: 'label',       serializer: localizableSerializer },
-    comment:   { name: 'comment',     serializer: localizableSerializer },
+    label:     { name: 'name',       serializer: localizableSerializer },
+    comment:   { name: 'description',     serializer: localizableSerializer },
     definedBy: { name: 'isDefinedBy', serializer: normalizingDefinedBySerializer }
   };
 
@@ -82,7 +82,7 @@ export class Class extends AbstractClass implements VisualizationClass {
 
   static classMappings = {
     subClassOf:        { name: 'subClassOf',      serializer: entityAwareOptional(uriSerializer) },
-    scopeClass:        { name: 'scopeClass',      serializer: entityAwareOptional(uriSerializer) },
+    scopeClass:        { name: 'targetClass',      serializer: entityAwareOptional(uriSerializer) },
     status:            { name: 'versionInfo',     serializer: optional(identitySerializer<Status>()) },
     properties:        { name: 'property',        serializer: entityAwareList(entity(() => Property)) },
     subject:           { name: 'subject',         serializer: entityAwareOptional(entity(() => Concept)) },
@@ -264,7 +264,7 @@ export class ConstraintListItem extends GraphNode {
 
   static constraintListItemMapping = {
     shapeId: { name: '@id',   serializer: uriSerializer },
-    label:   { name: 'label', serializer: localizableSerializer }
+    label:   { name: 'name', serializer: localizableSerializer }
   };
 
   shapeId: Uri;
@@ -309,17 +309,17 @@ export class Property extends GraphNode {
 
   static propertyMapping = {
     internalId:         { name: '@id',                  serializer: uriSerializer },
-    externalId:         { name: 'identifier',           serializer: optional(stringSerializer) },
+    externalId:         { name: 'localName',           serializer: optional(stringSerializer) },
     status:             { name: 'versionInfo',          serializer: valueOrDefault(identitySerializer<Status>(), 'DRAFT') },
-    label:              { name: 'label',                serializer: localizableSerializer },
-    comment:            { name: 'comment',              serializer: localizableSerializer },
+    label:              { name: 'name',                serializer: localizableSerializer },
+    comment:            { name: 'description',              serializer: localizableSerializer },
     example:            { name: 'example',              serializer: list(stringSerializer) },
     defaultValue:       { name: 'defaultValue',         serializer: optional(stringSerializer) },
     dataType:           { name: 'datatype',             serializer: optional(identitySerializer<DataType>()) },
-    language:           { name: 'language',             serializer: list(identitySerializer<Language>()) },
-    valueClass:         { name: 'valueShape',           serializer: entityAwareOptional(uriSerializer) },
-    predicate:          { name: 'predicate',            serializer: entityOrId(entity(resolvePredicateConstructor)) },
-    index:              { name: 'index',                serializer: identitySerializer<number>() },
+    language:           { name: 'languageIn',             serializer: list(identitySerializer<Language>()) },
+    valueClass:         { name: 'node',           serializer: entityAwareOptional(uriSerializer) },
+    predicate:          { name: 'path',            serializer: entityOrId(entity(resolvePredicateConstructor)) },
+    index:              { name: 'order',                serializer: identitySerializer<number>() },
     minCount:           { name: 'minCount',             serializer: optional(identitySerializer<number>()) },
     maxCount:           { name: 'maxCount',             serializer: optional(identitySerializer<number>()) },
     minLength:          { name: 'minLength',            serializer: optional(identitySerializer<number>()) },

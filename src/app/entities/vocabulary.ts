@@ -13,15 +13,15 @@ export class Vocabulary extends GraphNode {
     id:              { name: '@id',         serializer: uriSerializer },
     vocabularyGraph: { name: 'graph',       serializer: stringSerializer },
     vocabularyType:  { name: 'type',        serializer: stringSerializer },
-    uri:             { name: 'uri',         serializer: uriSerializer },
-    title:           { name: 'title',       serializer: localizableSerializer },
+    uri:             { name: 'uri',         serializer: entityAwareOptional(uriSerializer) },
+    title:           { name: 'prefLabel',       serializer: localizableSerializer },
     description:     { name: 'description', serializer: localizableSerializer }
   };
 
   id: Uri;
   vocabularyGraph: string;
   vocabularyType: string;
-  uri: Uri;
+  uri: Uri|null;
   title: Localizable;
   description: Localizable;
 
@@ -37,7 +37,7 @@ export class Concept extends GraphNode {
     id:             { name: '@id',               serializer: uriSerializer },
     label:          { name: 'prefLabel',         serializer: localizableSerializer },
     definition:     { name: 'definition',        serializer: localizableSerializer },
-    vocabulary:     { name: 'inScheme',          serializer: entityAwareOptional(entity(() => ConceptVocabulary)) } // TODO should be mandatory
+    vocabulary:     { name: 'inScheme',          serializer: entity(() => ConceptVocabulary)}
   };
 
   id: Uri;
@@ -76,7 +76,7 @@ export class ConceptVocabulary extends GraphNode {
 
   static conceptVocabularyMappings = {
     id:              { name: '@id',         serializer: uriSerializer },
-    title:           { name: 'title',       serializer: localizableSerializer }
+    title:           { name: 'prefLabel',       serializer: localizableSerializer }
   };
 
   id: Uri;
