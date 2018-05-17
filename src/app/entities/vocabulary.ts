@@ -37,7 +37,7 @@ export class Concept extends GraphNode {
     id:             { name: '@id',               serializer: uriSerializer },
     label:          { name: 'prefLabel',         serializer: localizableSerializer },
     definition:     { name: 'definition',        serializer: localizableSerializer },
-    vocabulary:     { name: 'inScheme',          serializer: entity(() => ConceptVocabulary)}
+    vocabulary:     { name: 'inScheme',          serializer: entityAwareOptional(entity(() => ConceptVocabulary)) } // TODO should be mandatory
   };
 
   id: Uri;
