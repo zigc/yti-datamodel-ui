@@ -1,5 +1,5 @@
 import { lowerCaseFirst, upperCaseFirst } from 'change-case';
-import { defaultModelNamespaceForEnvironmentAndPrefix } from '../../src/config';
+import { defaultModelNamespace } from '../../src/config';
 import { ClassType, KnownPredicateType } from '../../src/app/types/entity';
 import { assertNever } from 'yti-common-ui/utils/object';
 
@@ -61,7 +61,7 @@ export interface ClassDescriptor extends ResourceDescriptor<ClassType> {
 }
 
 export function modelIdFromPrefix(modelPrefix: string) {
-  return defaultModelNamespaceForEnvironmentAndPrefix('local', modelPrefix);
+  return defaultModelNamespace(modelPrefix);
 }
 
 function normalizeAsId(resourceName: string) {

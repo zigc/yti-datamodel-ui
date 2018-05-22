@@ -2,12 +2,12 @@ import { ILocationService, IScope, ui } from 'angular';
 import IModalScope = ui.bootstrap.IModalScope;
 import IModalStackService = ui.bootstrap.IModalStackService;
 import { UserService } from 'app/services/userService';
-import { config } from 'config';
 import { ConfirmationModal } from './common/confirmationModal';
 import { module as mod } from './module';
 import { nextUrl, modalCancelHandler } from 'app/utils/angular';
 import { HelpProvider } from './common/helpProvider';
 import { LocationService } from 'app/services/locationService';
+import { ConfigService } from '../services/configService';
 
 mod.directive('application', () => {
   return {
@@ -23,7 +23,7 @@ export class ApplicationController {
 
   applicationInitialized: boolean;
   showFooter: boolean;
-  production: boolean;
+  showGoogleAnalytics: boolean;
   helpProvider: HelpProvider|null;
 
   /* @ngInject */
@@ -32,7 +32,8 @@ export class ApplicationController {
               $uibModalStack: IModalStackService,
               userService: UserService,
               confirmationModal: ConfirmationModal,
-              private locationService: LocationService) {
+              private locationService: LocationService,
+              configService: ConfigService) {
 
     userService.loggedIn$.subscribe(() => this.applicationInitialized = true);
 
@@ -40,7 +41,9 @@ export class ApplicationController {
       this.showFooter = !path.startsWith('/model');
     });
 
-    this.production = config.environment === 'production';
+    configService.getConfig().then(config => {
+      this.showGoogleAnalytics = !config.dev;
+    });
 
     $scope.$on('$locationChangeStart', (event, next) => {
 

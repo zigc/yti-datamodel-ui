@@ -8,5 +8,5 @@
   <app-footer [title]="'Tietomallit'"
               (information-click)="ctrl.navigateToInformation()"
               ng-if="ctrl.showFooter"></app-footer>
-  <google-analytics ng-if="ctrl.production"></google-analytics>
+  <google-analytics ng-if="ctrl.showGoogleAnalytics"></google-analytics>
 </ng-container>

@@ -5,7 +5,7 @@ import { Predicate } from 'app/entities/predicate';
 import { Model } from 'app/entities/model';
 import { modalCancelHandler } from 'app/utils/angular';
 import { ConfigService } from '../../services/configService';
-import { UrlConfig } from '../../entities/urlConfig';
+import { Config } from '../../entities/config';
 
 mod.directive('subjectView', () => {
   return {
@@ -27,18 +27,18 @@ class SubjectViewController {
   entity: Class|Predicate;
   model: Model;
   isEditing: () => boolean;
-  urlConfig: UrlConfig;
+  config: Config;
 
   constructor(private searchConceptModal: SearchConceptModal,
               private configService: ConfigService) {
 
-    this.configService.getUrlConfig().then(urlConfig => {
-      this.urlConfig = urlConfig;
+    this.configService.getConfig().then(urlConfig => {
+      this.config = urlConfig;
     });
   }
 
   get conceptLink() {
-    return this.urlConfig && this.urlConfig.conceptUrl(this.entity.subject);
+    return this.config && this.config.conceptUrl(this.entity.subject);
   }
 
   changeSubject() {

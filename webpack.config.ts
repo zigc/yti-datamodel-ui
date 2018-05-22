@@ -51,16 +51,13 @@ export function createConfig(build: boolean): Configuration {
   const assetsPath = outputPath;
 
   const buildEnv = {
-    NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'development'),
     GIT_DATE: JSON.stringify(process.env.GIT_DATE),
     GIT_HASH: JSON.stringify(process.env.GIT_HASH),
     FINTO_URL: JSON.stringify(process.env.FINTO_URL),
     API_ENDPOINT: JSON.stringify(process.env.API_ENDPOINT)
   };
 
-  const serveEnv = {
-    NODE_ENV: JSON.stringify('local')
-  };
+  const serveEnv = {};
 
   const buildPlugins = [
     new webpack.optimize.UglifyJsPlugin({

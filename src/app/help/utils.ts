@@ -3,7 +3,7 @@ import { upperCaseFirst, lowerCaseFirst } from 'change-case';
 import { anyMatching, contains, keepMatching } from 'yti-common-ui/utils/array';
 import { Property } from 'app/entities/class';
 import { createScrollWithDefault } from './contract';
-import { config } from 'config';
+import { defaultModelNamespace } from 'config';
 
 export const editableMargin = { left: 20, right: 20 };
 export const editableMarginInColumn = Object.assign({}, editableMargin, { bottom: 15 });
@@ -71,7 +71,7 @@ export function initialInputValue(element: () => JQuery, value: string) {
 export const scrollToTop = createScrollWithDefault(() => angular.element('body'));
 
 export function modelIdFromPrefix(modelPrefix: string) {
-  return config.defaultModelNamespace(modelPrefix);
+  return defaultModelNamespace(modelPrefix);
 }
 
 function normalizeAsId(resourceName: string) {
