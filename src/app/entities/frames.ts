@@ -92,7 +92,8 @@ const propertyContext = Object.assign({}, coreContext, predicateContext, referen
   isXmlWrapper: { '@id': 'http://uri.suomi.fi/datamodel/ns/iow#isXmlWrapper' },
   isXmlAttribute: { '@id': 'http://uri.suomi.fi/datamodel/ns/iow#isXmlAttribute' },
   name: { '@id': 'http://www.w3.org/ns/shacl#name', '@container': '@language' },
-  description: { '@id': 'http://www.w3.org/ns/shacl#description', '@container': '@language' }
+  description: { '@id': 'http://www.w3.org/ns/shacl#description', '@container': '@language' },
+  readOnlyValue: {'@id': 'http://schema.org/readonlyValue'}
 });
 
 const classContext = Object.assign({}, coreContext, propertyContext, conceptContext, {

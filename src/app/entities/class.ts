@@ -335,7 +335,8 @@ export class Property extends GraphNode {
     uniqueLang:         { name: 'uniqueLang',           serializer: booleanSerializer },
     predicateType:      { name: 'type',                 serializer: optional(propertyTypeSerializer) },
     xmlWrapper:         { name: 'isXmlWrapper',         serializer: booleanSerializer },
-    xmlAttribute:       { name: 'isXmlAttribute',       serializer: booleanSerializer }
+    xmlAttribute:       { name: 'isXmlAttribute',       serializer: booleanSerializer },
+    readOnlyValue:      { name: 'readOnlyValue',       serializer: booleanSerializer }
   };
 
   internalId: Uri;
@@ -365,6 +366,7 @@ export class Property extends GraphNode {
   uniqueLang: boolean;
   xmlWrapper: boolean;
   xmlAttribute: boolean;
+  readOnlyValue: boolean;
 
   predicateType: KnownPredicateType|null = null;
 
@@ -409,7 +411,8 @@ export class Property extends GraphNode {
   hasTechnicalMetadata() {
     return this.resourceIdentifier
       || this.xmlWrapper
-      || this.xmlAttribute;
+      || this.xmlAttribute
+      || this.readOnlyValue;
   }
 
   hasAssociationTarget() {

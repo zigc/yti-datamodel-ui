@@ -2801,6 +2801,15 @@ msgid "XML Wrapper info"
 msgstr ""
 "Serialize as XML Wrapper Element using the class property id as Element name"
 
+#: translations/titles.html:68
+msgid "Read-only"
+msgstr "Read-only"
+
+#: translations/titles.html:68
+msgid "Read-only info"
+msgstr ""
+"Defines attribute that cannot be changed after the initialization"
+
 #: translations/attribute.html:10
 msgid "xsd:anyURI"
 msgstr "URI"

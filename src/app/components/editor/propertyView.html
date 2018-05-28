@@ -147,6 +147,9 @@
       <editable data-title="XML Attribute" context="ctrl.model" ng-if="ctrl.property.isAttribute()">
         <input id="{{ctrl.property.internalId + 'xmlAttribute'}}" type="checkbox" ng-model="ctrl.property.xmlAttribute"/>
       </editable>
+      <editable data-title="Read-only" context="ctrl.model" ng-if="ctrl.property.isAttribute()">
+        <input id="{{ctrl.property.internalId + 'readOnlyValue'}}" type="checkbox" ng-model="ctrl.property.readOnlyValue"/>
+      </editable>
     </div>
   </div>
 
