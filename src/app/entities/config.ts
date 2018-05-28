@@ -2,7 +2,7 @@ import { Concept } from './vocabulary';
 
 export class Config {
 
-  dev = false; // TODO
+  dev = true; // TODO
 
   constructor(public groupsManagementUrl: string,
               public terminologyEditorUrl: string) {
