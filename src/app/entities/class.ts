@@ -179,10 +179,10 @@ export class Constraint extends GraphNode {
   static constraintListItemsSerializer = entityAwareList(entity(() => ConstraintListItem));
 
   static constraintMappings = {
-    and:     { name: 'and',     serializer: Constraint.constraintListItemsSerializer },
-    or:      { name: 'or',      serializer: Constraint.constraintListItemsSerializer },
-    not:     { name: 'not',     serializer: Constraint.constraintListItemsSerializer },
-    comment: { name: 'comment', serializer: localizableSerializer }
+    and:     { name: 'andCond',     serializer: Constraint.constraintListItemsSerializer },
+    or:      { name: 'orCond',      serializer: Constraint.constraintListItemsSerializer },
+    not:     { name: 'notCond',     serializer: Constraint.constraintListItemsSerializer },
+    comment: { name: 'description', serializer: localizableSerializer }
   };
 
   constraint: ConstraintType;
@@ -219,7 +219,7 @@ export class Constraint extends GraphNode {
   addItem(shape: Class) {
     const graph = {
       '@id': shape.id.uri,
-      label: shape.label
+      name: shape.label
     };
 
     this.items.push(new ConstraintListItem(graph, this.context, this.frame));
