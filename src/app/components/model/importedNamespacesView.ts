@@ -21,7 +21,6 @@ mod.directive('importedNamespacesView', () => {
       <h4>
         <span translate>Imported namespaces</span>
         <button type="button" class="btn btn-link btn-xs pull-right" ng-click="ctrl.importNamespace()" ng-show="ctrl.isEditing()">
-          <span class="glyphicon glyphicon-plus"></span>
           <span translate>Import namespace</span>
         </button>
       </h4>

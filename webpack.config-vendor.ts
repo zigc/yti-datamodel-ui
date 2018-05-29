@@ -2,7 +2,7 @@ import * as path from 'path';
 import * as webpack from 'webpack';
 const AssetsPlugin = require('assets-webpack-plugin');
 
-const skippedDependencies = ['font-awesome', 'yti-common-ui'];
+const skippedDependencies = ['yti-common-ui'];
 
 export function createConfig(build: boolean): webpack.Configuration {
 

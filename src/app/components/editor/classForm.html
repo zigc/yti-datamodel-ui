@@ -50,7 +50,7 @@
          ng-class="{ active: ctrl.sortAlphabetically }"
          uib-btn-checkbox
          ng-model="ctrl.sortAlphabetically">
-        <i class="fa fa-sort-alpha-asc"></i>
+        <i class="fas fa-sort-alpha-down"></i>
       </a>
       <button-with-options ng-show="ctrl.isEditing()"
                            options="ctrl.addPropertyActions">
@@ -72,7 +72,7 @@
                 <span>{{property | translateLabel: ctrl.model}}</span>
                 <accordion-chevron is-open="isOpen()"></accordion-chevron>
                 <div class="property-ordering" ng-show="ctrl.isEditing()">
-                  <span class="fa fa-bars"></span>
+                  <span class="fas fa-bars"></span>
                 </div>
               </a>
             </h5>

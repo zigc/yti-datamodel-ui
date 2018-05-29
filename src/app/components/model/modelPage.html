@@ -17,7 +17,7 @@
           <uib-tabset active="ctrl.activeTab" justified="true">
             <uib-tab ng-repeat="tab in ctrl.tabs">
               <uib-tab-heading id="{{tab.type + '_tab_heading_link'}}">
-                <i ng-class="tab.glyphIconClass"></i><p>{{tab.type | translate}}</p>
+                <p>{{tab.type | translate}}</p>
               </uib-tab-heading>
 
               <div ng-if="$index === ctrl.activeTab">
@@ -26,7 +26,6 @@
                   <div class="col-lg-12">
                     <div class="selectable-actions">
                       <button id="{{'add_new_' + tab.type + '_button'}}" ng-if="ctrl.canEdit()" type="button" class="btn btn-action btn-md add-new-button" ng-click="tab.addNew()">
-                        <span class="glyphicon glyphicon-plus"></span>
                         <span>{{tab.addLabel | translate}}</span>
                       </button>
                     </div>

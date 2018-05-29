@@ -22,7 +22,6 @@ mod.directive('referenceDatasView', () => {
       <h4>
         <span translate>Reference data</span> 
         <button type="button" class="btn btn-link btn-xs pull-right" ng-click="ctrl.addReferenceData()" ng-show="ctrl.isEditing()">
-          <span class="glyphicon glyphicon-plus"></span>
           <span translate>Add reference data</span>
         </button>
       </h4>

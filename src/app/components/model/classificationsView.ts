@@ -27,7 +27,6 @@ mod.directive('classificationsView', () => {
       <h4>
         <span translate>Classifications</span> 
         <button type="button" class="btn btn-link btn-xs pull-right" ng-click="ctrl.addClassification()" ng-show="ctrl.isEditing()">
-          <span class="glyphicon glyphicon-plus"></span>
           <span translate>Add classification</span>
         </button>
       </h4>

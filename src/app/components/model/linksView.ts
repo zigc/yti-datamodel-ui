@@ -17,7 +17,6 @@ mod.directive('linksView', () => {
       <h4>
         <span translate>Links</span> 
         <button type="button" class="btn btn-link btn-xs pull-right" ng-click="ctrl.addLink()" ng-show="ctrl.isEditing()">
-          <span class="glyphicon glyphicon-plus"></span>
           <span translate>Add link</span>
         </button>
       </h4>

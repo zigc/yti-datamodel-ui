@@ -22,7 +22,7 @@ export class ErrorModal {
           <modal-template purpose="danger">
           
             <modal-title>
-              <i class="fa fa-exclamation-circle"></i>
+              <i class="fas fa-exclamation-circle"></i>
               {{ctrl.title | translate}}
             </modal-title>
           

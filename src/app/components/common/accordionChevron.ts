@@ -8,7 +8,7 @@ mod.directive('accordionChevron', () => {
       noPull: '=?'
     },
     transclude: true,
-    template: `<ng-transclude></ng-transclude><span ng-class="['fa', {'pull-right': !noPull,'fa-angle-down': isOpen, 'fa-angle-right': !isOpen}]"></span>`,
+    template: `<ng-transclude></ng-transclude><span ng-class="['fas', {'pull-right': !noPull,'fa-angle-down': isOpen, 'fa-angle-right': !isOpen}]"></span>`,
     require: '^uibAccordionGroup'
   };
 });

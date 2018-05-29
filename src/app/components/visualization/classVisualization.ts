@@ -54,7 +54,7 @@ mod.directive('classVisualization', ($window: IWindowService, zone: NgZone) => {
                uib-tooltip="{{'Maximize' | translate}}"
                tooltip-placement="left"
                ng-click="ctrl.maximized = true">
-        <i class="fa fa-window-maximize"></i>
+        <i class="fas fa-window-maximize"></i>
        </button>
        
        <button ng-if="ctrl.maximized" 
@@ -62,43 +62,43 @@ mod.directive('classVisualization', ($window: IWindowService, zone: NgZone) => {
                uib-tooltip="{{'Minimize' | translate}}"
                tooltip-placement="left"
                ng-click="ctrl.maximized = false">
-        <i class="fa fa-window-minimize"></i>
+        <i class="fas fa-window-minimize"></i>
        </button>
        
        <button class="btn btn-secondary-action btn-sm" 
           ng-mousedown="ctrl.zoomOut()" 
           ng-mouseup="ctrl.zoomOutEnded()">
-         <i class="fa fa-search-minus"></i>
+         <i class="fas fa-search-minus"></i>
        </button>
        
        <button class="btn btn-secondary-action btn-sm" 
           ng-mousedown="ctrl.zoomIn()" 
           ng-mouseup="ctrl.zoomInEnded()">
-         <i class="fa fa-search-plus"></i>
+         <i class="fas fa-search-plus"></i>
        </button>
        
        <button class="btn btn-secondary-action btn-sm" 
           ng-click="ctrl.fitToContent()">
-         <i class="fa fa-arrows-alt"></i>
+         <i class="fas fa-arrows-alt"></i>
        </button>
        
        <button ng-show="ctrl.canFocus()" 
           class="btn btn-secondary-action btn-sm" 
           ng-click="ctrl.centerToSelectedClass()">
-         <i class="fa fa-crosshairs"></i>
+         <i class="fas fa-crosshairs"></i>
        </button>
        
        <span ng-show="ctrl.canFocus()">
          <button class="btn btn-secondary-action btn-sm" 
             ng-click="ctrl.focusOut()">
-           <i class="fa fa-angle-left"></i>
+           <i class="fas fa-angle-left"></i>
          </button>
          <div class="focus-indicator">
            <i>{{ctrl.renderSelectionFocus()}}</i>
          </div>
          <button class="btn btn-secondary-action btn-sm" 
             ng-click="ctrl.focusIn()">
-           <i class="fa fa-angle-right"></i>
+           <i class="fas fa-angle-right"></i>
          </button>
        </span>
        
@@ -111,19 +111,19 @@ mod.directive('classVisualization', ($window: IWindowService, zone: NgZone) => {
           ng-show="ctrl.canSave()" 
           ng-disabled="ctrl.modelPositions.isPristine()" 
           ng-click="ctrl.savePositions()">
-        <i class="fa fa-save"></i>
+        <i class="fas fa-save"></i>
        </button>
        
        <button class="btn btn-secondary-action btn-sm" 
           ng-disabled="ctrl.saving" 
           ng-click="ctrl.layoutPersistentPositions()" 
           ng-context-menu="ctrl.relayoutPositions()">
-        <i class="fa fa-refresh"></i>
+        <i class="fas fa-sync-alt"></i>
        </button>
        
        <div uib-dropdown is-open="ctrl.exportOpen" ng-if="ctrl.downloads" class="d-inline-block">
          <button class="btn btn-secondary-action btn-sm dropdown-toggle" uib-dropdown-toggle>
-           <i class="fa fa-download" />
+           <i class="fas fa-download" />
          </button>
          <div uib-dropdown-menu>
            <a class="dropdown-item" 
