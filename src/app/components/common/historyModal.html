@@ -37,9 +37,9 @@
   <div style="float: left; width: calc(100% - 300px); height: calc(100% - 40px); padding-left: 20px;">
     <form class="editable-form">
       <div ng-if="ctrl.selection" style="height: 100%; overflow-x: hidden">
-        <model-form ng-if="ctrl.selection.isOfType('model')" model="ctrl.selection"></model-form>
-        <class-form ng-if="ctrl.selection.isClass()" class="ctrl.selection" old-class="ctrl.selection" model="ctrl.model" open-property-id="openPropertyId"></class-form>
-        <predicate-form ng-if="ctrl.selection.isPredicate()" predicate="ctrl.selection" old-predicate="ctrl.selection" model="ctrl.model"></predicate-form>
+        <model-form id="'model_history'" ng-if="ctrl.selection.isOfType('model')" model="ctrl.selection"></model-form>
+        <class-form id="'class_history'" ng-if="ctrl.selection.isClass()" class="ctrl.selection" old-class="ctrl.selection" model="ctrl.model" open-property-id="openPropertyId"></class-form>
+        <predicate-form id="'predicate_history'" ng-if="ctrl.selection.isPredicate()" predicate="ctrl.selection" old-predicate="ctrl.selection" model="ctrl.model"></predicate-form>
       </div>
     </form>
   </div>

@@ -20,6 +20,7 @@ import { modalCancelHandler } from 'app/utils/angular';
 mod.directive('classForm', () => {
   return {
     scope: {
+      id: '=',
       class: '=',
       oldClass: '=',
       model: '=',

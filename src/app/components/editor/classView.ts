@@ -16,6 +16,7 @@ import { AuthorizationManagerService } from 'app/services/authorizationManagerSe
 mod.directive('classView', () => {
   return {
     scope: {
+      id: '=',
       class: '=',
       model: '=',
       modelController: '=',

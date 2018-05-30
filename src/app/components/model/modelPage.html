@@ -6,7 +6,7 @@
 
   <div class="row top">
     <div class="col-12">
-      <model-view model="ctrl.model" model-controller="ctrl"></model-view>
+      <model-view id="'model'" model="ctrl.model" model-controller="ctrl"></model-view>
     </div>
   </div>
 
@@ -57,14 +57,16 @@
         <div class="selection-container"
              ng-style="{ width: ctrl.selectionWidth }">
 
-          <class-view ng-if="ctrl.selection.isClass()"
+          <class-view id="'class'"
+                      ng-if="ctrl.selection.isClass()"
                       data-class="ctrl.selection"
                       open-property-id="ctrl.openPropertyId"
                       model="ctrl.model"
                       model-controller="ctrl">
           </class-view>
 
-          <predicate-view ng-if="ctrl.selection.isPredicate()"
+          <predicate-view id="'predicate'"
+                          ng-if="ctrl.selection.isPredicate()"
                           predicate="ctrl.selection"
                           model="ctrl.model"
                           model-controller="ctrl">

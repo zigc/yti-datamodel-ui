@@ -14,6 +14,7 @@ import { AuthorizationManagerService } from 'app/services/authorizationManagerSe
 mod.directive('predicateView', () => {
   return {
     scope: {
+      id: '=',
       predicate: '=',
       model: '=',
       modelController: '=',

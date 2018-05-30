@@ -39,6 +39,7 @@ class AccordionController {
 mod.directive('accordionGroup', () => {
   return {
     scope: {
+      id: '=',
       identifier: '='
     },
     restrict: 'E',
@@ -48,7 +49,7 @@ mod.directive('accordionGroup', () => {
     },
     template: `
       <div class="card" ng-class="{ show: isOpen() }">
-        <div class="card-header" ng-click="toggleVisibility()">
+        <div id="{{id + '_accordion_button'}}" class="card-header" ng-click="toggleVisibility()">
           <div accordion-transclude="heading" is-open="isOpen"></div>
         </div>
         <div uib-collapse="!isOpen()" ng-if="isAnimate()">
@@ -75,10 +76,11 @@ mod.directive('accordionGroup', () => {
 });
 
 interface AccordionGroupScope extends IScope {
+  id: string;
   identifier: any;
   isOpen: () => boolean;
   toggleVisibility: () => void;
-  isAnimate(): boolean;
+  isAnimate(): boolean;  
 }
 
 interface AccordionTranscludeAttributes extends IAttributes {
