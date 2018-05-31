@@ -168,7 +168,7 @@ export function glyphIconClassForType(type: Type[]) {
   } else if (containsAny(type, ['association'])) {
     return ['fas', 'fa-arrows-alt-h'];
   } else if (containsAny(type, ['model', 'profile'])) {
-    return ['fas', 'fas-book'];
+    return ['fas', 'fa-book'];
   } else if (containsAny(type, ['concept', 'conceptSuggestion'])) {
     return ['fas', 'fa-lightbulb-o'];
   } else if (!type || type.length === 0 || (type.length === 1 && containsAny(type, ['property']))) {
@@ -178,4 +178,4 @@ export function glyphIconClassForType(type: Type[]) {
   }
 }
 
-export const glyphIconClassUnknown = ['fas', 'fas-question-circle'];
+export const glyphIconClassUnknown = ['fas', 'fa-question-circle'];
