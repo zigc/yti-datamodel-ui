@@ -57,11 +57,11 @@ mod.directive('accordionGroup', () => {
             <div accordion-transclude="body" is-open="isOpen"></div>
           </div>
         </div>
-        <divc class="collapse" ng-show="isOpen()" ng-if="!isAnimate()">
+        <div class="collapse" ng-show="isOpen()" ng-if="!isAnimate()">
           <div class="card-body">
             <div accordion-transclude="body" is-open="isOpen"></div>
           </div>
-        </divc>
+        </div>
       </div>
     `,
     require: '^accordion',
