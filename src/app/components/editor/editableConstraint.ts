@@ -16,6 +16,7 @@ import { modalCancelHandler } from 'app/utils/angular';
 mod.directive('editableConstraint', () => {
   return {
     scope: {
+      id: '=',
       constraint: '=',
       model: '=',
       class: '='

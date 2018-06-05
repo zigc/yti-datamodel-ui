@@ -12,6 +12,7 @@ import { Predicate } from 'app/entities/predicate';
 mod.directive('propertyView', () => {
   return {
     scope: {
+      id: '=',
       property: '=',
       class: '=',
       model: '='
@@ -115,6 +116,15 @@ export class PropertyViewController {
     if (predicate instanceof Predicate) {
       return this.languageService.translate(predicate.label, this.model);
     } else if (predicate instanceof Uri) {
+      return predicate.compact;
+    } else {
+      throw new Error('Unsupported predicate: ' + predicate);
+    }
+  }
+
+  get predicateNameCompact() {
+    const predicate = this.property.predicate;
+    if (predicate instanceof Uri) {
       return predicate.compact;
     } else {
       throw new Error('Unsupported predicate: ' + predicate);
