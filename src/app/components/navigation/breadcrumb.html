@@ -1,6 +1,6 @@
 <ol class="breadcrumb">
   <li ng-repeat="path in ctrl.location" class="breadcrumb-item" ng-class="{active: $last}">
-    <a ng-if="path.iowUrl && !$last" ng-href="{{path.iowUrl()}}">
+    <a id="{{ctrl.getIdNameFromLocation(path) + '_breadcrumb_link'}}" ng-if="path.iowUrl && !$last" ng-href="{{path.iowUrl()}}">
       <span ng-if="!path.label">{{path.localizationKey | translate}}</span>
       <span ng-if="path.label">{{path | translateLabel}}</span>
     </a>
