@@ -38,13 +38,15 @@
 
     <div class="input-group">
 
-      <app-dropdown [options]="ctrl.organizationOptions"
+      <app-dropdown id="access_request_dropdown"
+                    [options]="ctrl.organizationOptions"
                     [show-null-option]="false"
                     [placement]="'top-left'"
                     ng-model="ctrl.selectedOrganization"></app-dropdown>
 
       <div class="input-group-btn">
-        <button type="button"
+        <button id="send_request_button"
+                type="button"
                 class="btn btn-action"
                 ng-disabled="!ctrl.selectedOrganization"
                 ng-click="ctrl.sendRequest()" translate>Send</button>
