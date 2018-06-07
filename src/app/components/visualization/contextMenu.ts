@@ -6,6 +6,7 @@ import { VisualizationClass } from 'app/entities/visualization';
 import { Model } from 'app/entities/model';
 import { ClassService } from 'app/services/classService';
 import { ModelPageActions } from 'app/components/model/modelPage';
+import { labelNameToResourceIdName } from 'app/utils/resource';
 
 export interface ContextMenuTarget {
   coordinate: Coordinate;
@@ -25,7 +26,7 @@ mod.directive('visualizationContextMenu', () => {
     template: `
       <div class="dropdown-menu show" role="menu" ng-style="ctrl.style" ng-if="ctrl.actions.length > 0">
         <div class="dropdown-item" role="menuitem" ng-repeat="action in ctrl.actions">
-          <a ng-click="ctrl.invokeAction(action)">{{action.name | translate}}</a>
+          <a id="{{ctrl.getIdNameFromActionName(action.name) + '_context_dropdown_action'}}" ng-click="ctrl.invokeAction(action)">{{action.name | translate}}</a>
         </div>
       </div>
     `,
@@ -86,5 +87,9 @@ class VisualizationContextMenuController {
   invokeAction(action: Action) {
     action.invoke();
     this.dismiss();
+  }
+
+  getIdNameFromActionName(actionName: string) {
+    return labelNameToResourceIdName(actionName);
   }
 }
