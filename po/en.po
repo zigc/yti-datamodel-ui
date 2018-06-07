@@ -43,11 +43,11 @@ msgstr ""
 
 #: app/components/frontPage.html:53
 msgid "Add library"
-msgstr "New library"
+msgstr "New Core Vocabulary"
 
 #: translations/help.html:44
 msgid "Add library description"
-msgstr "Add new Core Component library from here"
+msgstr "Add new Core Vocabulary from here"
 
 #: translations/misc.html:210
 msgid "Add link"
@@ -225,11 +225,11 @@ msgstr "Thing that is being produced"
 
 #: translations/misc.html:244
 msgid "Assign class to library"
-msgstr ""
+msgstr "Assign class to Core Vocabulary"
 
 #: translations/misc.html:242
 msgid "Assign reusable predicate to library"
-msgstr ""
+msgstr "Assign reusable predicate to Core Vocabulary"
 
 #: translations/misc.html:243
 msgid "Assign reusable predicate to profile"
@@ -237,7 +237,7 @@ msgstr ""
 
 #: translations/misc.html:195
 msgid "Assigned to this library"
-msgstr ""
+msgstr "Assigned to this Core Vocabulary"
 
 #: translations/misc.html:194
 msgid "Assigned to this profile"
@@ -354,7 +354,7 @@ msgstr ""
 
 #: translations/misc.html:175
 msgid "Can be selected only from this library"
-msgstr ""
+msgstr "Can be selected only from this Core Vocabulary"
 
 #: translations/misc.html:176
 msgid "Can be selected only from this profile"
@@ -631,11 +631,11 @@ msgstr ""
 
 #: translations/help.html:21
 msgid "Congratulations for completing library creation!"
-msgstr ""
+msgstr "Congratulations for completing model creation!"
 
 #: translations/help.html:23
 msgid "Congratulations for completing library creation! description"
-msgstr "You can now proceed on creating real Core Component libraries"
+msgstr "You can now proceed on creating real Core Vocabularies"
 
 #: translations/help.html:25
 msgid "Congratulations for completing namespace require!"
@@ -703,7 +703,7 @@ msgstr ""
 
 #: translations/misc.html:246
 msgid "Copy reusable association to library"
-msgstr ""
+msgstr "Copy reusable association to Core Vocabulary"
 
 #: translations/misc.html:247
 msgid "Copy reusable association to profile"
@@ -711,7 +711,7 @@ msgstr ""
 
 #: translations/misc.html:248
 msgid "Copy reusable attribute to library"
-msgstr ""
+msgstr "Copy reusable attribute to Core Vocabulary"
 
 #: translations/misc.html:249
 msgid "Copy reusable attribute to profile"
@@ -879,11 +879,11 @@ msgstr "Reference to the model that defines the resource"
 
 #: translations/titles.html:33
 msgid "Defined by library"
-msgstr ""
+msgstr "Defined by Core Vocabulary"
 
 #: translations/titles.html:33
 msgid "Defined by library info"
-msgstr "Reference to the library that defines the resource"
+msgstr "Reference to the Core Vocabulary that defines the resource"
 
 #: translations/titles.html:34
 msgid "Defined by profile"
@@ -911,7 +911,7 @@ msgstr ""
 
 #: translations/misc.html:70
 msgid "Delete association from this library"
-msgstr ""
+msgstr "Delete association from this Core Vocabulary"
 
 #: translations/misc.html:71
 msgid "Delete association from this profile"
@@ -923,7 +923,7 @@ msgstr ""
 
 #: translations/misc.html:65
 msgid "Delete attribute from this library"
-msgstr ""
+msgstr "Delete attribute from this Core Vocabulary"
 
 #: translations/misc.html:66
 msgid "Delete attribute from this profile"
@@ -935,7 +935,7 @@ msgstr ""
 
 #: translations/misc.html:60
 msgid "Delete class from this library"
-msgstr ""
+msgstr "Delete class from this Core Vocabulary"
 
 #: translations/misc.html:227
 msgid "Delete concept"
@@ -963,7 +963,7 @@ msgstr ""
 
 #: translations/misc.html:30
 msgid "Delete library"
-msgstr ""
+msgstr "Delete Core Vocabulary"
 
 #: translations/misc.html:31
 msgid "Delete profile"
@@ -1227,13 +1227,13 @@ msgstr ""
 
 #: translations/help.html:10
 msgid "Guide through creating new library"
-msgstr "Guide through creating new Core Component library"
+msgstr "Guide through creating new Core Vocabulary"
 
 #: translations/help.html:11
 msgid "Guide through creating new library description"
 msgstr ""
-"Core Component libraries are Linked Data models defining reusable Classes, "
-"Datatype properties and Object properties. Core Components are created based "
+"Core Vocabulary libraries are Linked Data models defining reusable Classes, "
+"Datatype properties and Object properties. Core Vocabularys are created based "
 "on well defined Concepts described in terminological dictonaries and linked "
 "to existing metadata standards using IRI-identifiers."
 
@@ -1245,7 +1245,7 @@ msgstr "Guide trough creating new Application Profile"
 msgid "Guide through creating new profile description"
 msgstr ""
 "Application Profiles are machine readable information models that document "
-"the information structures using Shapes created from Core Components and "
+"the information structures using Shapes created from Core Vocabularys and "
 "other external Linked Data models. Application Profiles can be used to "
 "document the information sturctures, link application specific datamodels to "
 "international standards and use the application profile as a base for "
@@ -1419,19 +1419,19 @@ msgstr ""
 
 #: translations/misc.html:34
 msgid "library"
-msgstr ""
+msgstr "Core Vocabulary"
 
 #: translations/misc.html:124
 msgid "Library information"
-msgstr "Model information"
+msgstr "Core Vocabulary information"
 
 #: translations/titles.html:15
 msgid "Library label"
-msgstr "Model label"
+msgstr "Core Vocabulary label"
 
 #: translations/titles.html:15
 msgid "Library label info"
-msgstr "Name of the model"
+msgstr "Name of the Core Vocabulary"
 
 #: translations/misc.html:209
 msgid "Links"
@@ -1514,7 +1514,7 @@ msgstr ""
 
 #: app/components/frontPage.html:67 translations/misc.html:33
 msgid "model"
-msgstr "Component library"
+msgstr "Core Vocabulary Library"
 
 #: translations/titles.html:72
 msgid "Model languages"
@@ -1548,11 +1548,11 @@ msgstr ""
 
 #: translations/help.html:35
 msgid "Modify library"
-msgstr ""
+msgstr "Modify Core Vocabulary"
 
 #: translations/help.html:38
 msgid "Modify library description"
-msgstr "You can modify Core Component library from here"
+msgstr "You can modify Core Vocabulary from here"
 
 #: translations/help.html:36
 msgid "Modify profile"
@@ -1600,7 +1600,7 @@ msgstr ""
 
 #: translations/misc.html:28
 msgid "New library creation"
-msgstr ""
+msgstr "New Core Vocabulary"
 
 #: translations/misc.html:29
 msgid "New profile creation"
@@ -1693,7 +1693,7 @@ msgstr "group"
 
 #: translations/misc.html:86
 msgid "of library"
-msgstr "library"
+msgstr "Core Vocabulary"
 
 #: translations/misc.html:85
 msgid "of model"
@@ -1708,13 +1708,13 @@ msgid "of shape"
 msgstr "shape"
 
 #: translations/help.html:31
-msgid "Open library details"
+msgid "Open Core Vocabulary details"
 msgstr ""
 
 #: translations/help.html:32
 msgid "Open library details description"
 msgstr ""
-"Information about Core Component library can be found from here. This panel "
+"Information about Core Vocabulary can be found from here. This panel "
 "contains information about the used namespaces, terminologies, reference "
 "data and generic documentation about the model. You can also export the data "
 "model in different formats from this panel."
@@ -2024,8 +2024,7 @@ msgstr ""
 #: translations/help.html:87
 msgid "Search for jhs info"
 msgstr ""
-"In this tutorial we are going to use Finnish Public Sector Core Component "
-"library"
+"In this tutorial we are going to use Finnish Public Sector Core Vocabulary "
 
 #: translations/help.html:63
 msgid "Search for liikenneväline"
@@ -2300,7 +2299,7 @@ msgstr "Select name"
 
 #: translations/help.html:108
 msgid "Select nimi info"
-msgstr "Name was found from the library and can be selected from the list"
+msgstr "Name was found from the model and can be selected from the list"
 
 #: translations/help.html:104
 msgid "Select omistaja"
@@ -2556,7 +2555,7 @@ msgstr ""
 
 #: translations/help.html:137
 msgid "Testikirjasto"
-msgstr "Test library"
+msgstr "Test model"
 
 #: translations/misc.html:140
 msgid "text/turtle"
@@ -2567,7 +2566,7 @@ msgid "This tutorial shows how to add association to a Class"
 msgstr ""
 
 #: translations/help.html:160
-msgid "This tutorial shows how to add Class from existing library"
+msgid "This tutorial shows how to add Class from existing model"
 msgstr ""
 
 #: translations/help.html:161
