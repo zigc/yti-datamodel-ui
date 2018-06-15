@@ -76,7 +76,8 @@ ul.errors {
 }
 
 img.svg-icon {
-  width: 14px;
+  max-width: 14px;
+  max-height: 14px;
 }
 
 input[type=checkbox][disabled] + span {
