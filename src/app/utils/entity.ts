@@ -17,10 +17,10 @@ function registerType(type: Type, rdfTypes: string[]) {
 }
 
 registerType('class', ['rdfs:Class']);
-registerType('shape', ['sh:Shape']);
+registerType('shape', ['sh:NodeShape']);
 registerType('attribute', ['owl:DatatypeProperty']);
 registerType('association', ['owl:ObjectProperty']);
-registerType('property', ['rdf:Property']);
+registerType('property', ['rdf:Property', 'sh:PropertyShape']);
 registerType('model', ['owl:Ontology']);
 registerType('profile', ['dcap:DCAP']);
 registerType('group', ['foaf:Group']);
@@ -162,20 +162,20 @@ export function expandContextWithKnownModels(model?: Model): (response: IHttpPro
 export function glyphIconClassForType(type: Type[]) {
 
   if (containsAny(type, ['class', 'shape'])) {
-    return ['glyphicon', 'glyphicon-list-alt'];
+    return ['fas', 'fa-list-alt'];
   } else if (containsAny(type, ['attribute'])) {
-    return ['glyphicon', 'glyphicon-tasks'];
+    return ['fas', 'fa-server'];
   } else if (containsAny(type, ['association'])) {
-    return ['glyphicon', 'glyphicon-sort'];
+    return ['fas', 'fa-arrows-alt-h'];
   } else if (containsAny(type, ['model', 'profile'])) {
-    return ['glyphicon', 'glyphicon-book'];
+    return ['fas', 'fa-book'];
   } else if (containsAny(type, ['concept', 'conceptSuggestion'])) {
-    return ['fa', 'fa-lightbulb-o'];
+    return ['fas', 'fa-lightbulb-o'];
   } else if (!type || type.length === 0 || (type.length === 1 && containsAny(type, ['property']))) {
-    return ['glyphicon', 'glyphicon-question-sign'];
+    return glyphIconClassUnknown;
   } else {
     return [];
   }
 }
 
-export const glyphIconClassUnknown = ['glyphicon', 'glyphicon-question-sign'];
+export const glyphIconClassUnknown = ['fas', 'fa-question-circle'];

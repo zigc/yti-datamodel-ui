@@ -1,31 +1,32 @@
 <nav class="navbar navbar-expand-md navbar-light">
 
-  <a class="navbar-brand" ng-href="/"><span>Tietomallit</span></a>
+  <a id="main_page_link" class="navbar-brand" ng-href="/"><span>Tietomallit</span></a>
 
   <ul class="navbar-nav ml-auto">
 
     <li ng-if="ctrl.fakeableUsers.length > 0" class="nav-item dropdown pl-0" uib-dropdown>
-      <a class="nav-link" uib-dropdown-toggle translate>Impersonate user</a>
+      <a id="impersonate_user_link" class="nav-link" uib-dropdown-toggle translate>Impersonate user</a>
       <div uib-dropdown-menu>
-        <a class="dropdown-item" ng-repeat="user in ctrl.fakeableUsers" ng-click="ctrl.fakeUser(user.email)">
+        <a id="{{'impersonate_user_' + user.email + '_link'}}" class="dropdown-item" ng-repeat="user in ctrl.fakeableUsers" ng-click="ctrl.fakeUser(user.email)">
           {{user.firstName}} {{user.lastName}}
         </a>
       </div>
     </li>
 
     <li class="nav-item" ng-if="!ctrl.isLoggedIn()">
-      <a class="nav-link" ng-click="ctrl.logIn()" translate>LOG IN</a>
+      <a id="log_in_link" class="nav-link" ng-click="ctrl.logIn()" translate>LOG IN</a>
     </li>
 
     <li class="nav-item logged-in" ng-if="ctrl.isLoggedIn()">
       <span>{{ctrl.user.name}}</span>
-      <a class="nav-link" ng-click="ctrl.logOut()" translate>LOG OUT</a>
+      <a id="log_out_link" class="nav-link" ng-click="ctrl.logOut()" translate>LOG OUT</a>
     </li>
 
     <li class="nav-item dropdown" uib-dropdown>
-      <a class="nav-link btn btn-language" uib-dropdown-toggle>{{ctrl.language.toUpperCase()}}</a>
+      <a id="ui_language_dropdown" class="nav-link btn btn-language" uib-dropdown-toggle>{{ctrl.language.toUpperCase()}}</a>
       <div class="dropdown-menu-right" uib-dropdown-menu>
-        <a ng-repeat="availableLanguage in ctrl.availableLanguages"
+        <a id="{{availableLanguage.code + '_ui_language_dropdown'}}"
+           ng-repeat="availableLanguage in ctrl.availableLanguages"
            class="dropdown-item"
            ng-class="{active: availableLanguage.code === ctrl.language}"
            ng-click="ctrl.language = availableLanguage.code">
@@ -35,24 +36,26 @@
     </li>
 
     <li class="nav-item dropdown" uib-dropdown>
-      <a class="dropdown-toggle nav-link btn-menu" uib-dropdown-toggle>
+      <a id="navigation_menu_dropdown" class="dropdown-toggle nav-link btn-menu" uib-dropdown-toggle>
         <app-menu></app-menu>
       </a>
       <div class="dropdown-menu-right" uib-dropdown-menu>
-        <a class="dropdown-item" ng-if="ctrl.isLoggedIn()" ng-click="ctrl.logOut()">
-          <i class="fa fa-sign-out"></i>
+        <a id="navigation_log_out_link" class="dropdown-item" ng-if="ctrl.isLoggedIn()" ng-click="ctrl.logOut()">
+          <i class="fas fa-sign-out-alt"></i>
           <span translate>LOG OUT</span>
         </a>
-        <a class="dropdown-item" ng-if="!ctrl.isLoggedIn()" ng-click="ctrl.logIn()">
-          <i class="fa fa-sign-in"></i>
+        <a id="navigation_log_in_link" class="dropdown-item" ng-if="!ctrl.isLoggedIn()" ng-click="ctrl.logIn()">
+          <i class="fas fa-sign-in-alt"></i>
           <span translate>LOG IN</span>
         </a>
         <div class="dropdown-divider" ng-hide="ctrl.noMenuItemsAvailable"></div>
-        <a class="dropdown-item"
+        <a id="navigation_user_details_link"
+           class="dropdown-item"
            ng-if="ctrl.isLoggedIn()"
            ng-href="/user"
            translate>User details</a>
-        <a class="dropdown-item"
+        <a id="navigation_groupmanagement_link"
+           class="dropdown-item"
            ng-if="ctrl.showGroupManagementLink()"
            ng-href="{{ctrl.groupManagementUrl}}" target="_blank" translate>User right management</a>
       </div>

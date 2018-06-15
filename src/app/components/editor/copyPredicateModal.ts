@@ -26,7 +26,7 @@ export class CopyPredicateModal {
               </div>
               <div class="row">
                 <div class="col-md-12">
-                  <predicate-form predicate="ctrl.predicate" old-predicate="ctrl.predicate" model="ctrl.model"></predicate-form>
+                  <predicate-form id="'copy_predicate'" predicate="ctrl.predicate" old-predicate="ctrl.predicate" model="ctrl.model"></predicate-form>
                 </div>
               </div>
             </modal-body>

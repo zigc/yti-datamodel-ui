@@ -27,7 +27,6 @@ mod.directive('contributorsView', () => {
       <h4>
         <span translate>Contributors</span> 
         <button type="button" class="btn btn-link btn-xs pull-right" ng-click="ctrl.addContributor()" ng-show="ctrl.isEditing()">
-          <span class="glyphicon glyphicon-plus"></span>
           <span translate>Add contributor</span>
         </button>
       </h4>

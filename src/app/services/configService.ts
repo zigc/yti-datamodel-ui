@@ -1,6 +1,6 @@
 import { IHttpService, IPromise } from 'angular';
 import { config } from 'config';
-import { UrlConfig } from '../entities/urlConfig';
+import { Config } from '../entities/config';
 
 export class ConfigService {
 
@@ -8,9 +8,9 @@ export class ConfigService {
   constructor(private $http: IHttpService) {
   }
 
-  getUrlConfig(): IPromise<UrlConfig> {
+  getConfig(): IPromise<Config> {
 
     return this.$http.get<{ groups: string, concepts: string }>(config.apiEndpointWithName('config'))
-      .then(response => new UrlConfig(response.data!.groups, response.data!.concepts));
+      .then(response => new Config(response.data!.groups, response.data!.concepts));
   }
 }

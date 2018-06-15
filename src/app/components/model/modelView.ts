@@ -13,6 +13,7 @@ import { AuthorizationManagerService } from 'app/services/authorizationManagerSe
 mod.directive('modelView', () => {
   return {
     scope: {
+      id: '=',
       model: '=',
       modelController: '='
     },

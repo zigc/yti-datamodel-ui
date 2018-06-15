@@ -1,6 +1,8 @@
 import { Concept } from './vocabulary';
 
-export class UrlConfig {
+export class Config {
+
+  dev = true; // TODO
 
   constructor(public groupsManagementUrl: string,
               public terminologyEditorUrl: string) {

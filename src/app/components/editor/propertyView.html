@@ -8,7 +8,7 @@
                 class="btn btn-link pull-right remove"
                 ng-disabled="!ctrl.property.inUnstableState"
                 ng-click="ctrl.removeProperty(ctrl.property)">
-          <i class="fa fa-trash"></i>
+          <i class="fas fa-trash-alt"></i>
           <span translate>Delete property</span>
         </button>
     </div>
@@ -147,6 +147,9 @@
       <editable data-title="XML Attribute" context="ctrl.model" ng-if="ctrl.property.isAttribute()">
         <input id="{{ctrl.property.internalId + 'xmlAttribute'}}" type="checkbox" ng-model="ctrl.property.xmlAttribute"/>
       </editable>
+      <editable data-title="Read-only" context="ctrl.model" ng-if="ctrl.property.isAttribute()">
+        <input id="{{ctrl.property.internalId + 'readOnlyValue'}}" type="checkbox" ng-model="ctrl.property.readOnlyValue"/>
+      </editable>
     </div>
   </div>
 
@@ -171,7 +174,7 @@
   <h4 translate>Reusable predicate</h4>
 
   <accordion open-id="predicateOpen" class="reusable-predicate">
-    <accordion-group identifier="'default'">
+    <accordion-group id="ctrl.id + '_' + ctrl.predicateNameCompact + '_reusable'" identifier="'default'">
 
       <accordion-heading>
         <h5>

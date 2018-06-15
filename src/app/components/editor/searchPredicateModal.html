@@ -2,7 +2,7 @@
 
   <div class="modal-header">
     <h4 class="modal-title">
-      <a><i ng-click="$dismiss('cancel')" class="fa fa-times"></i></a>
+      <a><i ng-click="$dismiss('cancel')" class="fas fa-times"></i></a>
       <div ng-show="ctrl.onlySelection">
         <span ng-show="ctrl.typeSelectable" translate>Select attribute or association</span>
         <span ng-hide="ctrl.typeSelectable">{{('Select ' + ctrl.type) | translate}}</span>
@@ -85,7 +85,7 @@
       </div>
 
       <div class="col-6 search-selection editable-form">
-        <predicate-form ng-if="ctrl.isSelectionPredicate()" predicate="ctrl.selection" old-predicate="ctrl.selection" model="ctrl.model"></predicate-form>
+        <predicate-form id="'search_predicate'" ng-if="ctrl.isSelectionPredicate()" predicate="ctrl.selection" old-predicate="ctrl.selection" model="ctrl.model"></predicate-form>
 
         <div ng-if="ctrl.isSelectionExternalEntity()">
           <editable data-title="External URI" context="ctrl.model" autofocus>
@@ -137,7 +137,7 @@
     <button type="button" class="btn btn-link cancel" ng-click="ctrl.close()" translate>Cancel</button>
 
     <div class="alert alert-danger" role="alert" ng-show="ctrl.cannotConfirm">
-      <span class="fa fa-exclamation-circle" aria-hidden="true"></span>
+      <span class="fas fa-exclamation-circle" aria-hidden="true"></span>
       <span>{{ctrl.cannotConfirm | translate}}</span>
     </div>
   </div>

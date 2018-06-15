@@ -1,4 +1,4 @@
-@import '~font-awesome/scss/variables';
+@import '~@fortawesome/fontawesome-free-webfonts/scss/variables';
 @import '~yti-common-ui/theme/init';
 @import './mixin';
 @import '~jointjs/dist/joint.css';
@@ -25,6 +25,14 @@ nav.navbar {
 
 [hidden], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
   display: none !important;
+}
+
+.pull-right {
+  float: right;
+}
+
+.pull-left {
+  float: left;
 }
 
 h4, .h4 {
@@ -178,7 +186,7 @@ visualization-view ajax-loading-indicator {
   &:before {
     color: $gray-600;
     content: $fa-var-search;
-    font-family: FontAwesome;
+    font-family: "Font Awesome 5 Free";
     top: 10px;
     right: 15px;
     font-size: $font-size-lg;
@@ -549,7 +557,7 @@ reference-data-view.popup {
   display: inline-block;
 }
 
-.fa.info {
+.fas.info {
   color: $primary;
   font-size: small;
 }
@@ -820,7 +828,7 @@ accordion {
     height: $height;
     cursor: pointer;
 
-    h5, .fa {
+    h5, .fas {
       line-height: $height;
       padding-left: 10px;
       padding-right: 10px;
@@ -882,10 +890,6 @@ $input-select: 80px;
     font-size: 14px;
     padding: 0;
     display: block;
-  }
-
-  .glyphicon {
-    position: inherit;
   }
 
   input:not([type="checkbox"]), select, textarea {

@@ -1,16 +1,9 @@
-export type Environment = 'local'
-                        | 'development'
-                        | 'production';
-
-export const dateFormat = 'YYYY-MM-DD HH:mm:ss ZZ';
 
 export interface Config {
   apiEndpoint: string;
-  environment: Environment;
   gitDate: string;
   gitHash: string;
   apiEndpointWithName(name: string): string;
-  defaultModelNamespace(prefix: string): string;
 }
 
 class EnvironmentConfig implements Config {
@@ -23,10 +16,6 @@ class EnvironmentConfig implements Config {
     return process.env.API_ENDPOINT || '/api';
   }
 
-  get environment(): Environment {
-    return process.env.NODE_ENV;
-  }
-
   get gitDate() {
     return process.env.GIT_DATE;
   }
@@ -34,26 +23,10 @@ class EnvironmentConfig implements Config {
   get gitHash() {
     return process.env.GIT_HASH;
   }
-
-  defaultModelNamespace(prefix: string) {
-    return defaultModelNamespaceForEnvironmentAndPrefix(this.environment, prefix);
-  }
 }
 
-export function defaultModelNamespaceForEnvironmentAndPrefix(environment: Environment, prefix: string) {
-  switch (environment) {
-    case 'local':
-    case 'production':
-      return `http://iow.csc.fi/ns/${prefix}`;
-    case 'development':
-      return `http://iowdev.csc.fi/ns/${prefix}`;
-    default:
-      return assertNever(environment);
-  }
-}
-
-function assertNever(environment: never): never {
-  throw new Error('Unsupported environment: ' + environment);
+export function defaultModelNamespace(prefix: string) {
+    return `http://uri.suomi.fi/datamodel/ns/${prefix}`;
 }
 
 export const config: Config = new EnvironmentConfig();

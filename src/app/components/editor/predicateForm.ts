@@ -14,6 +14,7 @@ import { KnownPredicateType } from 'app/types/entity';
 mod.directive('predicateForm', () => {
   return {
     scope: {
+      id: '=',
       predicate: '=',
       oldPredicate: '=',
       model: '='

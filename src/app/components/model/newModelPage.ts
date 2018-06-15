@@ -31,6 +31,7 @@ export class NewModelPageController {
 
   prefix: string;
   label: string;
+  comment: string;
   classifications: Classification[] = [];
   contributors:  Organization[] = [];
   languages: Language[] = ['fi', 'en'];
@@ -86,6 +87,8 @@ export class NewModelPageController {
 
     this.modelService.newModel(this.prefix, this.label, classificationIds, orgIds, this.languages, this.type)
       .then(model => {
+        // XXX: should comment go to model creator api?
+        model.comment = { [this.languages[0]]: this.comment };
         this.modelService.createModel(model).then(() => {
           this.$location.url(model.iowUrl());
         }, () => this.persisting = false);

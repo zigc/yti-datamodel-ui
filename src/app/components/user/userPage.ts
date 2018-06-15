@@ -107,7 +107,7 @@ class UserPageController {
         this.requestsInOrganizations.get(org.id.uuid) || new Set<Role>()
       ]);
 
-      return hasAny(rolesOrRequests, ['CODE_LIST_EDITOR', 'ADMIN']);
+      return hasAny(rolesOrRequests, ['DATA_MODEL_EDITOR', 'ADMIN']);
     };
 
     const requestableOrganizations = this.allOrganizations.filter(organization => !hasExistingRoleOrRequest(organization));

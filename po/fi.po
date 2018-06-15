@@ -2842,6 +2842,14 @@ msgstr "XML Wrapper"
 msgid "XML Wrapper info"
 msgstr "Muodosta XML Wrapper elementti luokan ominaisuuden tunnisteesta"
 
+#: translations/titles.html:68
+msgid "Read-only"
+msgstr "Vain luku"
+
+#: translations/titles.html:68
+msgid "Read-only info"
+msgstr "Attribuutti jonka arvoa ei alustuksen jälkeen saa enää muokata"
+
 #: translations/attribute.html:10
 msgid "xsd:anyURI"
 msgstr "URI"

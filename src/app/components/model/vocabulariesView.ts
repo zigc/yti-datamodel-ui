@@ -20,7 +20,6 @@ mod.directive('vocabulariesView', () => {
       <h4>
         <span translate>Controlled vocabularies</span> 
         <button type="button" class="btn btn-link btn-xs pull-right" ng-click="ctrl.addVocabulary()" ng-show="ctrl.isEditing()">
-          <span class="glyphicon glyphicon-plus"></span>
           <span translate>Add vocabulary</span>
         </button>
       </h4>

@@ -4,7 +4,7 @@ const inScheme = { '@id': 'http://www.w3.org/2004/02/skos/core#inScheme', '@type
 const subject = { '@id': 'http://purl.org/dc/terms/subject', '@type': '@id' };
 const comment = { '@id': 'http://www.w3.org/2000/01/rdf-schema#comment', '@container': '@language' };
 const description = { '@id': 'http://purl.org/dc/terms/description', '@container': '@language' };
-const predicate = { '@id': 'http://www.w3.org/ns/shacl#predicate', '@type': '@id' };
+const path = { '@id': 'http://www.w3.org/ns/shacl#path', '@type': '@id' };
 const property = { '@id': 'http://www.w3.org/ns/shacl#property', '@type': '@id' };
 
 const coreContext = {
@@ -22,10 +22,11 @@ const coreContext = {
   modified: { '@id': 'http://purl.org/dc/terms/modified', '@type': 'http://www.w3.org/2001/XMLSchema#dateTime' },
   nodeKind: { '@id': 'http://www.w3.org/ns/shacl#nodeKind', '@type': '@id' },
   prefLabel: { '@id': 'http://www.w3.org/2004/02/skos/core#prefLabel', '@container': '@language' },
-  prov: 'http://www.w3.org/ns/prov#',
   title: { '@id': 'http://purl.org/dc/terms/title', '@container': '@language' },
+  prov: 'http://www.w3.org/ns/prov#',
   versionInfo: { '@id': 'http://www.w3.org/2002/07/owl#versionInfo' },
-  editorialNote: { '@id': 'http://www.w3.org/2004/02/skos/core#editorialNote', '@container': '@language' }
+  editorialNote: { '@id': 'http://www.w3.org/2004/02/skos/core#editorialNote', '@container': '@language' },
+  localName: { '@id': 'http://uri.suomi.fi/datamodel/ns/iow#localName' }
 };
 
 const vocabularyContext = Object.assign({}, coreContext, {
@@ -68,7 +69,7 @@ const predicateContext = Object.assign({}, coreContext, conceptContext, {
 });
 
 const propertyContext = Object.assign({}, coreContext, predicateContext, referenceDataContext, {
-  index: { '@id': 'http://www.w3.org/ns/shacl#index' },
+  order: { '@id': 'http://www.w3.org/ns/shacl#order' },
   example: { '@id': 'http://www.w3.org/2004/02/skos/core#example' },
   defaultValue: { '@id': 'http://www.w3.org/ns/shacl#defaultValue' },
   maxCount: { '@id': 'http://www.w3.org/ns/shacl#maxCount' },
@@ -80,28 +81,33 @@ const propertyContext = Object.assign({}, coreContext, predicateContext, referen
   in: null,
   pattern: { '@id': 'http://www.w3.org/ns/shacl#pattern' },
   type: { '@id': 'http://purl.org/dc/terms/type', '@type': '@id' },
-  valueShape: { '@id': 'http://www.w3.org/ns/shacl#valueShape', '@type': '@id' },
-  predicate,
+  node: { '@id': 'http://www.w3.org/ns/shacl#node', '@type': '@id' },
+  path,
   classIn: { '@id': 'http://www.w3.org/ns/shacl#classIn', '@type': '@id' },
   memberOf: { '@id': 'http://purl.org/dc/dcam/memberOf'},
   stem: { '@id': 'http://www.w3.org/ns/shacl#stem', '@type': '@id' },
-  language: { '@id': 'http://purl.org/dc/terms/language', '@container': '@list' },
+  language: { '@id': 'http://www.w3.org/ns/shacl#languageIn', '@container': '@list' },
   isResourceIdentifier: { '@id': 'http://uri.suomi.fi/datamodel/ns/iow#isResourceIdentifier' },
   uniqueLang: { '@id': 'http://www.w3.org/ns/shacl#uniqueLang' },
   isXmlWrapper: { '@id': 'http://uri.suomi.fi/datamodel/ns/iow#isXmlWrapper' },
-  isXmlAttribute: { '@id': 'http://uri.suomi.fi/datamodel/ns/iow#isXmlAttribute' }
+  isXmlAttribute: { '@id': 'http://uri.suomi.fi/datamodel/ns/iow#isXmlAttribute' },
+  name: { '@id': 'http://www.w3.org/ns/shacl#name', '@container': '@language' },
+  description: { '@id': 'http://www.w3.org/ns/shacl#description', '@container': '@language' },
+  readOnlyValue: {'@id': 'http://schema.org/readonlyValue'}
 });
 
 const classContext = Object.assign({}, coreContext, propertyContext, conceptContext, {
   abstract: { '@id': 'http://www.w3.org/ns/shacl#abstract'},
   property,
-  scopeClass : { '@id' : 'http://www.w3.org/ns/shacl#scopeClass', '@type' : '@id' },
+  targetClass : { '@id' : 'http://www.w3.org/ns/shacl#targetClass', '@type' : '@id' },
   subClassOf: { '@id': 'http://www.w3.org/2000/01/rdf-schema#subClassOf', '@type': '@id' },
   equivalentClass: { '@id' : 'http://www.w3.org/2002/07/owl#equivalentClass', '@type' : '@id' },
   constraint: { '@id': 'http://www.w3.org/ns/shacl#constraint', '@type': '@id' },
-  or: { '@id': 'http://www.w3.org/ns/shacl#or', '@container': '@list' },
-  and: { '@id': 'http://www.w3.org/ns/shacl#and', '@container': '@list' },
-  not: { '@id': 'http://www.w3.org/ns/shacl#not', '@container': '@list' },
+  orCond: { '@id': 'http://www.w3.org/ns/shacl#or', '@container': '@list' },
+  andCond: { '@id': 'http://www.w3.org/ns/shacl#and', '@container': '@list' },
+  notCond: { '@id': 'http://www.w3.org/ns/shacl#not', '@container': '@list' },
+  name: { '@id': 'http://www.w3.org/ns/shacl#name', '@container': '@language' },
+  description: { '@id': 'http://www.w3.org/ns/shacl#description', '@container': '@language' },
   subject
 });
 
@@ -133,7 +139,7 @@ const usageContext = Object.assign({}, coreContext, modelContext, {
 });
 
 const modelPositionContext = Object.assign({}, coreContext, {
-  predicate,
+  path,
   property,
   pointXY: { '@id': 'http://uri.suomi.fi/datamodel/ns/iow#pointXY' },
   vertexXY: { '@id': 'http://uri.suomi.fi/datamodel/ns/iow#vertexXY', '@container': '@list' }
@@ -189,7 +195,8 @@ export function usageFrame(data: any) {
 
 export function propertyFrame(data: any) {
   return frame(data, propertyContext, {
-    predicate: {}
+    '@type': 'sh:PropertyShape',
+    path: {}
   });
 }
 
@@ -228,22 +235,22 @@ export function predicateFrame(data: any) {
 
 export function classFrame(data: any) {
   return frame(data, classContext, {
-    '@type': ['rdfs:Class', 'sh:Shape'],
+    '@type': ['rdfs:Class', 'sh:NodeShape'],
     isDefinedBy: { '@embed': '@always' },
     subject: embeddedSubject,
-    scopeClass: {
+    targetClass: {
       '@embed': false
     },
     subClassOf: {
       '@embed': false
     },
     property: {
-      valueShape: {
+      node: {
         '@omitDefault': true,
         '@default': [],
         '@embed': false
       },
-      predicate: {
+      path: {
         '@embed': false
       },
       memberOf: {
@@ -272,7 +279,7 @@ export function conceptFrame(data: any, id: Uri|Url) {
 export function conceptListFrame(data: any) {
 
   return frame(data, conceptContext, {
-    '@type': 'skos:Concept',
+    '@type': 'skos:Concept'
   });
 }
 
@@ -340,12 +347,12 @@ export function searchResultFrame(data: any) {
 
 export function classVisualizationFrame(data: any) {
   return frame(data, classContext, {
-    '@type': ['rdfs:Class', 'sh:Shape'],
+    '@type': ['rdfs:Class', 'sh:NodeShape'],
     property: {
-      predicate: {
+      path: {
         '@embed': false
       },
-      valueShape: {
+      node: {
         '@omitDefault': true,
         '@default': [],
         '@embed': false
@@ -369,7 +376,7 @@ export function classVisualizationFrame(data: any) {
     subClassOf: {
       '@embed': false
     },
-    scopeClass: {
+    targetClass: {
       '@embed': false
     },
     isDefinedBy: {
@@ -380,7 +387,7 @@ export function classVisualizationFrame(data: any) {
 
 export function modelPositionsFrame(data: any) {
   return frame(data, modelPositionContext, {
-    '@type': ['rdfs:Class', 'sh:Shape'],
+    '@type': ['rdfs:Class', 'sh:NodeShape'],
     property: {
       vertexXY: {},
       '@omitDefault': true,

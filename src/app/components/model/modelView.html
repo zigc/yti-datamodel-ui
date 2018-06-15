@@ -7,11 +7,13 @@
 
         <span class="mr-4">{{ctrl.model | translateLabel: ctrl.model}}</span>
 
-        <button class="btn btn-action"
+        <button id="show_model_details_button"
+                class="btn btn-action"
                 ng-hide="ctrl.visible"
                 ng-click="ctrl.visible = true" translate>Show model details</button>
 
-        <button class="btn btn-action"
+        <button id="hide_model_details_button"
+                class="btn btn-action"
                 ng-show="ctrl.visible"
                 ng-click="ctrl.visible = false" translate>Hide model details</button>
 
@@ -32,13 +34,13 @@
           <app-status [status]="ctrl.model.status"></app-status>
           <export ng-hide="ctrl.isEditing()" entity="ctrl.model" context="ctrl.model"></export>
           <history model="ctrl.model" resource="ctrl.model" ng-hide="ctrl.isEditing()"></history>
-          <button class="btn btn-link pull-right" ng-click="ctrl.visible = false">
-            <i class="fa fa-times"></i>
+          <button id="close_model_details_button" class="btn btn-link pull-right" ng-click="ctrl.visible = false">
+            <i class="fas fa-times"></i>
             <span translate>Close</span>
           </button>
         </editable-entity-buttons>
 
-        <model-form model="ctrl.editableInEdit" model-controller="ctrl.modelController"></model-form>
+        <model-form id="ctrl.id" model="ctrl.editableInEdit" model-controller="ctrl.modelController"></model-form>
       </div>
     </fieldset>
   </form>

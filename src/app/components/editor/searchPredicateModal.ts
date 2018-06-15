@@ -31,7 +31,7 @@ export class SearchPredicateModal {
               private classService: ClassService) {
   }
 
-  private openModal(model: Model, type: KnownPredicateType|null, exclude: Exclusion<AbstractPredicate>, onlySelection: boolean) {
+  private openModal(model: Model, type: KnownPredicateType|null, exclude: Exclusion<AbstractPredicate>, onlySelection: boolean, allowExternal: boolean) {
     return this.$uibModal.open({
       template: require('./searchPredicateModal.html'),
       size: 'lg',
@@ -42,17 +42,14 @@ export class SearchPredicateModal {
         model: () => model,
         type: () => type,
         exclude: () => exclude,
-        onlySelection: () => onlySelection
+        onlySelection: () => onlySelection,
+        allowExternal: () => allowExternal
       }
     }).result;
   }
 
   openAddPredicate(model: Model, type: KnownPredicateType, exclude: Exclusion<AbstractPredicate> = noExclude): IPromise<ExternalEntity|EntityCreation|Predicate> {
-    return this.openModal(model, type, exclude, false);
-  }
-
-  openForProperty(model: Model, exclude: Exclusion<AbstractPredicate> = noExclude): IPromise<ExternalEntity|Predicate> {
-    return this.openModal(model, null, exclude, false);
+    return this.openModal(model, type, exclude, false, false);
   }
 
   openAddProperty(model: Model, klass: Class): IPromise<Property> {
@@ -62,7 +59,7 @@ export class SearchPredicateModal {
       createDefinedByExclusion(model)
     );
 
-    return this.openForProperty(model, exclude).then(predicate => {
+    return this.openModal(model, null, exclude, false, true).then(predicate => {
       if (predicate instanceof Predicate && predicate.normalizedType === 'property') {
         return this.choosePredicateTypeModal.open().then(type => {
           return this.classService.newProperty(predicate, type, model);
@@ -74,7 +71,7 @@ export class SearchPredicateModal {
   }
 
   openWithOnlySelection(model: Model, type: KnownPredicateType, exclude: Exclusion<AbstractPredicate> = noExclude): IPromise<Predicate> {
-    return this.openModal(model, type, exclude, true);
+    return this.openModal(model, type, exclude, true, true);
   }
 }
 
@@ -119,6 +116,7 @@ export class SearchPredicateController implements SearchController<PredicateList
               public type: KnownPredicateType|null,
               public exclude: Exclusion<PredicateListItem>,
               public onlySelection: boolean,
+              public allowExternal: boolean,
               private predicateService: PredicateService,
               languageService: LanguageService,
               private searchConceptModal: SearchConceptModal,
@@ -157,7 +155,7 @@ export class SearchPredicateController implements SearchController<PredicateList
   }
 
   canAddExternal() {
-    return this.model.isOfType('profile') && this.type === null; // type is null when adding new property
+    return this.model.isOfType('profile') && this.allowExternal;
   }
 
   isSelectionExternalEntity(): boolean {

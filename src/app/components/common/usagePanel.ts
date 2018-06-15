@@ -9,6 +9,7 @@ mod.directive('usagePanel', () => {
   return {
     restrict: 'E',
     scope: {
+      id: '=',
       entity: '=',
       context: '='
     },

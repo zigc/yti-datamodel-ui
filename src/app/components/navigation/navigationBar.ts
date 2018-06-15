@@ -69,7 +69,7 @@ class NavigationController {
       }
     });
 
-    configService.getUrlConfig()
+    configService.getConfig()
       .then(config => this.groupManagementUrl = config.groupsManagementUrl);
   }
 

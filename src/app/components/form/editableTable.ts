@@ -32,11 +32,11 @@ mod.directive('editableTable', () => {
           </td>
           <td ng-class="[ 'action', 'remove', { editable: ctrl.canRemove(value) } ]" 
               ng-click="ctrl.remove(value, valueIndex)">
-            <i class="fa fa-trash" uib-tooltip="{{'Remove' | translate}}"></i>
+            <i class="fas fa-trash-alt" uib-tooltip="{{'Remove' | translate}}"></i>
           </td>
           <td ng-class="[ 'action', 'edit', { editable: ctrl.canEdit(value) } ]" 
               ng-click="ctrl.edit(value, valueIndex)">
-            <i class="fa fa-pencil" uib-tooltip="{{'Edit' | translate}}"></i>
+            <i class="fas fa-pencil-alt" uib-tooltip="{{'Edit' | translate}}"></i>
           </td>
         </tr>
       </tbody>
@@ -159,7 +159,7 @@ class EditableTableController<T> {
 
   get expanderClasses() {
     return [
-      'fa',
+      'fas',
       {
         'fa-angle-double-down': !this.expanded,
         'fa-angle-double-up': this.expanded

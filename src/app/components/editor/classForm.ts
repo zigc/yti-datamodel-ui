@@ -16,10 +16,13 @@ import { comparingLocalizable } from 'app/utils/comparator';
 import { Class, Property, ClassListItem } from 'app/entities/class';
 import { Model } from 'app/entities/model';
 import { modalCancelHandler } from 'app/utils/angular';
+import { labelNameToResourceIdName } from 'app/utils/resource';
+import { Localizable } from 'yti-common-ui/types/localization';
 
 mod.directive('classForm', () => {
   return {
     scope: {
+      id: '=',
       class: '=',
       oldClass: '=',
       model: '=',
@@ -60,7 +63,7 @@ export class ClassFormController {
   constructor($scope: IScope,
               private classService: ClassService,
               private sessionService: SessionService,
-              languageService: LanguageService,
+              private languageService: LanguageService,
               private searchPredicateModal: SearchPredicateModal,
               private searchClassModal: SearchClassModal,
               private addPropertiesFromClassModal: AddPropertiesFromClassModal) {
@@ -141,5 +144,9 @@ export class ClassFormController {
 
   linkToScopeclass() {
     return this.model.linkToResource(this.class.scopeClass);
+  }
+
+  formLabelNameToIdName(label: Localizable) {
+    return labelNameToResourceIdName(this.languageService.translate(label));
   }
 }

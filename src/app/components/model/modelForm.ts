@@ -7,6 +7,7 @@ import { ModelControllerService } from './modelControllerService';
 mod.directive('modelForm', () => {
   return {
     scope: {
+      id: '=',
       model: '=',
       modelController: '='
     },

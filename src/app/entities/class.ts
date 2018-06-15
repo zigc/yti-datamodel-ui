@@ -8,7 +8,7 @@ import { Uri, Urn } from './uri';
 import { DefinedBy } from './definedBy';
 import { EntityConstructor } from 'app/types/entity';
 import { DataType } from './dataTypes';
-import { containsAny, swapElements, remove, removeMatching } from 'yti-common-ui/utils/array';
+import { containsAny, remove, removeMatching } from 'yti-common-ui/utils/array';
 import { ReferenceData } from './referenceData';
 import { hasLocalization } from 'app/utils/language';
 import { Language } from 'app/types/language';
@@ -36,8 +36,8 @@ export abstract class AbstractClass extends GraphNode {
 
   static abstractClassMappings = {
     id:        { name: '@id',         serializer: uriSerializer },
-    label:     { name: 'label',       serializer: localizableSerializer },
-    comment:   { name: 'comment',     serializer: localizableSerializer },
+    label:     { name: 'name',       serializer: localizableSerializer },
+    comment:   { name: 'description',     serializer: localizableSerializer },
     definedBy: { name: 'isDefinedBy', serializer: normalizingDefinedBySerializer }
   };
 
@@ -82,7 +82,7 @@ export class Class extends AbstractClass implements VisualizationClass {
 
   static classMappings = {
     subClassOf:        { name: 'subClassOf',      serializer: entityAwareOptional(uriSerializer) },
-    scopeClass:        { name: 'scopeClass',      serializer: entityAwareOptional(uriSerializer) },
+    scopeClass:        { name: 'targetClass',      serializer: entityAwareOptional(uriSerializer) },
     status:            { name: 'versionInfo',     serializer: optional(identitySerializer<Status>()) },
     properties:        { name: 'property',        serializer: entityAwareList(entity(() => Property)) },
     subject:           { name: 'subject',         serializer: entityAwareOptional(entity(() => Concept)) },
@@ -125,18 +125,6 @@ export class Class extends AbstractClass implements VisualizationClass {
 
   get inUnstableState(): boolean {
     return this.status === 'DRAFT' || this.status === 'SUGGESTED';
-  }
-
-  movePropertyUp(property: Property) {
-    this.swapProperties(property.index, property.index - 1);
-  }
-
-  movePropertyDown(property: Property) {
-    this.swapProperties(property.index, property.index + 1);
-  }
-
-  private swapProperties(index1: number, index2: number) {
-    swapElements(this.properties, index1, index2, (property, index) => property.index = index);
   }
 
   addProperty(property: Property): void {
@@ -191,10 +179,10 @@ export class Constraint extends GraphNode {
   static constraintListItemsSerializer = entityAwareList(entity(() => ConstraintListItem));
 
   static constraintMappings = {
-    and:     { name: 'and',     serializer: Constraint.constraintListItemsSerializer },
-    or:      { name: 'or',      serializer: Constraint.constraintListItemsSerializer },
-    not:     { name: 'not',     serializer: Constraint.constraintListItemsSerializer },
-    comment: { name: 'comment', serializer: localizableSerializer }
+    and:     { name: 'andCond',     serializer: Constraint.constraintListItemsSerializer },
+    or:      { name: 'orCond',      serializer: Constraint.constraintListItemsSerializer },
+    not:     { name: 'notCond',     serializer: Constraint.constraintListItemsSerializer },
+    comment: { name: 'description', serializer: localizableSerializer }
   };
 
   constraint: ConstraintType;
@@ -231,7 +219,7 @@ export class Constraint extends GraphNode {
   addItem(shape: Class) {
     const graph = {
       '@id': shape.id.uri,
-      label: shape.label
+      name: shape.label
     };
 
     this.items.push(new ConstraintListItem(graph, this.context, this.frame));
@@ -276,7 +264,7 @@ export class ConstraintListItem extends GraphNode {
 
   static constraintListItemMapping = {
     shapeId: { name: '@id',   serializer: uriSerializer },
-    label:   { name: 'label', serializer: localizableSerializer }
+    label:   { name: 'name', serializer: localizableSerializer }
   };
 
   shapeId: Uri;
@@ -321,17 +309,17 @@ export class Property extends GraphNode {
 
   static propertyMapping = {
     internalId:         { name: '@id',                  serializer: uriSerializer },
-    externalId:         { name: 'identifier',           serializer: optional(stringSerializer) },
+    externalId:         { name: 'localName',           serializer: optional(stringSerializer) },
     status:             { name: 'versionInfo',          serializer: valueOrDefault(identitySerializer<Status>(), 'DRAFT') },
-    label:              { name: 'label',                serializer: localizableSerializer },
-    comment:            { name: 'comment',              serializer: localizableSerializer },
+    label:              { name: 'name',                serializer: localizableSerializer },
+    comment:            { name: 'description',              serializer: localizableSerializer },
     example:            { name: 'example',              serializer: list(stringSerializer) },
     defaultValue:       { name: 'defaultValue',         serializer: optional(stringSerializer) },
     dataType:           { name: 'datatype',             serializer: optional(identitySerializer<DataType>()) },
-    language:           { name: 'language',             serializer: list(identitySerializer<Language>()) },
-    valueClass:         { name: 'valueShape',           serializer: entityAwareOptional(uriSerializer) },
-    predicate:          { name: 'predicate',            serializer: entityOrId(entity(resolvePredicateConstructor)) },
-    index:              { name: 'index',                serializer: identitySerializer<number>() },
+    language:           { name: 'languageIn',             serializer: list(identitySerializer<Language>()) },
+    valueClass:         { name: 'node',           serializer: entityAwareOptional(uriSerializer) },
+    predicate:          { name: 'path',            serializer: entityOrId(entity(resolvePredicateConstructor)) },
+    index:              { name: 'order',                serializer: identitySerializer<number>() },
     minCount:           { name: 'minCount',             serializer: optional(identitySerializer<number>()) },
     maxCount:           { name: 'maxCount',             serializer: optional(identitySerializer<number>()) },
     minLength:          { name: 'minLength',            serializer: optional(identitySerializer<number>()) },
@@ -347,7 +335,8 @@ export class Property extends GraphNode {
     uniqueLang:         { name: 'uniqueLang',           serializer: booleanSerializer },
     predicateType:      { name: 'type',                 serializer: optional(propertyTypeSerializer) },
     xmlWrapper:         { name: 'isXmlWrapper',         serializer: booleanSerializer },
-    xmlAttribute:       { name: 'isXmlAttribute',       serializer: booleanSerializer }
+    xmlAttribute:       { name: 'isXmlAttribute',       serializer: booleanSerializer },
+    readOnlyValue:      { name: 'readOnlyValue',       serializer: booleanSerializer }
   };
 
   internalId: Uri;
@@ -377,6 +366,7 @@ export class Property extends GraphNode {
   uniqueLang: boolean;
   xmlWrapper: boolean;
   xmlAttribute: boolean;
+  readOnlyValue: boolean;
 
   predicateType: KnownPredicateType|null = null;
 
@@ -421,7 +411,8 @@ export class Property extends GraphNode {
   hasTechnicalMetadata() {
     return this.resourceIdentifier
       || this.xmlWrapper
-      || this.xmlAttribute;
+      || this.xmlAttribute
+      || this.readOnlyValue;
   }
 
   hasAssociationTarget() {

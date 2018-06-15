@@ -15,10 +15,6 @@ To run the build
 
     npm start
 
-To make a production build
-
-    NODE_ENV=production npm run-script build
-
 ## Installing new npm dependencies
 
     yard add --save foo-bar-x
