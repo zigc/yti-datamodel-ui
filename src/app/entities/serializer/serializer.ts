@@ -52,7 +52,13 @@ export function valueOrDefault<T>(serializer: Serializer<T>, defaultData: any): 
 
 export function list<T>(serializer: Serializer<T>, defaultList?: T[]): Serializer<T[]> {
   return createSerializer(
-    (data: T[]) => data.map(d => serializer.serialize(d)),
+    (data: T[]) => {
+      if (data.length === 0) {
+        return null;
+      } else {
+        return data.map(d => serializer.serialize(d));
+      }
+    },
     (data: any) => {
       const arr = normalizeAsArray(data);
       if (arr.length === 0) {
