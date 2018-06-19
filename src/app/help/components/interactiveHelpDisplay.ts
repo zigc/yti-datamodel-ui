@@ -201,6 +201,7 @@ class InteractiveHelpController {
         const success = init();
         if (!success) {
           if (retryCount > 10) {
+            console.log(item);
             throw new Error('Cannot initialize');
           } else {
             setTimeout(() => tryToInitialize(init, retryCount + 1), 100);
@@ -265,6 +266,7 @@ class InteractiveHelpController {
       });
     } else {
       if (retryCount > 10) {
+        console.log(this.item);
         throw new Error('Popover element not found');
       } else {
         setTimeout(() => this.updatePositions(retryCount + 1), 100);
@@ -502,6 +504,7 @@ class InteractiveHelpController {
       } else if (item.nextCondition.type === 'navigating-click') {
         this.markLocationChange();
       } else {
+        console.log(this.item);
         throw new Error('Next condition element not found');
       }
     }
