@@ -837,8 +837,6 @@ msgid "data sv"
 msgstr "Sisältö ruotsiksi"
 
 #: app/components/navigation/navigationBar.html:20
-#, fuzzy
-#| msgid "Vocabularies"
 msgid "Data Vocabularies"
 msgstr "Tietomallit"
 
