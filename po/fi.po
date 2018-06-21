@@ -840,7 +840,7 @@ msgstr "Sisältö ruotsiksi"
 #, fuzzy
 #| msgid "Vocabularies"
 msgid "Data Vocabularies"
-msgstr "Sanastot"
+msgstr "Tietomallit"
 
 #: translations/misc.html:284
 msgid "DATA_MODEL_EDITOR"
