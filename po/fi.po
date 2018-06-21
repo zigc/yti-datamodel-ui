@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.5\n"
+"X-Generator: Poedit 2.0.8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: translations/misc.html:104 translations/misc.html:68
@@ -60,7 +60,7 @@ msgstr "Lisää linkki"
 msgid "Add model"
 msgstr "Lisää tietomalli"
 
-#: app/components/model/searchNamespaceModal.html:37
+#: app/components/model/searchNamespaceModal.html:36
 msgid "Add new namespace"
 msgstr "Luo uusi nimiavaruus"
 
@@ -120,7 +120,7 @@ msgstr "Lisää sanasto"
 
 #: app/components/editor/classForm.html:95
 #: app/components/editor/predicateForm.html:62
-#: app/components/editor/propertyView.html:160
+#: app/components/editor/propertyView.html:163
 #: app/components/model/modelForm.html:24
 msgid "Additional information"
 msgstr "Lisätiedot"
@@ -384,7 +384,7 @@ msgstr "Valinta on tehtävä soveltamisprofiilin luokista"
 #: app/components/model/editReferenceDataModal.html:27
 #: app/components/model/newModelPage.html:9
 #: app/components/model/searchClassificationModal.html:32
-#: app/components/model/searchNamespaceModal.html:74
+#: app/components/model/searchNamespaceModal.html:73
 #: app/components/model/searchOrganizationModal.html:31
 #: app/components/model/searchReferenceDataModal.html:119
 #: app/components/model/searchVocabularyModal.html:62
@@ -540,7 +540,7 @@ msgid "close"
 msgstr "sulje"
 
 #: app/components/common/historyModal.html:50
-#: app/components/model/modelView.html:37 translations/misc.html:174
+#: app/components/model/modelView.html:39 translations/misc.html:174
 msgid "Close"
 msgstr "Sulje"
 
@@ -835,6 +835,12 @@ msgstr "Sisältö venäjäksi"
 #: translations/misc.html:47
 msgid "data sv"
 msgstr "Sisältö ruotsiksi"
+
+#: app/components/navigation/navigationBar.html:20
+#, fuzzy
+#| msgid "Vocabularies"
+msgid "Data Vocabularies"
+msgstr "Sanastot"
 
 #: translations/misc.html:284
 msgid "DATA_MODEL_EDITOR"
@@ -1290,7 +1296,7 @@ msgstr "Ohje on avattuna"
 msgid "Hide"
 msgstr "Piilota"
 
-#: app/components/model/modelView.html:14
+#: app/components/model/modelView.html:15
 msgid "Hide model details"
 msgstr "Piilota tietomallin tiedot"
 
@@ -1333,7 +1339,7 @@ msgstr "Tunniste puuttuu nimiavaruuden sisältä"
 msgid "Identifier"
 msgstr "Tunniste"
 
-#: app/components/navigation/navigationBar.html:8
+#: app/components/navigation/navigationBar.html:29
 msgid "Impersonate user"
 msgstr "Esiinny käyttäjänä"
 
@@ -1462,13 +1468,13 @@ msgstr "Linkit"
 msgid "Local ID"
 msgstr "Paikallinen ID"
 
-#: app/components/navigation/navigationBar.html:17
-#: app/components/navigation/navigationBar.html:48
+#: app/components/navigation/navigationBar.html:38
+#: app/components/navigation/navigationBar.html:70
 msgid "LOG IN"
 msgstr "KIRJAUDU SISÄÄN"
 
-#: app/components/navigation/navigationBar.html:22
-#: app/components/navigation/navigationBar.html:44
+#: app/components/navigation/navigationBar.html:43
+#: app/components/navigation/navigationBar.html:66
 msgid "LOG OUT"
 msgstr "KIRJAUDU ULOS"
 
@@ -1989,7 +1995,7 @@ msgstr "Resurssia ei löydy"
 msgid "Resource status restricts removing"
 msgstr "Ei ole poistettavassa tilassa"
 
-#: app/components/editor/propertyView.html:171
+#: app/components/editor/propertyView.html:174
 msgid "Reusable predicate"
 msgstr "Uudelleenkäytettävä ominaisuus"
 
@@ -2405,7 +2411,7 @@ msgstr ""
 msgid "Self reference not allowed"
 msgstr "Viittaus itseensä ei ole sallittu"
 
-#: app/components/user/userPage.html:47
+#: app/components/user/userPage.html:48
 msgid "Send"
 msgstr "Lähetä"
 
@@ -2710,7 +2716,7 @@ msgstr "Käytä luokkaa"
 msgid "Use selection"
 msgstr "Käytä valintaa"
 
-#: app/components/navigation/navigationBar.html:51
+#: app/components/navigation/navigationBar.html:73
 #: app/components/user/userPage.html:6
 msgid "User details"
 msgstr "Käyttäjätiedot"
@@ -2723,7 +2729,7 @@ msgstr "Käyttäjätunnus"
 msgid "User name"
 msgstr "Nimi"
 
-#: app/components/navigation/navigationBar.html:55
+#: app/components/navigation/navigationBar.html:78
 msgid "User right management"
 msgstr "Oikeuksienhallinta"
 
@@ -2841,14 +2847,6 @@ msgstr "XML Wrapper"
 #: translations/titles.html:68
 msgid "XML Wrapper info"
 msgstr "Muodosta XML Wrapper elementti luokan ominaisuuden tunnisteesta"
-
-#: translations/titles.html:68
-msgid "Read-only"
-msgstr "Vain luku"
-
-#: translations/titles.html:68
-msgid "Read-only info"
-msgstr "Attribuutti jonka arvoa ei alustuksen jälkeen saa enää muokata"
 
 #: translations/attribute.html:10
 msgid "xsd:anyURI"
@@ -3005,6 +3003,12 @@ msgstr "Sinut uudelleenohjataan etusivulle"
 #: translations/misc.html:269 translations/misc.html:270
 msgid "You will be redirected to the model"
 msgstr "Sinut uudelleenohjataan mallin sivulle"
+
+#~ msgid "Read-only"
+#~ msgstr "Vain luku"
+
+#~ msgid "Read-only info"
+#~ msgstr "Attribuutti jonka arvoa ei alustuksen jälkeen saa enää muokata"
 
 #~ msgid "Filter results"
 #~ msgstr "Rajaa hakutuloksia"

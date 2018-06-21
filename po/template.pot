@@ -51,7 +51,7 @@ msgstr ""
 msgid "Add model"
 msgstr ""
 
-#: app/components/model/searchNamespaceModal.html:37
+#: app/components/model/searchNamespaceModal.html:36
 msgid "Add new namespace"
 msgstr ""
 
@@ -106,7 +106,7 @@ msgstr ""
 
 #: app/components/editor/classForm.html:95
 #: app/components/editor/predicateForm.html:62
-#: app/components/editor/propertyView.html:160
+#: app/components/editor/propertyView.html:163
 #: app/components/model/modelForm.html:24
 msgid "Additional information"
 msgstr ""
@@ -358,7 +358,7 @@ msgstr ""
 #: app/components/model/editReferenceDataModal.html:27
 #: app/components/model/newModelPage.html:9
 #: app/components/model/searchClassificationModal.html:32
-#: app/components/model/searchNamespaceModal.html:74
+#: app/components/model/searchNamespaceModal.html:73
 #: app/components/model/searchOrganizationModal.html:31
 #: app/components/model/searchReferenceDataModal.html:119
 #: app/components/model/searchVocabularyModal.html:62
@@ -514,7 +514,7 @@ msgid "close"
 msgstr ""
 
 #: app/components/common/historyModal.html:50
-#: app/components/model/modelView.html:37
+#: app/components/model/modelView.html:39
 #: translations/misc.html:174
 msgid "Close"
 msgstr ""
@@ -799,6 +799,10 @@ msgstr ""
 
 #: translations/misc.html:47
 msgid "data sv"
+msgstr ""
+
+#: app/components/navigation/navigationBar.html:20
+msgid "Data Vocabularies"
 msgstr ""
 
 #: translations/misc.html:284
@@ -1231,7 +1235,7 @@ msgstr ""
 msgid "Hide"
 msgstr ""
 
-#: app/components/model/modelView.html:14
+#: app/components/model/modelView.html:15
 msgid "Hide model details"
 msgstr ""
 
@@ -1273,7 +1277,7 @@ msgstr ""
 msgid "Identifier"
 msgstr ""
 
-#: app/components/navigation/navigationBar.html:8
+#: app/components/navigation/navigationBar.html:29
 msgid "Impersonate user"
 msgstr ""
 
@@ -1397,13 +1401,13 @@ msgstr ""
 msgid "Local ID"
 msgstr ""
 
-#: app/components/navigation/navigationBar.html:17
-#: app/components/navigation/navigationBar.html:48
+#: app/components/navigation/navigationBar.html:38
+#: app/components/navigation/navigationBar.html:70
 msgid "LOG IN"
 msgstr ""
 
-#: app/components/navigation/navigationBar.html:22
-#: app/components/navigation/navigationBar.html:44
+#: app/components/navigation/navigationBar.html:43
+#: app/components/navigation/navigationBar.html:66
 msgid "LOG OUT"
 msgstr ""
 
@@ -1904,7 +1908,7 @@ msgstr ""
 msgid "Resource status restricts removing"
 msgstr ""
 
-#: app/components/editor/propertyView.html:171
+#: app/components/editor/propertyView.html:174
 msgid "Reusable predicate"
 msgstr ""
 
@@ -2308,7 +2312,7 @@ msgstr ""
 msgid "Self reference not allowed"
 msgstr ""
 
-#: app/components/user/userPage.html:47
+#: app/components/user/userPage.html:48
 msgid "Send"
 msgstr ""
 
@@ -2611,7 +2615,7 @@ msgstr ""
 msgid "Use selection"
 msgstr ""
 
-#: app/components/navigation/navigationBar.html:51
+#: app/components/navigation/navigationBar.html:73
 #: app/components/user/userPage.html:6
 msgid "User details"
 msgstr ""
@@ -2624,7 +2628,7 @@ msgstr ""
 msgid "User name"
 msgstr ""
 
-#: app/components/navigation/navigationBar.html:55
+#: app/components/navigation/navigationBar.html:78
 msgid "User right management"
 msgstr ""
 
