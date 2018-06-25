@@ -475,7 +475,7 @@ msgstr ""
 
 #: translations/titles.html:10
 msgid "Class property id"
-msgstr ""
+msgstr "Class property localname"
 
 #: translations/titles.html:10
 msgid "Class property id info"
@@ -1629,6 +1629,14 @@ msgstr ""
 #: app/components/editor/classForm.html:88
 msgid "No properties yet"
 msgstr ""
+
+#: app/components/editor/classForm.html
+msgid "Localname"
+msgstr "Class localname"
+
+#: app/components/editor/classForm.html
+msgid "Localname description"
+msgstr "Can be used in schemas or other local applications"
 
 #: app/components/common/usage.html:1 app/components/common/usagePanel.html:15
 msgid "No referrers"

@@ -99,6 +99,14 @@ msgstr "Lisää ominaisuudet yläluokasta"
 msgid "Add property"
 msgstr "Lisää ominaisuus"
 
+#: app/components/editor/classForm.html
+msgid "Localname"
+msgstr "Luokan paikallinen tunniste"
+
+#: app/components/editor/classForm.html
+msgid "Localname description"
+msgstr "Voidaan käyttää skeemoissa tai muissa paikallisissta toteutuksissa"
+
 #: app/components/editor/editableReferenceDataSelect.html:12
 #: translations/misc.html:213
 msgid "Add reference data"
@@ -489,11 +497,11 @@ msgstr "Luokan ominaisuudet"
 
 #: translations/titles.html:10
 msgid "Class property id"
-msgstr "Luokan ominaisuuden tunniste"
+msgstr "Luokan ominaisuuden paikallinen tunniste"
 
 #: translations/titles.html:10
 msgid "Class property id info"
-msgstr "Luokan ominaisuuden yksilöivä tunniste"
+msgstr "Luokan ominaisuuden toissijainen tunniste jota voidaan käyttää skeemassa tai muussa paikallisessa toteutuksessa"
 
 #: translations/titles.html:23
 msgid "Class property label"

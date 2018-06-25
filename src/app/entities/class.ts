@@ -81,6 +81,7 @@ export class ClassListItem extends AbstractClass {
 export class Class extends AbstractClass implements VisualizationClass {
 
   static classMappings = {
+    localName: { name: 'localName',           serializer: optional(stringSerializer) },
     subClassOf:        { name: 'subClassOf',      serializer: entityAwareOptional(uriSerializer) },
     scopeClass:        { name: 'targetClass',      serializer: entityAwareOptional(uriSerializer) },
     status:            { name: 'versionInfo',     serializer: optional(identitySerializer<Status>()) },
@@ -97,6 +98,7 @@ export class Class extends AbstractClass implements VisualizationClass {
 
   subClassOf: Uri|null;
   scopeClass: Uri|null;
+  localName: string|null;
   status: Status|null;
   properties: Property[];
   subject: Concept|null;
