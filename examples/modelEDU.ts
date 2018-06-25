@@ -654,7 +654,7 @@ export namespace Classes {
         predicate: Associations.kiintio,
         label:   { fi: 'Kohderyhmän kiintiö' },
         comment: { fi: 'Kohderyhmälle määritellyt rajoitukset' },
-        valueClass: 'http://iow.csc.fi/ns/edu#Valintakiintio'
+        valueClass: 'http://uri.suomi.fi/datamodel/ns/edu#Valintakiintio'
       }
     ]
   });

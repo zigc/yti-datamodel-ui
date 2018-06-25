@@ -8,7 +8,7 @@ const lajikoodiId = '361ec89c-a723-4788-bd0d-927f414a1152';
 
 export const exampleImportedLibrary = {
   prefix: 'jhs',
-  namespaceId: 'http://iow.csc.fi/ns/jhs'
+  namespaceId: 'http://uri.suomi.fi/datamodel/ns/jhs'
 };
 
 export const exampleLibrary = {
