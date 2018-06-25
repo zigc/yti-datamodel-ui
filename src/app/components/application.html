@@ -5,7 +5,7 @@
     <div ng-view></div>
   </div>
 
-  <app-footer [title]="'Tietomallit'"
+  <app-footer [title]="'Data Vocabularies' | translate"
               (information-click)="ctrl.navigateToInformation()"
               ng-if="ctrl.showFooter"></app-footer>
   <google-analytics ng-if="ctrl.showGoogleAnalytics"></google-analytics>
