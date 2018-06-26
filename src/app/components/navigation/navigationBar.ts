@@ -14,6 +14,8 @@ import { modalCancelHandler } from 'app/utils/angular';
 import { ImpersonationService } from '../../services/impersonationService';
 import { ConfigService } from 'app/services/configService';
 
+const logo = require('../../../assets/logo.svg');
+
 mod.directive('navigationBar', () => {
   return {
     restrict: 'E',
@@ -30,6 +32,8 @@ mod.directive('navigationBar', () => {
 class NavigationController {
 
   helpProvider: HelpProvider|null;
+
+  logo = logo;
 
   availableLanguages = [
     { code: 'fi' as UILanguage, name: 'Suomeksi (FI)' },
