@@ -6,7 +6,7 @@ import { VisualizationClass } from 'app/entities/visualization';
 import { Model } from 'app/entities/model';
 import { ClassService } from 'app/services/classService';
 import { ModelPageActions } from 'app/components/model/modelPage';
-import { labelNameToResourceIdName } from 'app/utils/resource';
+import { labelNameToResourceIdIdentifier } from 'yti-common-ui/utils/resource';
 
 export interface ContextMenuTarget {
   coordinate: Coordinate;
@@ -90,6 +90,6 @@ class VisualizationContextMenuController {
   }
 
   getIdNameFromActionName(actionName: string) {
-    return labelNameToResourceIdName(actionName);
+    return labelNameToResourceIdIdentifier(actionName);
   }
 }

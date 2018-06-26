@@ -1,6 +1,6 @@
 import { IScope } from 'angular';
 import { LocationService, Location } from 'app/services/locationService';
-import { labelNameToResourceIdName } from 'app/utils/resource';
+import { labelNameToResourceIdIdentifier } from 'yti-common-ui/utils/resource';
 import { LanguageService } from 'app/services/languageService';
 import { TranslateService } from 'ng2-translate';
 
@@ -32,7 +32,7 @@ class BreadcrumbController {
   }
 
   getIdNameFromLocation(location: Location) {
-    return location.label ? labelNameToResourceIdName(this.languageService.translate(location.label)) 
+    return location.label ? labelNameToResourceIdIdentifier(this.languageService.translate(location.label)) 
                           : location.localizationKey ? this.translateService.instant(location.localizationKey)
                                                      : '';
   }

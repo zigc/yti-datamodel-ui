@@ -16,7 +16,7 @@ import { comparingLocalizable } from 'app/utils/comparator';
 import { Class, Property, ClassListItem } from 'app/entities/class';
 import { Model } from 'app/entities/model';
 import { modalCancelHandler } from 'app/utils/angular';
-import { labelNameToResourceIdName } from 'app/utils/resource';
+import { labelNameToResourceIdIdentifier } from 'yti-common-ui/utils/resource';
 import { Localizable } from 'yti-common-ui/types/localization';
 
 mod.directive('classForm', () => {
@@ -147,6 +147,6 @@ export class ClassFormController {
   }
 
   formLabelNameToIdName(label: Localizable) {
-    return labelNameToResourceIdName(this.languageService.translate(label));
+    return labelNameToResourceIdIdentifier(this.languageService.translate(label));
   }
 }
