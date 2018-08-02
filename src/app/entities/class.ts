@@ -318,7 +318,7 @@ export class Property extends GraphNode {
     example:            { name: 'example',              serializer: list(stringSerializer) },
     defaultValue:       { name: 'defaultValue',         serializer: optional(stringSerializer) },
     dataType:           { name: 'datatype',             serializer: optional(identitySerializer<DataType>()) },
-    language:           { name: 'languageIn',             serializer: list(identitySerializer<Language>()) },
+    languageIn:           { name: 'languageIn',             serializer: list(identitySerializer<Language>()) },
     valueClass:         { name: 'node',           serializer: entityAwareOptional(uriSerializer) },
     predicate:          { name: 'path',            serializer: entityOrId(entity(resolvePredicateConstructor)) },
     index:              { name: 'order',                serializer: identitySerializer<number>() },
@@ -349,7 +349,7 @@ export class Property extends GraphNode {
   example: string[];
   defaultValue: string|null;
   dataType: DataType|null;
-  language: Language[];
+  languageIn: Language[];
   valueClass: Uri|null;
   predicate: Attribute|Association|Uri;
   index: number;

@@ -36,18 +36,17 @@ export class DefaultVisualizationService implements VisualizationService {
       .then(expandContextWithKnownModels(model))
       .then(response => {
         const framed = response.data!;
-        try {          
+        try {
           return normalizeAsArray(framed['@graph']).map(element => {
             return new DefaultVisualizationClass(element, framed['@context'], null);
-          });          
+          });
+        } catch (error) {
+          console.log(error);
+          throw error;
         }
-        catch (error) {
-          console.log(error);          
-          throw error;          
-        }        
-      });      
+      });
   }
-  
+
   private getModelPositions(model: Model) {
     return this.$http.get<GraphData>(config.apiEndpointWithName('modelPositions'), { params: { model: model.id.uri } })
       .then(expandContextWithKnownModels(model))
@@ -64,7 +63,7 @@ export class DefaultVisualizationService implements VisualizationService {
   }
 
   private deserializeModelPositions(data: GraphData): IPromise<ModelPositions> {
-    return this.frameService.frameAndMapArrayEntity(data, frames.modelPositionsFrame(data), () => ModelPositions);    
+    return this.frameService.frameAndMapArrayEntity(data, frames.modelPositionsFrame(data), () => ModelPositions);
   }
 }
 
