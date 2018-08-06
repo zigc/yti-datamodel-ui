@@ -51,8 +51,16 @@ msgstr ""
 msgid "Add model"
 msgstr ""
 
+#: translations/misc.html:289
+msgid "Add new library"
+msgstr ""
+
 #: app\components\model/searchNamespaceModal.html:36
 msgid "Add new namespace"
+msgstr ""
+
+#: translations/misc.html:290
+msgid "Add new profile"
 msgstr ""
 
 #: app\components/frontPage.html:54
@@ -356,7 +364,7 @@ msgstr ""
 #: app\components\model/addEditLinkModal.html:21
 #: app\components\model/addEditNamespaceModal.html:46
 #: app\components\model/editReferenceDataModal.html:27
-#: app\components\model/newModelPage.html:9
+#: app\components\model/newModelPage.html:16
 #: app\components\model/searchClassificationModal.html:32
 #: app\components\model/searchNamespaceModal.html:73
 #: app\components\model/searchOrganizationModal.html:31
@@ -802,7 +810,7 @@ msgid "data sv"
 msgstr ""
 
 #: app\components/application.html:8
-#: app\components\navigation/navigationBar.html:18
+#: app\components\navigation/navigationBar.html:7
 msgid "Data Vocabularies"
 msgstr ""
 
@@ -1278,7 +1286,7 @@ msgstr ""
 msgid "Identifier"
 msgstr ""
 
-#: app\components\navigation/navigationBar.html:27
+#: app\components\navigation/navigationBar.html:15
 msgid "Impersonate user"
 msgstr ""
 
@@ -1402,13 +1410,13 @@ msgstr ""
 msgid "Local ID"
 msgstr ""
 
-#: app\components\navigation/navigationBar.html:36
-#: app\components\navigation/navigationBar.html:68
+#: app\components\navigation/navigationBar.html:24
+#: app\components\navigation/navigationBar.html:56
 msgid "LOG IN"
 msgstr ""
 
-#: app\components\navigation/navigationBar.html:41
-#: app\components\navigation/navigationBar.html:64
+#: app\components\navigation/navigationBar.html:29
+#: app\components\navigation/navigationBar.html:52
 msgid "LOG OUT"
 msgstr ""
 
@@ -1926,7 +1934,7 @@ msgid "Root class info"
 msgstr ""
 
 #: app\components\form/editableEntityButtons.html:15
-#: app\components\model/newModelPage.html:16
+#: app\components\model/newModelPage.html:23
 msgid "Save"
 msgstr ""
 
@@ -2616,7 +2624,7 @@ msgstr ""
 msgid "Use selection"
 msgstr ""
 
-#: app\components\navigation/navigationBar.html:71
+#: app\components\navigation/navigationBar.html:59
 #: app\components\user/userPage.html:6
 msgid "User details"
 msgstr ""
@@ -2629,7 +2637,7 @@ msgstr ""
 msgid "User name"
 msgstr ""
 
-#: app\components\navigation/navigationBar.html:76
+#: app\components\navigation/navigationBar.html:64
 msgid "User right management"
 msgstr ""
 

@@ -19,7 +19,7 @@ export class LocationService {
   }
 
   atNewModel(type: KnownModelType) {
-    this.changeLocation([{ localizationKey: `New ${type} creation` }])
+    this.changeLocation([{ localizationKey: `Add new ${type}` }])
   }
 
   atModel(model: Model, selection: Location|null): void {
