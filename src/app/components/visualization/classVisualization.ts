@@ -60,7 +60,7 @@ mod.directive('classVisualization', ($window: IWindowService, zone: NgZone) => {
        
        <button id="minimize_button"
                ng-if="ctrl.maximized" 
-               class="btn btn-link btn-lg pull-right pt-0 pb-0 pr-0"
+               class="btn btn-secondary-action btn-lg pull-right pl-1 pt-0 pb-0 pr-1 mr-3"
                uib-tooltip="{{'Minimize' | translate}}"
                tooltip-placement="left"
                ng-click="ctrl.maximized = false">
