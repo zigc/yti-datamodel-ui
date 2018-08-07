@@ -18,6 +18,7 @@ mod.directive('textFilter', () => {
     template: `
           <div class="input-group input-group-lg input-group-search">
             <input autofocus type="text" class="form-control" placeholder="{{ctrl.placeholder | translate}}"
+                   id="text_filter_search_input"
                    ng-model="ctrl.searchText"
                    ignore-dirty
                    ng-model-options="{ debounce: { 'default': 500, 'blur': 0 } }"

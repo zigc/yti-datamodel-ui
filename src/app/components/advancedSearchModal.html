@@ -1,6 +1,6 @@
 <div class="modal-header">
   <h4 class="modal-title">
-    <a><i ng-click="$dismiss('cancel')" class="fas fa-times"></i></a>
+    <a><i id="close_advanced_search_button" ng-click="$dismiss('cancel')" class="fas fa-times"></i></a>
     <span translate>Advanced search</span>
   </h4>
 </div>
@@ -34,19 +34,20 @@
 
           <div ng-repeat="searchResult in ctrl.searchResults track by searchResult.id"
                class="search-result"
+               id="{{searchResult.id + '_advanced_search_result'}}"
                ng-click="ctrl.selectSearchResult(searchResult)"
                key-control-selection>
 
             <div class="content" ng-class="{last: last}">
 
-                <span class="title">
-                  <i ng-class="searchResult.glyphIconClass"></i>
-                  <highlight text="searchResult.label" context="ctrl.context" search="ctrl.searchText"></highlight>
-                </span>
+              <span class="title">
+                <i ng-class="searchResult.glyphIconClass"></i>
+                <highlight text="searchResult.label" context="ctrl.context" search="ctrl.searchText"></highlight>
+              </span>
 
               <span class="body">
-                  <highlight text="searchResult.comment" context="ctrl.context" search="ctrl.searchText"></highlight>
-                </span>
+                <highlight text="searchResult.comment" context="ctrl.context" search="ctrl.searchText"></highlight>
+              </span>
 
               <div class="origin">
                 <span class="pull-left">{{searchResult.definedBy | translateLabel: ctrl.context}}</span>
@@ -62,5 +63,5 @@
 </div>
 
 <div class="modal-footer">
-  <button type="button" class="btn btn-link cancel" ng-click="ctrl.close()" translate>Cancel</button>
+  <button id="cancel_advanced_search_button" type="button" class="btn btn-link cancel" ng-click="ctrl.close()" translate>Cancel</button>
 </div>
