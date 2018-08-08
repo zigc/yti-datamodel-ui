@@ -3,7 +3,7 @@ import { Uri } from './uri';
 import { glyphIconClassForType } from 'app/utils/entity';
 import { init, serialize } from './mapping';
 import { GraphNode } from './graphNode';
-import {entity, entityAwareOptional, uriSerializer} from 'app/entities/serializer/entitySerializer';
+import { entity, entityAwareOptional, uriSerializer } from 'app/entities/serializer/entitySerializer';
 import { ConceptType } from 'app/types/entity';
 import { Localizable } from 'yti-common-ui/types/localization';
 
@@ -14,7 +14,7 @@ export class Vocabulary extends GraphNode {
     vocabularyGraph: { name: 'graph',       serializer: stringSerializer },
     vocabularyType:  { name: 'type',        serializer: stringSerializer },
     uri:             { name: 'uri',         serializer: entityAwareOptional(uriSerializer) },
-    title:           { name: 'prefLabel',       serializer: localizableSerializer },
+    title:           { name: 'prefLabel',   serializer: localizableSerializer },
     description:     { name: 'description', serializer: localizableSerializer }
   };
 
@@ -76,7 +76,7 @@ export class ConceptVocabulary extends GraphNode {
 
   static conceptVocabularyMappings = {
     id:              { name: '@id',         serializer: uriSerializer },
-    title:           { name: 'prefLabel',       serializer: localizableSerializer }
+    title:           { name: 'prefLabel',   serializer: localizableSerializer }
   };
 
   id: Uri;
