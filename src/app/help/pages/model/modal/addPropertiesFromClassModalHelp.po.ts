@@ -1,11 +1,11 @@
 import { createStory, createExpectedStateNextCondition, Story } from 'app/help/contract';
-import { modalBody, child, modal } from 'app/help/selectors';
+import { modal, child } from 'app/help/selectors';
 import { confirm } from 'app/help/pages/modal/modalHelp.po';
 import { AddPropertiesFromClassModalController } from 'app/components/editor/addPropertiesFromClassModal';
 import { arraysAreEqual } from 'yti-common-ui/utils/array';
-import { getModalController, propertyIdIsSame, onlyProperties } from 'app/help/utils';
+import { getModalController, onlyProperties } from 'app/help/utils';
 
-const selectPropertiesElement = modalBody;
+const selectPropertiesElement = child(modal, '.properties');
 
 export function selectProperties(title: string, expectProperties: string[]) {
 
@@ -23,12 +23,16 @@ export function selectProperties(title: string, expectProperties: string[]) {
         return true;
       }
 
-      return arraysAreEqual(Object.values(ctrl.selectedProperties.map(p => p.internalId.uuid)), expectProperties, propertyIdIsSame);
+      return arraysAreEqual(Object.values(ctrl.selectedProperties.map(p => p.predicateId.curie)), expectProperties);
     }),
     initialize: () => {
       if (expectProperties) {
-        const ctrl = getModalController<AddPropertiesFromClassModalController>();
-        onlyProperties(ctrl.selectedProperties, expectProperties);
+        try {
+          const ctrl = getModalController<AddPropertiesFromClassModalController>();
+          onlyProperties(ctrl.selectedProperties, expectProperties);
+        } catch (e) {
+          return false;
+        }
       }
       return true;
     },

@@ -24,7 +24,7 @@ export function filterForSearchResult(modalParent: () => JQuery, label: string, 
 
     title: `Search for ${label.toLowerCase()}`,
     content: `Search for ${label.toLowerCase()} info`,
-    popover: { element: filterForSearchResultTextSearchElement, position: 'bottom-right' },
+    popover: { element: filterForSearchResultTextSearchElement, position: 'right-down' },
     focus: { element: filterForSearchResultTextSearchElement },
     nextCondition: createExpectedStateNextCondition(elementExists(searchResult(modalParent, expectedResultId))),
     initialize: initialInputValue(filterForSearchResultTextSearchElement, formatInitialSearch()),
@@ -41,7 +41,7 @@ export function selectSearchResult(modalParent: () => JQuery, label: string, res
     title: `Select ${label.toLowerCase()}`,
     content: `Select ${label.toLowerCase()} info`,
     scroll: createScrollWithElement(searchResultsElement(modalParent), selectResultElement),
-    popover: { element: selectResultElement, position: 'left-down' },
+    popover: { element: selectResultElement, position: 'right-down' },
     focus: { element: selectResultElement },
     nextCondition: selectionNeedsConfirmation ? createClickNextCondition(selectResultElement)
                                               : createModifyingClickNextCondition(selectResultElement),
@@ -81,7 +81,7 @@ export function selectAddNewResult(modalParent: () => JQuery, addNewIndex: numbe
     title: title,
     content: title + ' info',
     scroll: createScrollWithElement(selectAddNewSearchResultsElement, selectAddNewElement),
-    popover: { element: selectAddNewElement, position: 'bottom-right' },
+    popover: { element: selectAddNewElement, position: 'right-down' },
     focus: { element: selectAddNewElement },
     nextCondition: createClickNextCondition(selectAddNewElement)
   });

@@ -1,6 +1,6 @@
 import {
   createClickNextCondition, createStory, createNavigatingClickNextCondition,
-  createScrollWithDefault, Story
+  createScrollWithDefault, Story, createModifyingClickNextCondition
 } from 'app/help/contract';
 import { child, modelPanelElement } from 'app/help/selectors';
 import { KnownModelType, KnownPredicateType } from 'app/types/entity';
@@ -14,7 +14,7 @@ import * as ClassForm from './classFormHelp.po';
 
 export function openModelDetails(type: KnownModelType) {
 
-  const openModelDetailsElement = child(ModelView.element, '.model-header');
+  const openModelDetailsElement = child(ModelView.element, '#show_model_details_button');
 
   return createStory({
 
@@ -23,7 +23,7 @@ export function openModelDetails(type: KnownModelType) {
     scroll: scrollToTop,
     popover: { element: openModelDetailsElement, position: 'bottom-right' },
     focus: { element: openModelDetailsElement },
-    nextCondition: createClickNextCondition(openModelDetailsElement)
+    nextCondition: createModifyingClickNextCondition(openModelDetailsElement)
   });
 }
 
@@ -43,7 +43,7 @@ export function openAddResource(type: 'class' | KnownPredicateType) {
 
 export function selectClass(namespaceId: string, name: string) {
 
-  const selectClassElement = child(modelPanelElement, `li#${CSS.escape(classIdFromNamespaceId(namespaceId, name))}`);
+  const selectClassElement = child(modelPanelElement, `li#${CSS.escape(classIdFromNamespaceId(namespaceId, name) + '_tabset_link' )}`);
 
   return createStory({
     scroll: createScrollWithDefault(modelPanelElement),

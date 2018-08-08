@@ -5,7 +5,11 @@ import * as frames from '../entities/frames';
 import { GraphData } from '../types/entity';
 import { FrameService } from './frameService';
 
-export class OrganizationService {
+export interface OrganizationService {
+  getOrganizations(): IPromise<Organization[]>;
+}
+
+export class DefaultOrganizationService implements OrganizationService {
 
   /* @ngInject */
   constructor(private $http: IHttpService,

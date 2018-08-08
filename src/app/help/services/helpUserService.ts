@@ -13,14 +13,6 @@ class InteractiveHelpUser implements User {
   anonymous = false;
   superuser = false;
 
-  getRoles(organizationIds: UUID | UUID[]): Set<Role> {
-    return new Set<Role>();
-  }
-
-  getOrganizations(roles: Role | Role[]): Set<UUID> {
-    return new Set<UUID>();
-  }
-
   isInRole(role: Role | Role[], organizationIds: UUID | UUID[]): boolean {
     return true;
   }

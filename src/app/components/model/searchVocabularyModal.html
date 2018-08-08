@@ -1,63 +1,65 @@
-<div class="modal-header">
-  <h4 class="modal-title">
-    <a><i ng-click="$dismiss('cancel')" class="fas fa-times"></i></a>
-    <span translate>Search vocabularies</span>
-  </h4>
-</div>
-
-<div class="modal-body full-height">
-
-  <div class="row mb-2">
-    <div class="col-12">
-
-      <text-filter class="pull-left"
-                   search-text="ctrl.searchText"
-                   search-controller="ctrl"
-                   content-extractors="ctrl.contentExtractors"
-                   placeholder="'search vocabulary'"></text-filter>
-
-      <model-language-chooser class="pull-right" context="ctrl.context"></model-language-chooser>
-    </div>
+<div class="search-vocabulary">
+  <div class="modal-header">
+    <h4 class="modal-title">
+      <a><i ng-click="$dismiss('cancel')" class="fas fa-times"></i></a>
+      <span translate>Search vocabularies</span>
+    </h4>
   </div>
 
-  <div class="row mb-2">
-    <div class="col-12">
-      <excluded-filter search-controller="ctrl" search-text="ctrl.searchText" exclude="ctrl.exclude"></excluded-filter>
-      <content-filter search-controller="ctrl" content-matchers="ctrl.contentMatchers" content-extractors="ctrl.contentExtractors"></content-filter>
+  <div class="modal-body full-height">
+
+    <div class="row mb-2">
+      <div class="col-12">
+
+        <text-filter class="pull-left"
+                     search-text="ctrl.searchText"
+                     search-controller="ctrl"
+                     content-extractors="ctrl.contentExtractors"
+                     placeholder="'search vocabulary'"></text-filter>
+
+        <model-language-chooser class="pull-right" context="ctrl.context"></model-language-chooser>
+      </div>
     </div>
-  </div>
 
-  <div class="row full-height" style="height: calc(100% - 135px)">
-    <div class="col-12">
-      <div class="content-box">
-        <div class="search-results">
+    <div class="row mb-2">
+      <div class="col-12">
+        <excluded-filter search-controller="ctrl" search-text="ctrl.searchText" exclude="ctrl.exclude"></excluded-filter>
+        <content-filter search-controller="ctrl" content-matchers="ctrl.contentMatchers" content-extractors="ctrl.contentExtractors"></content-filter>
+      </div>
+    </div>
 
-          <ajax-loading-indicator ng-if="ctrl.loadingResults"></ajax-loading-indicator>
+    <div class="row full-height" style="height: calc(100% - 135px)">
+      <div class="col-12">
+        <div class="content-box">
+          <div class="search-results">
 
-          <div class="no-search-results" ng-show="ctrl.searchText && ctrl.searchResults.length === 0" translate>No search results</div>
+            <ajax-loading-indicator ng-if="ctrl.loadingResults"></ajax-loading-indicator>
 
-          <search-results ng-if="!ctrl.loadingResults" items="ctrl.searchResults" selected="ctrl.selected" exclude="ctrl.exclude" on-select="ctrl.selectItem(item)">
+            <div class="no-search-results" ng-show="ctrl.searchText && ctrl.searchResults.length === 0" translate>No search results</div>
+
+            <search-results ng-if="!ctrl.loadingResults" items="ctrl.searchResults" selected="ctrl.selected" exclude="ctrl.exclude" on-select="ctrl.selectItem(item)">
 
             <span class="title">
               <highlight text="searchResult.title" context="ctrl.context" search="ctrl.searchText"></highlight>
             </span>
 
-            <span class="body">
+              <span class="body">
               <highlight text="searchResult.description" context="ctrl.context" search="ctrl.searchText"></highlight>
             </span>
 
-            <span class="origin">
+              <span class="origin">
               <span class="pull-left">{{searchResult.id.uri}}</span>
             </span>
 
-          </search-results>
+            </search-results>
 
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 
-<div class="modal-footer">
-  <button type="button" class="btn btn-link cancel" ng-click="ctrl.close()" translate>Cancel</button>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-link cancel" ng-click="ctrl.close()" translate>Cancel</button>
+  </div>
 </div>

@@ -48,7 +48,7 @@
                                [options]="$ctrl.modelTypes"
                                [filter-subject]="$ctrl.modelType$"></app-filter-dropdown>
 
-          <div class="pull-right" uib-dropdown ng-if="$ctrl.canAddModel()">
+          <div class="pull-right" id="add-new-datamodel" uib-dropdown ng-if="$ctrl.canAddModel()">
             <button id="model_creation_button" class="btn btn-action" uib-dropdown-toggle>
               <span translate>Add model</span>
             </button>

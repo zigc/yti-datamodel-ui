@@ -14,7 +14,6 @@ export interface VocabularyService {
   searchConcepts(searchText: string, vocabulary?: Vocabulary): IPromise<Concept[]>;
   createConceptSuggestion(vocabulary: Vocabulary, label: string, comment: string, lang: Language, model: Model): IPromise<Uri>;
   getConcept(id: Uri): IPromise<Concept>;
-  getConceptsForModel(model: Model): IPromise<Concept[]>;
 }
 
 export class DefaultVocabularyService implements VocabularyService {
@@ -60,20 +59,11 @@ export class DefaultVocabularyService implements VocabularyService {
       .then(response => this.deserializeConcept(response.data!, id.uri));
   }
 
-  getConceptsForModel(model: Model): IPromise<Concept[]> {
-    return this.$http.get<GraphData>(config.apiEndpointWithName('modelConcepts'), {params: {model: model.id.uri}})
-      .then(response => this.deserializeModelConcepts(response.data!));
-  }
-
   deserializeConcept(data: GraphData, id: Url): IPromise<Concept> {
     return this.frameService.frameAndMap(data, true, frames.conceptFrame(data, id), () => Concept);
   }
 
   deserializeConcepts(data: GraphData): IPromise<Concept[]> {
-    return this.frameService.frameAndMapArray(data, frames.conceptListFrame(data), () => Concept);
-  }
-
-  deserializeModelConcepts(data: GraphData): IPromise<Concept[]> {
     return this.frameService.frameAndMapArray(data, frames.conceptListFrame(data), () => Concept);
   }
 

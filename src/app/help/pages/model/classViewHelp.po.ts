@@ -1,4 +1,4 @@
-import { child } from 'app/help/selectors';
+import { child, first } from 'app/help/selectors';
 import {
   createStory, createModifyingClickNextCondition,
   createClickNextCondition, createScrollWithDefault, createScrollNone, Story
@@ -26,26 +26,38 @@ export const saveClassChanges = createStory({
 
   title: 'Save changes',
   content: 'Changes need to be saved',
-  scroll: createScrollNone(),
+  scroll: createScrollWithDefault(element),
   popover: { element: saveClassChangesElement, position: 'left-down' },
   focus: { element: saveClassChangesElement },
   nextCondition: createModifyingClickNextCondition(saveClassChangesElement)
 });
 
-const addPropertyElement = child(element, 'button.add-property');
+const addPropertyElement = child(element, '.add-property');
+const addPropertyDropdownElement = child(addPropertyElement, 'button');
+const addNewPropertyElement = first(child(addPropertyElement, '[uib-dropdown-menu] a'));
 export const addProperty = createStory({
   title: 'Add property',
   content: 'You can add new attribute or association to the Class from here',
   scroll: createScrollNone(),
-  popover: { element: addPropertyElement, position: 'left-down' },
-  focus: { element: addPropertyElement },
-  nextCondition: createClickNextCondition(addPropertyElement)
+  popover: { element: addPropertyDropdownElement, position: 'top-left' },
+  focus: { element: addPropertyDropdownElement },
+  nextCondition: createClickNextCondition(addPropertyDropdownElement)
+});
+
+export const addNewProperty = createStory({
+  title: 'Add new property',
+  content: 'Add new property description',
+  scroll: createScrollNone(),
+  popover: { element: addNewPropertyElement, position: 'top-left' },
+  focus: { element: addNewPropertyElement },
+  nextCondition: createClickNextCondition(addNewPropertyElement)
 });
 
 export function addPropertyUsingExistingPredicateItems(predicate: { type: KnownPredicateType, namespaceId: string, name: string },
                                                        gettextCatalog: gettextCatalog): Story[] {
   return [
     addProperty,
+    addNewProperty,
     ...SearchPredicateModal.findAndSelectExistingPredicateItems(predicate.type, predicate.namespaceId, predicate.name, gettextCatalog),
     ClassForm.focusOpenProperty(element)
   ];
@@ -55,6 +67,7 @@ export function addPropertyBasedOnSuggestionItems(predicate: { type: KnownPredic
                                                   gettextCatalog: gettextCatalog): Story[] {
   return [
     addProperty,
+    addNewProperty,
     ...SearchPredicateModal.findAndCreateNewPropertyBasedOnSuggestionItems(predicate.type, predicate.searchName, predicate.name, predicate.comment, gettextCatalog),
     ClassForm.focusOpenProperty(element)
   ];
@@ -64,6 +77,7 @@ export function addPropertyBasedOnExistingConceptItems(predicate: { type: KnownP
                                                        gettextCatalog: gettextCatalog): Story[] {
   return [
     addProperty,
+    addNewProperty,
     ...SearchPredicateModal.findAndCreateNewPropertyBasedOnExistingConceptItems(predicate.type, predicate.searchName, predicate.name, predicate.conceptId, gettextCatalog),
     ClassForm.focusOpenProperty(element)
   ];

@@ -6,6 +6,7 @@ import { child } from 'app/help/selectors';
 import { KnownModelType } from 'app/types/entity';
 import gettextCatalog = angular.gettext.gettextCatalog;
 import * as SearchNamespaceModal from './modal/searchNamepaceModalHelp.po';
+import * as SearchVocabularyModal from './modal/searchVocabularyModalHelp.po';
 
 export const element = () => angular.element('model-view');
 
@@ -33,6 +34,16 @@ export const requireNamespace = createStory({
 });
 
 
+const addVocabularyElement = child(element, 'vocabularies-view button');
+export const addVocabulary = createStory({
+
+  title: 'Add vocabulary',
+  content: 'Add vocabulary description',
+  popover: { element: addVocabularyElement, position: 'left-down' },
+  focus: { element: addVocabularyElement },
+  nextCondition: createClickNextCondition(addVocabularyElement)
+});
+
 const saveModelChangesElement = child(element, 'button.save');
 export const saveModelChanges = createStory({
 
@@ -54,11 +65,31 @@ export const focusNamespaces = createStory({
   nextCondition: createExplicitNextCondition()
 });
 
+const focusVocabulariesElement = child(element, 'vocabularies-view editable-table');
+export const focusVocabularies = createStory({
+  title: 'Vocabularies are here',
+  scroll: createScrollNone(),
+  content: 'Vocabularies can be used to link resources to existing concepts',
+  popover: { element: focusVocabulariesElement, position: 'left-down' },
+  focus: { element: focusVocabulariesElement },
+  denyInteraction: true,
+  nextCondition: createExplicitNextCondition()
+});
+
 export function addNamespaceItems(ns: { prefix: string, namespaceId: string }, gettextCatalog: gettextCatalog): Story[] {
   return [
     requireNamespace,
     SearchNamespaceModal.filterForModel(ns.prefix, ns.namespaceId, gettextCatalog),
     SearchNamespaceModal.selectNamespace(ns.prefix, ns.namespaceId),
     focusNamespaces
+  ];
+}
+
+export function addVocabularyItems(vocabulary: { name: string, id: string }, gettextCatalog: gettextCatalog): Story[] {
+  return [
+    addVocabulary,
+    SearchVocabularyModal.filterForVocabulary(vocabulary.name, vocabulary.id, gettextCatalog),
+    SearchVocabularyModal.selectVocabualry(vocabulary.name, vocabulary.id),
+    focusVocabularies
   ];
 }

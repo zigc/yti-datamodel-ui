@@ -14,11 +14,11 @@ import * as moment from 'moment';
 import { upperCaseFirst } from 'change-case';
 import * as frames from 'app/entities/frames';
 import { VocabularyService } from 'app/services/vocabularyService';
-import { identity } from 'yti-common-ui/utils/object';
 import { flatten } from 'yti-common-ui/utils/array';
 import { dateSerializer } from 'app/entities/serializer/serializer';
 import { ModelResourceStore } from './resourceStore';
 import { DefinedBy } from 'app/entities/definedBy';
+import { Concept } from 'app/entities/vocabulary';
 import { classNameToResourceIdName } from 'app/help/utils';
 
 export class InteractiveHelpClassService implements ClassService, ResetableService {
@@ -104,13 +104,12 @@ export class InteractiveHelpClassService implements ClassService, ResetableServi
     return this.$q.when();
   }
 
-  newClass(model: Model, classLabel: string, conceptID: Uri, lang: Language): IPromise<Class> {
-    return this.helpVocabularyService.getConcept(conceptID).then(identity, _err => null)
-      .then(concept => {
+  newClass(model: Model, classLabel: string, conceptID: Uri|null, lang: Language): IPromise<Class> {
 
-        if (!concept) {
-          throw new Error('Concept not found: ' + conceptID.toString());
-        }
+    const conceptPromise: IPromise<Concept|null> = conceptID ? this.helpVocabularyService.getConcept(conceptID) : this.$q.when(null);
+
+    return conceptPromise
+      .then(concept => {
 
         const currentTime = dateSerializer.serialize(moment());
 
@@ -119,9 +118,9 @@ export class InteractiveHelpClassService implements ClassService, ResetableServi
           '@type': 'rdfs:Class',
           created: currentTime,
           modified: currentTime,
-          subject: concept.serialize(true, false),
-          label: { [lang]: upperCaseFirst(classLabel) },
-          comment: Object.assign({}, concept.definition),
+          subject: concept ? concept.serialize(true, false) : null,
+          name: { [lang]: upperCaseFirst(classLabel) },
+          description: Object.assign({}, concept ? concept.definition : {}),
           isDefinedBy: model.asDefinedBy().serialize(true, false),
           versionInfo: 'DRAFT'
         };
@@ -161,9 +160,9 @@ export class InteractiveHelpClassService implements ClassService, ResetableServi
         '@id': Uri.randomUUID().toString(),
         created: currentTime,
         type: reverseMapType(type),
-        label: Object.assign({}, predicateOrExternal.label),
-        comment: Object.assign({}, predicateOrExternal.comment),
-        predicate: predicateOrExternal.id.curie
+        name: Object.assign({}, predicateOrExternal.label),
+        description: Object.assign({}, predicateOrExternal.comment),
+        path: predicateOrExternal.id.curie
       };
 
       if (type === 'attribute') {

@@ -72,6 +72,6 @@ export class AuthorizationManagerService {
   }
 
   canAddModel() {
-    return this.user.getOrganizations(['ADMIN', 'DATA_MODEL_EDITOR']).size > 0;
+    return this.user.isInRoleInAnyOrganization(['ADMIN', 'DATA_MODEL_EDITOR']);
   }
 }

@@ -14,9 +14,10 @@
           <div ng-repeat="classification in ctrl.classifications"
                class="search-result"
                ng-click="ctrl.select(classification)"
+               id="{{classification.id}}"
                key-control-selection>
 
-            <div class="content" ng-class="{last: last}">
+            <div class="content" ng-class="{last: $last}">
               <span class="title">{{classification.label | translateValue}}</span>
               <span class="body"></span>
               <div class="origin"></div>

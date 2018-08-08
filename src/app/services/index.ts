@@ -24,10 +24,11 @@ import { UserService } from 'yti-common-ui/services/user.service';
 import { downgradeInjectable } from '@angular/upgrade/static';
 import { AuthorizationManagerService } from './authorizationManagerService';
 import { ClassificationService } from './classificationService';
-import { OrganizationService } from './organizationService';
+import { DefaultOrganizationService, OrganizationService } from './organizationService';
 import { ImpersonationService } from './impersonationService';
 import { ConfigService } from './configService';
 import { UserRoleService } from './userRoleService';
+import { InteractiveHelpOrganizationService } from '../help/services/helpOrganizationService';
 
 function proxyConditionallyToHelp<T>(interactiveHelpService: InteractiveHelpService, defaultService: T, helpService: T) {
   return proxyToInstance(() => interactiveHelpService.isOpen() ? helpService : defaultService);
@@ -76,6 +77,11 @@ mod.service('validatorService',
   (interactiveHelpService: InteractiveHelpService, defaultValidatorService: ValidatorService, helpValidatorService: InteractiveHelpValidatorService) =>
     proxyConditionallyToHelp(interactiveHelpService, defaultValidatorService, helpValidatorService));
 
+mod.service('defaultOrganizationService', DefaultOrganizationService);
+mod.service('organizationService',
+  (interactiveHelpService: InteractiveHelpService, defaultOrganizationService: OrganizationService, helpOrganizationService: InteractiveHelpOrganizationService) =>
+    proxyConditionallyToHelp(interactiveHelpService, defaultOrganizationService, helpOrganizationService));
+
 mod.service('historyService', HistoryService);
 mod.service('resetService', ResetService);
 mod.service('entityLoaderService', EntityLoaderService);
@@ -83,7 +89,6 @@ mod.service('sessionService', SessionService);
 mod.service('frameService', FrameService);
 mod.service('authorizationManagerService', AuthorizationManagerService);
 mod.service('classificationService', ClassificationService);
-mod.service('organizationService', OrganizationService);
 mod.service('impersonationService', ImpersonationService);
 mod.service('configService', ConfigService);
 mod.service('userRoleService', UserRoleService);

@@ -5,10 +5,7 @@ import { Property } from 'app/entities/class';
 import { createScrollWithDefault } from './contract';
 import { defaultModelNamespace } from 'config';
 
-export const editableMargin = { left: 20, right: 20 };
-export const editableMarginInColumn = Object.assign({}, editableMargin, { bottom: 15 });
-export const editableSelectMargin =  Object.assign({}, editableMargin, { bottom: 15 });
-export const editableMultipleMargin = Object.assign({}, editableMargin, { bottom: 15 });
+export const editableMargin = { left: 20, right: 20, bottom: 15 };
 
 export function getModalController<T>(controllerName = 'ctrl') {
   return (angular.element('.modal').scope() as any)[controllerName] as T;
@@ -101,11 +98,8 @@ export function predicateIdFromNamespaceId(namespaceId: string, name: string) {
   return namespaceId + '#' + predicateNameToResourceIdName(name);
 }
 
-// XXX: api returns interesting {uuid}-{uuid} for which only first ui is stabile
-export const propertyIdIsSame = (l: string, r: string) => l.indexOf(r) !== -1 || r.indexOf(l) !== -1;
-
 export const isExpectedProperty = (expectedProperties: string[]) =>
-  (property: Property) => anyMatching(expectedProperties, uuid => propertyIdIsSame(uuid, property.internalId.uuid));
+  (property: Property) => anyMatching(expectedProperties, predicateCurie => property.predicateId.curie === predicateCurie);
 
 export function onlyProperties(properties: Property[], expectedProperties: string[]) {
   keepMatching(properties, isExpectedProperty(expectedProperties));

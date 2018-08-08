@@ -253,7 +253,8 @@ class ModelBuilder {
     this.model = this.entityLoader.createModel(type, {
       prefix,
       label: this.asLocalizable(name),
-      namespaces: namespaces
+      namespaces: namespaces,
+      vocabularies: ['http://uri.suomi.fi/terminology/jhs/terminological-vocabulary-1']
     });
 
     return this.model;

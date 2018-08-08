@@ -3,7 +3,7 @@ import { modal, child, editableByTitle, input, editableFocus } from 'app/help/se
 import { createStory, createExpectedStateNextCondition, Story } from 'app/help/contract';
 import {
   initialInputValue, validInput,
-  editableSelectMargin, editableMargin
+  editableMargin
 } from 'app/help/utils';
 import {
   filterForAddNewResult, selectAddNewResult, selectSearchResult,
@@ -36,7 +36,7 @@ export const enterVocabulary = createStory({
   title: 'Vocabulary',
   content: 'Select the vocabulary that is missing the required concept',
   popover: { element: enterVocabularyInputElement, position: 'left-down' },
-  focus: { element: editableFocus(enterVocabularyElement), margin: editableSelectMargin },
+  focus: { element: editableFocus(enterVocabularyElement), margin: editableMargin },
   nextCondition: createExpectedStateNextCondition(validInput(enterVocabularyInputElement)),
   reversible: true
 });

@@ -11,6 +11,15 @@
 
   <ul class="navbar-nav ml-auto">
 
+    <li ng-if="ctrl.canStartHelp()"
+        style="padding: 9px"
+        uib-tooltip="{{'Start help' | translate}}"
+        tooltip-placement="left">
+      <a ng-click="ctrl.startHelp()">
+        <i class="fas fa-info-circle" style="font-size: x-large"></i>
+      </a>
+    </li>
+
     <li ng-if="ctrl.fakeableUsers.length > 0" class="nav-item dropdown pl-0" uib-dropdown>
       <a id="impersonate_user_link" class="nav-link" uib-dropdown-toggle translate>Impersonate user</a>
       <div uib-dropdown-menu>

@@ -2,7 +2,7 @@ import {
   createStory, createClickNextCondition, createExplicitNextCondition, createScrollNone, createScrollWithDefault, Story
 } from 'app/help/contract';
 import { editableByTitle, child, editableFocus } from 'app/help/selectors';
-import { editableMarginInColumn } from 'app/help/utils';
+import { editableMargin } from 'app/help/utils';
 import * as SearchClassModal from './modal/searchClassModalHelp.po';
 import * as AddPropertiesFromClassModal from './modal/addPropertiesFromClassModalHelp.po';
 import gettextCatalog = angular.gettext.gettextCatalog;
@@ -79,7 +79,7 @@ export function focusAssociationTarget(parent: () => JQuery) {
     content: 'Association target can be changed from the list or by typing the identifier',
     scroll: createScrollWithDefault(enterAssociationTargetElement, 150),
     popover: { element: enterAssociationTargetSelectFocusElement, position: 'right-down' },
-    focus: { element: enterAssociationTargetSelectFocusElement, margin: editableMarginInColumn },
+    focus: { element: enterAssociationTargetSelectFocusElement, margin: editableMargin },
     denyInteraction: true,
     nextCondition: createExplicitNextCondition()
   });
@@ -96,7 +96,7 @@ export function focusSuperClass(parent: () => JQuery) {
     content: 'Super class can be changed from the list or by typing the identifier',
     scroll: createScrollWithDefault(enterSuperClassElement, 150),
     popover: { element: enterSuperClassSelectFocusElement, position: 'right-down' },
-    focus: { element: enterSuperClassSelectFocusElement, margin: editableMarginInColumn },
+    focus: { element: enterSuperClassSelectFocusElement, margin: editableMargin },
     denyInteraction: true,
     nextCondition: createExplicitNextCondition()
   });

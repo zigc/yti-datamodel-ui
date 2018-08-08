@@ -14,6 +14,7 @@ import { FrontPageHelpService } from './frontPageHelp';
 import { ModelPageHelpService } from './modelPageHelp';
 
 import { InteractiveHelpDisplay } from './components/interactiveHelpDisplay';
+import { InteractiveHelpOrganizationService } from './services/helpOrganizationService';
 
 mod.service('interactiveHelpService', InteractiveHelpService);
 mod.service('helpModelService', InteractiveHelpModelService);
@@ -23,6 +24,7 @@ mod.service('helpUserService', InteractiveHelpUserService);
 mod.service('helpVocabularyService', InteractiveHelpVocabularyService);
 mod.service('helpVisualizationService', InteractiveHelpVisualizationService);
 mod.service('helpValidatorService', InteractiveHelpValidatorService);
+mod.service('helpOrganizationService', InteractiveHelpOrganizationService);
 
 mod.service('frontPageHelpService', FrontPageHelpService);
 mod.service('modelPageHelpService', ModelPageHelpService);

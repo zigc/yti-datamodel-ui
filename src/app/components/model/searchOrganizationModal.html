@@ -13,9 +13,10 @@
         <div class="search-results">
           <div ng-repeat="organization in ctrl.organizations"
                class="search-result"
+               id="{{organization.id}}"
                ng-click="ctrl.select(organization)">
 
-            <div class="content" ng-class="{last: last}">
+            <div class="content" ng-class="{last: $last}">
               <span class="title">{{organization.label | translateValue}}</span>
               <span class="body">{{organization.description | translateValue}}</span>
               <div class="origin"></div>

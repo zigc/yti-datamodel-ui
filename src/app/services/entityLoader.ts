@@ -113,7 +113,6 @@ export class EntityLoaderService {
 export class EntityLoader {
 
   private initialized: IPromise<any>;
-  private vocabularies: Vocabulary[];
   private actions: IPromise<any>[] = [];
 
   constructor(private $q: IQService,
@@ -130,11 +129,7 @@ export class EntityLoader {
     const initialized = $q.defer();
     this.initialized = initialized.promise;
 
-    reset.then(() => this.vocabularyService.getAllVocabularies())
-      .then(vocabularies => {
-        this.vocabularies = vocabularies;
-        initialized.resolve();
-      });
+    reset.then(() => initialized.resolve());
   }
 
   addAction<T>(action: IPromise<T>, details: any): IPromise<T> {
@@ -173,14 +168,14 @@ export class EntityLoader {
           ['fi', 'en'],
           type
         )
-      )
-        .then(model => {
+      ).then(model => this.$q.all([model, this.vocabularyService.getAllVocabularies()]))
+        .then(([model, vocabularies]) => {
           setDetails(model, details);
 
           const promises: IPromise<any>[] = [];
 
           const resolveVocabulary = (importedVocabulary: string) => {
-            const vocabulary = firstMatching(this.vocabularies, (voc: Vocabulary) => voc.id.toString() === importedVocabulary);
+            const vocabulary = firstMatching(vocabularies, (voc: Vocabulary) => voc.id.toString() === importedVocabulary);
 
             if (!vocabulary) {
               throw new Error('Vocabulary not found: ' + vocabulary);

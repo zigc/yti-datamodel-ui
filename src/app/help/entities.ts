@@ -1,10 +1,6 @@
 import { modelIdFromPrefix } from '../../../e2e/util/resource'; // FIXME
 import { KnownPredicateType } from 'app/types/entity';
-
-const palveluNimiId = '6cfbd054-2bfc-4e92-8642-477b035f59ee';
-const palveluKuvausId = 'fe884237-f6e2-44ea-ac97-231516da4770';
-const rekisterinumeroId = '1b029515-4ee3-44dd-ac27-b9d59888be21';
-const lajikoodiId = '361ec89c-a723-4788-bd0d-927f414a1152';
+import { helpOrganizationId } from './services/helpOrganizationService';
 
 export const exampleImportedLibrary = {
   prefix: 'jhs',
@@ -16,13 +12,25 @@ export const exampleLibrary = {
   name: 'Merenkulun tietokomponentit',
   comment: 'Merenkulkuun liittyvät tietosisällöt',
   importedLibrary: exampleImportedLibrary,
+  vocabulary: {
+    name: 'julkis',
+    id: 'http://uri.suomi.fi/terminology/jhs/terminological-vocabulary-1', // FIXME relies on data initialization order
+  },
+  classification: {
+    name: 'Liikenne',
+    id: 'http://urn.fi/URN:NBN:fi:au:ptvl:v1142'
+  },
+  organization: {
+    name: 'Ohjeen organisaatio',
+    id: helpOrganizationId
+  },
   newClass: {
     name: 'Vene',
     comment: 'Vedessä kulkeva alus, joka on laivaa pienempi',
     superClass: {
       namespaceId: exampleImportedLibrary.namespaceId,
       name: 'Liikenneväline',
-      properties: [rekisterinumeroId, lajikoodiId]
+      properties: ['jhs:lajikoodi', 'jhs:rekisterinumero']
     },
     property: {
       name: {
@@ -41,7 +49,7 @@ export const exampleLibrary = {
         type: 'association' as KnownPredicateType,
         searchName: 'Omistaja',
         name: 'Omistaja',
-        conceptId: 'http://jhsmeta.fi/skos/J197',
+        conceptId: 'http://uri.suomi.fi/terminology/jhs/concept1', // FIXME relies on data initialization order
         target: {
           namespaceId: exampleImportedLibrary.namespaceId,
           name: 'Henkilö'
@@ -67,6 +75,18 @@ export const exampleProfile = {
   prefix: 'plv',
   name: 'Palveluprofiili',
   importedLibrary: exampleImportedLibrary,
+  vocabulary: {
+    name: 'julkis',
+    id: 'http://uri.suomi.fi/terminology/jhs/terminological-vocabulary-1', // FIXME relies on data initialization order
+  },
+  classification: {
+    name: 'Liikenne',
+    id: 'http://urn.fi/URN:NBN:fi:au:ptvl:v1142'
+  },
+  organization: {
+    name: 'Ohjeen organisaatio',
+    id: helpOrganizationId
+  },
   newClass: {
     name: 'Tuote',
     comment: 'Asia joka tuotetaan',
@@ -92,6 +112,6 @@ export const exampleProfile = {
   specializedClass: {
     namespaceId: exampleImportedLibrary.namespaceId,
     name: 'Palvelu',
-    properties: [palveluNimiId, palveluKuvausId]
+    properties: ['jhs:nimi', 'jhs:kuvaus']
   }
 };

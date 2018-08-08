@@ -13,24 +13,32 @@ export class HelpSelectionModal {
   open(helps: InteractiveHelp[]) {
     return this.$uibModal.open({
       template: `
-        <modal-template class="help-selection">
-          <modal-title translate>Select help topic</modal-title>
-       
-          <modal-body class="full-height">
-            <div class="row">
-              <div class="col-md-12">
-                <div class="help story-line" ng-repeat="help in ctrl.helps" ng-click="ctrl.startHelp(help)">
-                  <h5>{{help.storyLine.title | translate}}</h5>
-                  <div>{{help.storyLine.description | translate}}</div>
+        <div class="help-selection">
+        
+          <div class="modal-header">
+            <h4 class="modal-title">
+              <a><i ng-click="$dismiss('cancel')" class="fas fa-times"></i></a>
+              <span translate>Select help topic</span>
+            </h4>
+          </div>
+        
+          <div class="modal-body full-height">
+            <div class="content-box scrolling">
+              <div class="search-results">            
+                <div class="search-result" ng-repeat="help in ctrl.helps" ng-click="ctrl.startHelp(help)">
+                  <div class="content" ng-class="{last: $last}">
+                    <div class="title">{{help.storyLine.title | translate}}</div>
+                    <div class="body">{{help.storyLine.description | translate}}</div>                  
+                  </div>
                 </div>
               </div>
             </div>
-          </modal-body>
+          </div>
          
-          <modal-buttons>
+          <div class="modal-footer">
             <button class="btn btn-link" type="button" ng-click="$dismiss('cancel')" translate>Close</button>
-          </modal-buttons>
-        </modal-template>
+          </div>
+        </div>
       `,
       size: 'md',
       controllerAs: 'ctrl',
