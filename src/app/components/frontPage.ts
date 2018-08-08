@@ -25,6 +25,7 @@ import gettextCatalog = angular.gettext.gettextCatalog;
 import { OrganizationService } from '../services/organizationService';
 import { AuthorizationManagerService } from 'app/services/authorizationManagerService';
 import { Organization } from '../entities/organization';
+import { labelNameToResourceIdIdentifier } from 'yti-common-ui/utils/resource';
 
 export const component: ComponentDeclaration = {
   selector: 'frontPage',
@@ -74,7 +75,8 @@ export class FrontPageController implements HelpProvider {
     this.modelTypes = [null, 'library', 'profile'].map(type => {
       return {
         value: type as KnownModelType,
-        name: () => gettextCatalog.getString(type ? type : 'All types')
+        name: () => gettextCatalog.getString(type ? type : 'All types'),
+        idIdentifier: () => type ? type : 'all_selected'
       }
     });
 
@@ -83,7 +85,8 @@ export class FrontPageController implements HelpProvider {
       this.organizations = [null, ...organizations].map(org => {
         return {
           value: org,
-          name: () => org ? languageService.translate(org.label) : gettextCatalog.getString('All organizations')
+          name: () => org ? languageService.translate(org.label) : gettextCatalog.getString('All organizations'),
+          idIdentifier: () => org ? labelNameToResourceIdIdentifier(languageService.translate(org.label)) : 'all_selected'
         }
       });
     });
