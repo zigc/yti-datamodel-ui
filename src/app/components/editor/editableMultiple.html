@@ -13,7 +13,7 @@
       <div ng-repeat="value in ctrl.ngModel" class="added-item">
         <div class="box draggable" ng-class="{ 'has-error': !ctrl.isValid(value)}" drag-sortable-item>
           {{ctrl.format(value)}}
-          <div class="delete-item badge" ng-click="ctrl.deleteValue(value)">&times;</div>
+          <div id="{{ctrl.id + '_' + ctrl.normalizeValueForId(value) + '_delete_editable_item_button'}}" class="delete-item badge" ng-click="ctrl.deleteValue(value)">&times;</div>
         </div>
       </div>
 

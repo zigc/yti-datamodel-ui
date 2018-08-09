@@ -5,6 +5,7 @@ import { extendNgModelOptions, formatWithFormatters, ValidationResult, validateW
 import { module as mod } from './module';
 import { remove } from 'yti-common-ui/utils/array';
 import { enter } from 'yti-common-ui/utils/key-code';
+import { normalizeAsId } from 'yti-common-ui/utils/resource';
 
 const skipValidators = new Set<string>(['duplicate']);
 
@@ -161,5 +162,9 @@ export class EditableMultipleController<T> {
       this.addValue(this.input);
       this.input = null;
     }
+  }
+
+  normalizeValueForId(value: string): string {
+    return normalizeAsId(value);
   }
 }

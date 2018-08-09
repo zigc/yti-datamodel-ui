@@ -68,7 +68,7 @@
         <input id="{{ctrl.property.internalId + 'id'}}" class="form-control" type="text" restrict-duplicates="ctrl.otherPropertyIdentifiers" string-input="identifier" ng-trim="false" ng-model="ctrl.property.externalId" />
       </editable>
 
-      <editable-multiple-data-type-input id="{{ctrl.property.internalId + 'example attribute'}}"
+      <editable-multiple-data-type-input id="{{ctrl.property.internalId + '_example_attribute'}}"
                                          data-title="Example"
                                          context="ctrl.model"
                                          reference-data="ctrl.property.referenceData"
@@ -77,7 +77,7 @@
       </editable-multiple-data-type-input>
 
       <editable-multiple-data-type-input data-title="Allowed values"
-                                         id="{{ctrl.property.internalId + 'allowedValues'}}"
+                                         id="{{ctrl.property.internalId + '_allowedValues'}}"
                                          input-type="ctrl.property.inputType"
                                          ng-model="ctrl.property.in"
                                          reference-data="ctrl.property.referenceData"
