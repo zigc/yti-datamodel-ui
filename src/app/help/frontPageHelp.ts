@@ -1,6 +1,6 @@
 import { ILocationService, ui } from 'angular';
 import IModalStackService = ui.bootstrap.IModalStackService;
-import { createHelpWithDefaultHandler, createNotification, InteractiveHelp, Story, StoryLine, Notification } from './contract';
+import { createNotification, InteractiveHelp, Story, StoryLine, Notification } from './contract';
 import { KnownModelType } from 'app/types/entity';
 import gettextCatalog = angular.gettext.gettextCatalog;
 import * as FrontPage from './pages/frontPageHelp.po';
@@ -13,6 +13,9 @@ import * as SearchClassificationModal from './pages/model/modal/searchClassifica
 import * as SearchOrganizationsModal from './pages/model/modal/searchOrganizationModalHelp.po';
 import * as VisualizationView from './pages/model/visualizationViewHelp.po';
 import { exampleLibrary, exampleProfile } from './entities';
+import { EntityLoaderService } from '../services/entityLoader';
+import { InteractiveHelpService } from './services/interactiveHelpService';
+import { ModelService } from '../services/modelService';
 
 function createNewLibraryItems(gettextCatalog: gettextCatalog): Story[] {
 
@@ -98,18 +101,55 @@ function createNewModel(type: KnownModelType, gettextCatalog: gettextCatalog): S
 export class FrontPageHelpService {
 
   /* @ngInject */
-  constructor(private $uibModalStack: IModalStackService, private $location: ILocationService, private gettextCatalog: gettextCatalog) {
-  }
-
-  private returnToFrontPage() {
-    this.$uibModalStack.dismissAll();
-    this.$location.url('/');
+  constructor(private $uibModalStack: IModalStackService,
+              private $location: ILocationService,
+              private gettextCatalog: gettextCatalog,
+              private modelService: ModelService,
+              private entityLoaderService: EntityLoaderService) {
   }
 
   getHelps(): InteractiveHelp[] {
+
+    const returnToFrontPage = () => {
+      this.$uibModalStack.dismissAll();
+      this.$location.url('/');
+    };
+
+    const onInit = (service: InteractiveHelpService) =>
+      service.reset().then(() => {
+
+        const entityLoader = this.entityLoaderService.create(false);
+        const modelPromise = this.modelService.getModelByPrefix('jhs');
+
+        return entityLoader.createClass(modelPromise, {
+          label: {
+            fi: 'Liikenneväline'
+          },
+          properties: [
+            {
+              predicate: 'http://uri.suomi.fi/datamodel/ns/jhs#rekisterinumero'
+            },
+            {
+              predicate: 'http://uri.suomi.fi/datamodel/ns/jhs#lajikoodi',
+              valueClass: 'http://uri.suomi.fi/datamodel/ns/jhs#koodi'
+            }
+          ]
+        }).then(() => false);
+      });
+
     return [
-      createHelpWithDefaultHandler(createNewModel('library', this.gettextCatalog), this.returnToFrontPage.bind(this)),
-      createHelpWithDefaultHandler(createNewModel('profile', this.gettextCatalog), this.returnToFrontPage.bind(this))
+      {
+        storyLine: createNewModel('library', this.gettextCatalog),
+        onComplete: returnToFrontPage,
+        onCancel: returnToFrontPage,
+        onInit
+      },
+      {
+        storyLine: createNewModel('profile', this.gettextCatalog),
+        onComplete: returnToFrontPage,
+        onCancel: returnToFrontPage,
+        onInit
+      }
     ];
   }
 }

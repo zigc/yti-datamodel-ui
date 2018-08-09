@@ -28,12 +28,4 @@ const vocabularyService = new DefaultVocabularyService(httpService, frameService
 const resetService = new ResetService(httpService);
 
 
-const context = {
-  'skos' : 'http://www.w3.org/2004/02/skos/core#',
-  'dc' : 'http://purl.org/dc/elements/1.1/',
-  'schema' : 'http://schema.org/',
-  'foaf' : 'http://xmlns.com/foaf/0.1/'
-};
-
-
-export const loader = new EntityLoader(q, modelService, predicateService, classService, vocabularyService, resetService, context, true);
+export const loader = new EntityLoader(q, modelService, predicateService, classService, vocabularyService, resetService, true);

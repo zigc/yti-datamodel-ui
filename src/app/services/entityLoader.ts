@@ -105,10 +105,17 @@ export class EntityLoaderService {
               private resetService: ResetService) {
   }
 
-  create(context: any, shouldReset: boolean): EntityLoader {
-    return new EntityLoader(this.$q, this.modelService, this.predicateService, this.classService, this.vocabularyService, this.resetService, context, shouldReset);
+  create(shouldReset: boolean): EntityLoader {
+    return new EntityLoader(this.$q, this.modelService, this.predicateService, this.classService, this.vocabularyService, this.resetService, shouldReset);
   }
 }
+
+const context = {
+  'skos' : 'http://www.w3.org/2004/02/skos/core#',
+  'dc' : 'http://purl.org/dc/elements/1.1/',
+  'schema' : 'http://schema.org/',
+  'foaf' : 'http://xmlns.com/foaf/0.1/'
+};
 
 export class EntityLoader {
 
@@ -121,7 +128,6 @@ export class EntityLoader {
               private classService: ClassService,
               private vocabularyService: VocabularyService,
               resetService: ResetService,
-              private context: any,
               shouldReset: boolean) {
 
     const reset = shouldReset ? resetService.reset() : $q.when();
@@ -139,7 +145,7 @@ export class EntityLoader {
   }
 
   createUri(value: string) {
-    return new Uri(value, this.context);
+    return new Uri(value, context);
   }
 
   get result(): IPromise<any> {
@@ -192,7 +198,7 @@ export class EntityLoader {
 
             if (isUriResolvable(namespace)) {
               promises.push(
-                asUriPromise(assertExists(namespace, 'namespace for ' + model.label['fi']), this.context)
+                asUriPromise(assertExists(namespace, 'namespace for ' + model.label['fi']), context)
                   .then(importedNamespace =>
                     this.$q.all([this.$q.when(importedNamespace), this.modelService.getAllImportableNamespaces()]))
                   .then(([importedNamespace, importableNamespaces]: [Uri, ImportedNamespace[]]) =>
@@ -262,7 +268,7 @@ export class EntityLoader {
               }
 
               for (const equivalentClass of details.equivalentClasses || []) {
-                promises.push(asUriPromise(assertExists(equivalentClass, 'equivalent class for ' + details.class.toString()), this.context, shape.context)
+                promises.push(asUriPromise(assertExists(equivalentClass, 'equivalent class for ' + details.class.toString()), context, shape.context)
                   .then(id => shape.equivalentClasses.push(id)));
               }
 
@@ -307,10 +313,10 @@ export class EntityLoader {
           }
 
           assertPropertyValueExists(details, 'subClassOf for ' + details.label['fi']);
-          promises.push(asUriPromise(details.subClassOf!, this.context, klass.context).then(uri => klass.subClassOf = uri));
+          promises.push(asUriPromise(details.subClassOf!, context, klass.context).then(uri => klass.subClassOf = uri));
 
           for (const equivalentClass of details.equivalentClasses || []) {
-            promises.push(asUriPromise(assertExists(equivalentClass, 'equivalent class for ' + details.label['fi']), this.context, klass.context)
+            promises.push(asUriPromise(assertExists(equivalentClass, 'equivalent class for ' + details.label['fi']), context, klass.context)
               .then(uri => klass.equivalentClasses.push(uri)));
           }
 
@@ -364,10 +370,10 @@ export class EntityLoader {
           const promises: IPromise<any>[] = [];
 
           assertPropertyValueExists(details, 'subPropertyOf for ' + details.label['fi]']);
-          promises.push(asUriPromise(details.subPropertyOf!, this.context, predicate.context).then(uri => predicate.subPropertyOf = uri));
+          promises.push(asUriPromise(details.subPropertyOf!, context, predicate.context).then(uri => predicate.subPropertyOf = uri));
 
           for (const equivalentProperty of details.equivalentProperties || []) {
-            promises.push(asUriPromise(assertExists(equivalentProperty, 'equivalent property for ' + details.label['fi']), this.context, predicate.context)
+            promises.push(asUriPromise(assertExists(equivalentProperty, 'equivalent property for ' + details.label['fi']), context, predicate.context)
               .then(uri => predicate.equivalentProperties.push(uri)));
           }
 
@@ -391,7 +397,7 @@ export class EntityLoader {
   createAssociation(modelPromise: IPromise<Model>, details: AssociationDetails): IPromise<Association> {
     return this.createPredicate<Association>(modelPromise, 'association', details, association => {
       assertPropertyValueExists(details, 'valueClass');
-      return asUriPromise(details.valueClass!, this.context, association.context)
+      return asUriPromise(details.valueClass!, context, association.context)
         .then(uri => association.valueClass = uri);
     });
   }
@@ -409,7 +415,7 @@ export class EntityLoader {
         .then((p: Property) => {
           setDetails(p, details);
           assertPropertyValueExists(details, 'valueClass');
-          const valueClassPromise = asUriPromise(details.valueClass!, this.context, p.context).then(id => {
+          const valueClassPromise = asUriPromise(details.valueClass!, context, p.context).then(id => {
             if (id) {
               p.valueClass = id;
             }
@@ -510,8 +516,8 @@ function asUriPromise<T extends { id: Uri }>(resolvable: UriResolvable<T>, ...co
 
     const uriContext: any = {};
 
-    for (const context of contexts) {
-      Object.assign(uriContext, context);
+    for (const c of contexts) {
+      Object.assign(uriContext, c);
     }
 
     return <IPromise<Uri>> <any> Promise.resolve(new Uri(resolvable, Object.assign({}, uriContext)));

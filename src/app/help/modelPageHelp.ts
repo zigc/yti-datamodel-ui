@@ -329,7 +329,7 @@ class HelpBuilder {
       storyLine,
       onInit: (service: InteractiveHelpService) => {
 
-        const builder = new ModelBuilder(this.entityLoaderService.create(model.context, false), model, this.asLocalizable);
+        const builder = new ModelBuilder(this.entityLoaderService.create(false), model, this.asLocalizable);
 
         return service.reset()
           .then(() => {

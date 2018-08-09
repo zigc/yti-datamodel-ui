@@ -78,14 +78,6 @@ export interface StoryDetails {
   denyInteraction?: boolean;
 }
 
-export function createHelpWithDefaultHandler(storyLine: StoryLine, onFinish: () => void): InteractiveHelp {
-  return {
-    storyLine,
-    onComplete: onFinish,
-    onCancel: onFinish
-  };
-}
-
 export function createStory(storyDetails: StoryDetails) {
   return Object.assign({}, storyDetails, {
     type: 'story' as 'story'
