@@ -21,11 +21,11 @@ mod.directive('referenceDatasView', () => {
     template: `
       <h4>
         <span translate>Reference data</span> 
-        <button type="button" class="btn btn-link btn-xs pull-right" ng-click="ctrl.addReferenceData()" ng-show="ctrl.isEditing()">
+        <button id="add_reference_data_button" type="button" class="btn btn-link btn-xs pull-right" ng-click="ctrl.addReferenceData()" ng-show="ctrl.isEditing()">
           <span translate>Add reference data</span>
         </button>
       </h4>
-      <editable-table descriptor="ctrl.descriptor" expanded="ctrl.expanded"></editable-table>
+      <editable-table id="'referenceData'" descriptor="ctrl.descriptor" expanded="ctrl.expanded"></editable-table>
     `,
     controllerAs: 'ctrl',
     bindToController: true,

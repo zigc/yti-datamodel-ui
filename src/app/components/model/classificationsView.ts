@@ -26,11 +26,11 @@ mod.directive('classificationsView', () => {
     template: `
       <h4>
         <span translate>Classifications</span> 
-        <button type="button" class="btn btn-link btn-xs pull-right" ng-click="ctrl.addClassification()" ng-show="ctrl.isEditing()">
+        <button id="add_classification_button" type="button" class="btn btn-link btn-xs pull-right" ng-click="ctrl.addClassification()" ng-show="ctrl.isEditing()">
           <span translate>Add classification</span>
         </button>
       </h4>
-      <editable-table descriptor="ctrl.descriptor" expanded="ctrl.expanded"></editable-table>
+      <editable-table id="'classifications'" descriptor="ctrl.descriptor" expanded="ctrl.expanded"></editable-table>
     `,
     controllerAs: 'ctrl',
     bindToController: true,

@@ -11,7 +11,7 @@ mod.directive('technicalNamespaces', () => {
     restrict: 'E',
     template: `
       <h4 translate>Technical namespaces</h4>
-      <editable-table descriptor="ctrl.descriptor" expanded="ctrl.expanded"></editable-table>
+      <editable-table id="'technicalNamespaces'" descriptor="ctrl.descriptor" expanded="ctrl.expanded"></editable-table>
     `,
     controllerAs: 'ctrl',
     bindToController: true,

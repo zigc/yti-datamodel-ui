@@ -19,11 +19,11 @@ mod.directive('vocabulariesView', () => {
     template: `
       <h4>
         <span translate>Controlled vocabularies</span> 
-        <button type="button" class="btn btn-link btn-xs pull-right" ng-click="ctrl.addVocabulary()" ng-show="ctrl.isEditing()">
+        <button id="add_vocabulary_button" type="button" class="btn btn-link btn-xs pull-right" ng-click="ctrl.addVocabulary()" ng-show="ctrl.isEditing()">
           <span translate>Add vocabulary</span>
         </button>
       </h4>
-      <editable-table descriptor="ctrl.descriptor" expanded="ctrl.expanded"></editable-table>
+      <editable-table id="'vocabularies'" descriptor="ctrl.descriptor" expanded="ctrl.expanded"></editable-table>
     `,
     controllerAs: 'ctrl',
     bindToController: true,

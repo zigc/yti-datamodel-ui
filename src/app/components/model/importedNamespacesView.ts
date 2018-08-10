@@ -20,11 +20,11 @@ mod.directive('importedNamespacesView', () => {
     template: `
       <h4>
         <span translate>Imported namespaces</span>
-        <button type="button" class="btn btn-link btn-xs pull-right" ng-click="ctrl.importNamespace()" ng-show="ctrl.isEditing()">
+        <button id="add_imported_namespace_button" type="button" class="btn btn-link btn-xs pull-right" ng-click="ctrl.importNamespace()" ng-show="ctrl.isEditing()">
           <span translate>Import namespace</span>
         </button>
       </h4>
-      <editable-table descriptor="ctrl.descriptor" expanded="ctrl.expanded"></editable-table>
+      <editable-table id="'importedNamespaces'" descriptor="ctrl.descriptor" expanded="ctrl.expanded"></editable-table>
     `,
     controllerAs: 'ctrl',
     bindToController: true,

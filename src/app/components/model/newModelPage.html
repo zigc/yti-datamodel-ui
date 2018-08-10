@@ -12,13 +12,15 @@
     <fieldset ng-disabled="ctrl.persisting">
 
       <div class="top-actions">
-        <button type="button"
+        <button id="cancel_new_model_button"
+                type="button"
                 class="btn btn-link pull-right cancel"
                 ng-click="ctrl.cancel()">
           <span translate>Cancel</span>
         </button>
 
-        <button type="button"
+        <button id="save_new_model_button"
+                type="button"
                 class="btn btn-action pull-right save"
                 ng-click="ctrl.save()"
                 ng-disabled="!ctrl.isValid() || ctrl.form.$pending">
