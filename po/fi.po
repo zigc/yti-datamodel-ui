@@ -40,7 +40,7 @@ msgstr "Lisää luokitus"
 msgid "Add contributor"
 msgstr "Lisää sisällöntuottaja"
 
-#: app\components/frontPage.html:53
+#: app\components/frontPage.html:57
 msgid "Add library"
 msgstr "Lisää tietokomponenttikirjasto"
 
@@ -56,7 +56,7 @@ msgstr ""
 msgid "Add link"
 msgstr "Lisää linkki"
 
-#: app\components/frontPage.html:49
+#: app\components/frontPage.html:53
 msgid "Add model"
 msgstr "Lisää tietomalli"
 
@@ -72,7 +72,7 @@ msgstr "Luo uusi nimiavaruus"
 msgid "Add new profile"
 msgstr "Lisää uusi soveltamisprofiili"
 
-#: app\components/frontPage.html:54
+#: app\components/frontPage.html:58
 msgid "Add profile"
 msgstr "Lisää soveltamisprofiili"
 
@@ -103,7 +103,7 @@ msgstr "Lisää ominaisuudet tarkennettavasta luokasta"
 msgid "Add properties from super class"
 msgstr "Lisää ominaisuudet yläluokasta"
 
-#: app\components\editor/classForm.html:62
+#: app\components\editor/classForm.html:63
 msgid "Add property"
 msgstr "Lisää ominaisuus"
 
@@ -126,7 +126,7 @@ msgstr ""
 msgid "Add vocabulary"
 msgstr "Lisää sanasto"
 
-#: app\components\editor/classForm.html:100
+#: app\components\editor/classForm.html:101
 #: app\components\editor/predicateForm.html:62
 #: app\components\editor/propertyView.html:163
 #: app\components\model/modelForm.html:24
@@ -141,7 +141,7 @@ msgstr "Ylläpitäjä"
 msgid "Admin groups"
 msgstr "Pääkäyttäjänä ryhmissä"
 
-#: app\components/advancedSearchModal.html:4 app\components/frontPage.html:13
+#: app\components/advancedSearchModal.html:4 app\components/frontPage.html:14
 msgid "Advanced search"
 msgstr "Tarkennettu haku"
 
@@ -380,9 +380,9 @@ msgstr "Valinta on tehtävä tietokomponenettikirjaston luokista"
 msgid "Can be selected only from this profile"
 msgstr "Valinta on tehtävä soveltamisprofiilin luokista"
 
-#: app\components/advancedSearchModal.html:65
+#: app\components/advancedSearchModal.html:66
 #: app\components\common/modalTemplate.html:16
-#: app\components\editor/addPropertiesFromClassModal.html:27
+#: app\components\editor/addPropertiesFromClassModal.html:29
 #: app\components\editor/searchClassModal.html:116
 #: app\components\editor/searchConceptModal.html:112
 #: app\components\editor/searchPredicateModal.html:137
@@ -390,12 +390,12 @@ msgstr "Valinta on tehtävä soveltamisprofiilin luokista"
 #: app\components\model/addEditLinkModal.html:21
 #: app\components\model/addEditNamespaceModal.html:46
 #: app\components\model/editReferenceDataModal.html:27
-#: app\components\model/newModelPage.html:16
-#: app\components\model/searchClassificationModal.html:32
+#: app\components\model/newModelPage.html:19
+#: app\components\model/searchClassificationModal.html:33
 #: app\components\model/searchNamespaceModal.html:73
-#: app\components\model/searchOrganizationModal.html:31
+#: app\components\model/searchOrganizationModal.html:32
 #: app\components\model/searchReferenceDataModal.html:119
-#: app\components\model/searchVocabularyModal.html:62
+#: app\components\model/searchVocabularyModal.html:63
 msgid "Cancel"
 msgstr "Peruuta"
 
@@ -533,7 +533,7 @@ msgstr "Luokkaa voidaan muokata täältä"
 msgid "Classes can be seen visually here"
 msgstr "Luokat ja niiden väliset assosiaatiot näkyvät visuaalisesti täällä"
 
-#: app\components/frontPage.html:21
+#: app\components/frontPage.html:22
 msgid "Classification"
 msgstr "Luokitus"
 
@@ -1028,7 +1028,7 @@ msgstr "Kuvaus"
 msgid "Description info"
 msgstr "Tietosisällön kuvaus"
 
-#: app\components\editor/addPropertiesFromClassModal.html:22
+#: app\components\editor/addPropertiesFromClassModal.html:24
 msgid "Deselect all"
 msgstr "Poista kaikki valinnat"
 
@@ -1348,7 +1348,7 @@ msgstr "Tunniste puuttuu nimiavaruuden sisältä"
 msgid "Identifier"
 msgstr "Tunniste"
 
-#: app\components\navigation/navigationBar.html:15
+#: app\components\navigation/navigationBar.html:24
 msgid "Impersonate user"
 msgstr "Esiinny käyttäjänä"
 
@@ -1477,13 +1477,13 @@ msgstr "Linkit"
 msgid "Local ID"
 msgstr "Paikallinen ID"
 
-#: app\components\navigation/navigationBar.html:24
-#: app\components\navigation/navigationBar.html:56
+#: app\components\navigation/navigationBar.html:33
+#: app\components\navigation/navigationBar.html:65
 msgid "LOG IN"
 msgstr "KIRJAUDU SISÄÄN"
 
-#: app\components\navigation/navigationBar.html:29
-#: app\components\navigation/navigationBar.html:52
+#: app\components\navigation/navigationBar.html:38
+#: app\components\navigation/navigationBar.html:61
 msgid "LOG OUT"
 msgstr "KIRJAUDU ULOS"
 
@@ -1549,7 +1549,7 @@ msgstr "Sallitun arvon minimipituus"
 msgid "Minimize"
 msgstr "Pienennä"
 
-#: app\components/frontPage.html:67 translations/misc.html:33
+#: app\components/frontPage.html:71 translations/misc.html:33
 msgid "model"
 msgstr "Tietokomponenttikirjasto"
 
@@ -1568,7 +1568,7 @@ msgstr ""
 msgid "Model not found"
 msgstr " Mallia ei löydy"
 
-#: app\components/frontPage.html:68
+#: app\components/frontPage.html:72
 msgid "models"
 msgstr "tietomallia"
 
@@ -1668,7 +1668,7 @@ msgstr "Ei"
 msgid "No concept defined"
 msgstr "Käsitettä ei ole määritelty"
 
-#: app\components\editor/classForm.html:93
+#: app\components\editor/classForm.html:94
 msgid "No properties yet"
 msgstr "Ei vielä yhtään ominaisuutta"
 
@@ -1677,7 +1677,7 @@ msgid "No referrers"
 msgstr "Ei viittauksia"
 
 #: app\components/advancedSearchModal.html:33
-#: app\components\model/searchVocabularyModal.html:37
+#: app\components\model/searchVocabularyModal.html:38
 msgid "No search results"
 msgstr "Ei hakutuloksia"
 
@@ -2023,7 +2023,7 @@ msgstr ""
 "esimerkiksi XML tai JSON sanoman ensimmäinen entiteetti."
 
 #: app\components\form/editableEntityButtons.html:15
-#: app\components\model/newModelPage.html:23
+#: app\components\model/newModelPage.html:27
 msgid "Save"
 msgstr "Tallenna"
 
@@ -2031,7 +2031,7 @@ msgstr "Tallenna"
 msgid "Save visualization position"
 msgstr "Visualisoinnin sijaintien tallennus"
 
-#: app\components/frontPage.html:11
+#: app\components/frontPage.html:12
 msgid "Search"
 msgstr "Etsi"
 
@@ -2234,7 +2234,7 @@ msgstr "Hae koodistoa…"
 msgid "Search reference data"
 msgstr "Hae koodistoja"
 
-#: app\components\model/searchVocabularyModal.html:4
+#: app\components\model/searchVocabularyModal.html:5
 msgid "Search vocabularies"
 msgstr "Hae sanastoja"
 
@@ -2242,7 +2242,7 @@ msgstr "Hae sanastoja"
 msgid "search vocabulary"
 msgstr "Hae sanastoa…"
 
-#: app\components\editor/addPropertiesFromClassModal.html:21
+#: app\components\editor/addPropertiesFromClassModal.html:23
 msgid "Select all"
 msgstr "Valitse kaikki"
 
@@ -2504,7 +2504,7 @@ msgstr "Tarkennettu luokasta"
 msgid "Specialized from class info"
 msgstr "Luokka jota soveltamisprofiilissa on tarkennettu"
 
-#: translations/help.html:1
+#: app\components\navigation/navigationBar.html:16 translations/help.html:1
 msgid "Start help"
 msgstr "Aloita ohje"
 
@@ -2548,6 +2548,14 @@ msgstr "ehdotus"
 #: translations/misc.html:24
 msgid "Suggestion"
 msgstr "Ehdotus"
+
+#: app\components\navigation/navigationBar.html:76
+msgid "Suomi.fi Controlled Vocabularies"
+msgstr "Suomi.fi-sanastot"
+
+#: app\components\navigation/navigationBar.html:79
+msgid "Suomi.fi Reference Data"
+msgstr "Suomi.fi-koodistot"
 
 #: translations/help.html:155
 msgid "Super class can be changed from the list or by typing the identifier"
@@ -2725,7 +2733,7 @@ msgstr "Käytä luokkaa"
 msgid "Use selection"
 msgstr "Käytä valintaa"
 
-#: app\components\navigation/navigationBar.html:59
+#: app\components\navigation/navigationBar.html:68
 #: app\components\user/userPage.html:6
 msgid "User details"
 msgstr "Käyttäjätiedot"
@@ -2738,7 +2746,7 @@ msgstr "Käyttäjätunnus"
 msgid "User name"
 msgstr "Nimi"
 
-#: app\components\navigation/navigationBar.html:64
+#: app\components\navigation/navigationBar.html:82
 msgid "User right management"
 msgstr "Oikeuksienhallinta"
 
@@ -2994,7 +3002,7 @@ msgid "xsd:time error"
 msgstr "Virheellinen aika"
 
 #: app\components\common/modalTemplate.html:15
-#: app\components\editor/addPropertiesFromClassModal.html:26
+#: app\components\editor/addPropertiesFromClassModal.html:28
 #: translations/misc.html:273
 msgid "Yes"
 msgstr "Kyllä"

@@ -35,7 +35,7 @@ msgstr ""
 msgid "Add contributor"
 msgstr ""
 
-#: app\components/frontPage.html:53
+#: app\components/frontPage.html:57
 msgid "Add library"
 msgstr ""
 
@@ -47,7 +47,7 @@ msgstr ""
 msgid "Add link"
 msgstr ""
 
-#: app\components/frontPage.html:49
+#: app\components/frontPage.html:53
 msgid "Add model"
 msgstr ""
 
@@ -63,7 +63,7 @@ msgstr ""
 msgid "Add new profile"
 msgstr ""
 
-#: app\components/frontPage.html:54
+#: app\components/frontPage.html:58
 msgid "Add profile"
 msgstr ""
 
@@ -91,7 +91,7 @@ msgstr ""
 msgid "Add properties from super class"
 msgstr ""
 
-#: app\components\editor/classForm.html:62
+#: app\components\editor/classForm.html:63
 msgid "Add property"
 msgstr ""
 
@@ -112,7 +112,7 @@ msgstr ""
 msgid "Add vocabulary"
 msgstr ""
 
-#: app\components\editor/classForm.html:100
+#: app\components\editor/classForm.html:101
 #: app\components\editor/predicateForm.html:62
 #: app\components\editor/propertyView.html:163
 #: app\components\model/modelForm.html:24
@@ -128,7 +128,7 @@ msgid "Admin groups"
 msgstr ""
 
 #: app\components/advancedSearchModal.html:4
-#: app\components/frontPage.html:13
+#: app\components/frontPage.html:14
 msgid "Advanced search"
 msgstr ""
 
@@ -354,9 +354,9 @@ msgstr ""
 msgid "Can be selected only from this profile"
 msgstr ""
 
-#: app\components/advancedSearchModal.html:65
+#: app\components/advancedSearchModal.html:66
 #: app\components\common/modalTemplate.html:16
-#: app\components\editor/addPropertiesFromClassModal.html:27
+#: app\components\editor/addPropertiesFromClassModal.html:29
 #: app\components\editor/searchClassModal.html:116
 #: app\components\editor/searchConceptModal.html:112
 #: app\components\editor/searchPredicateModal.html:137
@@ -364,12 +364,12 @@ msgstr ""
 #: app\components\model/addEditLinkModal.html:21
 #: app\components\model/addEditNamespaceModal.html:46
 #: app\components\model/editReferenceDataModal.html:27
-#: app\components\model/newModelPage.html:16
-#: app\components\model/searchClassificationModal.html:32
+#: app\components\model/newModelPage.html:19
+#: app\components\model/searchClassificationModal.html:33
 #: app\components\model/searchNamespaceModal.html:73
-#: app\components\model/searchOrganizationModal.html:31
+#: app\components\model/searchOrganizationModal.html:32
 #: app\components\model/searchReferenceDataModal.html:119
-#: app\components\model/searchVocabularyModal.html:62
+#: app\components\model/searchVocabularyModal.html:63
 msgid "Cancel"
 msgstr ""
 
@@ -505,7 +505,7 @@ msgstr ""
 msgid "Classes can be seen visually here"
 msgstr ""
 
-#: app\components/frontPage.html:21
+#: app\components/frontPage.html:22
 msgid "Classification"
 msgstr ""
 
@@ -990,7 +990,7 @@ msgstr ""
 msgid "Description info"
 msgstr ""
 
-#: app\components\editor/addPropertiesFromClassModal.html:22
+#: app\components\editor/addPropertiesFromClassModal.html:24
 msgid "Deselect all"
 msgstr ""
 
@@ -1286,7 +1286,7 @@ msgstr ""
 msgid "Identifier"
 msgstr ""
 
-#: app\components\navigation/navigationBar.html:15
+#: app\components\navigation/navigationBar.html:24
 msgid "Impersonate user"
 msgstr ""
 
@@ -1410,13 +1410,13 @@ msgstr ""
 msgid "Local ID"
 msgstr ""
 
-#: app\components\navigation/navigationBar.html:24
-#: app\components\navigation/navigationBar.html:56
+#: app\components\navigation/navigationBar.html:33
+#: app\components\navigation/navigationBar.html:65
 msgid "LOG IN"
 msgstr ""
 
-#: app\components\navigation/navigationBar.html:29
-#: app\components\navigation/navigationBar.html:52
+#: app\components\navigation/navigationBar.html:38
+#: app\components\navigation/navigationBar.html:61
 msgid "LOG OUT"
 msgstr ""
 
@@ -1484,7 +1484,7 @@ msgstr ""
 msgid "Minimize"
 msgstr ""
 
-#: app\components/frontPage.html:67
+#: app\components/frontPage.html:71
 #: translations/misc.html:33
 msgid "model"
 msgstr ""
@@ -1501,7 +1501,7 @@ msgstr ""
 msgid "Model not found"
 msgstr ""
 
-#: app\components/frontPage.html:68
+#: app\components/frontPage.html:72
 msgid "models"
 msgstr ""
 
@@ -1593,7 +1593,7 @@ msgstr ""
 msgid "No concept defined"
 msgstr ""
 
-#: app\components\editor/classForm.html:93
+#: app\components\editor/classForm.html:94
 msgid "No properties yet"
 msgstr ""
 
@@ -1603,7 +1603,7 @@ msgid "No referrers"
 msgstr ""
 
 #: app\components/advancedSearchModal.html:33
-#: app\components\model/searchVocabularyModal.html:37
+#: app\components\model/searchVocabularyModal.html:38
 msgid "No search results"
 msgstr ""
 
@@ -1934,7 +1934,7 @@ msgid "Root class info"
 msgstr ""
 
 #: app\components\form/editableEntityButtons.html:15
-#: app\components\model/newModelPage.html:23
+#: app\components\model/newModelPage.html:27
 msgid "Save"
 msgstr ""
 
@@ -1942,7 +1942,7 @@ msgstr ""
 msgid "Save visualization position"
 msgstr ""
 
-#: app\components/frontPage.html:11
+#: app\components/frontPage.html:12
 msgid "Search"
 msgstr ""
 
@@ -2136,7 +2136,7 @@ msgstr ""
 msgid "Search reference data"
 msgstr ""
 
-#: app\components\model/searchVocabularyModal.html:4
+#: app\components\model/searchVocabularyModal.html:5
 msgid "Search vocabularies"
 msgstr ""
 
@@ -2144,7 +2144,7 @@ msgstr ""
 msgid "search vocabulary"
 msgstr ""
 
-#: app\components\editor/addPropertiesFromClassModal.html:21
+#: app\components\editor/addPropertiesFromClassModal.html:23
 msgid "Select all"
 msgstr ""
 
@@ -2406,6 +2406,7 @@ msgstr ""
 msgid "Specialized from class info"
 msgstr ""
 
+#: app\components\navigation/navigationBar.html:16
 #: translations/help.html:1
 msgid "Start help"
 msgstr ""
@@ -2448,6 +2449,14 @@ msgstr ""
 
 #: translations/misc.html:24
 msgid "Suggestion"
+msgstr ""
+
+#: app\components\navigation/navigationBar.html:76
+msgid "Suomi.fi Controlled Vocabularies"
+msgstr ""
+
+#: app\components\navigation/navigationBar.html:79
+msgid "Suomi.fi Reference Data"
 msgstr ""
 
 #: translations/help.html:155
@@ -2624,7 +2633,7 @@ msgstr ""
 msgid "Use selection"
 msgstr ""
 
-#: app\components\navigation/navigationBar.html:59
+#: app\components\navigation/navigationBar.html:68
 #: app\components\user/userPage.html:6
 msgid "User details"
 msgstr ""
@@ -2637,7 +2646,7 @@ msgstr ""
 msgid "User name"
 msgstr ""
 
-#: app\components\navigation/navigationBar.html:64
+#: app\components\navigation/navigationBar.html:82
 msgid "User right management"
 msgstr ""
 
@@ -2870,7 +2879,7 @@ msgid "xsd:time error"
 msgstr ""
 
 #: app\components\common/modalTemplate.html:15
-#: app\components\editor/addPropertiesFromClassModal.html:26
+#: app\components\editor/addPropertiesFromClassModal.html:28
 #: translations/misc.html:273
 msgid "Yes"
 msgstr ""
