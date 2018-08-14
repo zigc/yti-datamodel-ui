@@ -8,6 +8,7 @@ import { GraphData } from 'app/types/entity';
 import { ModelPositions, VisualizationClass, DefaultVisualizationClass } from 'app/entities/visualization';
 import { Model } from 'app/entities/model';
 import { IPromise, IQService, IHttpService } from 'angular';
+import { normalizeAsArray } from 'yti-common-ui/utils/array';
 
 export interface VisualizationService {
   getVisualization(model: Model): IPromise<ClassVisualization>;
@@ -31,9 +32,19 @@ export class DefaultVisualizationService implements VisualizationService {
       graph: model.id.uri
     };
 
-    return this.$http.get<GraphData>(config.apiEndpointWithName('exportModel'), { params })
+    return this.$http.get<GraphData>(config.apiEndpointWithName('framedGraphs'), { params })
       .then(expandContextWithKnownModels(model))
-      .then(response => this.deserializeModelVisualization(response.data!));
+      .then(response => {
+        const framed = response.data!;
+        try {
+          return normalizeAsArray(framed['@graph']).map(element => {
+            return new DefaultVisualizationClass(element, framed['@context'], null);
+          });
+        } catch (error) {
+          console.log(error);
+          throw error;
+        }
+      });
   }
 
   private getModelPositions(model: Model) {
@@ -49,10 +60,6 @@ export class DefaultVisualizationService implements VisualizationService {
   newModelPositions(model: Model) {
     const frame: any = frames.modelPositionsFrame({ '@context': model.context });
     return new ModelPositions([], frame['@context'], frame);
-  }
-
-  private deserializeModelVisualization(data: GraphData): IPromise<VisualizationClass[]> {
-    return this.frameService.frameAndMapArray<DefaultVisualizationClass>(data, frames.classVisualizationFrame(data), () => DefaultVisualizationClass);
   }
 
   private deserializeModelPositions(data: GraphData): IPromise<ModelPositions> {
