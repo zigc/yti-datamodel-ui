@@ -48,7 +48,7 @@
       </editable>
 
       <editable ng-if="ctrl.property.isAssociation()" data-title="Value class" link="ctrl.linkToValueClass()" context="ctrl.model">
-        <uri-select id="{{ctrl.property.internalId + 'valueClass'}}"
+        <uri-select id="{{ctrl.property.internalId + '_valueClass'}}"
                     type="class" uri="ctrl.property.valueClass"
                     mandatory="!ctrl.property.inUnstableState"
                     exclude-id="ctrl.valueClassExclude"
