@@ -43,7 +43,12 @@ mod.directive('editableMultipleUriSelect', () => {
          </input-container>
 
         <button-container>
-          <button ng-if="ctrl.isEditing()" type="button" class="btn btn-action btn-sm" style="display: block" ng-click="ctrl.selectUri()">
+          <button id="{{ctrl.id + '_choose_' + ctrl.type + '_multiple_uri_select_button'}}"
+                  ng-if="ctrl.isEditing()"
+                  type="button"
+                  class="btn btn-action btn-sm"
+                  style="display: block"
+                  ng-click="ctrl.selectUri()">
             {{('Choose ' + ctrl.type) | translate}}
           </button>
         </button-container>
