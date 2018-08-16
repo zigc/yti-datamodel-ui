@@ -13,6 +13,7 @@ import { identity } from 'yti-common-ui/utils/object';
 import { modalCancelHandler } from 'app/utils/angular';
 import { ImpersonationService } from '../../services/impersonationService';
 import { ConfigService } from 'app/services/configService';
+import { Config } from 'app/entities/config';
 
 const logo = require('../../../assets/logo.svg');
 
@@ -44,7 +45,7 @@ class NavigationController {
   helps: InteractiveHelp[];
 
   fakeableUsers: { email: string, firstName: string, lastName: string }[] = [];
-  groupManagementUrl: string;
+  config: Config;
 
   /* @ngInject */
   constructor($scope: IScope,
@@ -74,7 +75,7 @@ class NavigationController {
     });
 
     configService.getConfig()
-      .then(config => this.groupManagementUrl = config.groupsManagementUrl);
+      .then(config => this.config = config);
   }
 
   fakeUser(userEmail: string) {
@@ -114,7 +115,7 @@ class NavigationController {
   }
 
   canStartHelp() {
-    return this.interactiveHelpService.isClosed() && this.helps.length > 0;
+    return this.config && this.config.showIncompleteFeature && this.interactiveHelpService.isClosed() && this.helps.length > 0;
   }
 
   startHelp() {
