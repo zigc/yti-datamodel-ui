@@ -131,7 +131,8 @@ const modelContext = Object.assign({}, coreContext, namespaceContext, referenceD
   requires: { '@id': 'http://purl.org/dc/terms/requires', '@type': '@id' },
   relations: { '@id': 'http://purl.org/dc/terms/relation', '@container': '@list' },
   codeLists: { '@id': 'http://uri.suomi.fi/datamodel/ns/iow#codeLists', '@type': '@id' },
-  language: { '@id': 'http://purl.org/dc/terms/language', '@container': '@list' }
+  language: { '@id': 'http://purl.org/dc/terms/language', '@container': '@list' },
+  modelType: { '@id': 'http://uri.suomi.fi/datamodel/ns/iow#modelType' }
 });
 
 const usageContext = Object.assign({}, coreContext, modelContext, {
