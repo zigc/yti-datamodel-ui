@@ -2,6 +2,13 @@ import { IHttpService, IPromise } from 'angular';
 import { config } from 'config';
 import { Config } from '../entities/config';
 
+interface ConfigType {
+  groups: string;
+  concepts: string;
+  codes: string;
+  dev: boolean;
+}
+
 export class ConfigService {
 
   /* @ngInject */
@@ -10,7 +17,10 @@ export class ConfigService {
 
   getConfig(): IPromise<Config> {
 
-    return this.$http.get<{ groups: string, concepts: string }>(config.apiEndpointWithName('config'))
-      .then(response => new Config(response.data!.groups, response.data!.concepts));
+    return this.$http.get<ConfigType>(config.apiEndpointWithName('config'))
+      .then(response => {
+        const data = response.data!;
+        return new Config(data.groups, data.concepts, data.codes, data.dev);
+      });
   }
 }

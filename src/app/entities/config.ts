@@ -2,10 +2,10 @@ import { Concept } from './vocabulary';
 
 export class Config {
 
-  dev = true; // TODO
-
   constructor(public groupsManagementUrl: string,
-              public terminologyEditorUrl: string) {
+              public terminologyUrl: string,
+              public codeListUrl: string,
+              public dev: boolean) {
   }
 
   conceptUrl(concept: Concept|null) {
@@ -14,5 +14,9 @@ export class Config {
     } else {
       return ''; // TODO
     }
+  }
+
+  get showIncompleteFeature() {
+    return this.dev;
   }
 }
