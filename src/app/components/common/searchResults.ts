@@ -6,6 +6,7 @@ import { module as mod } from './module';
 import { Exclusion } from 'app/utils/exclusion';
 import { WithId } from 'app/types/entity';
 import { modalCancelHandler } from 'app/utils/angular';
+import { labelNameToResourceIdIdentifier } from 'yti-common-ui/utils/resource';
 
 mod.directive('searchResults', () => {
   return {
@@ -133,5 +134,10 @@ class SearchResultsController<T extends WithId> {
     } else {
       return null;
     }
+  }
+
+  generateSearchResultID(item: SearchResult<T>|AddNew): string {
+    return item.isAddNew() ? `${'create_new_'}${labelNameToResourceIdIdentifier((item as AddNew).label)}${'_link'}`
+                           : `${item.id.toString()}${'_search_result_link'}`;
   }
 }
