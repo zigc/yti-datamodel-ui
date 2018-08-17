@@ -14,8 +14,13 @@ import { Exclusion } from 'app/utils/exclusion';
 import { SearchController, SearchFilter } from 'app/types/filter';
 import { ifChanged } from 'app/utils/angular';
 import { ReferenceData, ReferenceDataServer, ReferenceDataGroup } from 'app/entities/referenceData';
-import { Model } from 'app/entities/model';
 import { filterAndSortSearchResults, defaultTitleComparator } from 'app/components/filter/util';
+import { LanguageContext } from 'app/types/language';
+import { Model } from 'app/entities/model';
+
+interface WithReferenceDatas {
+  referenceDatas: ReferenceData[];
+}
 
 const noExclude = (_referenceData: ReferenceData) => null;
 
@@ -24,7 +29,8 @@ export class SearchReferenceDataModal {
   constructor(private $uibModal: IModalService) {
   }
 
-  private open(model: Model, referenceDatasFromModel: boolean, exclude: Exclusion<ReferenceData>): IPromise<ReferenceData> {
+  private open(model: WithReferenceDatas|null, context: LanguageContext, exclude: Exclusion<ReferenceData>): IPromise<ReferenceData> {
+
     return this.$uibModal.open({
       template: require('./searchReferenceDataModal.html'),
       size: 'lg',
@@ -33,18 +39,18 @@ export class SearchReferenceDataModal {
       backdrop: true,
       resolve: {
         model: () => model,
-        referenceDatasFromModel: () => referenceDatasFromModel,
+        context: () => context,
         exclude: () => exclude
       }
     }).result;
   }
 
-  openSelectionForModel(model: Model, exclude: Exclusion<ReferenceData> = noExclude): IPromise<ReferenceData> {
-    return this.open(model, false, exclude);
+  openSelectionForModel(context: LanguageContext, exclude: Exclusion<ReferenceData> = noExclude): IPromise<ReferenceData> {
+    return this.open(null, context, exclude);
   }
 
   openSelectionForProperty(model: Model, exclude: Exclusion<ReferenceData> = noExclude) {
-    return this.open(model, true, exclude);
+    return this.open(model, model, exclude);
   }
 }
 
@@ -81,14 +87,14 @@ export class SearchReferenceDataModalController implements SearchController<Refe
   /* @ngInject */
   constructor(private $scope: SearchReferenceDataScope,
               private $uibModalInstance: IModalServiceInstance,
-              public model: Model,
-              public referenceDatasFromModel: boolean,
+              public model: WithReferenceDatas|null,
+              context: LanguageContext,
               private referenceDataService: ReferenceDataService,
               languageService: LanguageService,
               private gettextCatalog: gettextCatalog,
               public exclude: Exclusion<ReferenceData>) {
 
-    this.localizer = languageService.createLocalizer(model);
+    this.localizer = languageService.createLocalizer(context);
 
     const init = (referenceDatas: ReferenceData[]) => {
       this.referenceDatas = referenceDatas;
@@ -109,7 +115,7 @@ export class SearchReferenceDataModalController implements SearchController<Refe
     };
 
 
-    if (referenceDatasFromModel) {
+    if (model != null) {
       init(model.referenceDatas);
     } else {
 
@@ -199,7 +205,7 @@ export class SearchReferenceDataModalController implements SearchController<Refe
   }
 
   canAddNew() {
-    return !!this.searchText && !this.referenceDatasFromModel;
+    return !!this.searchText && !this.model;
   }
 
   close() {

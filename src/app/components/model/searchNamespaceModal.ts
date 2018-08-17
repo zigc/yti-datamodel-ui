@@ -5,11 +5,11 @@ import { LanguageService } from 'app/services/languageService';
 import { ModelService } from 'app/services/modelService';
 import { AddEditNamespaceModal } from './addEditNamespaceModal';
 import { comparingPrimitive } from 'yti-common-ui/utils/comparator';
-import { Language } from 'app/types/language';
+import { LanguageContext } from 'app/types/language';
 import { Exclusion } from 'app/utils/exclusion';
 import { SearchController, SearchFilter, TextAnalysis } from 'app/types/filter';
 import { ifChanged, modalCancelHandler } from 'app/utils/angular';
-import { ImportedNamespace, Model } from 'app/entities/model';
+import { ImportedNamespace } from 'app/entities/model';
 import { filterAndSortSearchResults } from 'app/components/filter/util';
 
 const noExclude = (_ns: ImportedNamespace) => null;
@@ -19,7 +19,7 @@ export class SearchNamespaceModal {
   constructor(private $uibModal: IModalService) {
   }
 
-  open(model: Model, language: Language, exclude: Exclusion<ImportedNamespace> = noExclude): IPromise<ImportedNamespace> {
+  open(context: LanguageContext, exclude: Exclusion<ImportedNamespace> = noExclude): IPromise<ImportedNamespace> {
     return this.$uibModal.open({
       template: require('./searchNamespaceModal.html'),
       size: 'md',
@@ -27,9 +27,8 @@ export class SearchNamespaceModal {
       controllerAs: 'ctrl',
       backdrop: true,
       resolve: {
-        model: () => model,
         exclude: () => exclude,
-        language: () => language
+        context: () => context
       }
     }).result;
   }
@@ -50,8 +49,7 @@ class SearchNamespaceController implements SearchController<ImportedNamespace> {
   constructor($scope: IScope,
               private $uibModalInstance: IModalServiceInstance,
               public exclude: Exclusion<ImportedNamespace>,
-              private model: Model,
-              private language: Language,
+              private context: LanguageContext,
               modelService: ModelService,
               private languageService: LanguageService,
               private addEditNamespaceModal: AddEditNamespaceModal) {
@@ -79,7 +77,6 @@ class SearchNamespaceController implements SearchController<ImportedNamespace> {
     return this.namespaces;
   }
 
-
   search() {
     const comparator = comparingPrimitive<TextAnalysis<ImportedNamespace>>(item => !!this.exclude(item.item))
       .andThen(comparingPrimitive<TextAnalysis<ImportedNamespace>>(item => item.item.namespace));
@@ -94,7 +91,7 @@ class SearchNamespaceController implements SearchController<ImportedNamespace> {
       return (text || '').toLowerCase().includes(search);
     }
 
-    return !this.searchText || contains(this.languageService.translate(ns.label, this.model)) || contains(ns.namespace);
+    return !this.searchText || contains(this.languageService.translate(ns.label, this.context)) || contains(ns.namespace);
   }
 
   selectItem(ns: ImportedNamespace) {
@@ -104,7 +101,10 @@ class SearchNamespaceController implements SearchController<ImportedNamespace> {
   }
 
   createNew() {
-    this.addEditNamespaceModal.openAdd(this.model, this.language)
+
+    const language = this.languageService.getModelLanguage(this.context);
+
+    this.addEditNamespaceModal.openAdd(language)
       .then(ns => this.$uibModalInstance.close(ns), modalCancelHandler);
   }
 

@@ -9,6 +9,9 @@ import { Classification } from '../../entities/classification';
 import { remove } from 'yti-common-ui/utils/array';
 import { Organization } from '../../entities/organization';
 import { ErrorModal } from '../form/errorModal';
+import { Vocabulary } from '../../entities/vocabulary';
+import { ReferenceData } from '../../entities/referenceData';
+import { ImportedNamespace } from '../../entities/model';
 
 interface EditableForm extends IFormController {
   editing: boolean;
@@ -32,8 +35,13 @@ export class NewModelPageController {
   prefix: string;
   label: string;
   comment: string;
+
   classifications: Classification[] = [];
   contributors:  Organization[] = [];
+  vocabularies: Vocabulary[] = [];
+  referenceDatas: ReferenceData[] = [];
+  importedNamespaces: ImportedNamespace[] = [];
+
   languages: Language[] = ['fi', 'en'];
   type: KnownModelType;
 
@@ -44,6 +52,8 @@ export class NewModelPageController {
 
   persisting = false;
   form: EditableForm;
+
+  namespacesInUse = new Set<string>();
 
   /* @ngInject */
   constructor(private $location: ILocationService,
@@ -56,6 +66,10 @@ export class NewModelPageController {
 
   $postLink() {
     this.form.editing = true;
+  }
+
+  get allowProfiles() {
+    return this.type === 'profile';
   }
 
   isValid() {
@@ -78,6 +92,30 @@ export class NewModelPageController {
     remove(this.contributors, organization);
   }
 
+  addVocabulary(vocabulary: Vocabulary) {
+    this.vocabularies.push(vocabulary);
+  }
+
+  removeVocabulary(vocabulary: Vocabulary) {
+    remove(this.vocabularies, vocabulary);
+  }
+
+  addReferenceData(referenceData: ReferenceData) {
+    this.referenceDatas.push(referenceData);
+  }
+
+  removeReferenceData(referenceData: ReferenceData) {
+    remove(this.referenceDatas, referenceData);
+  }
+
+  addImportedNamespace(namespace: ImportedNamespace) {
+    this.importedNamespaces.push(namespace);
+  }
+
+  removeImportedNamespace(namespace: ImportedNamespace) {
+    remove(this.importedNamespaces, namespace);
+  }
+
   save() {
 
     this.persisting = true;
@@ -89,6 +127,9 @@ export class NewModelPageController {
       .then(model => {
         // XXX: should comment go to model creator api?
         model.comment = { [this.languages[0]]: this.comment };
+        this.vocabularies.forEach(v => model.addVocabulary(v));
+        this.referenceDatas.forEach(r => model.addReferenceData(r));
+        this.importedNamespaces.forEach(ns => model.addImportedNamespace(ns));
         this.modelService.createModel(model).then(() => {
           this.$location.url(model.iowUrl());
         }, () => this.persisting = false);

@@ -27,7 +27,7 @@ mod.directive('prefixInput', () => {
           for (const modelNamespace of model.getNamespaces()) {
             if (modelNamespace.prefix === prefix) {
 
-              const isTechnical = modelNamespace.type === NamespaceType.IMPLICIT_TECHNICAL;
+              const isTechnical = modelNamespace.namespaceType === NamespaceType.IMPLICIT_TECHNICAL;
               const isActiveNamespace = activeNamespace ? activeNamespace.prefix === modelNamespace.prefix : false;
 
               if (isTechnical && allowTechnical) {

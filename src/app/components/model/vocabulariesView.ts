@@ -1,19 +1,26 @@
 import { IAttributes, IScope } from 'angular';
-import { ModelViewController } from './modelView';
 import { LanguageService } from 'app/services/languageService';
 import { ColumnDescriptor, TableDescriptor } from 'app/components/form/editableTable';
 import { SearchVocabularyModal } from './searchVocabularyModal';
 import { module as mod } from './module';
 import { createExistsExclusion } from 'app/utils/exclusion';
 import { collectProperties } from 'yti-common-ui/utils/array';
-import { Model } from 'app/entities/model';
 import { Vocabulary } from 'app/entities/vocabulary';
 import { modalCancelHandler } from 'app/utils/angular';
+import { LanguageContext } from 'app/types/language';
+import { EditableForm } from 'app/components/form/editableEntityController';
+
+interface WithVocabularies {
+  vocabularies: Vocabulary[];
+  addVocabulary(vocabulary: Vocabulary): void;
+  removeVocabulary(vocabulary: Vocabulary): void;
+}
 
 mod.directive('vocabulariesView', () => {
   return {
     scope: {
-      model: '='
+      value: '=',
+      context: '='
     },
     restrict: 'E',
     template: `
@@ -27,9 +34,9 @@ mod.directive('vocabulariesView', () => {
     `,
     controllerAs: 'ctrl',
     bindToController: true,
-    require: ['vocabulariesView', '?^modelView'],
-    link(_$scope: IScope, _element: JQuery, _attributes: IAttributes, [thisController, modelViewController]: [VocabulariesViewController, ModelViewController]) {
-      thisController.isEditing = () => modelViewController && modelViewController.isEditing();
+    require: ['vocabulariesView', '?^form'],
+    link(_$scope: IScope, _element: JQuery, _attributes: IAttributes, [thisController, formController]: [VocabulariesViewController, EditableForm]) {
+      thisController.isEditing = () => formController && formController.editing;
     },
     controller: VocabulariesViewController
   };
@@ -37,7 +44,8 @@ mod.directive('vocabulariesView', () => {
 
 class VocabulariesViewController {
 
-  model: Model;
+  value: WithVocabularies;
+  context: LanguageContext;
   isEditing: () => boolean;
 
   descriptor: VocabularyTableDescriptor;
@@ -48,18 +56,18 @@ class VocabulariesViewController {
               private searchVocabularyModal: SearchVocabularyModal,
               languageService: LanguageService) {
 
-    $scope.$watch(() => this.model, model => {
-      this.descriptor = new VocabularyTableDescriptor(model, languageService);
+    $scope.$watch(() => this.value, value => {
+      this.descriptor = new VocabularyTableDescriptor(value, this.context, languageService);
     });
   }
 
   addVocabulary() {
-    const vocabularies = collectProperties(this.model.vocabularies, vocabulary => vocabulary.id.uri);
+    const vocabularies = collectProperties(this.value.vocabularies, vocabulary => vocabulary.id.uri);
     const exclude = createExistsExclusion(vocabularies);
 
-    this.searchVocabularyModal.open(this.model, exclude)
+    this.searchVocabularyModal.open(this.context, exclude)
       .then((vocabulary: Vocabulary) => {
-        this.model.addVocabulary(vocabulary);
+        this.value.addVocabulary(vocabulary);
         this.expanded = true;
       }, modalCancelHandler);
   }
@@ -67,18 +75,18 @@ class VocabulariesViewController {
 
 class VocabularyTableDescriptor extends TableDescriptor<Vocabulary> {
 
-  constructor(private model: Model, private languageService: LanguageService) {
+  constructor(private value: WithVocabularies, private context: LanguageContext, private languageService: LanguageService) {
     super();
   }
 
   columnDescriptors(): ColumnDescriptor<Vocabulary>[] {
     return [
-      { headerName: 'Vocabulary name', nameExtractor: vocabulary => this.languageService.translate(vocabulary.title, this.model)}
+      { headerName: 'Vocabulary name', nameExtractor: vocabulary => this.languageService.translate(vocabulary.title, this.context)}
     ];
   }
 
   values(): Vocabulary[] {
-    return this.model && this.model.vocabularies;
+    return this.value && this.value.vocabularies;
   }
 
   canEdit(_vocabulary: Vocabulary): boolean {
@@ -90,7 +98,7 @@ class VocabularyTableDescriptor extends TableDescriptor<Vocabulary> {
   }
 
   remove(vocabulary: Vocabulary): any {
-    this.model.removeVocabulary(vocabulary);
+    this.value.removeVocabulary(vocabulary);
   }
 
   orderBy(vocabulary: Vocabulary): any {

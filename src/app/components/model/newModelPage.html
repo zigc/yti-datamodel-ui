@@ -8,7 +8,7 @@
         </h2>
       </div>
     </div>
-    
+
     <fieldset ng-disabled="ctrl.persisting">
 
       <div class="top-actions">
@@ -50,6 +50,12 @@
         <div class="col-lg-6 offset-lg-1">
           <classifications-view value="ctrl" context="ctrl.context"></classifications-view>
           <contributors-view value="ctrl" context="ctrl.context"></contributors-view>
+          <vocabularies-view value="ctrl" context="ctrl.context"></vocabularies-view>
+          <reference-datas-view value="ctrl" context="ctrl.context"></reference-datas-view>
+          <imported-namespaces-view value="ctrl"
+                                    context="ctrl.context"
+                                    allow-profiles="ctrl.allowProfiles"
+                                    namespaces-in-Use="ctrl.namespacesInUse"></imported-namespaces-view>
         </div>
       </div>
 

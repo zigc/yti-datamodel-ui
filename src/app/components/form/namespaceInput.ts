@@ -27,7 +27,7 @@ mod.directive('namespaceInput', () => {
           for (const modelNamespace of model.getNamespaces()) {
             if (modelNamespace.url === ns) {
 
-              const isTechnical = modelNamespace.type === NamespaceType.IMPLICIT_TECHNICAL;
+              const isTechnical = modelNamespace.namespaceType === NamespaceType.IMPLICIT_TECHNICAL;
               const isActiveNamespace = activeNamespace ? activeNamespace.namespace === modelNamespace.url : false;
 
               if (isTechnical && allowTechnical) {

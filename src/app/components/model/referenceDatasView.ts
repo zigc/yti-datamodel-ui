@@ -1,5 +1,4 @@
 import { IAttributes, IScope } from 'angular';
-import { ModelViewController } from './modelView';
 import { LanguageService, Localizer } from 'app/services/languageService';
 import { TableDescriptor, ColumnDescriptor } from 'app/components/form/editableTable';
 import { module as mod } from './module';
@@ -8,14 +7,22 @@ import { collectIds } from 'app/utils/entity';
 import { SearchReferenceDataModal } from './searchReferenceDataModal';
 import { EditReferenceDataModal } from './editReferenceDataModal';
 import { ViewReferenceDataModal } from './viewReferenceDataModal';
-import { Model } from 'app/entities/model';
 import { ReferenceData } from 'app/entities/referenceData';
 import { modalCancelHandler } from 'app/utils/angular';
+import { LanguageContext } from 'app/types/language';
+import { EditableForm } from 'app/components/form/editableEntityController';
+
+interface WithReferenceDatas {
+  referenceDatas: ReferenceData[];
+  addReferenceData(referenceData: ReferenceData): void;
+  removeReferenceData(referenceData: ReferenceData): void;
+}
 
 mod.directive('referenceDatasView', () => {
   return {
     scope: {
-      model: '='
+      value: '=',
+      context: '='
     },
     restrict: 'E',
     template: `
@@ -29,9 +36,9 @@ mod.directive('referenceDatasView', () => {
     `,
     controllerAs: 'ctrl',
     bindToController: true,
-    require: ['referenceDatasView', '?^modelView'],
-    link(_$scope: IScope, _element: JQuery, _attributes: IAttributes, [thisController, modelViewController]: [ReferenceDatasViewController, ModelViewController]) {
-      thisController.isEditing = () => modelViewController && modelViewController.isEditing();
+    require: ['referenceDatasView', '?^form'],
+    link(_$scope: IScope, _element: JQuery, _attributes: IAttributes, [thisController, formController]: [ReferenceDatasViewController, EditableForm]) {
+      thisController.isEditing = () => formController && formController.editing;
     },
     controller: ReferenceDatasViewController
   };
@@ -39,7 +46,8 @@ mod.directive('referenceDatasView', () => {
 
 class ReferenceDatasViewController {
 
-  model: Model;
+  value: WithReferenceDatas;
+  context: LanguageContext;
   isEditing: () => boolean;
 
   descriptor: ReferenceDataTableDescriptor;
@@ -52,17 +60,18 @@ class ReferenceDatasViewController {
               viewReferenceDataModal: ViewReferenceDataModal,
               languageService: LanguageService) {
 
-    $scope.$watch(() => this.model, model => {
-      this.descriptor = new ReferenceDataTableDescriptor(model, languageService.createLocalizer(model), editReferenceDataModal, viewReferenceDataModal);
+    $scope.$watch(() => this.value, value => {
+      this.descriptor = new ReferenceDataTableDescriptor(value, this.context, editReferenceDataModal, viewReferenceDataModal, languageService);
     });
   }
 
   addReferenceData() {
-    const exclude = createExistsExclusion(collectIds(this.model.referenceDatas));
 
-    this.searchReferenceDataModal.openSelectionForModel(this.model, exclude)
+    const exclude = createExistsExclusion(collectIds(this.value.referenceDatas));
+
+    this.searchReferenceDataModal.openSelectionForModel(this.context, exclude)
       .then(referenceData => {
-        this.model.addReferenceData(referenceData);
+        this.value.addReferenceData(referenceData);
         this.expanded = true;
       }, modalCancelHandler);
   }
@@ -70,11 +79,15 @@ class ReferenceDatasViewController {
 
 class ReferenceDataTableDescriptor extends TableDescriptor<ReferenceData> {
 
-  constructor(private model: Model,
-              private localizer: Localizer,
+  private localizer: Localizer;
+
+  constructor(private value: WithReferenceDatas,
+              public context: LanguageContext,
               private editReferenceDataModal: EditReferenceDataModal,
-              private viewReferenceDataModal: ViewReferenceDataModal) {
+              private viewReferenceDataModal: ViewReferenceDataModal,
+              private languageService: LanguageService) {
     super();
+    this.localizer = this.languageService.createLocalizer(this.context);
   }
 
   columnDescriptors(): ColumnDescriptor<ReferenceData>[] {
@@ -83,7 +96,7 @@ class ReferenceDataTableDescriptor extends TableDescriptor<ReferenceData> {
       if (value.isExternal()) {
         window.open(value.id.uri, '_blank');
       } else {
-        this.viewReferenceDataModal.open(value, this.model);
+        this.viewReferenceDataModal.open(value, this.context);
       }
     };
 
@@ -94,7 +107,7 @@ class ReferenceDataTableDescriptor extends TableDescriptor<ReferenceData> {
   }
 
   values(): ReferenceData[] {
-    return this.model && this.model.referenceDatas;
+    return this.value && this.value.referenceDatas;
   }
 
   canEdit(referenceData: ReferenceData): boolean {
@@ -102,7 +115,7 @@ class ReferenceDataTableDescriptor extends TableDescriptor<ReferenceData> {
   }
 
   edit(value: ReferenceData): any {
-    this.editReferenceDataModal.openEdit(value, this.model, this.localizer.language);
+    this.editReferenceDataModal.openEdit(value, this.context, this.localizer.language);
   }
 
   canRemove(_referenceData: ReferenceData): boolean {
@@ -110,7 +123,7 @@ class ReferenceDataTableDescriptor extends TableDescriptor<ReferenceData> {
   }
 
   remove(referenceData: ReferenceData): any {
-    this.model.removeReferenceData(referenceData);
+    this.value.removeReferenceData(referenceData);
   }
 
   orderBy(referenceData: ReferenceData): any {

@@ -3,8 +3,9 @@ import gettextCatalog = angular.gettext.gettextCatalog;
 import { isValidUri, isValidUrl, isValidUriStem } from './validators';
 import { Uri } from 'app/entities/uri';
 import { module as mod } from './module';
-import { Model } from 'app/entities/model';
+import { ImportedNamespace, Model } from 'app/entities/model';
 import { LanguageService } from 'app/services/languageService';
+import { anyMatching } from 'yti-common-ui/utils/array';
 
 type UriInputType = 'required-namespace' | 'free-url' | 'free-uri' | 'stem';
 
@@ -25,10 +26,14 @@ export function placeholderText(uriInputType: UriInputType, gettextCatalog: gett
   }
 }
 
-export function createParser(modelProvider: () => Model) {
+export interface WithContext {
+  context: any;
+}
+
+export function createParser(withContextProvider: () => WithContext) {
   return (viewValue: string) => {
-    const model = modelProvider();
-    return !viewValue ? null : new Uri(viewValue, model ? model.context : {});
+    const withContext = withContextProvider();
+    return !viewValue ? null : new Uri(viewValue, withContext ? withContext.context : {});
   };
 }
 
@@ -36,7 +41,11 @@ export function createFormatter() {
   return (value: Uri) => value ? value.compact : '';
 }
 
-export function createValidators(type: UriInputType, modelProvider: () => Model) {
+interface WithImportedNamespaces {
+  importedNamespaces: ImportedNamespace[];
+}
+
+export function createValidators(type: UriInputType, withNamespacesProvider: () => WithImportedNamespaces) {
 
   const result: IModelValidators = {};
 
@@ -53,7 +62,8 @@ export function createValidators(type: UriInputType, modelProvider: () => Model)
     result['idNameRequired'] = (value: Uri) => !value || !isValidUri(value) || !value.resolves() || value.name.length > 0;
 
     if (type === 'required-namespace') {
-      result['mustBeRequiredNS'] = (value: Uri) =>  !value || !isValidUri(value) || !value.resolves() || modelProvider().isRequiredNamespace(value.namespace);
+      const isRequiredNamespace = (ns: string) => anyMatching(withNamespacesProvider().importedNamespaces, importedNamespace => importedNamespace.namespace === ns);
+      result['mustBeRequiredNS'] = (value: Uri) =>  !value || !isValidUri(value) || !value.resolves() || isRequiredNamespace(value.namespace);
     }
   }
 

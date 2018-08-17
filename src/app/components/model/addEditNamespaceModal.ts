@@ -4,14 +4,40 @@ import IModalServiceInstance = ui.bootstrap.IModalServiceInstance;
 import { ModelService } from 'app/services/modelService';
 import { Language } from 'app/types/language';
 import { isDefined } from 'yti-common-ui/utils/object';
-import { Model, ImportedNamespace, NamespaceType } from 'app/entities/model';
+import { ImportedNamespace } from 'app/entities/model';
+
+const technicalNamespaces = {
+  dcap: 'http://purl.org/ws-mmi-dc/terms/',
+  schema: 'http://schema.org/',
+  void: 'http://rdfs.org/ns/void#',
+  adms: 'http://www.w3.org/ns/adms#',
+  owl: 'http://www.w3.org/2002/07/owl#',
+  dcam: 'http://purl.org/dc/dcam/',
+  skosxl: 'http://www.w3.org/2008/05/skos-xl#',
+  xsd: 'http://www.w3.org/2001/XMLSchema#',
+  afn: 'http://jena.hpl.hp.com/ARQ/function#',
+  skos: 'http://www.w3.org/2004/02/skos/core#',
+  rdfs: 'http://www.w3.org/2000/01/rdf-schema#',
+  iow: 'http://uri.suomi.fi/datamodel/ns/iow#',
+  sd: 'http://www.w3.org/ns/sparql-service-description#',
+  at: 'http://publications.europa.eu/ontology/authority/',
+  rdf: 'http://www.w3.org/1999/02/22-rdf-syntax-ns#',
+  sh: 'http://www.w3.org/ns/shacl#',
+  dcterms: 'http://purl.org/dc/terms/',
+  text: 'http://jena.apache.org/text#',
+  prov: 'http://www.w3.org/ns/prov#',
+  termed: 'http://termed.thl.fi/meta/',
+  foaf: 'http://xmlns.com/foaf/0.1/',
+  dc: 'http://purl.org/dc/elements/1.1/',
+  ts: 'http://www.w3.org/2003/06/sw-vocab-status/ns#'
+};
 
 export class AddEditNamespaceModal {
   /* @ngInject */
   constructor(private $uibModal: IModalService) {
   }
 
-  private open(model: Model, language: Language, namespaceToEdit: ImportedNamespace|null): IPromise<ImportedNamespace> {
+  private open(language: Language, namespaceToEdit: ImportedNamespace|null): IPromise<ImportedNamespace> {
     return this.$uibModal.open({
       template: require('./addEditNamespaceModal.html'),
       size: 'sm',
@@ -19,19 +45,18 @@ export class AddEditNamespaceModal {
       controllerAs: 'ctrl',
       backdrop: true,
       resolve: {
-        model: () => model,
         language: () => language,
         namespaceToEdit: () => namespaceToEdit
       }
     }).result;
   }
 
-  openAdd(model: Model, language: Language): IPromise<ImportedNamespace> {
-    return this.open(model, language, null);
+  openAdd(language: Language): IPromise<ImportedNamespace> {
+    return this.open(language, null);
   }
 
-  openEdit(require: ImportedNamespace, model: Model, language: Language): IPromise<ImportedNamespace> {
-    return this.open(model, language, require);
+  openEdit(require: ImportedNamespace, language: Language): IPromise<ImportedNamespace> {
+    return this.open(language, require);
   }
 }
 
@@ -50,7 +75,6 @@ class AddEditNamespaceController {
   /* @ngInject */
   constructor(private $uibModalInstance: IModalServiceInstance,
               $scope: IScope,
-              public model: Model,
               private language: Language,
               private namespaceToEdit: ImportedNamespace|null,
               private modelService: ModelService) {
@@ -71,7 +95,7 @@ class AddEditNamespaceController {
           const namespaceOverrideWasOn = isDefined(this.namespaceBeforeForced);
           let namespaceOverrideSwitchedOn = false;
 
-          for (const [prefix, ns] of Object.entries(model.getNamespacesOfType(NamespaceType.IMPLICIT_TECHNICAL))) {
+          for (const [prefix, ns] of Object.entries(technicalNamespaces)) {
             if (prefix === this.prefix) {
               namespaceOverrideSwitchedOn = true;
               this.namespaceBeforeForced = this.namespace || '';
@@ -92,7 +116,7 @@ class AddEditNamespaceController {
           const prefixOverrideWasOn = isDefined(this.prefixBeforeForced);
           let prefixOverrideSwitchedOn = false;
 
-          for (const [prefix, ns] of Object.entries(model.getNamespacesOfType(NamespaceType.IMPLICIT_TECHNICAL))) {
+          for (const [prefix, ns] of Object.entries(technicalNamespaces)) {
             if (ns === this.namespace) {
               prefixOverrideSwitchedOn = true;
               this.prefixBeforeForced = this.prefix || '';

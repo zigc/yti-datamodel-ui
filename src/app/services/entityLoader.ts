@@ -202,11 +202,11 @@ export class EntityLoader {
                   .then(importedNamespace =>
                     this.$q.all([this.$q.when(importedNamespace), this.modelService.getAllImportableNamespaces()]))
                   .then(([importedNamespace, importableNamespaces]: [Uri, ImportedNamespace[]]) =>
-                    model.addNamespace(requireDefined(firstMatching(importableNamespaces, ns => ns.id.equals(importedNamespace)))))
+                    model.addImportedNamespace(requireDefined(firstMatching(importableNamespaces, ns => ns.id.equals(importedNamespace)))))
               );
             } else if (isExternalNamespace(namespace)) {
               promises.push(this.modelService.newNamespaceImport(namespace.namespace, namespace.prefix, namespace.label, 'fi')
-                .then(newImportedNamespace => model.addNamespace(newImportedNamespace))
+                .then(newImportedNamespace => model.addImportedNamespace(newImportedNamespace))
               );
             } else {
               throw new Error('Unknown namespace: ' + namespace);

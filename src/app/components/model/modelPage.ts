@@ -78,6 +78,7 @@ export class ModelPageController implements ModelPageActions, HelpProvider, Mode
   classes: SelectableItem[] = [];
   associations: SelectableItem[] = [];
   attributes: SelectableItem[] = [];
+  namespacesInUse: Set<string> = new Set<string>();
   selectionWidth: number;
   visualizationMaximized = false;
 
@@ -288,21 +289,6 @@ export class ModelPageController implements ModelPageActions, HelpProvider, Mode
 
   get selectableItemComparator() {
     return comparingLocalizable<SelectableItem>(this.localizerProvider(), selectableItem => selectableItem.item.label);
-  }
-
-  getUsedNamespaces(): Set<string> {
-
-    const resources: WithDefinedBy[] = [
-      ...this.associations,
-      ...this.attributes,
-      ...this.classes
-    ];
-
-    const namespaces = resources
-      .filter(item => item && item.definedBy)
-      .map(item => item.definedBy!.id.uri);
-
-    return new Set<string>(namespaces);
   }
 
   registerView(view: View) {
@@ -629,7 +615,23 @@ export class ModelPageController implements ModelPageActions, HelpProvider, Mode
   }
 
   private updateSelectables(): IPromise<any> {
-    return this.$q.all([this.updateClasses(), this.updatePredicates()]);
+    return this.$q.all([this.updateClasses(), this.updatePredicates()])
+      .then(() => {
+
+        const resources: WithDefinedBy[] = [
+          ...this.associations,
+          ...this.attributes,
+          ...this.classes
+        ];
+
+        this.namespacesInUse.clear();
+
+        for (const resource of resources) {
+          if (resource.definedBy) {
+            this.namespacesInUse.add(resource.definedBy!.id.uri);
+          }
+        }
+      });
   }
 
   private updateClasses(): IPromise<any> {

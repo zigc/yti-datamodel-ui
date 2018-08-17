@@ -24,7 +24,16 @@ mod.directive('modelForm', () => {
 });
 
 class ModelFormController {
+
   model: Model;
   modelController: ModelControllerService;
   isEditing: () => boolean;
+
+  get allowProfiles() {
+    return this.model.isOfType('profile');
+  }
+
+  namespacesInUse() {
+    return this.modelController.namespacesInUse;
+  }
 }

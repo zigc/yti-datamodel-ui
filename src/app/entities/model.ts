@@ -5,7 +5,7 @@ import { modelUrl, normalizeModelType, resourceUrl } from 'app/utils/entity';
 import { Uri, Url, Urn } from './uri';
 import { Language } from 'app/types/language';
 import { Moment } from 'moment';
-import { contains, containsAny, remove } from 'yti-common-ui/utils/array';
+import { containsAny, remove } from 'yti-common-ui/utils/array';
 import { DefinedBy } from './definedBy';
 import { Vocabulary } from './vocabulary';
 import { ReferenceData } from './referenceData';
@@ -75,25 +75,25 @@ export class ModelListItem extends AbstractModel {
 export class Model extends AbstractModel {
 
   static modelMappings = {
-    comment:         { name: 'comment',      serializer: localizableSerializer },
-    status:          { name: 'versionInfo',  serializer: identitySerializer<Status>() },
-    vocabularies:    { name: 'references',   serializer: entityAwareList(entity(() => Vocabulary)) },
-    namespaces:      { name: 'requires',     serializer: entityAwareList(entity(() => ImportedNamespace)) },
-    links:           { name: 'relations',    serializer: entityAwareList(entity(() => Link)) },
-    referenceDatas:  { name: 'codeLists',    serializer: entityAwareList(entity(() => ReferenceData)) },
-    classifications: { name: 'isPartOf',     serializer: entityAwareList(entity(() => Classification)) },
-    contributors:    { name: 'contributor',  serializer: entityAwareList(entity(() => Organization)) },
-    version:         { name: 'identifier',   serializer: optional(identitySerializer<Urn>()) },
-    rootClass:       { name: 'rootResource', serializer: entityAwareOptional(uriSerializer) },
-    language:        { name: 'language',     serializer: list<Language>(languageSerializer, ['fi', 'en']) },
-    modifiedAt:      { name: 'modified',     serializer: optional(dateSerializer) },
-    createdAt:       { name: 'created',      serializer: optional(dateSerializer) }
+    comment:            { name: 'comment',      serializer: localizableSerializer },
+    status:             { name: 'versionInfo',  serializer: identitySerializer<Status>() },
+    vocabularies:       { name: 'references',   serializer: entityAwareList(entity(() => Vocabulary)) },
+    importedNamespaces: { name: 'requires',     serializer: entityAwareList(entity(() => ImportedNamespace)) },
+    links:              { name: 'relations',    serializer: entityAwareList(entity(() => Link)) },
+    referenceDatas:     { name: 'codeLists',    serializer: entityAwareList(entity(() => ReferenceData)) },
+    classifications:    { name: 'isPartOf',     serializer: entityAwareList(entity(() => Classification)) },
+    contributors:       { name: 'contributor',  serializer: entityAwareList(entity(() => Organization)) },
+    version:            { name: 'identifier',   serializer: optional(identitySerializer<Urn>()) },
+    rootClass:          { name: 'rootResource', serializer: entityAwareOptional(uriSerializer) },
+    language:           { name: 'language',     serializer: list<Language>(languageSerializer, ['fi', 'en']) },
+    modifiedAt:         { name: 'modified',     serializer: optional(dateSerializer) },
+    createdAt:          { name: 'created',      serializer: optional(dateSerializer) }
   };
 
   comment: Localizable;
   status: Status;
   vocabularies: Vocabulary[];
-  namespaces: ImportedNamespace[];
+  importedNamespaces: ImportedNamespace[];
   links: Link[];
   referenceDatas: ReferenceData[];
   classifications: Classification[];
@@ -120,16 +120,16 @@ export class Model extends AbstractModel {
     remove(this.vocabularies, vocabulary);
   }
 
-  addNamespace(ns: ImportedNamespace) {
-    this.namespaces.push(ns);
+  addImportedNamespace(ns: ImportedNamespace) {
+    this.importedNamespaces.push(ns);
     this.context[ns.prefix] = ns.namespace;
   }
 
-  removeNamespace(ns: ImportedNamespace) {
+  removeImportedNamespace(ns: ImportedNamespace) {
     if (ns.namespaceType !== NamespaceType.TECHNICAL) {
       delete this.context[ns.prefix];
     }
-    remove(this.namespaces, ns);
+    remove(this.importedNamespaces, ns);
   }
 
   addLink(link: Link) {
@@ -148,15 +148,27 @@ export class Model extends AbstractModel {
     remove(this.referenceDatas, referenceData);
   }
 
-  getNamespaces() {
+  getNamespaces(): Namespace[] {
+
     const namespaces: Namespace[] = [];
     const requiredNamespacePrefixes = new Set<string>();
 
-    namespaces.push(new Namespace(this.prefix, this.namespace, NamespaceType.MODEL));
+    namespaces.push({
+      prefix: this.prefix,
+      url: this.namespace,
+      namespaceType: NamespaceType.MODEL
+    });
+
     requiredNamespacePrefixes.add(this.prefix);
 
-    for (const require of this.namespaces) {
-      namespaces.push(new Namespace(require.prefix, require.namespace, require.namespaceType));
+    for (const require of this.importedNamespaces) {
+
+      namespaces.push({
+        prefix: require.prefix,
+        url: require.namespace,
+        namespaceType: require.namespaceType
+      });
+
       requiredNamespacePrefixes.add(require.prefix);
     }
 
@@ -164,7 +176,11 @@ export class Model extends AbstractModel {
       if (!requiredNamespacePrefixes.has(prefix)) {
         const value = this.context[prefix];
         if (typeof value === 'string') {
-          namespaces.push(new Namespace(prefix, value, NamespaceType.IMPLICIT_TECHNICAL));
+          namespaces.push({
+            prefix: prefix,
+            url: value,
+            namespaceType: NamespaceType.IMPLICIT_TECHNICAL
+          });
         }
       }
     }
@@ -172,20 +188,8 @@ export class Model extends AbstractModel {
     return namespaces;
   }
 
-  getNamespacesOfType(...namespaceTypes: NamespaceType[]) {
-    const result: {[prefix: string]: string} = {};
-
-    for (const namespace of this.getNamespaces()) {
-      if (contains(namespaceTypes, namespace.type)) {
-        result[namespace.prefix] = namespace.url;
-      }
-    }
-
-    return result;
-  }
-
   private copyNamespacesFromRequires() {
-    for (const require of this.namespaces) {
+    for (const require of this.importedNamespaces) {
       // if overriding existing namespace remove previous prefix
       for (const prefix of Object.keys(this.context)) {
         const value = this.context[prefix];
@@ -198,7 +202,16 @@ export class Model extends AbstractModel {
   }
 
   expandContextWithKnownModels(context: any) {
-    Object.assign(context, this.getNamespacesOfType(NamespaceType.MODEL, NamespaceType.EXTERNAL));
+
+    const models: {[prefix: string]: string} = {};
+
+    for (const namespace of this.getNamespaces()) {
+      if (namespace.namespaceType === NamespaceType.MODEL || namespace.namespaceType === NamespaceType.EXTERNAL) {
+        models[namespace.prefix] = namespace.url;
+      }
+    }
+
+    Object.assign(context, models);
   }
 
   asDefinedBy() {
@@ -206,7 +219,7 @@ export class Model extends AbstractModel {
   }
 
   namespaceAsDefinedBy(ns: Url) {
-    for (const require of this.namespaces) {
+    for (const require of this.importedNamespaces) {
       if (ns === require.namespace) {
         return new DefinedBy({'@id': ns, '@type': typeSerializer.serialize(require.type)}, this.context, this.frame);
       }
@@ -224,16 +237,7 @@ export class Model extends AbstractModel {
 
   isNamespaceKnownAndOfType(namespace: Url, types: NamespaceType[]): boolean  {
     for (const knownNamespace of this.getNamespaces()) {
-      if (namespace === knownNamespace.url && containsAny(types, [knownNamespace.type])) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  isRequiredNamespace(ns: string) {
-    for (const require of this.namespaces) {
-      if (ns === require.namespace) {
+      if (namespace === knownNamespace.url && containsAny(types, [knownNamespace.namespaceType])) {
         return true;
       }
     }
@@ -281,7 +285,7 @@ export class Model extends AbstractModel {
   }
 }
 
-export class ImportedNamespace extends GraphNode {
+export class ImportedNamespace extends GraphNode implements Namespace {
 
   static importedNamespaceMappings = {
     id:         { name: '@id',                         serializer: uriSerializer },
@@ -300,7 +304,7 @@ export class ImportedNamespace extends GraphNode {
     init(this, ImportedNamespace.importedNamespaceMappings);
   }
 
-  get namespaceType() {
+  get namespaceType(): NamespaceType {
     if (this.isOfType('resource')) {
       return NamespaceType.EXTERNAL;
     } else if (this.isOfType('standard')) {
@@ -354,6 +358,10 @@ export class ImportedNamespace extends GraphNode {
     this.id = new Uri(_.trimEnd(ns, '#/'), { [this.prefix]: ns });
   }
 
+  get url() {
+    return this.namespace;
+  }
+
   serializationValues(inline: boolean, clone: boolean): {} {
 
     const onlyIdAndType = inline && !clone && this.namespaceType === NamespaceType.MODEL;
@@ -394,7 +402,8 @@ export enum NamespaceType {
   IMPLICIT_TECHNICAL, TECHNICAL, MODEL, EXTERNAL
 }
 
-export class Namespace {
-  constructor(public prefix: string, public url: string, public type: NamespaceType) {
-  }
+export interface Namespace {
+  prefix: string;
+  url: string;
+  namespaceType: NamespaceType;
 }

@@ -71,7 +71,7 @@ export function createSelfExclusion(self: WithIdAndType): Exclusion<WithIdAndTyp
 
 export function createDefinedByExclusion(model: Model): Exclusion<WithDefinedBy> {
 
-  const modelIds = collectIds(model.namespaces);
+  const modelIds = collectIds(model.importedNamespaces);
   modelIds.add(model.id.uri);
 
   return (item: WithDefinedBy) => {

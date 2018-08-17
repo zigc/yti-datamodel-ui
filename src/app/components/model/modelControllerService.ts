@@ -7,8 +7,8 @@ export interface View {
 }
 
 export interface ModelControllerService {
+  namespacesInUse: Set<string>;
   registerView(view: View): void;
-  getUsedNamespaces(): Set<string>;
   selectionEdited(oldSelection: Class|Predicate|null, newSelection: Class|Predicate): void;
   selectionDeleted(selection: Class|Predicate): void;
 }

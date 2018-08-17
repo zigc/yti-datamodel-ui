@@ -4,7 +4,7 @@ import IModalServiceInstance = ui.bootstrap.IModalServiceInstance;
 import gettextCatalog = angular.gettext.gettextCatalog;
 import { LanguageService } from 'app/services/languageService';
 import { Property, Class } from 'app/entities/class';
-import { flatten, groupBy } from 'yti-common-ui/utils/array';
+import { anyMatching, flatten, groupBy } from 'yti-common-ui/utils/array';
 import { stringMapToObject } from 'yti-common-ui/utils/object';
 import { Model } from 'app/entities/model';
 
@@ -55,7 +55,8 @@ export class AddPropertiesFromClassModalController {
   }
 
   selectAllWithKnownPredicates() {
-    this.selectPropertiesWithPredicate(property => this.model.isRequiredNamespace(property.predicateId.namespace));
+    const isRequiredNamespace = (ns: string) => anyMatching(this.model.importedNamespaces, importedNamespace => importedNamespace.namespace === ns);
+    this.selectPropertiesWithPredicate(property => isRequiredNamespace(property.predicateId.namespace));
   }
 
   selectAll() {

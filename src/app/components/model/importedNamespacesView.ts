@@ -3,18 +3,26 @@ import { LanguageService } from 'app/services/languageService';
 import { ColumnDescriptor, TableDescriptor } from 'app/components/form/editableTable';
 import { AddEditNamespaceModal } from './addEditNamespaceModal';
 import { SearchNamespaceModal } from './searchNamespaceModal';
-import { ModelViewController } from './modelView';
 import { combineExclusions } from 'app/utils/exclusion';
 import { module as mod } from './module';
-import { Model, ImportedNamespace, NamespaceType } from 'app/entities/model';
-import { ModelControllerService } from './modelControllerService';
+import { ImportedNamespace, NamespaceType } from 'app/entities/model';
 import { modalCancelHandler } from 'app/utils/angular';
+import { LanguageContext } from 'app/types/language';
+import { EditableForm } from 'app/components/form/editableEntityController';
+
+interface WithImportedNamespaces {
+  importedNamespaces: ImportedNamespace[];
+  addImportedNamespace(namespace: ImportedNamespace): void;
+  removeImportedNamespace(namespace: ImportedNamespace): void;
+}
 
 mod.directive('importedNamespacesView', () => {
   return {
     scope: {
-      model: '=',
-      modelController: '='
+      value: '=',
+      context: '=',
+      allowProfiles: '=',
+      namespacesInUse: '='
     },
     restrict: 'E',
     template: `
@@ -28,9 +36,9 @@ mod.directive('importedNamespacesView', () => {
     `,
     controllerAs: 'ctrl',
     bindToController: true,
-    require: ['importedNamespacesView', '?^modelView'],
-    link(_$scope: IScope, _element: JQuery, _attributes: IAttributes, [thisController, modelViewController]: [ImportedNamespacesViewController, ModelViewController]) {
-      thisController.isEditing = () => modelViewController && modelViewController.isEditing();
+    require: ['importedNamespacesView', '?^form'],
+    link(_$scope: IScope, _element: JQuery, _attributes: IAttributes, [thisController, formController]: [ImportedNamespacesViewController, EditableForm]) {
+      thisController.isEditing = () => formController && formController.editing;
     },
     controller: ImportedNamespacesViewController
   };
@@ -38,38 +46,38 @@ mod.directive('importedNamespacesView', () => {
 
 class ImportedNamespacesViewController {
 
-  model: Model;
-  modelController: ModelControllerService;
+  value: WithImportedNamespaces;
+  allowProfiles: boolean;
+  context: LanguageContext;
   isEditing: () => boolean;
+  namespacesInUse: Set<string>;
 
   descriptor: ImportedNamespaceTableDescriptor;
   expanded = false;
 
-  constructor($scope: IScope, private searchNamespaceModal: SearchNamespaceModal, addEditNamespaceModal: AddEditNamespaceModal, private languageService: LanguageService) {
-    $scope.$watchGroup([() => this.model, () => this.modelController], ([model, modelController]) => {
-      this.descriptor = new ImportedNamespaceTableDescriptor(addEditNamespaceModal, model, languageService, modelController);
+  constructor($scope: IScope, private searchNamespaceModal: SearchNamespaceModal, addEditNamespaceModal: AddEditNamespaceModal, languageService: LanguageService) {
+    $scope.$watch(() => this.value, value => {
+      this.descriptor = new ImportedNamespaceTableDescriptor(addEditNamespaceModal, value, this.context, languageService, this.namespacesInUse);
     });
   }
 
   importNamespace() {
-    const language = this.languageService.getModelLanguage(this.model);
 
     const existsExclude = (ns: ImportedNamespace) => {
-      for (const existingNs of this.model.getNamespaces()) {
-        if (existingNs.type !== NamespaceType.IMPLICIT_TECHNICAL && (existingNs.prefix === ns.prefix || existingNs.url === ns.namespace)) {
+      for (const existingNs of this.value.importedNamespaces) {
+        if (existingNs.namespaceType !== NamespaceType.IMPLICIT_TECHNICAL && (existingNs.prefix === ns.prefix || existingNs.url === ns.namespace)) {
           return 'Already added';
         }
       }
       return null;
     };
 
-    const allowProfiles = this.model.isOfType('profile');
-    const profileExclude = (ns: ImportedNamespace) => (!allowProfiles && ns.isOfType('profile')) ? 'Cannot import profile' : null;
+    const profileExclude = (ns: ImportedNamespace) => (!this.allowProfiles && ns.isOfType('profile')) ? 'Cannot import profile' : null;
     const exclude = combineExclusions(existsExclude, profileExclude);
 
-    this.searchNamespaceModal.open(this.model, language, exclude)
+    this.searchNamespaceModal.open(this.context, exclude)
       .then((ns: ImportedNamespace) => {
-        this.model.addNamespace(ns);
+        this.value.addImportedNamespace(ns);
         this.expanded = true;
       }, modalCancelHandler);
   }
@@ -78,22 +86,23 @@ class ImportedNamespacesViewController {
 class ImportedNamespaceTableDescriptor extends TableDescriptor<ImportedNamespace> {
 
   constructor(private addEditNamespaceModal: AddEditNamespaceModal,
-              private model: Model,
+              private value: WithImportedNamespaces,
+              private context: LanguageContext,
               private languageService: LanguageService,
-              private modelController: ModelControllerService) {
+              private namespacesInUse: Set<string>) {
     super();
   }
 
   columnDescriptors(): ColumnDescriptor<ImportedNamespace>[] {
     return [
       { headerName: 'Prefix', nameExtractor: ns => ns.prefix, cssClass: 'prefix' },
-      { headerName: 'Namespace label', nameExtractor: ns => this.languageService.translate(ns.label, this.model) },
+      { headerName: 'Namespace label', nameExtractor: ns => this.languageService.translate(ns.label, this.context) },
       { headerName: 'Namespace', nameExtractor: ns => ns.namespace }
     ];
   }
 
   values(): ImportedNamespace[] {
-    return this.model && this.model.namespaces;
+    return this.value && this.value.importedNamespaces;
   }
 
   orderBy(ns: ImportedNamespace) {
@@ -101,11 +110,11 @@ class ImportedNamespaceTableDescriptor extends TableDescriptor<ImportedNamespace
   }
 
   edit(ns: ImportedNamespace) {
-    this.addEditNamespaceModal.openEdit(ns, this.model, this.languageService.getModelLanguage(this.model));
+    this.addEditNamespaceModal.openEdit(ns, this.languageService.getModelLanguage(this.context));
   }
 
   remove(ns: ImportedNamespace) {
-    this.model.removeNamespace(ns);
+    this.value.removeImportedNamespace(ns);
   }
 
   canEdit(ns: ImportedNamespace): boolean {
@@ -113,6 +122,6 @@ class ImportedNamespaceTableDescriptor extends TableDescriptor<ImportedNamespace
   }
 
   canRemove(ns: ImportedNamespace): boolean {
-    return this.modelController && !this.modelController.getUsedNamespaces().has(ns.id.uri);
+    return !this.namespacesInUse.has(ns.id.uri);
   }
 }
