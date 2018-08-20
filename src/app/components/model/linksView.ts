@@ -2,15 +2,23 @@ import { IAttributes, IScope } from 'angular';
 import { AddEditLinkModal } from './addEditLinkModal';
 import { LanguageService } from 'app/services/languageService';
 import { TableDescriptor, ColumnDescriptor } from 'app/components/form/editableTable';
-import { ModelViewController } from './modelView';
 import { module as mod } from './module';
-import { Model, Link } from 'app/entities/model';
+import { Link } from 'app/entities/model';
 import { modalCancelHandler } from 'app/utils/angular';
+import { LanguageContext } from 'app/types/language';
+import { EditableForm } from 'app/components/form/editableEntityController';
+
+interface WithLinks {
+  links: Link[];
+  addLink(link: Link): void;
+  removeLink(link: Link): void;
+}
 
 mod.directive('linksView', () => {
   return {
     scope: {
-      model: '='
+      value: '=',
+      context: '='
     },
     restrict: 'E',
     template: `
@@ -24,9 +32,9 @@ mod.directive('linksView', () => {
     `,
     controllerAs: 'ctrl',
     bindToController: true,
-    require: ['linksView', '?^modelView'],
-    link(_$scope: IScope, _element: JQuery, _attributes: IAttributes, [thisController, modelViewController]: [LinksViewController, ModelViewController]) {
-      thisController.isEditing = () => modelViewController && modelViewController.isEditing();
+    require: ['linksView', '?^form'],
+    link(_$scope: IScope, _element: JQuery, _attributes: IAttributes, [thisController, formController]: [LinksViewController, EditableForm]) {
+      thisController.isEditing = () => formController && formController.editing;
     },
     controller: LinksViewController
   };
@@ -34,22 +42,23 @@ mod.directive('linksView', () => {
 
 class LinksViewController {
 
-  model: Model;
+  value: WithLinks;
+  context: LanguageContext;
   isEditing: () => boolean;
 
   descriptor: LinkTableDescriptor;
   expanded = false;
 
   constructor($scope: IScope, private addEditLinkModal: AddEditLinkModal, private languageService: LanguageService) {
-    $scope.$watch(() => this.model, model => {
-      this.descriptor = new LinkTableDescriptor(addEditLinkModal, model, languageService);
+    $scope.$watch(() => this.value, value => {
+      this.descriptor = new LinkTableDescriptor(addEditLinkModal, value, this.context, languageService);
     });
   }
 
   addLink() {
-    this.addEditLinkModal.openAdd(this.model, this.languageService.getModelLanguage(this.model))
-      .then((linktion: Link) => {
-        this.model.addLink(linktion);
+    this.addEditLinkModal.openAdd(this.languageService.getModelLanguage(this.context))
+      .then((link: Link) => {
+        this.value.addLink(link);
         this.expanded = true;
       }, modalCancelHandler);
   }
@@ -57,19 +66,22 @@ class LinksViewController {
 
 class LinkTableDescriptor extends TableDescriptor<Link> {
 
-  constructor(private addEditLinkModal: AddEditLinkModal, private model: Model, private languageService: LanguageService) {
+  constructor(private addEditLinkModal: AddEditLinkModal,
+              private value: WithLinks,
+              private context: LanguageContext,
+              private languageService: LanguageService) {
     super();
   }
 
   columnDescriptors(): ColumnDescriptor<Link>[] {
     return [
-      { headerName: 'Title', nameExtractor: link => this.languageService.translate(link.title, this.model), hrefExtractor: link => link.homepage.toString() },
-      { headerName: 'Description', nameExtractor: link => this.languageService.translate(link.description, this.model) }
+      { headerName: 'Title', nameExtractor: link => this.languageService.translate(link.title, this.context), hrefExtractor: link => link.homepage.toString() },
+      { headerName: 'Description', nameExtractor: link => this.languageService.translate(link.description, this.context) }
     ];
   }
 
   values(): Link[] {
-    return this.model && this.model.links;
+    return this.value && this.value.links;
   }
 
   hasOrder() {
@@ -77,11 +89,11 @@ class LinkTableDescriptor extends TableDescriptor<Link> {
   }
 
   edit(link: Link) {
-    this.addEditLinkModal.openEdit(link, this.model, this.languageService.getModelLanguage(this.model));
+    this.addEditLinkModal.openEdit(link, this.languageService.getModelLanguage(this.context));
   }
 
   remove(link: Link) {
-    this.model.removeLink(link);
+    this.value.removeLink(link);
   }
 
   canEdit(_link: Link): boolean {

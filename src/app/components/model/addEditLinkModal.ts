@@ -4,14 +4,14 @@ import IModalServiceInstance = ui.bootstrap.IModalServiceInstance;
 import { ModelService } from 'app/services/modelService';
 import { Uri } from 'app/entities/uri';
 import { Language } from 'app/types/language';
-import { Model, Link } from 'app/entities/model';
+import { Link } from 'app/entities/model';
 
 export class AddEditLinkModal {
   /* @ngInject */
   constructor(private $uibModal: IModalService) {
   }
 
-  private open(model: Model, lang: Language, linkToEdit: Link|null): IPromise<Link> {
+  private open(lang: Language, linkToEdit: Link|null): IPromise<Link> {
     return this.$uibModal.open({
       template: require('./addEditLinkModal.html'),
       size: 'sm',
@@ -19,19 +19,18 @@ export class AddEditLinkModal {
       controllerAs: 'ctrl',
       backdrop: true,
       resolve: {
-        model: () => model,
         lang: () => lang,
         linkToEdit: () => linkToEdit
       }
     }).result;
   }
 
-  openAdd(model: Model, lang: Language): IPromise<Link> {
-    return this.open(model, lang, null);
+  openAdd(lang: Language): IPromise<Link> {
+    return this.open(lang, null);
   }
 
-  openEdit(link: Link, model: Model, lang: Language): IPromise<Link> {
-    return this.open(model, lang, link);
+  openEdit(link: Link, lang: Language): IPromise<Link> {
+    return this.open(lang, link);
   }
 }
 
@@ -43,7 +42,10 @@ class AddEditLinkModalController {
   edit: boolean;
 
   /* @ngInject */
-  constructor(private $uibModalInstance: IModalServiceInstance, private modelService: ModelService, private lang: Language, private model: Model, private linkToEdit: Link|null) {
+  constructor(private $uibModalInstance: IModalServiceInstance,
+              private modelService: ModelService,
+              private lang: Language,
+              private linkToEdit: Link|null) {
     this.edit = !!linkToEdit;
 
     if (linkToEdit) {
@@ -69,7 +71,7 @@ class AddEditLinkModalController {
 
       this.$uibModalInstance.close(this.linkToEdit);
     } else {
-      this.modelService.newLink(this.title, this.description, this.homepage, this.lang, this.model.context)
+      this.modelService.newLink(this.title, this.description, this.homepage, this.lang)
         .then(link => this.$uibModalInstance.close(link));
     }
   }

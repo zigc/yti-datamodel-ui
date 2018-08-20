@@ -88,8 +88,8 @@ export class InteractiveHelpModelService implements ModelService, ResetableServi
       });
   }
 
-  newLink(title: string, description: string, homepage: Uri, lang: Language, context: any): IPromise<Link> {
-    return this.defaultModelService.newLink(title, description, homepage, lang, context);
+  newLink(title: string, description: string, homepage: Uri, lang: Language): IPromise<Link> {
+    return this.defaultModelService.newLink(title, description, homepage, lang);
   }
 
   getAllImportableNamespaces(): IPromise<ImportedNamespace[]> {

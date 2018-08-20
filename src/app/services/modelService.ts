@@ -18,7 +18,7 @@ export interface ModelService {
   updateModel(model: Model): IPromise<any>;
   deleteModel(id: Uri): IPromise<any>;
   newModel(prefix: string, label: string, classifications: string[], organizations: string[], lang: Language[], type: KnownModelType, redirect?: Uri): IPromise<Model>;
-  newLink(title: string, description: string, homepage: Uri, lang: Language, context: any): IPromise<Link>;
+  newLink(title: string, description: string, homepage: Uri, lang: Language): IPromise<Link>;
   getAllImportableNamespaces(): IPromise<ImportedNamespace[]>;
   newNamespaceImport(namespace: string, prefix: string, label: string, lang: Language): IPromise<ImportedNamespace>;
 }
@@ -96,7 +96,7 @@ export class DefaultModelService implements ModelService {
       });
   }
 
-  newLink(title: string, description: string, homepage: Uri, lang: Language, context: any) {
+  newLink(title: string, description: string, homepage: Uri, lang: Language) {
     const graph = {
       title: {
         [lang]: title
@@ -107,9 +107,9 @@ export class DefaultModelService implements ModelService {
       homepage: homepage.url
     };
 
-    const frameObject = frames.modelFrame({ '@graph': graph, '@context': context});
+    const frameObject = frames.modelFrame({ '@graph': graph, '@context': {}});
 
-    return this.$q.when(new Link(graph, context, frameObject));
+    return this.$q.when(new Link(graph, {}, frameObject));
   }
 
   getAllImportableNamespaces(): IPromise<ImportedNamespace[]> {

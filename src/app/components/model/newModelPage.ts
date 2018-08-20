@@ -7,11 +7,11 @@ import { KnownModelType } from 'app/types/entity';
 import { LocationService } from 'app/services/locationService';
 import { Classification } from '../../entities/classification';
 import { remove } from 'yti-common-ui/utils/array';
-import { Organization } from '../../entities/organization';
-import { ErrorModal } from '../form/errorModal';
-import { Vocabulary } from '../../entities/vocabulary';
-import { ReferenceData } from '../../entities/referenceData';
-import { ImportedNamespace } from '../../entities/model';
+import { Organization } from 'app/entities/organization';
+import { ErrorModal } from 'app/components/form/errorModal';
+import { Vocabulary } from 'app/entities/vocabulary';
+import { ReferenceData } from 'app/entities/referenceData';
+import { ImportedNamespace, Link } from 'app/entities/model';
 
 interface EditableForm extends IFormController {
   editing: boolean;
@@ -41,6 +41,7 @@ export class NewModelPageController {
   vocabularies: Vocabulary[] = [];
   referenceDatas: ReferenceData[] = [];
   importedNamespaces: ImportedNamespace[] = [];
+  links: Link[] = [];
 
   languages: Language[] = ['fi', 'en'];
   type: KnownModelType;
@@ -116,6 +117,14 @@ export class NewModelPageController {
     remove(this.importedNamespaces, namespace);
   }
 
+  addLink(link: Link) {
+    this.links.push(link);
+  }
+
+  removeLink(link: Link) {
+    remove(this.links, link);
+  }
+
   save() {
 
     this.persisting = true;
@@ -130,6 +139,7 @@ export class NewModelPageController {
         this.vocabularies.forEach(v => model.addVocabulary(v));
         this.referenceDatas.forEach(r => model.addReferenceData(r));
         this.importedNamespaces.forEach(ns => model.addImportedNamespace(ns));
+        this.links.forEach(l => model.addLink(l));
         this.modelService.createModel(model).then(() => {
           this.$location.url(model.iowUrl());
         }, () => this.persisting = false);
