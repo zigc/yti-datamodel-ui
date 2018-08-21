@@ -79,7 +79,7 @@ class NavigationController {
   }
 
   get groupManagementUrl() {
-    return this.config.groupsManagementUrl;
+    return this.config && this.config.groupManagementUrl;
   }
 
   fakeUser(userEmail: string) {

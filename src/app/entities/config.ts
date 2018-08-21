@@ -2,7 +2,7 @@ import { Concept } from './vocabulary';
 
 export class Config {
 
-  constructor(public groupsManagementUrl: string,
+  constructor(public groupManagementUrl: string,
               public terminologyUrl: string,
               public codeListUrl: string,
               public dev: boolean) {
