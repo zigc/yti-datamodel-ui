@@ -17,6 +17,7 @@ import { ReferenceData, ReferenceDataServer, ReferenceDataGroup } from 'app/enti
 import { filterAndSortSearchResults, defaultTitleComparator } from 'app/components/filter/util';
 import { LanguageContext } from 'app/types/language';
 import { Model } from 'app/entities/model';
+import { Status, regularStatuses } from 'yti-common-ui/entities/status';
 
 interface WithReferenceDatas {
   referenceDatas: ReferenceData[];
@@ -72,6 +73,7 @@ export class SearchReferenceDataModalController implements SearchController<Refe
   selection: ReferenceData|AddNewReferenceDataFormData;
   cannotConfirm: string|null;
   submitError: string|null = null;
+  showStatus: Status|null;
 
   localizer: Localizer;
 
@@ -133,7 +135,12 @@ export class SearchReferenceDataModalController implements SearchController<Refe
       !this.showGroup || anyMatching(referenceData.item.groups, group => group.id.equals(this.showGroup!.id))
     );
 
+    this.addFilter(referenceData =>
+      !this.showStatus || referenceData.item.status === this.showStatus
+    );
+
     $scope.$watch(() => this.showGroup, ifChanged<ReferenceDataGroup|null>(() => this.search()));
+    $scope.$watch(() => this.showStatus, ifChanged<Status|null>(() => this.search()));
   }
 
   addFilter(filter: SearchFilter<ReferenceData>) {
@@ -148,9 +155,13 @@ export class SearchReferenceDataModalController implements SearchController<Refe
     return !!this.searchText;
   }
 
+  get statuses() {
+    return regularStatuses;
+  }
+
   search() {
     if (this.referenceDatas) {
-
+      
       this.searchResults = [
         new AddNewReferenceData(`${this.gettextCatalog.getString('Create new reference data')} '${this.searchText}'`, this.canAddNew.bind(this)),
         ...filterAndSortSearchResults(this.referenceDatas, this.searchText, this.contentExtractors, this.searchFilters, defaultTitleComparator(this.localizer, this.exclude))

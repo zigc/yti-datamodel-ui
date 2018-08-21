@@ -4,6 +4,7 @@ import { ReferenceDataService } from 'app/services/referenceDataService';
 import { ViewReferenceDataModal } from './viewReferenceDataModal';
 import { ReferenceData, ReferenceDataCode } from 'app/entities/referenceData';
 import { LanguageContext } from 'app/types/language';
+import { TranslateService } from 'ng2-translate';
 
 mod.directive('referenceDataView', () => {
   return {
@@ -29,7 +30,10 @@ class ReferenceDataViewController {
   showCodes: boolean;
   codes: ReferenceDataCode[];
 
-  constructor($scope: IScope, referenceDataService: ReferenceDataService, private viewReferenceDataModal: ViewReferenceDataModal) {
+  constructor($scope: IScope, 
+              referenceDataService: ReferenceDataService,
+              private viewReferenceDataModal: ViewReferenceDataModal,
+              private translateService: TranslateService) {
     $scope.$watch(() => this.referenceData, referenceData => {
       if (referenceData && !referenceData.isExternal()) {
         referenceDataService.getReferenceDataCodes(referenceData)
@@ -46,5 +50,9 @@ class ReferenceDataViewController {
     } else {
       this.viewReferenceDataModal.open(this.referenceData, this.context);
     }
+  }
+  
+  get referenceDataStatusTranslated() {
+    return this.referenceData.status ? this.translateService.instant(this.referenceData.status) : '';
   }
 }

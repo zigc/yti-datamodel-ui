@@ -47,6 +47,14 @@
           <option value="" translate>All groups</option>
         </select>
 
+        <select id="reference_data_status_filter_dropdown"
+                class="form-control ml-2 pull-left"
+                style="width: auto"
+                ng-model="ctrl.showStatus"
+                ng-options="(status | translate) for status in ctrl.statuses">
+          <option value="" translate>All statuses</option>
+        </select>
+        
         <excluded-filter search-controller="ctrl"
                          search-text="ctrl.searchText"
                          exclude="ctrl.exclude"></excluded-filter>

@@ -4,6 +4,7 @@ import { GraphNode } from './graphNode';
 import { uriSerializer, entityAwareList, entity } from './serializer/entitySerializer';
 import { optional, stringSerializer, localizableSerializer } from './serializer/serializer';
 import { Localizable } from 'yti-common-ui/types/localization';
+import { Status } from 'yti-common-ui/entities/status';
 
 export class ReferenceDataServer extends GraphNode {
 
@@ -49,7 +50,8 @@ export class ReferenceData extends GraphNode {
     description: { name: 'description', serializer: localizableSerializer },
     creator:     { name: 'creator',     serializer: optional(stringSerializer) },
     identifier:  { name: 'identifier',  serializer: optional(stringSerializer) },
-    groups:      { name: 'isPartOf',    serializer: entityAwareList(entity(() => ReferenceDataGroup))}
+    groups:      { name: 'isPartOf',    serializer: entityAwareList(entity(() => ReferenceDataGroup))},
+    status:      { name: 'status',      serializer: stringSerializer }
   };
 
   id: Uri;
@@ -58,6 +60,7 @@ export class ReferenceData extends GraphNode {
   creator: string|null;
   identifier: string|null;
   groups: ReferenceDataGroup[];
+  status: Status;
 
   constructor(graph: any, context: any, frame: any) {
     super(graph, context, frame);
@@ -78,12 +81,14 @@ export class ReferenceDataCode extends GraphNode {
   static referenceDataCodeMappings = {
     id:          { name: '@id',         serializer: uriSerializer },
     title:       { name: 'title',       serializer: localizableSerializer },
-    identifier:  { name: 'identifier',  serializer: optional(stringSerializer) }
+    identifier:  { name: 'identifier',  serializer: optional(stringSerializer) },
+    status:      { name: 'status',      serializer: stringSerializer }
   };
 
   id: Uri;
   title: Localizable;
   identifier?: string;
+  status: Status;
 
   constructor(graph: any, context: any, frame: any) {
     super(graph, context, frame);

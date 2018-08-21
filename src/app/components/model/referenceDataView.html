@@ -2,6 +2,7 @@
 
 <non-editable data-title="Reference data URI" value="ctrl.referenceData.id" context="ctrl.context"></non-editable>
 <non-editable data-title="Reference data name" value="ctrl.referenceData.title" context="ctrl.context"></non-editable>
+<non-editable data-title="Reference data status" value="ctrl.referenceDataStatusTranslated" context="ctrl.context"></non-editable>
 <non-editable data-title="Description" value="ctrl.referenceData.description" context="ctrl.context"></non-editable>
 <non-editable data-title="Creator" value="ctrl.referenceData.creator" context="ctrl.context"></non-editable>
 
@@ -18,12 +19,14 @@
     <tr>
       <th translate>Identifier</th>
       <th translate>Title</th>
+      <th translate>Status</th>
     </tr>
     </thead>
     <tbody>
     <tr ng-repeat="code in ctrl.codes | orderBy: 'identifier'">
       <td>{{code.identifier}}</td>
       <td>{{code.title | translateValue: ctrl.context}}</td>
+      <td>{{code.status | translate}}</td>
     </tr>
     </tbody>
   </table>
