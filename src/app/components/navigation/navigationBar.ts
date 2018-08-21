@@ -78,6 +78,10 @@ class NavigationController {
       .then(config => this.config = config);
   }
 
+  get groupManagementUrl() {
+    return this.config.groupsManagementUrl;
+  }
+
   fakeUser(userEmail: string) {
     this.userService.updateLoggedInUser(userEmail);
   }
