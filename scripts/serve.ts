@@ -6,7 +6,7 @@ import { applyProgressBar, report } from './webpackUtils';
 
 const hostname = 'localhost';
 const port = 9001;
-// const apiPort = 8084;
+const apiPort = 8084;
 
 function applyHotLoading(config: webpack.Configuration) {
 
@@ -42,8 +42,7 @@ applyProgressBar(webpack(createVendorConfig(false))).run((err: Error, stats: web
     },
     proxy: {
       '/api/*': {
-        target: `https://tietomallit-dev.suomi.fi`,
-        changeOrigin: true,
+        target: `http://${hostname}:${apiPort}/`,
         secure: false
       }
     }
