@@ -11,7 +11,7 @@ import { DataType } from './dataTypes';
 import { containsAny, remove, removeMatching } from 'yti-common-ui/utils/array';
 import { ReferenceData } from './referenceData';
 import { hasLocalization } from 'app/utils/language';
-import { Language } from 'app/types/language';
+import { Language, Localizer } from 'app/types/language';
 import { VisualizationClass } from './visualization';
 import { comparingPrimitive } from 'yti-common-ui/utils/comparator';
 import { Predicate, Attribute, Association } from './predicate';
@@ -31,6 +31,7 @@ import { normalizingDefinedBySerializer } from './serializer/common';
 import { Model } from './model';
 import { Localizable } from 'yti-common-ui/types/localization';
 import { Status } from 'yti-common-ui/entities/status';
+import { labelNameToResourceIdIdentifier } from 'yti-common-ui/utils/resource';
 
 export abstract class AbstractClass extends GraphNode {
 
@@ -473,5 +474,9 @@ export class Property extends GraphNode {
 
   serializationValues(_inline: boolean, clone: boolean): {} {
     return serialize(this, clone, Property.propertyMapping);
+  }
+
+  getIdIdentifierFromLabel(localizer: Localizer): string {
+    return labelNameToResourceIdIdentifier(localizer.translate(this.label));
   }
 }

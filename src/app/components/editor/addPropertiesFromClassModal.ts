@@ -38,7 +38,7 @@ export class AddPropertiesFromClassModalController {
 
   /* @ngInject */
   constructor(private $uibModalInstance: IModalServiceInstance,
-              private languageService: LanguageService,
+              public languageService: LanguageService,
               private gettextCatalog: gettextCatalog,
               klass: Class,
               public classType: string,
