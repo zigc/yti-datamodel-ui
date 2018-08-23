@@ -5,6 +5,8 @@ import IModalService = ui.bootstrap.IModalService;
 import IModalServiceInstance = ui.bootstrap.IModalServiceInstance;
 import { Exclusion } from '../../utils/exclusion';
 import { WithId } from '../../types/entity';
+import { comparingLocalizable } from 'app/utils/comparator';
+import { LanguageService } from '../../services/languageService';
 
 export class SearchClassificationModal {
   /* @ngInject */
@@ -32,10 +34,14 @@ class SearchClassificationModalController {
   constructor($scope: IScope,
               private $uibModalInstance: IModalServiceInstance,
               classificationService: ClassificationService,
+              private languageService: LanguageService,
               exclude: Exclusion<WithId>) {
 
     classificationService.getClassifications()
-      .then(classifications => this.classifications = classifications.filter(c => !exclude(c)));
+      .then(classifications => {
+        this.classifications = classifications.filter(c => !exclude(c));
+        this.classifications.sort(comparingLocalizable<Classification>(this.languageService.createLocalizer(), c => c.label)); 
+      });
   }
 
   get loading() {
