@@ -137,6 +137,7 @@ export class FrontPageController implements HelpProvider {
         );
 
         this.filteredModels.sort(comparingLocalizable<ModelListItem>(localizer, m => m.label));
+        this.filteredModels.map(filteredModel => filteredModel.classifications.sort(comparingLocalizable<Classification>(localizer, c => c.label)));
       }));
   }
 
