@@ -6,7 +6,6 @@ import { createExistsExclusion } from 'app/utils/exclusion';
 import { collectProperties } from 'yti-common-ui/utils/array';
 import { EditableForm } from '../form/editableEntityController';
 import { Classification } from '../../entities/classification';
-import { LanguageContext } from '../../types/language';
 import { SearchClassificationModal } from './searchClassificationModal';
 import { modalCancelHandler } from '../../utils/angular';
 
@@ -19,8 +18,7 @@ interface WithClassifications {
 mod.directive('classificationsView', () => {
   return {
     scope: {
-      value: '=',
-      context: '='
+      value: '='
     },
     restrict: 'E',
     template: `
@@ -45,7 +43,6 @@ mod.directive('classificationsView', () => {
 class ClassificationsViewController {
 
   value: WithClassifications;
-  context: LanguageContext;
   isEditing: () => boolean;
 
   descriptor: ClassificationTableDescriptor;
@@ -57,7 +54,7 @@ class ClassificationsViewController {
               private searchClassificationModal: SearchClassificationModal) {
 
     $scope.$watch(() => this.value, value => {
-      this.descriptor = new ClassificationTableDescriptor(value, this.context, languageService);
+      this.descriptor = new ClassificationTableDescriptor(value, languageService);
     });
   }
 
@@ -76,13 +73,13 @@ class ClassificationsViewController {
 
 class ClassificationTableDescriptor extends TableDescriptor<Classification> {
 
-  constructor(private value: WithClassifications, private context: LanguageContext, private languageService: LanguageService) {
+  constructor(private value: WithClassifications, private languageService: LanguageService) {
     super();
   }
 
   columnDescriptors(): ColumnDescriptor<Classification>[] {
     return [
-      { headerName: 'Name', nameExtractor: c => this.languageService.translate(c.label, this.context) }
+      { headerName: 'Name', nameExtractor: c => this.languageService.translate(c.label) }
     ];
   }
 
@@ -102,7 +99,7 @@ class ClassificationTableDescriptor extends TableDescriptor<Classification> {
     this.value.removeClassification(classification);
   }
 
-  hasOrder(): boolean {
-    return true;
+  orderBy(c: Classification) {
+    return this.languageService.translate(c.label);
   }
 }
