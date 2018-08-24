@@ -110,7 +110,7 @@ class ImportedNamespaceTableDescriptor extends TableDescriptor<ImportedNamespace
   }
 
   edit(ns: ImportedNamespace) {
-    this.addEditNamespaceModal.openEdit(ns, this.languageService.getModelLanguage(this.context));
+    this.addEditNamespaceModal.openEdit(this.context, ns, this.languageService.getModelLanguage(this.context));
   }
 
   remove(ns: ImportedNamespace) {

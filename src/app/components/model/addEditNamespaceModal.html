@@ -4,13 +4,13 @@
 
     <modal-body>
 
-      <editable data-title="Namespace label" disable="!ctrl.labelModifiable()" context="ctrl.model">
+      <editable data-title="Namespace label" disable="!ctrl.labelModifiable()" context="ctrl.context">
         <div class="input-group input-group-md">
           <input id="label" type="text" class="form-control" autofocus required string-input="modelLabel" ng-model="ctrl.label" />
         </div>
       </editable>
 
-      <editable data-title="Namespace" disable="!ctrl.namespaceModifiable()" context="ctrl.model">
+      <editable data-title="Namespace" disable="!ctrl.namespaceModifiable()" context="ctrl.context">
         <div class="input-group input-group-md">
           <input id="namespace"
                  type="text"
@@ -24,7 +24,7 @@
         </div>
       </editable>
 
-      <editable data-title="Prefix" disable="!ctrl.prefixModifiable()" context="ctrl.model">
+      <editable data-title="Prefix" disable="!ctrl.prefixModifiable()" context="ctrl.context">
         <div class="input-group input-group-md">
           <input id="prefix"
                  type="text"

@@ -2,7 +2,7 @@ import { IScope, IPromise, ui } from 'angular';
 import IModalService = ui.bootstrap.IModalService;
 import IModalServiceInstance = ui.bootstrap.IModalServiceInstance;
 import { ModelService } from 'app/services/modelService';
-import { Language } from 'app/types/language';
+import { Language, LanguageContext } from 'app/types/language';
 import { isDefined } from 'yti-common-ui/utils/object';
 import { ImportedNamespace } from 'app/entities/model';
 
@@ -37,7 +37,7 @@ export class AddEditNamespaceModal {
   constructor(private $uibModal: IModalService) {
   }
 
-  private open(language: Language, namespaceToEdit: ImportedNamespace|null): IPromise<ImportedNamespace> {
+  private open(context: LanguageContext, language: Language, namespaceToEdit: ImportedNamespace|null): IPromise<ImportedNamespace> {
     return this.$uibModal.open({
       template: require('./addEditNamespaceModal.html'),
       size: 'sm',
@@ -45,18 +45,19 @@ export class AddEditNamespaceModal {
       controllerAs: 'ctrl',
       backdrop: true,
       resolve: {
+        context: () => context,
         language: () => language,
         namespaceToEdit: () => namespaceToEdit
       }
     }).result;
   }
 
-  openAdd(language: Language): IPromise<ImportedNamespace> {
-    return this.open(language, null);
+  openAdd(context: LanguageContext, language: Language): IPromise<ImportedNamespace> {
+    return this.open(context, language, null);
   }
 
-  openEdit(require: ImportedNamespace, language: Language): IPromise<ImportedNamespace> {
-    return this.open(language, require);
+  openEdit(context: LanguageContext, require: ImportedNamespace, language: Language): IPromise<ImportedNamespace> {
+    return this.open(context, language, require);
   }
 }
 
@@ -75,6 +76,7 @@ class AddEditNamespaceController {
   /* @ngInject */
   constructor(private $uibModalInstance: IModalServiceInstance,
               $scope: IScope,
+              public context: LanguageContext,
               private language: Language,
               private namespaceToEdit: ImportedNamespace|null,
               private modelService: ModelService) {

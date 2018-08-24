@@ -104,7 +104,7 @@ class SearchNamespaceController implements SearchController<ImportedNamespace> {
 
     const language = this.languageService.getModelLanguage(this.context);
 
-    this.addEditNamespaceModal.openAdd(language)
+    this.addEditNamespaceModal.openAdd(this.context, language)
       .then(ns => this.$uibModalInstance.close(ns), modalCancelHandler);
   }
 
