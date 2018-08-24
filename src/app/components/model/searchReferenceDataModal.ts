@@ -90,7 +90,7 @@ export class SearchReferenceDataModalController implements SearchController<Refe
   constructor(private $scope: SearchReferenceDataScope,
               private $uibModalInstance: IModalServiceInstance,
               public model: WithReferenceDatas|null,
-              context: LanguageContext,
+              public context: LanguageContext,
               private referenceDataService: ReferenceDataService,
               languageService: LanguageService,
               private gettextCatalog: gettextCatalog,

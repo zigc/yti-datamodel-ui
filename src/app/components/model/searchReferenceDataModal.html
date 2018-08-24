@@ -24,7 +24,7 @@
         </div>
 
         <model-language-chooser class="pull-right"
-                                context="ctrl.model"></model-language-chooser>
+                                context="ctrl.context"></model-language-chooser>
       </div>
     </div>
 
@@ -35,7 +35,7 @@
                 class="form-control pull-left"
                 style="width: auto"
                 ng-model="ctrl.showServer"
-                ng-options="(referenceDataServer.title | translateValue: ctrl.model) for referenceDataServer in ctrl.referenceDataServers">
+                ng-options="(referenceDataServer.title | translateValue: ctrl.context) for referenceDataServer in ctrl.referenceDataServers">
           <option value="" translate>All servers</option>
         </select>
 
@@ -43,7 +43,7 @@
                 class="form-control ml-2 pull-left"
                 style="width: auto"
                 ng-model="ctrl.showGroup"
-                ng-options="(referenceDataGroup.title | translateValue: ctrl.model) for referenceDataGroup in ctrl.referenceDataGroups">
+                ng-options="(referenceDataGroup.title | translateValue: ctrl.context) for referenceDataGroup in ctrl.referenceDataGroups">
           <option value="" translate>All groups</option>
         </select>
 
