@@ -82,6 +82,14 @@ class NavigationController {
     return this.config && this.config.groupManagementUrl;
   }
 
+  get terminologyUrl() {
+    return this.config && this.config.terminologyUrl;
+  }
+
+  get codeListUrl() {
+    return this.config && this.config.codeListUrl;
+  }
+
   fakeUser(userEmail: string) {
     this.userService.updateLoggedInUser(userEmail);
   }

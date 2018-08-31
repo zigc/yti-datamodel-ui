@@ -3,9 +3,9 @@ import { config } from 'config';
 import { Config } from '../entities/config';
 
 interface ConfigType {
-  groups: string;
-  concepts: string;
-  codes: string;
+  groupsFrontend: string;
+  conceptsFrontend: string;
+  codesFrontend: string;
   dev: boolean;
 }
 
@@ -20,7 +20,7 @@ export class ConfigService {
     return this.$http.get<ConfigType>(config.apiEndpointWithName('config'))
       .then(response => {
         const data = response.data!;
-        return new Config(data.groups, data.concepts, data.codes, data.dev);
+        return new Config(data.groupsFrontend, data.conceptsFrontend, data.codesFrontend, data.dev);
       });
   }
 }
