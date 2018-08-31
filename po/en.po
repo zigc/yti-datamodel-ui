@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2018-08-21 14:33+0300\n"
+"PO-Revision-Date: 2018-08-31 16:00+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -123,7 +123,7 @@ msgstr ""
 #: app\components\editor/classForm.html:101
 #: app\components\editor/predicateForm.html:62
 #: app\components\editor/propertyView.html:163
-#: app\components\model/modelForm.html:24
+#: app\components\model/modelForm.html:25
 msgid "Additional information"
 msgstr ""
 
@@ -374,7 +374,7 @@ msgstr ""
 
 #: app\components/advancedSearchModal.html:66
 #: app\components\common/modalTemplate.html:16
-#: app\components\editor/addPropertiesFromClassModal.html:29
+#: app\components\editor/addPropertiesFromClassModal.html:33
 #: app\components\editor/searchClassModal.html:116
 #: app\components\editor/searchConceptModal.html:112
 #: app\components\editor/searchPredicateModal.html:137
@@ -1010,7 +1010,7 @@ msgstr ""
 msgid "Description info"
 msgstr "Description of a resource"
 
-#: app\components\editor/addPropertiesFromClassModal.html:24
+#: app\components\editor/addPropertiesFromClassModal.html:28
 msgid "Deselect all"
 msgstr ""
 
@@ -1147,6 +1147,10 @@ msgstr ""
 #: translations/titles.html:41
 msgid "Example info"
 msgstr "Example value for the property"
+
+#: translations/misc.html:294
+msgid "ExchangeFormat"
+msgstr "Exchange format"
 
 #: app\components\form/errorMessages.html:8
 msgid "Existing id error"
@@ -1352,6 +1356,18 @@ msgstr ""
 #: translations/misc.html:240
 msgid "In language"
 msgstr "In English"
+
+#: translations/misc.html:295
+msgid "InformationDescription"
+msgstr "Information description"
+
+#: translations/misc.html:292
+msgid "InformationPool"
+msgstr "Information pool"
+
+#: translations/misc.html:293
+msgid "InformationSystem"
+msgstr "Information system"
 
 #: translations/misc.html:192
 msgid "Input"
@@ -2214,7 +2230,7 @@ msgstr ""
 msgid "search vocabulary"
 msgstr "Search vocabulary…"
 
-#: app\components\editor/addPropertiesFromClassModal.html:23
+#: app\components\editor/addPropertiesFromClassModal.html:27
 msgid "Select all"
 msgstr ""
 
@@ -2698,6 +2714,16 @@ msgstr ""
 msgid "Use class"
 msgstr ""
 
+#: translations/misc.html:296
+#, fuzzy
+#| msgid "How content"
+msgid "Use context"
+msgstr ""
+"Interoperability descriptions published in the Workbench may be accessed and "
+"browsed freely. In future, the content of these core vocabularies and "
+"application profiles will be jointly produced by experts associated to each "
+"subject area."
+
 #: app\components\model/searchReferenceDataModal.html:124
 #: translations/misc.html:107
 msgid "Use selection"
@@ -2974,7 +3000,7 @@ msgid "xsd:time error"
 msgstr "Invalid time"
 
 #: app\components\common/modalTemplate.html:15
-#: app\components\editor/addPropertiesFromClassModal.html:28
+#: app\components\editor/addPropertiesFromClassModal.html:32
 #: translations/misc.html:274
 msgid "Yes"
 msgstr ""

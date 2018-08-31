@@ -49,6 +49,14 @@ export type ConstraintType = 'or'
                            | 'and'
                            | 'not';
 
+export type UseContext = 'InformationPool'
+                       | 'InformationSystem'
+                       | 'ExchangeFormat'
+                       | 'InformationDescription';
+
+export const profileUseContexts: UseContext[] = ['InformationPool', 'InformationSystem', 'ExchangeFormat', 'InformationDescription'];
+export const libraryUseContexts: UseContext[] = ['InformationDescription'];
+
 export interface GraphData {
   '@context': any;
   '@graph': any;

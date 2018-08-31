@@ -115,7 +115,7 @@ msgstr ""
 #: app\components\editor/classForm.html:101
 #: app\components\editor/predicateForm.html:62
 #: app\components\editor/propertyView.html:163
-#: app\components\model/modelForm.html:24
+#: app\components\model/modelForm.html:25
 msgid "Additional information"
 msgstr ""
 
@@ -360,7 +360,7 @@ msgstr ""
 
 #: app\components/advancedSearchModal.html:66
 #: app\components\common/modalTemplate.html:16
-#: app\components\editor/addPropertiesFromClassModal.html:29
+#: app\components\editor/addPropertiesFromClassModal.html:33
 #: app\components\editor/searchClassModal.html:116
 #: app\components\editor/searchConceptModal.html:112
 #: app\components\editor/searchPredicateModal.html:137
@@ -994,7 +994,7 @@ msgstr ""
 msgid "Description info"
 msgstr ""
 
-#: app\components\editor/addPropertiesFromClassModal.html:24
+#: app\components\editor/addPropertiesFromClassModal.html:28
 msgid "Deselect all"
 msgstr ""
 
@@ -1122,6 +1122,10 @@ msgstr ""
 
 #: translations/titles.html:41
 msgid "Example info"
+msgstr ""
+
+#: translations/misc.html:294
+msgid "ExchangeFormat"
 msgstr ""
 
 #: app\components\form/errorMessages.html:8
@@ -1312,6 +1316,18 @@ msgstr ""
 
 #: translations/misc.html:240
 msgid "In language"
+msgstr ""
+
+#: translations/misc.html:295
+msgid "InformationDescription"
+msgstr ""
+
+#: translations/misc.html:292
+msgid "InformationPool"
+msgstr ""
+
+#: translations/misc.html:293
+msgid "InformationSystem"
 msgstr ""
 
 #: translations/misc.html:192
@@ -2152,7 +2168,7 @@ msgstr ""
 msgid "search vocabulary"
 msgstr ""
 
-#: app\components\editor/addPropertiesFromClassModal.html:23
+#: app\components\editor/addPropertiesFromClassModal.html:27
 msgid "Select all"
 msgstr ""
 
@@ -2637,6 +2653,10 @@ msgstr ""
 msgid "Use class"
 msgstr ""
 
+#: translations/misc.html:296
+msgid "Use context"
+msgstr ""
+
 #: app\components\model/searchReferenceDataModal.html:124
 #: translations/misc.html:107
 msgid "Use selection"
@@ -2888,7 +2908,7 @@ msgid "xsd:time error"
 msgstr ""
 
 #: app\components\common/modalTemplate.html:15
-#: app\components\editor/addPropertiesFromClassModal.html:28
+#: app\components\editor/addPropertiesFromClassModal.html:32
 #: translations/misc.html:274
 msgid "Yes"
 msgstr ""

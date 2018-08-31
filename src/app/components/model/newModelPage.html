@@ -45,6 +45,8 @@
             <input id="modelPrefix" class="form-control" type="text" prefix-input ng-model="ctrl.prefix" autocomplete="off" required />
           </editable>
 
+          <app-use-context-input ng-model="ctrl.useContext" [editing]="true" [model-type]="ctrl.type"></app-use-context-input>
+
         </div>
 
         <div class="col-lg-6 offset-lg-1">

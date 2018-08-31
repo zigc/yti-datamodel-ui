@@ -1,6 +1,6 @@
 import * as _ from 'lodash';
 import { requireDefined } from 'yti-common-ui/utils/object';
-import { KnownModelType, Type } from 'app/types/entity';
+import { KnownModelType, Type, UseContext } from 'app/types/entity';
 import { modelUrl, normalizeModelType, resourceUrl } from 'app/utils/entity';
 import { Uri, Url, Urn } from './uri';
 import { Language } from 'app/types/language';
@@ -14,7 +14,7 @@ import { GraphNode } from './graphNode';
 import { entity, entityAwareList, entityAwareOptional, uriSerializer } from './serializer/entitySerializer';
 import {
   dateSerializer, identitySerializer, languageSerializer, list, localizableSerializer, optional,
-  stringSerializer, typeSerializer
+  stringSerializer, typeSerializer, valueOrDefault
 } from './serializer/serializer';
 import { Localizable } from 'yti-common-ui/types/localization';
 import { Organization } from './organization';
@@ -87,7 +87,8 @@ export class Model extends AbstractModel {
     rootClass:          { name: 'rootResource', serializer: entityAwareOptional(uriSerializer) },
     language:           { name: 'language',     serializer: list<Language>(languageSerializer, ['fi', 'en']) },
     modifiedAt:         { name: 'modified',     serializer: optional(dateSerializer) },
-    createdAt:          { name: 'created',      serializer: optional(dateSerializer) }
+    createdAt:          { name: 'created',      serializer: optional(dateSerializer) },
+    useContext:         { name: 'useContext',   serializer: valueOrDefault(identitySerializer<UseContext>(), 'InformationDescription') }
   };
 
   comment: Localizable;
@@ -104,6 +105,7 @@ export class Model extends AbstractModel {
   language: Language[];
   modifiedAt: Moment|null;
   createdAt: Moment|null;
+  useContext: UseContext;
 
   constructor(graph: any, context: any, frame: any) {
     super(graph, context, frame);

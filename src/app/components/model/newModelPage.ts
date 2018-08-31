@@ -3,7 +3,7 @@ import { module as mod } from './module';
 import { ModelService } from 'app/services/modelService';
 import { Uri } from 'app/entities/uri';
 import { Language, LanguageContext } from 'app/types/language';
-import { KnownModelType } from 'app/types/entity';
+import { KnownModelType, UseContext } from 'app/types/entity';
 import { LocationService } from 'app/services/locationService';
 import { Classification } from '../../entities/classification';
 import { remove } from 'yti-common-ui/utils/array';
@@ -45,6 +45,7 @@ export class NewModelPageController {
 
   languages: Language[] = ['fi', 'en'];
   type: KnownModelType;
+  useContext: UseContext = 'InformationDescription';
 
   context: LanguageContext = {
     id: new Uri('http://newModel', {}),
@@ -136,6 +137,7 @@ export class NewModelPageController {
       .then(model => {
         // XXX: should comment go to model creator api?
         model.comment = { [this.languages[0]]: this.comment };
+        model.useContext = this.useContext;
         this.vocabularies.forEach(v => model.addVocabulary(v));
         this.referenceDatas.forEach(r => model.addReferenceData(r));
         this.importedNamespaces.forEach(ns => model.addImportedNamespace(ns));

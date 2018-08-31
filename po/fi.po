@@ -129,7 +129,7 @@ msgstr "Lisää sanasto"
 #: app\components\editor/classForm.html:101
 #: app\components\editor/predicateForm.html:62
 #: app\components\editor/propertyView.html:163
-#: app\components\model/modelForm.html:24
+#: app\components\model/modelForm.html:25
 msgid "Additional information"
 msgstr "Lisätiedot"
 
@@ -386,7 +386,7 @@ msgstr "Valinta on tehtävä soveltamisprofiilin luokista"
 
 #: app\components/advancedSearchModal.html:66
 #: app\components\common/modalTemplate.html:16
-#: app\components\editor/addPropertiesFromClassModal.html:29
+#: app\components\editor/addPropertiesFromClassModal.html:33
 #: app\components\editor/searchClassModal.html:116
 #: app\components\editor/searchConceptModal.html:112
 #: app\components\editor/searchPredicateModal.html:137
@@ -1032,7 +1032,7 @@ msgstr "Kuvaus"
 msgid "Description info"
 msgstr "Tietosisällön kuvaus"
 
-#: app\components\editor/addPropertiesFromClassModal.html:24
+#: app\components\editor/addPropertiesFromClassModal.html:28
 msgid "Deselect all"
 msgstr "Poista kaikki valinnat"
 
@@ -1174,6 +1174,10 @@ msgstr "Esimerkki"
 #: translations/titles.html:41
 msgid "Example info"
 msgstr "Esimerkkiarvo ominaisuudelle"
+
+#: translations/misc.html:294
+msgid "ExchangeFormat"
+msgstr "Siirtoformaatti"
 
 #: app\components\form/errorMessages.html:8
 msgid "Existing id error"
@@ -1377,6 +1381,18 @@ msgstr ""
 #: translations/misc.html:240
 msgid "In language"
 msgstr "Suomeksi"
+
+#: translations/misc.html:295
+msgid "InformationDescription"
+msgstr "Tietosisältö"
+
+#: translations/misc.html:292
+msgid "InformationPool"
+msgstr "Tietovaranto"
+
+#: translations/misc.html:293
+msgid "InformationSystem"
+msgstr "Tietojärjestelmä"
 
 #: translations/misc.html:192
 msgid "Input"
@@ -2250,7 +2266,7 @@ msgstr "Hae sanastoja"
 msgid "search vocabulary"
 msgstr "Hae sanastoa…"
 
-#: app\components\editor/addPropertiesFromClassModal.html:23
+#: app\components\editor/addPropertiesFromClassModal.html:27
 msgid "Select all"
 msgstr "Valitse kaikki"
 
@@ -2736,6 +2752,10 @@ msgstr "Käytä attribuuttia"
 msgid "Use class"
 msgstr "Käytä luokkaa"
 
+#: translations/misc.html:296
+msgid "Use context"
+msgstr "Sisällön tyyppi"
+
 #: app\components\model/searchReferenceDataModal.html:124
 #: translations/misc.html:107
 msgid "Use selection"
@@ -3010,7 +3030,7 @@ msgid "xsd:time error"
 msgstr "Virheellinen aika"
 
 #: app\components\common/modalTemplate.html:15
-#: app\components\editor/addPropertiesFromClassModal.html:28
+#: app\components\editor/addPropertiesFromClassModal.html:32
 #: translations/misc.html:274
 msgid "Yes"
 msgstr "Kyllä"
@@ -3244,9 +3264,6 @@ msgstr "Sinut uudelleenohjataan mallin sivulle"
 
 #~ msgid "language"
 #~ msgstr "kieli"
-
-#~ msgid "Constraint description"
-#~ msgstr "Loogisen rajoitteen kuvaus"
 
 #~ msgid "Id"
 #~ msgstr "Tunniste"

@@ -17,6 +17,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { downgradeComponent, downgradeInjectable, UpgradeModule } from '@angular/upgrade/static';
 import { NgModule, NgZone } from '@angular/core';
 import { HttpModule } from '@angular/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { YtiCommonModule } from 'yti-common-ui';
 import { config } from 'config';
 import { AUTHENTICATED_USER_ENDPOINT } from 'yti-common-ui/services/user.service';
@@ -42,6 +43,8 @@ import { AjaxLoadingIndicatorSmallComponent } from 'yti-common-ui/components/aja
 import { FilterDropdownComponent } from 'yti-common-ui/components/filter-dropdown.component';
 import { StatusComponent } from 'yti-common-ui/components/status.component';
 import { DropdownComponent } from 'yti-common-ui/components/dropdown.component';
+import { UseContextDropdownComponent } from './components/model/use-context-dropdown.component';
+import { UseContextInputComponent } from './components/form/use-context-input.component';
 
 require('angular-gettext');
 require('checklist-model');
@@ -85,14 +88,18 @@ export function createMissingTranslationHandler(): MissingTranslationHandler {
 @NgModule({
   imports: [
     BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
     HttpModule,
     UpgradeModule,
     YtiCommonModule,
     TranslateModule.forRoot({ provide: TranslateLoader, useFactory: createTranslateLoader }),
     NgbModule.forRoot(),
   ],
-  declarations: [
-    StatusComponent // FIXME should be declared in YtiCommonModule
+  declarations: [    
+    StatusComponent, // FIXME should be declared in YtiCommonModule
+    UseContextDropdownComponent,
+    UseContextInputComponent
   ],
   entryComponents: [
     FooterComponent,
@@ -101,7 +108,9 @@ export function createMissingTranslationHandler(): MissingTranslationHandler {
     AjaxLoadingIndicatorSmallComponent,
     DropdownComponent,
     FilterDropdownComponent,
-    StatusComponent
+    StatusComponent,
+    UseContextDropdownComponent,
+    UseContextInputComponent
   ],
   providers: [
     { provide: AUTHENTICATED_USER_ENDPOINT, useFactory: resolveAuthenticatedUserEndpoint },
@@ -173,6 +182,10 @@ mod.directive('appFilterDropdown', downgradeComponent({
 mod.directive('appStatus', downgradeComponent({
   component: StatusComponent,
   inputs: ['status']
+}));
+mod.directive('appUseContextInput', downgradeComponent({
+  component: UseContextInputComponent,
+  inputs: ['editing', 'modelType']
 }));
 
 mod.factory('translateService', downgradeInjectable(TranslateService));

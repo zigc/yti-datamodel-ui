@@ -20,6 +20,7 @@
     <non-editable data-title="Namespace" value="ctrl.model.namespace" context="ctrl.model" clipboard="ctrl.model.namespace"></non-editable>
 
     <editable-state-select ng-if="!ctrl.model.unsaved" id="modelState" state="ctrl.model.status" model="ctrl.model"></editable-state-select>
+    <app-use-context-input ng-model="ctrl.model.useContext" [editing]="ctrl.isEditing()" [model-type]="ctrl.model.normalizedType"></app-use-context-input>
 
     <h4 translate>Additional information</h4>
 
