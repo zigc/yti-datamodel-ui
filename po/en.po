@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2018-08-31 16:00+0300\n"
+"PO-Revision-Date: 2018-09-03 11:48+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -1474,6 +1474,14 @@ msgstr ""
 msgid "Local ID"
 msgstr ""
 
+#: translations/titles.html:81
+msgid "Localname"
+msgstr "Class localname"
+
+#: translations/titles.html:81
+msgid "Localname info"
+msgstr "Can be used in schemas or other local applications"
+
 #: app\components\navigation/navigationBar.html:33
 #: app\components\navigation/navigationBar.html:65
 msgid "LOG IN"
@@ -1922,6 +1930,14 @@ msgstr "Literal"
 #: translations/attribute.html:7
 msgid "rdfs:Literal error"
 msgstr ""
+
+#: translations/titles.html:82
+msgid "Read-only"
+msgstr "Read-only"
+
+#: translations/titles.html:82
+msgid "Read-only info"
+msgstr "Defines attribute that cannot be changed after the initialization"
 
 #: translations/misc.html:22
 msgid "Recommendation"
@@ -3017,17 +3033,8 @@ msgstr ""
 msgid "You will be redirected to the model"
 msgstr ""
 
-#~ msgid "Localname"
-#~ msgstr "Class localname"
-
 #~ msgid "Localname description"
 #~ msgstr "Can be used in schemas or other local applications"
-
-#~ msgid "Read-only"
-#~ msgstr "Read-only"
-
-#~ msgid "Read-only info"
-#~ msgstr "Defines attribute that cannot be changed after the initialization"
 
 #~ msgid "Interoperability method"
 #~ msgstr "Interoperability and understandability"

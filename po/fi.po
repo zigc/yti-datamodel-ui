@@ -1497,6 +1497,14 @@ msgstr "Linkit"
 msgid "Local ID"
 msgstr "Paikallinen ID"
 
+#: translations/titles.html:81
+msgid "Localname"
+msgstr "Luokan paikallinen tunniste"
+
+#: translations/titles.html:81
+msgid "Localname info"
+msgstr "Voidaan käyttää skeemoissa tai muissa paikallisissta toteutuksissa"
+
 #: app\components\navigation/navigationBar.html:33
 #: app\components\navigation/navigationBar.html:65
 msgid "LOG IN"
@@ -1950,6 +1958,14 @@ msgstr "Literaali"
 #: translations/attribute.html:7
 msgid "rdfs:Literal error"
 msgstr "Virheellinen literaali"
+
+#: translations/titles.html:82
+msgid "Read-only"
+msgstr "Vain luku"
+
+#: translations/titles.html:82
+msgid "Read-only info"
+msgstr "Attribuutti jonka arvoa ei alustuksen jälkeen saa enää muokata"
 
 #: translations/misc.html:22
 msgid "Recommendation"
@@ -3049,17 +3065,8 @@ msgstr "Sinut uudelleenohjataan etusivulle"
 msgid "You will be redirected to the model"
 msgstr "Sinut uudelleenohjataan mallin sivulle"
 
-#~ msgid "Localname"
-#~ msgstr "Luokan paikallinen tunniste"
-
 #~ msgid "Localname description"
 #~ msgstr "Voidaan käyttää skeemoissa tai muissa paikallisissta toteutuksissa"
-
-#~ msgid "Read-only"
-#~ msgstr "Vain luku"
-
-#~ msgid "Read-only info"
-#~ msgstr "Attribuutti jonka arvoa ei alustuksen jälkeen saa enää muokata"
 
 #~ msgid "Filter results"
 #~ msgstr "Rajaa hakutuloksia"

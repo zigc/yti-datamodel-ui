@@ -1430,6 +1430,14 @@ msgstr ""
 msgid "Local ID"
 msgstr ""
 
+#: translations/titles.html:81
+msgid "Localname"
+msgstr ""
+
+#: translations/titles.html:81
+msgid "Localname info"
+msgstr ""
+
 #: app\components\navigation/navigationBar.html:33
 #: app\components\navigation/navigationBar.html:65
 msgid "LOG IN"
@@ -1862,6 +1870,14 @@ msgstr ""
 
 #: translations/attribute.html:7
 msgid "rdfs:Literal error"
+msgstr ""
+
+#: translations/titles.html:82
+msgid "Read-only"
+msgstr ""
+
+#: translations/titles.html:82
+msgid "Read-only info"
 msgstr ""
 
 #: translations/misc.html:22
