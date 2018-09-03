@@ -35,7 +35,7 @@ msgstr ""
 msgid "Add contributor"
 msgstr ""
 
-#: app\components/frontPage.html:57
+#: app\components/frontPage.html:59
 msgid "Add library"
 msgstr ""
 
@@ -47,7 +47,7 @@ msgstr ""
 msgid "Add link"
 msgstr ""
 
-#: app\components/frontPage.html:53
+#: app\components/frontPage.html:55
 msgid "Add model"
 msgstr ""
 
@@ -63,7 +63,7 @@ msgstr ""
 msgid "Add new profile"
 msgstr ""
 
-#: app\components/frontPage.html:58
+#: app\components/frontPage.html:60
 msgid "Add profile"
 msgstr ""
 
@@ -128,7 +128,7 @@ msgid "Admin groups"
 msgstr ""
 
 #: app\components/advancedSearchModal.html:4
-#: app\components/frontPage.html:14
+#: app\components/frontPage.html:16
 msgid "Advanced search"
 msgstr ""
 
@@ -509,7 +509,7 @@ msgstr ""
 msgid "Classes can be seen visually here"
 msgstr ""
 
-#: app\components/frontPage.html:22
+#: app\components/frontPage.html:24
 msgid "Classification"
 msgstr ""
 
@@ -1512,7 +1512,7 @@ msgstr ""
 msgid "Minimize"
 msgstr ""
 
-#: app\components/frontPage.html:71
+#: app\components/frontPage.html:73
 #: translations/misc.html:33
 msgid "model"
 msgstr ""
@@ -1529,7 +1529,7 @@ msgstr ""
 msgid "Model not found"
 msgstr ""
 
-#: app\components/frontPage.html:72
+#: app\components/frontPage.html:74
 msgid "models"
 msgstr ""
 
@@ -1982,7 +1982,7 @@ msgstr ""
 msgid "Save visualization position"
 msgstr ""
 
-#: app\components/frontPage.html:12
+#: app\components/frontPage.html:14
 msgid "Search"
 msgstr ""
 
@@ -2603,6 +2603,10 @@ msgstr ""
 
 #: translations/misc.html:180
 msgid "to vocabulary"
+msgstr ""
+
+#: app\components/frontPage.html:5
+msgid "ToolInfo"
 msgstr ""
 
 #: translations/help.html:139

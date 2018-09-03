@@ -40,7 +40,7 @@ msgstr "Lisää luokitus"
 msgid "Add contributor"
 msgstr "Lisää sisällöntuottaja"
 
-#: app\components/frontPage.html:57
+#: app\components/frontPage.html:59
 msgid "Add library"
 msgstr "Lisää tietokomponenttikirjasto"
 
@@ -56,7 +56,7 @@ msgstr ""
 msgid "Add link"
 msgstr "Lisää linkki"
 
-#: app\components/frontPage.html:53
+#: app\components/frontPage.html:55
 msgid "Add model"
 msgstr "Lisää tietomalli"
 
@@ -72,7 +72,7 @@ msgstr "Luo uusi nimiavaruus"
 msgid "Add new profile"
 msgstr "Lisää uusi soveltamisprofiili"
 
-#: app\components/frontPage.html:58
+#: app\components/frontPage.html:60
 msgid "Add profile"
 msgstr "Lisää soveltamisprofiili"
 
@@ -141,7 +141,7 @@ msgstr "Ylläpitäjä"
 msgid "Admin groups"
 msgstr "Pääkäyttäjänä ryhmissä"
 
-#: app\components/advancedSearchModal.html:4 app\components/frontPage.html:14
+#: app\components/advancedSearchModal.html:4 app\components/frontPage.html:16
 msgid "Advanced search"
 msgstr "Tarkennettu haku"
 
@@ -537,7 +537,7 @@ msgstr "Luokkaa voidaan muokata täältä"
 msgid "Classes can be seen visually here"
 msgstr "Luokat ja niiden väliset assosiaatiot näkyvät visuaalisesti täällä"
 
-#: app\components/frontPage.html:22
+#: app\components/frontPage.html:24
 msgid "Classification"
 msgstr "Luokitus"
 
@@ -1577,7 +1577,7 @@ msgstr "Sallitun arvon minimipituus"
 msgid "Minimize"
 msgstr "Pienennä"
 
-#: app\components/frontPage.html:71 translations/misc.html:33
+#: app\components/frontPage.html:73 translations/misc.html:33
 msgid "model"
 msgstr "Tietokomponenttikirjasto"
 
@@ -1596,7 +1596,7 @@ msgstr ""
 msgid "Model not found"
 msgstr " Mallia ei löydy"
 
-#: app\components/frontPage.html:72
+#: app\components/frontPage.html:74
 msgid "models"
 msgstr "tietomallia"
 
@@ -2071,7 +2071,7 @@ msgstr "Tallenna"
 msgid "Save visualization position"
 msgstr "Visualisoinnin sijaintien tallennus"
 
-#: app\components/frontPage.html:12
+#: app\components/frontPage.html:14
 msgid "Search"
 msgstr "Etsi"
 
@@ -2703,6 +2703,15 @@ msgstr "Ihmisluettava nimi"
 #: translations/misc.html:180
 msgid "to vocabulary"
 msgstr "sanastoon"
+
+#: app\components/frontPage.html:5
+msgid "ToolInfo"
+msgstr ""
+"Tietomallit-työkalu on julkishallinnon organisaatioiden tietomallintajien ja "
+"tietoarkkitehtien työkalu, jolla kuvataan omien järjestelmien tietosisältöjä "
+"ja -rakennetta. Tietomallit-työkalu tekee julkishallinnon julkisten tietojen "
+"loogisesta tietomallityöstä avointa ja julkista, minkä vuoksi tietomallien "
+"hyödyntäminen organisaatiorajojen yli helpottuu."
 
 #: translations/help.html:139
 msgid "Tuote"

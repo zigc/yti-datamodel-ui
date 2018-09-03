@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2018-09-03 11:48+0300\n"
+"PO-Revision-Date: 2018-09-03 15:00+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -41,7 +41,7 @@ msgstr ""
 msgid "Add contributor"
 msgstr ""
 
-#: app\components/frontPage.html:57
+#: app\components/frontPage.html:59
 msgid "Add library"
 msgstr "New Core Vocabulary"
 
@@ -53,7 +53,7 @@ msgstr "Add new Core Vocabulary from here"
 msgid "Add link"
 msgstr ""
 
-#: app\components/frontPage.html:53
+#: app\components/frontPage.html:55
 msgid "Add model"
 msgstr ""
 
@@ -69,7 +69,7 @@ msgstr ""
 msgid "Add new profile"
 msgstr "Add new profile"
 
-#: app\components/frontPage.html:58
+#: app\components/frontPage.html:60
 msgid "Add profile"
 msgstr "New profile"
 
@@ -135,7 +135,7 @@ msgstr ""
 msgid "Admin groups"
 msgstr ""
 
-#: app\components/advancedSearchModal.html:4 app\components/frontPage.html:14
+#: app\components/advancedSearchModal.html:4 app\components/frontPage.html:16
 msgid "Advanced search"
 msgstr ""
 
@@ -521,7 +521,7 @@ msgstr ""
 msgid "Classes can be seen visually here"
 msgstr ""
 
-#: app\components/frontPage.html:22
+#: app\components/frontPage.html:24
 msgid "Classification"
 msgstr ""
 
@@ -1553,7 +1553,7 @@ msgstr "Minimum length of the property value"
 msgid "Minimize"
 msgstr ""
 
-#: app\components/frontPage.html:71 translations/misc.html:33
+#: app\components/frontPage.html:73 translations/misc.html:33
 msgid "model"
 msgstr "Core Vocabulary Library"
 
@@ -1571,7 +1571,7 @@ msgstr ""
 msgid "Model not found"
 msgstr ""
 
-#: app\components/frontPage.html:72
+#: app\components/frontPage.html:74
 msgid "models"
 msgstr ""
 
@@ -2042,7 +2042,7 @@ msgstr ""
 msgid "Save visualization position"
 msgstr ""
 
-#: app\components/frontPage.html:12
+#: app\components/frontPage.html:14
 msgid "Search"
 msgstr ""
 
@@ -2665,6 +2665,12 @@ msgstr "Name of the vocabulary"
 #: translations/misc.html:180
 msgid "to vocabulary"
 msgstr ""
+
+#: app\components/frontPage.html:5
+msgid "ToolInfo"
+msgstr ""
+"The Controlled Vocabularies Tool is a service for creating and managing both "
+"terminological and descriptive glossaries."
 
 #: translations/help.html:139
 msgid "Tuote"
