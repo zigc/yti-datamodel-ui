@@ -8,6 +8,7 @@ import { GraphData } from 'app/types/entity';
 import * as frames from 'app/entities/frames';
 import { Vocabulary, Concept } from 'app/entities/vocabulary';
 import { Model } from 'app/entities/model';
+import { requireDefined } from '../../../node_modules/yti-common-ui/utils/object';
 
 export interface VocabularyService {
   getAllVocabularies(): IPromise<Vocabulary[]>;
@@ -60,7 +61,7 @@ export class DefaultVocabularyService implements VocabularyService {
   }
 
   deserializeConcept(data: GraphData, id: Url): IPromise<Concept> {
-    return this.frameService.frameAndMap(data, true, frames.conceptFrame(data, id), () => Concept);
+    return this.frameService.frameAndMap(data, false, frames.conceptFrame(data, id), () => Concept).then(requireDefined);
   }
 
   deserializeConcepts(data: GraphData): IPromise<Concept[]> {

@@ -140,7 +140,7 @@ export class InteractiveHelpClassService implements ClassService, ResetableServi
     return this.defaultClassService.newClassFromExternal(externalId, model);
   }
 
-  getExternalClass(externalId: Uri, model: Model): IPromise<Class> {
+  getExternalClass(externalId: Uri, model: Model): IPromise<Class|null> {
     return this.defaultClassService.getExternalClass(externalId, model);
   }
 
@@ -184,7 +184,7 @@ export class InteractiveHelpClassService implements ClassService, ResetableServi
     }
   }
 
-  getInternalOrExternalClass(id: Uri, model: Model): IPromise<Class> {
+  getInternalOrExternalClass(id: Uri, model: Model): IPromise<Class|null> {
 
     const resource = this.store.getResourceForAnyModelById(id);
 

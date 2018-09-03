@@ -1,7 +1,7 @@
 import { module as mod } from './module';
 import { Coordinate } from 'app/types/visualization';
 import { IScope } from 'angular';
-import { Optional } from 'yti-common-ui/utils/object';
+import { Optional, requireDefined } from 'yti-common-ui/utils/object';
 import { VisualizationClass } from 'app/entities/visualization';
 import { Model } from 'app/entities/model';
 import { ClassService } from 'app/services/classService';
@@ -76,7 +76,10 @@ class VisualizationContextMenuController {
 
   specializeClass() {
     this.classService.getInternalOrExternalClass(this.target!.target.id, this.model)
-      .then(klass => this.modelPageActions.createShape(klass, klass.external));
+      .then(klassOrNull => {
+        const klass = requireDefined(klassOrNull); // TODO: check if class can actually be null
+        this.modelPageActions.createShape(klass, klass.external)
+      });
   }
 
   dismiss() {

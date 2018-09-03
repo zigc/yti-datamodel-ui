@@ -4,14 +4,14 @@ import {
   createClickNextCondition, createExplicitNextCondition, createExpectedStateNextCondition, createScrollWithElement
 } from 'app/help/contract';
 import { initialInputValue, elementExists, inputHasExactValue, expectAll } from 'app/help/utils';
-import gettextCatalog = angular.gettext.gettextCatalog;
+import GettextCatalog = angular.gettext.gettextCatalog;
 
 export const textSearchElement = (modalParent: () => JQuery) => child(modalParent, 'text-filter input');
 export const searchSelectionElement = (modalParent: () => JQuery) => child(modalParent, '.search-selection');
 export const searchResultsElement = (modalParent: () => JQuery) => child(modalParent, '.search-results');
 
 
-export function filterForSearchResult(modalParent: () => JQuery, label: string, expectedResultId: string, gettextCatalog: gettextCatalog) {
+export function filterForSearchResult(modalParent: () => JQuery, label: string, expectedResultId: string, gettextCatalog: GettextCatalog) {
 
   const filterForSearchResultTextSearchElement = textSearchElement(modalParent);
 
@@ -49,7 +49,7 @@ export function selectSearchResult(modalParent: () => JQuery, label: string, res
   });
 }
 
-export function filterForAddNewResult(modalParent: () => JQuery, searchFor: string, gettextCatalog: gettextCatalog, searchType: string) {
+export function filterForAddNewResult(modalParent: () => JQuery, searchFor: string, gettextCatalog: GettextCatalog, searchType: string) {
 
   const filterForAddNewElement = textSearchElement(modalParent);
   const addNewResultsElements = first(child(modalParent, '.search-result.add-new'));

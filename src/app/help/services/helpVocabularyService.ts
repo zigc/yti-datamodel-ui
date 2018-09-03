@@ -12,6 +12,7 @@ import { Url } from '../../entities/uri';
 import { FrameService } from '../../services/frameService';
 import { Localizable } from 'yti-common-ui/types/localization';
 import { v4 as uuid } from 'node-uuid';
+import { requireDefined } from '../../../../node_modules/yti-common-ui/utils/object';
 
 const context = {
   prefLabel : { '@id' : 'http://www.w3.org/2004/02/skos/core#prefLabel' },
@@ -121,7 +122,7 @@ export class InteractiveHelpVocabularyService implements VocabularyService, Rese
   }
 
   getConcept(id: Uri): IPromise<Concept> {
-    return this.$q.when(this.conceptStore.findFirst(cs => cs.id.equals(id)));
+    return this.$q.when(requireDefined(this.conceptStore.findFirst(cs => cs.id.equals(id))));
   }
 
   private addConcept(vocabulary: Vocabulary, label: Localizable, definition: Localizable): IPromise<Concept> {
@@ -142,10 +143,10 @@ export class InteractiveHelpVocabularyService implements VocabularyService, Rese
   }
 
   private deserializeConcept(data: GraphData, id: Url): IPromise<Concept> {
-    return this.frameService.frameAndMap(data, false, frames.conceptFrame(data, id), () => Concept);
+    return this.frameService.frameAndMap(data, false, frames.conceptFrame(data, id), () => Concept).then(requireDefined);
   }
 
   private deserializeVocabulary(data: GraphData): IPromise<Vocabulary> {
-    return this.frameService.frameAndMap(data, false, frames.vocabularyFrame(data), () => Vocabulary);
+    return this.frameService.frameAndMap(data, false, frames.vocabularyFrame(data), () => Vocabulary).then(requireDefined);
   }
 }

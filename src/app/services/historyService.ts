@@ -5,6 +5,7 @@ import { GraphData } from 'app/types/entity';
 import { FrameService } from './frameService';
 import * as frames from 'app/entities/frames';
 import { Activity } from 'app/entities/version';
+import { requireDefined } from '../../../node_modules/yti-common-ui/utils/object';
 
 export class HistoryService {
 
@@ -18,6 +19,6 @@ export class HistoryService {
   }
 
   private deserializeVersion(data: GraphData): IPromise<Activity> {
-    return this.frameService.frameAndMap(data, true, frames.versionFrame(data), () => Activity);
+    return this.frameService.frameAndMap(data, false, frames.versionFrame(data), () => Activity).then(requireDefined);
   }
 }

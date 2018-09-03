@@ -1,10 +1,10 @@
 import { IScope, IAttributes, INgModelController, IModelValidators } from 'angular';
-import gettextCatalog = angular.gettext.gettextCatalog;
+import GettextCatalog = angular.gettext.gettextCatalog;
 import { isValidLanguageCode } from './validators';
 import { module as mod } from './module';
 import { LanguageService } from 'app/services/languageService';
 
-export function placeholderText(gettextCatalog: gettextCatalog) {
+export function placeholderText(gettextCatalog: GettextCatalog) {
   return gettextCatalog.getString('Input') + ' ' + gettextCatalog.getString('language code') + '...';
 }
 
@@ -12,7 +12,7 @@ export function createValidators(): IModelValidators {
   return { languageCode: isValidLanguageCode };
 }
 
-mod.directive('languageInput', /* @ngInject */ (languageService: LanguageService, gettextCatalog: gettextCatalog) => {
+mod.directive('languageInput', /* @ngInject */ (languageService: LanguageService, gettextCatalog: GettextCatalog) => {
   return {
     scope: {
       model: '='

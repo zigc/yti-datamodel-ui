@@ -1,5 +1,5 @@
 import { IScope, IAttributes, INgModelController, IModelValidators } from 'angular';
-import gettextCatalog = angular.gettext.gettextCatalog;
+import GettextCatalog = angular.gettext.gettextCatalog;
 import { isValidUri, isValidUrl, isValidUriStem } from './validators';
 import { Uri } from 'app/entities/uri';
 import { module as mod } from './module';
@@ -13,7 +13,7 @@ interface UriInputAttributes extends IAttributes {
   uriInput: UriInputType;
 }
 
-export function placeholderText(uriInputType: UriInputType, gettextCatalog: gettextCatalog) {
+export function placeholderText(uriInputType: UriInputType, gettextCatalog: GettextCatalog) {
   switch (uriInputType) {
     case 'free-url':
       return gettextCatalog.getString('Write URL');
@@ -70,7 +70,7 @@ export function createValidators(type: UriInputType, withNamespacesProvider: () 
   return result;
 }
 
-mod.directive('uriInput', /* @ngInject */ (languageService: LanguageService, gettextCatalog: gettextCatalog) => {
+mod.directive('uriInput', /* @ngInject */ (languageService: LanguageService, gettextCatalog: GettextCatalog) => {
   return {
     scope: {
       model: '='

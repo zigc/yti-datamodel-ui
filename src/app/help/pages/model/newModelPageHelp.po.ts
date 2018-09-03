@@ -4,7 +4,7 @@ import { createStory, createNavigatingClickNextCondition, createExpectedStateNex
 import { editableMargin, initialInputValue, validInput } from 'app/help/utils';
 import { KnownModelType } from 'app/types/entity';
 import { createExplicitNextCondition, createScrollNone } from 'app/help/contract';
-import gettextCatalog = angular.gettext.gettextCatalog;
+import GettextCatalog = angular.gettext.gettextCatalog;
 
 const form = () => angular.element('form');
 
@@ -25,7 +25,7 @@ export function enterModelPrefix(prefix: string) {
   });
 }
 
-export function enterModelLabel(type: KnownModelType, label: string, gettextCatalog: gettextCatalog) {
+export function enterModelLabel(type: KnownModelType, label: string, gettextCatalog: GettextCatalog) {
 
   const title = upperCaseFirst(type) + ' label';
   const enterModelLabelElement = editableByTitle(form, title);
@@ -43,7 +43,7 @@ export function enterModelLabel(type: KnownModelType, label: string, gettextCata
   });
 }
 
-export function enterModelComment(initialValue: string, gettextCatalog: gettextCatalog) {
+export function enterModelComment(initialValue: string, gettextCatalog: GettextCatalog) {
 
   const title = 'Description';
   const enterModelCommentElement = editableByTitle(form, title);

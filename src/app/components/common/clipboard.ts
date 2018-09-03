@@ -1,7 +1,7 @@
 import { module as mod } from './module';
 import { IScope, IAttributes, ITimeoutService } from 'angular';
 import { EditableForm } from 'app/components/form/editableEntityController';
-import gettextCatalog = angular.gettext.gettextCatalog;
+import GettextCatalog = angular.gettext.gettextCatalog;
 
 const clipboardImage = require('../../../assets/clippy.svg');
 
@@ -39,7 +39,7 @@ class ClipboardController {
   isEditing: () => boolean;
 
   /* @ngInject */
-  constructor(private gettextCatalog: gettextCatalog, private $timeout: ITimeoutService) {
+  constructor(private gettextCatalog: GettextCatalog, private $timeout: ITimeoutService) {
   }
 
   get copyInfo() {

@@ -40,9 +40,9 @@ export class EmptyUsage implements Usage {
   label: Localizable;
   referrers: Referrer[] = [];
 
-  constructor(entity: EditableEntity) {
-    this.id = entity.id;
-    this.label = entity.label;
+  constructor(editableEntity: EditableEntity) {
+    this.id = editableEntity.id;
+    this.label = editableEntity.label;
   }
 }
 

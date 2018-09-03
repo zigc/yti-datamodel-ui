@@ -1,7 +1,7 @@
 import { IPromise, ui } from 'angular';
 import IModalService = ui.bootstrap.IModalService;
 import IModalServiceInstance = ui.bootstrap.IModalServiceInstance;
-import gettextCatalog = angular.gettext.gettextCatalog;
+import GettextCatalog = angular.gettext.gettextCatalog;
 import { LanguageService } from 'app/services/languageService';
 import { Property, Class } from 'app/entities/class';
 import { anyMatching, flatten, groupBy } from 'yti-common-ui/utils/array';
@@ -39,7 +39,7 @@ export class AddPropertiesFromClassModalController {
   /* @ngInject */
   constructor(private $uibModalInstance: IModalServiceInstance,
               public languageService: LanguageService,
-              private gettextCatalog: gettextCatalog,
+              private gettextCatalog: GettextCatalog,
               klass: Class,
               public classType: string,
               public model: Model,

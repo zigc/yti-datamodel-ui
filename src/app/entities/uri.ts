@@ -22,8 +22,8 @@ export class Uri {
     }
   }
 
-  static fromUUID(uuid: string) {
-    return new Uri(uuidUrnPrefix + uuid, {});
+  static fromUUID(uuidStr: string) {
+    return new Uri(uuidUrnPrefix + uuidStr, {});
   }
 
   static randomUUID() {

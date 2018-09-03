@@ -33,10 +33,10 @@ export interface ClassService {
   newClass(model: Model, classLabel: string, conceptID: Uri|null, lang: Language): IPromise<Class>;
   newShape(classOrExternal: Class|ExternalEntity, profile: Model, external: boolean, lang: Language): IPromise<Class>;
   newClassFromExternal(externalId: Uri, model: Model): IPromise<Class>;
-  getExternalClass(externalId: Uri, model: Model): IPromise<Class>;
+  getExternalClass(externalId: Uri, model: Model): IPromise<Class|null>;
   getExternalClassesForModel(model: Model): IPromise<ClassListItem[]>;
   newProperty(predicateOrExternal: Predicate|ExternalEntity, type: KnownPredicateType, model: Model): IPromise<Property>;
-  getInternalOrExternalClass(id: Uri, model: Model): IPromise<Class>;
+  getInternalOrExternalClass(id: Uri, model: Model): IPromise<Class|null>;
 }
 
 export class DefaultClassService implements ClassService {
@@ -50,7 +50,8 @@ export class DefaultClassService implements ClassService {
   getClass(id: Uri|Urn, model: Model): IPromise<Class> {
     return this.$http.get<GraphData>(config.apiEndpointWithName('class'), {params: {id: id.toString()}})
       .then(expandContextWithKnownModels(model))
-      .then(response => this.deserializeClass(response.data!, false));
+      .then(response => this.deserializeClass(response.data!, false))
+      .then(klass => requireDefined(klass));
   }
 
   getAllClasses(model: Model): IPromise<ClassListItem[]> {
@@ -275,11 +276,11 @@ export class DefaultClassService implements ClassService {
     return this.frameService.frameAndMapArray(data, frames.classListFrame(data), () => ClassListItem);
   }
 
-  private deserializeClass(data: GraphData, optional: boolean): IPromise<Class> {
+  private deserializeClass(data: GraphData, optional: boolean): IPromise<Class|null> {
     return this.frameService.frameAndMap(data, optional, frames.classFrame(data), () => Class);
   }
 
-  private deserializeProperty(data: GraphData, optional: boolean): IPromise<Property> {
+  private deserializeProperty(data: GraphData, optional: boolean): IPromise<Property|null> {
     return this.frameService.frameAndMap(data, optional, frames.propertyFrame(data), () => Property);
   }
 }

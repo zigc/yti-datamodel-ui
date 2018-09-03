@@ -28,7 +28,7 @@ export class Activity extends GraphNode {
   constructor(graph: any, context: any, frame: any) {
     super(graph, context, frame);
     init(this, Activity.activityMappings);
-    this.versions = this.versions.sort(comparingDate<Entity>(entity => entity.createdAt));
+    this.versions = this.versions.sort(comparingDate<Entity>(e => e.createdAt));
     this.versionIndex = idToIndexMap(this.versions);
   }
 

@@ -1,5 +1,5 @@
 import { User } from 'app/entities/user';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
 export interface UserService {
   user: User;

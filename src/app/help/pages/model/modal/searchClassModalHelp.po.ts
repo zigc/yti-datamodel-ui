@@ -6,16 +6,16 @@ import {
 import { modal, child } from 'app/help/selectors';
 import { classIdFromNamespaceId } from 'app/help/utils';
 import * as SearchConceptModal from './searchConceptModalHelp.po';
-import gettextCatalog = angular.gettext.gettextCatalog;
+import GettextCatalog = angular.gettext.gettextCatalog;
 import { Story } from 'app/help/contract';
 
 const searchClassModal = child(modal, '.search-class');
 
-export function filterForClass(namespaceId: string, className: string, gettextCatalog: gettextCatalog) {
+export function filterForClass(namespaceId: string, className: string, gettextCatalog: GettextCatalog) {
   return filterForSearchResult(searchClassModal, className, classIdFromNamespaceId(namespaceId, className), gettextCatalog);
 }
 
-export function filterForNewClass(className: string, gettextCatalog: gettextCatalog) {
+export function filterForNewClass(className: string, gettextCatalog: GettextCatalog) {
   return filterForAddNewResult(searchClassModal, className, gettextCatalog, 'class');
 }
 
@@ -38,7 +38,7 @@ export function findAndSelectExistingClassItems(namespaceId: string, className: 
   ];
 }
 
-export function findAndCreateNewBasedOnConceptSuggestionItems(name: string, comment: string, gettextCatalog: gettextCatalog): Story[] {
+export function findAndCreateNewBasedOnConceptSuggestionItems(name: string, comment: string, gettextCatalog: GettextCatalog): Story[] {
   return [
     filterForNewClass(name, gettextCatalog),
     selectAddNewClassSearchResult,

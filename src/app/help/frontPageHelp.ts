@@ -2,7 +2,7 @@ import { ILocationService, ui } from 'angular';
 import IModalStackService = ui.bootstrap.IModalStackService;
 import { createNotification, InteractiveHelp, Story, StoryLine, Notification } from './contract';
 import { KnownModelType } from 'app/types/entity';
-import gettextCatalog = angular.gettext.gettextCatalog;
+import GettextCatalog = angular.gettext.gettextCatalog;
 import * as FrontPage from './pages/frontPageHelp.po';
 import * as NewModelPage from './pages/model/newModelPageHelp.po';
 import * as ModelPage from './pages/model/modelPageHelp.po';
@@ -17,7 +17,7 @@ import { EntityLoaderService } from '../services/entityLoader';
 import { InteractiveHelpService } from './services/interactiveHelpService';
 import { ModelService } from '../services/modelService';
 
-function createNewLibraryItems(gettextCatalog: gettextCatalog): Story[] {
+function createNewLibraryItems(gettextCatalog: GettextCatalog): Story[] {
 
   return [
     ...FrontPage.startModelCreation('library'),
@@ -51,7 +51,7 @@ function createNewLibraryItems(gettextCatalog: gettextCatalog): Story[] {
   ];
 }
 
-function createNewProfileItems(gettextCatalog: gettextCatalog): Story[] {
+function createNewProfileItems(gettextCatalog: GettextCatalog): Story[] {
 
   return [
     ...FrontPage.startModelCreation('profile'),
@@ -87,7 +87,7 @@ export function finishedCreateNewModelNotification(type: KnownModelType): Notifi
   });
 }
 
-function createNewModel(type: KnownModelType, gettextCatalog: gettextCatalog): StoryLine {
+function createNewModel(type: KnownModelType, gettextCatalog: GettextCatalog): StoryLine {
   return {
     title: `Guide through creating new ${type}`,
     description: `Guide through creating new ${type} description`,
@@ -103,7 +103,7 @@ export class FrontPageHelpService {
   /* @ngInject */
   constructor(private $uibModalStack: IModalStackService,
               private $location: ILocationService,
-              private gettextCatalog: gettextCatalog,
+              private gettextCatalog: GettextCatalog,
               private modelService: ModelService,
               private entityLoaderService: EntityLoaderService) {
   }

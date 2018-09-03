@@ -83,11 +83,11 @@ function index<T extends {id: string}>(items: T[]): Map<string, T> {
 const allElementScaleCorrection = 20;
 
 function hash(str: string) {
-  let hash = 0;
+  let result = 0;
   for (let i = 0; i < str.length; i++) {
-    hash = ((hash << 5) - hash) + str.charCodeAt(i);
+    result = ((result << 5) - result) + str.charCodeAt(i);
   }
-  return hash % 47;
+  return result % 47;
 }
 
 export function layout(graph: joint.dia.Graph, onlyNodeIds: string[] = []): Promise<any> {
@@ -134,7 +134,7 @@ export function layout(graph: joint.dia.Graph, onlyNodeIds: string[] = []): Prom
   }
 
   return new Promise((resolve) => {
-    const layout = new SimpleColaLayout(Array.from(nodes.values()), links, onlyNodeIds.length === 0, () => {
+    const colaLayout = new SimpleColaLayout(Array.from(nodes.values()), links, onlyNodeIds.length === 0, () => {
 
       if (onlyNodeIds.length > 0) {
         for (const nodeId of onlyNodeIds) {
@@ -152,9 +152,9 @@ export function layout(graph: joint.dia.Graph, onlyNodeIds: string[] = []): Prom
           element.position(normalizedX, normalizedY);
         });
       }
-      resolve(layout.tickCount);
+      resolve(colaLayout.tickCount);
     });
 
-    layout.start(30, 0, 30, 0);
+    colaLayout.start(30, 0, 30, 0);
   });
 }

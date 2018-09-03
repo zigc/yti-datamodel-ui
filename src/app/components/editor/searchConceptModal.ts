@@ -1,7 +1,7 @@
 import { IScope, IPromise, IQService, ui } from 'angular';
 import IModalService = ui.bootstrap.IModalService;
 import IModalServiceInstance = ui.bootstrap.IModalServiceInstance;
-import gettextCatalog = angular.gettext.gettextCatalog;
+import GettextCatalog = angular.gettext.gettextCatalog;
 import { LanguageService, Localizer } from 'app/services/languageService';
 import { comparingLocalizable } from 'app/utils/comparator';
 import { EditableForm } from 'app/components/form/editableEntityController';
@@ -71,11 +71,11 @@ export class SearchConceptModal {
   }
 
   openSelection(vocabularies: Vocabulary[], model: Model, allowSuggestions: boolean, type?: ClassType|KnownPredicateType): IPromise<Concept> {
-    return this.open(vocabularies, model, type || null, allowSuggestions, false, '');
+    return this.open(vocabularies, model, type || null, allowSuggestions, false, '') as IPromise<Concept>;
   }
 
   openNewEntityCreation(vocabularies: Vocabulary[], model: Model, type: ClassType|KnownPredicateType, initialSearch: string): IPromise<EntityCreation> {
-    return this.open(vocabularies, model, type, true, true, initialSearch);
+    return this.open(vocabularies, model, type, true, true, initialSearch) as IPromise<EntityCreation>;
   }
 }
 
@@ -128,7 +128,7 @@ class SearchConceptController implements SearchController<Concept> {
               vocabularies: Vocabulary[],
               public model: Model,
               private vocabularyService: VocabularyService,
-              private gettextCatalog: gettextCatalog) {
+              private gettextCatalog: GettextCatalog) {
 
     this.localizer = languageService.createLocalizer(model);
     this.defineConceptTitle = type ? `Define concept for the ${newEntityCreation ? 'new ' : ''}${type}` : 'Search concept';

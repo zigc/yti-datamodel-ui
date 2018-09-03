@@ -1,5 +1,5 @@
 import { module as mod } from './module';
-import gettextCatalog = angular.gettext.gettextCatalog;
+import GettextCatalog = angular.gettext.gettextCatalog;
 import { EditableForm } from 'app/components/form/editableEntityController';
 import { INgModelController, IScope, IAttributes } from 'angular';
 import { DataType, dataTypes } from 'app/entities/dataTypes';
@@ -48,9 +48,9 @@ class RangeSelectController {
   range: DataType;
   ranges: DataType[] = dataTypes;
   isEditing: () => boolean;
-  displayNameFormatter = (value: string, gettextCatalog: gettextCatalog) => value ? `${gettextCatalog.getString(value)} (${value})` : '';
+  displayNameFormatter = (value: string, gettextCatalog: GettextCatalog) => value ? `${gettextCatalog.getString(value)} (${value})` : '';
 
-  constructor(private gettextCatalog: gettextCatalog) {
+  constructor(private gettextCatalog: GettextCatalog) {
   }
 
   get displayName() {

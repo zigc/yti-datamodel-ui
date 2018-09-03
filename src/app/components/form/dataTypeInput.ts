@@ -1,6 +1,6 @@
 import { module as mod } from './module';
 import { IAttributes, IScope, IQService, INgModelController } from 'angular';
-import gettextCatalog = angular.gettext.gettextCatalog;
+import GettextCatalog = angular.gettext.gettextCatalog;
 import { resolveValidator } from './validators';
 import { LanguageService } from 'app/services/languageService';
 import { createAsyncValidators } from './codeValueInput';
@@ -9,7 +9,7 @@ import { isUpperCase } from 'change-case';
 import { DataType } from 'app/entities/dataTypes';
 import { ReferenceData } from 'app/entities/referenceData';
 
-export function placeholderText(dataType: DataType, gettextCatalog: gettextCatalog) {
+export function placeholderText(dataType: DataType, gettextCatalog: GettextCatalog) {
   const validator = resolveValidator(dataType);
   const localization = gettextCatalog.getString(dataType);
   const placeholder = gettextCatalog.getString('Input') + ' ' + (isUpperCase(localization) ? localization : localization.toLowerCase()) + '...';
@@ -21,7 +21,7 @@ interface DatatypeInputScope extends IScope {
   referenceData: ReferenceData[];
 }
 
-mod.directive('datatypeInput', /* @ngInject */ ($q: IQService, referenceDataService: ReferenceDataService, languageService: LanguageService, gettextCatalog: gettextCatalog) => {
+mod.directive('datatypeInput', /* @ngInject */ ($q: IQService, referenceDataService: ReferenceDataService, languageService: LanguageService, gettextCatalog: GettextCatalog) => {
   return {
     restrict: 'EA',
     scope: {

@@ -1,5 +1,5 @@
 import { IScope } from 'angular';
-import gettextCatalog = angular.gettext.gettextCatalog;
+import GettextCatalog = angular.gettext.gettextCatalog;
 import { LanguageService } from 'app/services/languageService';
 import { isLocalizationDefined } from 'app/utils/language';
 import { module as mod } from './module';
@@ -23,7 +23,7 @@ class ModelLanguageChooserController {
   context: LanguageContext;
 
   /* @ngInject */
-  constructor($scope: IScope, private languageService: LanguageService, private gettextCatalog: gettextCatalog) {
+  constructor($scope: IScope, private languageService: LanguageService, private gettextCatalog: GettextCatalog) {
     $scope.$watchCollection(() => this.context && this.context.language, languages => {
       if (languages && languages.indexOf(languageService.getModelLanguage(this.context)) === -1) {
         languageService.setModelLanguage(this.context, this.context.language[0]);

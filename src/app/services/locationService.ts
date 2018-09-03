@@ -11,7 +11,8 @@ export interface Location {
 const frontPage = { localizationKey: 'Front page', iowUrl: () => '/' };
 
 export class LocationService {
-  location: Location = [frontPage];
+
+  location: Location[] = [frontPage];
 
   private changeLocation(location: Location[]): void {
     location.unshift(frontPage);

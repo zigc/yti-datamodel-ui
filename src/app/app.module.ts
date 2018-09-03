@@ -16,7 +16,6 @@ import { module as helpModule } from './help';
 import { BrowserModule } from '@angular/platform-browser';
 import { downgradeComponent, downgradeInjectable, UpgradeModule } from '@angular/upgrade/static';
 import { NgModule, NgZone } from '@angular/core';
-import { HttpModule } from '@angular/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { YtiCommonModule } from 'yti-common-ui';
 import { config } from 'config';
@@ -25,8 +24,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {
   MissingTranslationHandler, MissingTranslationHandlerParams, TranslateLoader, TranslateModule,
   TranslateService
-} from 'ng2-translate';
-import { Observable } from 'rxjs/Observable';
+} from '@ngx-translate/core';
+import { of } from 'rxjs';
 import { availableUILanguages } from './types/language';
 
 import { LoginModalService } from 'yti-common-ui/components/login-modal.component';
@@ -45,6 +44,7 @@ import { StatusComponent } from 'yti-common-ui/components/status.component';
 import { DropdownComponent } from 'yti-common-ui/components/dropdown.component';
 import { UseContextDropdownComponent } from './components/model/use-context-dropdown.component';
 import { UseContextInputComponent } from './components/form/use-context-input.component';
+import { HttpClientModule } from '@angular/common/http';
 
 require('angular-gettext');
 require('checklist-model');
@@ -68,7 +68,7 @@ export function resolveAuthenticatedUserEndpoint() {
 export function createTranslateLoader(): TranslateLoader {
   return {
     getTranslation: (lang: string) => {
-      return Observable.of(localizationStrings[lang])
+      return of(localizationStrings[lang])
     }
   };
 }
@@ -90,14 +90,18 @@ export function createMissingTranslationHandler(): MissingTranslationHandler {
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpModule,
+    HttpClientModule,
     UpgradeModule,
     YtiCommonModule,
-    TranslateModule.forRoot({ provide: TranslateLoader, useFactory: createTranslateLoader }),
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: createTranslateLoader
+      }
+    }),
     NgbModule.forRoot(),
   ],
-  declarations: [    
-    StatusComponent, // FIXME should be declared in YtiCommonModule
+  declarations: [
     UseContextDropdownComponent,
     UseContextInputComponent
   ],

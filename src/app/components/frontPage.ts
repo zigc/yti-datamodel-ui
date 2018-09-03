@@ -10,22 +10,21 @@ import { ModelService } from 'app/services/modelService';
 import { ModelListItem } from 'app/entities/model';
 import { ClassificationService } from '../services/classificationService';
 import { Classification } from 'app/entities/classification';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Url } from 'app/entities/uri';
-import { Observable } from 'rxjs/Observable';
 import { comparingLocalizable } from 'app/utils/comparator';
-import { Subscription } from 'rxjs/Subscription';
+import { BehaviorSubject, Subscription, combineLatest } from 'rxjs';
 import { fromIPromise } from 'app/utils/observable';
 import { anyMatching } from 'yti-common-ui/utils/array';
 import { matches } from 'yti-common-ui/utils/string';
 import { forwardRef } from '@angular/core';
 import { FilterOptions } from 'yti-common-ui/components/filter-dropdown.component';
 import { KnownModelType } from '../types/entity';
-import gettextCatalog = angular.gettext.gettextCatalog;
+import GettextCatalog = angular.gettext.gettextCatalog;
 import { OrganizationService } from '../services/organizationService';
 import { AuthorizationManagerService } from 'app/services/authorizationManagerService';
 import { Organization } from '../entities/organization';
 import { labelNameToResourceIdIdentifier } from 'yti-common-ui/utils/resource';
+import { tap } from 'rxjs/operators';
 
 export const component: ComponentDeclaration = {
   selector: 'frontPage',
@@ -62,7 +61,7 @@ export class FrontPageController implements HelpProvider {
               locationService: LocationService,
               modelService: ModelService,
               languageService: LanguageService,
-              gettextCatalog: gettextCatalog,
+              gettextCatalog: GettextCatalog,
               private advancedSearchModal: AdvancedSearchModal,
               private frontPageHelpService: FrontPageHelpService,
               classificationService: ClassificationService,
@@ -91,7 +90,7 @@ export class FrontPageController implements HelpProvider {
       });
     });
 
-    const models$ = fromIPromise(modelService.getModels()).do(() => this.modelsLoaded = true);
+    const models$ = fromIPromise(modelService.getModels()).pipe(tap(() => this.modelsLoaded = true));
     const classifications$ = fromIPromise(classificationService.getClassifications());
 
     function searchMatches(search: string, model: ModelListItem) {
@@ -110,7 +109,7 @@ export class FrontPageController implements HelpProvider {
       return !org || anyMatching(model.contributors, modelOrg => modelOrg.id.equals(org.id));
     }
 
-    this.subscriptionsToClean.push(Observable.combineLatest(classifications$, models$, this.search$, this.modelType$, this.organization$, languageService.language$)
+    this.subscriptionsToClean.push(combineLatest(classifications$, models$, this.search$, this.modelType$, this.organization$, languageService.language$)
       .subscribe(([classifications, models, search, modelType, org]) => {
 
         const matchingVocabularies = models.filter(model =>
@@ -126,7 +125,7 @@ export class FrontPageController implements HelpProvider {
         this.classifications.sort(comparingLocalizable<{ node: Classification, count: number }>(localizer, c => c.node.label));        
       }));
 
-    this.subscriptionsToClean.push(Observable.combineLatest(models$, this.search$, this.classification$, this.modelType$, this.organization$, languageService.language$)
+    this.subscriptionsToClean.push(combineLatest(models$, this.search$, this.classification$, this.modelType$, this.organization$, languageService.language$)
       .subscribe(([models, search, classification, modelType, org]) => {
 
         this.filteredModels = models.filter(model =>

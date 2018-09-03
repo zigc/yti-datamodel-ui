@@ -149,8 +149,8 @@ const modelPositionContext = Object.assign({}, coreContext, {
 
 const searchResultContext = Object.assign({}, coreContext, modelContext, {});
 
-function frame(data: any, context: {}, frame?: {}) {
-  return Object.assign({ '@context': Object.assign({}, data['@context'], context) }, frame);
+function frame(data: any, context: {}, frameObj?: {}) {
+  return Object.assign({ '@context': Object.assign({}, data['@context'], context) }, frameObj);
 }
 
 export function modelFrame(data: any, options: { id?: Uri|Urn, prefix?: string } = {}) {

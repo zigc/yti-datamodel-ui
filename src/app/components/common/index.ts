@@ -1,7 +1,7 @@
 import { module as mod } from './module';
 export { module } from './module'
 import { ISCEService } from 'angular';
-import gettextCatalog = angular.gettext.gettextCatalog;
+import GettextCatalog = angular.gettext.gettextCatalog;
 import { Moment } from 'moment';
 import { ConfirmationModal } from './confirmationModal';
 import { DeleteConfirmationModal } from './deleteConfirmationModal';
@@ -57,7 +57,7 @@ mod.filter('trustAsHtml', /* @ngInject */ ($sce: ISCEService) => {
   return (text: string) => $sce.trustAsHtml(text);
 });
 
-mod.filter('localizedDate', /* @ngInject */ (gettextCatalog: gettextCatalog) => {
+mod.filter('localizedDate', /* @ngInject */ (gettextCatalog: GettextCatalog) => {
   return (moment: Moment) => {
     if (moment) {
       return moment.format(gettextCatalog.getString('date format'));

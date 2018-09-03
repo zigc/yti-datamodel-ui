@@ -4,7 +4,7 @@ import {
 } from 'app/help/contract';
 import { child } from 'app/help/selectors';
 import { KnownModelType } from 'app/types/entity';
-import gettextCatalog = angular.gettext.gettextCatalog;
+import GettextCatalog = angular.gettext.gettextCatalog;
 import * as SearchNamespaceModal from './modal/searchNamepaceModalHelp.po';
 import * as SearchVocabularyModal from './modal/searchVocabularyModalHelp.po';
 
@@ -76,7 +76,7 @@ export const focusVocabularies = createStory({
   nextCondition: createExplicitNextCondition()
 });
 
-export function addNamespaceItems(ns: { prefix: string, namespaceId: string }, gettextCatalog: gettextCatalog): Story[] {
+export function addNamespaceItems(ns: { prefix: string, namespaceId: string }, gettextCatalog: GettextCatalog): Story[] {
   return [
     requireNamespace,
     SearchNamespaceModal.filterForModel(ns.prefix, ns.namespaceId, gettextCatalog),
@@ -85,7 +85,7 @@ export function addNamespaceItems(ns: { prefix: string, namespaceId: string }, g
   ];
 }
 
-export function addVocabularyItems(vocabulary: { name: string, id: string }, gettextCatalog: gettextCatalog): Story[] {
+export function addVocabularyItems(vocabulary: { name: string, id: string }, gettextCatalog: GettextCatalog): Story[] {
   return [
     addVocabulary,
     SearchVocabularyModal.filterForVocabulary(vocabulary.name, vocabulary.id, gettextCatalog),

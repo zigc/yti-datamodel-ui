@@ -16,14 +16,14 @@ import {
   ClassDetails
 } from 'app/services/entityLoader';
 import { InteractiveHelpService } from './services/interactiveHelpService';
-import gettextCatalog = angular.gettext.gettextCatalog;
+import GettextCatalog = angular.gettext.gettextCatalog;
 import { availableUILanguages } from 'app/types/language';
 import * as ClassForm from './pages/model/classFormHelp.po';
 import * as VisualizationView from './pages/model/visualizationViewHelp.po';
 import { Attribute } from 'app/entities/predicate';
 import { Localizable } from 'yti-common-ui/types/localization';
 
-function addNamespace(type: KnownModelType, data: { prefix: string, namespaceId: string }, gettextCatalog: gettextCatalog): StoryLine {
+function addNamespace(type: KnownModelType, data: { prefix: string, namespaceId: string }, gettextCatalog: GettextCatalog): StoryLine {
   return {
     title: 'Guide through requiring a namespace',
     description: 'This tutorial shows how to import new namespace to the model',
@@ -39,7 +39,7 @@ function addNamespace(type: KnownModelType, data: { prefix: string, namespaceId:
   };
 }
 
-function specializeClass(klass: { namespaceId: string, name: string, properties: string[] }, gettextCatalog: gettextCatalog): StoryLine {
+function specializeClass(klass: { namespaceId: string, name: string, properties: string[] }, gettextCatalog: GettextCatalog): StoryLine {
   return {
     title: 'Guide through specializing a class',
     description: 'This tutorial shows how to create a new shape from a class',
@@ -52,7 +52,7 @@ function specializeClass(klass: { namespaceId: string, name: string, properties:
   };
 }
 
-function assignClass(klass: { namespaceId: string, name: string }, gettextCatalog: gettextCatalog): StoryLine {
+function assignClass(klass: { namespaceId: string, name: string }, gettextCatalog: GettextCatalog): StoryLine {
   return {
     title: 'Guide through assigning class to a library',
     description: 'This tutorial shows how to add Class from existing library',
@@ -68,7 +68,7 @@ function assignClass(klass: { namespaceId: string, name: string }, gettextCatalo
 function addAttribute(modelPrefix: string,
                       className: string,
                       predicate: { type: KnownPredicateType, namespaceId: string, name: string },
-                      gettextCatalog: gettextCatalog): StoryLine {
+                      gettextCatalog: GettextCatalog): StoryLine {
   return {
     title: 'Guide through adding an attribute',
     description: 'This tutorial shows how to add new attribute',
@@ -86,7 +86,7 @@ function addAttribute(modelPrefix: string,
 
 function createNewClass(klass: { name: string, comment: string },
                         propertyByExistingPredicate: { type: KnownPredicateType, namespaceId: string, name: string },
-                        gettextCatalog: gettextCatalog): StoryLine {
+                        gettextCatalog: GettextCatalog): StoryLine {
   return {
     title: 'Guide through creating a class',
     description: 'This tutorial shows how to create a new Class',
@@ -122,7 +122,7 @@ export class ModelPageHelpService {
   constructor(private $uibModalStack: IModalStackService,
               private $location: ILocationService,
               private entityLoaderService: EntityLoaderService,
-              private gettextCatalog: gettextCatalog) {
+              private gettextCatalog: GettextCatalog) {
   }
 
   private asLocalizable(key: string) {

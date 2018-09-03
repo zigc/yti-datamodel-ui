@@ -1,5 +1,5 @@
 import { IAttributes, IScope } from 'angular';
-import gettextCatalog = angular.gettext.gettextCatalog;
+import GettextCatalog = angular.gettext.gettextCatalog;
 import { EditableForm } from './editableEntityController';
 import { LanguageService } from 'app/services/languageService';
 import { isLocalizationDefined } from 'app/utils/language';
@@ -41,7 +41,7 @@ class EditableLabelController {
   infoText: string;
 
   /* @ngInject */
-  constructor($scope: IScope, gettextCatalog: gettextCatalog, languageService: LanguageService) {
+  constructor($scope: IScope, gettextCatalog: GettextCatalog, languageService: LanguageService) {
     const key = this.title + ' info';
     $scope.$watch(() => languageService.UILanguage, () => {
       const infoText = gettextCatalog.getString(key);

@@ -33,7 +33,6 @@ export class UseContextInputComponent implements ControlValueAccessor {
   control = new FormControl();
 
   private propagateChange: (fn: any) => void = () => {};
-  private propagateTouched: (fn: any) => void = () => {};
 
   constructor() {
     this.control.valueChanges.subscribe(x => this.propagateChange(x));
@@ -56,6 +55,5 @@ export class UseContextInputComponent implements ControlValueAccessor {
   }
 
   registerOnTouched(fn: any): void {
-    this.propagateTouched = fn;
   }
 }

@@ -1,5 +1,5 @@
 import { IAttributes, IScope, ITranscludeFunction, ICompiledExpression } from 'angular';
-import gettextCatalog = angular.gettext.gettextCatalog;
+import GettextCatalog = angular.gettext.gettextCatalog;
 import { ConfirmationModal } from './confirmationModal';
 import { Uri } from 'app/entities/uri';
 import { module as mod } from './module';
@@ -87,7 +87,7 @@ class SearchResultsController<T extends WithId> {
   onSelect: ICompiledExpression;
   editInProgress: () => boolean;
 
-  constructor($scope: IScope, $element: JQuery, private gettextCatalog: gettextCatalog, private confirmationModal: ConfirmationModal) {
+  constructor($scope: IScope, $element: JQuery, private gettextCatalog: GettextCatalog, private confirmationModal: ConfirmationModal) {
     $scope.$watchCollection(() => this.items, items => {
 
       $element.parents('.search-results').animate({ scrollTop: 0 }, 0);

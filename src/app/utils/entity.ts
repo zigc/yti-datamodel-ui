@@ -120,7 +120,7 @@ export function groupUrl(id: string): RelativeUrl {
 }
 
 export function idToIndexMap<T extends {id: Uri }>(items: T[]): Map<Urn, number> {
-  return new Map(items.map<[string, number]>((item: T, index: number) => [item.id.toString(), index]));
+  return new Map(items.map<[string, number]>((item: T, i: number) => [item.id.toString(), i]));
 }
 
 export function coordinatesAreEqual(l: Coordinate|null|undefined, r: Coordinate|null|undefined) {

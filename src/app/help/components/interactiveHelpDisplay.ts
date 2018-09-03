@@ -14,7 +14,7 @@ import {
 import { contains } from 'yti-common-ui/utils/array';
 import { ConfirmationModal } from 'app/components/common/confirmationModal';
 import { moveCursorToEnd, scrollToTop } from 'app/help/utils';
-import gettextCatalog = angular.gettext.gettextCatalog;
+import GettextCatalog = angular.gettext.gettextCatalog;
 import { NgZone } from '@angular/core';
 
 const popupAnimationTimeInMs = 300; // should match css help-popover transition time
@@ -25,7 +25,7 @@ export class InteractiveHelpDisplay {
   /* @ngInject */
   constructor(private overlayService: OverlayService,
               private interactiveHelpService: InteractiveHelpService,
-              private gettextCatalog: gettextCatalog) {
+              private gettextCatalog: GettextCatalog) {
   }
 
   open(help: InteractiveHelp) {

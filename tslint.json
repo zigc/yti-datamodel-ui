@@ -11,10 +11,14 @@
       "check-space"
     ],
     "curly": true,
+    "deprecation": {
+      "severity": "warn"
+    },
     "eofline": true,
     "forin": true,
     "import-blacklist": [
-      true
+      true,
+      "rxjs/Rx"
     ],
     "import-spacing": true,
     "indent": [
@@ -23,16 +27,9 @@
     ],
     "interface-over-type-literal": true,
     "label-position": true,
-    "max-line-length": [
-      true,
-      180
-    ],
     "member-access": false,
-    "member-ordering": [
-      true,
-      "variables-before-functions"
-    ],
     "no-arg": true,
+    "no-bitwise": false,
     "no-console": [
       true,
       "debug",
@@ -58,6 +55,7 @@
     "no-trailing-whitespace": false,
     "no-unnecessary-initializer": true,
     "no-unused-expression": true,
+    "no-use-before-declare": true,
     "no-var-keyword": true,
     "object-literal-sort-keys": false,
     "one-line": [
@@ -73,9 +71,6 @@
       "single"
     ],
     "radix": true,
-    "semicolon": [
-      "always"
-    ],
     "triple-equals": [
       true,
       "allow-null-check"
@@ -90,7 +85,6 @@
         "variable-declaration": "nospace"
       }
     ],
-    "typeof-compare": true,
     "unified-signatures": true,
     "variable-name": false,
     "whitespace": [
@@ -101,29 +95,15 @@
       "check-separator",
       "check-type"
     ],
-    "directive-selector": [
-      true,
-      "attribute",
-      "app",
-      "camelCase"
-    ],
-    "component-selector": [
-      true,
-      ["attribute", "element"],
-      "app",
-      "kebab-case"
-    ],
+    "no-output-on-prefix": true,
     "use-input-property-decorator": true,
     "use-output-property-decorator": true,
     "use-host-property-decorator": true,
-    "no-input-rename": true,
+    "no-input-rename": false,
     "no-output-rename": true,
     "use-life-cycle-interface": true,
     "use-pipe-transform-interface": true,
     "component-class-suffix": true,
-    "directive-class-suffix": true,
-    "no-access-missing-member": false,
-    "templates-use-public": true,
-    "invoke-injectable": true
+    "directive-class-suffix": true
   }
 }

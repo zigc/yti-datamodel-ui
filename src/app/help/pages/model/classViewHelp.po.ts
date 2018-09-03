@@ -6,7 +6,7 @@ import {
 import * as ClassForm from './classFormHelp.po';
 import * as SearchPredicateModal from './modal/searchPredicateModalHelp.po';
 import { KnownPredicateType } from 'app/types/entity';
-import gettextCatalog = angular.gettext.gettextCatalog;
+import GettextCatalog = angular.gettext.gettextCatalog;
 
 export const element = () => angular.element('class-view');
 
@@ -54,7 +54,7 @@ export const addNewProperty = createStory({
 });
 
 export function addPropertyUsingExistingPredicateItems(predicate: { type: KnownPredicateType, namespaceId: string, name: string },
-                                                       gettextCatalog: gettextCatalog): Story[] {
+                                                       gettextCatalog: GettextCatalog): Story[] {
   return [
     addProperty,
     addNewProperty,
@@ -64,7 +64,7 @@ export function addPropertyUsingExistingPredicateItems(predicate: { type: KnownP
 }
 
 export function addPropertyBasedOnSuggestionItems(predicate: { type: KnownPredicateType, searchName: string, name: string, comment: string },
-                                                  gettextCatalog: gettextCatalog): Story[] {
+                                                  gettextCatalog: GettextCatalog): Story[] {
   return [
     addProperty,
     addNewProperty,
@@ -74,7 +74,7 @@ export function addPropertyBasedOnSuggestionItems(predicate: { type: KnownPredic
 }
 
 export function addPropertyBasedOnExistingConceptItems(predicate: { type: KnownPredicateType, searchName: string, name: string, conceptId: string },
-                                                       gettextCatalog: gettextCatalog): Story[] {
+                                                       gettextCatalog: GettextCatalog): Story[] {
   return [
     addProperty,
     addNewProperty,

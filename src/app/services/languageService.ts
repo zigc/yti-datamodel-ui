@@ -2,10 +2,9 @@ import { LanguageContext, UILanguage, Language, availableUILanguages, Localizer 
 import { translate } from 'app/utils/language';
 import { Localizable, Localizer as AngularLocalizer } from 'yti-common-ui/types/localization';
 import { SessionService } from './sessionService';
-import { TranslateService } from 'ng2-translate';
-import { Observable } from 'rxjs/Observable';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import gettextCatalog = angular.gettext.gettextCatalog;
+import { TranslateService } from '@ngx-translate/core';
+import { Observable, BehaviorSubject } from 'rxjs';
+import GettextCatalog = angular.gettext.gettextCatalog;
 
 type Localizer = AngularJSLocalizer;
 export { Localizer };
@@ -17,7 +16,7 @@ export class LanguageService {
   language$: BehaviorSubject<UILanguage>;
 
   /* @ngInject */
-  constructor(private gettextCatalog: gettextCatalog /* AngularJS */,
+  constructor(private gettextCatalog: GettextCatalog /* AngularJS */,
               private translateService: TranslateService /* Angular */,
               public localizationStrings: { [key: string]: { [key: string]: string } },
               private sessionService: SessionService) {

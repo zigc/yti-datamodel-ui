@@ -18,11 +18,12 @@ export function getScale(paper: joint.dia.Paper) {
 }
 
 export function scale(paper: joint.dia.Paper, scaleDiff: number, x?: number, y?: number) {
-  const scale = getScale(paper);
-  const newScale = scale + scaleDiff;
+
+  const paperScale = getScale(paper);
+  const newScale = paperScale + scaleDiff;
 
   if (scale !== newScale && newScale >= minScale && newScale <= maxScale) {
-    const scaleRatio = newScale / scale;
+    const scaleRatio = newScale / paperScale;
 
     const actualX = x || (paper.options.width!) / 2;
     const actualY = y || (paper.options.height!) / 2;
@@ -36,12 +37,12 @@ export function scale(paper: joint.dia.Paper, scaleDiff: number, x?: number, y?:
 }
 
 export function centerToElement(paper: joint.dia.Paper, element: joint.dia.Element) {
-  const scale = 0.8;
+  const centerScale = 0.8;
   const bbox = element.getBBox();
-  const x = ((paper.options.width!) / 2) - (bbox.x + bbox.width / 2) * scale;
-  const y = ((paper.options.height!) / 2) - (bbox.y + bbox.height / 2) * scale;
+  const x = ((paper.options.width!) / 2) - (bbox.x + bbox.width / 2) * centerScale;
+  const y = ((paper.options.height!) / 2) - (bbox.y + bbox.height / 2) * centerScale;
 
-  paper.scale(scale);
+  paper.scale(centerScale);
   paper.setOrigin(x, y);
 }
 
@@ -54,7 +55,7 @@ enum Direction {
 export function scaleToFit(paper: joint.dia.Paper, graph: joint.dia.Graph, onlyVisible: boolean) {
 
   const visibleElements = !onlyVisible ? [] : graph.getElements().filter(e => isVisible(paper, e));
-  const scale = getScale(paper);
+  const paperScale = getScale(paper);
   const padding = 45;
 
   const contentBBox = getContentBBox(paper, graph, visibleElements);
@@ -65,7 +66,7 @@ export function scaleToFit(paper: joint.dia.Paper, graph: joint.dia.Graph, onlyV
     height: paper.options.height! - padding * 2
   };
 
-  const newScale = Math.min(fittingBBox.width / contentBBox.width * scale, fittingBBox.height / contentBBox.height * scale);
+  const newScale = Math.min(fittingBBox.width / contentBBox.width * paperScale, fittingBBox.height / contentBBox.height * paperScale);
 
   paper.scale(Math.max(Math.min(newScale, maxScale), minScale));
   const contentBBoxAfterScaling = getContentBBox(paper, graph, visibleElements);

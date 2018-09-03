@@ -341,7 +341,7 @@ class ClassVisualizationController implements ChangeListener<Class|Predicate>, C
 
   svgToPng(svgBlob: Blob): IPromise<Blob> {
 
-    const deferred = this.$q.defer();
+    const deferred = this.$q.defer<Blob>();
     const canvas = this.canvas;
     const img = new Image();
     img.crossOrigin = 'anonymous';

@@ -1,7 +1,7 @@
 import { IPromise, IScope, ui } from 'angular';
 import IModalService = ui.bootstrap.IModalService;
 import IModalServiceInstance = ui.bootstrap.IModalServiceInstance;
-import gettextCatalog = angular.gettext.gettextCatalog;
+import GettextCatalog = angular.gettext.gettextCatalog;
 import { PredicateService } from 'app/services/predicateService';
 import { SearchConceptModal, EntityCreation } from './searchConceptModal';
 import { LanguageService, Localizer } from 'app/services/languageService';
@@ -20,6 +20,7 @@ import { ExternalEntity } from 'app/entities/externalEntity';
 import { Class, Property } from 'app/entities/class';
 import { filterAndSortSearchResults, defaultLabelComparator } from 'app/components/filter/util';
 import { ignoreModalClose } from 'yti-common-ui/utils/modal';
+import { requireDefined } from '../../../../node_modules/yti-common-ui/utils/object';
 
 const noExclude = (_item: PredicateListItem) => null;
 
@@ -120,7 +121,7 @@ export class SearchPredicateController implements SearchController<PredicateList
               private predicateService: PredicateService,
               languageService: LanguageService,
               private searchConceptModal: SearchConceptModal,
-              private gettextCatalog: gettextCatalog) {
+              private gettextCatalog: GettextCatalog) {
 
     this.localizer = languageService.createLocalizer(model);
     this.loadingResults = true;
@@ -208,7 +209,9 @@ export class SearchPredicateController implements SearchController<PredicateList
       this.cannotConfirm = this.exclude(item);
 
       if (this.model.isNamespaceKnownToBeNotModel(item.definedBy.id.toString())) {
-        this.predicateService.getExternalPredicate(item.id, this.model).then(result => this.selection = result);
+        this.predicateService.getExternalPredicate(item.id, this.model).then(result => {
+          this.selection = requireDefined(result); // TODO check if result can actually be null
+        });
       } else {
         this.predicateService.getPredicate(item.id, this.model).then(result => this.selection = result);
       }

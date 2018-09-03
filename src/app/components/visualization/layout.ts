@@ -43,13 +43,18 @@ export enum VertexAction {
 
 function adjustSiblingLinks(paper: joint.dia.Paper, siblings: joint.dia.Link[], alreadyAdjusted: Set<string>, modelPositions: ModelPositions, vertexAction: VertexAction) {
 
+  const graph = <joint.dia.Graph> paper.model;
+  const first = siblings[0];
+  const firstSource = first.get('source');
+  const loop = isLoop(first);
+
   function getLinkPositionVertices(link: joint.dia.Link) {
     const sourcePosition = modelPositions.getClass(new Uri(link.get('source').id, {}));
     return sourcePosition.getAssociationProperty(new Uri(link.get('internalId'), {})).vertices;
   }
 
-  function getPersistedVertices(link: joint.dia.Link, isLoop: boolean) {
-    if (vertexAction === VertexAction.Reset || (vertexAction === VertexAction.KeepAllButLoops && isLoop)) {
+  function getPersistedVertices(link: joint.dia.Link) {
+    if (vertexAction === VertexAction.Reset || (vertexAction === VertexAction.KeepAllButLoops && loop)) {
       return null;
     } else {
       const vertices = getLinkPositionVertices(link);
@@ -57,17 +62,12 @@ function adjustSiblingLinks(paper: joint.dia.Paper, siblings: joint.dia.Link[], 
     }
   }
 
-  const graph = <joint.dia.Graph> paper.model;
-  const first = siblings[0];
-  const firstSource = first.get('source');
-  const loop = isLoop(first);
-
   for (let i = 0; i < siblings.length; i++) {
 
     const link = siblings[i];
     const source = (<joint.dia.Element> graph.getCell(link.get('source').id));
     const target = (<joint.dia.Element> graph.getCell(link.get('target').id));
-    const persistedVertices = getPersistedVertices(link, loop);
+    const persistedVertices = getPersistedVertices(link);
 
     if (persistedVertices) {
       link.set('vertices', persistedVertices);

@@ -79,8 +79,8 @@ export interface EditableEntity {
   normalizedType: Type;
   unsaved: boolean;
   isOfType(type: Type): boolean;
-  clone<T>(): T;
-  serialize<T>(): T;
+  clone(): this;
+  serialize(): any;
 }
 
 export interface WithId {

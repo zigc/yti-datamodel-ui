@@ -5,7 +5,7 @@ import { ReferenceDataService } from 'app/services/referenceDataService';
 import { comparingLocalizable } from 'app/utils/comparator';
 import { Localizer, LanguageService } from 'app/services/languageService';
 import { AddNew } from 'app/components/common/searchResults';
-import gettextCatalog = angular.gettext.gettextCatalog;
+import GettextCatalog = angular.gettext.gettextCatalog;
 import { EditableForm } from 'app/components/form/editableEntityController';
 import { Uri } from 'app/entities/uri';
 import { anyMatching, allMatching } from 'yti-common-ui/utils/array';
@@ -67,7 +67,7 @@ export class SearchReferenceDataModalController implements SearchController<Refe
   referenceDataGroups: ReferenceDataGroup[];
   showServer: ReferenceDataServer;
   showGroup: ReferenceDataGroup|null;
-  searchText= '';
+  searchText = '';
   loadingResults = true;
   selectedItem: ReferenceData|AddNewReferenceData;
   selection: ReferenceData|AddNewReferenceDataFormData;
@@ -93,7 +93,7 @@ export class SearchReferenceDataModalController implements SearchController<Refe
               public context: LanguageContext,
               private referenceDataService: ReferenceDataService,
               languageService: LanguageService,
-              private gettextCatalog: gettextCatalog,
+              private gettextCatalog: GettextCatalog,
               public exclude: Exclusion<ReferenceData>) {
 
     this.localizer = languageService.createLocalizer(context);

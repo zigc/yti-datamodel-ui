@@ -2,7 +2,7 @@ import { IScope } from 'angular';
 import { LocationService, Location } from 'app/services/locationService';
 import { labelNameToResourceIdIdentifier } from 'yti-common-ui/utils/resource';
 import { LanguageService } from 'app/services/languageService';
-import { TranslateService } from 'ng2-translate';
+import { TranslateService } from '@ngx-translate/core';
 
 import { module as mod } from './module';
 
@@ -19,7 +19,7 @@ mod.directive('breadcrumb', () => {
 
 class BreadcrumbController {
 
-  location: Location;
+  location: Location[];
 
   /* @ngInject */
   constructor($scope: IScope,

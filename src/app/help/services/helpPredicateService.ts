@@ -130,7 +130,7 @@ export class InteractiveHelpPredicateService implements PredicateService, Reseta
       });
   }
 
-  changePredicateType(predicate: Attribute|Association, newType: KnownPredicateType, model: Model): IPromise<Predicate> {
+  changePredicateType(predicate: Attribute|Association, newType: KnownPredicateType, model: Model): IPromise<Attribute|Association> {
     return this.defaultPredicateService.changePredicateType(predicate, newType, model);
   }
 
@@ -138,7 +138,7 @@ export class InteractiveHelpPredicateService implements PredicateService, Reseta
     return this.defaultPredicateService.copyPredicate(predicate, type, model);
   }
 
-  getExternalPredicate(externalId: Uri, model: Model): IPromise<Predicate> {
+  getExternalPredicate(externalId: Uri, model: Model): IPromise<Predicate|null> {
     return this.defaultPredicateService.getExternalPredicate(externalId, model);
   }
 

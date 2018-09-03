@@ -4,7 +4,7 @@ import { AddPropertiesFromClassModal } from './addPropertiesFromClassModal';
 import { Uri } from 'app/entities/uri';
 import { ClassService } from 'app/services/classService';
 import { module as mod } from './module';
-import { isDefined } from 'yti-common-ui/utils/object';
+import { isDefined, requireDefined } from 'yti-common-ui/utils/object';
 import { SearchPredicateModal } from './searchPredicateModal';
 import { EditableForm } from 'app/components/form/editableEntityController';
 import { Option } from 'app/components/common/buttonWithOptions';
@@ -131,7 +131,10 @@ export class ClassFormController {
 
   addPropertiesFromClassId(id: Uri, classType: string) {
     this.classService.getInternalOrExternalClass(id, this.model)
-      .then(klass => this.addPropertiesFromClass(klass, classType));
+      .then(klassOrNull => {
+        const klass = requireDefined(klassOrNull); // TODO check if class can actually be null
+        this.addPropertiesFromClass(klass, classType)
+      });
   }
 
   linkToIdClass() {

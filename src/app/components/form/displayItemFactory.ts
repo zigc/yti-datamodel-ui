@@ -1,5 +1,5 @@
 import { ILocationService } from 'angular';
-import gettextCatalog = angular.gettext.gettextCatalog;
+import GettextCatalog = angular.gettext.gettextCatalog;
 import { LanguageService } from 'app/services/languageService';
 import { Uri } from 'app/entities/uri';
 import { isString, isNumber, isBoolean } from 'yti-common-ui/utils/object';
@@ -22,7 +22,7 @@ export class DisplayItem {
 
   constructor(private $location: ILocationService,
               private languageService: LanguageService,
-              private gettextCatalog: gettextCatalog,
+              private gettextCatalog: GettextCatalog,
               private config: DisplayItemConfiguration) {
 
     this.onClick = config.onClick;
@@ -85,7 +85,7 @@ export interface DisplayItemConfiguration {
 
 export class DisplayItemFactory {
   /* @ngInject */
-  constructor(private $location: ILocationService, private languageService: LanguageService, private gettextCatalog: gettextCatalog) {
+  constructor(private $location: ILocationService, private languageService: LanguageService, private gettextCatalog: GettextCatalog) {
   }
 
   create(config: DisplayItemConfiguration) {

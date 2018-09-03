@@ -5,7 +5,7 @@ import { SearchConceptModal, EntityCreation } from './searchConceptModal';
 import { ClassService } from 'app/services/classService';
 import { LanguageService, Localizer } from 'app/services/languageService';
 import { AddNew } from 'app/components/common/searchResults';
-import gettextCatalog = angular.gettext.gettextCatalog;
+import GettextCatalog = angular.gettext.gettextCatalog;
 import { EditableForm } from 'app/components/form/editableEntityController';
 import { glyphIconClassForType } from 'app/utils/entity';
 import { Exclusion } from 'app/utils/exclusion';
@@ -14,7 +14,7 @@ import { AbstractClass, Class, ClassListItem } from 'app/entities/class';
 import { Model } from 'app/entities/model';
 import { ExternalEntity } from 'app/entities/externalEntity';
 import { filterAndSortSearchResults, defaultLabelComparator } from 'app/components/filter/util';
-import { Optional } from 'yti-common-ui/utils/object';
+import { Optional, requireDefined } from 'yti-common-ui/utils/object';
 import { ignoreModalClose } from 'yti-common-ui/utils/modal';
 
 export const noExclude = (_item: AbstractClass) => null;
@@ -105,7 +105,7 @@ class SearchClassController implements SearchController<ClassListItem> {
               public onlySelection: boolean,
               public textForSelection: (klass: Optional<Class>) => string,
               private searchConceptModal: SearchConceptModal,
-              private gettextCatalog: gettextCatalog) {
+              private gettextCatalog: GettextCatalog) {
 
     this.localizer = languageService.createLocalizer(model);
     this.loadingResults = true;
@@ -161,7 +161,7 @@ class SearchClassController implements SearchController<ClassListItem> {
     return !this.onlySelection && !!this.searchText;
   }
 
-  selectItem(item: ClassListItem|AddNewClass) {
+  selectItem(item: ClassListItem|Class|AddNewClass) {
     this.selectedItem = item;
     this.externalClass = undefined;
     this.excludeError = null;
@@ -179,7 +179,9 @@ class SearchClassController implements SearchController<ClassListItem> {
       this.cannotConfirm = this.exclude(item);
 
       if (this.model.isNamespaceKnownToBeNotModel(item.definedBy.id.toString())) {
-        this.classService.getExternalClass(item.id, this.model).then(result => this.selection = result);
+        this.classService.getExternalClass(item.id, this.model).then(result => {
+          this.selection = requireDefined(result); // TODO check if result can actually be null
+        });
       } else {
         this.classService.getClass(item.id, this.model).then(result => this.selection = result);
       }

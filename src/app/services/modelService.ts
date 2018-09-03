@@ -4,7 +4,7 @@ import { config } from 'config';
 import { upperCaseFirst } from 'change-case';
 import { Uri, Urn } from 'app/entities/uri';
 import { Language } from 'app/types/language';
-import { assertNever } from 'yti-common-ui/utils/object';
+import { assertNever, requireDefined } from 'yti-common-ui/utils/object';
 import * as frames from 'app/entities/frames';
 import { FrameService } from './frameService';
 import { GraphData, KnownModelType } from 'app/types/entity';
@@ -126,20 +126,20 @@ export class DefaultModelService implements ModelService {
     return this.frameService.frameAndMapArray(data, frames.modelListFrame(data), () => ModelListItem);
   }
 
-  private deserializeModel(data: GraphData): IPromise<Model> {
+  private deserializeModel(data: GraphData): IPromise<Model|null> {
     return this.frameService.frameAndMap(data, true, frames.modelFrame(data), () => Model);
   }
 
   private deserializeModelById(data: GraphData, id: Uri|Urn): IPromise<Model> {
-    return this.frameService.frameAndMap(data, true, frames.modelFrame(data, {id}), () => Model);
+    return this.frameService.frameAndMap(data, true, frames.modelFrame(data, {id}), () => Model).then(requireDefined);
   }
 
   private deserializeModelByPrefix(data: GraphData, prefix: string): IPromise<Model> {
-    return this.frameService.frameAndMap(data, true, frames.modelFrame(data, {prefix}), () => Model);
+    return this.frameService.frameAndMap(data, true, frames.modelFrame(data, {prefix}), () => Model).then(requireDefined);
   }
 
   private deserializeImportedNamespace(data: GraphData): IPromise<ImportedNamespace> {
-    return this.frameService.frameAndMap(data, true, frames.namespaceFrame(data), () => ImportedNamespace);
+    return this.frameService.frameAndMap(data, false, frames.namespaceFrame(data), () => ImportedNamespace).then(requireDefined);
   }
 
   private deserializeImportedNamespaces(data: GraphData): IPromise<ImportedNamespace[]> {

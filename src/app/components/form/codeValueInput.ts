@@ -1,12 +1,12 @@
 import { IAttributes, IAsyncModelValidators, IQService, IScope, INgModelController } from 'angular';
-import gettextCatalog = angular.gettext.gettextCatalog;
+import GettextCatalog = angular.gettext.gettextCatalog;
 import { ReferenceDataService } from 'app/services/referenceDataService';
 import { LanguageService } from 'app/services/languageService';
 import { module as mod } from './module';
 import { anyMatching } from 'yti-common-ui/utils/array';
 import { ReferenceData } from 'app/entities/referenceData';
 
-export function placeholderText(gettextCatalog: gettextCatalog) {
+export function placeholderText(gettextCatalog: GettextCatalog) {
   return gettextCatalog.getString('Write reference data code');
 }
 
@@ -33,7 +33,7 @@ export function createAsyncValidators($q: IQService, referenceData: ReferenceDat
   };
 }
 
-mod.directive('codeValueInput', /* @ngInject */ ($q: IQService, referenceDataService: ReferenceDataService, languageService: LanguageService, gettextCatalog: gettextCatalog) => {
+mod.directive('codeValueInput', /* @ngInject */ ($q: IQService, referenceDataService: ReferenceDataService, languageService: LanguageService, gettextCatalog: GettextCatalog) => {
   return {
     scope: {
       referenceData: '='

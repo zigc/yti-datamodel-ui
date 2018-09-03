@@ -7,6 +7,7 @@ import * as frames from 'app/entities/frames';
 import { FrameService } from './frameService';
 import { GraphData } from 'app/types/entity';
 import { ReferenceDataCode, ReferenceData, ReferenceDataServer } from 'app/entities/referenceData';
+import { requireDefined } from '../../../node_modules/yti-common-ui/utils/object';
 
 export class ReferenceDataService {
 
@@ -67,7 +68,7 @@ export class ReferenceDataService {
   }
 
   private deserializeReferenceData(data: GraphData): IPromise<ReferenceData> {
-    return this.frameService.frameAndMap(data, true, frames.referenceDataFrame(data), () => ReferenceData);
+    return this.frameService.frameAndMap(data, false, frames.referenceDataFrame(data), () => ReferenceData).then(requireDefined);
   }
 
   private deserializeReferenceDatas(data: GraphData): IPromise<ReferenceData[]> {

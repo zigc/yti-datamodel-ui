@@ -10,7 +10,7 @@ import { LanguageService } from '../../services/languageService';
 import { OrganizationService } from '../../services/organizationService';
 import { Options } from 'yti-common-ui/components/dropdown.component';
 import { combineSets, hasAny } from 'yti-common-ui/utils/set';
-import gettextCatalog = angular.gettext.gettextCatalog;
+import GettextCatalog = angular.gettext.gettextCatalog;
 import { UserRoleService } from '../../services/userRoleService';
 
 interface UserOrganizationRoles {
@@ -45,7 +45,7 @@ class UserPageController {
               private userService: UserService,
               locationService: LocationService,
               organizationService: OrganizationService,
-              private gettextCatalog: gettextCatalog,
+              private gettextCatalog: GettextCatalog,
               private languageService: LanguageService,
               private userRoleService: UserRoleService) {
 

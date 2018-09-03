@@ -31,7 +31,7 @@ export interface PredicateService {
   newPredicate<T extends Attribute|Association>(model: Model, predicateLabel: string, conceptID: Uri|null, type: KnownPredicateType, lang: Language): IPromise<T>;
   changePredicateType(predicate: Attribute|Association, newType: KnownPredicateType, model: Model): IPromise<Attribute|Association>;
   copyPredicate(predicate: Predicate|Uri, type: KnownPredicateType, model: Model): IPromise<Predicate>;
-  getExternalPredicate(externalId: Uri, model: Model): IPromise<Predicate>;
+  getExternalPredicate(externalId: Uri, model: Model): IPromise<Predicate|null>;
   getExternalPredicatesForModel(model: Model): IPromise<PredicateListItem[]>;
 }
 
@@ -46,7 +46,8 @@ export class DefaultPredicateService implements PredicateService {
   getPredicate(id: Uri|Urn, model?: Model): IPromise<Predicate> {
     return this.$http.get<GraphData>(config.apiEndpointWithName('predicate'), {params: {id: id.toString()}})
       .then(expandContextWithKnownModels(model))
-      .then(response => this.deserializePredicate(response.data!, false));
+      .then(response => this.deserializePredicate(response.data!, false))
+      .then(predicate => requireDefined(predicate));
   }
 
   getAllPredicates(model: Model): IPromise<PredicateListItem[]> {
@@ -245,7 +246,7 @@ export class DefaultPredicateService implements PredicateService {
     return this.frameService.frameAndMapArray(data, frames.predicateListFrame(data), () => PredicateListItem);
   }
 
-  private deserializePredicate(data: GraphData, optional: boolean): IPromise<Attribute|Association|Predicate> {
+  private deserializePredicate(data: GraphData, optional: boolean): IPromise<Attribute|Association|Predicate|null> {
 
     const entityFactory: EntityFactory<Predicate> = (framedData) => {
       const types = typeSerializer.deserialize(framedData['@graph'][0]['@type']);

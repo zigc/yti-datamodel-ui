@@ -3,7 +3,7 @@ import { IPromise, IQService } from 'angular';
 import { ResetableService } from './resetableService';
 import { Role, UUID } from 'yti-common-ui/services/user.service';
 import { UserService } from 'app/services/userService';
-import { Observable } from 'rxjs/Observable';
+import { Observable, of } from 'rxjs';
 
 // TODO fix to align with yti-common-ui UserService
 
@@ -35,7 +35,7 @@ export class InteractiveHelpUserService implements UserService, ResetableService
   }
 
   get loggedIn$(): Observable<boolean> {
-    return Observable.of(true);
+    return of(true);
   }
 
   updateLoggedInUser(fakeLoginMail?: string): void {

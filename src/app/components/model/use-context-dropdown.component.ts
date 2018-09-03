@@ -38,7 +38,6 @@ export class UseContextDropdownComponent implements ControlValueAccessor {
   selection: UseContext;
 
   private propagateChange: (fn: any) => void = () => {};
-  private propagateTouched: (fn: any) => void = () => {};
 
   get options(): UseContext[] {
     return this.modelType === 'profile' ? profileUseContexts : libraryUseContexts;
@@ -62,6 +61,5 @@ export class UseContextDropdownComponent implements ControlValueAccessor {
   }
 
   registerOnTouched(fn: any): void {
-    this.propagateTouched = fn;
   }
 }

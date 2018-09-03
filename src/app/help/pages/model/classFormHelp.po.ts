@@ -5,7 +5,7 @@ import { editableByTitle, child, editableFocus } from 'app/help/selectors';
 import { editableMargin } from 'app/help/utils';
 import * as SearchClassModal from './modal/searchClassModalHelp.po';
 import * as AddPropertiesFromClassModal from './modal/addPropertiesFromClassModalHelp.po';
-import gettextCatalog = angular.gettext.gettextCatalog;
+import GettextCatalog = angular.gettext.gettextCatalog;
 
 export function focusClass(parent: () => JQuery) {
 
@@ -102,7 +102,7 @@ export function focusSuperClass(parent: () => JQuery) {
   });
 }
 
-export function addAssociationTargetItems(context: () => JQuery, target: { namespaceId: string, name: string }, gettextCatalog: gettextCatalog): Story[] {
+export function addAssociationTargetItems(context: () => JQuery, target: { namespaceId: string, name: string }, gettextCatalog: GettextCatalog): Story[] {
   return [
     selectAssociationTarget(context),
     ...SearchClassModal.findAndSelectExistingClassItems(target.namespaceId, target.name, false, gettextCatalog),
@@ -110,7 +110,7 @@ export function addAssociationTargetItems(context: () => JQuery, target: { names
   ];
 }
 
-export function addSuperClassItems(context: () => JQuery, superClass: { name: string, namespaceId: string, properties: string[] }, gettextCatalog: gettextCatalog): Story[] {
+export function addSuperClassItems(context: () => JQuery, superClass: { name: string, namespaceId: string, properties: string[] }, gettextCatalog: GettextCatalog): Story[] {
   return [
     selectSuperClass(context),
     ...SearchClassModal.findAndSelectExistingClassItems(superClass.namespaceId, superClass.name, false, gettextCatalog),

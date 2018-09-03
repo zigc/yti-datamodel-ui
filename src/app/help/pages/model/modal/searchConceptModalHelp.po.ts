@@ -9,15 +9,15 @@ import {
   filterForAddNewResult, selectAddNewResult, selectSearchResult,
   focusSearchSelection, filterForSearchResult
 } from 'app/help/pages/modal/searchModalHelp.po';
-import gettextCatalog = angular.gettext.gettextCatalog;
+import GettextCatalog = angular.gettext.gettextCatalog;
 
 const searchConceptModal = child(modal, '.search-concept');
 
-export function filterForConceptSuggestionConcept(conceptName: string, gettextCatalog: gettextCatalog) {
+export function filterForConceptSuggestionConcept(conceptName: string, gettextCatalog: GettextCatalog) {
   return filterForAddNewResult(searchConceptModal, conceptName, gettextCatalog, 'concept');
 }
 
-export function filterForConcept(className: string, conceptId: string, gettextCatalog: gettextCatalog) {
+export function filterForConcept(className: string, conceptId: string, gettextCatalog: GettextCatalog) {
   return filterForSearchResult(searchConceptModal, className, conceptId, gettextCatalog);
 }
 
@@ -53,7 +53,7 @@ export const enterLabel = createStory({
   reversible: true
 });
 
-export function enterDefinition(initialValue: string, gettextCatalog: gettextCatalog) {
+export function enterDefinition(initialValue: string, gettextCatalog: GettextCatalog) {
 
   const enterDefinitionElement = editableByTitle(modal, 'Definition');
   const enterDefinitionInputElement = input(enterDefinitionElement);
@@ -74,7 +74,7 @@ export function confirmConceptSelection(navigates: boolean) {
   return confirm(searchConceptModal, navigates);
 }
 
-export function findAndCreateNewSuggestionItems(name: string, definition: string, navigates: boolean, gettextCatalog: gettextCatalog): Story[] {
+export function findAndCreateNewSuggestionItems(name: string, definition: string, navigates: boolean, gettextCatalog: GettextCatalog): Story[] {
   return [
     filterForConceptSuggestionConcept(name, gettextCatalog),
     addConceptSuggestionSearchResult,
@@ -85,7 +85,7 @@ export function findAndCreateNewSuggestionItems(name: string, definition: string
   ];
 }
 
-export function findAndSelectExistingConceptItems(name: string, conceptId: string, navigates: boolean, gettextCatalog: gettextCatalog): Story[] {
+export function findAndSelectExistingConceptItems(name: string, conceptId: string, navigates: boolean, gettextCatalog: GettextCatalog): Story[] {
   return [
     filterForConcept(name, conceptId, gettextCatalog),
     selectConcept(conceptId, name),

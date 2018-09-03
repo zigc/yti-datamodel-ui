@@ -8,16 +8,16 @@ import { predicateIdFromNamespaceId } from 'app/help/utils';
 import { KnownPredicateType } from 'app/types/entity';
 import * as SearchConceptModal from './searchConceptModalHelp.po';
 import * as PredicateForm from 'app/help/pages/model/predicateFormHelp.po';
-import gettextCatalog = angular.gettext.gettextCatalog;
+import GettextCatalog = angular.gettext.gettextCatalog;
 import { Story } from 'app/help/contract';
 
 export const searchPredicateModalElement = child(modal, '.search-predicate');
 
-export function filterForPredicate(namespaceId: string, predicateName: string, gettextCatalog: gettextCatalog) {
+export function filterForPredicate(namespaceId: string, predicateName: string, gettextCatalog: GettextCatalog) {
   return filterForSearchResult(searchPredicateModalElement, predicateName, predicateIdFromNamespaceId(namespaceId, predicateName), gettextCatalog);
 }
 
-export function filterForNewPredicate(predicateName: string, gettextCatalog: gettextCatalog) {
+export function filterForNewPredicate(predicateName: string, gettextCatalog: GettextCatalog) {
   return filterForAddNewResult(searchPredicateModalElement, predicateName, gettextCatalog, 'predicate');
 }
 
@@ -52,7 +52,7 @@ export function findAndCreateNewBasedOnSuggestionItems(type: KnownPredicateType,
                                                        name: string,
                                                        comment: string,
                                                        navigates: boolean,
-                                                       gettextCatalog: gettextCatalog): Story[] {
+                                                       gettextCatalog: GettextCatalog): Story[] {
   return [
     filterForNewPredicate(name, gettextCatalog),
     selectAddNewPredicateSearchResult(type),
@@ -64,7 +64,7 @@ export function findAndCreateNewBasedOnExistingConceptItems(type: KnownPredicate
                                                             name: string,
                                                             conceptId: string,
                                                             navigates: boolean,
-                                                            gettextCatalog: gettextCatalog): Story[] {
+                                                            gettextCatalog: GettextCatalog): Story[] {
   return [
     filterForNewPredicate(name, gettextCatalog),
     selectAddNewPredicateSearchResult(type),
@@ -76,7 +76,7 @@ export function findAndCreateNewPropertyBasedOnSuggestionItems(type: KnownPredic
                                                                searchName: string,
                                                                name: string,
                                                                comment: string,
-                                                               gettextCatalog: gettextCatalog): Story[] {
+                                                               gettextCatalog: GettextCatalog): Story[] {
   return [
     ...findAndCreateNewBasedOnSuggestionItems(type, searchName, comment, false, gettextCatalog),
     type === 'attribute' ? focusSelectedAttribute : focusSelectedAssociation,
@@ -89,7 +89,7 @@ export function findAndCreateNewPropertyBasedOnExistingConceptItems(type: KnownP
                                                                     searchName: string,
                                                                     name: string,
                                                                     conceptId: string,
-                                                                    gettextCatalog: gettextCatalog): Story[] {
+                                                                    gettextCatalog: GettextCatalog): Story[] {
   return [
     ...findAndCreateNewBasedOnExistingConceptItems(type, searchName, conceptId, false, gettextCatalog),
     type === 'attribute' ? focusSelectedAttribute : focusSelectedAssociation,

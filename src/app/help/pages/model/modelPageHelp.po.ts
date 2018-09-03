@@ -5,7 +5,7 @@ import {
 import { child, modelPanelElement } from 'app/help/selectors';
 import { KnownModelType, KnownPredicateType } from 'app/types/entity';
 import { scrollToTop, classIdFromNamespaceId } from 'app/help/utils';
-import gettextCatalog = angular.gettext.gettextCatalog;
+import GettextCatalog = angular.gettext.gettextCatalog;
 import * as SearchClassModal from './modal/searchClassModalHelp.po';
 import * as AddPropertiesFromClass from './modal/addPropertiesFromClassModalHelp.po';
 import * as ModelView from './modelViewHelp.po';
@@ -55,7 +55,7 @@ export function selectClass(namespaceId: string, name: string) {
   });
 }
 
-export function specializeClassItems(klass: { namespaceId: string, name: string, properties: string[] }, gettextCatalog: gettextCatalog): Story[] {
+export function specializeClassItems(klass: { namespaceId: string, name: string, properties: string[] }, gettextCatalog: GettextCatalog): Story[] {
   return [
     openAddResource('class'),
     ...SearchClassModal.findAndSelectExistingClassItems(klass.namespaceId, klass.name, false, gettextCatalog),
@@ -65,7 +65,7 @@ export function specializeClassItems(klass: { namespaceId: string, name: string,
   ];
 }
 
-export function assignClassItems(klass: { namespaceId: string, name: string }, gettextCatalog: gettextCatalog): Story[] {
+export function assignClassItems(klass: { namespaceId: string, name: string }, gettextCatalog: GettextCatalog): Story[] {
   return [
     openAddResource('class'),
     ...SearchClassModal.findAndSelectExistingClassItems(klass.namespaceId, klass.name, true, gettextCatalog),
@@ -73,7 +73,7 @@ export function assignClassItems(klass: { namespaceId: string, name: string }, g
   ];
 }
 
-export function createNewClassItems(klass: { name: string, comment: string }, gettextCatalog: gettextCatalog): Story[] {
+export function createNewClassItems(klass: { name: string, comment: string }, gettextCatalog: GettextCatalog): Story[] {
   return [
     openAddResource('class'),
     ...SearchClassModal.findAndCreateNewBasedOnConceptSuggestionItems(klass.name, klass.comment, gettextCatalog),

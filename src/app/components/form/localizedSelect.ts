@@ -1,4 +1,4 @@
-import gettextCatalog = angular.gettext.gettextCatalog;
+import GettextCatalog = angular.gettext.gettextCatalog;
 import { module as mod } from './module';
 
 mod.directive('localizedSelect', () => {
@@ -25,9 +25,9 @@ class LocalizedSelectController {
   value: string;
   values: string[];
   id: string;
-  displayNameFormatter: (value: string, gettextCatalog: gettextCatalog) => string;
+  displayNameFormatter: (value: string, gettextCatalog: GettextCatalog) => string;
 
-  constructor(private gettextCatalog: gettextCatalog) {
+  constructor(private gettextCatalog: GettextCatalog) {
   }
 
   getName(value: string) {
