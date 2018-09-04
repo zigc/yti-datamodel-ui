@@ -50,12 +50,25 @@ require('angular-gettext');
 require('checklist-model');
 require('ngclipboard');
 
+function removeEmptyValues(obj: {}) {
+
+  const result: any = {};
+
+  for (const [key, value] of Object.entries(obj)) {
+    if (!!value) {
+      result[key] = value;
+    }
+  }
+
+  return result;
+}
+
 export const localizationStrings: { [key: string]: { [key: string]: string } } = {};
 
 for (const language of availableUILanguages) {
   localizationStrings[language] = Object.assign({},
-    require(`../../po/${language}.po`),
-    require(`yti-common-ui/po/${language}.po`)
+    removeEmptyValues(require(`../../po/${language}.po`)),
+    removeEmptyValues(require(`yti-common-ui/po/${language}.po`))
   );
 }
 
@@ -97,7 +110,8 @@ export function createMissingTranslationHandler(): MissingTranslationHandler {
       loader: {
         provide: TranslateLoader,
         useFactory: createTranslateLoader
-      }
+      },
+      missingTranslationHandler: { provide: MissingTranslationHandler, useFactory: createMissingTranslationHandler }
     }),
     NgbModule.forRoot(),
   ],
@@ -118,7 +132,6 @@ export function createMissingTranslationHandler(): MissingTranslationHandler {
   ],
   providers: [
     { provide: AUTHENTICATED_USER_ENDPOINT, useFactory: resolveAuthenticatedUserEndpoint },
-    { provide: MissingTranslationHandler, useFactory: createMissingTranslationHandler },
     {
       provide: LanguageService,
       useFactory(injector: IInjectorService): AngularLocalizer {
