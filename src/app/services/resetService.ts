@@ -1,5 +1,5 @@
 import { IHttpService, IPromise } from 'angular';
-import { config } from 'config';
+import { apiEndpointWithName } from './config';
 
 export class ResetService {
 
@@ -8,6 +8,6 @@ export class ResetService {
   }
 
   reset(): IPromise<any> {
-    return this.$http.get(config.apiEndpointWithName('reset'));
+    return this.$http.get(apiEndpointWithName('reset'));
   }
 }

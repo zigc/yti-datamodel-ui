@@ -1,56 +1,59 @@
-import { module as mod } from './module';
-import GettextCatalog = angular.gettext.gettextCatalog;
+import { gettextCatalog as GettextCatalog } from 'angular-gettext';
 import { EditableForm } from 'app/components/form/editableEntityController';
-import { INgModelController, IScope, IAttributes } from 'angular';
 import { DataType, dataTypes } from 'app/entities/dataTypes';
+import { ComponentDeclaration } from 'app/utils/angular';
+import { forwardRef } from '@angular/core';
+import { INgModelController } from 'angular';
 
-// TODO duplication with editable just to get past
-mod.directive('editableRangeSelect', () => {
-  return {
-    scope: {
-      range: '=',
-      id: '@'
-    },
-    restrict: 'E',
-    template: `
+export const EditableRangeSelectComponent: ComponentDeclaration = {
+  selector: 'editableRangeSelect',
+  bindings: {
+    range: '=',
+    id: '@'
+  },
+  require: {
+    form: '?^form'
+  },
+  template: `
       <div class="editable-wrap form-group">
-        <editable-label data-title="'Range'" input-id="ctrl.id" required="true"></editable-label>
+        <editable-label data-title="'Range'" input-id="$ctrl.id" required="true"></editable-label>
         
-        <div ng-show="ctrl.isEditing()">
-          <localized-select id="{{ctrl.id}}" values="ctrl.ranges" value="ctrl.range" display-name-formatter="ctrl.displayNameFormatter"></localized-select>
+        <div ng-show="$ctrl.isEditing()">
+          <localized-select id="{{$ctrl.id}}" values="$ctrl.ranges" value="$ctrl.range" display-name-formatter="$ctrl.displayNameFormatter"></localized-select>
         </div>
       
         <div ng-if="!ctrl.isEditing()" class="content">
-          <span>{{ctrl.displayName}}</span>
+          <span>{{$ctrl.displayName}}</span>
         </div>
         
-        <error-messages ng-model-controller="ngModel"></error-messages>
+        <error-messages ng-model-controller="$ctrl.inputNgModelCtrl"></error-messages>
       </div>
-    `,
-    controllerAs: 'ctrl',
-    bindToController: true,
-    require: ['editableRangeSelect', '^form'],
-    link($scope: EditableScope, element: JQuery, _attributes: IAttributes, [thisController, formController]: [RangeSelectController, EditableForm]) {
-      const input = element.find('[ng-model]');
-      $scope.ngModel = input.controller('ngModel');
-      thisController.isEditing = () => formController.editing;
-    },
-    controller: RangeSelectController
-  };
-});
+  `,
+  controller: forwardRef(() => EditableRangeSelectController)
+};
 
-interface EditableScope extends IScope {
-  ngModel: INgModelController;
-}
 
-class RangeSelectController {
+class EditableRangeSelectController {
 
   range: DataType;
   ranges: DataType[] = dataTypes;
-  isEditing: () => boolean;
+  inputNgModelCtrl: INgModelController;
   displayNameFormatter = (value: string, gettextCatalog: GettextCatalog) => value ? `${gettextCatalog.getString(value)} (${value})` : '';
 
-  constructor(private gettextCatalog: GettextCatalog) {
+  form: EditableForm;
+
+  /* @ngInject */
+  constructor(private gettextCatalog: GettextCatalog,
+              private $element: JQuery) {
+  }
+
+  $postLink() {
+    const input = this.$element.find('[ng-model]');
+    this.inputNgModelCtrl = input.controller('ngModel');
+  }
+
+  isEditing() {
+    return this.form && this.form.editing;
   }
 
   get displayName() {

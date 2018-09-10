@@ -1,45 +1,43 @@
-import { module as mod } from 'app/components/module';
-import { IAttributes, IScope } from 'angular';
-import { EditableForm } from 'app/components/form/editableEntityController';
+import { IScope } from 'angular';
 import { Referrer, Usage } from 'app/entities/usage';
 import { LanguageContext } from 'app/types/language';
 import { groupBy } from 'yti-common-ui/utils/array';
 import { stringMapToObject } from 'yti-common-ui/utils/object';
+import { ComponentDeclaration } from 'app/utils/angular';
+import { forwardRef } from '@angular/core';
+import { EditableForm } from 'app/components/form/editableEntityController';
 
-interface UsageAttributes extends IAttributes {
-  showLinks: string;
-}
-
-mod.directive('usage', () => {
-  return {
-    restrict: 'E',
-    template: require('./usage.html'),
-    scope: {
-      usage: '=',
-      exclude: '=',
-      context: '='
-    },
-    bindToController: true,
-    controllerAs: 'ctrl',
-    require: ['usage', '?^form'],
-    link($scope: IScope, _element: JQuery, attributes: UsageAttributes, [thisController, formController]: [UsageController, EditableForm]) {
-      $scope.$watch(attributes.showLinks, (show: boolean) => thisController.showLinks = () => show && (!formController || !formController.editing));
-    },
-    controller: UsageController
-  };
-});
+export const UsageComponent: ComponentDeclaration = {
+  selector: 'usage',
+  bindings: {
+    usage: '=',
+    exclude: '=',
+    context: '=',
+    showLinks: '@'
+  },
+  require: {
+    form: '?^form'
+  },
+  template: require('./usage.html'),
+  controller: forwardRef(() => UsageController)
+};
 
 class UsageController {
 
   usage: Usage;
   exclude: (referrer: Referrer) => boolean;
   context: LanguageContext;
-  showLinks: () => boolean;
+  showLinks: string;
   referrers: { [type: string]: Referrer[] };
 
+  form: EditableForm;
+
   /* @ngInject */
-  constructor($scope: IScope) {
-    $scope.$watch(() => this.usage, usage => {
+  constructor(private $scope: IScope) {
+  }
+
+  $onInit() {
+    this.$scope.$watch(() => this.usage, usage => {
       if (usage) {
         const excludeFilter = (referrer: Referrer) => referrer.normalizedType && !this.exclude || !this.exclude(referrer);
         this.referrers = stringMapToObject(groupBy(usage.referrers.filter(excludeFilter), referrer => referrer.normalizedType!));
@@ -47,5 +45,9 @@ class UsageController {
         this.referrers = {};
       }
     });
+  }
+
+  isShowLinks() {
+    return this.showLinks === 'true' && (!this.form || !this.form.editing);
   }
 }

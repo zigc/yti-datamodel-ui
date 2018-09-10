@@ -1,9 +1,9 @@
 import { requireDefined } from 'yti-common-ui/utils/object';
-import { DefinedBy } from '../definedBy';
+import { DefinedBy } from 'app/entities/definedBy';
 import { entityAsId, normalized } from './entitySerializer';
 import { WithIdAndType } from 'app/types/entity';
-import { GraphNode } from '../graphNode';
-import { Uri } from '../uri';
+import { GraphNode } from 'app/entities/graphNode';
+import { Uri } from 'app/entities/uri';
 
 export const normalizingDefinedBySerializer = normalized<DefinedBy, GraphNode & WithIdAndType>(
   entityAsId(() => DefinedBy),

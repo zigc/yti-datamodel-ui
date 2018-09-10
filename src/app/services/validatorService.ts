@@ -1,7 +1,7 @@
 import { IPromise, IHttpService, IQService } from 'angular';
 import { Uri } from 'app/entities/uri';
 import { pascalCase, camelCase } from 'change-case';
-import { config } from 'config';
+import { apiEndpointWithName } from './config';
 
 export interface ValidatorService {
   classDoesNotExist(id: Uri): IPromise<boolean>;
@@ -22,7 +22,7 @@ export class DefaultValidatorService implements DefaultValidatorService {
   }
 
   private idDoesNotExist(id: Uri): IPromise<boolean> {
-    return this.$http.get(config.apiEndpointWithName('freeID'), {params: {id: id.uri}})
+    return this.$http.get(apiEndpointWithName('freeID'), {params: {id: id.uri}})
       .then(result => result.data ? true : this.$q.reject('exists'), _err => true);
   }
 }

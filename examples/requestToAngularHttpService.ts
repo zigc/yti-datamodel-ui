@@ -33,15 +33,18 @@ const pendingRequests: IRequestConfig[] = [];
 
 
 function makeUrl(url: string, params?: any) {
+
+  const endpoint = process.env['API_ENDPOINT'];
+
   if (!params) {
-    return url;
+    return endpoint + url;
   } else {
     const parts: string[] = [];
     for (const key of Object.keys(params)) {
       const value = params[key];
       parts.push(`${encodeURIComponent(key)}=${!value ? 'undefined' : encodeURIComponent(params[key])}`);
     }
-    return `${url}?${parts.join('&')}`;
+    return `${endpoint}${url}?${parts.join('&')}`;
   }
 }
 

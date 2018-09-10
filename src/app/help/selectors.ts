@@ -1,4 +1,4 @@
-export const modal = () => angular.element('.modal-dialog');
+export const modal = () => jQuery('.modal-dialog');
 export const modalBody = child(modal, '.modal-body');
 
 export function child(parent: () => JQuery, selector: string) {
@@ -24,4 +24,4 @@ export const editableByTitle =             (parent: () => JQuery, title: string)
 export const editableMultipleByTitle =     (parent: () => JQuery, title: string) => child(parent, `editable-multiple[data-title="${title}"]`);
 export const searchResult =                (parent: () => JQuery, id: string) => child(parent, `.search-results #${CSS.escape(id)}`);
 
-export const modelPanelElement = () => angular.element('.panel-left');
+export const modelPanelElement = () => jQuery('.panel-left');

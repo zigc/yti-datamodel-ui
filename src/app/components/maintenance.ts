@@ -1,10 +1,11 @@
-import { ILogService, ui } from 'angular';
+import { ILogService } from 'angular';
 import { identity } from 'yti-common-ui/utils/object';
 import { modalCancelHandler } from 'app/utils/angular';
+import { IModalService } from 'angular-ui-bootstrap';
 
 export class MaintenanceModal {
   /* @ngInject */
-  constructor(private $uibModal: ui.bootstrap.IModalService, private $log: ILogService) {
+  constructor(private $uibModal: IModalService, private $log: ILogService) {
   }
 
   open(err: any) {

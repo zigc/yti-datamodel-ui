@@ -1,5 +1,8 @@
 import * as angular from 'angular';
-import { animate, ICompileProvider, ILocationProvider, ILogProvider, ui } from 'angular';
+import { ICompileProvider, ILocationProvider, ILogProvider, animate, auto } from 'angular';
+import IInjectorService = auto.IInjectorService;
+import IAnimateProvider = animate.IAnimateProvider;
+import { ITooltipProvider } from 'angular-ui-bootstrap';
 import { routeConfig } from './routes';
 import { module as commonModule } from './components/common';
 import { module as editorModule } from './components/editor';
@@ -18,7 +21,6 @@ import { downgradeComponent, downgradeInjectable, UpgradeModule } from '@angular
 import { NgModule, NgZone } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { YtiCommonModule } from 'yti-common-ui';
-import { config } from 'config';
 import { AUTHENTICATED_USER_ENDPOINT } from 'yti-common-ui/services/user.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {
@@ -33,9 +35,6 @@ import { FooterComponent } from 'yti-common-ui/components/footer.component';
 import { LOCALIZER } from 'yti-common-ui/pipes/translate-value.pipe';
 import { Localizer as AngularLocalizer } from 'yti-common-ui/types/localization';
 import { DefaultAngularLocalizer, LanguageService } from './services/languageService';
-import IInjectorService = angular.auto.IInjectorService;
-import IAnimateProvider = animate.IAnimateProvider;
-import ITooltipProvider = ui.bootstrap.ITooltipProvider;
 import { MenuComponent } from 'yti-common-ui/components/menu.component';
 import { AjaxLoadingIndicatorComponent } from 'yti-common-ui/components/ajax-loading-indicator.component';
 import { AjaxLoadingIndicatorSmallComponent } from 'yti-common-ui/components/ajax-loading-indicator-small.component';
@@ -45,6 +44,7 @@ import { DropdownComponent } from 'yti-common-ui/components/dropdown.component';
 import { UseContextDropdownComponent } from './components/model/use-context-dropdown.component';
 import { UseContextInputComponent } from './components/form/use-context-input.component';
 import { HttpClientModule } from '@angular/common/http';
+import { apiEndpointWithName } from 'app/services/config';
 
 require('angular-gettext');
 require('checklist-model');
@@ -66,16 +66,16 @@ function removeEmptyValues(obj: {}) {
 export const localizationStrings: { [key: string]: { [key: string]: string } } = {};
 
 for (const language of availableUILanguages) {
-  localizationStrings[language] = Object.assign({},
-    removeEmptyValues(require(`../../po/${language}.po`)),
-    removeEmptyValues(require(`yti-common-ui/po/${language}.po`))
-  );
+  localizationStrings[language] = {
+    ...removeEmptyValues(JSON.parse(require(`raw-loader!po-loader?format=mf!../../po/${language}.po`))),
+    ...removeEmptyValues(JSON.parse(require(`raw-loader!po-loader?format=mf!yti-common-ui/po/${language}.po`)))
+  };
 }
 
 Object.freeze(localizationStrings);
 
 export function resolveAuthenticatedUserEndpoint() {
-  return config.apiEndpointWithName('user');
+  return apiEndpointWithName('user');
 }
 
 export function createTranslateLoader(): TranslateLoader {
@@ -214,15 +214,13 @@ mod.config(routeConfig);
 
 mod.config(($locationProvider: ILocationProvider,
             $logProvider: ILogProvider,
-            $compileProvider: Angular16ICompileProvider,
+            $compileProvider: ICompileProvider,
             $animateProvider: IAnimateProvider,
             $uibTooltipProvider: ITooltipProvider) => {
 
   $locationProvider.html5Mode(true);
   $logProvider.debugEnabled(false);
 
-  // Breaking change in angular 1.5 -> 1.6 consider adopting the $onInit style which is now default
-  $compileProvider.preAssignBindingsEnabled(true);
   $compileProvider.aHrefSanitizationWhitelist(/^\s*(|blob|https?|mailto):/);
 
   // enable angular-animate framework when 'ng-animate-enabled' class is added to animated element
@@ -241,8 +239,3 @@ mod.run((gettextCatalog: any) => {
     gettextCatalog.setStrings(language, localizationStrings[language]);
   }
 });
-
-// TODO replace with angular 1.6 @types when available
-interface Angular16ICompileProvider extends ICompileProvider {
-  preAssignBindingsEnabled(value: boolean): void;
-}

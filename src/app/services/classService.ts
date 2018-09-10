@@ -2,7 +2,6 @@ import { IHttpService, IPromise, IQService } from 'angular';
 import * as moment from 'moment';
 import { PredicateService } from './predicateService';
 import { upperCaseFirst } from 'change-case';
-import { config } from 'config';
 import { Uri, Urn } from 'app/entities/uri';
 import { reverseMapType } from 'app/utils/entity';
 import { expandContextWithKnownModels } from 'app/utils/entity';
@@ -19,6 +18,7 @@ import { Model } from 'app/entities/model';
 import { ExternalEntity } from 'app/entities/externalEntity';
 import { Predicate, Attribute, Association } from 'app/entities/predicate';
 import { flatten } from 'yti-common-ui/utils/array';
+import { apiEndpointWithName } from './config';
 
 export interface ClassService {
   getClass(id: Uri|Urn, model: Model): IPromise<Class>;
@@ -48,14 +48,14 @@ export class DefaultClassService implements ClassService {
   }
 
   getClass(id: Uri|Urn, model: Model): IPromise<Class> {
-    return this.$http.get<GraphData>(config.apiEndpointWithName('class'), {params: {id: id.toString()}})
+    return this.$http.get<GraphData>(apiEndpointWithName('class'), {params: {id: id.toString()}})
       .then(expandContextWithKnownModels(model))
       .then(response => this.deserializeClass(response.data!, false))
       .then(klass => requireDefined(klass));
   }
 
   getAllClasses(model: Model): IPromise<ClassListItem[]> {
-    return this.$http.get<GraphData>(config.apiEndpointWithName('class'))
+    return this.$http.get<GraphData>(apiEndpointWithName('class'))
       .then(expandContextWithKnownModels(model))
       .then(response => this.deserializeClassList(response.data!));
   }
@@ -84,7 +84,7 @@ export class DefaultClassService implements ClassService {
     if (classes) {
       return this.$q.when(classes);
     } else {
-      return this.$http.get<GraphData>(config.apiEndpointWithName('class'), {params: {model: model.id.uri}})
+      return this.$http.get<GraphData>(apiEndpointWithName('class'), {params: {model: model.id.uri}})
         .then(expandContextWithKnownModels(model))
         .then(response => this.deserializeClassList(response.data!))
         .then(classList => {
@@ -99,7 +99,7 @@ export class DefaultClassService implements ClassService {
       id: klass.id.uri,
       model: requireDefined(klass.definedBy).id.uri
     };
-    return this.$http.put<{ identifier: Urn }>(config.apiEndpointWithName('class'), klass.serialize(), {params: requestParams})
+    return this.$http.put<{ identifier: Urn }>(apiEndpointWithName('class'), klass.serialize(), {params: requestParams})
       .then(response => {
         this.modelClassesCache.delete(requireDefined(klass.definedBy).id.uri);
         klass.unsaved = false;
@@ -116,7 +116,7 @@ export class DefaultClassService implements ClassService {
     if (klass.id.notEquals(originalId)) {
       requestParams.oldid = originalId.uri;
     }
-    return this.$http.post<{ identifier: Urn }>(config.apiEndpointWithName('class'), klass.serialize(), {params: requestParams})
+    return this.$http.post<{ identifier: Urn }>(apiEndpointWithName('class'), klass.serialize(), {params: requestParams})
       .then(response => {
         this.modelClassesCache.delete(requireDefined(klass.definedBy).id.uri);
         klass.version = response.data!.identifier;
@@ -129,7 +129,7 @@ export class DefaultClassService implements ClassService {
       id: id.uri,
       model: model.id.uri
     };
-    return this.$http.delete(config.apiEndpointWithName('class'), {params: requestParams})
+    return this.$http.delete(apiEndpointWithName('class'), {params: requestParams})
       .then(() => this.modelClassesCache.delete(model.id.uri));
   }
 
@@ -138,7 +138,7 @@ export class DefaultClassService implements ClassService {
       id: classId.uri,
       model: model.id.uri
     };
-    return this.$http.post(config.apiEndpointWithName('class'), undefined, {params: requestParams})
+    return this.$http.post(apiEndpointWithName('class'), undefined, {params: requestParams})
       .then(() => this.modelClassesCache.delete(model.id.uri));
   }
 
@@ -154,7 +154,7 @@ export class DefaultClassService implements ClassService {
       params.conceptID = conceptID.uri;
     }
 
-    return this.$http.get<GraphData>(config.apiEndpointWithName('classCreator'), {params})
+    return this.$http.get<GraphData>(apiEndpointWithName('classCreator'), {params})
       .then(expandContextWithKnownModels(model))
       .then((response: any) => this.deserializeClass(response.data, false))
       .then((klass: Class) => {
@@ -172,7 +172,7 @@ export class DefaultClassService implements ClassService {
 
     return this.$q.all([
       classPromise,
-      this.$http.get<GraphData>(config.apiEndpointWithName('shapeCreator'), {params: {profileID: profile.id.uri, classID: id.toString(), lang}})
+      this.$http.get<GraphData>(apiEndpointWithName('shapeCreator'), {params: {profileID: profile.id.uri, classID: id.toString(), lang}})
         .then(expandContextWithKnownModels(profile))
         .then((response: any) => this.deserializeClass(response.data, false))
       ])
@@ -217,7 +217,7 @@ export class DefaultClassService implements ClassService {
   }
 
   getExternalClass(externalId: Uri, model: Model) {
-    return this.$http.get<GraphData>(config.apiEndpointWithName('externalClass'), {params: {model: model.id.uri, id: externalId.uri}})
+    return this.$http.get<GraphData>(apiEndpointWithName('externalClass'), {params: {model: model.id.uri, id: externalId.uri}})
       .then(expandContextWithKnownModels(model))
       .then((response: any) => this.deserializeClass(response.data, true))
       .then(klass => {
@@ -229,7 +229,7 @@ export class DefaultClassService implements ClassService {
   }
 
   getExternalClassesForModel(model: Model) {
-    return this.$http.get<GraphData>(config.apiEndpointWithName('externalClass'), {params: {model: model.id.uri}})
+    return this.$http.get<GraphData>(apiEndpointWithName('externalClass'), {params: {model: model.id.uri}})
       .then(expandContextWithKnownModels(model))
       .then(response => this.deserializeClassList(response.data!));
   }
@@ -242,7 +242,7 @@ export class DefaultClassService implements ClassService {
 
     return this.$q.all([
       predicatePromise,
-      this.$http.get<GraphData>(config.apiEndpointWithName('classProperty'), {params: {predicateID: id.toString(), type: reverseMapType(type)}})
+      this.$http.get<GraphData>(apiEndpointWithName('classProperty'), {params: {predicateID: id.toString(), type: reverseMapType(type)}})
         .then(expandContextWithKnownModels(model))
         .then((response: any) => this.deserializeProperty(response.data, false))
     ])

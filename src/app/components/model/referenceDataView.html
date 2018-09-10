@@ -1,20 +1,20 @@
-<h4 ng-if="ctrl.title">{{ctrl.title | translate}}</h4>
+<h4 ng-if="$ctrl.title">{{$ctrl.title | translate}}</h4>
 
-<non-editable data-title="Reference data URI" value="ctrl.referenceData.id" context="ctrl.context"></non-editable>
-<non-editable data-title="Reference data name" value="ctrl.referenceData.title" context="ctrl.context"></non-editable>
-<non-editable data-title="Reference data status" value="ctrl.referenceData.status" value-as-localization-key="true" context="ctrl.context"></non-editable>
-<non-editable data-title="Description" value="ctrl.referenceData.description" context="ctrl.context"></non-editable>
-<non-editable data-title="Creator" value="ctrl.referenceData.creator" context="ctrl.context"></non-editable>
+<non-editable data-title="Reference data URI" value="$ctrl.referenceData.id" context="$ctrl.context"></non-editable>
+<non-editable data-title="Reference data name" value="$ctrl.referenceData.title" context="$ctrl.context"></non-editable>
+<non-editable data-title="Reference data status" value="$ctrl.referenceData.status" value-as-localization-key="true" context="$ctrl.context"></non-editable>
+<non-editable data-title="Description" value="$ctrl.referenceData.description" context="$ctrl.context"></non-editable>
+<non-editable data-title="Creator" value="$ctrl.referenceData.creator" context="$ctrl.context"></non-editable>
 
 <br />
 
-<a ng-if="!ctrl.showCodes || ctrl.referenceData.isExternal()" ng-click="ctrl.browse()" translate>Browse reference data codes</a>
+<a ng-if="!$ctrl.showCodes || $ctrl.referenceData.isExternal()" ng-click="$ctrl.browse()" translate>Browse reference data codes</a>
 
-<div ng-if="ctrl.showCodes && !ctrl.referenceData.isExternal()">
+<div ng-if="$ctrl.showCodes && !$ctrl.referenceData.isExternal()">
 
-  <ajax-loading-indicator ng-if="!ctrl.codes" class="inline"></ajax-loading-indicator>
+  <ajax-loading-indicator ng-if="!$ctrl.codes" class="inline"></ajax-loading-indicator>
 
-  <table ng-if="ctrl.codes" class="table table-hover">
+  <table ng-if="$ctrl.codes" class="table table-hover">
     <thead>
     <tr>
       <th translate>Identifier</th>
@@ -23,9 +23,9 @@
     </tr>
     </thead>
     <tbody>
-    <tr ng-repeat="code in ctrl.codes | orderBy: 'identifier'">
+    <tr ng-repeat="code in $ctrl.codes | orderBy: 'identifier'">
       <td>{{code.identifier}}</td>
-      <td>{{code.title | translateValue: ctrl.context}}</td>
+      <td>{{code.title | translateValue: $ctrl.context}}</td>
       <td>{{code.status | translate}}</td>
     </tr>
     </tbody>

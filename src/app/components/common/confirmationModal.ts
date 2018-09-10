@@ -1,5 +1,5 @@
-import { IPromise, ui } from 'angular';
-import IModalService = ui.bootstrap.IModalService;
+import { IPromise } from 'angular';
+import { IModalService } from 'angular-ui-bootstrap';
 
 export class ConfirmationModal {
   /* @ngInject */
@@ -10,11 +10,11 @@ export class ConfirmationModal {
     return this.$uibModal.open({
       template: `<div class="confirmation">
                    <modal-template purpose="warning" default="true">
-                     <modal-title>{{ctrl.title | translate}}</modal-title>
-                     <modal-body>{{ctrl.body | translate}}</modal-body>
+                     <modal-title>{{$ctrl.title | translate}}</modal-title>
+                     <modal-body>{{$ctrl.body | translate}}</modal-body>
                    </modal-template>
                  </div>`,
-      controllerAs: 'ctrl',
+      controllerAs: '$ctrl',
       /* @ngInject */
       controller: ConfirmationModalController,
       windowClass: additionalCssClass,

@@ -1,36 +1,33 @@
 import { IQService } from 'angular';
-import { Language, availableLanguages } from 'app/types/language';
-import { module as mod } from './module';
+import { availableLanguages, Language } from 'app/types/language';
+import { ComponentDeclaration } from 'app/utils/angular';
+import { forwardRef } from '@angular/core';
 
-mod.directive('editableMultipleLanguageSelect', () => {
-  return {
-    scope: {
-      ngModel: '=',
-      id: '@',
-      title: '@',
-      required: '='
-    },
-    restrict: 'E',
-    controllerAs: 'ctrl',
-    bindToController: true,
-    template: `
-      <editable-multiple id="{{ctrl.id}}" data-title="{{ctrl.title}}" ng-model="ctrl.ngModel" required="ctrl.required" input="ctrl.input">
+export const EditableMultipleLanguageSelectComponent: ComponentDeclaration = {
+  selector: 'editableMultipleLanguageSelect',
+  bindings: {
+    ngModel: '=',
+    id: '@',
+    title: '@',
+    required: '='
+  },
+  template: `
+      <editable-multiple id="{{$ctrl.id}}" data-title="{{$ctrl.title}}" ng-model="$ctrl.ngModel" required="$ctrl.required" input="$ctrl.input">
         <input-container>
-          <autocomplete datasource="ctrl.datasource">
-            <input id="{{ctrl.id}}"
+          <autocomplete datasource="$ctrl.datasource">
+            <input id="{{$ctrl.id}}"
                    type="text"
-                   restrict-duplicates="ctrl.ngModel"
+                   restrict-duplicates="$ctrl.ngModel"
                    language-input
                    ignore-form
-                   autocomplete="false"
-                   ng-model="ctrl.input" />
+                   autocomplete="off"
+                   ng-model="$ctrl.input" />
           </autocomplete>
         </input-container>
       </editable-multiple>
-    `,
-    controller: EditableMultipleLanguageSelectController
-  };
-});
+  `,
+  controller: forwardRef(() => EditableMultipleLanguageSelectController)
+};
 
 class EditableMultipleLanguageSelectController {
 
@@ -39,6 +36,7 @@ class EditableMultipleLanguageSelectController {
   id: string;
   title: string;
 
+  /* @ngInject */
   constructor(private $q: IQService) {
   }
 

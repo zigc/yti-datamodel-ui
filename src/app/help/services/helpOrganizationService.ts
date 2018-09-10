@@ -1,9 +1,9 @@
-import { OrganizationService } from '../../services/organizationService';
+import { OrganizationService } from 'app/services/organizationService';
 import { IPromise } from 'angular';
-import { Organization } from '../../entities/organization';
-import { GraphData } from '../../types/entity';
-import * as frames from '../../entities/frames';
-import { FrameService } from '../../services/frameService';
+import { Organization } from 'app/entities/organization';
+import { GraphData } from 'app/types/entity';
+import * as frames from 'app/entities/frames';
+import { FrameService } from 'app/services/frameService';
 
 export const helpOrganizationId = 'urn:uuid:74a41211-8c99-4835-a519-7a61612b1098';
 

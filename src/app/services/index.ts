@@ -28,7 +28,7 @@ import { DefaultOrganizationService, OrganizationService } from './organizationS
 import { ImpersonationService } from './impersonationService';
 import { ConfigService } from './configService';
 import { UserRoleService } from './userRoleService';
-import { InteractiveHelpOrganizationService } from '../help/services/helpOrganizationService';
+import { InteractiveHelpOrganizationService } from 'app/help/services/helpOrganizationService';
 
 function proxyConditionallyToHelp<T>(interactiveHelpService: InteractiveHelpService, defaultService: T, helpService: T) {
   return proxyToInstance(() => interactiveHelpService.isOpen() ? helpService : defaultService);

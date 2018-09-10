@@ -1,25 +1,23 @@
-import { IScope, IAttributes, IFormController } from 'angular';
-import { EditableEntityController } from './editableEntityController';
-import { module as mod } from './module';
+import { EditableEntityController, EditableForm } from './editableEntityController';
+import { ComponentDeclaration } from 'app/utils/angular';
+import { forwardRef } from '@angular/core';
 
-mod.directive('editableEntityButtons', () => {
-  return {
-    restrict: 'E',
-    scope: {
-      ctrl: '=editableController',
-      context: '='
-    },
-    require: '^form',
-    template: require('./editableEntityButtons.html'),
-    transclude: true,
-    link($scope: EditableEntityButtonsScope, _element: JQuery, _attributes: IAttributes, formController: IFormController) {
-      $scope.form = formController;
-    }
-  };
-});
+export const EditableEntityButtons: ComponentDeclaration = {
+  selector: 'editableEntityButtons',
+  bindings: {
+    ctrl: '=editableController',
+    context: '='
+  },
+  require: {
+    form: '^form'
+  },
+  transclude: true,
+  template: require('./editableEntityButtons.html'),
+  controller: forwardRef(() => EditableEntityButtonsController)
+};
 
-interface EditableEntityButtonsScope extends IScope {
-  form: IFormController;
+class EditableEntityButtonsController {
+
   ctrl: EditableEntityController<any>;
-  width?: number;
+  form: EditableForm;
 }

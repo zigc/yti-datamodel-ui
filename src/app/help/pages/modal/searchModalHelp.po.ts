@@ -4,7 +4,7 @@ import {
   createClickNextCondition, createExplicitNextCondition, createExpectedStateNextCondition, createScrollWithElement
 } from 'app/help/contract';
 import { initialInputValue, elementExists, inputHasExactValue, expectAll } from 'app/help/utils';
-import GettextCatalog = angular.gettext.gettextCatalog;
+import { gettextCatalog as GettextCatalog } from 'angular-gettext';
 
 export const textSearchElement = (modalParent: () => JQuery) => child(modalParent, 'text-filter input');
 export const searchSelectionElement = (modalParent: () => JQuery) => child(modalParent, '.search-selection');

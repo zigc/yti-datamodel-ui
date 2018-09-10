@@ -1,6 +1,5 @@
-import { IPromise, ui } from 'angular';
-import IModalService = ui.bootstrap.IModalService;
-import IModalServiceInstance = ui.bootstrap.IModalServiceInstance;
+import { IPromise } from 'angular';
+import { IModalService, IModalServiceInstance } from 'angular-ui-bootstrap';
 import { ModelService } from 'app/services/modelService';
 import { Uri } from 'app/entities/uri';
 import { Language } from 'app/types/language';
@@ -16,7 +15,7 @@ export class AddEditLinkModal {
       template: require('./addEditLinkModal.html'),
       size: 'sm',
       controller: AddEditLinkModalController,
-      controllerAs: 'ctrl',
+      controllerAs: '$ctrl',
       backdrop: true,
       resolve: {
         lang: () => lang,

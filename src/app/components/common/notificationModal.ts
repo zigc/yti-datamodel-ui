@@ -1,5 +1,5 @@
-import { IPromise, ILocationService, ui } from 'angular';
-import IModalService = ui.bootstrap.IModalService;
+import { IPromise, ILocationService } from 'angular';
+import { IModalService } from 'angular-ui-bootstrap';
 import { Model } from 'app/entities/model';
 import { identity } from 'yti-common-ui/utils/object';
 import { modalCancelHandler } from 'app/utils/angular';

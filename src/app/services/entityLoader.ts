@@ -139,7 +139,7 @@ export class EntityLoader {
   }
 
   addAction<T>(action: IPromise<T>, details: any): IPromise<T> {
-    const withDetails = action.then(identity, failWithDetails(details));
+    const withDetails = action.then(identity, failWithDetails(this.$q, details));
     this.actions.push(withDetails);
     return withDetails;
   }
@@ -441,9 +441,9 @@ export class EntityLoader {
   }
 }
 
-function failWithDetails(details: any): (err: any) => void {
+function failWithDetails($q: IQService, details: any): (err: any) => IPromise<never> {
   return (error: any) => {
-    return Promise.reject({ error, details });
+    return $q.reject({ error, details });
   };
 }
 

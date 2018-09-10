@@ -1,10 +1,9 @@
-import { IAttributes, IPromise, IQService, IScope, ITimeoutService, IWindowService } from 'angular';
+import { IPromise, IQService, IScope, ITimeoutService, IWindowService } from 'angular';
 import { LanguageService } from 'app/services/languageService';
 import { ClassVisualization, VisualizationService } from 'app/services/visualizationService';
-import { ClassInteractionListener, Dimensions } from 'app/types/visualization';
+import { ClassInteractionListener, Coordinate, Dimensions } from 'app/types/visualization';
 import { ChangeListener } from 'app/types/component';
 import * as joint from 'jointjs';
-import { module as mod } from './module';
 import { Uri } from 'app/entities/uri';
 import { arraysAreEqual, firstMatching, normalizeAsArray } from 'yti-common-ui/utils/array';
 import { UserService } from 'app/services/userService';
@@ -16,37 +15,29 @@ import { PaperHolder } from './paperHolder';
 import { centerToElement, focusElement, moveOrigin, scale, scaleToFit } from './paperUtil';
 import { adjustElementLinks, calculateLabelPosition, layoutGraph, VertexAction } from './layout';
 import { Localizer } from 'app/types/language';
-import { ifChanged, modalCancelHandler } from 'app/utils/angular';
+import { ComponentDeclaration, ifChanged, modalCancelHandler } from 'app/utils/angular';
 import { centerToPosition, coordinatesAreEqual, copyVertices } from 'app/utils/entity';
 import { mapOptional, Optional, requireDefined } from 'yti-common-ui/utils/object';
 import { Class, Property } from 'app/entities/class';
 import { Predicate } from 'app/entities/predicate';
 import { Model } from 'app/entities/model';
-import {
-  AssociationPropertyPosition,
-  AssociationTargetPlaceholderClass,
-  ModelPositions,
-  VisualizationClass
-} from 'app/entities/visualization';
-import { Coordinate } from 'app/types/visualization';
+import { AssociationPropertyPosition, AssociationTargetPlaceholderClass, ModelPositions, VisualizationClass } from 'app/entities/visualization';
 import { InteractiveHelpService } from 'app/help/services/interactiveHelpService';
 import * as moment from 'moment';
 import { ContextMenuTarget } from './contextMenu';
 import { ModelPageActions } from 'app/components/model/modelPage';
 import { AuthorizationManagerService } from 'app/services/authorizationManagerService';
-import { NgZone } from '@angular/core';
+import { forwardRef, NgZone } from '@angular/core';
 
-/* @ngInject */
-mod.directive('classVisualization', ($window: IWindowService, zone: NgZone) => {
-  return {
-    restrict: 'E',
-    scope: {
-      selection: '=',
-      model: '=',
-      modelPageActions: '=',
-      maximized: '='
-    },
-    template: `
+export const ClassVisualizationComponent: ComponentDeclaration = {
+  selector: 'classVisualization',
+  bindings: {
+    selection: '=',
+    model: '=',
+    modelPageActions: '=',
+    maximized: '='
+  },
+  template: `
      <div class="visualization-buttons">
        
        <button id="maximize_button"
@@ -54,92 +45,92 @@ mod.directive('classVisualization', ($window: IWindowService, zone: NgZone) => {
                class="btn btn-link btn-lg pull-right pt-0 pb-0 pr-0"
                uib-tooltip="{{'Maximize' | translate}}"
                tooltip-placement="left"
-               ng-click="ctrl.maximized = true">
+               ng-click="$ctrl.maximized = true">
         <i class="fas fa-window-maximize"></i>
        </button>
        
        <button id="minimize_button"
-               ng-if="ctrl.maximized" 
+               ng-if="$ctrl.maximized" 
                class="btn btn-secondary-action btn-lg pull-right pl-1 pt-0 pb-0 pr-1 mr-3"
                uib-tooltip="{{'Minimize' | translate}}"
                tooltip-placement="left"
-               ng-click="ctrl.maximized = false">
+               ng-click="$ctrl.maximized = false">
         <i class="fas fa-window-minimize"></i>
        </button>
        
        <button id="zoom_out_button"
                class="btn btn-secondary-action btn-sm" 
-               ng-mousedown="ctrl.zoomOut()" 
-               ng-mouseup="ctrl.zoomOutEnded()">
+               ng-mousedown="$ctrl.zoomOut()" 
+               ng-mouseup="$ctrl.zoomOutEnded()">
          <i class="fas fa-search-minus"></i>
        </button>
        
        <button id="zoom_in_button"
                class="btn btn-secondary-action btn-sm" 
-               ng-mousedown="ctrl.zoomIn()" 
-               ng-mouseup="ctrl.zoomInEnded()">
+               ng-mousedown="$ctrl.zoomIn()" 
+               ng-mouseup="$ctrl.zoomInEnded()">
          <i class="fas fa-search-plus"></i>
        </button>
        
        <button id="fit_to_content_button"
                class="btn btn-secondary-action btn-sm" 
-               ng-click="ctrl.fitToContent()">
+               ng-click="$ctrl.fitToContent()">
          <i class="fas fa-arrows-alt"></i>
        </button>
        
        <button id="center_to_selected_class_button"
-               ng-show="ctrl.canFocus()" 
+               ng-show="$ctrl.canFocus()" 
                class="btn btn-secondary-action btn-sm" 
-               ng-click="ctrl.centerToSelectedClass()">
+               ng-click="$ctrl.centerToSelectedClass()">
          <i class="fas fa-crosshairs"></i>
        </button>
        
-       <span ng-show="ctrl.canFocus()">
+       <span ng-show="$ctrl.canFocus()">
          <button id="focus_out_button"
                  class="btn btn-secondary-action btn-sm" 
-                 ng-click="ctrl.focusOut()">
+                 ng-click="$ctrl.focusOut()">
            <i class="fas fa-angle-left"></i>
          </button>
          <div class="focus-indicator">
-           <i>{{ctrl.renderSelectionFocus()}}</i>
+           <i>{{$ctrl.renderSelectionFocus()}}</i>
          </div>
          <button id="focus_in_button"
                  class="btn btn-secondary-action btn-sm" 
-                 ng-click="ctrl.focusIn()">
+                 ng-click="$ctrl.focusIn()">
            <i class="fas fa-angle-right"></i>
          </button>
        </span>
        
        <button id="toggle_show_name_button"
                class="btn btn-secondary-action btn-sm" 
-               ng-click="ctrl.toggleShowName()">
-         <i>{{ctrl.showNameLabel | translate}}</i>
+               ng-click="$ctrl.toggleShowName()">
+         <i>{{$ctrl.showNameLabel | translate}}</i>
        </button>
        
        <button id="save_positions_button"
                class="btn btn-secondary-action btn-sm" 
-               ng-show="ctrl.canSave()" 
-               ng-disabled="ctrl.modelPositions.isPristine()" 
-               ng-click="ctrl.savePositions()">
+               ng-show="$ctrl.canSave()" 
+               ng-disabled="$ctrl.modelPositions.isPristine()" 
+               ng-click="$ctrl.savePositions()">
         <i class="fas fa-save"></i>
        </button>
        
        <button id="layout_persistent_positions_button"
                class="btn btn-secondary-action btn-sm" 
-               ng-disabled="ctrl.saving" 
-               ng-click="ctrl.layoutPersistentPositions()" 
-               ng-context-menu="ctrl.relayoutPositions()">
+               ng-disabled="$ctrl.saving" 
+               ng-click="$ctrl.layoutPersistentPositions()" 
+               ng-context-menu="$ctrl.relayoutPositions()">
         <i class="fas fa-sync-alt"></i>
        </button>
        
-       <div uib-dropdown is-open="ctrl.exportOpen" ng-if="ctrl.downloads" class="d-inline-block">
+       <div uib-dropdown is-open="$ctrl.exportOpen" ng-if="$ctrl.downloads" class="d-inline-block">
          <button id="download_dropdown" class="btn btn-secondary-action btn-sm dropdown-toggle" uib-dropdown-toggle>
            <i class="fas fa-download" />
          </button>
          <div uib-dropdown-menu>
            <a id="{{download.name + '_download_dropdown'}}"
               class="dropdown-item" 
-              ng-repeat="download in ctrl.downloads"
+              ng-repeat="download in $ctrl.downloads"
               target="_self" 
               download="{{download.filename}}" 
               ng-href="{{download.href}}" 
@@ -152,80 +143,18 @@ mod.directive('classVisualization', ($window: IWindowService, zone: NgZone) => {
      
      <canvas style="display:none; background-color: white"></canvas>
      
-     <visualization-popover details="ctrl.popoverDetails" context="ctrl.model"></visualization-popover>
+     <visualization-popover details="$ctrl.popoverDetails" context="$ctrl.model"></visualization-popover>
      
-     <visualization-context-menu ng-if="ctrl.contextMenuTarget" 
-                                 target="ctrl.contextMenuTarget" 
-                                 model="ctrl.model" 
-                                 model-page-actions="ctrl.modelPageActions"></visualization-context-menu>
+     <visualization-context-menu ng-if="$ctrl.contextMenuTarget" 
+                                 target="$ctrl.contextMenuTarget" 
+                                 model="$ctrl.model" 
+                                 model-page-actions="$ctrl.modelPageActions"></visualization-context-menu>
                                  
-     <ajax-loading-indicator ng-if="ctrl.loading"></ajax-loading-indicator>
+     <ajax-loading-indicator ng-if="$ctrl.loading"></ajax-loading-indicator>
     `,
-    bindToController: true,
-    controllerAs: 'ctrl',
-    require: 'classVisualization',
-    link($scope: IScope, element: JQuery, _attributes: IAttributes, controller: ClassVisualizationController) {
+  controller: forwardRef(() => ClassVisualizationController)
 
-      controller.paperHolder = new PaperHolder(element, controller, $window, zone);
-      controller.svg = () => element.find('svg')[0] as any as SVGElement;
-      controller.canvas = element.find('canvas')[0] as HTMLCanvasElement;
-
-      const visualizationViewElement = element.closest('visualization-view');
-
-      const currentDimensions = () => ({
-        width: visualizationViewElement.width(),
-        height: visualizationViewElement.height()
-      });
-
-      const refreshDimensionsWaitingToStabilize = (initial: Dimensions) => {
-
-        const paper = controller.paper;
-
-        const isDimensionChanged = (lhs: Dimensions, rhs: Dimensions) =>
-          lhs.width !== rhs.width || lhs.height !== rhs.height;
-
-        const previous = { width: paper.options.width!, height: paper.options.height! };
-        const current = currentDimensions();
-
-        if (isDimensionChanged(previous, current)) {
-          paper.setDimensions(current.width, current.height);
-          window.setTimeout(() => refreshDimensionsWaitingToStabilize(initial));
-        } else {
-          moveOrigin(paper, (initial.width - current.width) / 2, (initial.height - current.height) / 2);
-          controller.dimensionChangeInProgress = false;
-        }
-      };
-
-      const refreshDimensions = () => {
-        if (!controller.dimensionChangeInProgress) {
-
-          controller.dimensionChangeInProgress = true;
-          const initial = currentDimensions();
-
-          window.setTimeout(() =>
-            refreshDimensionsWaitingToStabilize(initial));
-        }
-      };
-
-      const setClickType = (event: MouseEvent) => controller.clickType = event.which === 3 ? 'right' : 'left';
-
-      // init
-      controller.refreshDimensions = () => window.setTimeout(refreshDimensions);
-
-      zone.runOutsideAngular(() => {
-        window.addEventListener('resize', refreshDimensions);
-        $scope.$watch(() => controller.maximized, refreshDimensions);
-        window.addEventListener('mousedown', setClickType);
-      });
-
-      $scope.$on('$destroy', () => {
-        window.removeEventListener('resize', refreshDimensions);
-        window.removeEventListener('mousedown', setClickType);
-      });
-    },
-    controller: ClassVisualizationController
-  };
-});
+};
 
 class ClassVisualizationController implements ChangeListener<Class|Predicate>, ClassInteractionListener {
 
@@ -271,6 +200,8 @@ class ClassVisualizationController implements ChangeListener<Class|Predicate>, C
               private $q: IQService,
               private $timeout: ITimeoutService,
               private $window: IWindowService,
+              private $element: JQuery,
+              private zone: NgZone,
               private visualizationService: VisualizationService,
               private languageService: LanguageService,
               private userService: UserService,
@@ -278,11 +209,71 @@ class ClassVisualizationController implements ChangeListener<Class|Predicate>, C
               private interactiveHelpService: InteractiveHelpService,
               private confirmationModal: ConfirmationModal,
               private authorizationManagerService: AuthorizationManagerService) {
+  }
+
+  $onInit() {
+
+    this.paperHolder = new PaperHolder(this.$element, this, this.$window, this.zone);
+    this.svg = () => this.$element.find('svg')[0] as any as SVGElement;
+    this.canvas = this.$element.find('canvas')[0] as HTMLCanvasElement;
+
+    const visualizationViewElement = this.$element.closest('visualization-view');
+
+    const currentDimensions = () => ({
+      width: visualizationViewElement.width(),
+      height: visualizationViewElement.height()
+    });
+
+    const refreshDimensionsWaitingToStabilize = (initial: Dimensions) => {
+
+      const paper = this.paper;
+
+      const isDimensionChanged = (lhs: Dimensions, rhs: Dimensions) =>
+        lhs.width !== rhs.width || lhs.height !== rhs.height;
+
+      const previous = { width: paper.options.width!, height: paper.options.height! };
+      const current = currentDimensions();
+
+      if (isDimensionChanged(previous, current)) {
+        paper.setDimensions(current.width, current.height);
+        window.setTimeout(() => refreshDimensionsWaitingToStabilize(initial));
+      } else {
+        moveOrigin(paper, (initial.width - current.width) / 2, (initial.height - current.height) / 2);
+        this.dimensionChangeInProgress = false;
+      }
+    };
+
+    const refreshDimensions = () => {
+      if (!this.dimensionChangeInProgress) {
+
+        this.dimensionChangeInProgress = true;
+        const initial = currentDimensions();
+
+        window.setTimeout(() =>
+          refreshDimensionsWaitingToStabilize(initial));
+      }
+    };
+
+    const setClickType = (event: MouseEvent) => this.clickType = event.which === 3 ? 'right' : 'left';
+
+    // init
+    this.refreshDimensions = () => window.setTimeout(refreshDimensions);
+
+    this.zone.runOutsideAngular(() => {
+      window.addEventListener('resize', refreshDimensions);
+      this.$scope.$watch(() => this.maximized, refreshDimensions);
+      window.addEventListener('mousedown', setClickType);
+    });
+
+    this.$scope.$on('$destroy', () => {
+      window.removeEventListener('resize', refreshDimensions);
+      window.removeEventListener('mousedown', setClickType);
+    });
 
     this.modelPageActions.addListener(this);
 
-    $scope.$watch(() => this.model, () => this.refresh());
-    $scope.$watch(() => this.selection, ifChanged((newSelection, oldSelection) => {
+    this.$scope.$watch(() => this.model, () => this.refresh());
+    this.$scope.$watch(() => this.selection, ifChanged((newSelection, oldSelection) => {
       if (!newSelection || !oldSelection) {
         // Need to do this on next frame since selection change will change visualization size
         window.setTimeout(() => this.queueWhenNotVisible(() => this.focusSelection(false)));
@@ -290,21 +281,21 @@ class ClassVisualizationController implements ChangeListener<Class|Predicate>, C
         this.focusSelection(false);
       }
     }));
-    $scope.$watch(() => this.selectionFocus, ifChanged(() => this.focusSelection(false)));
+    this.$scope.$watch(() => this.selectionFocus, ifChanged(() => this.focusSelection(false)));
 
     if (Modernizr.bloburls) {
       this.downloads = []; // set as empty array which indicates that exports are supported
-      $scope.$watch(() => this.exportOpen, open => {
+      this.$scope.$watch(() => this.exportOpen, open => {
         if (open) {
           this.revokePreviousDownloads();
           this.generateExports().then(downloads => this.downloads = downloads);
         }
       });
 
-      $scope.$on('$destroy', () => this.revokePreviousDownloads());
+      this.$scope.$on('$destroy', () => this.revokePreviousDownloads());
     }
 
-    $scope.$on('$destroy', () => this.paperHolder.clean());
+    this.$scope.$on('$destroy', () => this.paperHolder.clean());
   }
 
   revokePreviousDownloads() {

@@ -1,34 +1,28 @@
-import { IFormController, ILocationService } from 'angular';
-import { module as mod } from './module';
+import { ILocationService } from 'angular';
 import { ModelService } from 'app/services/modelService';
 import { Uri } from 'app/entities/uri';
 import { Language, LanguageContext } from 'app/types/language';
 import { KnownModelType, UseContext } from 'app/types/entity';
 import { LocationService } from 'app/services/locationService';
-import { Classification } from '../../entities/classification';
+import { Classification } from 'app/entities/classification';
 import { remove } from 'yti-common-ui/utils/array';
 import { Organization } from 'app/entities/organization';
 import { ErrorModal } from 'app/components/form/errorModal';
 import { Vocabulary } from 'app/entities/vocabulary';
 import { ReferenceData } from 'app/entities/referenceData';
 import { ImportedNamespace, Link } from 'app/entities/model';
+ import { ComponentDeclaration } from 'app/utils/angular';
+import { forwardRef } from '@angular/core';
+import { EditableForm } from 'app/components/form/editableEntityController';
 
-interface EditableForm extends IFormController {
-  editing: boolean;
-}
-
-mod.directive('newModelPage', () => {
-  return {
-    restrict: 'E',
-    scope: {
-      type: '='
-    },
-    template: require('./newModelPage.html'),
-    controllerAs: 'ctrl',
-    bindToController: true,
-    controller: NewModelPageController
-  };
-});
+export const NewModelPageComponent: ComponentDeclaration = {
+  selector: 'newModelPage',
+  bindings: {
+    type: '='
+  },
+  template: require('./newModelPage.html'),
+  controller: forwardRef(() => NewModelPageController)
+};
 
 export class NewModelPageController {
 
@@ -60,10 +54,12 @@ export class NewModelPageController {
   /* @ngInject */
   constructor(private $location: ILocationService,
               private modelService: ModelService,
-              locationService: LocationService,
+              private locationService: LocationService,
               private errorModal: ErrorModal) {
+  }
 
-    locationService.atNewModel(this.type);
+  $onInit() {
+    this.locationService.atNewModel(this.type);
   }
 
   $postLink() {

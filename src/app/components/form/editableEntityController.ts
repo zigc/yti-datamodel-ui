@@ -24,11 +24,12 @@ export abstract class EditableEntityController<T extends EditableEntity> {
   editableInEdit: T|null = null;
   persisting: boolean;
 
-  constructor(private $scope: EditableScope,
+  constructor(protected $scope: EditableScope,
               private $log: ILogService,
               protected deleteConfirmationModal: DeleteConfirmationModal,
               private errorModal: ErrorModal,
               protected userService: UserService) {
+
     $scope.$watch(() => userService.isLoggedIn(), (isLoggedIn, wasLoggedIn) => {
       if (!isLoggedIn && wasLoggedIn) {
         this.cancelEditing();

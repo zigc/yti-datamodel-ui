@@ -1,5 +1,5 @@
-import { Uri } from '../uri';
-import { GraphNode } from '../graphNode';
+import { Uri } from 'app/entities/uri';
+import { GraphNode } from 'app/entities/graphNode';
 import { EntityFactory } from 'app/types/entity';
 import { isDefined, assertNever } from 'yti-common-ui/utils/object';
 import { WithIdAndType } from 'app/types/entity';

@@ -15,7 +15,7 @@ import { Uri } from 'app/entities/uri';
 import { comparingLocalizable } from 'app/utils/comparator';
 import { AddPropertiesFromClassModal } from 'app/components/editor/addPropertiesFromClassModal';
 import { module as mod } from './module';
-import { isDifferentUrl, modalCancelHandler, nextUrl } from 'app/utils/angular';
+import { ComponentDeclaration, isDifferentUrl, modalCancelHandler, nextUrl } from 'app/utils/angular';
 import {
   combineExclusions,
   createClassTypeExclusion,
@@ -41,20 +41,16 @@ import { ModelControllerService, View } from './modelControllerService';
 import { AuthorizationManagerService } from 'app/services/authorizationManagerService';
 import IRouteService = route.IRouteService;
 import ICurrentRoute = route.ICurrentRoute;
+import { forwardRef } from '@angular/core';
 
-mod.directive('modelPage', () => {
-  return {
-    restrict: 'E',
-    template: require('./modelPage.html'),
-    controllerAs: 'ctrl',
-    bindToController: true,
-    controller: ModelPageController,
-    require: ['modelPage', '^application'],
-    link(_$scope: IScope, _element: JQuery, _attributes: IAttributes, [ctrl, applicationController]: [ModelPageController, ApplicationController]) {
-      applicationController.registerHelpProvider(ctrl);
-    }
-  };
-});
+export const ModelPageComponent: ComponentDeclaration = {
+  selector: 'modelPage',
+  require: {
+    application: '^application'
+  },
+  template: require('./modelPage.html'),
+  controller: forwardRef(() => ModelPageController)
+};
 
 export interface ModelPageActions extends ChangeNotifier<Class|Predicate> {
   select(item: WithIdAndType): void;
@@ -95,6 +91,8 @@ export class ModelPageController implements ModelPageActions, HelpProvider, Mode
   private currentRouteParams: any;
 
   helps: InteractiveHelp[] = [];
+
+  application: ApplicationController;
 
   /* @ngInject */
   constructor($scope: IScope,
@@ -187,7 +185,7 @@ export class ModelPageController implements ModelPageActions, HelpProvider, Mode
 
     $scope.$watch(() => this.visualizationMaximized, maximized => {
 
-      const body = angular.element('body');
+      const body = jQuery('body');
 
       if (maximized) {
         body.addClass('visualization-maximized');
@@ -195,6 +193,10 @@ export class ModelPageController implements ModelPageActions, HelpProvider, Mode
         body.removeClass('visualization-maximized');
       }
     });
+  }
+
+  $postLink() {
+    this.application.registerHelpProvider(this);
   }
 
   private init(routeData: RouteData) {

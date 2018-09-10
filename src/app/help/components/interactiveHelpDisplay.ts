@@ -1,8 +1,8 @@
-import { module as mod } from '../module';
+import { module as mod } from 'app/help/module';
 import * as _ from 'lodash';
 import { OverlayService, OverlayInstance } from 'app/components/common/overlay';
-import { IScope, IPromise, IDocumentService, ILocationService, ui, IWindowService } from 'angular';
-import IModalStackService = ui.bootstrap.IModalStackService;
+import { IScope, IPromise, IDocumentService, ILocationService, IWindowService } from 'angular';
+import { IModalStackService } from 'angular-ui-bootstrap';
 import { assertNever, requireDefined, areEqual, Optional } from 'yti-common-ui/utils/object';
 import { tab, esc, enter } from 'yti-common-ui/utils/key-code';
 import { isTargetElementInsideElement, nextUrl } from 'app/utils/angular';
@@ -14,7 +14,7 @@ import {
 import { contains } from 'yti-common-ui/utils/array';
 import { ConfirmationModal } from 'app/components/common/confirmationModal';
 import { moveCursorToEnd, scrollToTop } from 'app/help/utils';
-import GettextCatalog = angular.gettext.gettextCatalog;
+import { gettextCatalog as GettextCatalog } from 'angular-gettext';
 import { NgZone } from '@angular/core';
 
 const popupAnimationTimeInMs = 300; // should match css help-popover transition time
@@ -49,13 +49,13 @@ export class InteractiveHelpDisplay {
 
     return this.overlayService.open({
       template: `
-          <help-popover ng-show="ctrl.item" item="ctrl.item" help-controller="ctrl" ng-style="ctrl.popoverController.style()"></help-popover>
-          <help-popover-dimensions-calculator ng-show="ctrl.item" item="ctrl.item" help-controller="ctrl"></help-popover-dimensions-calculator>
-          <help-backdrop item="ctrl.item" help-controller="ctrl"></help-backdrop>
-          <div ng-show="ctrl.item.denyInteraction" class="help-interaction-stopper"></div>
+          <help-popover ng-show="$ctrl.item" item="$ctrl.item" help-controller="$ctrl" ng-style="$ctrl.popoverController.style()"></help-popover>
+          <help-popover-dimensions-calculator ng-show="$ctrl.item" item="$ctrl.item" help-controller="$ctrl"></help-popover-dimensions-calculator>
+          <help-backdrop item="$ctrl.item" help-controller="$ctrl"></help-backdrop>
+          <div ng-show="$ctrl.item.denyInteraction" class="help-interaction-stopper"></div>
         `,
       controller: InteractiveHelpController,
-      controllerAs: 'ctrl',
+      controllerAs: '$ctrl',
       resolve: {
         help: () => help,
         stateInitialization: () => stateInitialization
@@ -288,7 +288,7 @@ class InteractiveHelpController {
     }
 
     const scrollToElementPositioning = elementPositioning(scroll.element())!;
-    const defaultScrollWithElement = angular.element('html, body');
+    const defaultScrollWithElement = jQuery('html, body');
 
     const calculatePopoverOffsetOnTopOfScrollToElement = (story: Story) => {
 
@@ -680,14 +680,14 @@ mod.directive('helpPopoverDimensionsCalculator', () => {
   return {
     restrict: 'E',
     template: `
-        <span ng-class="ctrl.arrowClass"></span>
+        <span ng-class="$ctrl.arrowClass"></span>
       
         <div class="help-content-wrapper">
-          <h3 ng-show="ctrl.item.title">{{ctrl.item.title | translate}}</h3>
-          <p ng-show="ctrl.item.content">{{ctrl.item.content | translate}}</p>
-          <button ng-show="ctrl.helpController.showPrevious" class="small button help-navigate" translate>previous</button>
-          <button ng-show="ctrl.helpController.showNext" class="small button help-navigate" translate>next</button>
-          <button ng-show="ctrl.helpController.showClose" class="small button help-next" translate>close</button>
+          <h3 ng-show="$ctrl.item.title">{{$ctrl.item.title | translate}}</h3>
+          <p ng-show="$ctrl.item.content">{{$ctrl.item.content | translate}}</p>
+          <button ng-show="$ctrl.helpController.showPrevious" class="small button help-navigate" translate>previous</button>
+          <button ng-show="$ctrl.helpController.showNext" class="small button help-navigate" translate>next</button>
+          <button ng-show="$ctrl.helpController.showClose" class="small button help-next" translate>close</button>
           <a class="help-close">&times;</a>
         </div>
     `,
@@ -697,7 +697,7 @@ mod.directive('helpPopoverDimensionsCalculator', () => {
       helpController: '<'
     },
     controller: HelpPopoverDimensionsCalculatorController,
-    controllerAs: 'ctrl'
+    controllerAs: '$ctrl'
   };
 });
 
@@ -722,28 +722,28 @@ mod.directive('helpPopover', () => {
   return {
     restrict: 'E',
     template: `
-        <span ng-class="ctrl.arrowClass"></span>
+        <span ng-class="$ctrl.arrowClass"></span>
       
         <div class="help-content-wrapper">
-          <h3 ng-show="ctrl.title" ng-bind="ctrl.title | translate"></h3>
-          <p ng-show="ctrl.content" ng-bind="ctrl.content | translate"></p>
+          <h3 ng-show="$ctrl.title" ng-bind="$ctrl.title | translate"></h3>
+          <p ng-show="$ctrl.content" ng-bind="$ctrl.content | translate"></p>
           
-          <button ng-show="ctrl.showPrevious" 
+          <button ng-show="$ctrl.showPrevious" 
                   ng-disabled="!ctrl.helpController.canMoveToPrevious()" 
-                  ng-click="ctrl.helpController.moveToPreviousItem()" 
+                  ng-click="$ctrl.helpController.moveToPreviousItem()" 
                   class="small button help-navigate" translate>previous</button>
                   
-          <button ng-show="ctrl.showNext" 
+          <button ng-show="$ctrl.showNext" 
                   ng-disabled="!ctrl.helpController.canMoveToNext()" 
-                  ng-click="ctrl.helpController.tryToMoveToNextItem()" 
+                  ng-click="$ctrl.helpController.tryToMoveToNextItem()" 
                   class="small button help-navigate" translate>next</button>
                   
-          <button ng-show="ctrl.showClose" 
+          <button ng-show="$ctrl.showClose" 
                   ng-disabled="!ctrl.helpController.canMoveToNext()" 
-                  ng-click="ctrl.helpController.close(false)" 
+                  ng-click="$ctrl.helpController.close(false)" 
                   class="small button help-next" translate>close</button>
                   
-          <a ng-click="ctrl.helpController.close(true)" class="help-close">&times;</a>
+          <a ng-click="$ctrl.helpController.close(true)" class="help-close">&times;</a>
         </div>
     `,
     bindToController: true,
@@ -752,7 +752,7 @@ mod.directive('helpPopover', () => {
       helpController: '<'
     },
     controller: HelpPopoverController,
-    controllerAs: 'ctrl'
+    controllerAs: '$ctrl'
   };
 });
 
@@ -913,10 +913,10 @@ mod.directive('helpBackdrop', () => {
   return {
     restrict: 'E',
     template: `
-        <div ng-if="ctrl.regions" class="help-backdrop" ng-style="ctrl.regions.top"></div>
-        <div ng-if="ctrl.regions" class="help-backdrop" ng-style="ctrl.regions.right"></div>
-        <div ng-if="ctrl.regions" class="help-backdrop" ng-style="ctrl.regions.bottom"></div>
-        <div ng-if="ctrl.regions" class="help-backdrop" ng-style="ctrl.regions.left"></div>
+        <div ng-if="$ctrl.regions" class="help-backdrop" ng-style="$ctrl.regions.top"></div>
+        <div ng-if="$ctrl.regions" class="help-backdrop" ng-style="$ctrl.regions.right"></div>
+        <div ng-if="$ctrl.regions" class="help-backdrop" ng-style="$ctrl.regions.bottom"></div>
+        <div ng-if="$ctrl.regions" class="help-backdrop" ng-style="$ctrl.regions.left"></div>
     `,
     bindToController: true,
     scope: {
@@ -924,7 +924,7 @@ mod.directive('helpBackdrop', () => {
       helpController: '<'
     },
     controller: HelpBackdropController,
-    controllerAs: 'ctrl'
+    controllerAs: '$ctrl'
   };
 });
 

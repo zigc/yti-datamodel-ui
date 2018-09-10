@@ -1,9 +1,9 @@
 import { IHttpService, IPromise } from 'angular';
-import { config } from 'config';
 import { EditableEntity, GraphData } from 'app/types/entity';
 import { FrameService } from './frameService';
 import { usageFrame } from 'app/entities/frames';
 import { Usage, EmptyUsage, DefaultUsage } from 'app/entities/usage';
+import { apiEndpointWithName } from './config';
 
 export class UsageService {
   /* @ngInject */
@@ -15,7 +15,7 @@ export class UsageService {
                  : entity.isOfType('concept') ? { concept: entity.id.uri }
                                               : { id:      entity.id.uri };
 
-    return this.$http.get<GraphData>(config.apiEndpointWithName('usage'), {params})
+    return this.$http.get<GraphData>(apiEndpointWithName('usage'), {params})
       .then(response => this.deserializeUsage(response.data!))
       .then(usage => {
         if (usage) {

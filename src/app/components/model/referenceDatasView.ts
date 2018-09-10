@@ -1,16 +1,16 @@
-import { IAttributes, IScope } from 'angular';
+import { IScope } from 'angular';
 import { LanguageService, Localizer } from 'app/services/languageService';
-import { TableDescriptor, ColumnDescriptor } from 'app/components/form/editableTable';
-import { module as mod } from './module';
+import { ColumnDescriptor, TableDescriptor } from 'app/components/form/editableTable';
 import { createExistsExclusion } from 'app/utils/exclusion';
 import { collectIds } from 'app/utils/entity';
 import { SearchReferenceDataModal } from './searchReferenceDataModal';
 import { EditReferenceDataModal } from './editReferenceDataModal';
 import { ViewReferenceDataModal } from './viewReferenceDataModal';
 import { ReferenceData } from 'app/entities/referenceData';
-import { modalCancelHandler } from 'app/utils/angular';
+import { ComponentDeclaration, modalCancelHandler } from 'app/utils/angular';
 import { LanguageContext } from 'app/types/language';
 import { EditableForm } from 'app/components/form/editableEntityController';
+import { forwardRef } from '@angular/core';
 
 interface WithReferenceDatas {
   referenceDatas: ReferenceData[];
@@ -18,51 +18,53 @@ interface WithReferenceDatas {
   removeReferenceData(referenceData: ReferenceData): void;
 }
 
-mod.directive('referenceDatasView', () => {
-  return {
-    scope: {
-      value: '=',
-      context: '='
-    },
-    restrict: 'E',
-    template: `
+export const ReferenceDatasViewComponent: ComponentDeclaration = {
+  selector: 'referenceDatasView',
+  bindings: {
+    value: '=',
+    context: '='
+  },
+  require: {
+    form: '?^form'
+  },
+  template: `
       <h4>
         <span translate>Reference data</span> 
-        <button id="add_reference_data_button" type="button" class="btn btn-link btn-xs pull-right" ng-click="ctrl.addReferenceData()" ng-show="ctrl.isEditing()">
+        <button id="add_reference_data_button" type="button" class="btn btn-link btn-xs pull-right" ng-click="$ctrl.addReferenceData()" ng-show="$ctrl.isEditing()">
           <span translate>Add reference data</span>
         </button>
       </h4>
-      <editable-table id="'referenceData'" descriptor="ctrl.descriptor" expanded="ctrl.expanded"></editable-table>
-    `,
-    controllerAs: 'ctrl',
-    bindToController: true,
-    require: ['referenceDatasView', '?^form'],
-    link(_$scope: IScope, _element: JQuery, _attributes: IAttributes, [thisController, formController]: [ReferenceDatasViewController, EditableForm]) {
-      thisController.isEditing = () => formController && formController.editing;
-    },
-    controller: ReferenceDatasViewController
-  };
-});
+      <editable-table id="'referenceData'" descriptor="$ctrl.descriptor" expanded="$ctrl.expanded"></editable-table>
+  `,
+  controller: forwardRef(() => ReferenceDatasViewController)
+};
 
 class ReferenceDatasViewController {
 
   value: WithReferenceDatas;
   context: LanguageContext;
-  isEditing: () => boolean;
 
   descriptor: ReferenceDataTableDescriptor;
   expanded: boolean;
 
-  /* @ngInject */
-  constructor($scope: IScope,
-              private searchReferenceDataModal: SearchReferenceDataModal,
-              editReferenceDataModal: EditReferenceDataModal,
-              viewReferenceDataModal: ViewReferenceDataModal,
-              languageService: LanguageService) {
+  form: EditableForm;
 
-    $scope.$watch(() => this.value, value => {
-      this.descriptor = new ReferenceDataTableDescriptor(value, this.context, editReferenceDataModal, viewReferenceDataModal, languageService);
+  /* @ngInject */
+  constructor(private $scope: IScope,
+              private searchReferenceDataModal: SearchReferenceDataModal,
+              private editReferenceDataModal: EditReferenceDataModal,
+              private viewReferenceDataModal: ViewReferenceDataModal,
+              private languageService: LanguageService) {
+  }
+
+  $onInit() {
+    this.$scope.$watch(() => this.value, value => {
+      this.descriptor = new ReferenceDataTableDescriptor(value, this.context, this.editReferenceDataModal, this.viewReferenceDataModal, this.languageService);
     });
+  }
+
+  isEditing() {
+    return this.form && this.form.editing;
   }
 
   addReferenceData() {

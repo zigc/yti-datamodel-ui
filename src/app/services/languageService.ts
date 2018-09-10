@@ -4,7 +4,7 @@ import { Localizable, Localizer as AngularLocalizer } from 'yti-common-ui/types/
 import { SessionService } from './sessionService';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable, BehaviorSubject } from 'rxjs';
-import GettextCatalog = angular.gettext.gettextCatalog;
+import { gettextCatalog as GettextCatalog } from 'angular-gettext';
 
 type Localizer = AngularJSLocalizer;
 export { Localizer };

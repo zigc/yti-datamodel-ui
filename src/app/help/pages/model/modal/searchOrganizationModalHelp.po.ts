@@ -1,6 +1,6 @@
-import { Story } from '../../../contract';
-import { selectSearchResult } from '../../modal/searchModalHelp.po';
-import { modal } from '../../../selectors';
+import { Story } from 'app/help/contract';
+import { selectSearchResult } from 'app/help/pages/modal/searchModalHelp.po';
+import { modal } from 'app/help/selectors';
 
 export function selectOrganization(name: string, id: string): Story {
   return selectSearchResult(modal, name, id, true);

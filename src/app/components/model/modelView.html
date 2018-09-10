@@ -1,46 +1,46 @@
 <div>
 
-  <div ng-if="ctrl.model" class="row header">
+  <div ng-if="$ctrl.model" class="row header">
     <div class="col-12">
 
       <h2>
 
-        <span class="mr-4">{{ctrl.model | translateLabel: ctrl.model}}</span>
+        <span class="mr-4">{{$ctrl.model | translateLabel: $ctrl.model}}</span>
 
         <button id="show_model_details_button"
                 class="btn btn-action"
-                ng-hide="ctrl.visible"
-                ng-click="ctrl.visible = true" translate>Show model details</button>
+                ng-hide="$ctrl.visible"
+                ng-click="$ctrl.visible = true" translate>Show model details</button>
 
         <button id="hide_model_details_button"
                 class="btn btn-action"
-                ng-show="ctrl.visible"
-                ng-click="ctrl.visible = false" translate>Hide model details</button>
+                ng-show="$ctrl.visible"
+                ng-click="$ctrl.visible = false" translate>Hide model details</button>
 
       </h2>
 
-      <model-language-chooser context="ctrl.model" class="pull-right mt-2"></model-language-chooser>
+      <model-language-chooser context="$ctrl.model" class="pull-right mt-2"></model-language-chooser>
 
     </div>
   </div>
 
   <form name="form" class="editable-form">
-    <fieldset ng-if="ctrl.model" ng-disabled="ctrl.persisting">
-      <div uib-collapse="!ctrl.visible" class="main-editable-content">
+    <fieldset ng-if="$ctrl.model" ng-disabled="$ctrl.persisting">
+      <div uib-collapse="!$ctrl.visible" class="main-editable-content">
 
         <hr />
 
-        <editable-entity-buttons context="ctrl.model" editable-controller="ctrl">
-          <app-status [status]="ctrl.model.status"></app-status>
-          <export ng-hide="ctrl.isEditing()" entity="ctrl.model" context="ctrl.model"></export>
-          <history model="ctrl.model" resource="ctrl.model" ng-hide="ctrl.isEditing()"></history>
-          <button id="close_model_details_button" class="btn btn-link pull-right" ng-click="ctrl.visible = false">
+        <editable-entity-buttons context="$ctrl.model" editable-controller="$ctrl">
+          <app-status [status]="$ctrl.model.status"></app-status>
+          <export ng-hide="$ctrl.isEditing()" entity="$ctrl.model" context="$ctrl.model"></export>
+          <history model="$ctrl.model" resource="$ctrl.model" ng-hide="$ctrl.isEditing()"></history>
+          <button id="close_model_details_button" class="btn btn-link pull-right" ng-click="$ctrl.visible = false">
             <i class="fas fa-times"></i>
             <span translate>Close</span>
           </button>
         </editable-entity-buttons>
 
-        <model-form id="ctrl.id" model="ctrl.editableInEdit" model-controller="ctrl.modelController"></model-form>
+        <model-form id="$ctrl.id" model="$ctrl.editableInEdit" model-controller="$ctrl.modelController"></model-form>
       </div>
     </fieldset>
   </form>

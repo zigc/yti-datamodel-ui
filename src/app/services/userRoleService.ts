@@ -1,7 +1,7 @@
 import { IHttpService, IPromise } from 'angular';
 import { Uri } from 'app/entities/uri';
 import { Role } from 'yti-common-ui/services/user.service';
-import { config } from 'config';
+import { apiEndpointWithName } from './config';
 
 export interface UserRequest {
   organizationId: string;
@@ -20,12 +20,12 @@ export class UserRoleService {
       organizationId: id.uuid
     };
 
-    return this.$http.post<UserRequest[]>(config.apiEndpointWithName('userRequest'), undefined, {params: requestParams})
+    return this.$http.post<UserRequest[]>(apiEndpointWithName('userRequest'), undefined, {params: requestParams})
       .then(response => response.data!);
   }
 
   getUserRequests(): IPromise<UserRequest[]> {
-    return this.$http.get<UserRequest[]>(config.apiEndpointWithName('userRequest'))
+    return this.$http.get<UserRequest[]>(apiEndpointWithName('userRequest'))
       .then(response => response.data!);
   }
 }

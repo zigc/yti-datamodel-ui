@@ -4,32 +4,27 @@ import { ClassService } from 'app/services/classService';
 import { SearchPredicateModal } from './searchPredicateModal';
 import { UserService } from 'app/services/userService';
 import { DeleteConfirmationModal } from 'app/components/common/deleteConfirmationModal';
-import { module as mod } from './module';
 import { ErrorModal } from 'app/components/form/errorModal';
-import { modalCancelHandler } from 'app/utils/angular';
+import { ComponentDeclaration, modalCancelHandler } from 'app/utils/angular';
 import { Class } from 'app/entities/class';
 import { Model } from 'app/entities/model';
 import { LanguageContext } from 'app/types/language';
 import { ModelControllerService } from 'app/components/model/modelControllerService';
 import { AuthorizationManagerService } from 'app/services/authorizationManagerService';
+import { forwardRef } from '@angular/core';
 
-mod.directive('classView', () => {
-  return {
-    scope: {
-      id: '=',
-      class: '=',
-      model: '=',
-      modelController: '=',
-      openPropertyId: '='
-    },
-    restrict: 'E',
-    template: require('./classView.html'),
-    controllerAs: 'ctrl',
-    bindToController: true,
-    controller: ClassViewController,
-    require: 'classView'
-  };
-});
+export const ClassViewComponent: ComponentDeclaration = {
+  selector: 'classView',
+  bindings: {
+    id: '=',
+    class: '=',
+    model: '=',
+    modelController: '=',
+    openPropertyId: '='
+  },
+  template: require('./classView.html'),
+  controller: forwardRef(() => ClassViewController)
+};
 
 export class ClassViewController extends EditableEntityController<Class> {
 
@@ -48,7 +43,9 @@ export class ClassViewController extends EditableEntityController<Class> {
               userService: UserService,
               private authorizationManagerService: AuthorizationManagerService) {
     super($scope, $log, deleteConfirmationModal, errorModal, userService);
+  }
 
+  $onInit() {
     this.modelController.registerView(this);
   }
 

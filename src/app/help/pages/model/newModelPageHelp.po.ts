@@ -4,9 +4,9 @@ import { createStory, createNavigatingClickNextCondition, createExpectedStateNex
 import { editableMargin, initialInputValue, validInput } from 'app/help/utils';
 import { KnownModelType } from 'app/types/entity';
 import { createExplicitNextCondition, createScrollNone } from 'app/help/contract';
-import GettextCatalog = angular.gettext.gettextCatalog;
+import { gettextCatalog as GettextCatalog } from 'angular-gettext';
 
-const form = () => angular.element('form');
+const form = () => jQuery('form');
 
 export function enterModelPrefix(prefix: string) {
 
@@ -73,7 +73,7 @@ export const enterModelLanguage = createStory({
   nextCondition: createExpectedStateNextCondition(validInput(enterModelLanguageInputElement))
 });
 
-const addClassificationElement = () => angular.element('classifications-view button');
+const addClassificationElement = () => jQuery('classifications-view button');
 export const addClassification = createStory({
 
   title: 'Add classification',
@@ -84,7 +84,7 @@ export const addClassification = createStory({
   nextCondition: createClickNextCondition(addClassificationElement)
 });
 
-const addContributorElement = () => angular.element('contributors-view button');
+const addContributorElement = () => jQuery('contributors-view button');
 export const addContributor = createStory({
 
   title: 'Add contributor',
@@ -95,7 +95,7 @@ export const addContributor = createStory({
   nextCondition: createClickNextCondition(addContributorElement)
 });
 
-const focusClassificationsElement = () => angular.element('classifications-view editable-table');
+const focusClassificationsElement = () => jQuery('classifications-view editable-table');
 export const focusClassifications = createStory({
   title: 'Classifications are here',
   scroll: createScrollNone(),
@@ -105,7 +105,7 @@ export const focusClassifications = createStory({
   nextCondition: createExplicitNextCondition()
 });
 
-const focusContributorsElement = () => angular.element('contributors-view editable-table');
+const focusContributorsElement = () => jQuery('contributors-view editable-table');
 export const focusContributors = createStory({
   title: 'Contributors are here',
   scroll: createScrollNone(),

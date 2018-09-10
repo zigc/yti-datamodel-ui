@@ -1,36 +1,38 @@
 import { IScope } from 'angular';
-import GettextCatalog = angular.gettext.gettextCatalog;
+import { gettextCatalog as GettextCatalog } from 'angular-gettext';
 import { LanguageService } from 'app/services/languageService';
 import { isLocalizationDefined } from 'app/utils/language';
-import { module as mod } from './module';
 import { Language, LanguageContext } from 'app/types/language';
+ import { ComponentDeclaration } from 'app/utils/angular';
+import { forwardRef } from '@angular/core';
 
-mod.directive('modelLanguageChooser', () => {
-  return {
-    scope: {
-      context: '='
-    },
-    restrict: 'E',
-    template: require('./modelLanguageChooser.html'),
-    controllerAs: 'ctrl',
-    bindToController: true,
-    controller: ModelLanguageChooserController
-  };
-});
+export const ModelLanguageChooserComponent: ComponentDeclaration = {
+  selector: 'modelLanguageChooser',
+  bindings: {
+    context: '='
+  },
+  template: require('./modelLanguageChooser.html'),
+  controller: forwardRef(() => ModelLanguageChooserController)
+};
 
 class ModelLanguageChooserController {
 
   context: LanguageContext;
 
   /* @ngInject */
-  constructor($scope: IScope, private languageService: LanguageService, private gettextCatalog: GettextCatalog) {
-    $scope.$watchCollection(() => this.context && this.context.language, languages => {
-      if (languages && languages.indexOf(languageService.getModelLanguage(this.context)) === -1) {
-        languageService.setModelLanguage(this.context, this.context.language[0]);
+  constructor(private $scope: IScope,
+              private languageService: LanguageService,
+              private gettextCatalog: GettextCatalog) {
+  }
+
+  $onInit() {
+    this.$scope.$watchCollection(() => this.context && this.context.language, languages => {
+      if (languages && languages.indexOf(this.languageService.getModelLanguage(this.context)) === -1) {
+        this.languageService.setModelLanguage(this.context, this.context.language[0]);
       }
     });
 
-    $scope.$watch(() => languageService.UILanguage, (language, previousLanguage) => {
+    this.$scope.$watch(() => this.languageService.UILanguage, (language, previousLanguage) => {
       if (language !== previousLanguage) {
         if (this.context && this.context.language.indexOf(language) !== -1) {
           this.languageService.setModelLanguage(this.context, language);

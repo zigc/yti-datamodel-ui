@@ -1,68 +1,59 @@
-import { IAttributes, ICompiledExpression, IPromise, IScope, IQService } from 'angular';
+import { ICompiledExpression, IPromise, IQService, IScope } from 'angular';
 import { SearchPredicateModal } from './searchPredicateModal';
 import { SearchClassModal } from './searchClassModal';
 import { EditableForm } from 'app/components/form/editableEntityController';
 import { Uri } from 'app/entities/uri';
-import { module as mod } from './module';
 import { DataSource } from 'app/components/form/dataSource';
 import { ClassService } from 'app/services/classService';
 import { PredicateService } from 'app/services/predicateService';
-import { itemExclusion, idExclusion } from 'app/utils/exclusion';
+import { idExclusion, itemExclusion } from 'app/utils/exclusion';
 import { ClassListItem } from 'app/entities/class';
 import { PredicateListItem } from 'app/entities/predicate';
 import { ClassType, KnownPredicateType } from 'app/types/entity';
 import { Model } from 'app/entities/model';
-import { modalCancelHandler } from 'app/utils/angular';
+import { ComponentDeclaration, modalCancelHandler } from 'app/utils/angular';
+import { forwardRef } from '@angular/core';
 
-mod.directive('uriSelect', () => {
-  return {
-    scope: {
-      uri: '=',
-      type: '@',
-      model: '=',
-      id: '@',
-      afterSelected: '&',
-      mandatory: '=',
-      excludeId: '=?',
-      excludeItem: '=?',
-      defaultToCurrentModel: '='
-    },
-    restrict: 'E',
-    controllerAs: 'ctrl',
-    bindToController: true,
-    template: `
-      <autocomplete datasource="ctrl.datasource" value-extractor="ctrl.valueExtractor" exclude-provider="ctrl.createItemExclusion">
-        <input id="{{ctrl.id}}"
+export const UriSelectComponent: ComponentDeclaration = {
+  selector: 'uriSelect',
+  bindings: {
+    uri: '=',
+    type: '@',
+    model: '=',
+    id: '@',
+    afterSelected: '&',
+    mandatory: '=',
+    excludeId: '=?',
+    excludeItem: '=?',
+    defaultToCurrentModel: '='
+  },
+  require: {
+    form: '?^form'
+  },
+  template: `
+      <autocomplete datasource="$ctrl.datasource" value-extractor="$ctrl.valueExtractor" exclude-provider="$ctrl.createItemExclusion">
+        <input id="{{$ctrl.id}}"
                type="text"
                class="form-control"
                uri-input
-               exclude-validator="ctrl.createIdExclusion"
-               ng-required="ctrl.mandatory"
-               model="ctrl.model"
-               ng-model="ctrl.uri"
-               ng-blur="ctrl.handleChange()"
+               exclude-validator="$ctrl.createIdExclusion"
+               ng-required="$ctrl.mandatory"
+               model="$ctrl.model"
+               ng-model="$ctrl.uri"
+               ng-blur="$ctrl.handleChange()"
                autocomplete="off" />
       </autocomplete>
 
-      <button id="{{ctrl.id + '_choose_' + ctrl.type + '_uri_select_button'}}"
-              ng-if="formController.editing"
+      <button id="{{$ctrl.id + '_choose_' + $ctrl.type + '_uri_select_button'}}"
+              ng-if="$ctrl.isEditing()"
               type="button"
               class="btn btn-action btn-sm"
-              ng-click="ctrl.selectUri()">
-        {{('Choose ' + ctrl.type) | translate}}
+              ng-click="$ctrl.selectUri()">
+        {{('Choose ' + $ctrl.type) | translate}}
       </button>
-    `,
-    require: '?^form',
-    link($scope: EditableScope, _element: JQuery, _attributes: IAttributes, formController: EditableForm) {
-      $scope.formController = formController;
-    },
-    controller: UriSelectController
-  };
-});
-
-interface EditableScope extends IScope {
-  formController: EditableForm;
-}
+  `,
+  controller: forwardRef(() => UriSelectController)
+};
 
 type DataType = ClassListItem|PredicateListItem;
 
@@ -86,22 +77,32 @@ class UriSelectController {
   createIdExclusion = () => idExclusion(this.excludeId, this.excludeItem, this.datasource, this.$q);
   createItemExclusion = () => itemExclusion(this.excludeId, this.excludeItem);
 
-  constructor($scope: IScope,
+  form: EditableForm;
+
+  /* @ngInject */
+  constructor(private $scope: IScope,
               private $q: IQService,
               private searchPredicateModal: SearchPredicateModal,
               private searchClassModal: SearchClassModal,
-              classService: ClassService,
-              predicateService: PredicateService) {
+              private classService: ClassService,
+              private predicateService: PredicateService) {
+  }
+
+  $onInit() {
 
     const modelProvider = () => this.model;
-    this.datasource = this.type === 'class' || this.type === 'shape' ? classService.getClassesForModelDataSource(modelProvider)
-                                                                     : predicateService.getPredicatesForModelDataSource(modelProvider);
+    this.datasource = this.type === 'class' || this.type === 'shape' ? this.classService.getClassesForModelDataSource(modelProvider)
+                                                                     : this.predicateService.getPredicatesForModelDataSource(modelProvider);
 
-    $scope.$watch(() => this.uri, (current, previous) => {
+    this.$scope.$watch(() => this.uri, (current, previous) => {
       if (!current || !current.equals(previous)) {
         this.change = current;
       }
     });
+  }
+
+  isEditing() {
+    return this.form && this.form.editing;
   }
 
   handleChange() {

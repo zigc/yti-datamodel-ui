@@ -3,7 +3,7 @@
   <div class="modal-header">
     <h4 class="modal-title">
       <a><i ng-click="$dismiss('cancel')" class="fas fa-times"></i></a>
-      {{ctrl.defineConceptTitle | translate}}
+      {{$ctrl.defineConceptTitle | translate}}
     </h4>
   </div>
 
@@ -13,13 +13,13 @@
       <div class="col-12">
 
         <text-filter class="pull-left"
-                     search-text="ctrl.searchText"
-                     search-controller="ctrl"
-                     content-extractors="ctrl.contentExtractors"
+                     search-text="$ctrl.searchText"
+                     search-controller="$ctrl"
+                     content-extractors="$ctrl.contentExtractors"
                      placeholder="'Search from concept database'"></text-filter>
 
         <model-language-chooser class="pull-right"
-                                context="ctrl.model"></model-language-chooser>
+                                context="$ctrl.model"></model-language-chooser>
       </div>
     </div>
 
@@ -28,9 +28,9 @@
         <select id="vocabulary"
                 class="form-control"
                 style="width: auto"
-                ng-model="ctrl.selectedVocabulary"
+                ng-model="$ctrl.selectedVocabulary"
                 ignore-dirty
-                ng-options="(vocabulary.title | translateValue: ctrl.model) for vocabulary in ctrl.vocabularies">
+                ng-options="(vocabulary.title | translateValue: $ctrl.model) for vocabulary in $ctrl.vocabularies">
           <option value="" translate>All vocabularies</option>
         </select>
       </div>
@@ -41,17 +41,17 @@
         <div class="content-box">
           <div class="search-results">
 
-            <ajax-loading-indicator ng-if="ctrl.loadingResults"></ajax-loading-indicator>
+            <ajax-loading-indicator ng-if="$ctrl.loadingResults"></ajax-loading-indicator>
 
-            <search-results ng-if="!ctrl.loadingResults"
-                            items="ctrl.searchResults"
-                            selected="ctrl.selectedItem"
-                            on-select="ctrl.selectItem(item)"
-                            edit-in-progress="ctrl.editInProgress">
+            <search-results ng-if="!$ctrl.loadingResults"
+                            items="$ctrl.searchResults"
+                            selected="$ctrl.selectedItem"
+                            on-select="$ctrl.selectItem(item)"
+                            edit-in-progress="$ctrl.editInProgress">
 
               <span class="title">
-                <ajax-loading-indicator-small ng-if="ctrl.loadingSelection(searchResult)"></ajax-loading-indicator-small>
-                <highlight text="searchResult.label" context="ctrl.model" search="ctrl.searchText"></highlight>
+                <ajax-loading-indicator-small ng-if="$ctrl.loadingSelection(searchResult)"></ajax-loading-indicator-small>
+                <highlight text="searchResult.label" context="$ctrl.model" search="$ctrl.searchText"></highlight>
               </span>
 
               <div class="origin">
@@ -65,34 +65,34 @@
 
       <div class="col-6 search-selection">
 
-        <div ng-if="ctrl.selection">
+        <div ng-if="$ctrl.selection">
 
-          <div ng-if="ctrl.isSelectionAddWithoutConceptData()">
+          <div ng-if="$ctrl.isSelectionAddWithoutConceptData()">
             <p>
-              <span>{{'Create new ' + ctrl.type + ' without referencing concept' | translate}}</span>
+              <span>{{'Create new ' + $ctrl.type + ' without referencing concept' | translate}}</span>
             </p>
           </div>
 
-          <concept-form ng-if="ctrl.isSelectionConcept()" concept="ctrl.selection" model="ctrl.model"></concept-form>
+          <concept-form ng-if="$ctrl.isSelectionConcept()" concept="$ctrl.selection" model="$ctrl.model"></concept-form>
 
-          <div ng-if="ctrl.isSelectionNewConceptData()">
+          <div ng-if="$ctrl.isSelectionNewConceptData()">
 
-            <editable data-title="Vocabulary" context="ctrl.model" autofocus>
-              <select id="vocabularySelection" class="form-control" required ng-model="ctrl.selection.vocabulary"
-                      ng-options="(vocabulary.title | translateValue: ctrl.model) for vocabulary in ctrl.vocabularies">
+            <editable data-title="Vocabulary" context="$ctrl.model" autofocus>
+              <select id="vocabularySelection" class="form-control" required ng-model="$ctrl.selection.vocabulary"
+                      ng-options="(vocabulary.title | translateValue: $ctrl.model) for vocabulary in $ctrl.vocabularies">
               </select>
             </editable>
 
-            <editable data-title="Concept label" context="ctrl.model">
-              <input id="conceptLabel" type="text" class="form-control" required string-input="label" ng-model="ctrl.selection.label" />
+            <editable data-title="Concept label" context="$ctrl.model">
+              <input id="conceptLabel" type="text" class="form-control" required string-input="label" ng-model="$ctrl.selection.label" />
             </editable>
 
-            <editable data-title="Definition" context="ctrl.model">
-              <textarea id="conceptDefinition" class="form-control" required string-input ng-model="ctrl.selection.definition"></textarea>
+            <editable data-title="Definition" context="$ctrl.model">
+              <textarea id="conceptDefinition" class="form-control" required string-input ng-model="$ctrl.selection.definition"></textarea>
             </editable>
 
             <br />
-            <p><span translate>Concept is suggested to vocabulary</span> {{ctrl.selection.vocabulary.title | translateValue: ctrl.model}}</p>
+            <p><span translate>Concept is suggested to vocabulary</span> {{$ctrl.selection.vocabulary.title | translateValue: $ctrl.model}}</p>
 
           </div>
 
@@ -106,12 +106,12 @@
 
     <button type="button"
             class="btn btn-action confirm"
-            ng-click="ctrl.confirm()"
-            ng-disabled="!ctrl.selection || form.$invalid || form.$pending">{{ctrl.buttonTitle | translate}}</button>
+            ng-click="$ctrl.confirm()"
+            ng-disabled="!$ctrl.selection || form.$invalid || form.$pending">{{$ctrl.buttonTitle | translate}}</button>
 
     <button type="button"
             class="btn btn-link cancel"
-            ng-click="ctrl.close()" translate>Cancel</button>
+            ng-click="$ctrl.close()" translate>Cancel</button>
   </div>
 
 </form>

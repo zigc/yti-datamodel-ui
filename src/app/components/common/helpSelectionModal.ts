@@ -1,6 +1,4 @@
-import { ui } from 'angular';
-import IModalService = ui.bootstrap.IModalService;
-import IModalServiceInstance = ui.bootstrap.IModalServiceInstance;
+import { IModalService, IModalServiceInstance } from 'angular-ui-bootstrap';
 import { InteractiveHelp } from 'app/help/contract';
 import { InteractiveHelpDisplay } from 'app/help/components/interactiveHelpDisplay';
 
@@ -25,7 +23,7 @@ export class HelpSelectionModal {
           <div class="modal-body full-height">
             <div class="content-box scrolling">
               <div class="search-results">            
-                <div class="search-result" ng-repeat="help in ctrl.helps" ng-click="ctrl.startHelp(help)">
+                <div class="search-result" ng-repeat="help in $ctrl.helps" ng-click="$ctrl.startHelp(help)">
                   <div class="content" ng-class="{last: $last}">
                     <div class="title">{{help.storyLine.title | translate}}</div>
                     <div class="body">{{help.storyLine.description | translate}}</div>                  
@@ -41,7 +39,7 @@ export class HelpSelectionModal {
         </div>
       `,
       size: 'md',
-      controllerAs: 'ctrl',
+      controllerAs: '$ctrl',
       controller: HelpSelectionModalController,
       resolve: {
         helps: () => helps

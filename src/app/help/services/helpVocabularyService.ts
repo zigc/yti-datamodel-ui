@@ -7,12 +7,12 @@ import { Uri } from 'app/entities/uri';
 import * as frames from 'app/entities/frames';
 import { ResourceStore } from './resourceStore';
 import { analyze } from 'app/components/filter/textAnalyzer';
-import { GraphData } from '../../types/entity';
-import { Url } from '../../entities/uri';
-import { FrameService } from '../../services/frameService';
+import { GraphData } from 'app/types/entity';
+import { Url } from 'app/entities/uri';
+import { FrameService } from 'app/services/frameService';
 import { Localizable } from 'yti-common-ui/types/localization';
-import { v4 as uuid } from 'node-uuid';
-import { requireDefined } from '../../../../node_modules/yti-common-ui/utils/object';
+import { v4 as uuid } from 'uuid';
+import { requireDefined } from 'yti-common-ui/utils/object';
 
 const context = {
   prefLabel : { '@id' : 'http://www.w3.org/2004/02/skos/core#prefLabel' },

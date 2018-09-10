@@ -5,7 +5,7 @@ import { editableByTitle, child, editableFocus } from 'app/help/selectors';
 import { editableMargin } from 'app/help/utils';
 import * as SearchClassModal from './modal/searchClassModalHelp.po';
 import * as AddPropertiesFromClassModal from './modal/addPropertiesFromClassModalHelp.po';
-import GettextCatalog = angular.gettext.gettextCatalog;
+import { gettextCatalog as GettextCatalog } from 'angular-gettext';
 
 export function focusClass(parent: () => JQuery) {
 
@@ -23,7 +23,7 @@ export function focusClass(parent: () => JQuery) {
 
 export function focusOpenProperty(parent: () => JQuery) {
 
-  const focusOpenPropertyElement = child(parent, 'property-view div[ng-if="ctrl.isOpen()"]');
+  const focusOpenPropertyElement = child(parent, 'property-view div[ng-if="$ctrl.isOpen()"]');
 
   return createStory({
     title: 'Property is here',

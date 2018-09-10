@@ -1,39 +1,39 @@
-import { IAttributes, IScope } from 'angular';
-import { module as mod } from './module';
-import { ModelViewController } from './modelView';
 import { Model } from 'app/entities/model';
 import { ModelControllerService } from './modelControllerService';
+ import { ComponentDeclaration } from 'app/utils/angular';
+import { forwardRef } from '@angular/core';
+import { EditableForm } from 'app/components/form/editableEntityController';
 
-mod.directive('modelForm', () => {
-  return {
-    scope: {
-      id: '=',
-      model: '=',
-      modelController: '='
-    },
-    restrict: 'E',
-    template: require('./modelForm.html'),
-    controllerAs: 'ctrl',
-    bindToController: true,
-    require: ['modelForm', '?^modelView'],
-    controller: ModelFormController,
-    link(_$scope: IScope, _element: JQuery, _attributes: IAttributes, [modelFormController, modelViewController]: [ModelFormController, ModelViewController]) {
-      modelFormController.isEditing = () => modelViewController && modelViewController.isEditing();
-    }
-  };
-});
+export const ModelFormComponent: ComponentDeclaration = {
+  selector: 'modelForm',
+  bindings: {
+    id: '=',
+    model: '=',
+    modelController: '='
+  },
+  require: {
+    form: '?^form'
+  },
+  template: require('./modelForm.html'),
+  controller: forwardRef(() => ModelFormController)
+};
 
 class ModelFormController {
 
   model: Model;
   modelController: ModelControllerService;
-  isEditing: () => boolean;
+
+  form: EditableForm;
+
+  isEditing() {
+    return this.form && this.form.editing;
+  }
 
   get allowProfiles() {
     return this.model.isOfType('profile');
   }
 
   namespacesInUse() {
-    return this.modelController.namespacesInUse;
+    return this.modelController && this.modelController.namespacesInUse;
   }
 }

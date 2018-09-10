@@ -1,11 +1,14 @@
-import { module as mod } from './module';
+ import { ComponentDeclaration } from 'app/utils/angular';
+import { forwardRef } from '@angular/core';
 
-mod.directive('errorPanel', () => {
-  return {
-    restrict: 'E',
-    template: require('./errorPanel.html'),
-    scope: {
-      error: '='
-    }
-  };
-});
+export const ErrorPanelComponent: ComponentDeclaration = {
+  selector: 'errorPanel',
+  bindings: {
+    error: '='
+  },
+  template: require('./errorPanel.html'),
+  controller: forwardRef(() => ErrorPanelController)
+};
+
+export class ErrorPanelController {
+}

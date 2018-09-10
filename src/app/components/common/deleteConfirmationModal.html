@@ -3,9 +3,9 @@
     <modal-title translate>Confirm delete</modal-title>
     <modal-body>
 
-      <div ng-if="ctrl.usage && ctrl.hasReferrers">
-        <p><span translate>Following items are depending on the deleted</span> <span>{{'of ' + ctrl.entity.normalizedType | translate}}</span></p>
-        <usage usage="ctrl.usage" exclude="ctrl.exclude" context="ctrl.context"></usage>
+      <div ng-if="$ctrl.usage && $ctrl.hasReferrers">
+        <p><span translate>Following items are depending on the deleted</span> <span>{{'of ' + $ctrl.entity.normalizedType | translate}}</span></p>
+        <usage usage="$ctrl.usage" exclude="$ctrl.exclude" context="$ctrl.context"></usage>
         <br />
       </div>
 

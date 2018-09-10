@@ -1,6 +1,4 @@
-import { ui } from 'angular';
-import IModalService = ui.bootstrap.IModalService;
-import IModalServiceInstance = ui.bootstrap.IModalServiceInstance;
+import { IModalService, IModalServiceInstance } from 'angular-ui-bootstrap';
 import { Uri } from 'app/entities/uri';
 import { Language, LanguageContext } from 'app/types/language';
 import { ReferenceData } from 'app/entities/referenceData';
@@ -17,7 +15,7 @@ export class EditReferenceDataModal {
       template: require('./editReferenceDataModal.html'),
       size: 'sm',
       controller: EditReferenceDataModalController,
-      controllerAs: 'ctrl',
+      controllerAs: '$ctrl',
       backdrop: true,
       resolve: {
         context: () => context,

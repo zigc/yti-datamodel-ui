@@ -1,8 +1,8 @@
-import { ILocationService, ui } from 'angular';
-import IModalStackService = ui.bootstrap.IModalStackService;
+import { ILocationService } from 'angular';
+import { IModalStackService } from 'angular-ui-bootstrap';
 import { createNotification, InteractiveHelp, Story, StoryLine, Notification } from './contract';
 import { KnownModelType } from 'app/types/entity';
-import GettextCatalog = angular.gettext.gettextCatalog;
+import { gettextCatalog as GettextCatalog } from 'angular-gettext';
 import * as FrontPage from './pages/frontPageHelp.po';
 import * as NewModelPage from './pages/model/newModelPageHelp.po';
 import * as ModelPage from './pages/model/modelPageHelp.po';
@@ -13,9 +13,9 @@ import * as SearchClassificationModal from './pages/model/modal/searchClassifica
 import * as SearchOrganizationsModal from './pages/model/modal/searchOrganizationModalHelp.po';
 import * as VisualizationView from './pages/model/visualizationViewHelp.po';
 import { exampleLibrary, exampleProfile } from './entities';
-import { EntityLoaderService } from '../services/entityLoader';
+import { EntityLoaderService } from 'app/services/entityLoader';
 import { InteractiveHelpService } from './services/interactiveHelpService';
-import { ModelService } from '../services/modelService';
+import { ModelService } from 'app/services/modelService';
 
 function createNewLibraryItems(gettextCatalog: GettextCatalog): Story[] {
 

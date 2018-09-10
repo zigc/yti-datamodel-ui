@@ -57,24 +57,26 @@ export class OverlayService {
       const scope = instance.createScope(parentScope);
 
       if (options.controller) {
-        const locals = angular.extend({
-          $scope: scope,
-          $overlayInstance: instance
-        }, vars);
 
-        const instantiator: any = this.$controller(options.controller, locals, true);
+        const locals = {
+          $scope: scope,
+          $overlayInstance: instance,
+          ...vars
+        };
+
+        const instantiator: any = this.$controller(options.controller, locals);
         const ctrl = instantiator();
 
         if (options.controllerAs) {
-          scope[options.controllerAs] = ctrl;
+          (scope as any)[options.controllerAs] = ctrl;
         }
 
-        if (angular.isFunction(ctrl.$onInit)) {
+        if (jQuery.isFunction(ctrl.$onInit)) {
           ctrl.$onInit();
         }
       }
 
-      const elem = angular.element(options.template);
+      const elem = jQuery(options.template);
 
       if (options.disableScroll) {
         body.addClass(overlayOpenClass);

@@ -1,6 +1,8 @@
 # yti-datamodel-ui
 
-Interoperability workbench data model user interface  
+User interface for datamodel editor
+
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.1.4.
 
 ## Prepare tools
 
@@ -10,40 +12,34 @@ Interoperability workbench data model user interface
 
 `yarn install`
 
-## Usage
-To run the build
-
-    npm start
+## Development server
+Run `npm start` for a dev server. Navigate to `http://localhost:9001/`. The app will automatically reload if you change any of the source files.
 
 ## Installing new npm dependencies
 
-    yard add --save foo-bar-x
+`yarn add foo-bar-x`
 
 ## Loading example data
 To load example data to a local api/fuseki installation, run
 
-    npm run example-data
+`npm run example-data`
 
 To load example data to a custom host and/or port
 
-    npm run example-data -- --host 127.0.0.1 --port 8080
+`npm run example-data -- --host 127.0.0.1 --port 8084`
 
 ## Updating translation file
 
-    npm run create-translations
+npm run create-translations
 
-Copy new entries from `template.pot` to `po` translation files or use "Update from POT file" if using poedit.
+## Build
 
-## Architechture
-Interoperability user interface is separate one page application that uses data model backend services. Backend design follows restful three layer architecture:
+Run `npm run build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
-![Alt text](/Technical architecture.jpg "Technical architecture")
+## Running unit tests
 
+Run `npm run test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-Backend:
+## Running end-to-end tests
 
-https://github.com/VRK-YTI/yti-datamodel-api
-
-Database configuration:
-
-https://github.com/VRK-YTI/yti-datamodel-database
+Run `npm run e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).

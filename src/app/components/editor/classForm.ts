@@ -1,9 +1,8 @@
-import { IAttributes, IScope } from 'angular';
+import { IScope } from 'angular';
 import { ClassViewController } from './classView';
 import { AddPropertiesFromClassModal } from './addPropertiesFromClassModal';
 import { Uri } from 'app/entities/uri';
 import { ClassService } from 'app/services/classService';
-import { module as mod } from './module';
 import { isDefined, requireDefined } from 'yti-common-ui/utils/object';
 import { SearchPredicateModal } from './searchPredicateModal';
 import { EditableForm } from 'app/components/form/editableEntityController';
@@ -18,31 +17,25 @@ import { Model } from 'app/entities/model';
 import { modalCancelHandler } from 'app/utils/angular';
 import { labelNameToResourceIdIdentifier } from 'yti-common-ui/utils/resource';
 import { Localizable } from 'yti-common-ui/types/localization';
+import { ComponentDeclaration } from 'app/utils/angular';
+import { forwardRef } from '@angular/core';
 
-mod.directive('classForm', () => {
-  return {
-    scope: {
-      id: '=',
-      class: '=',
-      oldClass: '=',
-      model: '=',
-      openPropertyId: '='
-    },
-    restrict: 'E',
-    template: require('./classForm.html'),
-    require: ['classForm', '?^classView', '?^form'],
-    controllerAs: 'ctrl',
-    bindToController: true,
-    link(_$scope: IScope,
-         _element: JQuery,
-         _attributes: IAttributes,
-         [classFormController, classViewController, formController]: [ClassFormController, ClassViewController, EditableForm]) {
-      classFormController.isEditing = () => formController && formController.editing;
-      classFormController.shouldAutofocus = !isDefined(classViewController);
-    },
-    controller: ClassFormController
-  };
-});
+export const ClassFormComponent: ComponentDeclaration = {
+  selector: 'classForm',
+  template: require('./classForm.html'),
+  require: {
+    classView: '?^classView',
+    form: '?^form'
+  },
+  bindings: {
+    id: '=',
+    class: '=',
+    oldClass: '=',
+    model: '=',
+    openPropertyId: '='
+  },
+  controller: forwardRef(() => ClassFormController)
+};
 
 export class ClassFormController {
 
@@ -50,7 +43,6 @@ export class ClassFormController {
   properties: Property[];
   oldClass: Class;
   model: Model;
-  isEditing: () => boolean;
   openPropertyId: string;
   shouldAutofocus: boolean;
   addPropertyActions: Option[];
@@ -59,30 +51,36 @@ export class ClassFormController {
   onPropertyReorder = (property: Property, index: number) => property.index = index;
   superClassExclude = (klass: ClassListItem) => klass.isOfType('shape') ? 'Super cannot be shape' : null;
 
+  classView: ClassViewController;
+  form: EditableForm;
+
   /* @ngInject */
-  constructor($scope: IScope,
+  constructor(private $scope: IScope,
               private classService: ClassService,
               private sessionService: SessionService,
               private languageService: LanguageService,
               private searchPredicateModal: SearchPredicateModal,
               private searchClassModal: SearchClassModal,
               private addPropertiesFromClassModal: AddPropertiesFromClassModal) {
+  }
+
+  $onInit() {
 
     const setProperties = () => {
       if (this.isEditing() || !this.sortAlphabetically) {
         this.properties = this.class.properties;
       } else {
         this.properties = this.class.properties.slice();
-        this.properties.sort(comparingLocalizable<Property>(languageService.createLocalizer(this.model), property => property.label));
+        this.properties.sort(comparingLocalizable<Property>(this.languageService.createLocalizer(this.model), property => property.label));
       }
     };
 
-    $scope.$watchGroup([
-      () => this.class,
-      () => languageService.getModelLanguage(this.model),
-      () => this.sortAlphabetically,
-      () => this.isEditing()
-    ],
+    this.$scope.$watchGroup([
+        () => this.class,
+        () => this.languageService.getModelLanguage(this.model),
+        () => this.sortAlphabetically,
+        () => this.isEditing()
+      ],
       () => setProperties());
 
     this.addPropertyActions = [
@@ -95,6 +93,14 @@ export class ClassFormController {
         apply: () => this.copyPropertiesFromClass()
       }
     ];
+  }
+
+  isEditing() {
+    return this.form && this.form.editing;
+  }
+
+  get shouldAutoFocus() {
+    return !isDefined(this.classView);
   }
 
   get sortAlphabetically() {

@@ -1,23 +1,20 @@
-import { module as mod } from './module';
-import { IScope, ISCEService } from 'angular';
+import { ISCEService, IScope } from 'angular';
 import { LanguageService } from 'app/services/languageService';
 import { Language, LanguageContext } from 'app/types/language';
 import { Localizable } from 'yti-common-ui/types/localization';
+import { ComponentDeclaration, FilterDeclaration } from 'app/utils/angular';
+import { forwardRef } from '@angular/core';
 
-mod.directive('highlight', () => {
-  return {
-    restrict: 'E',
-    scope: {
-      text: '<',
-      search: '<',
-      context: '='
-    },
-    bindToController: true,
-    controllerAs: 'ctrl',
-    controller: HighlightController,
-    template: '<span ng-bind-html="ctrl.localizedText | highlight: ctrl.search"></span>'
-  };
-});
+export const HighlightComponent: ComponentDeclaration = {
+  selector: 'highlight',
+  bindings: {
+    text: '<',
+    search: '<',
+    context: '='
+  },
+  template: '<span ng-bind-html="$ctrl.localizedText | highlight: $ctrl.search"></span>',
+  controller: forwardRef(() => HighlightController)
+};
 
 class HighlightController {
 
@@ -28,8 +25,12 @@ class HighlightController {
   localizedText: string;
 
   /* @ngInject */
-  constructor($scope: IScope, private languageService: LanguageService) {
-    $scope.$watch(() => this.languageService.getModelLanguage(this.context), () => {
+  constructor(private $scope: IScope,
+              private languageService: LanguageService) {
+  }
+
+  $onInit() {
+    this.$scope.$watch(() => this.languageService.getModelLanguage(this.context), () => {
       this.localizedText = this.formatText();
     });
   }
@@ -97,13 +98,16 @@ class HighlightController {
   }
 }
 
-mod.filter('highlight', /* @ngInject */ ($sce: ISCEService) => {
-  return (text: string, search: string) => {
-    const highlightedText = applyHighlight(text, search);
-    return $sce.trustAsHtml(highlightedText);
-  };
-});
-
+export const HighlightFilter: FilterDeclaration = {
+  name: 'highlight',
+  /* @ngInject */
+  factory($sce: ISCEService) {
+    return (text: string, search: string) => {
+      const highlightedText = applyHighlight(text, search);
+      return $sce.trustAsHtml(highlightedText);
+    };
+  }
+};
 
 function applyHighlight(text: string, search: string): string {
   if (!text || !search || search.length === 0) {

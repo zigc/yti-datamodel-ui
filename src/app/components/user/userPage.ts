@@ -1,17 +1,18 @@
 import { ILocationService, IScope } from 'angular';
 import { UserService } from 'app/services/userService';
 import { LocationService } from 'app/services/locationService';
-import { module as mod } from './module';
 import { Role, User } from 'yti-common-ui/services/user.service';
-import { Organization } from '../../entities/organization';
+import { Organization } from 'app/entities/organization';
 import { index } from 'yti-common-ui/utils/array';
-import { comparingLocalizable } from '../../utils/comparator';
-import { LanguageService } from '../../services/languageService';
-import { OrganizationService } from '../../services/organizationService';
+import { comparingLocalizable } from 'app/utils/comparator';
+import { LanguageService } from 'app/services/languageService';
+import { OrganizationService } from 'app/services/organizationService';
 import { Options } from 'yti-common-ui/components/dropdown.component';
 import { combineSets, hasAny } from 'yti-common-ui/utils/set';
-import GettextCatalog = angular.gettext.gettextCatalog;
-import { UserRoleService } from '../../services/userRoleService';
+import { gettextCatalog as GettextCatalog } from 'angular-gettext';
+import { UserRoleService } from 'app/services/userRoleService';
+import { ComponentDeclaration } from 'app/utils/angular';
+import { forwardRef } from '@angular/core';
 
 interface UserOrganizationRoles {
   organization?: Organization;
@@ -19,15 +20,11 @@ interface UserOrganizationRoles {
   requests: Role[];
 }
 
-mod.directive('userPage', () => {
-  return {
-    restrict: 'E',
-    template: require('./userPage.html'),
-    controllerAs: 'ctrl',
-    bindToController: true,
-    controller: UserPageController
-  };
-});
+export const UserPageComponent: ComponentDeclaration = {
+  selector: 'userPage',
+  template: require('./userPage.html'),
+  controller: forwardRef(() => UserPageController)
+};
 
 // TODO clean the implementation
 class UserPageController {

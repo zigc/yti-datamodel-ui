@@ -1,48 +1,53 @@
-import { IScope, IAttributes } from 'angular';
+import { IScope } from 'angular';
 import { EditableForm } from 'app/components/form/editableEntityController';
 import { SearchReferenceDataModal } from 'app/components/model/searchReferenceDataModal';
-import { module as mod } from './module';
 import { ViewReferenceDataModal } from 'app/components/model/viewReferenceDataModal';
-import { TableDescriptor, ColumnDescriptor } from 'app/components/form/editableTable';
-import { Localizer, LanguageService } from 'app/services/languageService';
-import { collectProperties } from 'yti-common-ui/utils/array';
+import { ColumnDescriptor, TableDescriptor } from 'app/components/form/editableTable';
+import { LanguageService, Localizer } from 'app/services/languageService';
+import { collectProperties, remove } from 'yti-common-ui/utils/array';
 import { createExistsExclusion } from 'app/utils/exclusion';
 import { ReferenceData } from 'app/entities/referenceData';
 import { Model } from 'app/entities/model';
-import { remove } from 'yti-common-ui/utils/array';
-import { modalCancelHandler } from 'app/utils/angular';
+import { ComponentDeclaration, modalCancelHandler } from 'app/utils/angular';
+import { forwardRef } from '@angular/core';
 
-mod.directive('editableReferenceDataSelect', () => {
-  return {
-    scope: {
-      referenceData: '=',
-      model: '='
-    },
-    restrict: 'E',
-    controllerAs: 'ctrl',
-    bindToController: true,
-    template: require('./editableReferenceDataSelect.html'),
-    require: ['editableReferenceDataSelect', '?^form'],
-    link(_$scope: IScope, _element: JQuery, _attributes: IAttributes, [thisController, formController]: [EditableReferenceDataSelectController, EditableForm]) {
-      thisController.isEditing = () => formController.editing;
-    },
-    controller: EditableReferenceDataSelectController
-  };
-});
+export const EditableReferenceDataSelectComponent: ComponentDeclaration = {
+  selector: 'editableReferenceDataSelect',
+  bindings: {
+    referenceData: '=',
+    model: '='
+  },
+  require: {
+    form: '?^form'
+  },
+  template: require('./editableReferenceDataSelect.html'),
+  controller: forwardRef(() => EditableReferenceDataSelectController)
+};
 
 class EditableReferenceDataSelectController {
 
-  isEditing: () => boolean;
   referenceData: ReferenceData[];
   model: Model;
   expanded: boolean;
   descriptor: ReferenceDataTableDescriptor;
 
+  form: EditableForm;
+
   /* @ngInject */
-  constructor($scope: IScope, private searchReferenceDataModal: SearchReferenceDataModal, languageService: LanguageService, viewReferenceDataModal: ViewReferenceDataModal) {
-    $scope.$watch(() => this.referenceData, referenceData => {
-      this.descriptor = new ReferenceDataTableDescriptor(referenceData, this.model, languageService.createLocalizer(this.model), viewReferenceDataModal);
+  constructor(private $scope: IScope,
+              private searchReferenceDataModal: SearchReferenceDataModal,
+              private languageService: LanguageService,
+              private viewReferenceDataModal: ViewReferenceDataModal) {
+  }
+
+  $onInit() {
+    this.$scope.$watch(() => this.referenceData, referenceData => {
+      this.descriptor = new ReferenceDataTableDescriptor(referenceData, this.model, this.languageService.createLocalizer(this.model), this.viewReferenceDataModal);
     });
+  }
+
+  isEditing() {
+    return this.form && this.form.editing;
   }
 
   addReferenceData() {

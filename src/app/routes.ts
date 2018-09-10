@@ -1,11 +1,11 @@
-import { route } from 'angular';
+import * as angular from 'angular';
 import { Uri } from './entities/uri';
 import { ILocationService } from 'angular';
 import { resourceUrl, modelUrl } from './utils/entity';
 import { NotificationModal } from './components/common/notificationModal';
 
 /* @ngInject */
-export function routeConfig($routeProvider: route.IRouteProvider) {
+export function routeConfig($routeProvider: angular.route.IRouteProvider) {
   $routeProvider
     .when('/', {
       template: '<front-page></front-page>'
@@ -18,20 +18,20 @@ export function routeConfig($routeProvider: route.IRouteProvider) {
     })
     .when('/group', {
       template: '<group-page group-id="groupId"></group-page>',
-      controller($scope: any, $route: route.IRouteService) {
+      controller($scope: any, $route: angular.route.IRouteService) {
         $scope.groupId = new Uri($route.current!.params.id, {});
       }
     })
     .when('/newModel', {
       template: '<new-model-page type="type"></new-model-page>',
-      controller($scope: any, $route: route.IRouteService) {
+      controller($scope: any, $route: angular.route.IRouteService) {
         const params: any = $route.current!.params;
         $scope.type = params.type;
       }
     })
     .when('/ns/:prefix*', {
       template: '',
-      controller($location: ILocationService, $route: route.IRouteService) {
+      controller($location: ILocationService, $route: angular.route.IRouteService) {
         const prefix = $route.current!.params.prefix;
         const resource = $location.hash();
 

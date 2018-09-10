@@ -17,7 +17,7 @@ const argv = require('optimist')
   })
   .argv;
 
-process.env['API_ENDPOINT'] = `http://${argv.host}:${argv.port}/api`;
+process.env['API_ENDPOINT'] = `http://${argv.host}:${argv.port}`;
 
 const q = <IQService> require('q');
 const frameService = new FrameService();

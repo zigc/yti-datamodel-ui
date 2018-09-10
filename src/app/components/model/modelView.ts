@@ -3,27 +3,24 @@ import { EditableEntityController, EditableScope, Rights } from 'app/components/
 import { ModelService } from 'app/services/modelService';
 import { UserService } from 'app/services/userService';
 import { DeleteConfirmationModal } from 'app/components/common/deleteConfirmationModal';
-import { module as mod } from './module';
 import { ErrorModal } from 'app/components/form/errorModal';
 import { Model } from 'app/entities/model';
 import { LanguageContext } from 'app/types/language';
 import { ModelControllerService } from './modelControllerService';
 import { AuthorizationManagerService } from 'app/services/authorizationManagerService';
+ import { ComponentDeclaration } from 'app/utils/angular';
+import { forwardRef } from '@angular/core';
 
-mod.directive('modelView', () => {
-  return {
-    scope: {
-      id: '=',
-      model: '=',
-      modelController: '='
-    },
-    restrict: 'E',
-    template: require('./modelView.html'),
-    controllerAs: 'ctrl',
-    bindToController: true,
-    controller: ModelViewController
-  };
-});
+export const ModelViewComponent: ComponentDeclaration = {
+  selector: 'modelView',
+  bindings: {
+    id: '=',
+    model: '=',
+    modelController: '='
+  },
+  template: require('./modelView.html'),
+  controller: forwardRef(() => ModelViewController)
+};
 
 export class ModelViewController extends EditableEntityController<Model> {
 
@@ -41,12 +38,15 @@ export class ModelViewController extends EditableEntityController<Model> {
               private authorizationManagerService: AuthorizationManagerService) {
 
     super($scope, $log, deleteConfirmationModal, errorModal, userService);
+  }
+
+  $onInit() {
 
     if (this.modelController) {
       this.modelController.registerView(this);
     }
 
-    $scope.$watch(() => this.isEditing(), editing => {
+    this.$scope.$watch(() => this.isEditing(), editing => {
       if (editing) {
         this.visible = true;
       }

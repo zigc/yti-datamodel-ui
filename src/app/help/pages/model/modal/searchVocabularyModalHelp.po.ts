@@ -1,6 +1,6 @@
 import { filterForSearchResult, selectSearchResult } from 'app/help/pages/modal/searchModalHelp.po';
 import { modal, child } from 'app/help/selectors';
-import GettextCatalog = angular.gettext.gettextCatalog;
+import { gettextCatalog as GettextCatalog } from 'angular-gettext';
 
 const searchVocabularyModal = child(modal, '.search-vocabulary');
 

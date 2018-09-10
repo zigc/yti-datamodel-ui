@@ -3,29 +3,27 @@ import { isDefined } from 'yti-common-ui/utils/object';
 import { esc, tab, enter, pageUp, pageDown, arrowUp, arrowDown } from 'yti-common-ui/utils/key-code';
 import { module as mod } from './module';
 import { InputWithPopupController } from './inputPopup';
+ import { ComponentDeclaration } from 'app/utils/angular';
+import { forwardRef } from '@angular/core';
 
 // TODO: similarities with autocomplete
-mod.directive('iowSelect', () => {
-  return {
-    restrict: 'E',
-    scope: {
-      ngModel: '=',
-      options: '@'
-    },
-    transclude: true,
-    bindToController: true,
-    template: `
+export const IowSelectComponent: ComponentDeclaration = {
+  selector: 'iowSelect',
+  bindings: {
+    ngModel: '=',
+    options: '@'
+  },
+  transclude: true,
+  template: `
       <div>
         <div class="btn btn-dropdown dropdown-toggle" tabindex="0" iow-select-input>
           <iow-selection-transclude></iow-selection-transclude>       
         </div>
-        <input-popup ctrl="ctrl"><iow-selectable-item-transclude></iow-selectable-item-transclude></input-popup>
+        <input-popup ctrl="$ctrl"><iow-selectable-item-transclude></iow-selectable-item-transclude></input-popup>
       </div>
     `,
-    controller: IowSelectController,
-    controllerAs: 'ctrl'
-  };
-});
+  controller: forwardRef(() => IowSelectController)
+};
 
 function parse(exp: string) {
   const match = exp.match(/^\s*([\s\S]+?)\s+in\s+([\s\S]+?)$/);
@@ -45,7 +43,7 @@ function parse(exp: string) {
 }
 
 interface SelectionScope extends IScope {
-  ctrl: IowSelectController<any>;
+  $ctrl: IowSelectController<any>;
 }
 
 export class IowSelectController<T> implements InputWithPopupController<T> {
@@ -72,13 +70,17 @@ export class IowSelectController<T> implements InputWithPopupController<T> {
   };
 
   /* @ngInject */
-  constructor($q: IQService, $scope: SelectionScope, $parse: IParseService) {
+  constructor(private $q: IQService,
+              private $scope: SelectionScope,
+              private $parse: IParseService) {
+  }
 
-    $scope.$watch(() => this.options, optionsExp => {
+  $onInit() {
+    this.$scope.$watch(() => this.options, optionsExp => {
       const result = parse(optionsExp);
 
       this.popupItemName = result.itemName;
-      $q.when($parse(result.collection)($scope.$parent)).then(items => this.popupItems = items);
+      this.$q.when(this.$parse(result.collection)(this.$scope.$parent)).then(items => this.popupItems = items);
     });
   }
 
@@ -166,7 +168,7 @@ mod.directive('iowSelectInput', /* @ngInject */ ($document: IDocumentService) =>
       const clickHandler = () => $scope.$apply(() => controller.toggleOpen());
       const blurClickHandler = (event: JQueryEventObject) => {
 
-        const eventIowSelectElement = angular.element(event.target).closest('iow-select');
+        const eventIowSelectElement = jQuery(event.target).closest('iow-select');
 
         if (eventIowSelectElement[0] !== iowSelectElement[0]) {
           $scope.$apply(() => controller.close());
@@ -196,15 +198,15 @@ mod.directive('iowSelectionTransclude', () => {
 
       let childScope: IScope;
 
-      $scope.$watch(() => $scope.ctrl.ngModel, item => {
+      $scope.$watch(() => $scope.$ctrl.ngModel, item => {
         if (!childScope) {
           transclude((clone, transclusionScope) => {
             childScope = transclusionScope!;
-            transclusionScope![$scope.ctrl.popupItemName] = item;
+            (transclusionScope as any)[$scope.$ctrl.popupItemName] = item;
             element.append(clone!);
           });
         } else {
-          childScope[$scope.ctrl.popupItemName] = item;
+          (childScope as any)[$scope.$ctrl.popupItemName] = item;
         }
       });
     }
@@ -215,7 +217,7 @@ mod.directive('iowSelectableItemTransclude', () => {
   return {
     link($scope: SelectionScope, element: JQuery, _attribute: IAttributes, _controller: any, transclude: ITranscludeFunction) {
       transclude((clone, transclusionScope) => {
-        transclusionScope![$scope.ctrl.popupItemName] = $scope[$scope.ctrl.popupItemName];
+        (transclusionScope as any)[$scope.$ctrl.popupItemName] = ($scope as any)[$scope.$ctrl.popupItemName];
         element.append(clone!);
       });
     }

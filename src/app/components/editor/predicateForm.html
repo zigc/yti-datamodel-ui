@@ -1,86 +1,86 @@
 <div class="row">
   <div class="col-md-12">
-    <h4 class="pull-left">{{ctrl.predicate.normalizedType + ' information' | capitalize | translate}}</h4>
+    <h4 class="pull-left">{{$ctrl.predicate.normalizedType + ' information' | capitalize | translate}}</h4>
 
-    <button ng-if="ctrl.isEditing() && !ctrl.predicate.unsaved"
+    <button ng-if="$ctrl.isEditing() && !$ctrl.predicate.unsaved"
             type="button"
             class="btn btn-link pull-right"
             style="margin-left: 5px"
-            ng-disabled="!ctrl.predicate.inUnstableState"
-            ng-click="ctrl.changeType()">
-      {{'Convert to ' + ctrl.changedType | translate}}
+            ng-disabled="!$ctrl.predicate.inUnstableState"
+            ng-click="$ctrl.changeType()">
+      {{'Convert to ' + $ctrl.changedType | translate}}
     </button>
   </div>
 </div>
 
 <div class="row">
   <div class="col-md-6">
-    <editable data-title="{{ctrl.predicate.normalizedType + ' label' | capitalize}}" context="ctrl.model" autofocus="ctrl.shouldAutofocus">
-      <input id="predicateName" class="form-control" type="text" localized-input="label" context="ctrl.model" ng-model="ctrl.predicate.label" />
+    <editable data-title="{{$ctrl.predicate.normalizedType + ' label' | capitalize}}" context="$ctrl.model" autofocus="$ctrl.shouldAutofocus">
+      <input id="predicateName" class="form-control" type="text" localized-input="label" context="$ctrl.model" ng-model="$ctrl.predicate.label" />
     </editable>
   </div>
   <div class="col-md-6">
-    <editable data-title="Description" context="ctrl.model">
-      <textarea id="predicateComment" class="form-control" localized-input context="ctrl.model" ng-model="ctrl.predicate.comment"></textarea>
+    <editable data-title="Description" context="$ctrl.model">
+      <textarea id="predicateComment" class="form-control" localized-input context="$ctrl.model" ng-model="$ctrl.predicate.comment"></textarea>
     </editable>
   </div>
 </div>
 
 <div class="row">
   <div class="col-md-6">
-    <editable data-title="{{ctrl.predicate.normalizedType + ' id' | capitalize}}" link="ctrl.linkToIdProperty()" context="ctrl.model" clipboard="ctrl.predicate.id.uri">
-      <input id="predicateId" class="form-control" type="text" required id-input="predicate" old="ctrl.oldPredicate" ng-model="ctrl.predicate.id" ng-disabled="!ctrl.predicate.inUnstableState" />
+    <editable data-title="{{$ctrl.predicate.normalizedType + ' id' | capitalize}}" link="$ctrl.linkToIdProperty()" context="$ctrl.model" clipboard="$ctrl.predicate.id.uri">
+      <input id="predicateId" class="form-control" type="text" required id-input="predicate" old="$ctrl.oldPredicate" ng-model="$ctrl.predicate.id" ng-disabled="!$ctrl.predicate.inUnstableState" />
     </editable>
 
-    <editable data-title="{{'Super' + ctrl.predicate.normalizedType}}" link="ctrl.linkToSuperproperty()" context="ctrl.model">
-      <uri-select id="superPredicate" type="{{ctrl.predicate.normalizedType}}" uri="ctrl.predicate.subPropertyOf" model="ctrl.model"></uri-select>
+    <editable data-title="{{'Super' + $ctrl.predicate.normalizedType}}" link="$ctrl.linkToSuperproperty()" context="$ctrl.model">
+      <uri-select id="superPredicate" type="{{$ctrl.predicate.normalizedType}}" uri="$ctrl.predicate.subPropertyOf" model="$ctrl.model"></uri-select>
     </editable>
 
-    <defined-by entity="ctrl.predicate" model="ctrl.model"></defined-by>
+    <defined-by entity="$ctrl.predicate" model="$ctrl.model"></defined-by>
   </div>
 
   <div class="col-md-6">
 
-    <editable-state-select ng-if="!ctrl.predicate.unsaved" id="predicateState" state="ctrl.predicate.status" model="ctrl.model"></editable-state-select>
-    <editable-range-select ng-if="ctrl.predicate.isAttribute()" id="predicateRange" range="ctrl.predicate.dataType"></editable-range-select>
+    <editable-state-select ng-if="!$ctrl.predicate.unsaved" id="predicateState" state="$ctrl.predicate.status" model="$ctrl.model"></editable-state-select>
+    <editable-range-select ng-if="$ctrl.predicate.isAttribute()" id="predicateRange" range="$ctrl.predicate.dataType"></editable-range-select>
 
-    <editable ng-if="ctrl.predicate.isAssociation()" data-title="Value class" name="Value class" link="ctrl.linkToValueClass()" context="ctrl.model">
-      <uri-select id="predicateValueClass" type="class" uri="ctrl.predicate.valueClass" model="ctrl.model" default-to-current-model="true"></uri-select>
+    <editable ng-if="$ctrl.predicate.isAssociation()" data-title="Value class" name="Value class" link="$ctrl.linkToValueClass()" context="$ctrl.model">
+      <uri-select id="predicateValueClass" type="class" uri="$ctrl.predicate.valueClass" model="$ctrl.model" default-to-current-model="true"></uri-select>
     </editable>
 
-    <editable-multiple-uri-select id="equivalentProperty" type="{{ctrl.predicate.normalizedType}}" ng-model="ctrl.predicate.equivalentProperties" model="ctrl.model" data-title="{{'Equivalent ' + ctrl.predicate.normalizedType}}"></editable-multiple-uri-select>
+    <editable-multiple-uri-select id="equivalentProperty" type="{{$ctrl.predicate.normalizedType}}" ng-model="$ctrl.predicate.equivalentProperties" model="$ctrl.model" data-title="{{'Equivalent ' + $ctrl.predicate.normalizedType}}"></editable-multiple-uri-select>
   </div>
 </div>
 
 
-<subject-view entity="ctrl.predicate" model="ctrl.model" is-editing="ctrl.isEditing"></subject-view>
+<subject-view entity="$ctrl.predicate" model="$ctrl.model" is-editing="$ctrl.isEditing"></subject-view>
 
 <hr />
 
-<div ng-if="!ctrl.predicate.unsaved">
+<div ng-if="!$ctrl.predicate.unsaved">
 
   <h4 translate>Additional information</h4>
 
   <div class="row">
     <div class="col-md-6">
-      <non-editable data-title="Created at" value="ctrl.predicate.createdAt" context="ctrl.model"></non-editable>
+      <non-editable data-title="Created at" value="$ctrl.predicate.createdAt" context="$ctrl.model"></non-editable>
     </div>
     <div class="col-md-6">
-      <non-editable data-title="Modified at" value="ctrl.predicate.modifiedAt" context="ctrl.model"></non-editable>
+      <non-editable data-title="Modified at" value="$ctrl.predicate.modifiedAt" context="$ctrl.model"></non-editable>
     </div>
   </div>
 
   <div class="row">
     <div class="col-md-12">
-      <editable data-title="Editorial note" context="ctrl.model">
-        <textarea id="editorialNote" class="form-control" localized-input="free" context="ctrl.model" ng-model="ctrl.predicate.editorialNote"></textarea>
+      <editable data-title="Editorial note" context="$ctrl.model">
+        <textarea id="editorialNote" class="form-control" localized-input="free" context="$ctrl.model" ng-model="$ctrl.predicate.editorialNote"></textarea>
       </editable>
     </div>
   </div>
 
   <div class="row">
     <div class="col-md-12">
-      <usage-panel id="ctrl.id + '_' + ctrl.predicate.id.uri" entity="ctrl.predicate" context="ctrl.model"></usage-panel>
+      <usage-panel id="$ctrl.id + '_' + $ctrl.predicate.id.uri" entity="$ctrl.predicate" context="$ctrl.model"></usage-panel>
     </div>
   </div>
 

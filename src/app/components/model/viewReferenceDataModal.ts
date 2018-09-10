@@ -1,5 +1,4 @@
-import { ui } from 'angular';
-import IModalService = ui.bootstrap.IModalService;
+import { IModalService } from 'angular-ui-bootstrap';
 import { ReferenceData } from 'app/entities/referenceData';
 import { LanguageContext } from 'app/types/language';
 import { identity } from 'yti-common-ui/utils/object';
@@ -20,7 +19,7 @@ export class ViewReferenceDataModal {
             <modal-body class="full-height">
               <div class="row">
                 <div class="col-md-12">
-                  <reference-data-view reference-data="ctrl.referenceData" context="ctrl.context" class="popup" show-codes="true"></reference-data-view>
+                  <reference-data-view reference-data="$ctrl.referenceData" context="$ctrl.context" class="popup" show-codes="true"></reference-data-view>
                 </div>
               </div>
             </modal-body>
@@ -33,7 +32,7 @@ export class ViewReferenceDataModal {
       `,
       size: 'md',
       controller: ViewReferenceDataModalController,
-      controllerAs: 'ctrl',
+      controllerAs: '$ctrl',
       backdrop: true,
       resolve: {
         referenceData: () => referenceData,

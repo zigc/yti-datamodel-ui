@@ -5,7 +5,7 @@ import {
 import { child, modelPanelElement } from 'app/help/selectors';
 import { KnownModelType, KnownPredicateType } from 'app/types/entity';
 import { scrollToTop, classIdFromNamespaceId } from 'app/help/utils';
-import GettextCatalog = angular.gettext.gettextCatalog;
+import { gettextCatalog as GettextCatalog } from 'angular-gettext';
 import * as SearchClassModal from './modal/searchClassModalHelp.po';
 import * as AddPropertiesFromClass from './modal/addPropertiesFromClassModalHelp.po';
 import * as ModelView from './modelViewHelp.po';
@@ -29,7 +29,7 @@ export function openModelDetails(type: KnownModelType) {
 
 export function openAddResource(type: 'class' | KnownPredicateType) {
 
-  const openAddResourceElement = () => angular.element('button.add-new-button');
+  const openAddResourceElement = () => jQuery('button.add-new-button');
 
   return createStory({
     scroll: createScrollWithDefault(modelPanelElement),

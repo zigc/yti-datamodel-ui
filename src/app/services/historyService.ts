@@ -1,11 +1,11 @@
 import { IHttpService, IPromise } from 'angular';
-import { config } from 'config';
 import { Uri } from 'app/entities/uri';
 import { GraphData } from 'app/types/entity';
 import { FrameService } from './frameService';
 import * as frames from 'app/entities/frames';
 import { Activity } from 'app/entities/version';
-import { requireDefined } from '../../../node_modules/yti-common-ui/utils/object';
+import { requireDefined } from 'yti-common-ui/utils/object';
+import { apiEndpointWithName } from './config';
 
 export class HistoryService {
 
@@ -14,7 +14,7 @@ export class HistoryService {
   }
 
   getHistory(id: Uri): IPromise<Activity> {
-    return this.$http.get<GraphData>(config.apiEndpointWithName('history'), {params: {id: id.uri}})
+    return this.$http.get<GraphData>(apiEndpointWithName('history'), {params: {id: id.uri}})
       .then(response => this.deserializeVersion(response.data!));
   }
 

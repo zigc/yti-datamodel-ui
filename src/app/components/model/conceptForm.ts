@@ -1,22 +1,18 @@
 import { Localizer } from 'app/services/languageService';
-import { module as mod } from './module';
 import { Concept } from 'app/entities/vocabulary';
 import { Model } from 'app/entities/model';
+import { ComponentDeclaration } from 'app/utils/angular';
+import { forwardRef } from '@angular/core';
 
-mod.directive('conceptForm', () => {
-  return {
-    scope: {
-      concept: '=',
-      model: '='
-    },
-    restrict: 'E',
-    template: require('./conceptForm.html'),
-    require: ['conceptForm', '?^conceptView'],
-    controllerAs: 'ctrl',
-    bindToController: true,
-    controller: ConceptFormController
-  };
-});
+export const ConceptFormComponent: ComponentDeclaration = {
+  selector: 'conceptForm',
+  bindings: {
+    concept: '=',
+    model: '='
+  },
+  template: require('./conceptForm.html'),
+  controller: forwardRef(() => ConceptFormController)
+};
 
 export class ConceptFormController {
 

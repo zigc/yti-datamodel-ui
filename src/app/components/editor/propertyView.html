@@ -1,13 +1,13 @@
-<div ng-if="ctrl.isOpen()">
+<div ng-if="$ctrl.isOpen()">
   <div class="row">
     <div class="col-md-12">
-        <app-status class="mb-2" [status]="ctrl.model.status"></app-status>
+        <app-status class="mb-2" [status]="$ctrl.model.status"></app-status>
 
-        <button ng-if="ctrl.isEditing()"
+        <button ng-if="$ctrl.isEditing()"
                 type="button"
                 class="btn btn-link pull-right remove"
-                ng-disabled="!ctrl.property.inUnstableState"
-                ng-click="ctrl.removeProperty(ctrl.property)">
+                ng-disabled="!$ctrl.property.inUnstableState"
+                ng-click="$ctrl.removeProperty($ctrl.property)">
           <i class="fas fa-trash-alt"></i>
           <span translate>Delete property</span>
         </button>
@@ -19,153 +19,153 @@
   <div class="row">
 
     <div class="col-md-6">
-      <editable data-title="Class property label" context="ctrl.model">
-        <input id="{{ctrl.property.internalId + 'label'}}" class="form-control" type="text" restrict-duplicates="ctrl.otherPropertyLabels" localized-input="label" context="ctrl.model" ng-model="ctrl.property.label" />
+      <editable data-title="Class property label" context="$ctrl.model">
+        <input id="{{$ctrl.property.internalId + 'label'}}" class="form-control" type="text" restrict-duplicates="$ctrl.otherPropertyLabels" localized-input="label" context="$ctrl.model" ng-model="$ctrl.property.label" />
       </editable>
 
-      <editable-range-select ng-if="ctrl.property.isAttribute()"
-                             id="{{ctrl.property.internalId + 'range'}}"
-                             range="ctrl.property.dataType">
+      <editable-range-select ng-if="$ctrl.property.isAttribute()"
+                             id="{{$ctrl.property.internalId + 'range'}}"
+                             range="$ctrl.property.dataType">
       </editable-range-select>
 
-      <editable data-title="Unique label" context="ctrl.model" ng-if="ctrl.property.dataType === 'rdf:langString'">
-        <input id="{{ctrl.property.uniqueLang + 'permanentIdentifier'}}" type="checkbox" ng-model="ctrl.property.uniqueLang" />
+      <editable data-title="Unique label" context="$ctrl.model" ng-if="$ctrl.property.dataType === 'rdf:langString'">
+        <input id="{{$ctrl.property.uniqueLang + 'permanentIdentifier'}}" type="checkbox" ng-model="$ctrl.property.uniqueLang" />
       </editable>
 
-      <editable-multiple-language-select ng-if="ctrl.model.isOfType('profile') && ctrl.property.dataType === 'rdf:langString'"
+      <editable-multiple-language-select ng-if="$ctrl.model.isOfType('profile') && $ctrl.property.dataType === 'rdf:langString'"
                                          data-title="Allowed languages"
                                          id="dataTypeAllowedLanguage"
-                                         ng-model="ctrl.property.languageIn"
+                                         ng-model="$ctrl.property.languageIn"
                                          required="false">
       </editable-multiple-language-select>
 
-      <editable-state-select id="{{ctrl.property.internalId + 'state'}}" state="ctrl.property.status" model="ctrl.model"></editable-state-select>
+      <editable-state-select id="{{$ctrl.property.internalId + 'state'}}" state="$ctrl.property.status" model="$ctrl.model"></editable-state-select>
     </div>
 
     <div class="col-md-6">
-      <editable data-title="Description" context="ctrl.model">
-        <textarea id="{{ctrl.property.internalId + 'comment'}}" class="form-control" localized-input context="ctrl.model" ng-model="ctrl.property.comment"></textarea>
+      <editable data-title="Description" context="$ctrl.model">
+        <textarea id="{{$ctrl.property.internalId + 'comment'}}" class="form-control" localized-input context="$ctrl.model" ng-model="$ctrl.property.comment"></textarea>
       </editable>
 
-      <editable ng-if="ctrl.property.isAssociation()" data-title="Value class" link="ctrl.linkToValueClass()" context="ctrl.model">
-        <uri-select id="{{ctrl.property.internalId + '_valueClass'}}"
-                    type="class" uri="ctrl.property.valueClass"
-                    mandatory="!ctrl.property.inUnstableState"
-                    exclude-id="ctrl.valueClassExclude"
-                    model="ctrl.model"
+      <editable ng-if="$ctrl.property.isAssociation()" data-title="Value class" link="$ctrl.linkToValueClass()" context="$ctrl.model">
+        <uri-select id="{{$ctrl.property.internalId + '_valueClass'}}"
+                    type="class" uri="$ctrl.property.valueClass"
+                    mandatory="!$ctrl.property.inUnstableState"
+                    exclude-id="$ctrl.valueClassExclude"
+                    model="$ctrl.model"
                     default-to-current-model="true">
         </uri-select>
       </editable>
     </div>
   </div>
 
-  <h4 translate ng-show="ctrl.isEditing() || ctrl.property.hasOptionalMetadata()">Optional metadata</h4>
+  <h4 translate ng-show="$ctrl.isEditing() || $ctrl.property.hasOptionalMetadata()">Optional metadata</h4>
 
   <div class="row">
     <div class="col-md-6">
 
-      <editable data-title="Class property id" context="ctrl.model">
-        <input id="{{ctrl.property.internalId + 'id'}}" class="form-control" type="text" restrict-duplicates="ctrl.otherPropertyIdentifiers" string-input="identifier" ng-trim="false" ng-model="ctrl.property.externalId" />
+      <editable data-title="Class property id" context="$ctrl.model">
+        <input id="{{$ctrl.property.internalId + 'id'}}" class="form-control" type="text" restrict-duplicates="$ctrl.otherPropertyIdentifiers" string-input="identifier" ng-trim="false" ng-model="$ctrl.property.externalId" />
       </editable>
 
-      <editable-multiple-data-type-input id="{{ctrl.property.internalId + '_example_attribute'}}"
+      <editable-multiple-data-type-input id="{{$ctrl.property.internalId + '_example_attribute'}}"
                                          data-title="Example"
-                                         context="ctrl.model"
-                                         reference-data="ctrl.property.referenceData"
-                                         input-type="ctrl.property.inputType"
-                                         ng-model="ctrl.property.example">
+                                         context="$ctrl.model"
+                                         reference-data="$ctrl.property.referenceData"
+                                         input-type="$ctrl.property.inputType"
+                                         ng-model="$ctrl.property.example">
       </editable-multiple-data-type-input>
 
       <editable-multiple-data-type-input data-title="Allowed values"
-                                         id="{{ctrl.property.internalId + '_allowedValues'}}"
-                                         input-type="ctrl.property.inputType"
-                                         ng-model="ctrl.property.in"
-                                         reference-data="ctrl.property.referenceData"
-                                         context="ctrl.model"></editable-multiple-data-type-input>
+                                         id="{{$ctrl.property.internalId + '_allowedValues'}}"
+                                         input-type="$ctrl.property.inputType"
+                                         ng-model="$ctrl.property.in"
+                                         reference-data="$ctrl.property.referenceData"
+                                         context="$ctrl.model"></editable-multiple-data-type-input>
 
       <div class="range-input">
-        <editable data-title="Min length" context="ctrl.model">
-          <input id="{{ctrl.property.internalId + 'minLength'}}" min-input max="ctrl.property.maxLength" class="form-control" type="number" ng-model="ctrl.property.minLength" />
+        <editable data-title="Min length" context="$ctrl.model">
+          <input id="{{$ctrl.property.internalId + 'minLength'}}" min-input max="$ctrl.property.maxLength" class="form-control" type="number" ng-model="$ctrl.property.minLength" />
         </editable>
 
-        <editable data-title="Max length" context="ctrl.model">
-          <input id="{{ctrl.property.internalId + 'maxLength'}}" max-input min="ctrl.property.minLength" class="form-control" type="number" ng-model="ctrl.property.maxLength" />
+        <editable data-title="Max length" context="$ctrl.model">
+          <input id="{{$ctrl.property.internalId + 'maxLength'}}" max-input min="$ctrl.property.minLength" class="form-control" type="number" ng-model="$ctrl.property.maxLength" />
         </editable>
       </div>
 
-      <editable-multiple-uri-select ng-if="ctrl.property.isAssociation()" id="classIn" type="class" ng-model="ctrl.property.classIn" model="ctrl.model" data-title="{{'Class type'}}"></editable-multiple-uri-select>
+      <editable-multiple-uri-select ng-if="$ctrl.property.isAssociation()" id="classIn" type="class" ng-model="$ctrl.property.classIn" model="$ctrl.model" data-title="{{'Class type'}}"></editable-multiple-uri-select>
     </div>
 
     <div class="col-md-6">
 
-      <editable ng-if="ctrl.property.isAttribute()" data-title="Pattern" context="ctrl.model">
-        <input id="{{ctrl.property.internalId + 'pattern'}}" class="form-control" type="text" ng-model="ctrl.property.pattern" />
+      <editable ng-if="$ctrl.property.isAttribute()" data-title="Pattern" context="$ctrl.model">
+        <input id="{{$ctrl.property.internalId + 'pattern'}}" class="form-control" type="text" ng-model="$ctrl.property.pattern" />
       </editable>
 
-      <autocomplete ng-if="ctrl.property.isAssociation()" datasource="ctrl.stemDatasource">
-        <editable data-title="URI stem" context="ctrl.model">
-          <input id="{{ctrl.property.internalId + 'stem'}}" uri-input="stem" model="ctrl.model" class="form-control" type="text" ng-model="ctrl.property.stem" />
+      <autocomplete ng-if="$ctrl.property.isAssociation()" datasource="$ctrl.stemDatasource">
+        <editable data-title="URI stem" context="$ctrl.model">
+          <input id="{{$ctrl.property.internalId + 'stem'}}" uri-input="stem" model="$ctrl.model" class="form-control" type="text" ng-model="$ctrl.property.stem" />
         </editable>
       </autocomplete>
 
-      <editable data-title="Default value" context="ctrl.model">
-        <code-value-input-autocomplete reference-data="ctrl.property.referenceData" context="ctrl.model">
-          <input id="{{ctrl.property.internalId + 'default value'}}" class="form-control" type="text" datatype-input="ctrl.property.inputType" reference-data="ctrl.property.referenceData" ng-model="ctrl.property.defaultValue" />
+      <editable data-title="Default value" context="$ctrl.model">
+        <code-value-input-autocomplete reference-data="$ctrl.property.referenceData" context="$ctrl.model">
+          <input id="{{$ctrl.property.internalId + 'default value'}}" class="form-control" type="text" datatype-input="$ctrl.property.inputType" reference-data="$ctrl.property.referenceData" ng-model="$ctrl.property.defaultValue" />
         </code-value-input-autocomplete>
       </editable>
 
-      <editable data-title="Fixed value" context="ctrl.model">
-        <code-value-input-autocomplete reference-data="ctrl.property.referenceData" context="ctrl.model">
-          <input id="{{ctrl.property.internalId + 'hasValue'}}" class="form-control" type="text" datatype-input="ctrl.property.inputType" reference-data="ctrl.property.referenceData" ng-model="ctrl.property.hasValue" />
+      <editable data-title="Fixed value" context="$ctrl.model">
+        <code-value-input-autocomplete reference-data="$ctrl.property.referenceData" context="$ctrl.model">
+          <input id="{{$ctrl.property.internalId + 'hasValue'}}" class="form-control" type="text" datatype-input="$ctrl.property.inputType" reference-data="$ctrl.property.referenceData" ng-model="$ctrl.property.hasValue" />
         </code-value-input-autocomplete>
       </editable>
 
       <div class="range-input">
-        <editable data-title="Min count" context="ctrl.model">
-          <input id="{{ctrl.property.internalId + 'minCount'}}" placeholder="0" min-input max="ctrl.property.maxCount" class="form-control" type="number" ng-model="ctrl.property.minCount" />
+        <editable data-title="Min count" context="$ctrl.model">
+          <input id="{{$ctrl.property.internalId + 'minCount'}}" placeholder="0" min-input max="$ctrl.property.maxCount" class="form-control" type="number" ng-model="$ctrl.property.minCount" />
         </editable>
 
-        <editable data-title="Max count" context="ctrl.model">
-          <input id="{{ctrl.property.internalId + 'maxCount'}}" placeholder="*" max-input min="ctrl.property.minCount" class="form-control" type="number" ng-model="ctrl.property.maxCount" />
+        <editable data-title="Max count" context="$ctrl.model">
+          <input id="{{$ctrl.property.internalId + 'maxCount'}}" placeholder="*" max-input min="$ctrl.property.minCount" class="form-control" type="number" ng-model="$ctrl.property.maxCount" />
         </editable>
       </div>
     </div>
   </div>
 
-  <h4 translate ng-show="ctrl.isEditing() || ctrl.property.hasTechnicalMetadata()">Technical metadata</h4>
+  <h4 translate ng-show="$ctrl.isEditing() || $ctrl.property.hasTechnicalMetadata()">Technical metadata</h4>
 
   <div class="row">
     <div class="col-md-6">
-      <editable data-title="Resource identifier" context="ctrl.model">
-        <input id="{{ctrl.property.internalId + 'resourceIdentifier'}}" type="checkbox" ng-model="ctrl.property.resourceIdentifier" restrict-duplicates="ctrl.otherPropertyResourceIdentifiers"/>
+      <editable data-title="Resource identifier" context="$ctrl.model">
+        <input id="{{$ctrl.property.internalId + 'resourceIdentifier'}}" type="checkbox" ng-model="$ctrl.property.resourceIdentifier" restrict-duplicates="$ctrl.otherPropertyResourceIdentifiers"/>
       </editable>
     </div>
     <div class="col-md-6">
-      <editable data-title="XML Wrapper" context="ctrl.model" ng-if="ctrl.property.isAssociation()">
-        <input id="{{ctrl.property.internalId + 'xmlWrapper'}}" type="checkbox" ng-model="ctrl.property.xmlWrapper"/>
+      <editable data-title="XML Wrapper" context="$ctrl.model" ng-if="$ctrl.property.isAssociation()">
+        <input id="{{$ctrl.property.internalId + 'xmlWrapper'}}" type="checkbox" ng-model="$ctrl.property.xmlWrapper"/>
       </editable>
-      <editable data-title="XML Attribute" context="ctrl.model" ng-if="ctrl.property.isAttribute()">
-        <input id="{{ctrl.property.internalId + 'xmlAttribute'}}" type="checkbox" ng-model="ctrl.property.xmlAttribute"/>
+      <editable data-title="XML Attribute" context="$ctrl.model" ng-if="$ctrl.property.isAttribute()">
+        <input id="{{$ctrl.property.internalId + 'xmlAttribute'}}" type="checkbox" ng-model="$ctrl.property.xmlAttribute"/>
       </editable>
-      <editable data-title="Read-only" context="ctrl.model" ng-if="ctrl.property.isAttribute()">
-        <input id="{{ctrl.property.internalId + 'readOnlyValue'}}" type="checkbox" ng-model="ctrl.property.readOnlyValue"/>
+      <editable data-title="Read-only" context="$ctrl.model" ng-if="$ctrl.property.isAttribute()">
+        <input id="{{$ctrl.property.internalId + 'readOnlyValue'}}" type="checkbox" ng-model="$ctrl.property.readOnlyValue"/>
       </editable>
     </div>
   </div>
 
   <div class="row">
     <div class="col-md-12">
-      <editable-reference-data-select model="ctrl.model" reference-data="ctrl.property.referenceData"></editable-reference-data-select>
+      <editable-reference-data-select model="$ctrl.model" reference-data="$ctrl.property.referenceData"></editable-reference-data-select>
     </div>
   </div>
 
-  <div ng-show="ctrl.showAdditionalInformation || ctrl.isEditing()">
+  <div ng-show="$ctrl.showAdditionalInformation || $ctrl.isEditing()">
     <h4 translate>Additional information</h4>
 
     <div class="row">
       <div class="col-md-12">
-        <editable data-title="Editorial note" context="ctrl.model">
-          <textarea id="editorialNote" class="form-control" localized-input="free" context="ctrl.model" ng-model="ctrl.property.editorialNote"></textarea>
+        <editable data-title="Editorial note" context="$ctrl.model">
+          <textarea id="editorialNote" class="form-control" localized-input="free" context="$ctrl.model" ng-model="$ctrl.property.editorialNote"></textarea>
         </editable>
       </div>
     </div>
@@ -174,19 +174,19 @@
   <h4 translate>Reusable predicate</h4>
 
   <accordion open-id="predicateOpen" class="reusable-predicate">
-    <accordion-group id="ctrl.id + '_' + ctrl.predicateNameCompact + '_reusable'" identifier="'default'">
+    <accordion-group id="$ctrl.id + '_' + $ctrl.predicateNameCompact + '_reusable'" identifier="'default'">
 
       <accordion-heading>
         <h5>
           <a href>
             <accordion-chevron is-open="isOpen()"></accordion-chevron>
-            <span>{{ctrl.predicateName}}</span>
+            <span>{{$ctrl.predicateName}}</span>
           </a>
         </h5>
       </accordion-heading>
 
       <accordion-body>
-        <property-predicate-view ng-if="isOpen()" property="ctrl.property" model="ctrl.model"></property-predicate-view>
+        <property-predicate-view ng-if="isOpen()" property="$ctrl.property" model="$ctrl.model"></property-predicate-view>
       </accordion-body>
 
     </accordion-group>

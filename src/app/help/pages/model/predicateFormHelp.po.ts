@@ -3,7 +3,7 @@ import { KnownPredicateType } from 'app/types/entity';
 import { upperCaseFirst } from 'change-case';
 import { editableByTitle, input, editableFocus } from 'app/help/selectors';
 import { validInput, initialInputValue, editableMargin } from 'app/help/utils';
-import GettextCatalog = angular.gettext.gettextCatalog;
+import { gettextCatalog as GettextCatalog } from 'angular-gettext';
 
 export function enterPredicateLabel(parent: () => JQuery, type: KnownPredicateType, initialValue: string, gettextCatalog: GettextCatalog) {
 

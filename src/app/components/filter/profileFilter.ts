@@ -1,29 +1,25 @@
-import { module as mod } from './module';
 import { SearchController, TextAnalysis } from 'app/types/filter';
 import { IScope } from 'angular';
 import { WithDefinedBy } from 'app/types/entity';
-import { ifChanged } from 'app/utils/angular';
+import { ComponentDeclaration, ifChanged } from 'app/utils/angular';
+import { forwardRef } from '@angular/core';
 
-mod.directive('profileFilter', () => {
-  return {
-    scope: {
-      searchController: '=',
-      onlySelection: '='
-    },
-    bindToController: true,
-    controllerAs: 'ctrl',
-    restrict: 'E',
-    template: `
-      <div class="form-check form-check-inline" ng-hide="ctrl.onlySelection">
+export const ProfileFilterComponent: ComponentDeclaration = {
+  selector: 'profileFilter',
+  bindings: {
+    searchController: '=',
+    onlySelection: '='
+  },
+  template: `
+      <div class="form-check form-check-inline" ng-hide="$ctrl.onlySelection">
         <label>
-          <input type="checkbox" ng-model="ctrl.showProfiles">
+          <input type="checkbox" ng-model="$ctrl.showProfiles">
           {{'Show classes defined in profiles' | translate}}
         </label>
       </div>
-    `,
-    controller: ProfileFilterController
-  };
-});
+  `,
+  controller: forwardRef(() => ProfileFilterController)
+};
 
 class ProfileFilterController {
 
@@ -31,11 +27,15 @@ class ProfileFilterController {
   showProfiles = true;
 
   /* @ngInject */
-  constructor($scope: IScope) {
+  constructor(private $scope: IScope) {
+  }
+
+  $onInit() {
+
     this.searchController.addFilter((item: TextAnalysis<WithDefinedBy>) =>
-        this.showProfiles || !item.item.definedBy.isOfType('profile')
+      this.showProfiles || !item.item.definedBy.isOfType('profile')
     );
 
-    $scope.$watch(() => this.showProfiles, ifChanged(() => this.searchController.search()));
+    this.$scope.$watch(() => this.showProfiles, ifChanged(() => this.searchController.search()));
   }
 }

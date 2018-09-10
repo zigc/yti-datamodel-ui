@@ -1,23 +1,20 @@
 import { IScope } from 'angular';
-import { TableDescriptor, ColumnDescriptor } from 'app/components/form/editableTable';
-import { module as mod } from './module';
+import { ColumnDescriptor, TableDescriptor } from 'app/components/form/editableTable';
 import { Model, Namespace, NamespaceType } from 'app/entities/model';
+import { ComponentDeclaration } from 'app/utils/angular';
+import { forwardRef } from '@angular/core';
 
-mod.directive('technicalNamespaces', () => {
-  return {
-    scope: {
-      model: '='
-    },
-    restrict: 'E',
-    template: `
+export const TechnicalNamespacesComponent: ComponentDeclaration = {
+  selector: 'technicalNamespaces',
+  bindings: {
+    model: '='
+  },
+  template: `
       <h4 translate>Technical namespaces</h4>
-      <editable-table id="'technicalNamespaces'" descriptor="ctrl.descriptor" expanded="ctrl.expanded"></editable-table>
-    `,
-    controllerAs: 'ctrl',
-    bindToController: true,
-    controller: TechnicalNamespacesController
-  };
-});
+      <editable-table id="'technicalNamespaces'" descriptor="$ctrl.descriptor" expanded="$ctrl.expanded"></editable-table>
+  `,
+  controller: forwardRef(() => TechnicalNamespacesController)
+};
 
 class TechnicalNamespacesController {
   model: Model;
@@ -25,8 +22,11 @@ class TechnicalNamespacesController {
   expanded = false;
 
   /* @ngInject */
-  constructor($scope: IScope) {
-    $scope.$watch(() => this.model, model => {
+  constructor(private $scope: IScope) {
+  }
+
+  $onInit() {
+    this.$scope.$watch(() => this.model, model => {
       this.descriptor = new TechnicalNamespaceTableDescriptor(model);
     });
   }

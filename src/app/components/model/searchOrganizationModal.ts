@@ -1,11 +1,10 @@
-import { IPromise, IScope, ui } from 'angular';
-import { Classification } from '../../entities/classification';
-import { Exclusion } from '../../utils/exclusion';
-import { Organization } from '../../entities/organization';
-import { OrganizationService } from '../../services/organizationService';
-import IModalService = ui.bootstrap.IModalService;
-import IModalServiceInstance = ui.bootstrap.IModalServiceInstance;
-import { AuthorizationManagerService } from '../../services/authorizationManagerService';
+import { IPromise, IScope } from 'angular';
+import { Classification } from 'app/entities/classification';
+import { Exclusion } from 'app/utils/exclusion';
+import { Organization } from 'app/entities/organization';
+import { OrganizationService } from 'app/services/organizationService';
+import { IModalService, IModalServiceInstance } from 'angular-ui-bootstrap';
+import { AuthorizationManagerService } from 'app/services/authorizationManagerService';
 
 export class SearchOrganizationModal {
   /* @ngInject */
@@ -20,14 +19,14 @@ export class SearchOrganizationModal {
         exclude: () => exclude
       },
       controller: SearchOrganizationModalController,
-      controllerAs: 'ctrl'
+      controllerAs: '$ctrl'
     }).result;
   }
 }
 
 class SearchOrganizationModalController {
 
-  organizations: Organization[];
+  organizations?: Organization[];
 
   /* @ngInject */
   constructor($scope: IScope,

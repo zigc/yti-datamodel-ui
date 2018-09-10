@@ -1,7 +1,6 @@
 import { IHttpService, IPromise, IQService } from 'angular';
 import * as moment from 'moment';
 import { upperCaseFirst } from 'change-case';
-import { config } from 'config';
 import { KnownPredicateType } from 'app/types/entity';
 import { reverseMapType } from 'app/utils/entity';
 import { Urn, Uri } from 'app/entities/uri';
@@ -17,6 +16,7 @@ import { containsAny, flatten } from 'yti-common-ui/utils/array';
 import { PredicateListItem, Predicate, Attribute, Association } from 'app/entities/predicate';
 import { Model } from 'app/entities/model';
 import { typeSerializer } from 'app/entities/serializer/serializer';
+import { apiEndpointWithName } from './config';
 
 export interface PredicateService {
   getPredicate(id: Uri|Urn, model?: Model): IPromise<Predicate>;
@@ -44,14 +44,14 @@ export class DefaultPredicateService implements PredicateService {
   }
 
   getPredicate(id: Uri|Urn, model?: Model): IPromise<Predicate> {
-    return this.$http.get<GraphData>(config.apiEndpointWithName('predicate'), {params: {id: id.toString()}})
+    return this.$http.get<GraphData>(apiEndpointWithName('predicate'), {params: {id: id.toString()}})
       .then(expandContextWithKnownModels(model))
       .then(response => this.deserializePredicate(response.data!, false))
       .then(predicate => requireDefined(predicate));
   }
 
   getAllPredicates(model: Model): IPromise<PredicateListItem[]> {
-    return this.$http.get<GraphData>(config.apiEndpointWithName('predicate'))
+    return this.$http.get<GraphData>(apiEndpointWithName('predicate'))
       .then(expandContextWithKnownModels(model))
       .then(response => this.deserializePredicateList(response.data!));
   }
@@ -79,7 +79,7 @@ export class DefaultPredicateService implements PredicateService {
     if (predicates) {
       return this.$q.when(predicates);
     } else {
-      return this.$http.get<GraphData>(config.apiEndpointWithName('predicate'), {params: {model: model.id.uri}})
+      return this.$http.get<GraphData>(apiEndpointWithName('predicate'), {params: {model: model.id.uri}})
         .then(expandContextWithKnownModels(model))
         .then(response => this.deserializePredicateList(response.data!))
         .then(predicateList => {
@@ -94,7 +94,7 @@ export class DefaultPredicateService implements PredicateService {
       id: predicate.id.uri,
       model: predicate.definedBy.id.uri
     };
-    return this.$http.put<{ identifier: Urn }>(config.apiEndpointWithName('predicate'), predicate.serialize(), {params: requestParams})
+    return this.$http.put<{ identifier: Urn }>(apiEndpointWithName('predicate'), predicate.serialize(), {params: requestParams})
       .then(response => {
         this.modelPredicatesCache.delete(predicate.definedBy.id.uri);
         predicate.unsaved = false;
@@ -111,7 +111,7 @@ export class DefaultPredicateService implements PredicateService {
     if (predicate.id.notEquals(originalId)) {
       requestParams.oldid = originalId.uri;
     }
-    return this.$http.post<{ identifier: Urn }>(config.apiEndpointWithName('predicate'), predicate.serialize(), {params: requestParams})
+    return this.$http.post<{ identifier: Urn }>(apiEndpointWithName('predicate'), predicate.serialize(), {params: requestParams})
       .then(response => {
         predicate.version = response.data!.identifier;
         predicate.modifiedAt = moment();
@@ -124,7 +124,7 @@ export class DefaultPredicateService implements PredicateService {
       id: id.uri,
       model: model.id.uri
     };
-    return this.$http.delete(config.apiEndpointWithName('predicate'), {params: requestParams})
+    return this.$http.delete(apiEndpointWithName('predicate'), {params: requestParams})
       .then(() => this.modelPredicatesCache.delete(model.id.uri));
   }
 
@@ -133,7 +133,7 @@ export class DefaultPredicateService implements PredicateService {
       id: predicateId.uri,
       model: model.id.uri
     };
-    return this.$http.post(config.apiEndpointWithName('predicate'), undefined, {params: requestParams})
+    return this.$http.post(apiEndpointWithName('predicate'), undefined, {params: requestParams})
       .then(() => this.modelPredicatesCache.delete(model.id.uri));
   }
 
@@ -150,7 +150,7 @@ export class DefaultPredicateService implements PredicateService {
       params.conceptID = conceptID.uri;
     }
 
-    return this.$http.get<GraphData>(config.apiEndpointWithName('predicateCreator'), {params})
+    return this.$http.get<GraphData>(apiEndpointWithName('predicateCreator'), {params})
       .then(expandContextWithKnownModels(model))
       .then(response => this.deserializePredicate(response.data!, false))
       .then((predicate: T) => {
@@ -225,7 +225,7 @@ export class DefaultPredicateService implements PredicateService {
   }
 
   getExternalPredicate(externalId: Uri, model: Model) {
-    return this.$http.get<GraphData>(config.apiEndpointWithName('externalPredicate'), {params: {model: model.id.uri, id: externalId.uri}})
+    return this.$http.get<GraphData>(apiEndpointWithName('externalPredicate'), {params: {model: model.id.uri, id: externalId.uri}})
       .then(expandContextWithKnownModels(model))
       .then(response => this.deserializePredicate(response.data!, true))
       .then(predicate => {
@@ -237,7 +237,7 @@ export class DefaultPredicateService implements PredicateService {
   }
 
   getExternalPredicatesForModel(model: Model) {
-    return this.$http.get<GraphData>(config.apiEndpointWithName('externalPredicate'), {params: {model: model.id.uri}})
+    return this.$http.get<GraphData>(apiEndpointWithName('externalPredicate'), {params: {model: model.id.uri}})
       .then(expandContextWithKnownModels(model))
       .then(response => this.deserializePredicateList(response.data!));
   }

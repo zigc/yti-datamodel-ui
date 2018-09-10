@@ -1,14 +1,14 @@
-import { IAttributes, IScope } from 'angular';
+import { IScope } from 'angular';
 import { LanguageService } from 'app/services/languageService';
 import { ColumnDescriptor, TableDescriptor } from 'app/components/form/editableTable';
-import { module as mod } from './module';
 import { collectProperties } from 'yti-common-ui/utils/array';
-import { EditableForm } from '../form/editableEntityController';
-import { LanguageContext } from '../../types/language';
-import { Organization } from '../../entities/organization';
+import { EditableForm } from 'app/components/form/editableEntityController';
+import { LanguageContext } from 'app/types/language';
+import { Organization } from 'app/entities/organization';
 import { SearchOrganizationModal } from './searchOrganizationModal';
-import { modalCancelHandler } from '../../utils/angular';
-import { createExistsExclusion } from '../../utils/exclusion';
+import { ComponentDeclaration, modalCancelHandler } from 'app/utils/angular';
+import { createExistsExclusion } from 'app/utils/exclusion';
+import { forwardRef } from '@angular/core';
 
 interface WithContributors {
   contributors: Organization[];
@@ -16,49 +16,50 @@ interface WithContributors {
   removeContributor(organization: Organization): void;
 }
 
-mod.directive('contributorsView', () => {
-  return {
-    scope: {
-      value: '=',
-      context: '='
-    },
-    restrict: 'E',
-    template: `
+export const ContributosViewComponent: ComponentDeclaration = {
+  selector: 'contributorsView',
+  bindings: {
+    value: '=',
+    context: '='
+  },
+  require: {
+    form: '?^form'
+  },    template: `
       <h4>
         <span translate>Contributors</span> 
-        <button id="add_contributor_button" type="button" class="btn btn-link btn-xs pull-right" ng-click="ctrl.addContributor()" ng-show="ctrl.isEditing()">
+        <button id="add_contributor_button" type="button" class="btn btn-link btn-xs pull-right" ng-click="$ctrl.addContributor()" ng-show="$ctrl.isEditing()">
           <span translate>Add contributor</span>
         </button>
       </h4>
-      <editable-table id="'contributors'" descriptor="ctrl.descriptor" expanded="ctrl.expanded"></editable-table>
-    `,
-    controllerAs: 'ctrl',
-    bindToController: true,
-    require: ['contributorsView', '?^form'],
-    link(_$scope: IScope, _element: JQuery, _attributes: IAttributes, [thisController, formController]: [ContributorsViewController, EditableForm]) {
-      thisController.isEditing = () => formController && formController.editing;
-    },
-    controller: ContributorsViewController
-  };
-});
+      <editable-table id="'contributors'" descriptor="$ctrl.descriptor" expanded="$ctrl.expanded"></editable-table>
+  `,
+  controller: forwardRef(() => ContributorsViewController)
+};
 
 class ContributorsViewController {
 
   value: WithContributors;
   context: LanguageContext;
-  isEditing: () => boolean;
 
   descriptor: ContributorsTableDescriptor;
   expanded: boolean;
 
-  /* @ngInject */
-  constructor($scope: IScope,
-              languageService: LanguageService,
-              private searchOrganizationModal: SearchOrganizationModal) {
+  form: EditableForm;
 
-    $scope.$watch(() => this.value, value => {
-      this.descriptor = new ContributorsTableDescriptor(value, this.context, languageService);
+  /* @ngInject */
+  constructor(private $scope: IScope,
+              private languageService: LanguageService,
+              private searchOrganizationModal: SearchOrganizationModal) {
+  }
+
+  $onInit() {
+    this.$scope.$watch(() => this.value, value => {
+      this.descriptor = new ContributorsTableDescriptor(value, this.context, this.languageService);
     });
+  }
+
+  isEditing() {
+    return this.form && this.form.editing;
   }
 
   addContributor() {

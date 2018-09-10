@@ -1,13 +1,13 @@
-import { IAttributes, IScope } from 'angular';
+import { IScope } from 'angular';
 import { LanguageService } from 'app/services/languageService';
 import { ColumnDescriptor, TableDescriptor } from 'app/components/form/editableTable';
-import { module as mod } from './module';
 import { createExistsExclusion } from 'app/utils/exclusion';
 import { collectProperties } from 'yti-common-ui/utils/array';
-import { EditableForm } from '../form/editableEntityController';
-import { Classification } from '../../entities/classification';
+import { EditableForm } from 'app/components/form/editableEntityController';
+import { Classification } from 'app/entities/classification';
 import { SearchClassificationModal } from './searchClassificationModal';
-import { modalCancelHandler } from '../../utils/angular';
+import { ComponentDeclaration, modalCancelHandler } from 'app/utils/angular';
+import { forwardRef } from '@angular/core';
 
 interface WithClassifications {
   classifications: Classification[];
@@ -15,47 +15,49 @@ interface WithClassifications {
   removeClassification(classification: Classification): void;
 }
 
-mod.directive('classificationsView', () => {
-  return {
-    scope: {
-      value: '='
-    },
-    restrict: 'E',
-    template: `
+export const ClassificationsViewComponent: ComponentDeclaration = {
+  selector: 'classificationsView',
+  bindings: {
+    value: '='
+  },
+  require: {
+    form: '?^form'
+  },
+  template: `
       <h4>
         <span translate>Classifications</span> 
-        <button id="add_classification_button" type="button" class="btn btn-link btn-xs pull-right" ng-click="ctrl.addClassification()" ng-show="ctrl.isEditing()">
+        <button id="add_classification_button" type="button" class="btn btn-link btn-xs pull-right" ng-click="$ctrl.addClassification()" ng-show="$ctrl.isEditing()">
           <span translate>Add classification</span>
         </button>
       </h4>
-      <editable-table id="'classifications'" descriptor="ctrl.descriptor" expanded="ctrl.expanded"></editable-table>
-    `,
-    controllerAs: 'ctrl',
-    bindToController: true,
-    require: ['classificationsView', '?^form'],
-    link(_$scope: IScope, _element: JQuery, _attributes: IAttributes, [thisController, formController]: [ClassificationsViewController, EditableForm]) {
-      thisController.isEditing = () => formController && formController.editing;
-    },
-    controller: ClassificationsViewController
-  };
-});
+      <editable-table id="'classifications'" descriptor="$ctrl.descriptor" expanded="$ctrl.expanded"></editable-table>
+  `,
+  controller: forwardRef(() => ClassificationsViewController)
+};
 
 class ClassificationsViewController {
 
   value: WithClassifications;
-  isEditing: () => boolean;
 
   descriptor: ClassificationTableDescriptor;
   expanded: boolean;
 
-  /* @ngInject */
-  constructor($scope: IScope,
-              languageService: LanguageService,
-              private searchClassificationModal: SearchClassificationModal) {
+  form: EditableForm;
 
-    $scope.$watch(() => this.value, value => {
-      this.descriptor = new ClassificationTableDescriptor(value, languageService);
+  /* @ngInject */
+  constructor(private $scope: IScope,
+              private languageService: LanguageService,
+              private searchClassificationModal: SearchClassificationModal) {
+  }
+
+  $onInit() {
+    this.$scope.$watch(() => this.value, value => {
+      this.descriptor = new ClassificationTableDescriptor(value, this.languageService);
     });
+  }
+
+  isEditing() {
+    return this.form && this.form.editing;
   }
 
   addClassification() {

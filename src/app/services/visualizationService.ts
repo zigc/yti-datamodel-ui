@@ -1,4 +1,3 @@
-import { config } from 'config';
 import { expandContextWithKnownModels } from 'app/utils/entity';
 import { index } from 'yti-common-ui/utils/array';
 import { requireDefined } from 'yti-common-ui/utils/object';
@@ -9,6 +8,7 @@ import { ModelPositions, VisualizationClass, DefaultVisualizationClass } from 'a
 import { Model } from 'app/entities/model';
 import { IPromise, IQService, IHttpService } from 'angular';
 import { normalizeAsArray } from 'yti-common-ui/utils/array';
+import { apiEndpointWithName } from './config';
 
 export interface VisualizationService {
   getVisualization(model: Model): IPromise<ClassVisualization>;
@@ -32,7 +32,7 @@ export class DefaultVisualizationService implements VisualizationService {
       graph: model.id.uri
     };
 
-    return this.$http.get<GraphData>(config.apiEndpointWithName('framedGraphs'), { params })
+    return this.$http.get<GraphData>(apiEndpointWithName('framedGraphs'), { params })
       .then(expandContextWithKnownModels(model))
       .then(response => {
         const framed = response.data!;
@@ -48,13 +48,13 @@ export class DefaultVisualizationService implements VisualizationService {
   }
 
   private getModelPositions(model: Model) {
-    return this.$http.get<GraphData>(config.apiEndpointWithName('modelPositions'), { params: { model: model.id.uri } })
+    return this.$http.get<GraphData>(apiEndpointWithName('modelPositions'), { params: { model: model.id.uri } })
       .then(expandContextWithKnownModels(model))
       .then(response => this.deserializeModelPositions(response.data!), _err => this.newModelPositions(model));
   }
 
   updateModelPositions(model: Model, modelPositions: ModelPositions) {
-    return this.$http.put(config.apiEndpointWithName('modelPositions'), modelPositions.serialize(), { params: { model: model.id.uri } });
+    return this.$http.put(apiEndpointWithName('modelPositions'), modelPositions.serialize(), { params: { model: model.id.uri } });
   }
 
   newModelPositions(model: Model) {

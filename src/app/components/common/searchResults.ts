@@ -1,45 +1,12 @@
-import { IAttributes, IScope, ITranscludeFunction, ICompiledExpression } from 'angular';
-import GettextCatalog = angular.gettext.gettextCatalog;
+import { IAttributes, ICompiledExpression, IScope, ITranscludeFunction } from 'angular';
+import { gettextCatalog as GettextCatalog } from 'angular-gettext';
 import { ConfirmationModal } from './confirmationModal';
 import { Uri } from 'app/entities/uri';
-import { module as mod } from './module';
 import { Exclusion } from 'app/utils/exclusion';
 import { WithId } from 'app/types/entity';
-import { modalCancelHandler } from 'app/utils/angular';
+import { ComponentDeclaration, DirectiveDeclaration, modalCancelHandler } from 'app/utils/angular';
 import { labelNameToResourceIdIdentifier } from 'yti-common-ui/utils/resource';
-
-mod.directive('searchResults', () => {
-  return {
-    restrict: 'E',
-    bindToController: true,
-    scope: {
-      items: '=',
-      selected: '=',
-      exclude: '=',
-      onSelect: '&',
-      editInProgress: '='
-    },
-    controllerAs: 'ctrl',
-    transclude: true,
-    template: require('./searchResults.html'),
-    controller: SearchResultsController
-  };
-});
-
-mod.directive('searchResultTransclude', () => {
-  return {
-    link($scope: SearchResultScope, element: JQuery, _attribute: IAttributes, _ctrl: any, transclude: ITranscludeFunction) {
-      transclude((clone, transclusionScope) => {
-        transclusionScope!['searchResult'] = $scope.searchResult.item;
-        element.append(clone!);
-      });
-    }
-  };
-});
-
-interface SearchResultScope extends IScope {
-  searchResult: SearchResult<any>;
-}
+import { forwardRef } from '@angular/core';
 
 export abstract class AddNew {
 
@@ -78,6 +45,20 @@ class SearchResult<T extends WithId> {
   }
 }
 
+export const SearchResultsComponent: ComponentDeclaration = {
+  selector: 'searchResults',
+  bindings: {
+    items: '=',
+    selected: '=',
+    exclude: '=',
+    onSelect: '&',
+    editInProgress: '='
+  },
+  transclude: true,
+  template: require('./searchResults.html'),
+  controller: forwardRef(() => SearchResultsController)
+};
+
 class SearchResultsController<T extends WithId> {
 
   items: (T|AddNew)[];
@@ -87,10 +68,18 @@ class SearchResultsController<T extends WithId> {
   onSelect: ICompiledExpression;
   editInProgress: () => boolean;
 
-  constructor($scope: IScope, $element: JQuery, private gettextCatalog: GettextCatalog, private confirmationModal: ConfirmationModal) {
-    $scope.$watchCollection(() => this.items, items => {
+  /* @ngInject */
+  constructor(private $scope: IScope,
+              private $element: JQuery,
+              private gettextCatalog: GettextCatalog,
+              private confirmationModal: ConfirmationModal) {
+  }
 
-      $element.parents('.search-results').animate({ scrollTop: 0 }, 0);
+  $onInit() {
+
+    this.$scope.$watchCollection(() => this.items, items => {
+
+      this.$element.parents('.search-results').animate({ scrollTop: 0 }, 0);
 
       this.searchResults = (items || []).map(item => {
         if (item instanceof AddNew) {
@@ -141,3 +130,21 @@ class SearchResultsController<T extends WithId> {
                            : `${item.id.toString()}${'_search_result_link'}`;
   }
 }
+
+interface SearchResultScope extends IScope {
+  searchResult: SearchResult<any>;
+}
+
+export const SearchResultTranscludeDirective: DirectiveDeclaration = {
+  selector: 'searchResultTransclude',
+  factory() {
+    return {
+      link($scope: SearchResultScope, element: JQuery, _attribute: IAttributes, _ctrl: any, transclude: ITranscludeFunction) {
+        transclude((clone, transclusionScope) => {
+          (transclusionScope as SearchResultScope).searchResult = $scope.searchResult.item;
+          element.append(clone!);
+        });
+      }
+    };
+  }
+};

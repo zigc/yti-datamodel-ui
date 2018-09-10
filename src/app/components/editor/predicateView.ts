@@ -4,30 +4,26 @@ import { UserService } from 'app/services/userService';
 import { EditableEntityController, EditableScope, Rights } from 'app/components/form/editableEntityController';
 import { DeleteConfirmationModal } from 'app/components/common/deleteConfirmationModal';
 import { ErrorModal } from 'app/components/form/errorModal';
-import { module as mod } from './module';
 import { Association, Attribute } from 'app/entities/predicate';
 import { Model } from 'app/entities/model';
 import { LanguageContext } from 'app/types/language';
 import { ModelControllerService } from 'app/components/model/modelControllerService';
 import { AuthorizationManagerService } from 'app/services/authorizationManagerService';
+ import { ComponentDeclaration } from 'app/utils/angular';
+import { forwardRef } from '@angular/core';
 
-mod.directive('predicateView', () => {
-  return {
-    scope: {
-      id: '=',
-      predicate: '=',
-      model: '=',
-      modelController: '=',
-      width: '='
-    },
-    restrict: 'E',
-    template: require('./predicateView.html'),
-    controllerAs: 'ctrl',
-    bindToController: true,
-    controller: PredicateViewController,
-    require: 'predicateView'
-  };
-});
+export const PredicateViewComponent: ComponentDeclaration = {
+  selector: 'predicateView',
+  bindings: {
+    id: '=',
+    predicate: '=',
+    model: '=',
+    modelController: '=',
+    width: '='
+  },
+  template: require('./predicateView.html'),
+  controller: forwardRef(() => PredicateViewController)
+};
 
 export class PredicateViewController extends EditableEntityController<Association|Attribute> {
 
@@ -44,6 +40,9 @@ export class PredicateViewController extends EditableEntityController<Associatio
               userService: UserService,
               private authorizationManagerService: AuthorizationManagerService) {
     super($scope, $log, deleteConfirmationModal, errorModal, userService);
+  }
+
+  $onInit() {
     this.modelController.registerView(this);
   }
 

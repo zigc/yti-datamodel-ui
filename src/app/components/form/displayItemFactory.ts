@@ -1,5 +1,5 @@
 import { ILocationService } from 'angular';
-import GettextCatalog = angular.gettext.gettextCatalog;
+import { gettextCatalog as GettextCatalog } from 'angular-gettext';
 import { LanguageService } from 'app/services/languageService';
 import { Uri } from 'app/entities/uri';
 import { isString, isNumber, isBoolean } from 'yti-common-ui/utils/object';

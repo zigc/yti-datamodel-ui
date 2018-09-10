@@ -1,10 +1,10 @@
-import { IAttributes, IAsyncModelValidators, IQService, IScope, INgModelController } from 'angular';
-import GettextCatalog = angular.gettext.gettextCatalog;
+import { IAsyncModelValidators, IAttributes, INgModelController, IQService, IScope } from 'angular';
+import { gettextCatalog as GettextCatalog } from 'angular-gettext';
 import { ReferenceDataService } from 'app/services/referenceDataService';
 import { LanguageService } from 'app/services/languageService';
-import { module as mod } from './module';
 import { anyMatching } from 'yti-common-ui/utils/array';
 import { ReferenceData } from 'app/entities/referenceData';
+import { DirectiveDeclaration } from 'app/utils/angular';
 
 export function placeholderText(gettextCatalog: GettextCatalog) {
   return gettextCatalog.getString('Write reference data code');
@@ -33,28 +33,33 @@ export function createAsyncValidators($q: IQService, referenceData: ReferenceDat
   };
 }
 
-mod.directive('codeValueInput', /* @ngInject */ ($q: IQService, referenceDataService: ReferenceDataService, languageService: LanguageService, gettextCatalog: GettextCatalog) => {
-  return {
-    scope: {
-      referenceData: '='
-    },
-    restrict: 'A',
-    require: 'ngModel',
-    link($scope: CodeValueInputScope, element: JQuery, attributes: IAttributes, modelController: INgModelController) {
-
-      if (!attributes['placeholder']) {
-        $scope.$watch(() => languageService.UILanguage, () => {
-          element.attr('placeholder', placeholderText(gettextCatalog));
-        });
-      }
-
-      $scope.$watch(() => $scope.referenceData, referenceData => {
-        Object.assign(modelController.$asyncValidators, createAsyncValidators($q, referenceData, referenceDataService));
-      });
-    }
-  };
-});
-
 interface CodeValueInputScope extends IScope {
   referenceData: ReferenceData[];
 }
+
+export const CodeValueInputDirective: DirectiveDeclaration = {
+  selector: 'codeValueInput',
+  /* @ngInject */
+  factory($q: IQService, referenceDataService: ReferenceDataService, languageService: LanguageService, gettextCatalog: GettextCatalog) {
+    return {
+      bindToController: {
+        referenceData: '='
+      },
+      restrict: 'A',
+      require: 'ngModel',
+      link($scope: CodeValueInputScope, element: JQuery, attributes: IAttributes, modelController: INgModelController) {
+
+        if (!attributes['placeholder']) {
+          $scope.$watch(() => languageService.UILanguage, () => {
+            element.attr('placeholder', placeholderText(gettextCatalog));
+          });
+        }
+
+        $scope.$watch(() => $scope.referenceData, referenceData => {
+          Object.assign(modelController.$asyncValidators, createAsyncValidators($q, referenceData, referenceDataService));
+        });
+      }
+    }
+  }
+};
+

@@ -1,23 +1,19 @@
-import { module as mod } from './module';
+import { ComponentDeclaration } from 'app/utils/angular';
+import { forwardRef } from '@angular/core';
 
-mod.directive('selectionView', () => {
-  return {
-    scope: {
-      editableController: '=',
-      model: '='
-    },
-    restrict: 'E',
-    template: require('./selectionView.html'),
-    transclude: {
-      'content': 'selectionContent',
-      'buttons': '?selectionButtons'
-    },
-    controllerAs: 'ctrl',
-    bindToController: true,
-    controller: SelectionViewController
-  };
-});
+export const SelectionViewComponent: ComponentDeclaration = {
+  selector: 'selectionView',
+  bindings: {
+    editableController: '=',
+    model: '='
+  },
+  transclude: {
+    'content': 'selectionContent',
+    'buttons': '?selectionButtons'
+  },
+  template: require('./selectionView.html'),
+  controller: forwardRef(() => SelectionViewController)
+};
 
 class SelectionViewController {
-
 }

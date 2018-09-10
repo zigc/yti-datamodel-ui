@@ -1,15 +1,15 @@
-<h4>{{ctrl.class.normalizedType + ' information' | capitalize | translate}}</h4>
+<h4>{{$ctrl.class.normalizedType + ' information' | capitalize | translate}}</h4>
 
 <div class="row basic-info">
   <div class="col-md-6">
-    <editable data-title="{{ctrl.class.normalizedType + ' label' | capitalize}}" context="ctrl.model" autofocus="ctrl.shouldAutofocus">
-      <input id="classLabel" class="form-control" type="text" localized-input="label" context="ctrl.model" ng-model="ctrl.class.label"/>
+    <editable data-title="{{$ctrl.class.normalizedType + ' label' | capitalize}}" context="$ctrl.model" autofocus="$ctrl.shouldAutofocus">
+      <input id="classLabel" class="form-control" type="text" localized-input="label" context="$ctrl.model" ng-model="$ctrl.class.label"/>
     </editable>
   </div>
 
   <div class="col-md-6">
-    <editable data-title="Description" context="ctrl.model">
-      <textarea id="classComment" class="form-control" localized-input context="ctrl.model" ng-model="ctrl.class.comment"></textarea>
+    <editable data-title="Description" context="$ctrl.model">
+      <textarea id="classComment" class="form-control" localized-input context="$ctrl.model" ng-model="$ctrl.class.comment"></textarea>
     </editable>
   </div>
 </div>
@@ -17,31 +17,31 @@
 <div class="row">
   <div class="col-md-6">
 
-    <editable data-title="{{ctrl.class.normalizedType + ' id' | capitalize}}" link="ctrl.linkToIdClass()" context="ctrl.model" clipboard="ctrl.class.id.uri">
-      <input id="classId" class="form-control" type="text" required id-input="class" old="ctrl.oldClass" ng-model="ctrl.class.id" ng-disabled="!ctrl.class.inUnstableState" />
+    <editable data-title="{{$ctrl.class.normalizedType + ' id' | capitalize}}" link="$ctrl.linkToIdClass()" context="$ctrl.model" clipboard="$ctrl.class.id.uri">
+      <input id="classId" class="form-control" type="text" required id-input="class" old="$ctrl.oldClass" ng-model="$ctrl.class.id" ng-disabled="!$ctrl.class.inUnstableState" />
     </editable>
 
-    <editable ng-if="ctrl.class.isOfType('class')" data-title="Superclass" link="ctrl.linkToSuperclass()" context="ctrl.model">
-      <uri-select id="superClass" type="class" uri="ctrl.class.subClassOf" model="ctrl.model" exclude-item="ctrl.superClassExclude" after-selected="ctrl.addPropertiesFromClassId(id, 'super class')"></uri-select>
+    <editable ng-if="$ctrl.class.isOfType('class')" data-title="Superclass" link="$ctrl.linkToSuperclass()" context="$ctrl.model">
+      <uri-select id="superClass" type="class" uri="$ctrl.class.subClassOf" model="$ctrl.model" exclude-item="$ctrl.superClassExclude" after-selected="$ctrl.addPropertiesFromClassId(id, 'super class')"></uri-select>
     </editable>
 
-    <editable ng-if="ctrl.class.isOfType('shape')" data-title="Specialized from class" link="ctrl.linkToScopeclass()" context="ctrl.model">
-      <uri-select id="scopeClass" type="class" uri="ctrl.class.scopeClass" model="ctrl.model" mandatory="true" after-selected="ctrl.addPropertiesFromClassId(id, 'scope class')"></uri-select>
+    <editable ng-if="$ctrl.class.isOfType('shape')" data-title="Specialized from class" link="$ctrl.linkToScopeclass()" context="$ctrl.model">
+      <uri-select id="scopeClass" type="class" uri="$ctrl.class.scopeClass" model="$ctrl.model" mandatory="true" after-selected="$ctrl.addPropertiesFromClassId(id, 'scope class')"></uri-select>
     </editable>
 
-    <editable data-title="Localname" context="ctrl.model">
-      <input id="localName" class="form-control" type="text" string-input="identifier" ng-trim="false" ng-model="ctrl.class.localName" />
+    <editable data-title="Localname" context="$ctrl.model">
+      <input id="localName" class="form-control" type="text" string-input="identifier" ng-trim="false" ng-model="$ctrl.class.localName" />
     </editable>
 
   </div>
   <div class="col-md-6">
-    <editable-state-select ng-if="!ctrl.class.unsaved" id="classState" state="ctrl.class.status" model="ctrl.model"></editable-state-select>
-    <defined-by entity="ctrl.class" model="ctrl.model"></defined-by>
-    <editable-multiple-uri-select id="equivalentClass" type="class" ng-model="ctrl.class.equivalentClasses" model="ctrl.model" data-title="{{'Equivalent class'}}"></editable-multiple-uri-select>
+    <editable-state-select ng-if="!$ctrl.class.unsaved" id="classState" state="$ctrl.class.status" model="$ctrl.model"></editable-state-select>
+    <defined-by entity="$ctrl.class" model="$ctrl.model"></defined-by>
+    <editable-multiple-uri-select id="equivalentClass" type="class" ng-model="$ctrl.class.equivalentClasses" model="$ctrl.model" data-title="{{'Equivalent class'}}"></editable-multiple-uri-select>
   </div>
 </div>
 
-<subject-view entity="ctrl.class" model="ctrl.model" is-editing="ctrl.isEditing"></subject-view>
+<subject-view entity="$ctrl.class" model="$ctrl.model" is-editing="$ctrl.isEditing"></subject-view>
 
 <hr />
 
@@ -49,35 +49,35 @@
   <div class="col-md-12">
 
     <div class="clearfix">
-      <h4 class="pull-left mb-0 mr-2">{{ctrl.class.normalizedType + ' properties' | capitalize | translate}}</h4>
-      <a ng-show="!ctrl.isEditing()"
+      <h4 class="pull-left mb-0 mr-2">{{$ctrl.class.normalizedType + ' properties' | capitalize | translate}}</h4>
+      <a ng-show="!$ctrl.isEditing()"
          class="btn btn-secondary-action btn-sm"
-         ng-class="{ active: ctrl.sortAlphabetically }"
+         ng-class="{ active: $ctrl.sortAlphabetically }"
          uib-btn-checkbox
-         ng-model="ctrl.sortAlphabetically">
+         ng-model="$ctrl.sortAlphabetically">
         <i class="fas fa-sort-alpha-down"></i>
       </a>
-      <button-with-options ng-show="ctrl.isEditing()"
+      <button-with-options ng-show="$ctrl.isEditing()"
                            class="add-property"
-                           options="ctrl.addPropertyActions">
+                           options="$ctrl.addPropertyActions">
         <span translate>Add property</span>
       </button-with-options>
     </div>
 
-    <accordion class="properties" ng-if="ctrl.class.properties.length > 0"
-               open-id="ctrl.openPropertyId"
-               drag-sortable="ctrl.properties"
-               drag-disabled="!ctrl.isEditing()"
-               on-reorder="ctrl.onPropertyReorder">
-       <accordion-group id="ctrl.id + '_property_' + ctrl.formLabelNameToIdName(property.label)" ng-repeat="property in ctrl.properties track by property.internalId" identifier="property.internalId.uuid">
+    <accordion class="properties" ng-if="$ctrl.class.properties.length > 0"
+               open-id="$ctrl.openPropertyId"
+               drag-sortable="$ctrl.properties"
+               drag-disabled="!$ctrl.isEditing()"
+               on-reorder="$ctrl.onPropertyReorder">
+       <accordion-group id="$ctrl.id + '_property_' + $ctrl.formLabelNameToIdName(property.label)" ng-repeat="property in $ctrl.properties track by property.internalId" identifier="property.internalId.uuid">
         <accordion-heading>
           <div drag-sortable-item>
             <h5>
               <a ng-class="{collapsed: !isOpen()}" href>
                 <span class="accordion-icon" ng-class="property.glyphIconClass"></span>
-                <span>{{property | translateLabel: ctrl.model}}</span>
+                <span>{{property | translateLabel: $ctrl.model}}</span>
                 <accordion-chevron is-open="isOpen()"></accordion-chevron>
-                <div class="property-ordering" ng-show="ctrl.isEditing()">
+                <div class="property-ordering" ng-show="$ctrl.isEditing()">
                   <span class="fas fa-bars"></span>
                 </div>
               </a>
@@ -86,12 +86,12 @@
         </accordion-heading>
 
         <accordion-body>
-          <property-view id="ctrl.id + '_property_' + ctrl.formLabelNameToIdName(property.label)" property="property" data-class="ctrl.class" model="ctrl.model"></property-view>
+          <property-view id="$ctrl.id + '_property_' + $ctrl.formLabelNameToIdName(property.label)" property="property" data-class="$ctrl.class" model="$ctrl.model"></property-view>
         </accordion-body>
       </accordion-group>
     </accordion>
 
-    <span ng-show="ctrl.class.properties.length === 0" translate>No properties yet</span>
+    <span ng-show="$ctrl.class.properties.length === 0" translate>No properties yet</span>
 
   </div>
 </div>
@@ -102,27 +102,27 @@
 
 <div class="row">
   <div class="col-md-6">
-    <non-editable data-title="Created at" value="ctrl.class.createdAt" context="ctrl.model"></non-editable>
+    <non-editable data-title="Created at" value="$ctrl.class.createdAt" context="$ctrl.model"></non-editable>
   </div>
   <div class="col-md-6">
-    <non-editable data-title="Modified at" value="ctrl.class.modifiedAt" context="ctrl.model"></non-editable>
+    <non-editable data-title="Modified at" value="$ctrl.class.modifiedAt" context="$ctrl.model"></non-editable>
   </div>
 </div>
 
 <div class="row">
   <div class="col-md-12">
-    <editable data-title="Editorial note" context="ctrl.model">
-      <textarea id="editorialNote" class="form-control" localized-input="free" context="ctrl.model" ng-model="ctrl.class.editorialNote"></textarea>
+    <editable data-title="Editorial note" context="$ctrl.model">
+      <textarea id="editorialNote" class="form-control" localized-input="free" context="$ctrl.model" ng-model="$ctrl.class.editorialNote"></textarea>
     </editable>
   </div>
 </div>
 
 <div class="row">
   <div class="col-md-12">
-    <div ng-show="ctrl.model.isOfType('profile') && (ctrl.class.constraint.isVisible() || ctrl.isEditing())">
-      <editable-constraint id="ctrl.id + '_' + ctrl.class.id.uri" constraint="ctrl.class.constraint" model="ctrl.model" class="ctrl.class"></editable-constraint>
+    <div ng-show="$ctrl.model.isOfType('profile') && ($ctrl.class.constraint.isVisible() || $ctrl.isEditing())">
+      <editable-constraint id="$ctrl.id + '_' + $ctrl.class.id.uri" constraint="$ctrl.class.constraint" model="$ctrl.model" class="$ctrl.class"></editable-constraint>
     </div>
 
-    <usage-panel id="ctrl.id + '_' + ctrl.class.id.uri" entity="ctrl.class" context="ctrl.model"></usage-panel>
+    <usage-panel id="$ctrl.id + '_' + $ctrl.class.id.uri" entity="$ctrl.class" context="$ctrl.model"></usage-panel>
   </div>
 </div>

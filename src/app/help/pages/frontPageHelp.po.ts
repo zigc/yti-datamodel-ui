@@ -1,10 +1,10 @@
 import { createStory, createClickNextCondition, Story, createNavigatingClickNextCondition } from 'app/help/contract';
-import { KnownModelType } from '../../types/entity';
-import { child } from '../selectors';
+import { KnownModelType } from 'app/types/entity';
+import { child } from 'app/help/selectors';
 
 export function startModelCreation(type: KnownModelType): Story[] {
 
-  const startModelCreationElement = () => angular.element(`#add-new-datamodel`);
+  const startModelCreationElement = () => jQuery(`#add-new-datamodel`);
   const startModelCreationButton = child(startModelCreationElement, `button.btn-action`);
   const dropdownSelectionElement = child(startModelCreationElement, `#add_${type}_button`);
 

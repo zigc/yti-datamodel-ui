@@ -1,0 +1,7 @@
+{
+  "/api/*": {
+    "target": "https://tietomallit-dev.suomi.fi",
+    "changeOrigin": true,
+    "secure": false
+  }
+}

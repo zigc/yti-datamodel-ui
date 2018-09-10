@@ -6,9 +6,9 @@ import {
 import * as ClassForm from './classFormHelp.po';
 import * as SearchPredicateModal from './modal/searchPredicateModalHelp.po';
 import { KnownPredicateType } from 'app/types/entity';
-import GettextCatalog = angular.gettext.gettextCatalog;
+import { gettextCatalog as GettextCatalog } from 'angular-gettext';
 
-export const element = () => angular.element('class-view');
+export const element = () => jQuery('class-view');
 
 const modifyClassElement = child(element, 'button.edit');
 export const modifyClass = createStory({

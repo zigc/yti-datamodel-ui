@@ -1,33 +1,33 @@
-import { module as mod } from './module';
 import { ISCEService } from 'angular';
 import { LanguageContext } from 'app/types/language';
 import { Localizable } from 'yti-common-ui/types/localization';
+import { ComponentDeclaration, FilterDeclaration } from 'app/utils/angular';
+import { forwardRef } from '@angular/core';
 
-mod.directive('paragraphize', () => {
-  return {
-    restrict: 'E',
-    scope: {
-      text: '=',
-      context: '='
-    },
-    bindToController: true,
-    controllerAs: 'ctrl',
-    controller: ParagraphizeController,
-    template: '<span ng-bind-html="ctrl.text | translateValue: ctrl.context | paragraphize"></span>'
-  };
-});
-
+export const ParagraphizeComponent: ComponentDeclaration = {
+  selector: 'paragraphize',
+  bindings: {
+    text: '=',
+    context: '='
+  },
+  template: '<span ng-bind-html="$ctrl.text | translateValue:$ctrlcontext | paragraphize"></span>',
+  controller: forwardRef(() => ParagraphizeController)
+};
 
 class ParagraphizeController {
   text: Localizable;
   context: LanguageContext;
 }
 
-mod.filter('paragraphize', /* @ngInject */ ($sce: ISCEService) => {
-  return (text: string) => {
-    return $sce.trustAsHtml(applyParagraph(text));
-  };
-});
+export const ParagraphizeFilter: FilterDeclaration = {
+  name: 'paragraphize',
+  /* @ngInject */
+  factory($sce: ISCEService) {
+    return (text: string) => {
+      return $sce.trustAsHtml(applyParagraph(text));
+    };
+  }
+};
 
 const paragraphRegex = new RegExp(`(.*?\n\n})`);
 

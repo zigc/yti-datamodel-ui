@@ -1,20 +1,16 @@
-import { IWindowService, IScope } from 'angular';
-import { module as mod } from './module';
+import { IScope, IWindowService } from 'angular';
 import { SessionService } from 'app/services/sessionService';
-import { NgZone } from '@angular/core';
+import { forwardRef, NgZone } from '@angular/core';
+ import { ComponentDeclaration } from 'app/utils/angular';
 
-mod.directive('divider', () => {
-  return {
-    scope: {
-      selectionWidth: '='
-    },
-    restrict: 'E',
-    template: `<div class="divider" ng-mousedown="ctrl.moveDivider($event)"></div>`,
-    controllerAs: 'ctrl',
-    bindToController: true,
-    controller: DividerController
-  };
-});
+export const DividerComponent: ComponentDeclaration = {
+  selector: 'divider',
+  bindings: {
+    selectionWidth: '='
+  },
+  template: `<div class="divider" ng-mousedown="$ctrl.moveDivider($event)"></div>`,
+  controller: forwardRef(() => DividerController)
+};
 
 const modelPanelLeft = 350;
 const minSelectionWidth = 520;
@@ -30,19 +26,22 @@ class DividerController {
               private $window: IWindowService,
               private zone: NgZone,
               private sessionService: SessionService) {
+  }
+
+  $onInit() {
 
     this.initWidth();
 
     const onResize = () => {
       this.initWidth();
-      $scope.$apply();
+      this.$scope.$apply();
     };
 
-    zone.runOutsideAngular(() => {
-      $window.addEventListener('resize', onResize);
+    this.zone.runOutsideAngular(() => {
+      this.$window.addEventListener('resize', onResize);
     });
 
-    $scope.$on('$destroy', () => $window.removeEventListener('resize', onResize));
+    this.$scope.$on('$destroy', () => this.$window.removeEventListener('resize', onResize));
   }
 
   initWidth() {

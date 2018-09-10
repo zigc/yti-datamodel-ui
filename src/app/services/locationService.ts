@@ -1,6 +1,6 @@
 import { Model } from 'app/entities/model';
 import { Localizable } from 'yti-common-ui/types/localization';
-import { KnownModelType } from '../types/entity';
+import { KnownModelType } from 'app/types/entity';
 
 export interface Location {
   localizationKey?: string;

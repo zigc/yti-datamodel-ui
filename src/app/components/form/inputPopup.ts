@@ -1,7 +1,7 @@
 import { module as mod } from './module';
 import { IScope, IAttributes, ITranscludeFunction, IRepeatScope, IWindowService } from 'angular';
-import { scrollToElement, hasFixedPositioningParent } from 'app/utils/angular';
-import { NgZone } from '@angular/core';
+import { scrollToElement, hasFixedPositioningParent, ComponentDeclaration } from 'app/utils/angular';
+import { forwardRef, NgZone } from '@angular/core';
 
 export interface InputWithPopupController<T> {
   popupItemName: string;
@@ -15,34 +15,31 @@ export interface InputWithPopupController<T> {
 }
 
 interface InputPopupScope extends IScope {
-  ctrl: InputPopupController<any>;
+  $ctrl: InputPopupController<any>;
 }
 
-mod.directive('inputPopup', () => {
-  return {
-    scope: {
-      ctrl: '<'
-    },
-    template: `
-        <div ng-if-body="ctrl.ctrl.show" class="input-popup show">
-          <ul class="dropdown-menu" ng-style="ctrl.popupStyle">
-            <a ng-repeat="item in ctrl.ctrl.popupItems"
+export const InputPopupComponent: ComponentDeclaration = {
+  selector: 'inputPopup',
+  transclude: true,
+  bindings: {
+    ctrl: '<'
+  },
+  template: `
+        <div ng-if-body="$ctrl.ctrl.show" class="input-popup show">
+          <ul class="dropdown-menu" ng-style="$ctrl.popupStyle">
+            <a ng-repeat="item in $ctrl.ctrl.popupItems"
                 class="dropdown-item"
-                ng-class="{ active: ctrl.ctrl.isSelected($index) }" 
-                ng-mouseenter="ctrl.ctrl.setSelection($index)" 
-                ng-mousedown="ctrl.ctrl.selectSelection(event)"
-                input-popup-select-item="ctrl.ctrl">
+                ng-class="{ active: $ctrl.ctrl.isSelected($index) }" 
+                ng-mouseenter="$ctrl.ctrl.setSelection($index)" 
+                ng-mousedown="$ctrl.ctrl.selectSelection(event)"
+                input-popup-select-item="$ctrl.ctrl">
               <input-popup-item-transclude></input-popup-item-transclude>
             </a>
           </ul>
         </div>
-    `,
-    controllerAs: 'ctrl',
-    bindToController: true,
-    transclude: true,
-    controller: InputPopupController
-  };
-});
+  `,
+  controller: forwardRef(() => InputPopupController)
+};
 
 class InputPopupController<T> {
 
@@ -50,9 +47,12 @@ class InputPopupController<T> {
   popupStyle: { top: string|number, left: string|number, width: string|number, position: string };
 
   /* @ngInject */
-  constructor($scope: InputPopupScope,
-              $window: IWindowService,
-              zone: NgZone) {
+  constructor(private $scope: InputPopupScope,
+              private $window: IWindowService,
+              private zone: NgZone) {
+  }
+
+  $onInit() {
 
     const calculatePopupStyle = (e: JQuery) => {
       const offset = e.offset();
@@ -65,9 +65,9 @@ class InputPopupController<T> {
       };
     };
 
-    $scope.$watch(() => this.ctrl.show, () => this.popupStyle = calculatePopupStyle(this.ctrl.element));
+    this.$scope.$watch(() => this.ctrl.show, () => this.popupStyle = calculatePopupStyle(this.ctrl.element));
 
-    $scope.$watch(() => {
+    this.$scope.$watch(() => {
       const offset = this.ctrl.element.offset();
       return {
         left: offset.left,
@@ -79,15 +79,15 @@ class InputPopupController<T> {
       if (this.ctrl.show) {
         this.popupStyle = calculatePopupStyle(this.ctrl.element);
         // apply styles without invoking scope for performance reasons
-        angular.element('div.input-popup .dropdown-menu').css(this.popupStyle);
+        jQuery('div.input-popup .dropdown-menu').css(this.popupStyle);
       }
     };
 
-    zone.runOutsideAngular(() => {
+    this.zone.runOutsideAngular(() => {
       window.addEventListener('resize', setPopupStyleToElement);
     });
 
-    $scope.$on('$destroy', () => {
+    this.$scope.$on('$destroy', () => {
       window.removeEventListener('resize', setPopupStyleToElement);
     });
   }
@@ -101,7 +101,7 @@ mod.directive('inputPopupItemTransclude', () => {
   return {
     link($scope: SelectItemScope, element: JQuery, _attribute: IAttributes, _controller: any, transclude: ITranscludeFunction) {
       transclude((clone, transclusionScope) => {
-        transclusionScope![$scope.ctrl.ctrl.popupItemName] = $scope.item;
+        (transclusionScope as any)[$scope.$ctrl.ctrl.popupItemName] = $scope.item;
         element.append(clone!);
       });
     }

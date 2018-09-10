@@ -1,6 +1,5 @@
-import { IAttributes, IScope } from 'angular';
+import { IScope } from 'angular';
 import { Uri } from 'app/entities/uri';
-import { module as mod } from './module';
 import { PredicateService } from 'app/services/predicateService';
 import { SearchPredicateModal } from './searchPredicateModal';
 import { createDefinedByExclusion } from 'app/utils/exclusion';
@@ -10,26 +9,22 @@ import { CopyPredicateModal } from './copyPredicateModal';
 import { requireDefined } from 'yti-common-ui/utils/object';
 import { Property } from 'app/entities/class';
 import { Model } from 'app/entities/model';
-import { Predicate, Association, Attribute } from 'app/entities/predicate';
-import { modalCancelHandler } from 'app/utils/angular';
+import { Association, Attribute, Predicate } from 'app/entities/predicate';
+import { ComponentDeclaration, modalCancelHandler } from 'app/utils/angular';
+import { forwardRef } from '@angular/core';
 
-mod.directive('propertyPredicateView', () => {
-  return {
-    scope: {
-      property: '=',
-      model: '='
-    },
-    restrict: 'E',
-    template: require('./propertyPredicateView.html'),
-    controllerAs: 'ctrl',
-    bindToController: true,
-    controller: PropertyPredicateViewController,
-    require: ['propertyPredicateView', '^classForm'],
-    link(_$scope: IScope, _element: JQuery, _attributes: IAttributes, [thisController, classFormController]: [PropertyPredicateViewController, ClassFormController]) {
-      thisController.isEditing = () => classFormController.isEditing();
-    }
-  };
-});
+export const PropertyPredicateViewComponent: ComponentDeclaration = {
+  selector: 'propertyPredicateView',
+  bindings: {
+    property: '=',
+    model: '='
+  },
+  require: {
+    classForm: '^classForm'
+  },
+  template: require('./propertyPredicateView.html'),
+  controller: forwardRef(() => PropertyPredicateViewController)
+};
 
 
 class PropertyPredicateViewController {
@@ -38,34 +33,43 @@ class PropertyPredicateViewController {
   property: Property;
   model: Model;
   predicate: Predicate|null;
-  isEditing: () => boolean;
   changeActions: { name: string, apply: () => void }[] = [];
+
+  classForm: ClassFormController;
+
   /* @ngInject */
-  constructor($scope: IScope,
+  constructor(private $scope: IScope,
               private predicateService: PredicateService,
               private searchPredicateModal: SearchPredicateModal,
               private copyPredicateModal: CopyPredicateModal) {
+  }
+
+  $onInit() {
 
     const setResult = (p: Predicate|null) => {
-        this.predicate = p;
-        this.updateChangeActions().then(() => this.loading = false);
+      this.predicate = p;
+      this.updateChangeActions().then(() => this.loading = false);
     };
 
-    $scope.$watch(() => this.property && this.property.predicate, predicate => {
+    this.$scope.$watch(() => this.property && this.property.predicate, predicate => {
       this.loading = true;
 
       if (predicate instanceof Association || predicate instanceof Attribute) {
         setResult(predicate);
       } else if (predicate instanceof Uri) {
         if (this.model.isNamespaceKnownToBeNotModel(predicate.namespace)) {
-          predicateService.getExternalPredicate(predicate, this.model).then(setResult, (_err: any) => setResult(null));
+          this.predicateService.getExternalPredicate(predicate, this.model).then(setResult, (_err: any) => setResult(null));
         } else {
-          predicateService.getPredicate(predicate).then(setResult, (_err: any) => setResult(null));
+          this.predicateService.getPredicate(predicate).then(setResult, (_err: any) => setResult(null));
         }
       } else {
         throw new Error('Unsupported predicate: ' + predicate);
       }
     });
+  }
+
+  isEditing() {
+    return this.classForm && this.classForm.isEditing();
   }
 
   updateChangeActions() {

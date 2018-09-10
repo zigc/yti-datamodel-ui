@@ -1,39 +1,36 @@
-import { module as mod } from './module';
 import { DataType } from 'app/entities/dataTypes';
 import { ReferenceData } from 'app/entities/referenceData';
 import { LanguageContext } from 'app/types/language';
+import { ComponentDeclaration } from 'app/utils/angular';
+import { forwardRef } from '@angular/core';
 
-mod.directive('editableMultipleDataTypeInput', () => {
-  return {
-    scope: {
-      ngModel: '=',
-      inputType: '=',
-      id: '@',
-      title: '@',
-      referenceData: '=',
-      context: '='
-    },
-    restrict: 'E',
-    controllerAs: 'ctrl',
-    bindToController: true,
-    template: `
-      <editable-multiple id="{{ctrl.id}}" data-title="{{ctrl.title}}" ng-model="ctrl.ngModel" input="ctrl.input">
+export const EditableMultipleDataTypeInputComponent: ComponentDeclaration = {
+  selector: 'editableMultipleDataTypeInput',
+  bindings: {
+    ngModel: '=',
+    inputType: '=',
+    id: '@',
+    title: '@',
+    referenceData: '=',
+    context: '='
+  },
+  template: `
+      <editable-multiple id="{{$ctrl.id}}" data-title="{{$ctrl.title}}" ng-model="$ctrl.ngModel" input="$ctrl.input">
         <input-container>
-          <code-value-input-autocomplete reference-data="ctrl.referenceData" context="ctrl.context">
-            <input id="{{ctrl.id}}"
+          <code-value-input-autocomplete reference-data="$ctrl.referenceData" context="$ctrl.context">
+            <input id="{{$ctrl.id}}"
                    type="text"
-                   restrict-duplicates="ctrl.ngModel"
-                   datatype-input="ctrl.inputType"
+                   restrict-duplicates="$ctrl.ngModel"
+                   datatype-input="$ctrl.inputType"
                    ignore-form
-                   reference-data="ctrl.referenceData"
-                   ng-model="ctrl.input" />
+                   reference-data="$ctrl.referenceData"
+                   ng-model="$ctrl.input" />
           </code-value-input-autocomplete>
         </input-container>
       </editable-multiple>
-    `,
-    controller: EditableMultipleDataTypeInputController
-  };
-});
+  `,
+  controller: forwardRef(() => EditableMultipleDataTypeInputController)
+};
 
 class EditableMultipleDataTypeInputController {
 

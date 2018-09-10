@@ -1,6 +1,5 @@
-import { IPromise, ui } from 'angular';
-import IModalService = ui.bootstrap.IModalService;
-import IModalServiceInstance = ui.bootstrap.IModalServiceInstance;
+import { IPromise } from 'angular';
+import { IModalService, IModalServiceInstance } from 'angular-ui-bootstrap';
 import { PredicateService } from 'app/services/predicateService';
 import { Uri } from 'app/entities/uri';
 import { Predicate } from 'app/entities/predicate';
@@ -16,17 +15,17 @@ export class CopyPredicateModal {
       template: `
         <form name="form">
           <modal-template>
-            <modal-title>{{'Copy' | translate}} {{ctrl.predicate.type | translate}}</modal-title>
+            <modal-title>{{'Copy' | translate}} {{$ctrl.predicate.type | translate}}</modal-title>
           
             <modal-body>
               <div class="row">
                 <div class="col-md-12">
-                  <model-language-chooser class="pull-right" context="ctrl.model"></model-language-chooser>
+                  <model-language-chooser class="pull-right" context="$ctrl.model"></model-language-chooser>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12">
-                  <predicate-form id="'copy_predicate'" predicate="ctrl.predicate" old-predicate="ctrl.predicate" model="ctrl.model"></predicate-form>
+                  <predicate-form id="'copy_predicate'" predicate="$ctrl.predicate" old-predicate="$ctrl.predicate" model="$ctrl.model"></predicate-form>
                 </div>
               </div>
             </modal-body>
@@ -34,7 +33,7 @@ export class CopyPredicateModal {
             <modal-buttons>
               <button type="button"
                       class="btn btn-action confirm"
-                      ng-click="ctrl.confirm()"
+                      ng-click="$ctrl.confirm()"
                       ng-disabled="form.$invalid || form.$pending || !ctrl.predicate.subject">{{'Copy' | translate}}
               </button>
               
@@ -44,7 +43,7 @@ export class CopyPredicateModal {
         </form>
       `,
       size: 'md',
-      controllerAs: 'ctrl',
+      controllerAs: '$ctrl',
       resolve: {
         predicate: () => predicate,
         type: () => type,

@@ -1,6 +1,6 @@
 import { IHttpService, IPromise } from 'angular';
 import { upperCaseFirst } from 'change-case';
-import { config } from 'config';
+import { apiEndpointWithName } from './config';
 import { Uri, Url } from 'app/entities/uri';
 import { Language } from 'app/types/language';
 import { FrameService } from './frameService';
@@ -8,7 +8,7 @@ import { GraphData } from 'app/types/entity';
 import * as frames from 'app/entities/frames';
 import { Vocabulary, Concept } from 'app/entities/vocabulary';
 import { Model } from 'app/entities/model';
-import { requireDefined } from '../../../node_modules/yti-common-ui/utils/object';
+import { requireDefined } from 'yti-common-ui/utils/object';
 
 export interface VocabularyService {
   getAllVocabularies(): IPromise<Vocabulary[]>;
@@ -24,7 +24,7 @@ export class DefaultVocabularyService implements VocabularyService {
   }
 
   getAllVocabularies(): IPromise<Vocabulary[]> {
-    return this.$http.get<GraphData>(config.apiEndpointWithName('conceptSchemes'))
+    return this.$http.get<GraphData>(apiEndpointWithName('conceptSchemes'))
       .then(response => this.deserializeVocabularies(response.data!));
   }
 
@@ -39,12 +39,12 @@ export class DefaultVocabularyService implements VocabularyService {
       params.graphId = vocabulary.vocabularyGraph;
     }
 
-    return this.$http.get<GraphData>(config.apiEndpointWithName('conceptSearch'), { params })
+    return this.$http.get<GraphData>(apiEndpointWithName('conceptSearch'), { params })
       .then(response => this.deserializeConcepts(response.data!));
   }
 
   createConceptSuggestion(vocabulary: Vocabulary, label: string, definition: string, lang: Language, model: Model): IPromise<Uri> {
-    return this.$http.put<{ identifier: string }>(config.apiEndpointWithName('conceptSuggestion'), null, {
+    return this.$http.put<{ identifier: string }>(apiEndpointWithName('conceptSuggestion'), null, {
       params: {
         graphUUID: vocabulary.vocabularyGraph,
         label: upperCaseFirst(label),
@@ -56,7 +56,7 @@ export class DefaultVocabularyService implements VocabularyService {
   }
 
   getConcept(id: Uri): IPromise<Concept> {
-    return this.$http.get<GraphData>(config.apiEndpointWithName('concept'), {params: {id: id.isUuid() ? id.uuid : id.uri}})
+    return this.$http.get<GraphData>(apiEndpointWithName('concept'), {params: {id: id.isUuid() ? id.uuid : id.uri}})
       .then(response => this.deserializeConcept(response.data!, id.uri));
   }
 

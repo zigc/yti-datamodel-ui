@@ -1,25 +1,22 @@
-import GettextCatalog = angular.gettext.gettextCatalog;
-import { module as mod } from './module';
+import { gettextCatalog as GettextCatalog } from 'angular-gettext';
+import { ComponentDeclaration } from '../../utils/angular';
+import { forwardRef } from '@angular/core';
 
-mod.directive('localizedSelect', () => {
-  return {
-    scope: {
-      value: '=',
-      values: '=',
-      id: '@',
-      displayNameFormatter: '='
-    },
-    restrict: 'E',
-    template: `
-      <iow-select id="{{ctrl.id}}" required ng-model="ctrl.value" options="value in ctrl.values">
-        <span>{{ctrl.getName(value)}}</span>
+export const LocalizedSelectComponent: ComponentDeclaration = {
+  selector: 'localizedSelect',
+  bindings: {
+    value: '=',
+    values: '=',
+    id: '@',
+    displayNameFormatter: '='
+  },
+  template: `
+      <iow-select id="{{$ctrl.id}}" required ng-model="$ctrl.value" options="value in $ctrl.values">
+        <span>{{$ctrl.getName(value)}}</span>
       </iow-select>
-    `,
-    controllerAs: 'ctrl',
-    bindToController: true,
-    controller: LocalizedSelectController
-  };
-});
+  `,
+  controller: forwardRef(() => LocalizedSelectController)
+};
 
 class LocalizedSelectController {
   value: string;

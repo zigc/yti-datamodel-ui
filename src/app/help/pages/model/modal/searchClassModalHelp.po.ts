@@ -6,7 +6,7 @@ import {
 import { modal, child } from 'app/help/selectors';
 import { classIdFromNamespaceId } from 'app/help/utils';
 import * as SearchConceptModal from './searchConceptModalHelp.po';
-import GettextCatalog = angular.gettext.gettextCatalog;
+import { gettextCatalog as GettextCatalog } from 'angular-gettext';
 import { Story } from 'app/help/contract';
 
 const searchClassModal = child(modal, '.search-class');
@@ -29,7 +29,7 @@ export const focusSelectedClass = focusSearchSelection(searchClassModal, 'Class 
 
 export const confirmClassSelection = (navigates: boolean) => confirm(searchClassModal, navigates);
 
-export function findAndSelectExistingClassItems(namespaceId: string, className: string, navigates: boolean, gettextCatalog: angular.gettext.gettextCatalog): Story[] {
+export function findAndSelectExistingClassItems(namespaceId: string, className: string, navigates: boolean, gettextCatalog: GettextCatalog): Story[] {
   return [
     filterForClass(namespaceId, className, gettextCatalog),
     selectClass(namespaceId, className),

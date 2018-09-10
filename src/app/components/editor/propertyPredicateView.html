@@ -1,14 +1,14 @@
-<ajax-loading-indicator ng-if="ctrl.loading"></ajax-loading-indicator>
+<ajax-loading-indicator ng-if="$ctrl.loading"></ajax-loading-indicator>
 
-<div ng-if="ctrl.predicate && !ctrl.loading">
+<div ng-if="$ctrl.predicate && !$ctrl.loading">
 
   <div class="row">
     <div class="col-md-12 mb-2">
       <h4 class="pull-left" translate>Reusable predicate information</h4>
-      <button-with-options ng-show="ctrl.isEditing()"
-                           options="ctrl.changeActions"
+      <button-with-options ng-show="$ctrl.isEditing()"
+                           options="$ctrl.changeActions"
                            class="pull-right"
-                           disabled="!ctrl.property.inUnstableState">
+                           disabled="!$ctrl.property.inUnstableState">
         <span translate>Change reusable predicate</span>
       </button-with-options>
     </div>
@@ -16,26 +16,26 @@
 
   <div class="row">
     <div class="col-md-6">
-      <non-editable data-title="{{ctrl.predicate.normalizedType + ' label' | capitalize}}" value="ctrl.predicate.label" context="ctrl.model"></non-editable>
-      <non-editable data-title="{{ctrl.predicate.normalizedType + ' id' | capitalize}}" value="ctrl.predicate.id" link="ctrl.linkToId()" context="ctrl.model" clipboard="ctrl.predicate.id.uri"></non-editable>
-      <non-editable data-title="Range" value="ctrl.predicate.range" context="ctrl.model"></non-editable>
+      <non-editable data-title="{{$ctrl.predicate.normalizedType + ' label' | capitalize}}" value="$ctrl.predicate.label" context="$ctrl.model"></non-editable>
+      <non-editable data-title="{{$ctrl.predicate.normalizedType + ' id' | capitalize}}" value="$ctrl.predicate.id" link="$ctrl.linkToId()" context="$ctrl.model" clipboard="$ctrl.predicate.id.uri"></non-editable>
+      <non-editable data-title="Range" value="$ctrl.predicate.range" context="$ctrl.model"></non-editable>
     </div>
     <div class="col-md-6">
-      <non-editable data-title="Description" value="ctrl.predicate.comment" context="ctrl.model"></non-editable>
-      <defined-by entity="ctrl.predicate" model="ctrl.model"></defined-by>
-      <non-editable data-title="Predicate type" value="ctrl.predicate.normalizedType" value-as-localization-key="true" context="ctrl.model"></non-editable>
+      <non-editable data-title="Description" value="$ctrl.predicate.comment" context="$ctrl.model"></non-editable>
+      <defined-by entity="$ctrl.predicate" model="$ctrl.model"></defined-by>
+      <non-editable data-title="Predicate type" value="$ctrl.predicate.normalizedType" value-as-localization-key="true" context="$ctrl.model"></non-editable>
     </div>
   </div>
 
-  <subject-view entity="ctrl.predicate" model="ctrl.model"></subject-view>
+  <subject-view entity="$ctrl.predicate" model="$ctrl.model"></subject-view>
 
 </div>
 
-<div ng-if="ctrl.predicate === null && !ctrl.loading">
+<div ng-if="$ctrl.predicate === null && !$ctrl.loading">
   <span class="pull-left" translate>Predicate information not found</span>
-  <button-with-options options="ctrl.changeActions"
+  <button-with-options options="$ctrl.changeActions"
                        class="pull-right"
-                       disabled="!ctrl.property.inUnstableState">
+                       disabled="!$ctrl.property.inUnstableState">
     <span translate>Change reusable predicate</span>
   </button-with-options>
 </div>

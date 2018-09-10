@@ -8,7 +8,7 @@ import { FrontPageHelpService } from 'app/help/frontPageHelp';
 import { ComponentDeclaration, modalCancelHandler } from 'app/utils/angular';
 import { ModelService } from 'app/services/modelService';
 import { ModelListItem } from 'app/entities/model';
-import { ClassificationService } from '../services/classificationService';
+import { ClassificationService } from 'app/services/classificationService';
 import { Classification } from 'app/entities/classification';
 import { Url } from 'app/entities/uri';
 import { comparingLocalizable } from 'app/utils/comparator';
@@ -18,15 +18,15 @@ import { anyMatching } from 'yti-common-ui/utils/array';
 import { matches } from 'yti-common-ui/utils/string';
 import { forwardRef } from '@angular/core';
 import { FilterOptions } from 'yti-common-ui/components/filter-dropdown.component';
-import { KnownModelType } from '../types/entity';
-import GettextCatalog = angular.gettext.gettextCatalog;
-import { OrganizationService } from '../services/organizationService';
+import { KnownModelType } from 'app/types/entity';
+import { gettextCatalog as GettextCatalog } from 'angular-gettext';
+import { OrganizationService } from 'app/services/organizationService';
 import { AuthorizationManagerService } from 'app/services/authorizationManagerService';
-import { Organization } from '../entities/organization';
+import { Organization } from 'app/entities/organization';
 import { labelNameToResourceIdIdentifier } from 'yti-common-ui/utils/resource';
 import { tap } from 'rxjs/operators';
 
-export const component: ComponentDeclaration = {
+export const FrontPageComponent: ComponentDeclaration = {
   selector: 'frontPage',
   template: require('./frontPage.html'),
   require: {

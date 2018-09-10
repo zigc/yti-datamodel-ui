@@ -1,5 +1,5 @@
 import { IHttpService, IPromise, IQService } from 'angular';
-import { config } from 'config';
+import { apiEndpointWithName } from './config';
 import { Uri } from 'app/entities/uri';
 import { Language } from 'app/types/language';
 import { normalizeAsArray, flatten } from 'yti-common-ui/utils/array';
@@ -7,7 +7,7 @@ import * as frames from 'app/entities/frames';
 import { FrameService } from './frameService';
 import { GraphData } from 'app/types/entity';
 import { ReferenceDataCode, ReferenceData, ReferenceDataServer } from 'app/entities/referenceData';
-import { requireDefined } from '../../../node_modules/yti-common-ui/utils/object';
+import { requireDefined } from 'yti-common-ui/utils/object';
 
 export class ReferenceDataService {
 
@@ -19,12 +19,12 @@ export class ReferenceDataService {
   }
 
   getReferenceDataServers(): IPromise<ReferenceDataServer[]> {
-    return this.$http.get<GraphData>(config.apiEndpointWithName('codeServer'))
+    return this.$http.get<GraphData>(apiEndpointWithName('codeServer'))
       .then(response => this.deserializeReferenceDataServers(response.data!));
   }
 
   getReferenceDatasForServer(server: ReferenceDataServer): IPromise<ReferenceData[]> {
-    return this.$http.get<GraphData>(config.apiEndpointWithName('codeList'), { params: { uri: server.id.uri } })
+    return this.$http.get<GraphData>(apiEndpointWithName('codeList'), { params: { uri: server.id.uri } })
       .then(response => this.deserializeReferenceDatas(response.data!));
   }
 
@@ -45,7 +45,7 @@ export class ReferenceDataService {
       if (cached) {
         return cached;
       } else {
-        const result = this.$http.get<GraphData>(config.apiEndpointWithName('codeValues'), {params: {uri: rd.id.uri}})
+        const result = this.$http.get<GraphData>(apiEndpointWithName('codeValues'), {params: {uri: rd.id.uri}})
           .then(response => this.deserializeReferenceDataCodes(response.data!));
 
         this.referenceDataCodesCache.set(rd.id.uri, result);
@@ -59,7 +59,7 @@ export class ReferenceDataService {
   }
 
   newReferenceData(uri: Uri, label: string, description: string, lang: Language): IPromise<ReferenceData> {
-    return this.$http.get<GraphData>(config.apiEndpointWithName('codeListCreator'), {params: {uri: uri.uri, label, description, lang}})
+    return this.$http.get<GraphData>(apiEndpointWithName('codeListCreator'), {params: {uri: uri.uri, label, description, lang}})
       .then(response => this.deserializeReferenceData(response.data!));
   }
 

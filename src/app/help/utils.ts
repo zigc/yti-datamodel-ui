@@ -3,12 +3,11 @@ import { upperCaseFirst, lowerCaseFirst } from 'change-case';
 import { anyMatching, contains, keepMatching } from 'yti-common-ui/utils/array';
 import { Property } from 'app/entities/class';
 import { createScrollWithDefault } from './contract';
-import { defaultModelNamespace } from 'config';
 
 export const editableMargin = { left: 20, right: 20, bottom: 15 };
 
 export function getModalController<T>(controllerName = 'ctrl') {
-  return (angular.element('.modal').scope() as any)[controllerName] as T;
+  return (jQuery('.modal').scope() as any)[controllerName] as T;
 }
 
 function inputWithNgModel(element: () => JQuery, validate: (ngModel: INgModelController) => boolean) {
@@ -65,11 +64,8 @@ export function initialInputValue(element: () => JQuery, value: string) {
   };
 }
 
-export const scrollToTop = createScrollWithDefault(() => angular.element('body'));
+export const scrollToTop = createScrollWithDefault(() => jQuery('body'));
 
-export function modelIdFromPrefix(modelPrefix: string) {
-  return defaultModelNamespace(modelPrefix);
-}
 
 function normalizeAsId(resourceName: string) {
   return resourceName
@@ -80,6 +76,14 @@ function normalizeAsId(resourceName: string) {
     .replace(/Ä/g, 'A')
     .replace(/å/g, 'a')
     .replace(/Å/g, 'A');
+}
+
+export function modelIdFromPrefix(modelPrefix: string) {
+  return defaultModelNamespace(modelPrefix);
+}
+
+export function defaultModelNamespace(prefix: string) {
+  return `http://uri.suomi.fi/datamodel/ns/${prefix}`;
 }
 
 export function classNameToResourceIdName(className: string) {

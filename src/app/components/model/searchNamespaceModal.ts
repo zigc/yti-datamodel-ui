@@ -1,6 +1,5 @@
-import { IPromise, IScope, ui } from 'angular';
-import IModalService = ui.bootstrap.IModalService;
-import IModalServiceInstance = ui.bootstrap.IModalServiceInstance;
+import { IPromise, IScope } from 'angular';
+import { IModalService, IModalServiceInstance } from 'angular-ui-bootstrap';
 import { LanguageService } from 'app/services/languageService';
 import { ModelService } from 'app/services/modelService';
 import { AddEditNamespaceModal } from './addEditNamespaceModal';
@@ -24,7 +23,7 @@ export class SearchNamespaceModal {
       template: require('./searchNamespaceModal.html'),
       size: 'md',
       controller: SearchNamespaceController,
-      controllerAs: 'ctrl',
+      controllerAs: '$ctrl',
       backdrop: true,
       resolve: {
         exclude: () => exclude,

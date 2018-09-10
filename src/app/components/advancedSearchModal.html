@@ -10,18 +10,18 @@
   <div class="row mb-2">
     <div class="col-12">
       <text-filter class="pull-left"
-                   search-text="ctrl.searchText"
-                   search-controller="ctrl"
-                   content-extractors="ctrl.contentExtractors"
+                   search-text="$ctrl.searchText"
+                   search-controller="$ctrl"
+                   content-extractors="$ctrl.contentExtractors"
                    placeholder="'Search'"></text-filter>
 
-      <model-language-chooser class="pull-right" context="ctrl.context"></model-language-chooser>
+      <model-language-chooser class="pull-right" context="$ctrl.context"></model-language-chooser>
     </div>
   </div>
 
   <div class="row mb-2">
     <div class="col-12">
-      <types-filter search-controller="ctrl"></types-filter>
+      <types-filter search-controller="$ctrl"></types-filter>
     </div>
   </div>
 
@@ -30,28 +30,28 @@
       <div class="content-box">
         <div class="search-results">
 
-          <div ng-show="ctrl.searchText && ctrl.searchResults.length === 0" translate>No search results</div>
+          <div ng-show="$ctrl.searchText && $ctrl.searchResults.length === 0" translate>No search results</div>
 
-          <div ng-repeat="searchResult in ctrl.searchResults track by searchResult.id"
+          <div ng-repeat="searchResult in $ctrl.searchResults track by searchResult.id"
                class="search-result"
                id="{{searchResult.id + '_advanced_search_result'}}"
-               ng-click="ctrl.selectSearchResult(searchResult)"
+               ng-click="$ctrl.selectSearchResult(searchResult)"
                key-control-selection>
 
             <div class="content" ng-class="{last: $last}">
 
               <span class="title">
                 <i ng-class="searchResult.glyphIconClass"></i>
-                <highlight text="searchResult.label" context="ctrl.context" search="ctrl.searchText"></highlight>
+                <highlight text="searchResult.label" context="$ctrl.context" search="$ctrl.searchText"></highlight>
               </span>
 
               <span class="body">
-                <highlight text="searchResult.comment" context="ctrl.context" search="ctrl.searchText"></highlight>
+                <highlight text="searchResult.comment" context="$ctrl.context" search="$ctrl.searchText"></highlight>
               </span>
 
               <div class="origin">
-                <span class="pull-left">{{searchResult.definedBy | translateLabel: ctrl.context}}</span>
-                <span class="pull-right" ng-bind-html="searchResult.id.compact | highlight: ctrl.searchText"></span>
+                <span class="pull-left">{{searchResult.definedBy | translateLabel: $ctrl.context}}</span>
+                <span class="pull-right" ng-bind-html="searchResult.id.compact | highlight: $ctrl.searchText"></span>
               </div>
             </div>
           </div>
@@ -63,5 +63,5 @@
 </div>
 
 <div class="modal-footer">
-  <button id="cancel_advanced_search_button" type="button" class="btn btn-link cancel" ng-click="ctrl.close()" translate>Cancel</button>
+  <button id="cancel_advanced_search_button" type="button" class="btn btn-link cancel" ng-click="$ctrl.close()" translate>Cancel</button>
 </div>

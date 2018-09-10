@@ -9,7 +9,7 @@ import {
   filterForAddNewResult, selectAddNewResult, selectSearchResult,
   focusSearchSelection, filterForSearchResult
 } from 'app/help/pages/modal/searchModalHelp.po';
-import GettextCatalog = angular.gettext.gettextCatalog;
+import { gettextCatalog as GettextCatalog } from 'angular-gettext';
 
 const searchConceptModal = child(modal, '.search-concept');
 

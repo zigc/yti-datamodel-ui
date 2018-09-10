@@ -1,7 +1,6 @@
-import { IPromise, ui } from 'angular';
-import IModalService = ui.bootstrap.IModalService;
-import IModalServiceInstance = ui.bootstrap.IModalServiceInstance;
-import GettextCatalog = angular.gettext.gettextCatalog;
+import { IPromise } from 'angular';
+import { IModalService, IModalServiceInstance } from 'angular-ui-bootstrap';
+import { gettextCatalog as GettextCatalog } from 'angular-gettext';
 import { LanguageService } from 'app/services/languageService';
 import { Property, Class } from 'app/entities/class';
 import { anyMatching, flatten, groupBy } from 'yti-common-ui/utils/array';
@@ -19,7 +18,7 @@ export class AddPropertiesFromClassModal {
     return this.$uibModal.open({
       template: require('./addPropertiesFromClassModal.html'),
       size: 'adapting',
-      controllerAs: 'ctrl',
+      controllerAs: '$ctrl',
       controller: AddPropertiesFromClassModalController,
       resolve: {
         klass: () => klass,

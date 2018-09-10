@@ -11,10 +11,10 @@
     <div class="col-12">
       <div class="content-box">
         <div class="search-results">
-          <div ng-repeat="organization in ctrl.organizations"
+          <div ng-repeat="organization in $ctrl.organizations"
                class="search-result"
                id="{{organization.id}}"
-               ng-click="ctrl.select(organization)">
+               ng-click="$ctrl.select(organization)">
 
             <div class="content" ng-class="{last: $last}">
               <span class="title">{{organization.label | translateValue}}</span>
@@ -29,5 +29,5 @@
 </div>
 
 <div class="modal-footer">
-  <button type="button" class="btn btn-link cancel" ng-click="ctrl.close()" translate>Cancel</button>
+  <button type="button" class="btn btn-link cancel" ng-click="$ctrl.close()" translate>Cancel</button>
 </div>

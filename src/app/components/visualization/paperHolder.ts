@@ -175,7 +175,7 @@ function registerHandlers(paper: joint.dia.Paper, listener: ClassInteractionList
     paper.on('blank:pointerdown', startDragHandler);
     $window.addEventListener('mouseup', stopDragHandler);
     $window.addEventListener('mousemove', dragMoveHandler);
-    angular.element(paperElement).mousewheel(mouseWheelHandler);
+    jQuery(paperElement).mousewheel(mouseWheelHandler);
     paper.on('cell:pointerdown', startCellMoveHandler);
     paper.on('cell:pointerclick', classClickHandler);
     paper.on('cell:mouseover', hoverHandler);

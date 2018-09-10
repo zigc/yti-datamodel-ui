@@ -1,11 +1,11 @@
 
 <div class="row">
   <div class="col-12">
-    <button ng-if="ctrl.isEditing()"
+    <button ng-if="$ctrl.isEditing()"
             type="button"
             class="btn btn-link pull-right"
-            ng-disabled="!ctrl.entity.inUnstableState"
-            ng-click="ctrl.changeSubject()">
+            ng-disabled="!$ctrl.entity.inUnstableState"
+            ng-click="$ctrl.changeSubject()">
       <span translate>Change concept</span>
     </button>
   </div>
@@ -14,23 +14,23 @@
 <div class="row">
   <div class="col-12">
 
-    <div ng-if="!ctrl.entity.subject" class="concept-box">
+    <div ng-if="!$ctrl.entity.subject" class="concept-box">
       <h5 translate>No concept defined</h5>
     </div>
 
-    <div ng-if="ctrl.entity.subject" class="concept-box">
+    <div ng-if="$ctrl.entity.subject" class="concept-box">
 
         <h5>
-          <i class="fas fa-lightbulb-o"></i>
-          <span>{{ctrl.entity.subject | translateLabel: ctrl.model}}</span>
+          <i class="fas fa-lightbulb"></i>
+          <span>{{$ctrl.entity.subject | translateLabel: $ctrl.model}}</span>
         </h5>
 
-        <non-editable data-title="Concept definition" value="ctrl.entity.subject.definition"
-                      context="ctrl.model"></non-editable>
+        <non-editable data-title="Concept definition" value="$ctrl.entity.subject.definition"
+                      context="$ctrl.model"></non-editable>
 
-        <non-editable-vocabulary vocabulary="ctrl.entity.subject.vocabulary"
-                                 context="ctrl.model"
-                                 link="ctrl.conceptLink"></non-editable-vocabulary>
+        <non-editable-vocabulary vocabulary="$ctrl.entity.subject.vocabulary"
+                                 context="$ctrl.model"
+                                 link="$ctrl.conceptLink"></non-editable-vocabulary>
     </div>
 
   </div>

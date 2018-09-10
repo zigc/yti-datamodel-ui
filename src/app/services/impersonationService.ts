@@ -1,5 +1,5 @@
 import { IHttpService } from 'angular';
-import { config } from 'config';
+import { apiEndpointWithName } from './config';
 
 export class ImpersonationService {
 
@@ -8,7 +8,7 @@ export class ImpersonationService {
   }
 
   getFakeableUsers() {
-    return this.$http.get<{ email: string, firstName: string, lastName: string }[]>(config.apiEndpointWithName('fakeableUsers'))
+    return this.$http.get<{ email: string, firstName: string, lastName: string }[]>(apiEndpointWithName('fakeableUsers'))
       .then(result => result.data!);
   }
 }

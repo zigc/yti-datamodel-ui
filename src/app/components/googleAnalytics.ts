@@ -1,8 +1,11 @@
-import { module as mod } from './module';
+import { ComponentDeclaration } from 'app/utils/angular';
+import { forwardRef } from '@angular/core';
 
-mod.directive('googleAnalytics', () => {
-  return {
-    restrict: 'E',
-    template: require('./googleAnalytics.html')
-  };
-});
+export const GoogleAnalyticsComponent: ComponentDeclaration = {
+  selector: 'googleAnalytics',
+  template: require('./googleAnalytics.html'),
+  controller: forwardRef(() => GoogleAnalyticsController)
+};
+
+export class GoogleAnalyticsController {
+}

@@ -1,5 +1,5 @@
-<accordion open-id="ctrl.open">
-  <accordion-group id="ctrl.id + '_usage'" identifier="'default'">
+<accordion open-id="$ctrl.open">
+  <accordion-group id="$ctrl.id + '_usage'" identifier="'default'">
     <accordion-heading>
       <h5>
         <a href>
@@ -9,10 +9,10 @@
       </h5>
     </accordion-heading>
     <accordion-body>
-      <ajax-loading-indicator ng-if="ctrl.loading"></ajax-loading-indicator>
+      <ajax-loading-indicator ng-if="$ctrl.loading"></ajax-loading-indicator>
       <div ng-if="!loading">
-        <usage ng-show="ctrl.hasReferrers()" usage="ctrl.usage" show-links="true" context="ctrl.context"></usage>
-        <p ng-hide="ctrl.loading || ctrl.hasReferrers()" translate>No referrers</p>
+        <usage ng-show="$ctrl.hasReferrers()" usage="$ctrl.usage" show-links="true" context="$ctrl.context"></usage>
+        <p ng-hide="$ctrl.loading || $ctrl.hasReferrers()" translate>No referrers</p>
       </div>
     </accordion-body>
   </accordion-group>

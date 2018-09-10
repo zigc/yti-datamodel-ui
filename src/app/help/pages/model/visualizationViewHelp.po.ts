@@ -1,5 +1,5 @@
 import { createStory, createExplicitNextCondition, createScrollWithDefault } from 'app/help/contract';
-const focusVisualizationElement = () => angular.element('class-visualization');
+const focusVisualizationElement = () => jQuery('class-visualization');
 
 export const focusVisualization = createStory({
   title: 'Classes can be seen visually here',

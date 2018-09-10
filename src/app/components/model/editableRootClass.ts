@@ -1,36 +1,35 @@
-import { IAttributes, IScope } from 'angular';
 import { EditableForm } from 'app/components/form/editableEntityController';
 import { SearchClassModal } from 'app/components/editor/searchClassModal';
 import { requireDefined } from 'yti-common-ui/utils/object';
 import { Model } from 'app/entities/model';
 import { ClassListItem } from 'app/entities/class';
-import { module as mod } from './module';
-import { modalCancelHandler } from 'app/utils/angular';
+import { ComponentDeclaration, modalCancelHandler } from 'app/utils/angular';
+import { forwardRef } from '@angular/core';
 
-mod.directive('editableRootClass', () => {
-  return {
-    scope: {
-      model: '='
-    },
-    restrict: 'E',
-    template: require('./editableRootClass.html'),
-    controllerAs: 'ctrl',
-    bindToController: true,
-    require: ['editableRootClass', '?^form'],
-    link(_$scope: IScope, _element: JQuery, _attributes: IAttributes, [thisController, formController]: [EditableRootClassController, EditableForm]) {
-      thisController.isEditing = () => formController.editing;
-    },
-    controller: EditableRootClassController
-  };
-});
+export const EditableRootClassCompoonent: ComponentDeclaration = {
+  selector: 'editableRootClass',
+  bindings: {
+    model: '='
+  },
+  require: {
+    form: '?^form'
+  },
+  template: require('./editableRootClass.html'),
+  controller: forwardRef(() => EditableRootClassController)
+};
 
 class EditableRootClassController {
 
   model: Model;
-  isEditing: () => boolean;
+
+  form: EditableForm;
 
   /* @ngInject */
   constructor(private searchClassModal: SearchClassModal) {
+  }
+
+  isEditing() {
+    return this.form && this.form.editing;
   }
 
   get href() {

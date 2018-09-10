@@ -170,7 +170,7 @@ export function glyphIconClassForType(type: Type[]) {
   } else if (containsAny(type, ['model', 'profile'])) {
     return ['fas', 'fa-book'];
   } else if (containsAny(type, ['concept', 'conceptSuggestion'])) {
-    return ['fas', 'fa-lightbulb-o'];
+    return ['fas', 'fa-lightbulb'];
   } else if (!type || type.length === 0 || (type.length === 1 && containsAny(type, ['property']))) {
     return glyphIconClassUnknown;
   } else {

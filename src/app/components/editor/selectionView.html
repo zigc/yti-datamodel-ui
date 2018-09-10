@@ -2,12 +2,12 @@
 
   <div class="component-header">
     <h3>
-      <span>{{ctrl.editableController.getEditable() | translateLabel: ctrl.model}}</span>
+      <span>{{$ctrl.editableController.getEditable() | translateLabel: $ctrl.model}}</span>
     </h3>
   </div>
 
   <div class="component-content">
-    <editable-entity-buttons context="ctrl.model" editable-controller="ctrl.editableController">
+    <editable-entity-buttons context="$ctrl.model" editable-controller="$ctrl.editableController">
       <div ng-transclude="buttons"></div>
     </editable-entity-buttons>
 

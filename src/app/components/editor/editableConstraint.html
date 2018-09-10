@@ -1,5 +1,5 @@
-<accordion open-id="ctrl.open">
-  <accordion-group id="ctrl.id + '_constraint'" identifier="'default'">
+<accordion open-id="$ctrl.open">
+  <accordion-group id="$ctrl.id + '_constraint'" identifier="'default'">
 
     <accordion-heading>
       <h5>
@@ -12,33 +12,33 @@
 
     <accordion-body>
 
-      <editable data-title="Description" context="ctrl.model">
-        <textarea id="constraintComment" class="form-control" localized-input context="ctrl.model" ng-model="ctrl.constraint.comment"></textarea>
+      <editable data-title="Description" context="$ctrl.model">
+        <textarea id="constraintComment" class="form-control" localized-input context="$ctrl.model" ng-model="$ctrl.constraint.comment"></textarea>
       </editable>
 
       <div class="editable-wrap form-group">
 
         <editable-label data-title="'Constraint classes'"></editable-label>
 
-        <span ng-if="!ctrl.isEditing()" ng-repeat="item in ctrl.constraint.items">
-          <a ng-href="{{ctrl.linkItem(item)}}">{{item | translateLabel: ctrl.model}}</a>
-          <span ng-if="!$last">&nbsp;{{ctrl.constraint.constraint}}&nbsp;</span>
+        <span ng-if="!$ctrl.isEditing()" ng-repeat="item in $ctrl.constraint.items">
+          <a ng-href="{{$ctrl.linkItem(item)}}">{{item | translateLabel: $ctrl.model}}</a>
+          <span ng-if="!$last">&nbsp;{{$ctrl.constraint.constraint}}&nbsp;</span>
         </span>
 
-        <div ng-if="ctrl.isEditing()">
+        <div ng-if="$ctrl.isEditing()">
           <div class="input-group input-group-sm pull-left input-select">
-            <select class="form-control" ng-model="ctrl.constraint.constraint" ng-options="type | capitalize for type in ctrl.types"></select>
+            <select class="form-control" ng-model="$ctrl.constraint.constraint" ng-options="type | capitalize for type in $ctrl.types"></select>
           </div>
-          <div class="form-control with-button multi-input" drag-sortable="ctrl.constraint.items">
-            <div ng-repeat="item in ctrl.constraint.items" class="added-item">
+          <div class="form-control with-button multi-input" drag-sortable="$ctrl.constraint.items">
+            <div ng-repeat="item in $ctrl.constraint.items" class="added-item">
               <div class="box draggable" drag-sortable-item>
-                {{item | translateLabel: ctrl.model}}
-                <div class="delete-item badge" ng-click="ctrl.removeItem(item)">&times;</div>
+                {{item | translateLabel: $ctrl.model}}
+                <div class="delete-item badge" ng-click="$ctrl.removeItem(item)">&times;</div>
               </div>
             </div>
           </div>
 
-          <button type="button" class="btn btn-action btn-sm" style="display: block" ng-click="ctrl.addItem()" translate>Choose class</button>
+          <button type="button" class="btn btn-action btn-sm" style="display: block" ng-click="$ctrl.addItem()" translate>Choose class</button>
         </div>
       </div>
 

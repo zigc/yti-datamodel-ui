@@ -1,6 +1,11 @@
-/// <reference path="./webpack-runtime.d.ts" />
+/// <reference types="angular-route" />
+/// <reference types="angular-animate" />
 
-import { IAugmentedJQuery, ICloneAttachFunction } from 'angular';
+import * as __angular from 'angular';
+
+declare global {
+  const angular: typeof __angular;
+}
 
 declare global {
 
@@ -30,16 +35,10 @@ declare global {
   interface CSS {
     escape(str: string): string;
   }
-
-  const process: { env: any };
 }
 
 declare module 'angular' {
   interface INgModelController {
     $options: any;
-  }
-
-  interface ITranscludeFunction {
-    (cloneAttachFn: ICloneAttachFunction, futureParentElement: JQuery|null, slotName: string): IAugmentedJQuery;
   }
 }

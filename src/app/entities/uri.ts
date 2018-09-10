@@ -1,4 +1,4 @@
-import { v4 as uuid } from 'node-uuid';
+import { v4 as uuid } from 'uuid';
 import { isDefined } from 'yti-common-ui/utils/object';
 
 export type Url = string;

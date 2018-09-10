@@ -1,6 +1,6 @@
 import { Component, Input, forwardRef } from '@angular/core';
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { UseContext, KnownModelType } from '../../types/entity';
+import { UseContext, KnownModelType } from 'app/types/entity';
 
 @Component({
   selector: 'app-use-context-input',

@@ -1,51 +1,63 @@
-import { IAttributes, IScope } from 'angular';
-import GettextCatalog = angular.gettext.gettextCatalog;
+import { IScope } from 'angular';
+import { gettextCatalog as GettextCatalog } from 'angular-gettext';
 import { EditableForm } from './editableEntityController';
 import { LanguageService } from 'app/services/languageService';
 import { isLocalizationDefined } from 'app/utils/language';
-import { module as mod } from './module';
+ import { ComponentDeclaration } from 'app/utils/angular';
+import { forwardRef } from '@angular/core';
 
-mod.directive('editableLabel', () => {
-  return {
-    scope: {
-      title: '=',
-      inputId: '=',
-      required: '='
-    },
-    restrict: 'E',
-    template: `<label>{{ctrl.title | translate}} 
-                  <span ng-show="ctrl.infoText" class="fas fa-info-circle info" uib-tooltip="{{ctrl.infoText}}"></span>
-                  <span ng-show="ctrl.required && ctrl.isEditing()" class="fas fa-asterisk" uib-tooltip="{{'Required' | translate}}"></span>
-               </label>`,
-    bindToController: true,
-    controllerAs: 'ctrl',
-    require: ['editableLabel', '?^form'],
-    link($scope: IScope, element: JQuery, _attributes: IAttributes, [thisController, formController]: [EditableLabelController, EditableForm]) {
-      thisController.isEditing = () => formController.editing;
-      const labelElement = element.find('label');
-      $scope.$watch(() => thisController.inputId, inputId => {
-        if (inputId) {
-          labelElement.attr('for', inputId);
-        }
-      });
-    },
-    controller: EditableLabelController
-  };
-});
+export const EditableLabelComponent: ComponentDeclaration = {
+  selector: 'editableLabel',
+  bindings: {
+    title: '=',
+    inputId: '=',
+    required: '='
+  },
+  require: {
+    form: '?^form'
+  },
+  template: `
+      <label>{{$ctrl.title | translate}} 
+         <span ng-show="$ctrl.infoText" class="fas fa-info-circle info" uib-tooltip="{{$ctrl.infoText}}"></span>
+         <span ng-show="$ctrl.required && $ctrl.isEditing()" class="fas fa-asterisk" uib-tooltip="{{'Required' | translate}}"></span>
+      </label>
+  `,
+  controller: forwardRef(() => EditableLabelController)
+};
 
 class EditableLabelController {
 
   title: string;
   inputId: string;
-  isEditing: () => boolean;
   infoText: string;
 
+  form: EditableForm;
+
   /* @ngInject */
-  constructor($scope: IScope, gettextCatalog: GettextCatalog, languageService: LanguageService) {
+  constructor(private $scope: IScope,
+              private $element: JQuery,
+              private gettextCatalog: GettextCatalog,
+              private languageService: LanguageService) {
+  }
+
+  $onInit() {
+
+    const labelElement = this.$element.find('label');
+    this.$scope.$watch(() => this.inputId, inputId => {
+      if (inputId) {
+        labelElement.attr('for', inputId);
+      }
+    });
+
     const key = this.title + ' info';
-    $scope.$watch(() => languageService.UILanguage, () => {
-      const infoText = gettextCatalog.getString(key);
+
+    this.$scope.$watch(() => this.languageService.UILanguage, () => {
+      const infoText = this.gettextCatalog.getString(key);
       this.infoText = isLocalizationDefined(key, infoText) ? infoText : '';
     });
+  }
+
+  isEditing() {
+    return this.form && this.form.editing;
   }
 }

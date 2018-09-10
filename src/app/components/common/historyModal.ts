@@ -1,5 +1,5 @@
-import { IPromise, ui } from 'angular';
-import IModalService = ui.bootstrap.IModalService;
+import { IPromise } from 'angular';
+import { IModalService } from 'angular-ui-bootstrap';
 import { ClassService } from 'app/services/classService';
 import { PredicateService } from 'app/services/predicateService';
 import { ModelService } from 'app/services/modelService';
@@ -25,7 +25,7 @@ export class HistoryModal {
     this.$uibModal.open({
       template: require('./historyModal.html'),
       size: resource instanceof Model ? 'lg' : 'md',
-      controllerAs: 'ctrl',
+      controllerAs: '$ctrl',
       controller: HistoryModalController,
       resolve: {
         model: () => model,

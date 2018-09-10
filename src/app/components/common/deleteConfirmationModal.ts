@@ -1,5 +1,5 @@
-import { IPromise, ui } from 'angular';
-import IModalService = ui.bootstrap.IModalService;
+import { IPromise } from 'angular';
+import { IModalService } from 'angular-ui-bootstrap';
 import { UsageService } from 'app/services/usageService';
 import { anyMatching } from 'yti-common-ui/utils/array';
 import { isDefined } from 'yti-common-ui/utils/object';
@@ -17,7 +17,7 @@ export class DeleteConfirmationModal {
     return this.$uibModal.open({
       template: require('./deleteConfirmationModal.html'),
       size: 'adapting',
-      controllerAs: 'ctrl',
+      controllerAs: '$ctrl',
       controller: DeleteConfirmationModalController,
       resolve: {
         entity: () => entity,

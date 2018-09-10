@@ -1,4 +1,3 @@
-import { module as mod } from './module';
 import { Coordinate } from 'app/types/visualization';
 import { IScope } from 'angular';
 import { Optional, requireDefined } from 'yti-common-ui/utils/object';
@@ -7,32 +6,30 @@ import { Model } from 'app/entities/model';
 import { ClassService } from 'app/services/classService';
 import { ModelPageActions } from 'app/components/model/modelPage';
 import { labelNameToResourceIdIdentifier } from 'yti-common-ui/utils/resource';
+import { ComponentDeclaration } from 'app/utils/angular';
+import { forwardRef } from '@angular/core';
 
 export interface ContextMenuTarget {
   coordinate: Coordinate;
   target: VisualizationClass;
 }
 
-mod.directive('visualizationContextMenu', () => {
-  return {
-    scope: {
-      model: '=',
-      modelPageActions: '=',
-      target: '='
-    },
-    bindToController: true,
-    controllerAs: 'ctrl',
-    restrict: 'E',
-    template: `
-      <div class="dropdown-menu show" role="menu" ng-style="ctrl.style" ng-if="ctrl.actions.length > 0">
-        <div class="dropdown-item" role="menuitem" ng-repeat="action in ctrl.actions">
-          <a id="{{ctrl.getIdNameFromActionName(action.name) + '_context_dropdown_action'}}" ng-click="ctrl.invokeAction(action)">{{action.name | translate}}</a>
+export const VisualizationContextMenuComponent: ComponentDeclaration = {
+  selector: 'visualizationContextMenu',
+  bindings: {
+    model: '=',
+    modelPageActions: '=',
+    target: '='
+  },
+  template: `
+      <div class="dropdown-menu show" role="menu" ng-style="$ctrl.style" ng-if="$ctrl.actions.length > 0">
+        <div class="dropdown-item" role="menuitem" ng-repeat="action in $ctrl.actions">
+          <a id="{{$ctrl.getIdNameFromActionName(action.name) + '_context_dropdown_action'}}" ng-click="$ctrl.invokeAction(action)">{{action.name | translate}}</a>
         </div>
       </div>
-    `,
-    controller: VisualizationContextMenuController
-  };
-});
+  `,
+  controller: forwardRef(() => VisualizationContextMenuController)
+};
 
 interface Action {
   name: string;
@@ -47,8 +44,14 @@ class VisualizationContextMenuController {
   actions: Action[] = [];
   style: any;
 
-  constructor($scope: IScope, private classService: ClassService) {
-    $scope.$watch(() => this.target, target => {
+  /* @ngInject */
+  constructor(private $scope: IScope,
+              private classService: ClassService) {
+  }
+
+  $onInit() {
+
+    this.$scope.$watch(() => this.target, target => {
       if (target) {
 
         this.style = {

@@ -1,10 +1,10 @@
 import { IHttpService, IPromise } from 'angular';
 import { GraphData } from 'app/types/entity';
-import { config } from 'config';
 import * as frames from 'app/entities/frames';
 import { Classification } from 'app/entities/classification';
 import { FrameService } from './frameService';
 import { comparingPrimitive } from 'yti-common-ui/utils/comparator';
+import { apiEndpointWithName } from './config';
 
 export class ClassificationService {
 
@@ -15,7 +15,7 @@ export class ClassificationService {
 
   getClassifications(): IPromise<Classification[]> {
 
-    return this.$http.get<GraphData>(config.apiEndpointWithName('serviceCategories'), {
+    return this.$http.get<GraphData>(apiEndpointWithName('serviceCategories'), {
       headers: { Accept: 'application/ld+json'}
     })
       .then(response => this.deserializeClassification(response.data!))

@@ -1,12 +1,13 @@
 import { IScope, IWindowService } from 'angular';
 import * as moment from 'moment';
-import { config } from 'config';
 import { LanguageService } from 'app/services/languageService';
-import { module as mod } from './module';
 import { Model } from 'app/entities/model';
 import { Class } from 'app/entities/class';
 import { Predicate } from 'app/entities/predicate';
 import { LanguageContext } from 'app/types/language';
+import { apiEndpointWithName } from 'app/services/config';
+import { ComponentDeclaration } from 'app/utils/angular';
+import { forwardRef } from '@angular/core';
 
 const exportOptions = [
   {type: 'application/ld+json', extension: 'json'},
@@ -19,19 +20,15 @@ const exportOptions = [
 
 const UTF8_BOM = '\ufeff';
 
-mod.directive('export', () => {
-  return {
-    scope: {
-      entity: '=',
-      context: '='
-    },
-    bindToController: true,
-    restrict: 'E',
-    template: require('./export.html'),
-    controllerAs: 'ctrl',
-    controller: ExportController
-  };
-});
+export const ExportComponent: ComponentDeclaration = {
+  selector: 'export',
+  bindings: {
+    entity: '=',
+    context: '='
+  },
+  template: require('./export.html'),
+  controller: forwardRef(() => ExportController)
+};
 
 type EntityType = Model|Class|Predicate;
 
@@ -52,9 +49,15 @@ class ExportController {
   frameUrlObjectRaw: string;
 
   /* @ngInject */
-  constructor($scope: IScope, $window: IWindowService, languageService: LanguageService) {
-    $scope.$watchGroup([() => this.entity, () => languageService.getModelLanguage(this.context)], ([entity, lang]) => {
-      const hrefBase = entity instanceof Model ? config.apiEndpointWithName('exportModel') : config.apiEndpointWithName('exportResource');
+  constructor(private $scope: IScope,
+              private $window: IWindowService,
+              private languageService: LanguageService) {
+  }
+
+  $onInit() {
+
+    this.$scope.$watchGroup([() => this.entity, () => this.languageService.getModelLanguage(this.context)], ([entity, lang]) => {
+      const hrefBase = entity instanceof Model ? apiEndpointWithName('exportModel') : apiEndpointWithName('exportResource');
       this.downloads = exportOptions.map(option => {
         const href = `${hrefBase}?graph=${encodeURIComponent(entity.id.uri)}&content-type=${encodeURIComponent(option.type)}&lang=${lang}`;
 
@@ -72,31 +75,31 @@ class ExportController {
         const framedDataBlobRaw = new Blob([UTF8_BOM, framedDataAsString], {type: 'text/plain;charset=utf-8'});
 
         if (this.framedUrlObject) {
-          $window.URL.revokeObjectURL(this.framedUrlObject);
+          this.$window.URL.revokeObjectURL(this.framedUrlObject);
         }
 
         if (this.framedUrlObjectRaw) {
-          $window.URL.revokeObjectURL(this.framedUrlObjectRaw);
+          this.$window.URL.revokeObjectURL(this.framedUrlObjectRaw);
         }
 
         if (this.frameUrlObject) {
-          $window.URL.revokeObjectURL(this.frameUrlObject);
+          this.$window.URL.revokeObjectURL(this.frameUrlObject);
         }
 
         if (this.frameUrlObjectRaw) {
-          $window.URL.revokeObjectURL(this.frameUrlObjectRaw);
+          this.$window.URL.revokeObjectURL(this.frameUrlObjectRaw);
         }
 
-        this.framedUrlObject = $window.URL.createObjectURL(framedDataBlob);
-        this.framedUrlObjectRaw = $window.URL.createObjectURL(framedDataBlobRaw);
+        this.framedUrlObject = this.$window.URL.createObjectURL(framedDataBlob);
+        this.framedUrlObjectRaw = this.$window.URL.createObjectURL(framedDataBlobRaw);
 
         if (this.entity.frame) {
           const frameAsString = JSON.stringify(this.entity.frame, null, 2);
           const frameBlob = new Blob([UTF8_BOM, frameAsString], {type: 'application/json;charset=utf-8'});
           const frameBlobRaw = new Blob([UTF8_BOM, frameAsString], {type: 'text/plain;charset=utf-8'});
 
-          this.frameUrlObject = $window.URL.createObjectURL(frameBlob);
-          this.frameUrlObjectRaw = $window.URL.createObjectURL(frameBlobRaw);
+          this.frameUrlObject = this.$window.URL.createObjectURL(frameBlob);
+          this.frameUrlObjectRaw = this.$window.URL.createObjectURL(frameBlobRaw);
 
           this.downloads.push({
             name: 'ld+json frame',

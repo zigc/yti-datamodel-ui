@@ -1,76 +1,85 @@
-import { IAttributes, IScope } from 'angular';
+import { IScope } from 'angular';
 import { ClassFormController } from './classForm';
 import { Uri } from 'app/entities/uri';
 import { LanguageService } from 'app/services/languageService';
-import { anyMatching, allMatching } from 'yti-common-ui/utils/array';
-import { module as mod } from './module';
+import { allMatching, anyMatching } from 'yti-common-ui/utils/array';
 import { hasLocalization } from 'app/utils/language';
-import { Property, Class } from 'app/entities/class';
+import { Class, Property } from 'app/entities/class';
 import { Model } from 'app/entities/model';
 import { Predicate } from 'app/entities/predicate';
+import { ComponentDeclaration } from 'app/utils/angular';
+import { forwardRef } from '@angular/core';
 
-mod.directive('propertyView', () => {
-  return {
-    scope: {
-      id: '=',
-      property: '=',
-      class: '=',
-      model: '='
-    },
-    restrict: 'E',
-    template: require('./propertyView.html'),
-    controllerAs: 'ctrl',
-    bindToController: true,
-    require: ['propertyView', '^classForm'],
-    link($scope: IScope, element: JQuery, _attributes: IAttributes,
-         [thisController, classFormController]: [PropertyViewController, ClassFormController]) {
+export const PropertyViewComponent: ComponentDeclaration = {
+  selector: 'propertyView',
+  bindings: {
+    id: '=',
+    property: '=',
+    class: '=',
+    model: '='
+  },
+  require: {
+    classForm: '^classForm'
+  },
+  template: require('./propertyView.html'),
+  controller: forwardRef(() => PropertyViewController)
+};
 
-      thisController.isOpen = () => classFormController.openPropertyId === thisController.property.internalId.uuid;
-      thisController.isEditing = () => classFormController.isEditing();
 
-      function scrollTo(previousTop?: number) {
-        const scrollTop = element.offset().top;
-
-        if (!previousTop || scrollTop !== previousTop) {
-          // wait for stabilization
-          setTimeout(() => scrollTo(scrollTop), 100);
-        } else {
-          jQuery('html, body').animate({scrollTop: scrollTop - 105}, 500);
-        }
-      }
-
-      if (thisController.isOpen()) {
-        scrollTo();
-      }
-
-      $scope.$watchCollection(() => thisController.class && thisController.class.properties, (oldProperties) => {
-
-        const isPropertyAdded = allMatching(oldProperties, p => thisController.property.internalId.notEquals(p.internalId));
-
-        if (thisController.isOpen() && isPropertyAdded) {
-          scrollTo();
-        }
-      });
-    },
-    controller: PropertyViewController
-  };
-});
 
 export class PropertyViewController {
 
   property: Property;
   class: Class;
   model: Model;
-  isEditing: () => boolean;
-  isOpen: () => boolean;
+
+  classForm: ClassFormController;
+
+  /* @ngInject */
+  constructor(private $scope: IScope,
+              private $element: JQuery,
+              private languageService: LanguageService) {
+  }
+
+  $onInit() {
+
+    if (this.isOpen()) {
+      this.scrollTo();
+    }
+
+    this.$scope.$watchCollection(() => this.class && this.class.properties, (oldProperties) => {
+
+      const isPropertyAdded = allMatching(oldProperties, p => this.property.internalId.notEquals(p.internalId));
+
+      if (this.isOpen() && isPropertyAdded) {
+        this.scrollTo();
+      }
+    });
+  }
+
+  scrollTo(previousTop?: number) {
+
+    const scrollTop = this.$element.offset().top;
+
+    if (!previousTop || scrollTop !== previousTop) {
+      // wait for stabilization
+      setTimeout(() => this.scrollTo(scrollTop), 100);
+    } else {
+      jQuery('html, body').animate({scrollTop: scrollTop - 105}, 500);
+    }
+  }
+
+  isOpen() {
+    return this.classForm && this.classForm.openPropertyId === this.property.internalId.uuid;
+  }
+
+  isEditing() {
+    return this.classForm && this.classForm.isEditing();
+  }
 
   valueClassExclude = (valueClass: Uri) =>
     anyMatching(this.class.properties, p => p !== this.property && this.property.predicateId.equals(p.predicateId) && valueClass.equals(p.valueClass))
       ? 'Duplicate association target' : null;
-
-  /* @ngInject */
-  constructor(private languageService: LanguageService) {
-  }
 
   private get otherProperties() {
     return this.class.properties.filter(property => property.internalId.notEquals(this.property.internalId));

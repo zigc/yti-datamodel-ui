@@ -8,7 +8,7 @@ import { predicateIdFromNamespaceId } from 'app/help/utils';
 import { KnownPredicateType } from 'app/types/entity';
 import * as SearchConceptModal from './searchConceptModalHelp.po';
 import * as PredicateForm from 'app/help/pages/model/predicateFormHelp.po';
-import GettextCatalog = angular.gettext.gettextCatalog;
+import { gettextCatalog as GettextCatalog } from 'angular-gettext';
 import { Story } from 'app/help/contract';
 
 export const searchPredicateModalElement = child(modal, '.search-predicate');
@@ -39,7 +39,7 @@ export function confirmPredicateSelection(navigates: boolean) {
 export function findAndSelectExistingPredicateItems(type: KnownPredicateType,
                                                     namespaceId: string,
                                                     predicateName: string,
-                                                    gettextCatalog: angular.gettext.gettextCatalog): Story[] {
+                                                    gettextCatalog: GettextCatalog): Story[] {
   return [
     filterForPredicate(namespaceId, predicateName, gettextCatalog),
     selectPredicate(namespaceId, predicateName),

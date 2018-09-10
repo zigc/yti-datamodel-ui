@@ -1,11 +1,10 @@
-import { IPromise, IScope, ui } from 'angular';
-import IModalService = ui.bootstrap.IModalService;
-import IModalServiceInstance = ui.bootstrap.IModalServiceInstance;
+import { IPromise, IScope } from 'angular';
+import { IModalService, IModalServiceInstance } from 'angular-ui-bootstrap';
 import { SearchConceptModal, EntityCreation } from './searchConceptModal';
 import { ClassService } from 'app/services/classService';
 import { LanguageService, Localizer } from 'app/services/languageService';
 import { AddNew } from 'app/components/common/searchResults';
-import GettextCatalog = angular.gettext.gettextCatalog;
+import { gettextCatalog as GettextCatalog } from 'angular-gettext';
 import { EditableForm } from 'app/components/form/editableEntityController';
 import { glyphIconClassForType } from 'app/utils/entity';
 import { Exclusion } from 'app/utils/exclusion';
@@ -35,7 +34,7 @@ export class SearchClassModal {
       template: require('./searchClassModal.html'),
       size: 'lg',
       controller: SearchClassController,
-      controllerAs: 'ctrl',
+      controllerAs: '$ctrl',
       backdrop: true,
       resolve: {
         model: () => model,

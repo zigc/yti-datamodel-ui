@@ -4,11 +4,11 @@ import {
 } from 'app/help/contract';
 import { child } from 'app/help/selectors';
 import { KnownModelType } from 'app/types/entity';
-import GettextCatalog = angular.gettext.gettextCatalog;
+import { gettextCatalog as GettextCatalog } from 'angular-gettext';
 import * as SearchNamespaceModal from './modal/searchNamepaceModalHelp.po';
 import * as SearchVocabularyModal from './modal/searchVocabularyModalHelp.po';
 
-export const element = () => angular.element('model-view');
+export const element = () => jQuery('model-view');
 
 export function modifyModel(type: KnownModelType) {
 

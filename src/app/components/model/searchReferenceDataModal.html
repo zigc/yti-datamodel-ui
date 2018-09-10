@@ -12,19 +12,19 @@
       <div class="col-12">
 
         <text-filter class="pull-left"
-                     search-text="ctrl.searchText"
-                     search-controller="ctrl"
-                     content-extractors="ctrl.contentExtractors"
+                     search-text="$ctrl.searchText"
+                     search-controller="$ctrl"
+                     content-extractors="$ctrl.contentExtractors"
                      placeholder="'search reference data'"></text-filter>
 
         <div class="pull-left mt-2 ml-2">
-          <content-filter search-controller="ctrl"
-                          content-extractors="ctrl.contentExtractors"
-                          content-matchers="ctrl.contentMatchers"></content-filter>
+          <content-filter search-controller="$ctrl"
+                          content-extractors="$ctrl.contentExtractors"
+                          content-matchers="$ctrl.contentMatchers"></content-filter>
         </div>
 
         <model-language-chooser class="pull-right"
-                                context="ctrl.context"></model-language-chooser>
+                                context="$ctrl.context"></model-language-chooser>
       </div>
     </div>
 
@@ -34,30 +34,30 @@
         <select id="server"
                 class="form-control pull-left"
                 style="width: auto"
-                ng-model="ctrl.showServer"
-                ng-options="(referenceDataServer.title | translateValue: ctrl.context) for referenceDataServer in ctrl.referenceDataServers">
+                ng-model="$ctrl.showServer"
+                ng-options="(referenceDataServer.title | translateValue: $ctrl.context) for referenceDataServer in $ctrl.referenceDataServers">
           <option value="" translate>All servers</option>
         </select>
 
         <select id="group"
                 class="form-control ml-2 pull-left"
                 style="width: auto"
-                ng-model="ctrl.showGroup"
-                ng-options="(referenceDataGroup.title | translateValue: ctrl.context) for referenceDataGroup in ctrl.referenceDataGroups">
+                ng-model="$ctrl.showGroup"
+                ng-options="(referenceDataGroup.title | translateValue: $ctrl.context) for referenceDataGroup in $ctrl.referenceDataGroups">
           <option value="" translate>All groups</option>
         </select>
 
         <select id="reference_data_status_filter_dropdown"
                 class="form-control ml-2 pull-left"
                 style="width: auto"
-                ng-model="ctrl.showStatus"
-                ng-options="(status | translate) for status in ctrl.statuses">
+                ng-model="$ctrl.showStatus"
+                ng-options="(status | translate) for status in $ctrl.statuses">
           <option value="" translate>All statuses</option>
         </select>
         
-        <excluded-filter search-controller="ctrl"
-                         search-text="ctrl.searchText"
-                         exclude="ctrl.exclude"></excluded-filter>
+        <excluded-filter search-controller="$ctrl"
+                         search-text="$ctrl.searchText"
+                         exclude="$ctrl.exclude"></excluded-filter>
       </div>
     </div>
 
@@ -67,21 +67,21 @@
         <div class="content-box">
           <div class="search-results">
 
-            <ajax-loading-indicator ng-if="ctrl.loadingResults"></ajax-loading-indicator>
+            <ajax-loading-indicator ng-if="$ctrl.loadingResults"></ajax-loading-indicator>
 
-            <search-results ng-if="!ctrl.loadingResults" items="ctrl.searchResults" selected="ctrl.selectedItem" exclude="ctrl.exclude" on-select="ctrl.selectItem(item)">
+            <search-results ng-if="!$ctrl.loadingResults" items="$ctrl.searchResults" selected="$ctrl.selectedItem" exclude="$ctrl.exclude" on-select="$ctrl.selectItem(item)">
 
               <span class="title">
-                <ajax-loading-indicator-small ng-if="ctrl.loadingSelection(searchResult)"></ajax-loading-indicator-small>
-                <highlight text="searchResult.title" context="ctrl.model" search="ctrl.searchText"></highlight>
+                <ajax-loading-indicator-small ng-if="$ctrl.loadingSelection(searchResult)"></ajax-loading-indicator-small>
+                <highlight text="searchResult.title" context="$ctrl.model" search="$ctrl.searchText"></highlight>
               </span>
 
               <span class="body">
-                <highlight text="searchResult.description" context="ctrl.model" search="ctrl.searchText"></highlight>
+                <highlight text="searchResult.description" context="$ctrl.model" search="$ctrl.searchText"></highlight>
               </span>
 
               <div class="origin">
-                <span ng-repeat="group in searchResult.groups">{{group.title | translateValue: ctrl.model}}{{$last ? '' : ', '}}</span>
+                <span ng-repeat="group in searchResult.groups">{{group.title | translateValue: $ctrl.model}}{{$last ? '' : ', '}}</span>
               </div>
             </search-results>
           </div>
@@ -89,46 +89,46 @@
       </div>
 
       <div class="col-6 search-selection">
-        <div ng-if="!ctrl.isSelectionFormData() && ctrl.selection">
-          <reference-data-view data-title="Reference data information" context="ctrl.model" reference-data="ctrl.selection" show-codes="true"></reference-data-view>
+        <div ng-if="!$ctrl.isSelectionFormData() && $ctrl.selection">
+          <reference-data-view data-title="Reference data information" context="$ctrl.model" reference-data="$ctrl.selection" show-codes="true"></reference-data-view>
         </div>
 
-        <div ng-if="ctrl.isSelectionFormData()">
-          <editable data-title="Reference data URI" context="ctrl.model" autofocus>
+        <div ng-if="$ctrl.isSelectionFormData()">
+          <editable data-title="Reference data URI" context="$ctrl.model" autofocus>
             <div class="input-group input-group-md">
-              <input id="uri" type="text" class="form-control" required uri-input="free-url" model="ctrl.model" ng-model="ctrl.selection.uri" />
+              <input id="uri" type="text" class="form-control" required uri-input="free-url" model="$ctrl.model" ng-model="$ctrl.selection.uri" />
             </div>
           </editable>
 
-          <editable data-title="Reference data label" context="ctrl.model">
+          <editable data-title="Reference data label" context="$ctrl.model">
             <div class="input-group input-group-md">
-              <input id="label" type="text" class="form-control" required string-input="label" model="ctrl.model" ng-model="ctrl.selection.label" />
+              <input id="label" type="text" class="form-control" required string-input="label" model="$ctrl.model" ng-model="$ctrl.selection.label" />
             </div>
           </editable>
 
-          <editable data-title="Description" context="ctrl.model">
+          <editable data-title="Description" context="$ctrl.model">
             <div class="input-group input-group-md">
-              <textarea id="description" class="form-control" required string-input model="ctrl.model" ng-model="ctrl.selection.description"></textarea>
+              <textarea id="description" class="form-control" required string-input model="$ctrl.model" ng-model="$ctrl.selection.description"></textarea>
             </div>
           </editable>
         </div>
 
-        <error-panel error="ctrl.submitError"></error-panel>
+        <error-panel error="$ctrl.submitError"></error-panel>
       </div>
     </div>
   </div>
 
   <div class="modal-footer">
-    <button type="button" class="btn btn-action confirm" ng-click="ctrl.confirm()" ng-disabled="!ctrl.selection || ctrl.cannotConfirm || form.$invalid || form.$pending">
-      <span ng-show="ctrl.isSelectionFormData()" translate>Create new</span>
-      <span ng-hide="ctrl.isSelectionFormData()" translate>Use selection</span>
+    <button type="button" class="btn btn-action confirm" ng-click="$ctrl.confirm()" ng-disabled="!$ctrl.selection || $ctrl.cannotConfirm || form.$invalid || form.$pending">
+      <span ng-show="$ctrl.isSelectionFormData()" translate>Create new</span>
+      <span ng-hide="$ctrl.isSelectionFormData()" translate>Use selection</span>
     </button>
 
-    <button type="button" class="btn btn-link cancel" ng-click="ctrl.close()" translate>Cancel</button>
+    <button type="button" class="btn btn-link cancel" ng-click="$ctrl.close()" translate>Cancel</button>
 
-    <div class="alert alert-danger" role="alert" ng-show="ctrl.cannotConfirm">
+    <div class="alert alert-danger" role="alert" ng-show="$ctrl.cannotConfirm">
       <span class="fas fa-exclamation-circle" aria-hidden="true"></span>
-      <span>{{ctrl.cannotConfirm | translate}}</span>
+      <span>{{$ctrl.cannotConfirm | translate}}</span>
     </div>
   </div>
 </form>

@@ -1,4 +1,4 @@
-import { modelIdFromPrefix } from '../../../e2e/util/resource'; // FIXME
+import { modelIdFromPrefix } from 'app/help/utils';
 import { KnownPredicateType } from 'app/types/entity';
 import { helpOrganizationId } from './services/helpOrganizationService';
 

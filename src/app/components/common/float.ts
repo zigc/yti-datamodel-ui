@@ -1,130 +1,152 @@
-import { module as mod } from './module';
-import { IScope, IAttributes, IWindowService } from 'angular';
+import { IScope } from 'angular';
 import { InteractiveHelpService } from 'app/help/services/interactiveHelpService';
 import { NgZone } from '@angular/core';
+import { DirectiveDeclaration } from 'app/utils/angular';
 
-interface FloatAttributes extends IAttributes {
-  float: string;
-  always: string;
-  snap: string;
-  width: string;
+interface Position {
+  left: number;
+  top: number;
 }
 
-mod.directive('float', (interactiveHelpService: InteractiveHelpService, $window: IWindowService, zone: NgZone) => {
-  return {
-    restrict: 'A',
-    controller: FloatController,
-    require: 'float',
-    link($scope: IScope, element: JQuery, attributes: FloatAttributes, ctrl: FloatController) {
+export const FloatDirective: DirectiveDeclaration = {
 
-      const placeholderClass = attributes.float;
-      const shouldSnap = () => interactiveHelpService.isClosed() && attributes.snap === 'true';
-      let elementStaticLocation = element.offset();
-
-      ctrl.element = element;
-      ctrl.always = attributes.always === 'true';
-      ctrl.width = attributes.width;
-      ctrl.placeholder =
-        jQuery(document.createElement('div'))
-          .hide()
-          .addClass(placeholderClass)
-          .insertBefore(element);
-
-      ctrl.isFloatingPosition = () => window.pageYOffset >= elementStaticLocation.top;
-      ctrl.isStaticPosition = () => window.pageYOffset < elementStaticLocation.top;
-      ctrl.isInitialized = () => elementStaticLocation.top > 0;
-
-      let timeoutId: any = null;
-
-      function snap(destination: number) {
-
-        const diff = destination - window.pageYOffset;
-
-        if (Math.abs(diff) < 3) {
-          scrollTo(window.pageXOffset, destination + 1);
-        } else if (diff < 80 && diff > 0) {
-          scrollTo(window.pageXOffset, window.pageYOffset + ((destination - window.pageYOffset) / 2));
-          setTimeout(snap, 20, destination);
-        }
-      }
-
-      function scrollHandler() {
-
-        if (shouldSnap()) {
-          if (timeoutId) {
-            clearTimeout(timeoutId);
-          }
-
-          timeoutId = setTimeout(snap, 200, elementStaticLocation.top);
-        }
-
-        if (!ctrl.floating) {
-          const offset = element.offset();
-
-          if (offset.top > 0) {
-            // re-refresh has to be done since location can change due to accordion etc
-            elementStaticLocation = element.offset();
-          }
-        }
-
-        if (ctrl.isInitialized()) {
-          if (ctrl.floating) {
-            if (ctrl.isStaticPosition()) {
-              ctrl.setStatic();
-              $scope.$apply();
-            }
-          } else {
-            if (ctrl.enabled && ctrl.isFloatingPosition()) {
-              ctrl.setFloating();
-              $scope.$apply();
-            }
-          }
-        }
-      }
-
-      zone.runOutsideAngular(() => {
-        window.addEventListener('scroll', scrollHandler, true);
-      });
-
-      $scope.$on('$destroy', () => {
-        window.removeEventListener('scroll', scrollHandler);
-      });
-    }
-  };
-});
+  selector: 'float',
+  factory() {
+    return {
+      restrict: 'A',
+      bindToController: {
+        float: '@',
+        snap: '@',
+        always: '@',
+        width: '@'
+      },
+      controller: FloatController,
+    };
+  }
+};
 
 export class FloatController {
 
-  element: JQuery;
+  float: string;
+  snap: string;
+  always: string;
+  width: string;
+
   placeholder: JQuery;
 
-  always: boolean;
-  isFloatingPosition: () => boolean;
-  isStaticPosition: () => boolean;
-  isInitialized: () => boolean;
-
+  elementStaticPosition: Position;
   floating = false;
   enabled = true;
-  width: string|number;
+
+  /* @ngInject */
+  constructor(private $scope: IScope,
+              private $element: JQuery,
+              private interactiveHelpService: InteractiveHelpService,
+              private zone: NgZone) {
+  }
+
+  $postLink() {
+
+    const placeholderClass = this.float;
+    this.elementStaticPosition = this.$element.offset();
+
+    this.placeholder =
+      jQuery(document.createElement('div'))
+        .hide()
+        .addClass(placeholderClass)
+        .insertBefore(this.$element);
+
+    let timeoutId: any = null;
+
+    const snap = (destination: number ) => {
+
+      const diff = destination - window.pageYOffset;
+
+      if (Math.abs(diff) < 3) {
+        scrollTo(window.pageXOffset, destination + 1);
+      } else if (diff < 80 && diff > 0) {
+        scrollTo(window.pageXOffset, window.pageYOffset + ((destination - window.pageYOffset) / 2));
+        setTimeout(snap, 20, destination);
+      }
+    };
+
+    const scrollHandler = () => {
+
+      if (this.shouldSnap()) {
+        if (timeoutId) {
+          clearTimeout(timeoutId);
+        }
+
+        timeoutId = setTimeout(snap, 200, this.elementStaticPosition.top);
+      }
+
+      if (!this.floating) {
+        const offset = this.$element.offset();
+
+        if (offset.top > 0) {
+          // re-refresh has to be done since location can change due to accordion etc
+          this.elementStaticPosition = this.$element.offset();
+        }
+      }
+
+      if (this.isInitialized()) {
+        if (this.floating) {
+          if (this.isStaticPosition()) {
+            this.setStatic();
+            this.$scope.$apply();
+          }
+        } else {
+          if (this.enabled && this.isFloatingPosition()) {
+            this.setFloating();
+            this.$scope.$apply();
+          }
+        }
+      }
+    };
+
+    this.zone.runOutsideAngular(() => {
+      window.addEventListener('scroll', scrollHandler, true);
+    });
+
+    this.$scope.$on('$destroy', () => {
+      window.removeEventListener('scroll', scrollHandler);
+    });
+  }
+
+  isFloatingPosition() {
+    return window.pageYOffset >= this.elementStaticPosition.top;
+  }
+
+  isStaticPosition() {
+    return window.pageYOffset < this.elementStaticPosition.top;
+  }
+
+  shouldSnap() {
+    return this.interactiveHelpService.isClosed() && this.snap === 'true';
+  }
+
+  isInitialized() {
+    return this.elementStaticPosition.top > 0;
+  }
 
   setFloating() {
     this.floating = true;
-    const width = this.width || this.element.outerWidth() + 'px';
+    const width = this.width || this.$element.outerWidth() + 'px';
 
     this.placeholder.css({
       width: width,
-      height: this.element.outerHeight() + 'px'
+      height: this.$element.outerHeight() + 'px'
     });
 
-    this.element.css({
+    this.$element.css({
       top: 0,
       width: width
     });
 
-    this.element.addClass('floating');
+    this.$element.addClass('floating');
 
     if (this.always) {
-      this.element.addClass('always');
+      this.$element.addClass('always');
     }
 
     if (this.enabled) {
@@ -134,13 +156,13 @@ export class FloatController {
 
   setStatic() {
     this.floating = false;
-    this.element.css('top', '');
-    this.element.css('width', this.width || '');
+    this.$element.css('top', '');
+    this.$element.css('width', this.width || '');
 
-    this.element.removeClass('floating');
+    this.$element.removeClass('floating');
 
     if (this.always) {
-      this.element.removeClass('always');
+      this.$element.removeClass('always');
     }
 
     this.placeholder.hide();

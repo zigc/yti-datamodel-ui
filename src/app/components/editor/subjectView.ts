@@ -1,26 +1,22 @@
-import { module as mod } from './module';
 import { SearchConceptModal } from './searchConceptModal';
 import { Class } from 'app/entities/class';
 import { Predicate } from 'app/entities/predicate';
 import { Model } from 'app/entities/model';
-import { modalCancelHandler } from 'app/utils/angular';
-import { ConfigService } from '../../services/configService';
-import { Config } from '../../entities/config';
+import { ComponentDeclaration, modalCancelHandler } from 'app/utils/angular';
+import { ConfigService } from 'app/services/configService';
+import { Config } from 'app/entities/config';
+import { forwardRef } from '@angular/core';
 
-mod.directive('subjectView', () => {
-  return {
-    scope: {
-      entity: '=',
-      model: '=',
-      isEditing: '='
-    },
-    bindToController: true,
-    controllerAs: 'ctrl',
-    restrict: 'E',
-    controller: SubjectViewController,
-    template: require('./subjectView.html')
-  };
-});
+export const SubjectViewComponent: ComponentDeclaration = {
+  selector: 'subjectView',
+  bindings: {
+    entity: '=',
+    model: '=',
+    isEditing: '='
+  },
+  template: require('./subjectView.html'),
+  controller: forwardRef(() => SubjectViewController)
+};
 
 class SubjectViewController {
 
@@ -29,6 +25,7 @@ class SubjectViewController {
   isEditing: () => boolean;
   config: Config;
 
+  /* @ngInject */
   constructor(private searchConceptModal: SearchConceptModal,
               private configService: ConfigService) {
 

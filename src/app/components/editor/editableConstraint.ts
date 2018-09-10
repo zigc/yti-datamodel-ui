@@ -1,48 +1,44 @@
-import { IAttributes, IScope } from 'angular';
-import { EditableForm } from 'app/components/form/editableEntityController';
 import { SearchClassModal } from './searchClassModal';
 import { SearchClassType } from 'app/types/component';
-import {
-  createClassTypeExclusion, createExistsExclusion, createDefinedByExclusion,
-  createSelfExclusion, combineExclusions
-} from 'app/utils/exclusion';
+import { combineExclusions, createClassTypeExclusion, createDefinedByExclusion, createExistsExclusion, createSelfExclusion } from 'app/utils/exclusion';
 import { collectProperties } from 'yti-common-ui/utils/array';
-import { module as mod } from './module';
-import { Constraint, Class, ConstraintListItem, ClassListItem } from 'app/entities/class';
+import { Class, ClassListItem, Constraint, ConstraintListItem } from 'app/entities/class';
 import { Model } from 'app/entities/model';
 import { ConstraintType } from 'app/types/entity';
-import { modalCancelHandler } from 'app/utils/angular';
+import { ComponentDeclaration, modalCancelHandler } from 'app/utils/angular';
+import { EditableForm } from 'app/components/form/editableEntityController';
+import { forwardRef } from '@angular/core';
 
-mod.directive('editableConstraint', () => {
-  return {
-    scope: {
-      id: '=',
-      constraint: '=',
-      model: '=',
-      class: '='
-    },
-    restrict: 'E',
-    controllerAs: 'ctrl',
-    bindToController: true,
-    template: require('./editableConstraint.html'),
-    require: ['editableConstraint', '?^form'],
-    link(_$scope: IScope, _element: JQuery, _attributes: IAttributes, [thisController, formController]: [EditableConstraint, EditableForm]) {
-      thisController.isEditing = () => formController.editing;
-    },
-    controller: EditableConstraint
-  };
-});
+export const EditableConstraintComponent: ComponentDeclaration = {
+  selector: 'editableConstraint',
+  bindings: {
+    id: '=',
+    constraint: '=',
+    model: '=',
+    class: '='
+  },
+  require: {
+    form: '?^form'
+  },
+  template: require('./editableConstraint.html'),
+  controller: forwardRef(() => EditableConstraintController)
+};
 
-class EditableConstraint {
+class EditableConstraintController {
 
   constraint: Constraint;
   model: Model;
   class: Class;
-  isEditing: () => boolean;
   types: ConstraintType[] = ['or', 'and', 'not'];
+
+  form: EditableForm;
 
   /* @ngInject */
   constructor(private searchClassModal: SearchClassModal) {
+  }
+
+  isEditing() {
+    return this.form && this.form.editing;
   }
 
   linkItem(item: ConstraintListItem) {

@@ -1,19 +1,16 @@
-import { IAttributes, IScope } from 'angular';
-import { arrowDown, arrowUp, pageDown, pageUp, enter } from 'yti-common-ui/utils/key-code';
-import { module as mod } from './module';
+import { IRepeatScope, IScope, ITimeoutService } from 'angular';
+import { arrowDown, arrowUp, enter, pageDown, pageUp } from 'yti-common-ui/utils/key-code';
+import { DirectiveDeclaration, scrollToElement } from 'app/utils/angular';
 
-mod.directive('keyControl', () => {
-  return {
-    restrict: 'A',
-    controllerAs: 'keyControl',
-    require: 'keyControl',
-    link($scope: IScope, element: JQuery, _attributes: IAttributes, controller: KeyControlController) {
-      element.on('keydown', event => controller.keyPressed(event));
-      $scope.$watch(element.attr('key-control') + '.length', (items: number) => controller.onItemsChange(items || 0));
-    },
-    controller: KeyControlController
-  };
-});
+export const KeyControlDirective: DirectiveDeclaration = {
+  selector: 'keyControl',
+  factory() {
+    return {
+      restrict: 'A',
+      controller: KeyControlController
+    };
+  }
+};
 
 export class KeyControlController {
 
@@ -28,7 +25,14 @@ export class KeyControlController {
     [enter]: () => this.selectSelection()
   };
 
-  constructor(private $scope: IScope) {
+  /* @ngInject */
+  constructor(private $scope: IScope,
+              private $element: JQuery) {
+  }
+
+  $postLink() {
+    this.$element.on('keydown', event => this.keyPressed(event));
+    this.$scope.$watch(this.$element.attr('key-control') + '.length', (items: number) => this.onItemsChange(items || 0));
   }
 
   onItemsChange(itemCount: number) {
@@ -58,4 +62,52 @@ export class KeyControlController {
   }
 }
 
+const selectionClass = 'active';
 
+export const KeyControlSelectionDirective: DirectiveDeclaration = {
+  selector: 'keyControlSelection',
+  factory() {
+    return {
+      restrict: 'A',
+      controller: KeyControlSelectionController
+    }
+  }
+};
+
+class KeyControlSelectionController {
+
+  /* @ngInject */
+  constructor(private $scope: IRepeatScope,
+              private $element: JQuery,
+              private $timeout: ITimeoutService) {
+  }
+
+  $postLink() {
+
+    this.$scope.$on('selectionMoved', (_event, selectionIndex) => this.update(selectionIndex));
+    this.$scope.$on('selectionSelected', (_event, selectionIndex) => {
+      if (selectionIndex === this.$scope.$index) {
+        // do outside of digest cycle
+        this.$timeout(() => this.$element.click());
+      }
+    });
+  }
+
+  update(selectionIndex: number) {
+    if (this.$scope.$index === selectionIndex) {
+      this.$element.addClass(selectionClass);
+      scrollToElement(this.$element, this.findParent());
+    } else {
+      this.$element.removeClass(selectionClass);
+    }
+  }
+
+  findParent() {
+    const parent = this.$element.parent();
+    if (parent.is('search-results')) {
+      return parent.parent();
+    } else {
+      return parent;
+    }
+  }
+}

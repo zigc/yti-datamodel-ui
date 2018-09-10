@@ -1,12 +1,12 @@
-<div ng-if="ctrl.loading">
+<div ng-if="$ctrl.loading">
   <ajax-loading-indicator></ajax-loading-indicator>
 </div>
 
-<div class="content-box main" ng-if="!ctrl.loading">
+<div class="content-box main" ng-if="!$ctrl.loading">
 
   <div class="row top">
     <div class="col-12">
-      <model-view id="'model'" model="ctrl.model" model-controller="ctrl"></model-view>
+      <model-view id="'model'" model="$ctrl.model" model-controller="$ctrl"></model-view>
     </div>
   </div>
 
@@ -14,18 +14,18 @@
     <div class="col-12">
       <div class="panel-left">
         <div class="selection-box" float always="true">
-          <uib-tabset active="ctrl.activeTab" justified="true">
-            <uib-tab ng-repeat="tab in ctrl.tabs">
+          <uib-tabset active="$ctrl.activeTab" justified="true">
+            <uib-tab ng-repeat="tab in $ctrl.tabs">
               <uib-tab-heading id="{{tab.type + '_tab_heading_link'}}">
                 <p>{{tab.type | translate}}</p>
               </uib-tab-heading>
 
-              <div ng-if="$index === ctrl.activeTab">
+              <div ng-if="$index === $ctrl.activeTab">
 
                 <div class="row">
                   <div class="col-lg-12">
                     <div class="selectable-actions">
-                      <button id="{{'add_new_' + tab.type + '_button'}}" ng-if="ctrl.canEdit()" type="button" class="btn btn-action btn-md add-new-button" ng-click="tab.addNew()">
+                      <button id="{{'add_new_' + tab.type + '_button'}}" ng-if="$ctrl.canEdit()" type="button" class="btn btn-action btn-md add-new-button" ng-click="tab.addNew()">
                         <span>{{tab.addLabel | translate}}</span>
                       </button>
                     </div>
@@ -35,12 +35,12 @@
                 <div class="row">
                   <div class="col-lg-12">
                     <div class="selectable-items">
-                      <ul ng-class="{'has-button': ctrl.canEdit()}">
+                      <ul ng-class="{'has-button': $ctrl.canEdit()}">
                         <li ng-repeat="item in tab.items() track by item.id.uri"
                             id="{{item.id.uri + '_tabset_link'}}"
-                            ng-class="{'selection': ctrl.isSelected(item)}"
-                            ng-click="ctrl.select(item)">
-                          {{item.label}} <ajax-loading-indicator-small ng-if="ctrl.isLoading(item)"></ajax-loading-indicator-small>
+                            ng-class="{'selection': $ctrl.isSelected(item)}"
+                            ng-click="$ctrl.select(item)">
+                          {{item.label}} <ajax-loading-indicator-small ng-if="$ctrl.isLoading(item)"></ajax-loading-indicator-small>
                         </li>
                       </ul>
                     </div>
@@ -55,37 +55,37 @@
       <div class="panel-right">
 
         <div class="selection-container"
-             ng-style="{ width: ctrl.selectionWidth }">
+             ng-style="{ width: $ctrl.selectionWidth }">
 
           <class-view id="'class'"
-                      ng-if="ctrl.selection.isClass()"
-                      data-class="ctrl.selection"
-                      open-property-id="ctrl.openPropertyId"
-                      model="ctrl.model"
-                      model-controller="ctrl">
+                      ng-if="$ctrl.selection.isClass()"
+                      data-class="$ctrl.selection"
+                      open-property-id="$ctrl.openPropertyId"
+                      model="$ctrl.model"
+                      model-controller="$ctrl">
           </class-view>
 
           <predicate-view id="'predicate'"
-                          ng-if="ctrl.selection.isPredicate()"
-                          predicate="ctrl.selection"
-                          model="ctrl.model"
-                          model-controller="ctrl">
+                          ng-if="$ctrl.selection.isPredicate()"
+                          predicate="$ctrl.selection"
+                          model="$ctrl.model"
+                          model-controller="$ctrl">
           </predicate-view>
         </div>
 
         <div class="visualization-container"
-             ng-style="{ width: ctrl.visualizationWidth }">
+             ng-style="{ width: $ctrl.visualizationWidth }">
 
           <div float width="auto">
 
-            <divider ng-if="ctrl.selection" selection-width="ctrl.selectionWidth"></divider>
+            <divider ng-if="$ctrl.selection" selection-width="$ctrl.selectionWidth"></divider>
 
-            <visualization-view ng-if="ctrl.model"
-                                ng-class="{'without-divider': !ctrl.selection, maximized: ctrl.visualizationMaximized}"
-                                selection="ctrl.selection"
-                                model="ctrl.model"
-                                model-page-actions="ctrl"
-                                maximized="ctrl.visualizationMaximized">
+            <visualization-view ng-if="$ctrl.model"
+                                ng-class="{'without-divider': !$ctrl.selection, maximized: $ctrl.visualizationMaximized}"
+                                selection="$ctrl.selection"
+                                model="$ctrl.model"
+                                model-page-actions="$ctrl"
+                                maximized="$ctrl.visualizationMaximized">
             </visualization-view>
           </div>
         </div>

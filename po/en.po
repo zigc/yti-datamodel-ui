@@ -2,1023 +2,577 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2018-09-04 08:50+0300\n"
+"PO-Revision-Date: 2018-09-11 14:03+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.1.1\n"
+"X-Generator: Poedit 1.8.5\n"
 "X-Poedit-Basepath: .\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: translations/misc.html:104 translations/misc.html:68
-msgid "Add association"
-msgstr ""
-
-#: translations/misc.html:101 translations/misc.html:63
-msgid "Add attribute"
-msgstr ""
-
-#: app\components\editor/searchPredicateModal.html:11
-msgid "Add attribute or association"
-msgstr ""
-
-#: app\components\editor/searchClassModal.html:7 translations/misc.html:57
-msgid "Add class"
-msgstr ""
-
-#: translations/help.html:45
-msgid "Add class description"
-msgstr "Add new class from here"
-
-#: translations/misc.html:215
-msgid "Add classification"
-msgstr ""
-
-#: translations/misc.html:217
-msgid "Add contributor"
-msgstr ""
-
-#: app\components/frontPage.html:59
-msgid "Add library"
-msgstr "New Core Vocabulary"
-
-#: translations/help.html:44
-msgid "Add library description"
-msgstr "Add new Core Vocabulary from here"
-
-#: translations/misc.html:210
-msgid "Add link"
-msgstr ""
-
-#: app\components/frontPage.html:55
-msgid "Add model"
-msgstr ""
-
-#: translations/misc.html:290
-msgid "Add new library"
-msgstr "Add new Core Vocabulary"
-
-#: app\components\model/searchNamespaceModal.html:36
-msgid "Add new namespace"
-msgstr ""
-
-#: translations/misc.html:291
-msgid "Add new profile"
-msgstr "Add new profile"
-
-#: app\components/frontPage.html:60
-msgid "Add profile"
-msgstr "New profile"
-
-#: translations/help.html:43
-msgid "Add profile description"
-msgstr "Add new Application Profile from here"
-
-#: translations/misc.html:154
-msgid "Add properties from class"
-msgstr ""
-
-#: translations/misc.html:158
-msgid "Add properties from external class"
-msgstr ""
-
-#: translations/misc.html:157
-msgid "Add properties from profile class"
-msgstr ""
-
-#: translations/misc.html:156
-msgid "Add properties from scope class"
-msgstr ""
-
-#: translations/misc.html:155
-msgid "Add properties from super class"
-msgstr ""
-
-#: app\components\editor/classForm.html:63
-msgid "Add property"
-msgstr ""
-
-#: app\components\editor/editableReferenceDataSelect.html:12
-#: translations/misc.html:213
-msgid "Add reference data"
-msgstr ""
-
-#: translations/help.html:41
-msgid "Add reference to namespace"
-msgstr ""
-
-#: translations/help.html:42
-msgid "Add reference to namespace description"
-msgstr ""
-"Imported namespaces can be used to link Classes and Properties to other "
-"standards"
-
-#: translations/misc.html:206
-msgid "Add vocabulary"
-msgstr ""
-
-#: app\components\editor/classForm.html:101
-#: app\components\editor/predicateForm.html:62
-#: app\components\editor/propertyView.html:163
-#: app\components\model/modelForm.html:25
-msgid "Additional information"
-msgstr ""
-
-#: translations/misc.html:284
-msgid "ADMIN"
-msgstr ""
-
-#: translations/misc.html:153
-msgid "Admin groups"
-msgstr ""
-
-#: app\components/advancedSearchModal.html:4 app\components/frontPage.html:16
-msgid "Advanced search"
-msgstr ""
-
-#: app\components\model/searchReferenceDataModal.html:47
-msgid "All groups"
-msgstr ""
-
-#: translations/misc.html:282
-msgid "All models"
-msgstr ""
-
-#: translations/misc.html:280
-msgid "All organizations"
-msgstr ""
-
-#: app\components\model/searchReferenceDataModal.html:39
-msgid "All servers"
-msgstr ""
-
-#: app\components\model/searchReferenceDataModal.html:55
-msgid "All statuses"
-msgstr ""
-
-#: translations/misc.html:278 translations/misc.html:41
-msgid "All types"
-msgstr ""
-
-#: app\components\editor/searchConceptModal.html:34
-msgid "All vocabularies"
-msgstr ""
-
-#: translations/misc.html:239
-msgid "Allowed languages"
-msgstr ""
-
-#: translations/titles.html:59
-msgid "Allowed values"
-msgstr ""
-
-#: translations/titles.html:59
-msgid "Allowed values info"
-msgstr "List of values that are allowed"
-
-#: translations/misc.html:120
-msgid "Already added"
-msgstr ""
-
-#: translations/misc.html:18
-msgid "and create new"
-msgstr ""
-
-#: translations/misc.html:139
-msgid "application/ld+json"
-msgstr "JSON-LD"
-
-#: translations/misc.html:143
-msgid "application/ld+json+context"
-msgstr "JSON-LD Context"
-
-#: translations/misc.html:142
-msgid "application/rdf+xml"
-msgstr "RDF"
-
-#: translations/misc.html:144
-msgid "application/schema+json"
-msgstr "JSON Schema"
-
-#: translations/misc.html:141
-msgid "application/xml"
-msgstr "XML"
-
-#: translations/misc.html:52
-msgid "Are you sure that you want to close dialog?"
-msgstr ""
-
-#: translations/help.html:119
-msgid "Are you sure that you want to close help?"
-msgstr ""
-
-#: translations/misc.html:50
-msgid ""
-"Are you sure that you want to continue? By continuing unsaved changes will "
-"be lost."
-msgstr ""
-
-#: app\components\common/deleteConfirmationModal.html:12
-#: translations/misc.html:54
-msgid "Are you sure that you want to delete?"
-msgstr ""
-
-#: translations/misc.html:56
-msgid ""
-"Are you sure you want to save? Saving overrides previously saves positions."
-msgstr ""
-
-#: translations/help.html:140
-msgid "Asia joka tuotetaan"
-msgstr "Thing that is being produced"
-
-#: translations/misc.html:245
-msgid "Assign class to library"
-msgstr "Assign class to Core Vocabulary"
-
-#: translations/misc.html:243
-msgid "Assign reusable predicate to library"
-msgstr "Assign reusable predicate to Core Vocabulary"
-
-#: translations/misc.html:244
-msgid "Assign reusable predicate to profile"
-msgstr ""
-
-#: translations/misc.html:195
-msgid "Assigned to this library"
-msgstr "Assigned to this Core Vocabulary"
-
-#: translations/misc.html:194
-msgid "Assigned to this profile"
-msgstr ""
-
-#: translations/misc.html:39
-msgid "association"
-msgstr "Association"
-
-#: translations/titles.html:8
-msgid "Association id"
-msgstr ""
-
-#: translations/titles.html:8
-msgid "Association id info"
-msgstr "CURIE that identifies the Object property"
-
-#: translations/misc.html:129
-msgid "Association information"
-msgstr ""
-
-#: translations/help.html:126
-msgid "Association is here"
-msgstr ""
-
-#: translations/help.html:127
-msgid "Association is here info"
-msgstr ""
-"New association consists for permanent URI identifer, name, description and "
-"range definitions."
-
-#: translations/titles.html:20
-msgid "Association label"
-msgstr ""
-
-#: translations/titles.html:20
-msgid "Association label info"
-msgstr "Name of the association"
-
-#: translations/misc.html:72
-msgid "Association list"
-msgstr ""
-
-#: translations/help.html:153
-msgid ""
-"Association target can be changed from the list or by typing the identifier"
-msgstr ""
-
-#: translations/help.html:128
-msgid "Association target is here"
-msgstr "Target of the association is the class that is being referred to"
-
-#: translations/help.html:152
-msgid "Association target must be selected from list of existing classes"
-msgstr ""
-
-#: translations/misc.html:38
-msgid "attribute"
-msgstr "Attribute"
-
-#: translations/titles.html:7
-msgid "Attribute id"
-msgstr ""
-
-#: translations/titles.html:7
-msgid "Attribute id info"
-msgstr "CURIE that identifies the Datatype property"
-
-#: translations/misc.html:128
-msgid "Attribute information"
-msgstr ""
-
-#: translations/help.html:124
-msgid "Attribute is here"
-msgstr ""
-
-#: translations/help.html:125
-msgid "Attribute is here info"
-msgstr ""
-"Attribute information consists of permanent URI identifier, name, "
-"description and xsd:datatype range"
-
-#: translations/titles.html:21
-msgid "Attribute label"
-msgstr ""
-
-#: translations/titles.html:21
-msgid "Attribute label info"
-msgstr "Name of the attribute"
-
-#: translations/misc.html:67
-msgid "Attribute list"
-msgstr ""
-
-#: translations/titles.html:49
-msgid "Broader concept"
-msgstr ""
-
-#: translations/titles.html:49
-msgid "Broader concept info"
-msgstr "Related broader concept that defines some context for the concept"
-
-#: translations/misc.html:226
-msgid "Browse concepts"
-msgstr ""
-
-#: app\components\model/referenceDataView.html:11
-msgid "Browse reference data codes"
-msgstr ""
-
-#: translations/misc.html:186
-msgid "by referencing external uri"
-msgstr ""
-
-#: translations/misc.html:175
-msgid "Can be selected only from this library"
-msgstr "Can be selected only from this Core Vocabulary"
-
-#: translations/misc.html:176
-msgid "Can be selected only from this profile"
-msgstr ""
-
-#: app\components/advancedSearchModal.html:66
-#: app\components\common/modalTemplate.html:16
-#: app\components\editor/addPropertiesFromClassModal.html:33
-#: app\components\editor/searchClassModal.html:116
-#: app\components\editor/searchConceptModal.html:112
-#: app\components\editor/searchPredicateModal.html:137
-#: app\components\form/editableEntityButtons.html:7
-#: app\components\model/addEditLinkModal.html:21
-#: app\components\model/addEditNamespaceModal.html:46
-#: app\components\model/editReferenceDataModal.html:27
-#: app\components\model/newModelPage.html:19
-#: app\components\model/searchClassificationModal.html:33
-#: app\components\model/searchNamespaceModal.html:73
-#: app\components\model/searchOrganizationModal.html:32
-#: app\components\model/searchReferenceDataModal.html:127
-#: app\components\model/searchVocabularyModal.html:63
-msgid "Cancel"
-msgstr ""
-
-#: translations/misc.html:165
-msgid "Cannot import profile"
-msgstr ""
-
-#: app\components\editor/subjectView.html:9 translations/misc.html:252
-msgid "Change concept"
-msgstr ""
-
-#: app\components\editor/propertyPredicateView.html:12
-#: app\components\editor/propertyPredicateView.html:39
-#: translations/misc.html:242
-msgid "Change reusable predicate"
-msgstr ""
-
-#: translations/help.html:147
-msgid "Changes need to be saved"
-msgstr ""
-
-#: app\components\editor/choosePredicateTypeModal.html:13
-msgid "Choose"
-msgstr ""
-
-#: translations/misc.html:75
-msgid "Choose association"
-msgstr ""
-
-#: translations/misc.html:74
-msgid "Choose attribute"
-msgstr ""
-
-#: app\components\editor/editableConstraint.html:41 translations/misc.html:73
-msgid "Choose class"
-msgstr ""
-
-#: translations/misc.html:253
-msgid "Choose concept"
-msgstr ""
-
-#: translations/misc.html:283
-msgid "Choose organization"
-msgstr ""
-
-#: translations/misc.html:224
-msgid "Choose reference data"
-msgstr ""
-
-#: app\components\model/editableRootClass.html:7
-msgid "Choose root class"
-msgstr ""
-
-#: translations/misc.html:37
-msgid "class"
-msgstr "Class"
-
-#: translations/help.html:5
-msgid "Class description info"
-msgstr ""
-
-#: translations/titles.html:5
-msgid "Class id"
-msgstr ""
-
-#: translations/titles.html:5
-msgid "Class id info"
-msgstr "CURIE that identifies the class"
-
-#: translations/misc.html:126
-msgid "Class information"
-msgstr ""
-
-#: translations/help.html:122
-msgid "Class is here"
-msgstr ""
-
-#: translations/help.html:123
-msgid "Class is here info"
-msgstr "Information about the selected Class is seen in here"
-
-#: translations/titles.html:18
-msgid "Class label"
-msgstr ""
-
-#: translations/titles.html:18
-msgid "Class label info"
-msgstr "Name of the class"
-
-#: translations/misc.html:62
-msgid "Class list"
-msgstr ""
-
-#: translations/misc.html:134
-msgid "Class properties"
-msgstr ""
-
-#: translations/titles.html:10
-msgid "Class property id"
-msgstr "Class property localname"
-
-#: translations/titles.html:10
-msgid "Class property id info"
-msgstr ""
-
-#: translations/titles.html:23
-msgid "Class property label"
-msgstr ""
-
-#: translations/titles.html:23
-msgid "Class property label info"
-msgstr ""
-
-#: translations/titles.html:60
-msgid "Class type"
-msgstr ""
-
-#: translations/titles.html:60
-msgid "Class type info"
-msgstr ""
-
-#: translations/misc.html:167
-msgid "Classes are not allowed"
-msgstr ""
-
-#: translations/help.html:146
-msgid "Classes can be modified"
-msgstr ""
-
-#: translations/help.html:135
-msgid "Classes can be seen visually here"
-msgstr ""
-
-#: app\components/frontPage.html:24
-msgid "Classification"
-msgstr ""
-
-#: translations/misc.html:214
-msgid "Classifications"
-msgstr ""
-
-#: app\components\model/editableRootClass.html:8
-msgid "Clear selection"
-msgstr ""
-
-#: translations/help.html:4
-msgid "close"
-msgstr ""
-
-#: app\components\common/historyModal.html:50
-#: app\components\model/modelView.html:39 translations/misc.html:174
-msgid "Close"
-msgstr ""
-
-#: translations/misc.html:287
-msgid "CODE_LIST_EDITOR"
-msgstr ""
-
-#: translations/misc.html:137
-msgid "Concept"
-msgstr ""
-
-#: translations/titles.html:26
-msgid "Concept definition"
-msgstr ""
-
-#: translations/titles.html:26
-msgid "Concept definition info"
-msgstr ""
-
-#: translations/titles.html:11
-msgid "Concept id"
-msgstr ""
-
-#: translations/titles.html:11
-msgid "Concept id info"
-msgstr "URI of the concept"
-
-#: app\components\model/conceptForm.html:2 translations/misc.html:132
-msgid "Concept information"
-msgstr ""
-
-#: translations/help.html:130
-msgid "Concept is here"
-msgstr ""
-
-#: translations/help.html:131
-msgid "Concept is here info"
-msgstr ""
-
-#: app\components\editor/searchConceptModal.html:95
-msgid "Concept is suggested to vocabulary"
-msgstr ""
-
-#: translations/titles.html:24
-msgid "Concept label"
-msgstr ""
-
-#: translations/titles.html:24
-msgid "Concept label info"
-msgstr "Preferred term of the concept"
-
-#: translations/misc.html:138
-msgid "Concept suggestion"
-msgstr ""
-
-#: translations/titles.html:27
-msgid "Concept suggestion definition"
-msgstr ""
-
-#: translations/titles.html:27
-msgid "Concept suggestion definition info"
-msgstr ""
-"Suggested definition should contain all the relevant information about the "
-"use of the concept"
-
-#: translations/misc.html:133
-msgid "Concept suggestion information"
-msgstr ""
-
-#: translations/titles.html:25
-msgid "Concept suggestion label"
-msgstr ""
-
-#: translations/titles.html:25
-msgid "Concept suggestion label info"
-msgstr "Suggested term for the concept"
-
-#: app\components\common/deleteConfirmationModal.html:3
-#: translations/misc.html:53
-msgid "Confirm delete"
-msgstr ""
-
-#: translations/help.html:120
-msgid "Confirm selection"
-msgstr ""
-
-#: translations/help.html:8
-msgid "Confirm selection info"
-msgstr "Selected operation can be confirmed from here"
-
-#: translations/help.html:30
-msgid "Congratulations for completing adding an association!"
-msgstr ""
-
-#: translations/help.html:29
-msgid "Congratulations for completing adding an attribute!"
-msgstr ""
-
-#: translations/help.html:27
-msgid "Congratulations for completing class assignation!"
-msgstr ""
-
-#: translations/help.html:21
-msgid "Congratulations for completing library creation!"
-msgstr "Congratulations for completing model creation!"
-
-#: translations/help.html:23
-msgid "Congratulations for completing library creation! description"
-msgstr "You can now proceed on creating real Core Vocabularies"
-
-#: translations/help.html:25
-msgid "Congratulations for completing namespace require!"
-msgstr ""
-
-#: translations/help.html:28
-msgid "Congratulations for completing new class creation!"
-msgstr ""
-
-#: translations/help.html:22
-msgid "Congratulations for completing profile creation!"
-msgstr ""
-
-#: translations/help.html:24
-msgid "Congratulations for completing profile creation! description"
-msgstr "You can now proceed on creating real Application Profiles."
-
-#: translations/help.html:26
-msgid "Congratulations for completing specialize class!"
-msgstr ""
-
-#: translations/titles.html:77
-msgid "Constraint classes"
-msgstr "Constraint shapes"
-
-#: translations/titles.html:77
-msgid "Constraint classes info"
-msgstr "Shapes of classes that are used to constraint allowed values"
-
-#: translations/misc.html:216
-msgid "Contributors"
-msgstr ""
-
-#: translations/misc.html:205
-msgid "Controlled vocabularies"
-msgstr ""
-
-#: translations/misc.html:257
-msgid "Convert to association"
-msgstr ""
-
-#: translations/misc.html:258
-msgid "Convert to attribute"
-msgstr ""
-
-#: translations/misc.html:260
 msgid "Copied"
 msgstr ""
 
-#: translations/misc.html:261
+msgid "Select help topic"
+msgstr ""
+
+msgid "Close"
+msgstr ""
+
+msgid "Show history"
+msgstr ""
+
+msgid "${title}"
+msgstr ""
+
+msgid "${body}"
+msgstr ""
+
 msgid "Copy"
 msgstr ""
 
-#: translations/misc.html:259
-msgid "Copy \"{{text}}\" to clipboard"
+msgid "Cancel"
 msgstr ""
 
-#: translations/misc.html:262
-msgid "Copy properties"
+msgid "All models"
 msgstr ""
 
-#: translations/misc.html:263
-msgid "Copy properties from class"
+msgid "Show classes defined in profiles"
 msgstr ""
 
-#: translations/misc.html:247
-msgid "Copy reusable association to library"
-msgstr "Copy reusable association to Core Vocabulary"
-
-#: translations/misc.html:248
-msgid "Copy reusable association to profile"
+msgid "All types"
 msgstr ""
 
-#: translations/misc.html:249
-msgid "Copy reusable attribute to library"
-msgstr "Copy reusable attribute to Core Vocabulary"
-
-#: translations/misc.html:250
-msgid "Copy reusable attribute to profile"
+msgid "Required"
 msgstr ""
 
-#: translations/misc.html:171
-msgid "Copy shape"
+msgid "Status"
 msgstr ""
 
-#: translations/misc.html:111
-msgid "Create and use association"
+msgid "Remove"
 msgstr ""
 
-#: translations/misc.html:110
-msgid "Create and use attribute"
+msgid "Edit"
 msgstr ""
 
-#: app\components\model/searchReferenceDataModal.html:123
-msgid "Create new"
+msgid "None added"
 msgstr ""
 
-#: app\components\editor/searchConceptModal.html:72
-msgid "Create new ' + ctrl.type + ' without referencing concept"
+#, fuzzy
+msgid "Use context"
+msgstr ""
+"Interoperability descriptions published in the Workbench may be accessed and "
+"browsed freely. In future, the content of these core vocabularies and "
+"application profiles will be jointly produced by experts associated to each "
+"subject area."
+
+msgid "Classifications"
 msgstr ""
 
-#: translations/misc.html:185
-msgid "Create new association"
+msgid "Add classification"
 msgstr ""
 
-#: translations/misc.html:14
-msgid "Create new association without referencing concept"
+msgid "Contributors"
 msgstr ""
 
-#: translations/misc.html:184
-msgid "Create new attribute"
+msgid "Add contributor"
 msgstr ""
 
-#: translations/misc.html:15
-msgid "Create new attribute without referencing concept"
+msgid "Imported namespaces"
 msgstr ""
 
-#: translations/misc.html:181
-msgid "Create new class"
+msgid "Import namespace"
 msgstr ""
 
-#: translations/misc.html:12
-msgid "Create new class without referencing concept"
+msgid "Links"
 msgstr ""
 
-#: translations/help.html:151
-msgid "Create new info"
-msgstr ""
-"This is all that is required for creating a new model. Prefix will be used "
-"to create namespace in the workbech domain. Alternatively you could use the "
-"Namespace redirection to use other domain as the namespace. "
-
-#: translations/misc.html:183
-msgid "Create new predicate"
+msgid "Add link"
 msgstr ""
 
-#: translations/misc.html:222
-msgid "Create new reference data"
+msgid "Reference data"
 msgstr ""
 
-#: translations/misc.html:182
-msgid "Create new shape"
+msgid "Add reference data"
 msgstr ""
 
-#: translations/misc.html:13
-msgid "Create new shape without referencing concept"
+msgid "Technical namespaces"
 msgstr ""
 
-#: translations/misc.html:150
-msgid "Created at"
+msgid "Reference data information"
 msgstr ""
 
-#: translations/titles.html:80
-msgid "Creator"
+msgid "Controlled vocabularies"
 msgstr ""
 
-#: translations/titles.html:80
-msgid "Creator info"
+msgid "Add vocabulary"
 msgstr ""
 
-#: translations/misc.html:46
-msgid "data en"
-msgstr "Data in english"
+msgid "Maximize"
+msgstr ""
 
-#: translations/misc.html:45
-msgid "data fi"
-msgstr "Data in finnish"
+msgid "Minimize"
+msgstr ""
 
-#: translations/misc.html:44
-msgid "data language"
-msgstr "Data in language"
+msgid "Advanced search"
+msgstr ""
 
-#: translations/misc.html:48
-msgid "data ru"
-msgstr "Data in russian"
+msgid "No search results"
+msgstr ""
 
-#: translations/misc.html:47
-msgid "data sv"
-msgstr "Data in swedish"
-
-#: app\components/application.html:8
-#: app\components\navigation/navigationBar.html:7
 msgid "Data Vocabularies"
 msgstr ""
 
-#: translations/misc.html:285
-msgid "DATA_MODEL_EDITOR"
+msgid "Confirm delete"
 msgstr ""
 
-#: translations/misc.html:147
-msgid "date format"
-msgstr "DD/MM/YYYY HH.mm"
-
-#: translations/titles.html:58
-msgid "Default value"
+msgid "Following items are depending on the deleted"
 msgstr ""
 
-#: translations/titles.html:58
-msgid "Default value info"
-msgstr ""
-"Default value for the property that may be used if no value is manually given"
-
-#: translations/misc.html:10
-msgid "Define concept for the association"
+msgid "Are you sure that you want to delete?"
 msgstr ""
 
-#: translations/misc.html:8
-msgid "Define concept for the attribute"
+msgid "Show"
 msgstr ""
 
-#: translations/misc.html:4
-msgid "Define concept for the class"
+msgid "Download"
 msgstr ""
 
-#: translations/misc.html:11
-msgid "Define concept for the new association"
+msgid "Export"
 msgstr ""
 
-#: translations/misc.html:9
-msgid "Define concept for the new attribute"
+msgid "Historical versions"
 msgstr ""
 
-#: translations/misc.html:5
-msgid "Define concept for the new class"
+msgid "Yes"
 msgstr ""
 
-#: translations/misc.html:7
-msgid "Define concept for the new shape"
+msgid "No referrers"
 msgstr ""
 
-#: translations/misc.html:6
-msgid "Define concept for the shape"
+msgid "Usage"
 msgstr ""
 
-#: app\components\editor/choosePredicateTypeModal.html:2
-msgid "Define type for class property"
+msgid "?"
 msgstr ""
 
-#: translations/titles.html:32
-msgid "Defined by"
+msgid "Select all"
 msgstr ""
 
-#: translations/titles.html:32
-msgid "Defined by info"
-msgstr "Reference to the model that defines the resource"
-
-#: translations/titles.html:33
-msgid "Defined by library"
-msgstr "Defined by Core Vocabulary"
-
-#: translations/titles.html:33
-msgid "Defined by library info"
-msgstr "Reference to the Core Vocabulary that defines the resource"
-
-#: translations/titles.html:34
-msgid "Defined by profile"
-msgstr ""
-
-#: translations/titles.html:34
-msgid "Defined by profile info"
-msgstr "Reference to the application profile that defines the resource"
-
-#: translations/misc.html:251
-msgid "Defined in vocabularies"
-msgstr ""
-
-#: translations/titles.html:1
-msgid "Definition"
-msgstr ""
-
-#: translations/titles.html:1
-msgid "Definition info"
-msgstr "Definition of the concept"
-
-#: translations/misc.html:69
-msgid "Delete association"
-msgstr ""
-
-#: translations/misc.html:70
-msgid "Delete association from this library"
-msgstr "Delete association from this Core Vocabulary"
-
-#: translations/misc.html:71
-msgid "Delete association from this profile"
-msgstr ""
-
-#: translations/misc.html:64
-msgid "Delete attribute"
-msgstr ""
-
-#: translations/misc.html:65
-msgid "Delete attribute from this library"
-msgstr "Delete attribute from this Core Vocabulary"
-
-#: translations/misc.html:66
-msgid "Delete attribute from this profile"
-msgstr ""
-
-#: translations/misc.html:58
-msgid "Delete class"
-msgstr ""
-
-#: translations/misc.html:60
-msgid "Delete class from this library"
-msgstr "Delete class from this Core Vocabulary"
-
-#: translations/misc.html:228
-msgid "Delete concept"
-msgstr ""
-
-#: translations/misc.html:229
-msgid "Delete concept from this library"
-msgstr ""
-
-#: translations/misc.html:230
-msgid "Delete concept from this profile"
-msgstr ""
-
-#: translations/misc.html:231
-msgid "Delete conceptSuggestion"
-msgstr ""
-
-#: translations/misc.html:232
-msgid "Delete conceptSuggestion from this library"
-msgstr ""
-
-#: translations/misc.html:233
-msgid "Delete conceptSuggestion from this profile"
-msgstr ""
-
-#: translations/misc.html:30
-msgid "Delete library"
-msgstr "Delete Core Vocabulary"
-
-#: translations/misc.html:31
-msgid "Delete profile"
-msgstr ""
-
-#: app\components\editor/propertyView.html:12
-msgid "Delete property"
-msgstr ""
-
-#: translations/misc.html:59
-msgid "Delete shape"
-msgstr ""
-
-#: translations/misc.html:61
-msgid "Delete shape from this library"
-msgstr ""
-
-#: translations/misc.html:23
-msgid "Deprecated"
-msgstr ""
-
-#: translations/titles.html:2
-msgid "Description"
-msgstr ""
-
-#: translations/titles.html:2
-msgid "Description info"
-msgstr "Description of a resource"
-
-#: app\components\editor/addPropertiesFromClassModal.html:28
 msgid "Deselect all"
 msgstr ""
 
-#: translations/misc.html:51
-msgid "Dialog is open"
+msgid "Define type for class property"
 msgstr ""
 
-#: translations/help.html:6
+msgid "Choose"
+msgstr ""
+
+msgid "Additional information"
+msgstr ""
+
+msgid "Add property"
+msgstr ""
+
+msgid "No properties yet"
+msgstr ""
+
+msgid "Logical constraints"
+msgstr ""
+
+msgid "Choose class"
+msgstr ""
+
+msgid "Not defined"
+msgstr ""
+
+msgid "Reusable predicate information"
+msgstr ""
+
+msgid "Change reusable predicate"
+msgstr ""
+
+msgid "Predicate information not found"
+msgstr ""
+
+msgid "Delete property"
+msgstr ""
+
+msgid "Property information"
+msgstr ""
+
+msgid "Optional metadata"
+msgstr ""
+
+msgid "Technical metadata"
+msgstr "Technical metadata"
+
+msgid "Reusable predicate"
+msgstr ""
+
+msgid "Select class"
+msgstr ""
+
+msgid "Add class"
+msgstr ""
+
+msgid " without referencing concept"
+msgstr ""
+
+msgid "All vocabularies"
+msgstr ""
+
+msgid "Concept is suggested to vocabulary"
+msgstr ""
+
+msgid "Select attribute or association"
+msgstr ""
+
+msgid "Add attribute or association"
+msgstr ""
+
+msgid "Change concept"
+msgstr ""
+
+msgid "No concept defined"
+msgstr ""
+
+msgid "Save"
+msgstr ""
+
+msgid "Invalid url error"
+msgstr ""
+
+msgid "Invalid stem error"
+msgstr ""
+
+msgid "Invalid namespace error"
+msgstr ""
+
+msgid "Invalid id error"
+msgstr ""
+
+msgid "Existing id error"
+msgstr ""
+
+msgid "Required error"
+msgstr ""
+
+msgid "Required localized error"
+msgstr ""
+
+msgid "Duplicate error"
+msgstr ""
+
+msgid "String error"
+msgstr ""
+
+msgid "Length error"
+msgstr ""
+
+msgid "Prefix error"
+msgstr ""
+
+msgid "Negative error"
+msgstr ""
+
+msgid "Greater than max error"
+msgstr ""
+
+msgid "Less than min error"
+msgstr ""
+
+msgid "Unknown namespace"
+msgstr ""
+
+msgid "Id name is required"
+msgstr ""
+
+msgid "Must be imported namespace"
+msgstr ""
+
+msgid "Is not valid language code"
+msgstr ""
+
+msgid "Is not valid reference data code"
+msgstr ""
+
+msgid "Search"
+msgstr ""
+
+msgid "Add model"
+msgstr ""
+
+msgid "Add library"
+msgstr "New Core Vocabulary"
+
+msgid "Add profile"
+msgstr "New profile"
+
+msgid "ToolInfo"
+msgstr ""
+"The Data Vocabularies Tool is a service for managing and publishing data "
+"vocabularies. It contains data component libraries, i.e. data specifications "
+"for harmonizing information used by jointly different actors. In addition, "
+"the Data Vocabularies Tool is used, when necessary, for managing API’s or "
+"the contents of various data resources."
+
+msgid "Classification"
+msgstr ""
+
+msgid "model"
+msgstr "Core Vocabulary Library"
+
+msgid "models"
+msgstr ""
+
+msgid "Maintenance content"
+msgstr ""
+"Application is unfortunately out of service because of maintenance break."
+
+msgid "Maintenance"
+msgstr "Maintenance break"
+
+msgid "Concept information"
+msgstr ""
+
+msgid "Not selected"
+msgstr ""
+
+msgid "Choose root class"
+msgstr ""
+
+msgid "Clear selection"
+msgstr ""
+
+msgid "Edit reference data"
+msgstr ""
+
+msgid "Show model details"
+msgstr ""
+
+msgid "Hide model details"
+msgstr ""
+
+msgid "Browse reference data codes"
+msgstr ""
+
+msgid "Identifier"
+msgstr ""
+
+msgid "Title"
+msgstr ""
+
+msgid "Select classification"
+msgstr ""
+
+msgid "Show technical namespaces"
+msgstr ""
+
+msgid "Add new namespace"
+msgstr ""
+
+msgid "Search namespaces"
+msgstr ""
+
+msgid "Select organization"
+msgstr ""
+
+msgid "Search reference data"
+msgstr ""
+
+msgid "All servers"
+msgstr ""
+
+msgid "All groups"
+msgstr ""
+
+msgid "All statuses"
+msgstr ""
+
+msgid "Create new"
+msgstr ""
+
+msgid "Use selection"
+msgstr ""
+
+msgid "Search vocabularies"
+msgstr ""
+
+msgid "Start help"
+msgstr ""
+
+msgid "Impersonate user"
+msgstr ""
+
+msgid "LOG IN"
+msgstr ""
+
+msgid "LOG OUT"
+msgstr ""
+
+msgid "User details"
+msgstr ""
+
+msgid "Suomi.fi Controlled Vocabularies"
+msgstr ""
+
+msgid "Suomi.fi Reference Data"
+msgstr ""
+
+msgid "User right management"
+msgstr ""
+
+msgid "Name"
+msgstr ""
+
+msgid "Email"
+msgstr ""
+
+msgid "Organizations and roles"
+msgstr ""
+
+msgid "Unknown organization"
+msgstr ""
+
+msgid "Waiting for approval"
+msgstr ""
+
+msgid "Send access request"
+msgstr ""
+
+msgid "Send"
+msgstr ""
+
+msgid "xsd:long error"
+msgstr "Invalid integer"
+
+msgid "xsd:string"
+msgstr "Text"
+
+msgid "rdfs:Literal"
+msgstr "Literal"
+
+msgid "rdfs:Literal error"
+msgstr ""
+
+msgid "rdf:langString"
+msgstr "Localized text"
+
+msgid "rdf:langString error"
+msgstr ""
+
+msgid "xsd:anyURI"
+msgstr "URI"
+
+msgid "xsd:anyURI error"
+msgstr "Invalid URI"
+
+msgid "xsd:boolean"
+msgstr "Boolean"
+
+msgid "xsd:boolean error"
+msgstr "Invalid boolean"
+
+msgid "xsd:decimal"
+msgstr "Decimal"
+
+msgid "xsd:decimal error"
+msgstr "Invalid decimal"
+
+msgid "xsd:double"
+msgstr "Decimal (64bit)"
+
+msgid "xsd:double error"
+msgstr "Invalid double"
+
+msgid "xsd:float"
+msgstr "Decimal (32bit)"
+
+msgid "xsd:float error"
+msgstr "Invalid decimal"
+
+msgid "xsd:integer"
+msgstr "Integer"
+
+msgid "xsd:integer error"
+msgstr "Invalid integer"
+
+msgid "xsd:long"
+msgstr "Integer (64bit)"
+
+msgid "xsd:string error"
+msgstr "Invalid text"
+
+msgid "xsd:int"
+msgstr "Integer (32bit)"
+
+msgid "xsd:int error"
+msgstr "Invalid integer"
+
+msgid "xsd:date"
+msgstr "Date"
+
+msgid "xsd:date error"
+msgstr "Invalid date"
+
+msgid "xsd:dateTime"
+msgstr "Point in time"
+
+msgid "xsd:dateTime error"
+msgstr "Invalid point in time"
+
+msgid "xsd:time"
+msgstr "Time"
+
+msgid "xsd:time error"
+msgstr "Invalid time"
+
+msgid "xsd:gYear"
+msgstr "Year"
+
+msgid "xsd:gYear error"
+msgstr "Invalid year"
+
+msgid "xsd:gMonth"
+msgstr "Month"
+
+msgid "xsd:gMonth error"
+msgstr "Invalid month"
+
+msgid "xsd:gDay"
+msgstr "Day"
+
+msgid "xsd:gDay error"
+msgstr "Invalid day"
+
+msgid "xsd:hexBinary"
+msgstr "Hex binary"
+
+msgid "xsd:hexBinary error"
+msgstr "Invalid hex binary"
+
+msgid "xsd:base64Binary"
+msgstr "Base64 binary"
+
+msgid "xsd:base64Binary error"
+msgstr "Invalid Base64 binary"
+
+msgid "Select new attribute creation"
+msgstr ""
+
+msgid "previous"
+msgstr ""
+
+msgid "close"
+msgstr ""
+
+msgid "Class description info"
+msgstr ""
+
 msgid "Diipadaa"
 msgstr ""
 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod "
@@ -1028,229 +582,20 @@ msgstr ""
 "cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat "
 "non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
 
-#: app\components\editor/addPropertiesFromClassModal.html:5
-msgid "Do you want to add following properties from ' + ctrl.classType + '?"
+msgid "Select group"
 msgstr ""
 
-#: translations/misc.html:159
-msgid "Do you want to add following properties from class?"
-msgstr ""
+msgid "Confirm selection info"
+msgstr "Selected operation can be confirmed from here"
 
-#: translations/misc.html:163
-msgid "Do you want to add following properties from external class?"
-msgstr ""
-
-#: translations/misc.html:162
-msgid "Do you want to add following properties from profile class?"
-msgstr ""
-
-#: translations/misc.html:161
-msgid "Do you want to add following properties from scope class?"
-msgstr ""
-
-#: translations/misc.html:160
-msgid "Do you want to add following properties from super class?"
-msgstr ""
-
-#: app\components\common/export.html:20
-msgid "Download"
-msgstr ""
-
-#: translations/misc.html:21
-msgid "Draft"
-msgstr ""
-
-#: translations/misc.html:273
-msgid "Duplicate association target"
-msgstr ""
-
-#: app\components\form/errorMessages.html:11
-msgid "Duplicate error"
-msgstr ""
-
-#: app\components\form/editableEntityButtons.html:22
-#: app\components\model/editReferenceDataModal.html:26
-msgid "Edit"
-msgstr ""
-
-#: translations/misc.html:49
-msgid "Edit in progress"
-msgstr ""
-
-#: translations/misc.html:211
-msgid "Edit link"
-msgstr ""
-
-#: translations/misc.html:199
-msgid "Edit namespace"
-msgstr ""
-
-#: app\components\model/editReferenceDataModal.html:3
-#: translations/misc.html:223
-msgid "Edit reference data"
-msgstr ""
-
-#: translations/titles.html:3
-msgid "Editorial note"
-msgstr ""
-
-#: translations/titles.html:3
-msgid "Editorial note info"
-msgstr ""
-
-#: app\components\user/userPage.html:15
-msgid "Email"
-msgstr ""
-
-#: translations/misc.html:43
-msgid "en"
-msgstr "English"
-
-#: translations/titles.html:47
-msgid "Equivalent association"
-msgstr ""
-
-#: translations/titles.html:47
-msgid "Equivalent association info"
-msgstr ""
-"Semantically equivalent Object property that is defined in external model"
-
-#: translations/titles.html:46
-msgid "Equivalent attribute"
-msgstr ""
-
-#: translations/titles.html:46
-msgid "Equivalent attribute info"
-msgstr ""
-"Semantically equivalent Datatype property that is defined in external model"
-
-#: translations/titles.html:45
-msgid "Equivalent class"
-msgstr ""
-
-#: translations/titles.html:45
-msgid "Equivalent class info"
-msgstr "Semantically equivalent Class that is defined in external model"
-
-#: translations/titles.html:48
-msgid "Equivalent property"
-msgstr ""
-
-#: translations/titles.html:48
-msgid "Equivalent property info"
-msgstr ""
-
-#: translations/titles.html:41
-msgid "Example"
-msgstr ""
-
-#: translations/titles.html:41
-msgid "Example info"
-msgstr "Example value for the property"
-
-#: translations/misc.html:294
-msgid "ExchangeFormat"
-msgstr "Exchange format"
-
-#: app\components\form/errorMessages.html:8
-msgid "Existing id error"
-msgstr ""
-
-#: app\components\common/export.html:4
-msgid "Export"
-msgstr ""
-
-#: translations/misc.html:189
-msgid "External class not found"
-msgstr ""
-
-#: translations/misc.html:191
-msgid "External predicate is of wrong type"
-msgstr ""
-
-#: translations/misc.html:190
-msgid "External predicate not found"
-msgstr ""
-
-#: translations/titles.html:74
-msgid "External URI"
-msgstr ""
-
-#: translations/titles.html:74
-msgid "External URI info"
-msgstr "URI of an external resource"
-
-#: translations/misc.html:42
-msgid "fi"
-msgstr "Finnish"
-
-#: translations/titles.html:61
-msgid "Fixed value"
-msgstr ""
-
-#: translations/titles.html:61
-msgid "Fixed value info"
-msgstr "Fixed value for the property"
-
-#: app\components\common/deleteConfirmationModal.html:7
-msgid "Following items are depending on the deleted"
-msgstr ""
-
-#: translations/misc.html:145
-msgid "framed ld+json"
-msgstr "Framed JSON-LD"
-
-#: translations/misc.html:27
-msgid "Front page"
-msgstr ""
-
-#: app\components\form/errorMessages.html:16
-msgid "Greater than max error"
-msgstr ""
-
-#: translations/misc.html:32
-msgid "group"
-msgstr "Group"
-
-#: translations/help.html:9
 msgid ""
 "Group is a categorization of interoperability descriptions to different "
 "fields and domains"
 msgstr ""
 
-#: translations/titles.html:17
-msgid "Group label"
-msgstr ""
-
-#: translations/titles.html:17
-msgid "Group label info"
-msgstr "Name of the domain group"
-
-#: translations/misc.html:266
-msgid "Group not found"
-msgstr ""
-
-#: translations/help.html:19
-msgid "Guide through adding an association"
-msgstr ""
-
-#: translations/help.html:18
-msgid "Guide through adding an attribute"
-msgstr ""
-
-#: translations/help.html:16
-msgid "Guide through assigning class to a library"
-msgstr ""
-
-#: translations/help.html:17
-msgid "Guide through creating a class"
-msgstr ""
-
-#: translations/help.html:10
 msgid "Guide through creating new library"
 msgstr "Guide through creating new Core Vocabulary"
 
-#: translations/help.html:11
 msgid "Guide through creating new library description"
 msgstr ""
 "Core Vocabulary libraries are Linked Data models defining reusable Classes, "
@@ -1258,11 +603,9 @@ msgstr ""
 "based on well defined Concepts described in terminological dictonaries and "
 "linked to existing metadata standards using IRI-identifiers."
 
-#: translations/help.html:12
 msgid "Guide through creating new profile"
 msgstr "Guide trough creating new Application Profile"
 
-#: translations/help.html:13
 msgid "Guide through creating new profile description"
 msgstr ""
 "Application Profiles are machine readable information models that document "
@@ -1272,485 +615,55 @@ msgstr ""
 "international standards and use the application profile as a base for "
 "physical data model in any syntax."
 
-#: translations/help.html:14
 msgid "Guide through requiring a namespace"
 msgstr ""
 
-#: translations/help.html:15
 msgid "Guide through specializing a class"
 msgstr ""
 
-#: translations/help.html:118
-msgid "Help is open"
+msgid "Guide through assigning class to a library"
 msgstr ""
 
-#: translations/misc.html:26
-msgid "Hide"
+msgid "Guide through creating a class"
 msgstr ""
 
-#: app\components\model/modelView.html:15
-msgid "Hide model details"
+msgid "Guide through adding an attribute"
 msgstr ""
 
-#: app\components\common/historyModal.html:6 translations/misc.html:173
-msgid "Historical versions"
+msgid "Guide through adding an association"
 msgstr ""
 
-#: translations/titles.html:71
-msgid "Homepage"
-msgstr "Link"
+msgid "Congratulations for completing library creation!"
+msgstr "Congratulations for completing model creation!"
 
-#: translations/titles.html:71
-msgid "Homepage info"
+msgid "Congratulations for completing profile creation!"
 msgstr ""
-"Link to a Information or application that somehow uses the defined model"
 
-#: translations/misc.html:83
-msgid "How content"
-msgstr ""
-"Interoperability descriptions published in the Workbench may be accessed and "
-"browsed freely. In future, the content of these core vocabularies and "
-"application profiles will be jointly produced by experts associated to each "
-"subject area."
-
-#: translations/misc.html:82
-msgid "How?"
-msgstr "How can I participate?"
-
-#: translations/misc.html:237
-msgid "ID"
-msgstr ""
-
-#: translations/misc.html:113
-msgid "ID is already in use"
-msgstr ""
-
-#: app\components\form/errorMessages.html:19
-msgid "Id name is required"
-msgstr ""
-
-#: app\components\model/referenceDataView.html:20 translations/misc.html:207
-msgid "Identifier"
-msgstr ""
-
-#: app\components\navigation/navigationBar.html:24
-msgid "Impersonate user"
-msgstr ""
-
-#: translations/misc.html:201
-msgid "Import namespace"
-msgstr ""
-
-#: translations/misc.html:200
-msgid "Imported namespaces"
-msgstr ""
-
-#: translations/help.html:121
-msgid "Imported namespaces are here"
-msgstr ""
-
-#: translations/help.html:148
-msgid "Imported namespaces can be used to link resources to existing standards"
-msgstr ""
-
-#: translations/misc.html:240
-msgid "In language"
-msgstr "In English"
-
-#: translations/misc.html:295
-msgid "InformationDescription"
-msgstr "Information description"
-
-#: translations/misc.html:292
-msgid "InformationPool"
-msgstr "Information pool"
-
-#: translations/misc.html:293
-msgid "InformationSystem"
-msgstr "Information system"
-
-#: translations/misc.html:192
-msgid "Input"
-msgstr ""
-
-#: translations/titles.html:51
-msgid "Internal group page"
-msgstr ""
-
-#: translations/titles.html:51
-msgid "Internal group page info"
-msgstr ""
-"Link to a internal group page that can be used to discuss about the defined "
-"models and resources"
-
-#: translations/misc.html:197
-msgid "Internal vocabulary"
-msgstr "Internal terminology"
-
-#: translations/misc.html:235
-msgid "Interoperability method description"
-msgstr ""
-"The method ensures that shared definitions are applied in a systematic way "
-"and the semantics are passed to every implementation that re-uses the "
-"interoperability descriptions."
-
-#: translations/misc.html:188
-msgid "Invalid ID"
-msgstr ""
-
-#: app\components\form/errorMessages.html:7
-msgid "Invalid id error"
-msgstr ""
-
-#: app\components\form/errorMessages.html:6
-msgid "Invalid namespace error"
-msgstr ""
-
-#: app\components\form/errorMessages.html:5
-msgid "Invalid stem error"
-msgstr ""
-
-#: app\components\form/errorMessages.html:4
-msgid "Invalid url error"
-msgstr ""
-
-#: app\components\form/errorMessages.html:21
-msgid "Is not valid language code"
-msgstr ""
-
-#: app\components\form/errorMessages.html:22
-msgid "Is not valid reference data code"
-msgstr ""
-
-#: translations/help.html:145
-msgid "jhs"
-msgstr ""
-
-#: translations/misc.html:236
-msgid "Label"
-msgstr ""
-
-#: translations/help.html:134
-msgid "Label can be changed"
-msgstr ""
-
-#: translations/misc.html:196
-msgid "language code"
-msgstr ""
-
-#: translations/misc.html:146
-msgid "ld+json frame"
-msgstr "JSON-LD Frame"
-
-#: app\components\form/errorMessages.html:13
-msgid "Length error"
-msgstr ""
-
-#: app\components\form/errorMessages.html:17
-msgid "Less than min error"
-msgstr ""
-
-#: translations/misc.html:34
-msgid "library"
-msgstr "Core Vocabulary"
-
-#: translations/misc.html:124
-msgid "Library information"
-msgstr "Core Vocabulary information"
-
-#: translations/titles.html:15
-msgid "Library label"
-msgstr "Core Vocabulary label"
-
-#: translations/titles.html:15
-msgid "Library label info"
-msgstr "Name of the Core Vocabulary"
-
-#: translations/misc.html:209
-msgid "Links"
-msgstr ""
-
-#: translations/misc.html:238
-msgid "Local ID"
-msgstr ""
-
-#: translations/titles.html:81
-msgid "Localname"
-msgstr "Class localname"
-
-#: translations/titles.html:81
-msgid "Localname info"
-msgstr "Can be used in schemas or other local applications"
-
-#: app\components\navigation/navigationBar.html:33
-#: app\components\navigation/navigationBar.html:65
-msgid "LOG IN"
-msgstr ""
-
-#: app\components\navigation/navigationBar.html:38
-#: app\components\navigation/navigationBar.html:61
-msgid "LOG OUT"
-msgstr ""
-
-#: app\components\editor/editableConstraint.html:8
-msgid "Logical constraints"
-msgstr ""
-
-#: app\components/maintenance.html:2 translations/misc.html:177
-msgid "Maintenance"
-msgstr "Maintenance break"
-
-#: app\components/maintenance.html:5 translations/misc.html:178
-msgid "Maintenance content"
-msgstr ""
-"Application is unfortunately out of service because of maintenance break."
-
-#: translations/misc.html:277
-msgid "Match to content"
-msgstr ""
-
-#: translations/titles.html:64
-msgid "Max count"
-msgstr ""
-
-#: translations/titles.html:64
-msgid "Max count info"
-msgstr "Maximum cardinality of the property"
-
-#: translations/titles.html:66 translations/titles.html:67
-msgid "Max length"
-msgstr ""
-
-#: translations/titles.html:66 translations/titles.html:67
-msgid "Max length info"
-msgstr "Maximum length of the property value"
-
-#: translations/misc.html:288
-msgid "Maximize"
-msgstr ""
-
-#: translations/misc.html:152
-msgid "Member groups"
-msgstr ""
-
-#: translations/titles.html:63
-msgid "Min count"
-msgstr ""
-
-#: translations/titles.html:63
-msgid "Min count info"
-msgstr "Minimum count of the properties"
-
-#: translations/titles.html:65
-msgid "Min length"
-msgstr ""
-
-#: translations/titles.html:65
-msgid "Min length info"
-msgstr "Minimum length of the property value"
-
-#: translations/misc.html:289
-msgid "Minimize"
-msgstr ""
-
-#: app\components/frontPage.html:73 translations/misc.html:33
-msgid "model"
-msgstr "Core Vocabulary Library"
-
-#: translations/titles.html:72
-msgid "Model languages"
-msgstr ""
-
-#: translations/titles.html:72
-msgid "Model languages info"
-msgstr ""
-"Models can be localized in multiple languages. Used languages are listed "
-"here as ISO 639-2 language codes."
-
-#: translations/misc.html:265
-msgid "Model not found"
-msgstr ""
-
-#: app\components/frontPage.html:74
-msgid "models"
-msgstr ""
-
-#: translations/misc.html:151
-msgid "Modified at"
-msgstr ""
-
-#: translations/help.html:37
-msgid "Modify class"
-msgstr ""
-
-#: translations/help.html:40
-msgid "Modify class description"
-msgstr ""
-
-#: translations/help.html:35
-msgid "Modify library"
-msgstr "Modify Core Vocabulary"
-
-#: translations/help.html:38
-msgid "Modify library description"
-msgstr "You can modify Core Vocabulary from here"
-
-#: translations/help.html:36
-msgid "Modify profile"
-msgstr ""
-
-#: translations/help.html:39
-msgid "Modify profile description"
-msgstr "You can modify Application Profile from here"
-
-#: app\components\form/errorMessages.html:20
-msgid "Must be imported namespace"
-msgstr ""
-
-#: app\components\user/userPage.html:10
-msgid "Name"
-msgstr ""
+msgid "Congratulations for completing library creation! description"
+msgstr "You can now proceed on creating real Core Vocabularies"
 
-#: translations/titles.html:54
-msgid "Namespace"
-msgstr ""
-
-#: translations/titles.html:54
-msgid "Namespace info"
-msgstr "Namespaces are used to identify and resolve resources"
-
-#: translations/titles.html:28
-msgid "Namespace label"
-msgstr ""
-
-#: translations/titles.html:28
-msgid "Namespace label info"
-msgstr ""
-
-#: translations/titles.html:75
-msgid "Namespace redirection"
-msgstr ""
-
-#: translations/titles.html:75
-msgid "Namespace redirection info"
-msgstr ""
-
-#: app\components\form/errorMessages.html:15
-msgid "Negative error"
-msgstr ""
-
-#: translations/misc.html:28
-msgid "New library creation"
-msgstr "New Core Vocabulary"
-
-#: translations/misc.html:29
-msgid "New profile creation"
-msgstr ""
-
-#: translations/help.html:2
-msgid "next"
-msgstr ""
-
-#: translations/help.html:141
-msgid "Nimi"
-msgstr "Name"
-
-#: translations/misc.html:275
-msgid "No"
-msgstr ""
-
-#: app\components\editor/subjectView.html:18
-msgid "No concept defined"
-msgstr ""
-
-#: app\components\editor/classForm.html:94
-msgid "No properties yet"
-msgstr ""
-
-#: app\components\common/usage.html:1 app\components\common/usagePanel.html:15
-msgid "No referrers"
-msgstr ""
-
-#: app\components/advancedSearchModal.html:33
-#: app\components\model/searchVocabularyModal.html:38
-msgid "No search results"
-msgstr ""
-
-#: translations/misc.html:168
-msgid "Non specialized classes are not allowed"
-msgstr ""
-
-#: translations/misc.html:203
-msgid "None added"
-msgstr ""
+msgid "Congratulations for completing profile creation! description"
+msgstr "You can now proceed on creating real Application Profiles."
 
-#: app\components\editor/editableReferenceDataSelect.html:4
-msgid "Not defined"
+msgid "Congratulations for completing namespace require!"
 msgstr ""
 
-#: translations/misc.html:116
-msgid "Not found"
+msgid "Congratulations for completing specialize class!"
 msgstr ""
 
-#: translations/misc.html:3
-msgid "not found in the concept database"
+msgid "Congratulations for completing class assignation!"
 msgstr ""
 
-#: translations/misc.html:164
-msgid "Not imported by model"
+msgid "Congratulations for completing new class creation!"
 msgstr ""
 
-#: translations/misc.html:117
-msgid "Not removed"
+msgid "Congratulations for completing adding an attribute!"
 msgstr ""
 
-#: app\components\model/editableRootClass.html:4
-msgid "Not selected"
+msgid "Congratulations for completing adding an association!"
 msgstr ""
-
-#: translations/misc.html:90
-msgid "of association"
-msgstr "association"
-
-#: translations/misc.html:91
-msgid "of attribute"
-msgstr "attribute"
-
-#: translations/misc.html:88
-msgid "of class"
-msgstr "class"
-
-#: translations/misc.html:92
-msgid "of concept"
-msgstr "concept"
-
-#: translations/misc.html:93
-msgid "of conceptSuggestion"
-msgstr "concept suggestion"
-
-#: translations/misc.html:84
-msgid "of group"
-msgstr "group"
-
-#: translations/misc.html:86
-msgid "of library"
-msgstr "Core Vocabulary"
-
-#: translations/misc.html:85
-msgid "of model"
-msgstr "model"
-
-#: translations/misc.html:87
-msgid "of profile"
-msgstr "profile"
-
-#: translations/misc.html:89
-msgid "of shape"
-msgstr "shape"
 
-#: translations/help.html:31
 #, fuzzy
-#| msgid "Open library details description"
 msgid "Open library details"
 msgstr ""
 "Information about Core Vocabulary can be found from here. This panel "
@@ -1758,7 +671,6 @@ msgstr ""
 "data and generic documentation about the model. You can also export the data "
 "model in different formats from this panel."
 
-#: translations/help.html:32
 msgid "Open library details description"
 msgstr ""
 "Information about Core Vocabulary can be found from here. This panel "
@@ -1766,11 +678,9 @@ msgstr ""
 "data and generic documentation about the model. You can also export the data "
 "model in different formats from this panel."
 
-#: translations/help.html:33
 msgid "Open profile details"
 msgstr ""
 
-#: translations/help.html:34
 msgid "Open profile details description"
 msgstr ""
 "Information about Application Profile can be found from here. This panel "
@@ -1778,1051 +688,605 @@ msgstr ""
 "data, history of the data model. You can also export the data model in "
 "different formats from this panel."
 
-#: app\components\editor/propertyView.html:62
-msgid "Optional metadata"
+msgid "Modify library"
+msgstr "Modify Core Vocabulary"
+
+msgid "Modify profile"
 msgstr ""
 
-#: app\components\user/userPage.html:20
-msgid "Organizations and roles"
+msgid "Modify class"
 msgstr ""
 
-#: translations/type.html:4
-msgid "owl:DatatypeProperty"
-msgstr "Attribute"
+msgid "Modify library description"
+msgstr "You can modify Core Vocabulary from here"
 
-#: translations/type.html:5
-msgid "owl:ObjectProperty"
-msgstr "Association"
+msgid "Modify profile description"
+msgstr "You can modify Application Profile from here"
 
-#: translations/misc.html:267
-msgid "Page not found"
+msgid "Modify class description"
 msgstr ""
 
-#: translations/help.html:136
-msgid "Palvelu"
-msgstr "Service"
-
-#: translations/help.html:138
-msgid "Palveluprofiili"
-msgstr "Serviceprofile"
-
-#: translations/titles.html:62
-msgid "Pattern"
-msgstr "Regular expression"
-
-#: translations/titles.html:62
-msgid "Pattern info"
-msgstr "Regular expression that can be used to validate the property values"
-
-#: translations/misc.html:272
-msgid "Please login to perform the action"
+msgid "Add reference to namespace"
 msgstr ""
 
-#: translations/misc.html:255
-msgid "Predicate in use"
+msgid "Add reference to namespace description"
+msgstr ""
+"Imported namespaces can be used to link Classes and Properties to other "
+"standards"
+
+msgid "Add profile description"
+msgstr "Add new Application Profile from here"
+
+msgid "Add library description"
+msgstr "Add new Core Vocabulary from here"
+
+msgid "Add class description"
+msgstr "Add new class from here"
+
+msgid "Search for jhs"
 msgstr ""
 
-#: app\components\editor/propertyPredicateView.html:35
-msgid "Predicate information not found"
+msgid "Search for palvelu"
+msgstr "Search for service"
+
+msgid "Search for tuote class"
+msgstr "Search for Product class"
+
+msgid "Search for tuote concept"
+msgstr "Search for Product in the terminology"
+
+msgid "Search for nimi"
+msgstr "Search for name"
+
+msgid "Search for tuotetaan"
+msgstr "Search for produces"
+
+msgid "Search for tuotetaan concept"
+msgstr "Search for produces term"
+
+msgid "Search for henkilö"
 msgstr ""
 
-#: translations/titles.html:43
-msgid "Predicate type"
+msgid "Search for henkilö info"
 msgstr ""
 
-#: translations/misc.html:256
-msgid ""
-"Predicate type cannot be changed because it is already used by following "
-"resources"
+msgid "Search for yhteystiedot"
 msgstr ""
 
-#: translations/titles.html:43
-msgid "Predicate type info"
-msgstr "Predicate type can be Datatype or Object property"
-
-#: translations/titles.html:55
-msgid "Prefix"
+msgid "Search for yhteystiedot info"
 msgstr ""
 
-#: app\components\form/errorMessages.html:14
-msgid "Prefix error"
+msgid "Search for osoite"
 msgstr ""
 
-#: translations/titles.html:55
-msgid "Prefix info"
-msgstr "Prefixes are used to form namespaces and human readable CURIE:s"
-
-#: translations/help.html:3
-msgid "previous"
+msgid "Search for osoite info"
 msgstr ""
 
-#: translations/misc.html:36
-msgid "profile"
-msgstr "Application profile"
-
-#: translations/misc.html:125
-msgid "Profile information"
+msgid "Search for vene class"
 msgstr ""
 
-#: translations/titles.html:16
-msgid "Profile label"
+msgid "Search for vene class info"
 msgstr ""
 
-#: translations/titles.html:16
-msgid "Profile label info"
-msgstr "Name of the application profile"
-
-#: translations/misc.html:40
-msgid "property"
+msgid "Search for vene concept"
 msgstr ""
 
-#: translations/titles.html:9
-msgid "Property id"
+msgid "Search for vene concept info"
 msgstr ""
 
-#: translations/titles.html:9
-msgid "Property id info"
-msgstr "URI that identifies the property"
-
-#: app\components\editor/propertyView.html:17 translations/misc.html:130
-msgid "Property information"
+msgid "Search for liikenneväline"
 msgstr ""
 
-#: translations/help.html:132
+msgid "Search for liikenneväline info"
+msgstr ""
+
+msgid "Select jhs"
+msgstr ""
+
+msgid "Select palvelu"
+msgstr "Select Public Service"
+
+msgid "Select nimi"
+msgstr "Select name"
+
+msgid "Select tuote"
+msgstr "Select Product"
+
+msgid "Select henkilö"
+msgstr ""
+
+msgid "Select henkilö info"
+msgstr ""
+
+msgid "Select yhteystiedot"
+msgstr ""
+
+msgid "Select yhteystiedot info"
+msgstr ""
+
+msgid "Select osoite"
+msgstr ""
+
+msgid "Select osoite info"
+msgstr ""
+
+msgid "Select liikenneväline"
+msgstr ""
+
+msgid "Select liikenneväline info"
+msgstr ""
+
+msgid "Select name and description"
+msgstr ""
+
+msgid "Select registration number and vehicle code"
+msgstr ""
+
+msgid "Select registration number and vehicle code info"
+msgstr ""
+
+msgid "Select new creation"
+msgstr "Select Create new class"
+
+msgid "next"
+msgstr ""
+
+msgid "Select new association creation"
+msgstr ""
+
+msgid "Select concept suggest creation"
+msgstr "Create new concept suggestion"
+
+msgid "Select association target"
+msgstr ""
+
+msgid "Select super class"
+msgstr ""
+
+msgid "Search for jhs info"
+msgstr ""
+"In this tutorial we are going to use Finnish Public Sector Core Vocabulary "
+
+msgid "Search for palvelu info"
+msgstr "Lets search for a class about a service"
+
+msgid "Search for tuote class info"
+msgstr "Lets add a class about a Product in our model"
+
+msgid "Search for tuote concept info"
+msgstr ""
+"When creating a new class you need to search for the concept from the "
+"existing terminologies"
+
+msgid "Search for nimi info"
+msgstr "Lets add name Property to the Class"
+
+msgid "Search for tuotetaan info"
+msgstr "Lets add new association to Product class"
+
+msgid "Search for tuotetaan concept info"
+msgstr "Search for the Product term in the existing terminologies"
+
+msgid "Search for tuotetaan predicate"
+msgstr "Search for is produced by association"
+
+msgid "Search for tuotetaan predicate info"
+msgstr "Lets search for existing predicates to create a new association"
+
+msgid "Search for omistaja"
+msgstr ""
+
+msgid "Search for omistaja info"
+msgstr ""
+
+msgid "Search for omistaja predicate"
+msgstr ""
+
+msgid "Search for omistaja predicate info"
+msgstr ""
+
+msgid "Search for matkustajien lukumäärä"
+msgstr ""
+
+msgid "Search for matkustajien lukumäärä info"
+msgstr ""
+
+msgid "Search for matkustajien lukumäärä concept"
+msgstr ""
+
+msgid "Search for matkustajien lukumäärä concept info"
+msgstr ""
+
+msgid "Select omistaja"
+msgstr ""
+
+msgid "Select omistaja info"
+msgstr ""
+
+msgid "Select jhs info"
+msgstr "Select Namespace from the list"
+
+msgid "Select palvelu info"
+msgstr "Select search results from the list"
+
+msgid "Select nimi info"
+msgstr "Name was found from the model and can be selected from the list"
+
+msgid "Select tuote info"
+msgstr "Lets add new Product class"
+
+msgid "Select name and description info"
+msgstr ""
+"Here you can select which attributes or associations you want to use in our "
+"application profile"
+
+msgid "Select new creation info"
+msgstr "If some Class is not found, it can be created from here"
+
+msgid "Select new attribute creation info"
+msgstr ""
+
+msgid "Select new association creation info"
+msgstr "New association can be created from here"
+
+msgid "Select concept suggest creation info"
+msgstr ""
+"If some concept is not defined in the used terminologies, you can create new "
+"concept suggestion that is sent to the terminology managers"
+
+msgid "Select association target info"
+msgstr "You can create new association from here"
+
+msgid "Help is open"
+msgstr ""
+
+msgid "Are you sure that you want to close help?"
+msgstr ""
+
+msgid "Confirm selection"
+msgstr ""
+
+msgid "Imported namespaces are here"
+msgstr ""
+
+msgid "Class is here"
+msgstr ""
+
+msgid "Class is here info"
+msgstr "Information about the selected Class is seen in here"
+
+msgid "Attribute is here"
+msgstr ""
+
+msgid "Attribute is here info"
+msgstr ""
+"Attribute information consists of permanent URI identifier, name, "
+"description and xsd:datatype range"
+
+msgid "Association is here"
+msgstr ""
+
+msgid "Association is here info"
+msgstr ""
+"New association consists for permanent URI identifer, name, description and "
+"range definitions."
+
+msgid "Association target is here"
+msgstr "Target of the association is the class that is being referred to"
+
+msgid "Super class is here"
+msgstr ""
+
+msgid "Concept is here"
+msgstr ""
+
+msgid "Concept is here info"
+msgstr ""
+
 msgid "Property is here"
 msgstr "Use of Property is defined here"
 
-#: translations/help.html:133
 msgid "Property is here info"
 msgstr ""
 "Information about the property usage consists of Class specific name of the "
 "property, Description of the property usage and specific information of "
 "property is used in the context of the Class."
 
-#: translations/titles.html:22
-msgid "Property label"
+msgid "Label can be changed"
 msgstr ""
 
-#: translations/titles.html:22
-msgid "Property label info"
-msgstr "Name of the property"
-
-#: translations/titles.html:39
-msgid "Range"
-msgstr ""
-
-#: translations/titles.html:39
-msgid "Range info"
-msgstr "Value range of the property"
-
-#: translations/attribute.html:8
-msgid "rdf:langString"
-msgstr "Localized text"
-
-#: translations/attribute.html:9
-msgid "rdf:langString error"
-msgstr ""
-
-#: translations/attribute.html:6
-msgid "rdfs:Literal"
-msgstr "Literal"
-
-#: translations/attribute.html:7
-msgid "rdfs:Literal error"
-msgstr ""
-
-#: translations/titles.html:82
-msgid "Read-only"
-msgstr "Read-only"
-
-#: translations/titles.html:82
-msgid "Read-only info"
-msgstr "Defines attribute that cannot be changed after the initialization"
-
-#: translations/misc.html:22
-msgid "Recommendation"
-msgstr ""
-
-#: translations/misc.html:212
-msgid "Reference data"
-msgstr ""
-
-#: translations/misc.html:131
-msgid "Reference data information"
-msgstr ""
-
-#: translations/titles.html:29
-msgid "Reference data label"
-msgstr ""
-
-#: translations/titles.html:29
-msgid "Reference data label info"
-msgstr ""
-
-#: translations/misc.html:220
-msgid "Reference data name"
-msgstr ""
-
-#: translations/misc.html:221
-#, fuzzy
-#| msgid "search reference data"
-msgid "Reference data status"
-msgstr "Search reference data…"
-
-#: translations/titles.html:13
-msgid "Reference data URI"
-msgstr ""
-
-#: translations/titles.html:13
-msgid "Reference data URI info"
-msgstr ""
-
-#: app\components\form/editableEntityButtons.html:30 translations/misc.html:198
-msgid "Remove"
-msgstr ""
-
-#: translations/misc.html:193
-msgid "Required"
-msgstr ""
-
-#: app\components\form/errorMessages.html:9
-msgid "Required error"
-msgstr ""
-
-#: app\components\form/errorMessages.html:10
-msgid "Required localized error"
-msgstr ""
-
-#: translations/misc.html:114
-msgid "Resource dependencies restricts removing"
-msgstr ""
-
-#: translations/titles.html:57
-msgid "Resource identifier"
-msgstr "Resource identifier"
-
-#: translations/titles.html:57
-msgid "Resource identifier info"
-msgstr "Use attribute value as primary resource identifier"
-
-#: translations/misc.html:119
-msgid "Resource is in use"
-msgstr ""
-
-#: translations/misc.html:268
-msgid "Resource not found"
-msgstr ""
-
-#: translations/misc.html:118
-msgid "Resource status restricts removing"
-msgstr ""
-
-#: app\components\editor/propertyView.html:174
-msgid "Reusable predicate"
-msgstr ""
-
-#: app\components\editor/propertyPredicateView.html:7
-msgid "Reusable predicate information"
-msgstr ""
-
-#: translations/titles.html:78
-msgid "Root class"
-msgstr ""
-
-#: translations/titles.html:78
-msgid "Root class info"
-msgstr "Class or Shape that can be used to define root for the model"
-
-#: app\components\form/editableEntityButtons.html:15
-#: app\components\model/newModelPage.html:27
-msgid "Save"
-msgstr ""
-
-#: translations/misc.html:55
-msgid "Save visualization position"
-msgstr ""
-
-#: app\components/frontPage.html:14
-msgid "Search"
-msgstr ""
-
-#: translations/misc.html:106
-msgid "search association"
-msgstr "Search association…"
-
-#: translations/misc.html:103
-msgid "search attribute"
-msgstr "Search attribute…"
-
-#: translations/misc.html:94
-msgid "search attribute or association"
-msgstr "Search attribute or association…"
-
-#: translations/misc.html:95
-msgid "search class"
-msgstr "Search class…"
-
-#: translations/misc.html:227
-msgid "Search concept"
-msgstr ""
-
-#: translations/misc.html:96
-msgid "search descriptions"
-msgstr ""
-
-#: translations/help.html:53
-msgid "Search for henkilö"
-msgstr ""
-
-#: translations/help.html:54
-msgid "Search for henkilö info"
-msgstr ""
-
-#: translations/help.html:46
-msgid "Search for jhs"
-msgstr ""
-
-#: translations/help.html:87
-msgid "Search for jhs info"
-msgstr ""
-"In this tutorial we are going to use Finnish Public Sector Core Vocabulary "
-
-#: translations/help.html:63
-msgid "Search for liikenneväline"
-msgstr ""
-
-#: translations/help.html:64
-msgid "Search for liikenneväline info"
-msgstr ""
-
-#: translations/help.html:100
-msgid "Search for matkustajien lukumäärä"
-msgstr ""
-
-#: translations/help.html:102
-msgid "Search for matkustajien lukumäärä concept"
-msgstr ""
-
-#: translations/help.html:103
-msgid "Search for matkustajien lukumäärä concept info"
-msgstr ""
-
-#: translations/help.html:101
-msgid "Search for matkustajien lukumäärä info"
-msgstr ""
-
-#: translations/help.html:50
-msgid "Search for nimi"
-msgstr "Search for name"
-
-#: translations/help.html:91
-msgid "Search for nimi info"
-msgstr "Lets add name Property to the Class"
-
-#: translations/help.html:96
-msgid "Search for omistaja"
-msgstr ""
-
-#: translations/help.html:97
-msgid "Search for omistaja info"
-msgstr ""
-
-#: translations/help.html:98
-msgid "Search for omistaja predicate"
-msgstr ""
-
-#: translations/help.html:99
-msgid "Search for omistaja predicate info"
-msgstr ""
-
-#: translations/help.html:57
-msgid "Search for osoite"
-msgstr ""
-
-#: translations/help.html:58
-msgid "Search for osoite info"
-msgstr ""
-
-#: translations/help.html:47
-msgid "Search for palvelu"
-msgstr "Search for service"
-
-#: translations/help.html:88
-msgid "Search for palvelu info"
-msgstr "Lets search for a class about a service"
-
-#: translations/help.html:48
-msgid "Search for tuote class"
-msgstr "Search for Product class"
-
-#: translations/help.html:89
-msgid "Search for tuote class info"
-msgstr "Lets add a class about a Product in our model"
-
-#: translations/help.html:49
-msgid "Search for tuote concept"
-msgstr "Search for Product in the terminology"
-
-#: translations/help.html:90
-msgid "Search for tuote concept info"
-msgstr ""
-"When creating a new class you need to search for the concept from the "
-"existing terminologies"
-
-#: translations/help.html:51
-msgid "Search for tuotetaan"
-msgstr "Search for produces"
-
-#: translations/help.html:52
-msgid "Search for tuotetaan concept"
-msgstr "Search for produces term"
-
-#: translations/help.html:93
-msgid "Search for tuotetaan concept info"
-msgstr "Search for the Product term in the existing terminologies"
-
-#: translations/help.html:92
-msgid "Search for tuotetaan info"
-msgstr "Lets add new association to Product class"
-
-#: translations/help.html:94
-msgid "Search for tuotetaan predicate"
-msgstr "Search for is produced by association"
-
-#: translations/help.html:95
-msgid "Search for tuotetaan predicate info"
-msgstr "Lets search for existing predicates to create a new association"
-
-#: translations/help.html:59
-msgid "Search for vene class"
-msgstr ""
-
-#: translations/help.html:60
-msgid "Search for vene class info"
-msgstr ""
-
-#: translations/help.html:61
-msgid "Search for vene concept"
-msgstr ""
-
-#: translations/help.html:62
-msgid "Search for vene concept info"
-msgstr ""
-
-#: translations/help.html:55
-msgid "Search for yhteystiedot"
-msgstr ""
-
-#: translations/help.html:56
-msgid "Search for yhteystiedot info"
-msgstr ""
-
-#: translations/misc.html:97
-msgid "Search from concept database"
-msgstr ""
-
-#: translations/misc.html:98
-msgid "search namespace"
-msgstr "Search namespace…"
-
-#: app\components\model/searchNamespaceModal.html:5
-msgid "Search namespaces"
-msgstr ""
-
-#: translations/misc.html:100 translations/misc.html:219
-msgid "search reference data"
-msgstr "Search reference data…"
-
-#: app\components\model/searchReferenceDataModal.html:6
-#: translations/misc.html:218
-msgid "Search reference data"
-msgstr ""
-
-#: app\components\model/searchVocabularyModal.html:5
-msgid "Search vocabularies"
-msgstr ""
-
-#: translations/misc.html:99
-msgid "search vocabulary"
-msgstr "Search vocabulary…"
-
-#: app\components\editor/addPropertiesFromClassModal.html:27
-msgid "Select all"
-msgstr ""
-
-#: translations/misc.html:105
-msgid "Select association"
-msgstr ""
-
-#: translations/help.html:84
-msgid "Select association target"
-msgstr ""
-
-#: translations/help.html:116
-msgid "Select association target info"
-msgstr "You can create new association from here"
-
-#: translations/misc.html:102
-msgid "Select attribute"
-msgstr ""
-
-#: app\components\editor/searchPredicateModal.html:7
-msgid "Select attribute or association"
-msgstr ""
-
-#: app\components\editor/searchClassModal.html:6
-msgid "Select class"
+msgid "Classes can be seen visually here"
 msgstr ""
 
-#: app\components\model/searchClassificationModal.html:4
-msgid "Select classification"
-msgstr ""
-
-#: translations/help.html:83
-msgid "Select concept suggest creation"
-msgstr "Create new concept suggestion"
-
-#: translations/help.html:115
-msgid "Select concept suggest creation info"
-msgstr ""
-"If some concept is not defined in the used terminologies, you can create new "
-"concept suggestion that is sent to the terminology managers"
-
-#: translations/help.html:7
-msgid "Select group"
-msgstr ""
-
-#: translations/help.html:20
-msgid "Select help topic"
-msgstr ""
-
-#: translations/help.html:69
-msgid "Select henkilö"
-msgstr ""
-
-#: translations/help.html:70
-msgid "Select henkilö info"
-msgstr ""
-
-#: translations/help.html:65
-msgid "Select jhs"
-msgstr ""
-
-#: translations/help.html:106
-msgid "Select jhs info"
-msgstr "Select Namespace from the list"
-
-#: translations/help.html:75
-msgid "Select liikenneväline"
-msgstr ""
-
-#: translations/help.html:76
-msgid "Select liikenneväline info"
-msgstr ""
-
-#: translations/help.html:77
-msgid "Select name and description"
-msgstr ""
-
-#: translations/help.html:111
-msgid "Select name and description info"
-msgstr ""
-"Here you can select which attributes or associations you want to use in our "
-"application profile"
-
-#: translations/help.html:82
-msgid "Select new association creation"
-msgstr ""
-
-#: translations/help.html:114
-msgid "Select new association creation info"
-msgstr "New association can be created from here"
-
-#: translations/help.html:81
-msgid "Select new attribute creation"
-msgstr ""
-
-#: translations/help.html:113
-msgid "Select new attribute creation info"
-msgstr ""
-
-#: translations/help.html:80
-msgid "Select new creation"
-msgstr "Select Create new class"
-
-#: translations/help.html:112
-msgid "Select new creation info"
-msgstr "If some Class is not found, it can be created from here"
-
-#: translations/help.html:67
-msgid "Select nimi"
-msgstr "Select name"
-
-#: translations/help.html:108
-msgid "Select nimi info"
-msgstr "Name was found from the model and can be selected from the list"
-
-#: translations/help.html:104
-msgid "Select omistaja"
-msgstr ""
-
-#: translations/help.html:105
-msgid "Select omistaja info"
-msgstr ""
-
-#: app\components\model/searchOrganizationModal.html:4
-msgid "Select organization"
-msgstr ""
-
-#: translations/help.html:73
-msgid "Select osoite"
-msgstr ""
-
-#: translations/help.html:74
-msgid "Select osoite info"
-msgstr ""
-
-#: translations/help.html:66
-msgid "Select palvelu"
-msgstr "Select Public Service"
-
-#: translations/help.html:107
-msgid "Select palvelu info"
-msgstr "Select search results from the list"
-
-#: translations/help.html:78
-msgid "Select registration number and vehicle code"
-msgstr ""
-
-#: translations/help.html:79
-msgid "Select registration number and vehicle code info"
-msgstr ""
-
-#: translations/help.html:85
-msgid "Select super class"
-msgstr ""
-
-#: translations/help.html:149
-msgid "Select the vocabulary that is missing the required concept"
-msgstr ""
-
-#: translations/help.html:68
-msgid "Select tuote"
-msgstr "Select Product"
-
-#: translations/help.html:109 translations/help.html:110
-msgid "Select tuote info"
-msgstr "Lets add new Product class"
-
-#: translations/help.html:71
-msgid "Select yhteystiedot"
-msgstr ""
-
-#: translations/help.html:72
-msgid "Select yhteystiedot info"
-msgstr ""
-
-#: translations/misc.html:187
-msgid "Self reference not allowed"
-msgstr ""
-
-#: app\components\user/userPage.html:48
-msgid "Send"
-msgstr ""
-
-#: app\components\user/userPage.html:37
-msgid "Send access request"
-msgstr ""
-
-#: translations/misc.html:264
-msgid "Session expired"
-msgstr ""
-
-#: translations/misc.html:35
-msgid "shape"
-msgstr "Shape"
-
-#: translations/titles.html:6
-msgid "Shape id"
-msgstr ""
-
-#: translations/titles.html:6
-msgid "Shape id info"
-msgstr "URI that idenfities the shape"
-
-#: translations/misc.html:127
-msgid "Shape information"
-msgstr ""
-
-#: translations/titles.html:19
-msgid "Shape label"
-msgstr ""
-
-#: translations/titles.html:19
-msgid "Shape label info"
-msgstr "Name of the shape"
-
-#: translations/misc.html:135
-msgid "Shape properties"
-msgstr ""
-
-#: translations/misc.html:166
-msgid "Shapes are not allowed"
-msgstr ""
-
-#: app\components\common/export.html:8 translations/misc.html:25
-msgid "Show"
-msgstr ""
-
-#: translations/misc.html:276
-msgid "Show classes defined in profiles"
-msgstr ""
-
-#: translations/misc.html:136
-msgid "Show excluded"
-msgstr ""
-
-#: translations/misc.html:172
-msgid "Show history"
-msgstr ""
-
-#: app\components\model/modelView.html:10
-msgid "Show model details"
-msgstr ""
-
-#: app\components\model/searchNamespaceModal.html:30
-msgid "Show technical namespaces"
-msgstr ""
-
-#: translations/misc.html:170
-msgid "Specialize class"
-msgstr ""
-
-#: translations/misc.html:246
-msgid "Specialize class to profile"
-msgstr ""
-
-#: translations/titles.html:40
-msgid "Specialized from class"
-msgstr ""
-
-#: translations/titles.html:40
-msgid "Specialized from class info"
-msgstr "Reference to the Class of the Shape"
-
-#: app\components\navigation/navigationBar.html:16 translations/help.html:1
-msgid "Start help"
-msgstr ""
-
-#: translations/titles.html:31
-msgid "State"
-msgstr "Status"
-
-#: translations/titles.html:31
-msgid "State info"
-msgstr "Information about the stability and usability of the resource "
-
-#: app\components\model/referenceDataView.html:22 translations/misc.html:281
-msgid "Status"
-msgstr ""
-
-#: app\components\form/errorMessages.html:12
-msgid "String error"
-msgstr ""
-
-#: translations/misc.html:179
-msgid "Subject"
-msgstr ""
-
-#: translations/misc.html:254
-msgid "Submit error"
-msgstr ""
-
-#: translations/misc.html:16
-msgid "suggest"
-msgstr ""
-
-#: translations/help.html:150
-msgid "Suggest definition or description for the concept"
-msgstr ""
-
-#: translations/misc.html:17
-msgid "suggestion"
-msgstr ""
-
-#: translations/misc.html:24
-msgid "Suggestion"
-msgstr ""
-
-#: app\components\navigation/navigationBar.html:76
-msgid "Suomi.fi Controlled Vocabularies"
-msgstr ""
-
-#: app\components\navigation/navigationBar.html:79
-msgid "Suomi.fi Reference Data"
-msgstr ""
-
-#: translations/help.html:155
-msgid "Super class can be changed from the list or by typing the identifier"
-msgstr ""
-
-#: translations/help.html:129
-msgid "Super class is here"
-msgstr ""
-
-#: translations/help.html:154
-msgid "Super class must be selected from list of existing classes"
-msgstr ""
-
-#: translations/titles.html:36
-msgid "Superassociation"
-msgstr ""
-
-#: translations/titles.html:36
-msgid "Superassociation info"
-msgstr "is subproperty of"
-
-#: translations/titles.html:37
-msgid "Superattribute"
-msgstr ""
-
-#: translations/titles.html:37
-msgid "Superattribute info"
-msgstr ""
-
-#: translations/titles.html:35
-msgid "Superclass"
-msgstr ""
-
-#: translations/titles.html:35
-msgid "Superclass info"
-msgstr "is subclass of"
-
-#: translations/titles.html:38
-msgid "Superproperty"
-msgstr ""
-
-#: translations/titles.html:38
-msgid "Superproperty info"
-msgstr ""
-
-#: translations/help.html:144
-msgid "tapahtumaketju joka toteuttaa jotain"
-msgstr "event that produces something"
-
-#: app\components\editor/propertyView.html:135
-msgid "Technical metadata"
-msgstr "Technical metadata"
-
-#: translations/misc.html:202
-msgid "Technical namespaces"
-msgstr ""
-
-#: translations/misc.html:286
-msgid "TERMINOLOGY_EDITOR"
-msgstr ""
+msgid "Palvelu"
+msgstr "Service"
 
-#: translations/help.html:137
 msgid "Testikirjasto"
 msgstr "Test model"
 
-#: translations/misc.html:140
-msgid "text/turtle"
-msgstr "Turtle"
+msgid "Palveluprofiili"
+msgstr "Serviceprofile"
 
-#: translations/help.html:163
-msgid "This tutorial shows how to add association to a Class"
-msgstr ""
-
-#: translations/help.html:160
-msgid "This tutorial shows how to add Class from existing library"
-msgstr ""
-
-#: translations/help.html:161
-msgid "This tutorial shows how to add new attribute"
-msgstr ""
-
-#: translations/help.html:162
-msgid "This tutorial shows how to create a new Class"
-msgstr ""
-
-#: translations/help.html:159
-msgid "This tutorial shows how to create a new shape from a class"
-msgstr ""
-
-#: translations/help.html:158
-msgid "This tutorial shows how to import new namespace to the model"
-msgstr ""
-
-#: app\components\model/referenceDataView.html:21 translations/titles.html:73
-msgid "Title"
-msgstr ""
-
-#: translations/titles.html:73
-msgid "Title info"
-msgstr "Name of the vocabulary"
-
-#: translations/misc.html:180
-msgid "to vocabulary"
-msgstr ""
-
-#: app\components/frontPage.html:5
-msgid "ToolInfo"
-msgstr ""
-"The Data Vocabularies Tool is a service for managing and publishing data "
-"vocabularies. It contains data component libraries, i.e. data specifications "
-"for harmonizing information used by jointly different actors. In addition, "
-"the Data Vocabularies Tool is used, when necessary, for managing API’s or "
-"the contents of various data resources."
-
-#: translations/help.html:139
 msgid "Tuote"
 msgstr "Product"
 
-#: translations/help.html:142
+msgid "Asia joka tuotetaan"
+msgstr "Thing that is being produced"
+
+msgid "Nimi"
+msgstr "Name"
+
 msgid "Tuotetaan"
 msgstr "Is produced"
 
-#: translations/help.html:143
 msgid "Tuotetaan palvelussa"
 msgstr "Is produced in service"
 
-#: translations/misc.html:112
-msgid "Unauthorized"
+msgid "tapahtumaketju joka toteuttaa jotain"
+msgstr "event that produces something"
+
+msgid "jhs"
 msgstr ""
 
-#: translations/misc.html:241
-msgid "Undefined"
+msgid "Classes can be modified"
 msgstr ""
 
-#: translations/misc.html:115
-msgid "Unexpected error"
+msgid "Changes need to be saved"
 msgstr ""
 
-#: translations/misc.html:279
-msgid "Unique label"
+msgid "Imported namespaces can be used to link resources to existing standards"
 msgstr ""
 
-#: app\components\form/errorMessages.html:18
-msgid "Unknown namespace"
+msgid "Select the vocabulary that is missing the required concept"
 msgstr ""
 
-#: app\components\user/userPage.html:24
-msgid "Unknown organization"
+msgid "Suggest definition or description for the concept"
 msgstr ""
 
-#: translations/misc.html:20
-msgid "Unstable"
+msgid "Create new info"
+msgstr ""
+"This is all that is required for creating a new model. Prefix will be used "
+"to create namespace in the workbech domain. Alternatively you could use the "
+"Namespace redirection to use other domain as the namespace. "
+
+msgid "Association target must be selected from list of existing classes"
 msgstr ""
 
-#: translations/misc.html:234
-msgid "URI stem"
+msgid ""
+"Association target can be changed from the list or by typing the identifier"
 msgstr ""
 
-#: app\components\common/usagePanel.html:7
-msgid "Usage"
+msgid "Super class must be selected from list of existing classes"
 msgstr ""
 
-#: translations/misc.html:19
+msgid "Super class can be changed from the list or by typing the identifier"
+msgstr ""
+
+msgid "You can add new attribute or association to the Class from here"
+msgstr ""
+
+msgid "This tutorial shows how to import new namespace to the model"
+msgstr ""
+
+msgid "This tutorial shows how to create a new shape from a class"
+msgstr ""
+
+msgid "This tutorial shows how to add Class from existing library"
+msgstr ""
+
+msgid "This tutorial shows how to add new attribute"
+msgstr ""
+
+msgid "This tutorial shows how to create a new Class"
+msgstr ""
+
+msgid "This tutorial shows how to add association to a Class"
+msgstr ""
+
+msgid "Created at"
+msgstr ""
+
+msgid "not found in the concept database"
+msgstr ""
+
+msgid "Define concept for the new class"
+msgstr ""
+
+msgid "Define concept for the shape"
+msgstr ""
+
+msgid "Define concept for the new shape"
+msgstr ""
+
+msgid "Define concept for the attribute"
+msgstr ""
+
+msgid "Define concept for the new attribute"
+msgstr ""
+
+msgid "Define concept for the association"
+msgstr ""
+
+msgid "Define concept for the new association"
+msgstr ""
+
+msgid "Create new class without referencing concept"
+msgstr ""
+
+msgid "Create new shape without referencing concept"
+msgstr ""
+
+msgid "Create new association without referencing concept"
+msgstr ""
+
+msgid "Create new attribute without referencing concept"
+msgstr ""
+
+msgid "suggest"
+msgstr ""
+
+msgid "suggestion"
+msgstr ""
+
+msgid "and create new"
+msgstr ""
+
 msgid "Use"
 msgstr ""
 
-#: translations/misc.html:109
-msgid "Use association"
+msgid "Unstable"
 msgstr ""
 
-#: translations/misc.html:108
-msgid "Use attribute"
+msgid "Draft"
 msgstr ""
 
-#: translations/misc.html:169
-msgid "Use class"
+msgid "Recommendation"
 msgstr ""
 
-#: translations/misc.html:296
-#, fuzzy
-#| msgid "How content"
-msgid "Use context"
-msgstr ""
-"Interoperability descriptions published in the Workbench may be accessed and "
-"browsed freely. In future, the content of these core vocabularies and "
-"application profiles will be jointly produced by experts associated to each "
-"subject area."
-
-#: app\components\model/searchReferenceDataModal.html:124
-#: translations/misc.html:107
-msgid "Use selection"
+msgid "Deprecated"
 msgstr ""
 
-#: app\components\navigation/navigationBar.html:68
-#: app\components\user/userPage.html:6
-msgid "User details"
+msgid "Suggestion"
 msgstr ""
 
-#: translations/misc.html:148
-msgid "User login"
+msgid "Hide"
 msgstr ""
 
-#: translations/misc.html:149
-msgid "User name"
+msgid "Front page"
 msgstr ""
 
-#: app\components\navigation/navigationBar.html:82
-msgid "User right management"
+msgid "New library creation"
+msgstr "New Core Vocabulary"
+
+msgid "New profile creation"
 msgstr ""
 
-#: translations/titles.html:42
-msgid "Value class"
+msgid "Delete library"
+msgstr "Delete Core Vocabulary"
+
+msgid "Delete profile"
 msgstr ""
 
-#: translations/titles.html:42
-msgid "Value class info"
-msgstr "Class or Shape that is the range of the object property"
+msgid "group"
+msgstr "Group"
 
-#: translations/misc.html:204
-msgid "Vocabularies"
-msgstr "Terminologies"
+msgid "library"
+msgstr "Core Vocabulary"
 
-#: translations/titles.html:53
-msgid "Vocabulary"
-msgstr "Terminology"
+msgid "shape"
+msgstr "Shape"
 
-#: translations/titles.html:12
-msgid "Vocabulary id"
-msgstr "Terminology id"
+msgid "profile"
+msgstr "Application profile"
 
-#: translations/titles.html:12
-msgid "Vocabulary id info"
-msgstr "Identifier of the terminology"
+msgid "class"
+msgstr "Class"
 
-#: translations/titles.html:53
-msgid "Vocabulary info"
-msgstr "Terminology info"
+msgid "attribute"
+msgstr "Attribute"
 
-#: translations/misc.html:208
-msgid "Vocabulary name"
-msgstr "Terminology name"
+msgid "association"
+msgstr "Association"
 
-#: app\components\user/userPage.html:28
-msgid "Waiting for approval"
+msgid "property"
 msgstr ""
 
-#: translations/misc.html:81
-msgid "What can I do content"
+msgid "fi"
+msgstr "Finnish"
+
+msgid "en"
+msgstr "English"
+
+msgid "data language"
+msgstr "Data in language"
+
+msgid "data fi"
+msgstr "Data in finnish"
+
+msgid "data en"
+msgstr "Data in english"
+
+msgid "data sv"
+msgstr "Data in swedish"
+
+msgid "data ru"
+msgstr "Data in russian"
+
+msgid "Edit in progress"
 msgstr ""
-"Interoperability Workbench is a set of tools designed to be used in "
-"developing, documenting and publishing interoperability descriptions such as "
-"re-usable information components and application profiles. It offers a one-"
-"stop service for openly published data descriptions and vocabularies. These "
-"semantically coherent data models help planning information management in "
-"information exchange operations (integration, interface, service bus) or "
-"database and software development. "
 
-#: translations/misc.html:80
-msgid "What can I do?"
-msgstr "What can the interoperability workbench do?"
+msgid ""
+"Are you sure that you want to continue? By continuing unsaved changes will "
+"be lost."
+msgstr ""
 
-#: translations/misc.html:77
+msgid "Dialog is open"
+msgstr ""
+
+msgid "Are you sure that you want to close dialog?"
+msgstr ""
+
+msgid "Save visualization position"
+msgstr ""
+
+msgid ""
+"Are you sure you want to save? Saving overrides previously saves positions."
+msgstr ""
+
+msgid "Delete class"
+msgstr ""
+
+msgid "Delete shape"
+msgstr ""
+
+msgid "Delete class from this library"
+msgstr "Delete class from this Core Vocabulary"
+
+msgid "Delete shape from this library"
+msgstr ""
+
+msgid "Class list"
+msgstr ""
+
+msgid "Add attribute"
+msgstr ""
+
+msgid "Delete attribute"
+msgstr ""
+
+msgid "Delete attribute from this library"
+msgstr "Delete attribute from this Core Vocabulary"
+
+msgid "Delete attribute from this profile"
+msgstr ""
+
+msgid "Attribute list"
+msgstr ""
+
+msgid "Add association"
+msgstr ""
+
+msgid "Delete association"
+msgstr ""
+
+msgid "Delete association from this library"
+msgstr "Delete association from this Core Vocabulary"
+
+msgid "Delete association from this profile"
+msgstr ""
+
+msgid "Association list"
+msgstr ""
+
+msgid "Choose attribute"
+msgstr ""
+
+msgid "Choose association"
+msgstr ""
+
+msgid "What is description?"
+msgstr "What are the descriptions for interoperability?"
+
 msgid "What is description content"
 msgstr ""
 "Interoperability descriptions are set of highly reusable metadata that "
@@ -2836,11 +1300,9 @@ msgstr ""
 "on the shared concept definitions and application profiles specifying the "
 "use of the information components."
 
-#: translations/misc.html:76
-msgid "What is description?"
-msgstr "What are the descriptions for interoperability?"
+msgid "What is method?"
+msgstr "What is the semantic interoperability framework?"
 
-#: translations/misc.html:79
 msgid "What is method content"
 msgstr ""
 "Semantic interoperability framework describes a method to define the "
@@ -2851,196 +1313,981 @@ msgstr ""
 "from <a href=\"https://confluence.csc.fi/display/korkeakoulujentietomalli/"
 "Semantic+Interoperability+Architecture\">here</a>."
 
-#: translations/misc.html:78
-msgid "What is method?"
-msgstr "What is the semantic interoperability framework?"
+msgid "What can I do?"
+msgstr "What can the interoperability workbench do?"
 
-#: translations/misc.html:121
+msgid "What can I do content"
+msgstr ""
+"Interoperability Workbench is a set of tools designed to be used in "
+"developing, documenting and publishing interoperability descriptions such as "
+"re-usable information components and application profiles. It offers a one-"
+"stop service for openly published data descriptions and vocabularies. These "
+"semantically coherent data models help planning information management in "
+"information exchange operations (integration, interface, service bus) or "
+"database and software development. "
+
+msgid "How?"
+msgstr "How can I participate?"
+
+msgid "How content"
+msgstr ""
+"Interoperability descriptions published in the Workbench may be accessed and "
+"browsed freely. In future, the content of these core vocabularies and "
+"application profiles will be jointly produced by experts associated to each "
+"subject area."
+
+msgid "of group"
+msgstr "group"
+
+msgid "of model"
+msgstr "model"
+
+msgid "of library"
+msgstr "Core Vocabulary"
+
+msgid "of profile"
+msgstr "profile"
+
+msgid "of class"
+msgstr "class"
+
+msgid "of shape"
+msgstr "shape"
+
+msgid "of association"
+msgstr "association"
+
+msgid "of attribute"
+msgstr "attribute"
+
+msgid "of concept"
+msgstr "concept"
+
+msgid "of conceptSuggestion"
+msgstr "concept suggestion"
+
+msgid "search attribute or association"
+msgstr "Search attribute or association…"
+
+msgid "search class"
+msgstr "Search class…"
+
+msgid "search descriptions"
+msgstr ""
+
+msgid "Search from concept database"
+msgstr ""
+
+msgid "search namespace"
+msgstr "Search namespace…"
+
+msgid "search vocabulary"
+msgstr "Search vocabulary…"
+
+msgid "search reference data"
+msgstr "Search reference data…"
+
+msgid "Select attribute"
+msgstr ""
+
+msgid "search attribute"
+msgstr "Search attribute…"
+
+msgid "Select association"
+msgstr ""
+
+msgid "search association"
+msgstr "Search association…"
+
+msgid "Use attribute"
+msgstr ""
+
+msgid "Use association"
+msgstr ""
+
+msgid "Create and use attribute"
+msgstr ""
+
+msgid "Create and use association"
+msgstr ""
+
+msgid "Unauthorized"
+msgstr ""
+
+msgid "ID is already in use"
+msgstr ""
+
+msgid "Resource dependencies restricts removing"
+msgstr ""
+
+msgid "Unexpected error"
+msgstr ""
+
+msgid "Not found"
+msgstr ""
+
+msgid "Not removed"
+msgstr ""
+
+msgid "Resource status restricts removing"
+msgstr ""
+
+msgid "Resource is in use"
+msgstr ""
+
+msgid "Already added"
+msgstr ""
+
 msgid "Write identifier"
 msgstr "Write identifier…"
 
-#: translations/misc.html:225
-msgid "Write reference data code"
-msgstr "Write code…"
-
-#: translations/misc.html:122
 msgid "Write URI"
 msgstr "Write URI…"
 
-#: translations/misc.html:123
 msgid "Write URL"
 msgstr "Write URL…"
 
-#: translations/titles.html:69
-msgid "XML Attribute"
-msgstr "XML Attribute"
+msgid "Library information"
+msgstr "Core Vocabulary information"
 
-#: translations/titles.html:69
-msgid "XML Attribute info"
-msgstr "Serialize as XML Element Attribute in XML Schema"
+msgid "Profile information"
+msgstr ""
 
-#: translations/titles.html:68
+msgid "Class information"
+msgstr ""
+
+msgid "Shape information"
+msgstr ""
+
+msgid "Attribute information"
+msgstr ""
+
+msgid "Association information"
+msgstr ""
+
+msgid "Concept suggestion information"
+msgstr ""
+
+msgid "Class properties"
+msgstr ""
+
+msgid "Shape properties"
+msgstr ""
+
+msgid "Show excluded"
+msgstr ""
+
+msgid "Concept"
+msgstr ""
+
+msgid "Concept suggestion"
+msgstr ""
+
+msgid "application/ld+json"
+msgstr "JSON-LD"
+
+msgid "text/turtle"
+msgstr "Turtle"
+
+msgid "application/xml"
+msgstr "XML"
+
+msgid "application/rdf+xml"
+msgstr "RDF"
+
+msgid "application/ld+json+context"
+msgstr "JSON-LD Context"
+
+msgid "application/schema+json"
+msgstr "JSON Schema"
+
+msgid "framed ld+json"
+msgstr "Framed JSON-LD"
+
+msgid "ld+json frame"
+msgstr "JSON-LD Frame"
+
+msgid "date format"
+msgstr "DD/MM/YYYY HH.mm"
+
+msgid "User login"
+msgstr ""
+
+msgid "User name"
+msgstr ""
+
+msgid "Define concept for the class"
+msgstr ""
+
+msgid "Modified at"
+msgstr ""
+
+msgid "Member groups"
+msgstr ""
+
+msgid "Admin groups"
+msgstr ""
+
+msgid "Add properties from class"
+msgstr ""
+
+msgid "Add properties from super class"
+msgstr ""
+
+msgid "Add properties from scope class"
+msgstr ""
+
+msgid "Add properties from profile class"
+msgstr ""
+
+msgid "Add properties from external class"
+msgstr ""
+
+msgid "Do you want to add following properties from class?"
+msgstr ""
+
+msgid "Do you want to add following properties from super class?"
+msgstr ""
+
+msgid "Do you want to add following properties from scope class?"
+msgstr ""
+
+msgid "Do you want to add following properties from profile class?"
+msgstr ""
+
+msgid "Do you want to add following properties from external class?"
+msgstr ""
+
+msgid "Not imported by model"
+msgstr ""
+
+msgid "Cannot import profile"
+msgstr ""
+
+msgid "Shapes are not allowed"
+msgstr ""
+
+msgid "Classes are not allowed"
+msgstr ""
+
+msgid "Non specialized classes are not allowed"
+msgstr ""
+
+msgid "Use class"
+msgstr ""
+
+msgid "Specialize class"
+msgstr ""
+
+msgid "Copy shape"
+msgstr ""
+
+msgid "Can be selected only from this library"
+msgstr "Can be selected only from this Core Vocabulary"
+
+msgid "Can be selected only from this profile"
+msgstr ""
+
+msgid "Subject"
+msgstr ""
+
+msgid "to vocabulary"
+msgstr ""
+
+msgid "Create new class"
+msgstr ""
+
+msgid "Create new shape"
+msgstr ""
+
+msgid "Create new predicate"
+msgstr ""
+
+msgid "Create new attribute"
+msgstr ""
+
+msgid "Create new association"
+msgstr ""
+
+msgid "by referencing external uri"
+msgstr ""
+
+msgid "Self reference not allowed"
+msgstr ""
+
+msgid "Invalid ID"
+msgstr ""
+
+msgid "External class not found"
+msgstr ""
+
+msgid "External predicate not found"
+msgstr ""
+
+msgid "External predicate is of wrong type"
+msgstr ""
+
+msgid "Input"
+msgstr ""
+
+msgid "Assigned to this profile"
+msgstr ""
+
+msgid "Assigned to this library"
+msgstr "Assigned to this Core Vocabulary"
+
+msgid "language code"
+msgstr ""
+
+msgid "Internal vocabulary"
+msgstr "Internal terminology"
+
+msgid "Edit namespace"
+msgstr ""
+
+msgid "Vocabularies"
+msgstr "Terminologies"
+
+msgid "Vocabulary name"
+msgstr "Terminology name"
+
+msgid "Edit link"
+msgstr ""
+
+msgid "Reference data name"
+msgstr ""
+
+#, fuzzy
+msgid "Reference data status"
+msgstr "Search reference data…"
+
+msgid "Create new reference data"
+msgstr ""
+
+msgid "Choose reference data"
+msgstr ""
+
+msgid "Write reference data code"
+msgstr "Write code…"
+
+msgid "Browse concepts"
+msgstr ""
+
+msgid "Search concept"
+msgstr ""
+
+msgid "Delete concept"
+msgstr ""
+
+msgid "Delete concept from this library"
+msgstr ""
+
+msgid "Delete concept from this profile"
+msgstr ""
+
+msgid "Delete conceptSuggestion"
+msgstr ""
+
+msgid "Delete conceptSuggestion from this library"
+msgstr ""
+
+msgid "Delete conceptSuggestion from this profile"
+msgstr ""
+
+msgid "URI stem"
+msgstr ""
+
+msgid "Interoperability method description"
+msgstr ""
+"The method ensures that shared definitions are applied in a systematic way "
+"and the semantics are passed to every implementation that re-uses the "
+"interoperability descriptions."
+
+msgid "Label"
+msgstr ""
+
+msgid "ID"
+msgstr ""
+
+msgid "Local ID"
+msgstr ""
+
+msgid "Allowed languages"
+msgstr ""
+
+msgid "In language"
+msgstr "In English"
+
+msgid "Undefined"
+msgstr ""
+
+msgid "Assign reusable predicate to library"
+msgstr "Assign reusable predicate to Core Vocabulary"
+
+msgid "Assign reusable predicate to profile"
+msgstr ""
+
+msgid "Assign class to library"
+msgstr "Assign class to Core Vocabulary"
+
+msgid "Specialize class to profile"
+msgstr ""
+
+msgid "Copy reusable association to library"
+msgstr "Copy reusable association to Core Vocabulary"
+
+msgid "Copy reusable association to profile"
+msgstr ""
+
+msgid "Copy reusable attribute to library"
+msgstr "Copy reusable attribute to Core Vocabulary"
+
+msgid "Copy reusable attribute to profile"
+msgstr ""
+
+msgid "Defined in vocabularies"
+msgstr ""
+
+msgid "Choose concept"
+msgstr ""
+
+msgid "Submit error"
+msgstr ""
+
+msgid "Predicate in use"
+msgstr ""
+
+msgid ""
+"Predicate type cannot be changed because it is already used by following "
+"resources"
+msgstr ""
+
+msgid "Convert to association"
+msgstr ""
+
+msgid "Convert to attribute"
+msgstr ""
+
+msgid "Copy \"{{text}}\" to clipboard"
+msgstr ""
+
+msgid "Copy properties"
+msgstr ""
+
+msgid "Copy properties from class"
+msgstr ""
+
+msgid "Session expired"
+msgstr ""
+
+msgid "Model not found"
+msgstr ""
+
+msgid "Group not found"
+msgstr ""
+
+msgid "Page not found"
+msgstr ""
+
+msgid "Resource not found"
+msgstr ""
+
+msgid "You will be redirected to the front page"
+msgstr ""
+
+msgid "You will be redirected to the model"
+msgstr ""
+
+msgid "Please login to perform the action"
+msgstr ""
+
+msgid "Duplicate association target"
+msgstr ""
+
+msgid "No"
+msgstr ""
+
+msgid "Match to content"
+msgstr ""
+
+msgid "Unique label"
+msgstr ""
+
+msgid "All organizations"
+msgstr ""
+
+msgid "Choose organization"
+msgstr ""
+
+msgid "ADMIN"
+msgstr ""
+
+msgid "DATA_MODEL_EDITOR"
+msgstr ""
+
+msgid "TERMINOLOGY_EDITOR"
+msgstr ""
+
+msgid "CODE_LIST_EDITOR"
+msgstr ""
+
+msgid "Add new library"
+msgstr "Add new Core Vocabulary"
+
+msgid "Add new profile"
+msgstr "Add new profile"
+
+msgid "InformationPool"
+msgstr "Information pool"
+
+msgid "InformationSystem"
+msgstr "Information system"
+
+msgid "ExchangeFormat"
+msgstr "Exchange format"
+
+msgid "InformationDescription"
+msgstr "Information description"
+
+msgid "Specialized from class"
+msgstr ""
+
+msgid "Definition"
+msgstr ""
+
+msgid "Description"
+msgstr ""
+
+msgid "Description info"
+msgstr "Description of a resource"
+
+msgid "Editorial note"
+msgstr ""
+
+msgid "Editorial note info"
+msgstr ""
+
+msgid "Class id"
+msgstr ""
+
+msgid "Class id info"
+msgstr "CURIE that identifies the class"
+
+msgid "Shape id"
+msgstr ""
+
+msgid "Shape id info"
+msgstr "URI that idenfities the shape"
+
+msgid "Attribute id"
+msgstr ""
+
+msgid "Attribute id info"
+msgstr "CURIE that identifies the Datatype property"
+
+msgid "Association id"
+msgstr ""
+
+msgid "Association id info"
+msgstr "CURIE that identifies the Object property"
+
+msgid "Property id"
+msgstr ""
+
+msgid "Property id info"
+msgstr "URI that identifies the property"
+
+msgid "Class property id"
+msgstr "Class property localname"
+
+msgid "Class property id info"
+msgstr ""
+
+msgid "Concept id"
+msgstr ""
+
+msgid "Concept id info"
+msgstr "URI of the concept"
+
+msgid "Vocabulary id"
+msgstr "Terminology id"
+
+msgid "Vocabulary id info"
+msgstr "Identifier of the terminology"
+
+msgid "Reference data URI"
+msgstr ""
+
+msgid "Reference data URI info"
+msgstr ""
+
+msgid "Library label"
+msgstr "Core Vocabulary label"
+
+msgid "Library label info"
+msgstr "Name of the Core Vocabulary"
+
+msgid "Profile label"
+msgstr ""
+
+msgid "Profile label info"
+msgstr "Name of the application profile"
+
+msgid "Group label"
+msgstr ""
+
+msgid "Group label info"
+msgstr "Name of the domain group"
+
+msgid "Class label"
+msgstr ""
+
+msgid "Class label info"
+msgstr "Name of the class"
+
+msgid "Shape label"
+msgstr ""
+
+msgid "Shape label info"
+msgstr "Name of the shape"
+
+msgid "Association label"
+msgstr ""
+
+msgid "Association label info"
+msgstr "Name of the association"
+
+msgid "Attribute label"
+msgstr ""
+
+msgid "Attribute label info"
+msgstr "Name of the attribute"
+
+msgid "Property label"
+msgstr ""
+
+msgid "Property label info"
+msgstr "Name of the property"
+
+msgid "Class property label"
+msgstr ""
+
+msgid "Class property label info"
+msgstr ""
+
+msgid "Concept label"
+msgstr ""
+
+msgid "Concept label info"
+msgstr "Preferred term of the concept"
+
+msgid "Concept suggestion label"
+msgstr ""
+
+msgid "Concept suggestion label info"
+msgstr "Suggested term for the concept"
+
+msgid "Concept definition"
+msgstr ""
+
+msgid "Concept definition info"
+msgstr ""
+
+msgid "Concept suggestion definition"
+msgstr ""
+
+msgid "Concept suggestion definition info"
+msgstr ""
+"Suggested definition should contain all the relevant information about the "
+"use of the concept"
+
+msgid "Namespace label"
+msgstr ""
+
+msgid "Namespace label info"
+msgstr ""
+
+msgid "Reference data label"
+msgstr ""
+
+msgid "Reference data label info"
+msgstr ""
+
+msgid "State"
+msgstr "Status"
+
+msgid "State info"
+msgstr "Information about the stability and usability of the resource "
+
+msgid "Defined by"
+msgstr ""
+
+msgid "Defined by info"
+msgstr "Reference to the model that defines the resource"
+
+msgid "Defined by library"
+msgstr "Defined by Core Vocabulary"
+
+msgid "Defined by library info"
+msgstr "Reference to the Core Vocabulary that defines the resource"
+
+msgid "Defined by profile"
+msgstr ""
+
+msgid "Defined by profile info"
+msgstr "Reference to the application profile that defines the resource"
+
+msgid "Superclass"
+msgstr ""
+
+msgid "Superclass info"
+msgstr "is subclass of"
+
+msgid "Superassociation"
+msgstr ""
+
+msgid "Superassociation info"
+msgstr "is subproperty of"
+
+msgid "Superattribute"
+msgstr ""
+
+msgid "Superattribute info"
+msgstr ""
+
+msgid "Superproperty"
+msgstr ""
+
+msgid "Superproperty info"
+msgstr ""
+
+msgid "Range"
+msgstr ""
+
+msgid "Range info"
+msgstr "Value range of the property"
+
+msgid "Definition info"
+msgstr "Definition of the concept"
+
+msgid "Specialized from class info"
+msgstr "Reference to the Class of the Shape"
+
+msgid "Example"
+msgstr ""
+
+msgid "Example info"
+msgstr "Example value for the property"
+
+msgid "Value class"
+msgstr ""
+
+msgid "Value class info"
+msgstr "Class or Shape that is the range of the object property"
+
+msgid "Predicate type"
+msgstr ""
+
+msgid "Predicate type info"
+msgstr "Predicate type can be Datatype or Object property"
+
+msgid "Equivalent class"
+msgstr ""
+
+msgid "Equivalent class info"
+msgstr "Semantically equivalent Class that is defined in external model"
+
+msgid "Equivalent attribute"
+msgstr ""
+
+msgid "Equivalent attribute info"
+msgstr ""
+"Semantically equivalent Datatype property that is defined in external model"
+
+msgid "Equivalent association"
+msgstr ""
+
+msgid "Equivalent association info"
+msgstr ""
+"Semantically equivalent Object property that is defined in external model"
+
+msgid "Equivalent property"
+msgstr ""
+
+msgid "Equivalent property info"
+msgstr ""
+
+msgid "Broader concept"
+msgstr ""
+
+msgid "Broader concept info"
+msgstr "Related broader concept that defines some context for the concept"
+
+msgid "Internal group page"
+msgstr ""
+
+msgid "Internal group page info"
+msgstr ""
+"Link to a internal group page that can be used to discuss about the defined "
+"models and resources"
+
+msgid "Vocabulary"
+msgstr "Terminology"
+
+msgid "Vocabulary info"
+msgstr "Terminology info"
+
+msgid "Namespace"
+msgstr ""
+
+msgid "Namespace info"
+msgstr "Namespaces are used to identify and resolve resources"
+
+msgid "Prefix"
+msgstr ""
+
+msgid "Prefix info"
+msgstr "Prefixes are used to form namespaces and human readable CURIE:s"
+
+msgid "Resource identifier"
+msgstr "Resource identifier"
+
+msgid "Resource identifier info"
+msgstr "Use attribute value as primary resource identifier"
+
+msgid "Default value"
+msgstr ""
+
+msgid "Default value info"
+msgstr ""
+"Default value for the property that may be used if no value is manually given"
+
+msgid "Allowed values"
+msgstr ""
+
+msgid "Allowed values info"
+msgstr "List of values that are allowed"
+
+msgid "Class type"
+msgstr ""
+
+msgid "Class type info"
+msgstr ""
+
+msgid "Fixed value"
+msgstr ""
+
+msgid "Fixed value info"
+msgstr "Fixed value for the property"
+
+msgid "Pattern"
+msgstr "Regular expression"
+
+msgid "Pattern info"
+msgstr "Regular expression that can be used to validate the property values"
+
+msgid "Min count"
+msgstr ""
+
+msgid "Min count info"
+msgstr "Minimum count of the properties"
+
+msgid "Max count"
+msgstr ""
+
+msgid "Max count info"
+msgstr "Maximum cardinality of the property"
+
+msgid "Min length"
+msgstr ""
+
+msgid "Min length info"
+msgstr "Minimum length of the property value"
+
+msgid "Max length"
+msgstr ""
+
+msgid "Max length info"
+msgstr "Maximum length of the property value"
+
 msgid "XML Wrapper"
 msgstr "XML Wrapper"
 
-#: translations/titles.html:68
 msgid "XML Wrapper info"
 msgstr ""
 "Serialize as XML Wrapper Element using the class property id as Element name"
 
-#: translations/attribute.html:10
-msgid "xsd:anyURI"
-msgstr "URI"
+msgid "XML Attribute"
+msgstr "XML Attribute"
 
-#: translations/attribute.html:11
-msgid "xsd:anyURI error"
-msgstr "Invalid URI"
+msgid "XML Attribute info"
+msgstr "Serialize as XML Element Attribute in XML Schema"
 
-#: translations/attribute.html:40
-msgid "xsd:base64Binary"
-msgstr "Base64 binary"
+msgid "Homepage"
+msgstr "Link"
 
-#: translations/attribute.html:41
-msgid "xsd:base64Binary error"
-msgstr "Invalid Base64 binary"
+msgid "Homepage info"
+msgstr ""
+"Link to a Information or application that somehow uses the defined model"
 
-#: translations/attribute.html:12
-msgid "xsd:boolean"
-msgstr "Boolean"
-
-#: translations/attribute.html:13
-msgid "xsd:boolean error"
-msgstr "Invalid boolean"
-
-#: translations/attribute.html:26
-msgid "xsd:date"
-msgstr "Date"
-
-#: translations/attribute.html:27
-msgid "xsd:date error"
-msgstr "Invalid date"
-
-#: translations/attribute.html:28
-msgid "xsd:dateTime"
-msgstr "Point in time"
-
-#: translations/attribute.html:29
-msgid "xsd:dateTime error"
-msgstr "Invalid point in time"
-
-#: translations/attribute.html:14
-msgid "xsd:decimal"
-msgstr "Decimal"
-
-#: translations/attribute.html:15
-msgid "xsd:decimal error"
-msgstr "Invalid decimal"
-
-#: translations/attribute.html:16
-msgid "xsd:double"
-msgstr "Decimal (64bit)"
-
-#: translations/attribute.html:17
-msgid "xsd:double error"
-msgstr "Invalid double"
-
-#: translations/attribute.html:18
-msgid "xsd:float"
-msgstr "Decimal (32bit)"
-
-#: translations/attribute.html:19
-msgid "xsd:float error"
-msgstr "Invalid decimal"
-
-#: translations/attribute.html:36
-msgid "xsd:gDay"
-msgstr "Day"
-
-#: translations/attribute.html:37
-msgid "xsd:gDay error"
-msgstr "Invalid day"
-
-#: translations/attribute.html:34
-msgid "xsd:gMonth"
-msgstr "Month"
-
-#: translations/attribute.html:35
-msgid "xsd:gMonth error"
-msgstr "Invalid month"
-
-#: translations/attribute.html:32
-msgid "xsd:gYear"
-msgstr "Year"
-
-#: translations/attribute.html:33
-msgid "xsd:gYear error"
-msgstr "Invalid year"
-
-#: translations/attribute.html:38
-msgid "xsd:hexBinary"
-msgstr "Hex binary"
-
-#: translations/attribute.html:39
-msgid "xsd:hexBinary error"
-msgstr "Invalid hex binary"
-
-#: translations/attribute.html:24
-msgid "xsd:int"
-msgstr "Integer (32bit)"
-
-#: translations/attribute.html:25
-msgid "xsd:int error"
-msgstr "Invalid integer"
-
-#: translations/attribute.html:20
-msgid "xsd:integer"
-msgstr "Integer"
-
-#: translations/attribute.html:21
-msgid "xsd:integer error"
-msgstr "Invalid integer"
-
-#: translations/attribute.html:22
-msgid "xsd:long"
-msgstr "Integer (64bit)"
-
-#: translations/attribute.html:23
-msgid "xsd:long error"
-msgstr "Invalid integer"
-
-#: translations/attribute.html:4
-msgid "xsd:string"
-msgstr "Text"
-
-#: translations/attribute.html:5
-msgid "xsd:string error"
-msgstr "Invalid text"
-
-#: translations/attribute.html:30
-msgid "xsd:time"
-msgstr "Time"
-
-#: translations/attribute.html:31
-msgid "xsd:time error"
-msgstr "Invalid time"
-
-#: app\components\common/modalTemplate.html:15
-#: app\components\editor/addPropertiesFromClassModal.html:32
-#: translations/misc.html:274
-msgid "Yes"
+msgid "Model languages"
 msgstr ""
 
-#: translations/help.html:156
-msgid "You can add new attribute or association to the Class from here"
+msgid "Model languages info"
+msgstr ""
+"Models can be localized in multiple languages. Used languages are listed "
+"here as ISO 639-2 language codes."
+
+msgid "Title info"
+msgstr "Name of the vocabulary"
+
+msgid "External URI"
 msgstr ""
 
-#: translations/misc.html:269
-msgid "You will be redirected to the front page"
+msgid "External URI info"
+msgstr "URI of an external resource"
+
+msgid "Namespace redirection"
 msgstr ""
 
-#: translations/misc.html:270 translations/misc.html:271
-msgid "You will be redirected to the model"
+msgid "Namespace redirection info"
 msgstr ""
+
+msgid "Constraint classes"
+msgstr "Constraint shapes"
+
+msgid "Constraint classes info"
+msgstr "Shapes of classes that are used to constraint allowed values"
+
+msgid "Root class"
+msgstr ""
+
+msgid "Root class info"
+msgstr "Class or Shape that can be used to define root for the model"
+
+msgid "Creator"
+msgstr ""
+
+msgid "Creator info"
+msgstr ""
+
+msgid "Localname"
+msgstr "Class localname"
+
+msgid "Localname info"
+msgstr "Can be used in schemas or other local applications"
+
+msgid "Read-only"
+msgstr "Read-only"
+
+msgid "Read-only info"
+msgstr "Defines attribute that cannot be changed after the initialization"
+
+msgid "owl:DatatypeProperty"
+msgstr "Attribute"
+
+msgid "owl:ObjectProperty"
+msgstr "Association"
 
 #~ msgid "Localname description"
 #~ msgstr "Can be used in schemas or other local applications"

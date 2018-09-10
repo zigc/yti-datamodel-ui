@@ -1,25 +1,22 @@
 import { IScope } from 'angular';
-import { module as mod } from './module';
 import { ReferenceDataService } from 'app/services/referenceDataService';
 import { ViewReferenceDataModal } from './viewReferenceDataModal';
 import { ReferenceData, ReferenceDataCode } from 'app/entities/referenceData';
 import { LanguageContext } from 'app/types/language';
+import { ComponentDeclaration } from 'app/utils/angular';
+import { forwardRef } from '@angular/core';
 
-mod.directive('referenceDataView', () => {
-  return {
-    scope: {
-      referenceData: '=',
-      context: '=',
-      title: '@',
-      showCodes: '='
-    },
-    restrict: 'E',
-    template: require('./referenceDataView.html'),
-    controllerAs: 'ctrl',
-    bindToController: true,
-    controller: ReferenceDataViewController
-  };
-});
+export const ReferenceDataViewComponent: ComponentDeclaration = {
+  selector: 'referenceDataView',
+  bindings: {
+    referenceData: '=',
+    context: '=',
+    title: '@',
+    showCodes: '='
+  },
+  template: require('./referenceDataView.html'),
+  controller: forwardRef(() => ReferenceDataViewController)
+};
 
 class ReferenceDataViewController {
 
@@ -29,12 +26,15 @@ class ReferenceDataViewController {
   showCodes: boolean;
   codes: ReferenceDataCode[];
 
-  constructor($scope: IScope, 
-              referenceDataService: ReferenceDataService,
+  constructor(private $scope: IScope,
+              private referenceDataService: ReferenceDataService,
               private viewReferenceDataModal: ViewReferenceDataModal) {
-    $scope.$watch(() => this.referenceData, referenceData => {
+  }
+
+  $onInit() {
+    this.$scope.$watch(() => this.referenceData, referenceData => {
       if (referenceData && !referenceData.isExternal()) {
-        referenceDataService.getReferenceDataCodes(referenceData)
+        this.referenceDataService.getReferenceDataCodes(referenceData)
           .then(values => this.codes = values);
       } else {
         this.codes = [];

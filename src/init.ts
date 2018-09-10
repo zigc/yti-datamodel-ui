@@ -1,10 +1,6 @@
-/// <reference path="augment.d.ts" />
-
-import './shim';
-import './vendor/modernizr';
-import './styles/loading.scss';
 const pw = require('please-wait');
 
+import './vendor/modernizr';
 const logo = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
 const backgroundColor = '#FFFFFF';
 
@@ -21,9 +17,13 @@ if (Modernizr.es5syntax && Modernizr.svg) {
 
   const waitScreen = loadingScreen();
 
-  require.ensure(['./main'], require => {
-    require('./main').done.then(() => waitScreen.finish());
-  }, 'app');
+  require.ensure(
+    ['./main'],
+    (require: NodeRequire) => require('./main').done.then(() => waitScreen.finish()),
+    (error: any) => {},
+    'app'
+  );
+
 } else {
 
   pw.pleaseWait({

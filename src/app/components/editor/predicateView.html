@@ -1,15 +1,15 @@
 <form name="form" class="editable-form">
-  <fieldset ng-disabled="ctrl.persisting">
-    <div ng-if="ctrl.predicate && ctrl.model">
-      <selection-view model="ctrl.model" editable-controller="ctrl">
+  <fieldset ng-disabled="$ctrl.persisting">
+    <div ng-if="$ctrl.predicate && $ctrl.model">
+      <selection-view model="$ctrl.model" editable-controller="$ctrl">
         <selection-buttons>
-          <export ng-hide="ctrl.isEditing()" entity="ctrl.predicate" context="ctrl.model"></export>
-          <history model="ctrl.model" resource="ctrl.predicate" ng-hide="ctrl.isEditing()"></history>
-          <app-status [status]="ctrl.predicate.status"></app-status>
+          <export ng-hide="$ctrl.isEditing()" entity="$ctrl.predicate" context="$ctrl.model"></export>
+          <history model="$ctrl.model" resource="$ctrl.predicate" ng-hide="$ctrl.isEditing()"></history>
+          <app-status [status]="$ctrl.predicate.status"></app-status>
         </selection-buttons>
 
         <selection-content>
-          <predicate-form id="ctrl.id" predicate="ctrl.editableInEdit" old-predicate="ctrl.predicate" model="ctrl.model"></predicate-form>
+          <predicate-form id="$ctrl.id" predicate="$ctrl.editableInEdit" old-predicate="$ctrl.predicate" model="$ctrl.model"></predicate-form>
         </selection-content>
       </selection-view>
     </div>

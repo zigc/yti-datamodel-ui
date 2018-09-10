@@ -1,6 +1,5 @@
-import { IScope, IPromise, ui } from 'angular';
-import IModalService = ui.bootstrap.IModalService;
-import IModalServiceInstance = ui.bootstrap.IModalServiceInstance;
+import { IScope, IPromise } from 'angular';
+import { IModalService, IModalServiceInstance } from 'angular-ui-bootstrap';
 import { ModelService } from 'app/services/modelService';
 import { Language, LanguageContext } from 'app/types/language';
 import { isDefined } from 'yti-common-ui/utils/object';
@@ -42,7 +41,7 @@ export class AddEditNamespaceModal {
       template: require('./addEditNamespaceModal.html'),
       size: 'sm',
       controller: AddEditNamespaceController,
-      controllerAs: 'ctrl',
+      controllerAs: '$ctrl',
       backdrop: true,
       resolve: {
         context: () => context,

@@ -1,5 +1,5 @@
-import { IPromise, ILocationService, ui } from 'angular';
-import IModalStackService = ui.bootstrap.IModalStackService;
+import { IPromise, ILocationService } from 'angular';
+import { IModalStackService } from 'angular-ui-bootstrap';
 import {
   StoryLine, InteractiveHelp, createNotification, Story
 } from './contract';
@@ -16,7 +16,7 @@ import {
   ClassDetails
 } from 'app/services/entityLoader';
 import { InteractiveHelpService } from './services/interactiveHelpService';
-import GettextCatalog = angular.gettext.gettextCatalog;
+import { gettextCatalog as GettextCatalog } from 'angular-gettext';
 import { availableUILanguages } from 'app/types/language';
 import * as ClassForm from './pages/model/classFormHelp.po';
 import * as VisualizationView from './pages/model/visualizationViewHelp.po';
@@ -323,23 +323,23 @@ class HelpBuilder {
 
   add(storyLine: StoryLine, initializer: (builder: ModelBuilder) => void) {
 
-    const model = this.contextModel;
+    const contextModel = this.contextModel;
 
     this.result.push({
       storyLine,
       onInit: (service: InteractiveHelpService) => {
 
-        const builder = new ModelBuilder(this.entityLoaderService.create(false), model, this.asLocalizable);
+        const builder = new ModelBuilder(this.entityLoaderService.create(false), contextModel, this.asLocalizable);
 
         return service.reset()
           .then(() => {
             initializer(builder);
             return builder.result;
           })
-        .then(this.navigate.bind(this));
+          .then(model => this.navigate(model));
       },
-      onComplete: () => this.returnToModelPage(model),
-      onCancel: () => this.returnToModelPage(model)
+      onComplete: () => this.returnToModelPage(contextModel),
+      onCancel: () => this.returnToModelPage(contextModel)
     });
   };
 

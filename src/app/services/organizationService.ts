@@ -1,8 +1,8 @@
 import { IHttpService, IPromise } from 'angular';
-import { config } from 'config';
-import { Organization } from '../entities/organization';
-import * as frames from '../entities/frames';
-import { GraphData } from '../types/entity';
+import { apiEndpointWithName } from './config';
+import { Organization } from 'app/entities/organization';
+import * as frames from 'app/entities/frames';
+import { GraphData } from 'app/types/entity';
 import { FrameService } from './frameService';
 
 export interface OrganizationService {
@@ -17,7 +17,7 @@ export class DefaultOrganizationService implements OrganizationService {
   }
 
   getOrganizations(): IPromise<Organization[]> {
-    return this.$http.get<GraphData>(config.apiEndpointWithName('organizations'))
+    return this.$http.get<GraphData>(apiEndpointWithName('organizations'))
       .then(response => this.deserializeOrganization(response.data!));
   }
 

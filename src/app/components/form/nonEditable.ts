@@ -1,31 +1,27 @@
-import { IAttributes, IParseService, IScope } from 'angular';
-import { DisplayItemFactory, DisplayItem, Value } from './displayItemFactory';
+import { IParseService, IScope } from 'angular';
+import { DisplayItem, DisplayItemFactory, Value } from './displayItemFactory';
 import { EditableForm } from './editableEntityController';
-import { module as mod } from './module';
 import { LanguageContext } from 'app/types/language';
+ import { ComponentDeclaration } from 'app/utils/angular';
+import { forwardRef } from '@angular/core';
 
-mod.directive('nonEditable', () => {
-  return {
-    scope: {
-      title: '@',
-      value: '=',
-      link: '=',
-      onClick: '@',
-      valueAsLocalizationKey: '@',
-      context: '=',
-      clipboard: '='
-    },
-    restrict: 'E',
-    template: require('./nonEditable.html'),
-    bindToController: true,
-    controllerAs: 'ctrl',
-    require: ['nonEditable', '?^form'],
-    link(_$scope: IScope, _element: JQuery, _attributes: IAttributes, [thisController, formController]: [NonEditableController, EditableForm]) {
-      thisController.isEditing = () => formController.editing;
-    },
-    controller: NonEditableController
-  };
-});
+export const NonEditableComponent: ComponentDeclaration = {
+  selector: 'nonEditable',
+  bindings: {
+    title: '@',
+    value: '=',
+    link: '=',
+    onClick: '@',
+    valueAsLocalizationKey: '@',
+    context: '=',
+    clipboard: '='
+  },
+  require: {
+    form: '?^form'
+  },
+  template: require('./nonEditable.html'),
+  controller: forwardRef(() => NonEditableController)
+};
 
 class NonEditableController {
 
@@ -37,17 +33,23 @@ class NonEditableController {
   onClick: string;
   clipboard: string;
 
-  isEditing: () => boolean;
   item: DisplayItem;
 
+  form: EditableForm;
+
   /* @ngInject */
-  constructor($scope: IScope, $parse: IParseService, displayItemFactory: DisplayItemFactory) {
+  constructor(private $scope: IScope,
+              private $parse: IParseService,
+              private displayItemFactory: DisplayItemFactory) {
+  }
+
+  $onInit() {
 
     // we need to know if handler was set or not so parse ourselves instead of using scope '&'
-    const clickHandler = $parse(this.onClick);
-    const onClick = this.onClick ? (value: Value) => clickHandler($scope.$parent, {value}) : undefined;
+    const clickHandler = this.$parse(this.onClick);
+    const onClick = this.onClick ? (value: Value) => clickHandler(this.$scope.$parent, {value}) : undefined;
 
-    this.item = displayItemFactory.create({
+    this.item = this.displayItemFactory.create({
       context: () => this.context,
       value: () => this.value,
       link: () => this.link,
@@ -55,6 +57,10 @@ class NonEditableController {
       hideLinks: () => this.isEditing(),
       onClick: onClick
     });
+  }
+
+  isEditing() {
+    return this.form && this.form.editing;
   }
 
   get style(): {} {

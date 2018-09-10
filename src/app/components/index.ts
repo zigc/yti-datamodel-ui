@@ -1,15 +1,16 @@
-import { module as mod } from './module';
-export { module } from './module';
-import { registerComponent } from '../utils/angular';
-import { component as frontPage } from './frontPage';
+import { FrontPageComponent } from './frontPage';
 import { AdvancedSearchModal } from './advancedSearchModal';
 import { MaintenanceModal } from './maintenance';
+import { ApplicationComponent } from './application';
+import { GoogleAnalyticsComponent } from './googleAnalytics';
 
-registerComponent(mod, frontPage);
+import { registerComponent } from 'app/utils/angular';
+import { module as mod } from './module';
+export { module } from './module';
 
-import './application';
-import './googleAnalytics';
-import './maintenance';
+registerComponent(mod, FrontPageComponent);
+registerComponent(mod, ApplicationComponent);
+registerComponent(mod, GoogleAnalyticsComponent);
 
 mod.service('advancedSearchModal', AdvancedSearchModal);
 mod.service('maintenanceModal', MaintenanceModal);

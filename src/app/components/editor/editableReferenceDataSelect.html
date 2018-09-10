@@ -1,14 +1,14 @@
-<div ng-if="ctrl.referenceData.length > 0 || ctrl.isEditing()" class="editable-wrap">
+<div ng-if="$ctrl.referenceData.length > 0 || $ctrl.isEditing()" class="editable-wrap">
   <div>
     <editable-label data-title="'Reference data'"></editable-label>
-    <div ng-show="ctrl.referenceData.length === 0" translate>Not defined</div>
+    <div ng-show="$ctrl.referenceData.length === 0" translate>Not defined</div>
   </div>
 
-  <div ng-if="ctrl.referenceData.length > 0" class="model-view__sub row">
-    <editable-table id="'editableReferenceDataSelect'" descriptor="ctrl.descriptor" expanded="ctrl.expanded"></editable-table>
+  <div ng-if="$ctrl.referenceData.length > 0" class="model-view__sub row">
+    <editable-table id="'editableReferenceDataSelect'" descriptor="$ctrl.descriptor" expanded="$ctrl.expanded"></editable-table>
   </div>
 
-  <div ng-class="{'model-view__sub': !!ctrl.referenceData}" style="margin-bottom: 15px">
-    <button id="add_editable_reference_data_select_button" ng-if="ctrl.isEditing()" type="button" class="btn btn-action btn-sm" ng-click="ctrl.addReferenceData()" translate>Add reference data</button>
+  <div ng-class="{'model-view__sub': !!$ctrl.referenceData}" style="margin-bottom: 15px">
+    <button id="add_editable_reference_data_select_button" ng-if="$ctrl.isEditing()" type="button" class="btn btn-action btn-sm" ng-click="$ctrl.addReferenceData()" translate>Add reference data</button>
   </div>
 </div>

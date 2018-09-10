@@ -1,13 +1,13 @@
-import { IAttributes, IScope } from 'angular';
+import { IScope } from 'angular';
 import { LanguageService } from 'app/services/languageService';
 import { ColumnDescriptor, TableDescriptor } from 'app/components/form/editableTable';
 import { AddEditNamespaceModal } from './addEditNamespaceModal';
 import { SearchNamespaceModal } from './searchNamespaceModal';
 import { combineExclusions } from 'app/utils/exclusion';
-import { module as mod } from './module';
 import { ImportedNamespace, NamespaceType } from 'app/entities/model';
-import { modalCancelHandler } from 'app/utils/angular';
+import { ComponentDeclaration, modalCancelHandler } from 'app/utils/angular';
 import { LanguageContext } from 'app/types/language';
+import { forwardRef } from '@angular/core';
 import { EditableForm } from 'app/components/form/editableEntityController';
 
 interface WithImportedNamespaces {
@@ -16,49 +16,56 @@ interface WithImportedNamespaces {
   removeImportedNamespace(namespace: ImportedNamespace): void;
 }
 
-mod.directive('importedNamespacesView', () => {
-  return {
-    scope: {
-      value: '=',
-      context: '=',
-      allowProfiles: '=',
-      namespacesInUse: '='
-    },
-    restrict: 'E',
-    template: `
+export const ImportedNamespacesViewComponent: ComponentDeclaration = {
+  selector: 'importedNamespacesView',
+  bindings: {
+    value: '=',
+    context: '=',
+    allowProfiles: '=',
+    namespacesInUse: '='
+  },
+  require: {
+    form: '?^form'
+  },
+  template: `
       <h4>
         <span translate>Imported namespaces</span>
-        <button id="add_imported_namespace_button" type="button" class="btn btn-link btn-xs pull-right" ng-click="ctrl.importNamespace()" ng-show="ctrl.isEditing()">
+        <button id="add_imported_namespace_button" type="button" class="btn btn-link btn-xs pull-right" ng-click="$ctrl.importNamespace()" ng-show="$ctrl.isEditing()">
           <span translate>Import namespace</span>
         </button>
       </h4>
-      <editable-table id="'importedNamespaces'" descriptor="ctrl.descriptor" expanded="ctrl.expanded"></editable-table>
-    `,
-    controllerAs: 'ctrl',
-    bindToController: true,
-    require: ['importedNamespacesView', '?^form'],
-    link(_$scope: IScope, _element: JQuery, _attributes: IAttributes, [thisController, formController]: [ImportedNamespacesViewController, EditableForm]) {
-      thisController.isEditing = () => formController && formController.editing;
-    },
-    controller: ImportedNamespacesViewController
-  };
-});
+      <editable-table id="'importedNamespaces'" descriptor="$ctrl.descriptor" expanded="$ctrl.expanded"></editable-table>
+  `,
+  controller: forwardRef(() => ImportedNamespacesViewController)
+};
 
 class ImportedNamespacesViewController {
 
   value: WithImportedNamespaces;
   allowProfiles: boolean;
   context: LanguageContext;
-  isEditing: () => boolean;
   namespacesInUse: Set<string>;
 
   descriptor: ImportedNamespaceTableDescriptor;
   expanded = false;
 
-  constructor($scope: IScope, private searchNamespaceModal: SearchNamespaceModal, addEditNamespaceModal: AddEditNamespaceModal, languageService: LanguageService) {
-    $scope.$watch(() => this.value, value => {
-      this.descriptor = new ImportedNamespaceTableDescriptor(addEditNamespaceModal, value, this.context, languageService, this.namespacesInUse);
+  form: EditableForm;
+
+  /* @ngInject */
+  constructor(private $scope: IScope,
+              private searchNamespaceModal: SearchNamespaceModal,
+              private addEditNamespaceModal: AddEditNamespaceModal,
+              private languageService: LanguageService) {
+  }
+
+  $onInit() {
+    this.$scope.$watch(() => this.value, value => {
+      this.descriptor = new ImportedNamespaceTableDescriptor(this.addEditNamespaceModal, value, this.context, this.languageService, this.namespacesInUse);
     });
+  }
+
+  isEditing() {
+    return this.form && this.form.editing;
   }
 
   importNamespace() {

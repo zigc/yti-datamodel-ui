@@ -1,7 +1,6 @@
-import { IPromise, IScope, ui } from 'angular';
-import IModalService = ui.bootstrap.IModalService;
-import IModalServiceInstance = ui.bootstrap.IModalServiceInstance;
-import GettextCatalog = angular.gettext.gettextCatalog;
+import { IPromise, IScope } from 'angular';
+import { IModalService, IModalServiceInstance } from 'angular-ui-bootstrap';
+import { gettextCatalog as GettextCatalog } from 'angular-gettext';
 import { PredicateService } from 'app/services/predicateService';
 import { SearchConceptModal, EntityCreation } from './searchConceptModal';
 import { LanguageService, Localizer } from 'app/services/languageService';
@@ -20,7 +19,7 @@ import { ExternalEntity } from 'app/entities/externalEntity';
 import { Class, Property } from 'app/entities/class';
 import { filterAndSortSearchResults, defaultLabelComparator } from 'app/components/filter/util';
 import { ignoreModalClose } from 'yti-common-ui/utils/modal';
-import { requireDefined } from '../../../../node_modules/yti-common-ui/utils/object';
+import { requireDefined } from 'yti-common-ui/utils/object';
 
 const noExclude = (_item: PredicateListItem) => null;
 
@@ -37,7 +36,7 @@ export class SearchPredicateModal {
       template: require('./searchPredicateModal.html'),
       size: 'lg',
       controller: SearchPredicateController,
-      controllerAs: 'ctrl',
+      controllerAs: '$ctrl',
       backdrop: true,
       resolve: {
         model: () => model,

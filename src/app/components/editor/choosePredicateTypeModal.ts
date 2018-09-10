@@ -1,5 +1,5 @@
-import { IPromise, ui } from 'angular';
-import IModalService = ui.bootstrap.IModalService;
+import { IPromise } from 'angular';
+import { IModalService } from 'angular-ui-bootstrap';
 import { KnownPredicateType } from 'app/types/entity';
 
 export class ChoosePredicateTypeModal {
@@ -11,7 +11,7 @@ export class ChoosePredicateTypeModal {
     return this.$uibModal.open({
       template: require('./choosePredicateTypeModal.html'),
       size: 'adapting',
-      controllerAs: 'ctrl',
+      controllerAs: '$ctrl',
       controller: ChoosePredicateTypeModalController
     }).result;
   }

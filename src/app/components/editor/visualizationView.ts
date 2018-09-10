@@ -1,23 +1,20 @@
-import { module as mod } from './module';
 import { Class } from 'app/entities/class';
 import { Predicate } from 'app/entities/predicate';
 import { Model } from 'app/entities/model';
+import { ComponentDeclaration } from 'app/utils/angular';
+import { forwardRef } from '@angular/core';
 
-mod.directive('visualizationView', () => {
-  return {
-    scope: {
-      selection: '=',
-      model: '=',
-      modelPageActions: '=',
-      maximized: '='
-    },
-    restrict: 'E',
-    template: require('./visualizationView.html'),
-    controllerAs: 'ctrl',
-    bindToController: true,
-    controller: VisualizationViewController
-  };
-});
+export const VisualizationViewComponent: ComponentDeclaration = {
+  selector: 'visualizationView',
+  bindings: {
+    selection: '=',
+    model: '=',
+    modelPageActions: '=',
+    maximized: '='
+  },
+  template: require('./visualizationView.html'),
+  controller: forwardRef(() => VisualizationViewController)
+};
 
 export class VisualizationViewController {
 

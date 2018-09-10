@@ -1,40 +1,40 @@
 <form name="form" class="add-edit-namespace">
   <modal-template>
-    <modal-title>{{ctrl.titleLabel | translate}}</modal-title>
+    <modal-title>{{$ctrl.titleLabel | translate}}</modal-title>
 
     <modal-body>
 
-      <editable data-title="Namespace label" disable="!ctrl.labelModifiable()" context="ctrl.context">
+      <editable data-title="Namespace label" disable="!$ctrl.labelModifiable()" context="$ctrl.context">
         <div class="input-group input-group-md">
-          <input id="label" type="text" class="form-control" autofocus required string-input="modelLabel" ng-model="ctrl.label" />
+          <input id="label" type="text" class="form-control" autofocus required string-input="modelLabel" ng-model="$ctrl.label" />
         </div>
       </editable>
 
-      <editable data-title="Namespace" disable="!ctrl.namespaceModifiable()" context="ctrl.context">
+      <editable data-title="Namespace" disable="!$ctrl.namespaceModifiable()" context="$ctrl.context">
         <div class="input-group input-group-md">
           <input id="namespace"
                  type="text"
                  class="form-control"
                  required
                  namespace-input
-                 active-namespace="ctrl.namespaceToEdit"
-                 allow-technical="!ctrl.edit"
-                 model="ctrl.model"
-                 ng-model="ctrl.namespace" />
+                 active-namespace="$ctrl.namespaceToEdit"
+                 allow-technical="!$ctrl.edit"
+                 model="$ctrl.model"
+                 ng-model="$ctrl.namespace" />
         </div>
       </editable>
 
-      <editable data-title="Prefix" disable="!ctrl.prefixModifiable()" context="ctrl.context">
+      <editable data-title="Prefix" disable="!$ctrl.prefixModifiable()" context="$ctrl.context">
         <div class="input-group input-group-md">
           <input id="prefix"
                  type="text"
                  class="form-control"
                  required
                  prefix-input
-                 active-namespace="ctrl.namespaceToEdit"
-                 allow-technical="!ctrl.edit"
-                 model="ctrl.model"
-                 ng-model="ctrl.prefix" />
+                 active-namespace="$ctrl.namespaceToEdit"
+                 allow-technical="!$ctrl.edit"
+                 model="$ctrl.model"
+                 ng-model="$ctrl.prefix" />
         </div>
       </editable>
 
@@ -42,9 +42,9 @@
 
     <modal-buttons>
 
-      <button class="btn btn-action confirm" type="button" ng-click="ctrl.create()" ng-disabled="!form.$valid">{{ctrl.confirmLabel | translate}}</button>
-      <button class="btn btn-link cancel" type="button" ng-click="ctrl.cancel()" translate>Cancel</button>
-      <error-panel error="ctrl.submitError"></error-panel>
+      <button class="btn btn-action confirm" type="button" ng-click="$ctrl.create()" ng-disabled="!form.$valid">{{$ctrl.confirmLabel | translate}}</button>
+      <button class="btn btn-link cancel" type="button" ng-click="$ctrl.cancel()" translate>Cancel</button>
+      <error-panel error="$ctrl.submitError"></error-panel>
 
     </modal-buttons>
   </modal-template>

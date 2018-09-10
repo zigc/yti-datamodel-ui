@@ -1,86 +1,31 @@
-import { IScope, IAttributes, INgModelController, IQService, IModelFormatter } from 'angular';
+import { IModelFormatter, INgModelController, IQService, IScope } from 'angular';
 import { isDefined } from 'yti-common-ui/utils/object';
-import { esc, tab, enter, pageUp, pageDown, arrowUp, arrowDown } from 'yti-common-ui/utils/key-code';
-import { formatWithFormatters } from 'app/utils/angular';
-import { module as mod } from './module';
+import { arrowDown, arrowUp, enter, esc, pageDown, pageUp, tab } from 'yti-common-ui/utils/key-code';
+import { ComponentDeclaration, formatWithFormatters } from 'app/utils/angular';
 import { DataSource } from './dataSource';
 import { InputWithPopupController } from './inputPopup';
 import { limit } from 'yti-common-ui/utils/array';
+import { forwardRef } from '@angular/core';
 
 // TODO: similarities with iowSelect
-mod.directive('autocomplete', ($document: JQuery) => {
-  return {
-    restrict: 'E',
-    transclude: true,
-    scope: {
-      datasource: '=',
-      matcher: '=',
-      formatter: '=',
-      valueExtractor: '=',
-      excludeProvider: '=?',
-      maxMatches: '='
-    },
-    bindToController: true,
-    template: `
+export const AutocompleteComponent: ComponentDeclaration = {
+  selector: 'autocomplete',
+  bindings: {
+    datasource: '=',
+    matcher: '=',
+    formatter: '=',
+    valueExtractor: '=',
+    excludeProvider: '=?',
+    maxMatches: '='
+  },
+  transclude: true,
+  template: `
       <ng-transclude></ng-transclude>
-      <input-popup ctrl="ctrl"><span class="content">{{::ctrl.format(match)}}</span></input-popup>
-    `,
-    controller: AutocompleteController,
-    controllerAs: 'ctrl',
-    require: 'autocomplete',
-    link($scope: IScope, element: JQuery, _attributes: IAttributes, thisController: AutocompleteController<any>) {
+      <input-popup ctrl="$ctrl"><span class="content">{{::$ctrl.format(match)}}</span></input-popup>
+  `,
+  controller: forwardRef(() => AutocompleteController)
+};
 
-      const inputElement = element.find('input');
-      const ngModel: INgModelController = inputElement.controller('ngModel');
-
-      $scope.$watchCollection(() => ngModel.$formatters, formatters => thisController.inputFormatter = formatters);
-
-      const keyDownHandler = (event: JQueryEventObject) => $scope.$apply(() => thisController.keyPressed(event));
-      const focusHandler = () => {
-        $document.on('click', blurClickHandler);
-        $scope.$apply(() => thisController.autocomplete(ngModel.$viewValue));
-      };
-      const blurClickHandler = (event: JQueryEventObject) => {
-
-        const autocomplete = angular.element(event.target).closest('autocomplete');
-
-        if (autocomplete[0] !== element[0]) {
-          $scope.$apply(() => thisController.clear());
-          $document.off('click', blurClickHandler);
-        }
-      };
-
-      inputElement.on('keydown', keyDownHandler);
-      inputElement.on('focus', focusHandler);
-
-      $scope.$on('$destroy', () => {
-        inputElement.off('keydown', keyDownHandler);
-        inputElement.off('focus', focusHandler);
-      });
-
-      let ignoreNextViewChange = false;
-
-      $scope.$watch(() => ngModel.$viewValue, viewValue => {
-        if (ignoreNextViewChange) {
-          ignoreNextViewChange = false;
-        } else {
-          // prevents initial triggering when user is not actually inputting anything
-          if (inputElement.is(':focus')) {
-            thisController.autocomplete(viewValue);
-          }
-        }
-      });
-
-      thisController.applyValue = (value: string) => {
-        ignoreNextViewChange = ngModel.$viewValue !== value;
-        ngModel.$setViewValue(value);
-        ngModel.$render();
-      };
-
-      thisController.element = inputElement;
-    }
-  };
-});
 
 export class AutocompleteController<T> implements InputWithPopupController<T> {
 
@@ -111,7 +56,63 @@ export class AutocompleteController<T> implements InputWithPopupController<T> {
     [esc]: () => this.clear()
   };
 
-  constructor(private $q: IQService) {
+  /* @ngInject */
+  constructor(private $scope: IScope,
+              private $q: IQService,
+              private $element: JQuery,
+              private $document: JQuery) {
+  }
+
+  $postLink() {
+
+    const inputElement = this.$element.find('input');
+    const ngModel: INgModelController = inputElement.controller('ngModel');
+
+    this.$scope.$watchCollection(() => ngModel.$formatters, formatters => this.inputFormatter = formatters);
+
+    const keyDownHandler = (event: JQueryEventObject) => this.$scope.$apply(() => this.keyPressed(event));
+    const focusHandler = () => {
+      this.$document.on('click', blurClickHandler);
+      this.$scope.$apply(() => this.autocomplete(ngModel.$viewValue));
+    };
+    const blurClickHandler = (event: JQueryEventObject) => {
+
+      const autocomplete = jQuery(event.target).closest('autocomplete');
+
+      if (autocomplete[0] !== this.$element[0]) {
+        this.$scope.$apply(() => this.clear());
+        this.$document.off('click', blurClickHandler);
+      }
+    };
+
+    inputElement.on('keydown', keyDownHandler);
+    inputElement.on('focus', focusHandler);
+
+    this.$scope.$on('$destroy', () => {
+      inputElement.off('keydown', keyDownHandler);
+      inputElement.off('focus', focusHandler);
+    });
+
+    let ignoreNextViewChange = false;
+
+    this.$scope.$watch(() => ngModel.$viewValue, viewValue => {
+      if (ignoreNextViewChange) {
+        ignoreNextViewChange = false;
+      } else {
+        // prevents initial triggering when user is not actually inputting anything
+        if (inputElement.is(':focus')) {
+          this.autocomplete(viewValue);
+        }
+      }
+    });
+
+    this.applyValue = (value: string) => {
+      ignoreNextViewChange = ngModel.$viewValue !== value;
+      ngModel.$setViewValue(value);
+      ngModel.$render();
+    };
+
+    this.element = inputElement;
   }
 
   keyPressed(event: JQueryEventObject) {

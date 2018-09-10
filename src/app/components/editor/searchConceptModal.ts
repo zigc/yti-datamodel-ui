@@ -1,7 +1,6 @@
-import { IScope, IPromise, IQService, ui } from 'angular';
-import IModalService = ui.bootstrap.IModalService;
-import IModalServiceInstance = ui.bootstrap.IModalServiceInstance;
-import GettextCatalog = angular.gettext.gettextCatalog;
+import { IScope, IPromise, IQService } from 'angular';
+import { IModalService, IModalServiceInstance } from 'angular-ui-bootstrap';
+import { gettextCatalog as GettextCatalog } from 'angular-gettext';
 import { LanguageService, Localizer } from 'app/services/languageService';
 import { comparingLocalizable } from 'app/utils/comparator';
 import { EditableForm } from 'app/components/form/editableEntityController';
@@ -57,7 +56,7 @@ export class SearchConceptModal {
       template: require('./searchConceptModal.html'),
       size: 'lg',
       controller: SearchConceptController,
-      controllerAs: 'ctrl',
+      controllerAs: '$ctrl',
       backdrop: true,
       resolve: {
         vocabularies: () => vocabularies,

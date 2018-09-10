@@ -1,12 +1,12 @@
-import { IAttributes, IScope } from 'angular';
+import { IScope } from 'angular';
 import { AddEditLinkModal } from './addEditLinkModal';
 import { LanguageService } from 'app/services/languageService';
-import { TableDescriptor, ColumnDescriptor } from 'app/components/form/editableTable';
-import { module as mod } from './module';
+import { ColumnDescriptor, TableDescriptor } from 'app/components/form/editableTable';
 import { Link } from 'app/entities/model';
-import { modalCancelHandler } from 'app/utils/angular';
+import { ComponentDeclaration, modalCancelHandler } from 'app/utils/angular';
 import { LanguageContext } from 'app/types/language';
 import { EditableForm } from 'app/components/form/editableEntityController';
+import { forwardRef } from '@angular/core';
 
 interface WithLinks {
   links: Link[];
@@ -14,45 +14,51 @@ interface WithLinks {
   removeLink(link: Link): void;
 }
 
-mod.directive('linksView', () => {
-  return {
-    scope: {
-      value: '=',
-      context: '='
-    },
-    restrict: 'E',
-    template: `
+export const LinksViewComponent: ComponentDeclaration = {
+  selector: 'linksView',
+  bindings: {
+    value: '=',
+    context: '='
+  },
+  require: {
+    form: '?^form'
+  },
+  template: `
       <h4>
         <span translate>Links</span> 
-        <button id="add_link_button" type="button" class="btn btn-link btn-xs pull-right" ng-click="ctrl.addLink()" ng-show="ctrl.isEditing()">
+        <button id="add_link_button" type="button" class="btn btn-link btn-xs pull-right" ng-click="$ctrl.addLink()" ng-show="$ctrl.isEditing()">
           <span translate>Add link</span>
         </button>
       </h4>
-      <editable-table id="'links'" descriptor="ctrl.descriptor" expanded="ctrl.expanded"></editable-table>
-    `,
-    controllerAs: 'ctrl',
-    bindToController: true,
-    require: ['linksView', '?^form'],
-    link(_$scope: IScope, _element: JQuery, _attributes: IAttributes, [thisController, formController]: [LinksViewController, EditableForm]) {
-      thisController.isEditing = () => formController && formController.editing;
-    },
-    controller: LinksViewController
-  };
-});
+      <editable-table id="'links'" descriptor="$ctrl.descriptor" expanded="$ctrl.expanded"></editable-table>
+  `,
+  controller: forwardRef(() => LinksViewController)
+};
 
 class LinksViewController {
 
   value: WithLinks;
   context: LanguageContext;
-  isEditing: () => boolean;
 
   descriptor: LinkTableDescriptor;
   expanded = false;
 
-  constructor($scope: IScope, private addEditLinkModal: AddEditLinkModal, private languageService: LanguageService) {
-    $scope.$watch(() => this.value, value => {
-      this.descriptor = new LinkTableDescriptor(addEditLinkModal, value, this.context, languageService);
+  form: EditableForm;
+
+  /* @ngInject */
+  constructor(private $scope: IScope,
+              private addEditLinkModal: AddEditLinkModal,
+              private languageService: LanguageService) {
+  }
+
+  $onInit() {
+    this.$scope.$watch(() => this.value, value => {
+      this.descriptor = new LinkTableDescriptor(this.addEditLinkModal, value, this.context, this.languageService);
     });
+  }
+
+  isEditing() {
+    return this.form && this.form.editing;
   }
 
   addLink() {

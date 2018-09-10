@@ -1,6 +1,5 @@
-import { IPromise, IScope, ui } from 'angular';
-import IModalService = ui.bootstrap.IModalService;
-import IModalServiceInstance = ui.bootstrap.IModalServiceInstance;
+import { IPromise, IScope } from 'angular';
+import { IModalService, IModalServiceInstance } from 'angular-ui-bootstrap';
 import { SearchService } from 'app/services/searchService';
 import { LanguageService, Localizer } from 'app/services/languageService';
 import { SearchController, SearchFilter } from 'app/types/filter';
@@ -8,7 +7,7 @@ import { Type } from 'app/types/entity';
 import { availableUILanguages, LanguageContext } from 'app/types/language';
 import { SearchResult } from 'app/entities/search';
 import { filterAndSortSearchResults, defaultLabelComparator } from './filter/util';
-import { Uri } from '../entities/uri';
+import { Uri } from 'app/entities/uri';
 
 export const languageContext: LanguageContext = {
   id: new Uri('http://advanvedSearch', {}),
@@ -25,7 +24,7 @@ export class AdvancedSearchModal {
       template: require('./advancedSearchModal.html'),
       size: 'md',
       controller: AdvancedSearchController,
-      controllerAs: 'ctrl'
+      controllerAs: '$ctrl'
     }).result;
   }
 }

@@ -1,3 +1,7 @@
+import { InformationAboutServicePageComponent } from './informationAboutServicePage';
+
+import { registerComponent } from 'app/utils/angular';
+import { module as mod } from './module';
 export { module } from './module';
 
-import './informationAboutServicePage';
+registerComponent(mod, InformationAboutServicePageComponent);

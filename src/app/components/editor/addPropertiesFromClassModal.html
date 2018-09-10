@@ -1,35 +1,35 @@
 <modal-template class="add-properties-from-class">
-  <modal-title>{{'Add properties from ' + ctrl.classType | translate}}</modal-title>
+  <modal-title>{{'Add properties from ' + $ctrl.classType | translate}}</modal-title>
 
   <modal-body>
-    <p><span>{{'Do you want to add following properties from ' + ctrl.classType + '?' | translate}}</span></p>
+    <p><span>{{'Do you want to add following properties from ' + $ctrl.classType + '?' | translate}}</span></p>
 
     <div class="properties">
-      <div ng-repeat="(type, properties) in ctrl.properties track by $index">
+      <div ng-repeat="(type, properties) in $ctrl.properties track by $index">
         <h5>{{type | translate}}</h5>
 
         <div class="checkbox" ng-repeat="property in properties track by property.internalId.uri">
           <label>
-            <input id="{{'select_property_' + type + '_' + property.getIdIdentifierFromLabel(ctrl.languageService) + '_checkbox'}}"
-                   ng-disabled="ctrl.isExcluded(property)"
+            <input id="{{'select_property_' + type + '_' + property.getIdIdentifierFromLabel($ctrl.languageService) + '_checkbox'}}"
+                   ng-disabled="$ctrl.isExcluded(property)"
                    type="checkbox"
-                   checklist-model="ctrl.selectedProperties"
+                   checklist-model="$ctrl.selectedProperties"
                    checklist-value="property" />
-            <span uib-tooltip="{{ctrl.tooltip(property)}}">
+            <span uib-tooltip="{{$ctrl.tooltip(property)}}">
               <i ng-class="property.glyphIconClass"></i>
-              {{property | translateLabel: ctrl.context}}
+              {{property | translateLabel: $ctrl.context}}
             </span>
           </label>
         </div>
       </div>
     </div>
 
-    <button id="select_all_properties_button" class="btn btn-action btn-sm" ng-click="ctrl.selectAll()" translate>Select all</button>
-    <button id="deselect_all_properties_button" class="btn btn-action btn-sm" ng-click="ctrl.deselectAll()" translate>Deselect all</button>
+    <button id="select_all_properties_button" class="btn btn-action btn-sm" ng-click="$ctrl.selectAll()" translate>Select all</button>
+    <button id="deselect_all_properties_button" class="btn btn-action btn-sm" ng-click="$ctrl.deselectAll()" translate>Deselect all</button>
   </modal-body>
 
   <modal-buttons>
-    <button id="confirm_properties_from_class_button" class="btn btn-action confirm" type="button" ng-click="ctrl.confirm()" translate>Yes</button>
+    <button id="confirm_properties_from_class_button" class="btn btn-action confirm" type="button" ng-click="$ctrl.confirm()" translate>Yes</button>
     <button id="cancel_properties_from_class_button" class="btn btn-link" type="button" ng-click="$dismiss('cancel')" translate>Cancel</button>
   </modal-buttons>
 </modal-template>

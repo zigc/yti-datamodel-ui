@@ -1,5 +1,4 @@
-import { ui } from 'angular';
-import IModalService = ui.bootstrap.IModalService;
+import { IModalService } from 'angular-ui-bootstrap';
 import { Usage } from 'app/entities/usage';
 import { LanguageContext } from 'app/types/language';
 import { identity } from 'yti-common-ui/utils/object';
@@ -23,12 +22,12 @@ export class ErrorModal {
           
             <modal-title>
               <i class="fas fa-exclamation-circle"></i>
-              {{ctrl.title | translate}}
+              {{$ctrl.title | translate}}
             </modal-title>
           
             <modal-body>
-              <p>{{ctrl.errorMessage | translate}}</p>
-              <usage ng-if="ctrl.usage" usage="ctrl.usage.usage" context="ctrl.usage.context"></usage>
+              <p>{{$ctrl.errorMessage | translate}}</p>
+              <usage ng-if="$ctrl.usage" usage="$ctrl.usage.usage" context="$ctrl.usage.context"></usage>
             </modal-body>
           
             <modal-buttons>
@@ -38,7 +37,7 @@ export class ErrorModal {
           </modal-template>
         `,
       size: 'adapting',
-      controllerAs: 'ctrl',
+      controllerAs: '$ctrl',
       controller: ErrorModalController,
       resolve: {
         title: () => title,

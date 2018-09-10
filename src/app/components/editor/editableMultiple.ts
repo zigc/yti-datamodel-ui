@@ -1,122 +1,35 @@
-import { IAttributes, INgModelController, IQService, IScope, IModelFormatter } from 'angular';
+import { IModelFormatter, INgModelController, IQService, IScope } from 'angular';
 import { EditableForm } from 'app/components/form/editableEntityController';
-import { arrayValidator, arrayAsyncValidator } from 'app/components/form/validators';
-import { extendNgModelOptions, formatWithFormatters, ValidationResult, validateWithValidators } from 'app/utils/angular';
-import { module as mod } from './module';
+import { arrayAsyncValidator, arrayValidator } from 'app/components/form/validators';
+import { ComponentDeclaration, extendNgModelOptions, formatWithFormatters, validateWithValidators, ValidationResult } from 'app/utils/angular';
 import { remove } from 'yti-common-ui/utils/array';
 import { enter } from 'yti-common-ui/utils/key-code';
 import { normalizeAsId } from 'yti-common-ui/utils/resource';
+import { forwardRef } from '@angular/core';
 
 const skipValidators = new Set<string>(['duplicate']);
 
-mod.directive('editableMultiple', /* @ngInject */ ($q: IQService) => {
-  return {
-    scope: {
-      ngModel: '=',
-      input: '=',
-      id: '@',
-      title: '@',
-      link: '=',
-      required: '='
-    },
-    restrict: 'E',
-    controllerAs: 'ctrl',
-    bindToController: true,
-    transclude: {
-      input: 'inputContainer',
-      button: '?buttonContainer'
-    },
-    template: require('./editableMultiple.html'),
-    require: ['editableMultiple', 'ngModel', '?^form'],
-    link($scope: EditableMultipleScope,
-         element: JQuery,
-         _attributes: IAttributes,
-         [thisController, ngModel, formController]: [EditableMultipleController<any>, INgModelController, EditableForm]) {
-
-      thisController.isEditing = () => formController.editing;
-
-      const inputElement = element.find('input');
-      const inputNgModel = inputElement.controller('ngModel');
-
-      const keyDownHandler = (event: JQueryEventObject) => $scope.$apply(() => thisController.keyPressed(event));
-      const blurHandler = () => $scope.$apply(() => thisController.addValueFromInput());
-
-      inputElement.on('keydown', keyDownHandler);
-      inputElement.on('blur', blurHandler);
-
-      $scope.$on('$destroy', () => {
-        inputElement.off('keydown', keyDownHandler);
-        inputElement.off('blur', blurHandler);
-      });
-
-      extendNgModelOptions(ngModel, { allowInvalid: true });
-      $scope.ngModelControllers = [inputNgModel, ngModel];
-
-      $scope.$watchCollection(() => inputNgModel.$formatters, formatters => thisController.formatter = formatters);
-
-      function validate() {
-        ngModel.$validate();
-        validateWithValidators<any>($q, inputNgModel, skipValidators, ngModel.$modelValue)
-          .then(validation => thisController.validation = validation);
-      }
-
-      function resetValidators(validators: string[], oldValidators: string[]) {
-
-        for (const validator of oldValidators) {
-          if (!skipValidators.has(validator)) {
-            delete ngModel.$validators[validator];
-            ngModel.$setValidity(validator, true);
-          }
-        }
-
-        for (const validator of validators) {
-          if (!skipValidators.has(validator)) {
-            ngModel.$validators[validator] = arrayValidator(inputNgModel.$validators[validator]);
-          }
-        }
-
-        validate();
-      }
-
-      function resetAsyncValidators(asyncValidatorNames: string[], oldAsyncValidatorNames: string[]) {
-
-        for (const asyncValidator of oldAsyncValidatorNames) {
-          if (!skipValidators.has(asyncValidator)) {
-            delete ngModel.$asyncValidators[asyncValidator];
-            ngModel.$setValidity(asyncValidator, true);
-          }
-        }
-
-        for (const asyncValidator of asyncValidatorNames) {
-          if (!skipValidators.has(asyncValidator)) {
-            ngModel.$asyncValidators[asyncValidator] = arrayAsyncValidator($q, inputNgModel.$asyncValidators[asyncValidator]);
-          }
-        }
-
-        validate();
-      }
-
-      $scope.$watchCollection(() => Object.keys(inputNgModel.$validators), resetValidators);
-      $scope.$watchCollection(() => Object.values(inputNgModel.$validators), () => {
-        const validatorNames = Object.keys(inputNgModel.$validators);
-        resetValidators(validatorNames, validatorNames);
-      });
-
-      $scope.$watchCollection(() => Object.keys(inputNgModel.$asyncValidators), resetAsyncValidators);
-      $scope.$watchCollection(() => Object.values(inputNgModel.$asyncValidators), () => {
-        const asyncValidatorNames = Object.keys(inputNgModel.$asyncValidators);
-        resetAsyncValidators(asyncValidatorNames, asyncValidatorNames);
-      });
-
-      if (thisController.required) {
-        ngModel.$validators['required'] = (value: any[]) => value && value.length > 0;
-      }
-
-      $scope.$watchCollection(() => thisController.ngModel, () => validate());
-    },
-    controller: EditableMultipleController
-  };
-});
+export const EditableMultipleComponent: ComponentDeclaration = {
+  selector: 'editableMultiple',
+  bindings: {
+    ngModel: '=',
+    input: '=',
+    id: '@',
+    title: '@',
+    link: '=',
+    required: '='
+  },
+  transclude: {
+    input: 'inputContainer',
+    button: '?buttonContainer'
+  },
+  template: require('./editableMultiple.html'),
+  require: {
+    'ngModelCtrl': 'ngModel',
+    'form': '?^form'
+  },
+  controller: forwardRef(() => EditableMultipleController)
+};
 
 interface EditableMultipleScope extends IScope {
   ngModelControllers: INgModelController[];
@@ -132,7 +45,116 @@ export class EditableMultipleController<T> {
   link: (item: T) => string;
   required: boolean;
   validation: ValidationResult<T>;
-  isEditing: () => boolean;
+
+  form: EditableForm;
+  ngModelCtrl: INgModelController;
+
+  /* @ngInject */
+  constructor(private $scope: EditableMultipleScope,
+              private $q: IQService,
+              private $element: JQuery) {
+  }
+
+  $postLink() {
+
+    const inputElement = this.$element.find('input');
+    const inputNgModelCtrl = inputElement.controller('ngModel');
+
+    const keyDownHandler = (event: JQueryEventObject) => this.$scope.$apply(() => this.keyPressed(event));
+    const blurHandler = () => this.$scope.$apply(() => this.addValueFromInput());
+
+    inputElement.on('keydown', keyDownHandler);
+    inputElement.on('blur', blurHandler);
+
+    this.$scope.$on('$destroy', () => {
+      inputElement.off('keydown', keyDownHandler);
+      inputElement.off('blur', blurHandler);
+    });
+
+    extendNgModelOptions(this.ngModelCtrl, { allowInvalid: true });
+    this.$scope.ngModelControllers = [inputNgModelCtrl, this.ngModelCtrl];
+
+    this.$scope.$watchCollection(() => inputNgModelCtrl.$formatters, formatters => this.formatter = formatters);
+
+    this.$scope.$watchCollection(() => Object.keys(inputNgModelCtrl.$validators),
+      (current, previous) => this.resetValidators(current, previous));
+
+    this.$scope.$watchCollection(() => Object.values(inputNgModelCtrl.$validators), () => {
+      this.resetValidators();
+    });
+
+    this.$scope.$watchCollection(() => Object.keys(inputNgModelCtrl.$asyncValidators),
+      (current, previous) => this.resetAsyncValidators(current, previous));
+
+    this.$scope.$watchCollection(() => Object.values(inputNgModelCtrl.$asyncValidators), () => {
+      const asyncValidatorNames = Object.keys(inputNgModelCtrl.$asyncValidators);
+      this.resetAsyncValidators(asyncValidatorNames, asyncValidatorNames);
+    });
+
+    if (this.required) {
+      this.ngModelCtrl.$validators['required'] = (value: any[]) => value && value.length > 0;
+    }
+
+    this.$scope.$watchCollection(() => this.ngModel, () => this.validate());
+  }
+
+  validate() {
+
+    const inputElement = this.$element.find('input');
+    const inputNgModelCtrl = inputElement.controller('ngModel');
+
+    this.ngModelCtrl.$validate();
+    validateWithValidators<any>(this.$q, inputNgModelCtrl, skipValidators, this.ngModelCtrl.$modelValue || [])
+      .then(validation => this.validation = validation);
+  };
+
+  resetAsyncValidators(asyncValidatorNames?: string[], oldAsyncValidatorNames?: string[]) {
+
+    const inputElement = this.$element.find('input');
+    const inputNgModelCtrl = inputElement.controller('ngModel');
+    const validatorNames = Object.keys(inputNgModelCtrl.$validators);
+
+    for (const asyncValidator of oldAsyncValidatorNames || validatorNames) {
+      if (!skipValidators.has(asyncValidator)) {
+        delete this.ngModelCtrl.$asyncValidators[asyncValidator];
+        this.ngModelCtrl.$setValidity(asyncValidator, true);
+      }
+    }
+
+    for (const asyncValidator of asyncValidatorNames || validatorNames) {
+      if (!skipValidators.has(asyncValidator)) {
+        this.ngModelCtrl.$asyncValidators[asyncValidator] = arrayAsyncValidator(this.$q, inputNgModelCtrl.$asyncValidators[asyncValidator]);
+      }
+    }
+
+    this.validate();
+  }
+
+  resetValidators(validators?: string[], oldValidators?: string[]) {
+
+    const inputElement = this.$element.find('input');
+    const inputNgModelCtrl = inputElement.controller('ngModel');
+    const validatorNames = Object.keys(inputNgModelCtrl.$validators);
+
+    for (const validator of oldValidators || validatorNames) {
+      if (!skipValidators.has(validator)) {
+        delete this.ngModelCtrl.$validators[validator];
+        this.ngModelCtrl.$setValidity(validator, true);
+      }
+    }
+
+    for (const validator of validators || validatorNames) {
+      if (!skipValidators.has(validator)) {
+        this.ngModelCtrl.$validators[validator] = arrayValidator(inputNgModelCtrl.$validators[validator]);
+      }
+    }
+
+    this.validate();
+  }
+
+  isEditing() {
+    return this.form.editing;
+  }
 
   format(value: T): string {
     return formatWithFormatters(value, this.formatter);

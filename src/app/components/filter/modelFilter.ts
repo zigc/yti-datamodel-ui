@@ -9,38 +9,35 @@ import { collectIds } from 'app/utils/entity';
 import { IPromise } from 'angular';
 import { comparingLocalizable } from 'app/utils/comparator';
 import { LanguageService } from 'app/services/languageService';
-import { ifChanged } from 'app/utils/angular';
+import { ComponentDeclaration, ifChanged } from 'app/utils/angular';
 import { ClassListItem } from 'app/entities/class';
 import { PredicateListItem } from 'app/entities/predicate';
 import { Model } from 'app/entities/model';
 import { DefinedBy } from 'app/entities/definedBy';
+import { forwardRef } from '@angular/core';
 
-mod.directive('modelFilter', () => {
-  return {
-    scope: {
-      searchController: '=',
-      type: '@',
-      model: '=',
-      defaultShow: '='
-    },
-    bindToController: true,
-    controllerAs: 'ctrl',
-    restrict: 'E',
-    template: `
+export const ModelFilterComponent: ComponentDeclaration = {
+  selector: 'modelFilter',
+  bindings: {
+    searchController: '=',
+    type: '@',
+    model: '=',
+    defaultShow: '='
+  },
+  template: `
       <select id="model" 
               class="form-control" 
               style="width: auto"
-              ng-model="ctrl.showModel"
-              ng-options="ctrl.isThisModel(model)
-                        ? ('Assigned to this ' + ctrl.model.normalizedType | translate)
-                        : (model | translateLabel: ctrl.model)
-                        for model in ctrl.models">
+              ng-model="$ctrl.showModel"
+              ng-options="$ctrl.isThisModel(model)
+                        ? ('Assigned to this ' + $ctrl.model.normalizedType | translate)
+                        : (model | translateLabel: $ctrl.model)
+                        for model in $ctrl.models">
         <option value="" translate>All models</option>
       </select>
-    `,
-    controller: ModelFilterController
-  };
-});
+  `,
+  controller: forwardRef(() => ModelFilterController)
+};
 
 type ItemType = ClassListItem|PredicateListItem;
 
@@ -56,22 +53,28 @@ class ModelFilterController {
   private currentModelItemIds: Set<string> = new Set<string>();
 
   /* @ngInject */
-  constructor($scope: IScope, classService: ClassService, predicateService: PredicateService, languageService: LanguageService) {
+  constructor(private $scope: IScope,
+              private classService: ClassService,
+              private predicateService: PredicateService,
+              private languageService: LanguageService) {
+  }
 
-    const localizer = languageService.createLocalizer(this.model);
+  $onInit() {
+
+    const localizer = this.languageService.createLocalizer(this.model);
 
     this.showModel = this.defaultShow;
 
-    $scope.$watch(() => this.model, () => {
+    this.$scope.$watch(() => this.model, () => {
       const promise: IPromise<(PredicateListItem|ClassListItem)[]> =
-        (this.type === 'class' ? classService.getClassesAssignedToModel(this.model)
-                               : predicateService.getPredicatesAssignedToModel(this.model));
+        (this.type === 'class' ? this.classService.getClassesAssignedToModel(this.model)
+                               : this.predicateService.getPredicatesAssignedToModel(this.model));
 
       promise.then(items => this.currentModelItemIds = collectIds(items))
         .then(() => this.searchController.search());
     });
 
-    $scope.$watch(() => this.searchController.items, items => {
+    this.$scope.$watch(() => this.searchController.items, items => {
       const definedByFromClasses = _.chain(items)
         .map(item => item.definedBy!)
         .uniqBy(definedBy => definedBy.id.toString())
@@ -92,7 +95,7 @@ class ModelFilterController {
       }
     );
 
-    $scope.$watch(() => this.showModel, ifChanged(() => this.searchController.search()));
+    this.$scope.$watch(() => this.showModel, ifChanged(() => this.searchController.search()));
   }
 
   isThisModel(item: DefinedBy|Model) {

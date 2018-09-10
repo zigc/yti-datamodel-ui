@@ -1,11 +1,10 @@
-import { IScope, IPromise, ui } from 'angular';
-import IModalService = ui.bootstrap.IModalService;
-import IModalServiceInstance = ui.bootstrap.IModalServiceInstance;
+import { IScope, IPromise } from 'angular';
+import { IModalService, IModalServiceInstance} from 'angular-ui-bootstrap';
 import { ReferenceDataService } from 'app/services/referenceDataService';
 import { comparingLocalizable } from 'app/utils/comparator';
 import { Localizer, LanguageService } from 'app/services/languageService';
 import { AddNew } from 'app/components/common/searchResults';
-import GettextCatalog = angular.gettext.gettextCatalog;
+import { gettextCatalog as GettextCatalog } from 'angular-gettext';
 import { EditableForm } from 'app/components/form/editableEntityController';
 import { Uri } from 'app/entities/uri';
 import { anyMatching, allMatching } from 'yti-common-ui/utils/array';
@@ -36,7 +35,7 @@ export class SearchReferenceDataModal {
       template: require('./searchReferenceDataModal.html'),
       size: 'lg',
       controller: SearchReferenceDataModalController,
-      controllerAs: 'ctrl',
+      controllerAs: '$ctrl',
       backdrop: true,
       resolve: {
         model: () => model,

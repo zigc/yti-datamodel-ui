@@ -1,12 +1,11 @@
-import { IPromise, IScope, ui } from 'angular';
-import { Classification } from '../../entities/classification';
-import { ClassificationService } from '../../services/classificationService';
-import IModalService = ui.bootstrap.IModalService;
-import IModalServiceInstance = ui.bootstrap.IModalServiceInstance;
-import { Exclusion } from '../../utils/exclusion';
-import { WithId } from '../../types/entity';
+import { IPromise, IScope } from 'angular';
+import { Classification } from 'app/entities/classification';
+import { ClassificationService } from 'app/services/classificationService';
+import { IModalService, IModalServiceInstance } from 'angular-ui-bootstrap';
+import { Exclusion } from 'app/utils/exclusion';
+import { WithId } from 'app/types/entity';
 import { comparingLocalizable } from 'app/utils/comparator';
-import { LanguageService } from '../../services/languageService';
+import { LanguageService } from 'app/services/languageService';
 
 export class SearchClassificationModal {
   /* @ngInject */
@@ -21,7 +20,7 @@ export class SearchClassificationModal {
         exclude: () => exclude
       },
       controller: SearchClassificationModalController,
-      controllerAs: 'ctrl'
+      controllerAs: '$ctrl'
     }).result;
   }
 }

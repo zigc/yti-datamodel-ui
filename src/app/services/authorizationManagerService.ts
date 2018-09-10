@@ -4,7 +4,7 @@ import { User } from 'app/entities/user';
 import { WithDefinedBy } from 'app/types/entity';
 import { Association, Attribute } from 'app/entities/predicate';
 import { Class } from 'app/entities/class';
-import { Organization } from '../entities/organization';
+import { Organization } from 'app/entities/organization';
 import { selectableStatuses, Status } from 'yti-common-ui/entities/status';
 
 function isReference(model: Model, resource: WithDefinedBy): boolean {

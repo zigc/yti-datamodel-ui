@@ -1,24 +1,21 @@
-import { module as mod } from './module';
 import { IScope } from 'angular';
 import { UsageService } from 'app/services/usageService';
 import { EditableEntity } from 'app/types/entity';
 import { LanguageContext } from 'app/types/language';
 import { Usage } from 'app/entities/usage';
+import { ComponentDeclaration } from 'app/utils/angular';
+import { forwardRef } from '@angular/core';
 
-mod.directive('usagePanel', () => {
-  return {
-    restrict: 'E',
-    scope: {
-      id: '=',
-      entity: '=',
-      context: '='
-    },
-    template: require('./usagePanel.html'),
-    bindToController: true,
-    controllerAs: 'ctrl',
-    controller: UsagePanelController
-  };
-});
+export const UsagePanelComponent: ComponentDeclaration = {
+  selector: 'usagePanel',
+  bindings: {
+    id: '=',
+    entity: '=',
+    context: '='
+  },
+  template: require('./usagePanel.html'),
+  controller: forwardRef(() => UsagePanelController)
+};
 
 class UsagePanelController {
 
@@ -29,9 +26,13 @@ class UsagePanelController {
   loading: boolean;
 
   /* @ngInject */
-  constructor($scope: IScope, private usageService: UsageService) {
-    $scope.$watch(() => this.open, () => this.updateUsage());
-    $scope.$watch(() => this.entity, () => this.updateUsage());
+  constructor(private $scope: IScope,
+              private usageService: UsageService) {
+  }
+
+  $onInit() {
+    this.$scope.$watch(() => this.open, () => this.updateUsage());
+    this.$scope.$watch(() => this.entity, () => this.updateUsage());
   }
 
   hasReferrers() {

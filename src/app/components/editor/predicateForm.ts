@@ -1,5 +1,3 @@
-import { module as mod } from './module';
-import { IScope, IAttributes } from 'angular';
 import { isDefined } from 'yti-common-ui/utils/object';
 import { UsageService } from 'app/services/usageService';
 import { ErrorModal } from 'app/components/form/errorModal';
@@ -8,45 +6,48 @@ import { glyphIconClassForType } from 'app/utils/entity';
 import { EditableForm } from 'app/components/form/editableEntityController';
 import { PredicateViewController } from './predicateView';
 import { Model } from 'app/entities/model';
-import { Attribute, Association } from 'app/entities/predicate';
+import { Association, Attribute } from 'app/entities/predicate';
 import { KnownPredicateType } from 'app/types/entity';
+import { ComponentDeclaration } from 'app/utils/angular';
+import { forwardRef } from '@angular/core';
 
-mod.directive('predicateForm', () => {
-  return {
-    scope: {
-      id: '=',
-      predicate: '=',
-      oldPredicate: '=',
-      model: '='
-    },
-    restrict: 'E',
-    template: require('./predicateForm.html'),
-    bindToController: true,
-    controllerAs: 'ctrl',
-    require: ['predicateForm', '?^predicateView', '?^form'],
-    link(_$scope: IScope,
-         _element: JQuery,
-         _attributes: IAttributes,
-         [predicateFormController, predicateViewController, formController]: [PredicateFormController, PredicateViewController, EditableForm]) {
-      predicateFormController.isEditing = () => formController && formController.editing;
-      predicateFormController.shouldAutofocus = !isDefined(predicateViewController);
-    },
-    controller: PredicateFormController
-  };
-});
+export const PredicateFormComponent: ComponentDeclaration = {
+  selector: 'predicateForm',
+  bindings: {
+    id: '=',
+    predicate: '=',
+    oldPredicate: '=',
+    model: '='
+  },
+  require: {
+    predicateView: '?^predicateView',
+    form: '?^form'
+  },
+  template: require('./predicateForm.html'),
+  controller: forwardRef(() => PredicateFormController)
+};
 
 class PredicateFormController {
 
   model: Model;
   predicate: Attribute|Association;
   oldPredicate: Attribute|Association;
-  isEditing: () => boolean;
-  shouldAutofocus: boolean;
+
+  predicateView: PredicateViewController;
+  form: EditableForm;
 
   /* @ngInject */
   constructor(private predicateService: PredicateService,
               private usageService: UsageService,
               private errorModal: ErrorModal) {
+  }
+
+  isEditing() {
+    return this.form && this.form.editing;
+  }
+
+  get shouldAutofocus() {
+    return !isDefined(this.predicateView);
   }
 
   linkToIdProperty() {

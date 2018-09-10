@@ -1,8 +1,9 @@
-import { IScope, IAttributes, INgModelController } from 'angular';
+import { INgModelController, IScope } from 'angular';
 import { resolveValidator } from './validators';
 import { normalizeAsArray } from 'yti-common-ui/utils/array';
-import { module as mod } from './module';
 import { dataTypes } from 'app/entities/dataTypes';
+ import { ComponentDeclaration } from 'app/utils/angular';
+import { forwardRef } from '@angular/core';
 
 interface Error {
   key: string;
@@ -17,35 +18,45 @@ for (const dataType of dataTypes) {
   errors.push({ key: dataType, message: dataType + ' error', format: format ? `(${format})` : ''});
 }
 
-mod.directive('errorMessages', () => {
-  return {
-    restrict: 'E',
-    template: require('./errorMessages.html'),
-    link($scope: ErrorMessagesScope, _element: JQuery, attributes: ErrorMessagesAttributes) {
-      $scope.dynamicErrors = errors;
-      $scope.$watch(attributes.ngModelController, (ngModelController: INgModelController|INgModelController[]) => {
-        $scope.ngModelControllers = normalizeAsArray(ngModelController);
-      });
-      $scope.isVisible = () => {
-        if ($scope.ngModelControllers) {
-          for (const ngModel of $scope.ngModelControllers) {
-            if (ngModel.$dirty || ngModel.$viewValue) {
-              return true;
-            }
-          }
-        }
-        return false;
-      };
-    }
-  };
-});
+export const ErrorMessagesComponent: ComponentDeclaration = {
+  selector: 'errorMessages',
+  template: require('./errorMessages.html'),
+  bindings: {
+    'ngModelController': '<'
+  },
+  controller: forwardRef(() => ErrorMessagesController)
+};
 
-interface ErrorMessagesAttributes extends IAttributes {
-  ngModelController: string;
+class ErrorMessagesController {
+
+  ngModelController: INgModelController|INgModelController[];
+  ngModelControllers: INgModelController[];
+  dynamicErrors = errors;
+
+  /* @ngInject */
+  constructor(private $scope: ErrorMessagesScope) {
+  }
+
+  isVisible() {
+    if (this.ngModelControllers) {
+      for (const ngModel of this.ngModelControllers) {
+        if (ngModel.$dirty || ngModel.$viewValue) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  $onInit() {
+    this.$scope.$watch(() => this.ngModelController, (ngModelController: INgModelController|INgModelController[]) => {
+      this.ngModelControllers = normalizeAsArray(ngModelController);
+    });
+  }
 }
 
 interface ErrorMessagesScope extends IScope {
-  ngModelControllers: INgModelController[];
+
   dynamicErrors: Error[];
   isVisible(): boolean;
 }

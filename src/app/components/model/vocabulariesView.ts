@@ -6,9 +6,10 @@ import { module as mod } from './module';
 import { createExistsExclusion } from 'app/utils/exclusion';
 import { collectProperties } from 'yti-common-ui/utils/array';
 import { Vocabulary } from 'app/entities/vocabulary';
-import { modalCancelHandler } from 'app/utils/angular';
+import { ComponentDeclaration, modalCancelHandler } from 'app/utils/angular';
 import { LanguageContext } from 'app/types/language';
 import { EditableForm } from 'app/components/form/editableEntityController';
+import { forwardRef } from '@angular/core';
 
 interface WithVocabularies {
   vocabularies: Vocabulary[];
@@ -16,49 +17,51 @@ interface WithVocabularies {
   removeVocabulary(vocabulary: Vocabulary): void;
 }
 
-mod.directive('vocabulariesView', () => {
-  return {
-    scope: {
-      value: '=',
-      context: '='
-    },
-    restrict: 'E',
-    template: `
+export const VocabulariesViewComponent: ComponentDeclaration = {
+  selector: 'vocabulariesView',
+  bindings: {
+    value: '=',
+    context: '='
+  },
+  require: {
+    form: '?^form'
+  },
+  template: `
       <h4>
         <span translate>Controlled vocabularies</span> 
-        <button id="add_vocabulary_button" type="button" class="btn btn-link btn-xs pull-right" ng-click="ctrl.addVocabulary()" ng-show="ctrl.isEditing()">
+        <button id="add_vocabulary_button" type="button" class="btn btn-link btn-xs pull-right" ng-click="$ctrl.addVocabulary()" ng-show="$ctrl.isEditing()">
           <span translate>Add vocabulary</span>
         </button>
       </h4>
-      <editable-table id="'vocabularies'" descriptor="ctrl.descriptor" expanded="ctrl.expanded"></editable-table>
-    `,
-    controllerAs: 'ctrl',
-    bindToController: true,
-    require: ['vocabulariesView', '?^form'],
-    link(_$scope: IScope, _element: JQuery, _attributes: IAttributes, [thisController, formController]: [VocabulariesViewController, EditableForm]) {
-      thisController.isEditing = () => formController && formController.editing;
-    },
-    controller: VocabulariesViewController
-  };
-});
+      <editable-table id="'vocabularies'" descriptor="$ctrl.descriptor" expanded="$ctrl.expanded"></editable-table>
+  `,
+  controller: forwardRef(() => VocabulariesViewController)
+};
 
 class VocabulariesViewController {
 
   value: WithVocabularies;
   context: LanguageContext;
-  isEditing: () => boolean;
 
   descriptor: VocabularyTableDescriptor;
   expanded: boolean;
 
-  /* @ngInject */
-  constructor($scope: IScope,
-              private searchVocabularyModal: SearchVocabularyModal,
-              languageService: LanguageService) {
+  form: EditableForm;
 
-    $scope.$watch(() => this.value, value => {
-      this.descriptor = new VocabularyTableDescriptor(value, this.context, languageService);
+  /* @ngInject */
+  constructor(private $scope: IScope,
+              private searchVocabularyModal: SearchVocabularyModal,
+              private languageService: LanguageService) {
+  }
+
+  $onInit() {
+    this.$scope.$watch(() => this.value, value => {
+      this.descriptor = new VocabularyTableDescriptor(value, this.context, this.languageService);
     });
+  }
+
+  isEditing() {
+    return this.form && this.form.editing;
   }
 
   addVocabulary() {

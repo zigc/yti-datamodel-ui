@@ -1,15 +1,26 @@
 import {
-  IComponentController, IComponentOptions, ILocationService, IModelFormatter, IModule, INgModelController,
+  FilterFactory,
+  IComponentOptions, IControllerConstructor, IDirective, IDirectiveFactory, ILocationService, IModelFormatter, IModule, INgModelController,
   IPromise, IQService
 } from 'angular';
 import { AsyncValidator, Validator } from 'app/components/form/validators';
 import { allMatching, normalizeAsArray } from 'yti-common-ui/utils/array';
 import { valuesExcludingKeys } from 'yti-common-ui/utils/object';
-import { ForwardRefFn, resolveForwardRef } from '@angular/core';
+import { resolveForwardRef } from '@angular/core';
 
 export interface ComponentDeclaration extends IComponentOptions {
   selector: string;
-  controller?: string | Function | (string | Function)[] | IComponentController | ForwardRefFn;
+  controller?: IControllerConstructor;
+}
+
+export interface DirectiveDeclaration {
+  selector: string;
+  factory: IDirectiveFactory;
+}
+
+export interface FilterDeclaration {
+  name: string;
+  factory: FilterFactory;
 }
 
 export function registerComponent(module: IModule, componentDeclaration: ComponentDeclaration) {
@@ -18,6 +29,20 @@ export function registerComponent(module: IModule, componentDeclaration: Compone
   const resolvedController = resolveForwardRef(controller);
 
   module.component(selector, Object.assign({}, options, resolvedController ? { controller: resolvedController} : {}));
+}
+
+export function registerDirective(module: IModule, directiveDeclaration: DirectiveDeclaration) {
+
+  const { selector, factory } = directiveDeclaration;
+
+  module.directive(selector, factory);
+}
+
+export function registerFilter(module: IModule, filterDeclaration: FilterDeclaration) {
+
+  const { name, factory } = filterDeclaration;
+
+  module.filter(name, factory);
 }
 
 export function hasFixedPositioningParent(e: JQuery) {

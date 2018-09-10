@@ -1,4 +1,11 @@
-import 'core-js';
+const tsConfig = require('./tsconfig.script.json');
+const tsConfigPaths = require('tsconfig-paths');
+
+tsConfigPaths.register({
+  baseUrl: tsConfig.compilerOptions.baseUrl,
+  paths: tsConfig.compilerOptions.paths
+});
+
 import '../examples/modelJHS';
 import '../examples/modelEDU';
 import '../examples/modelOILI';

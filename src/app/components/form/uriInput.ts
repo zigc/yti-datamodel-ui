@@ -1,11 +1,11 @@
-import { IScope, IAttributes, INgModelController, IModelValidators } from 'angular';
-import GettextCatalog = angular.gettext.gettextCatalog;
-import { isValidUri, isValidUrl, isValidUriStem } from './validators';
+import { IAttributes, IModelValidators, INgModelController, IScope } from 'angular';
+import { gettextCatalog as GettextCatalog } from 'angular-gettext';
+import { isValidUri, isValidUriStem, isValidUrl } from './validators';
 import { Uri } from 'app/entities/uri';
-import { module as mod } from './module';
 import { ImportedNamespace, Model } from 'app/entities/model';
 import { LanguageService } from 'app/services/languageService';
 import { anyMatching } from 'yti-common-ui/utils/array';
+import { DirectiveDeclaration } from 'app/utils/angular';
 
 type UriInputType = 'required-namespace' | 'free-url' | 'free-uri' | 'stem';
 
@@ -70,33 +70,37 @@ export function createValidators(type: UriInputType, withNamespacesProvider: () 
   return result;
 }
 
-mod.directive('uriInput', /* @ngInject */ (languageService: LanguageService, gettextCatalog: GettextCatalog) => {
-  return {
-    scope: {
-      model: '='
-    },
-    restrict: 'A',
-    require: 'ngModel',
-    link($scope: UriInputScope, element: JQuery, attributes: UriInputAttributes, modelController: INgModelController) {
-
-      if (!attributes['placeholder']) {
-        $scope.$watch(() => languageService.UILanguage, () => {
-          element.attr('placeholder', placeholderText(attributes.uriInput, gettextCatalog));
-        });
-      }
-
-      modelController.$parsers = [createParser(() => $scope.model)];
-      modelController.$formatters = [createFormatter()];
-
-      const validators = createValidators(attributes.uriInput, () => $scope.model);
-
-      for (const validatorName of Object.keys(validators)) {
-        modelController.$validators[validatorName] = validators[validatorName];
-      }
-    }
-  };
-});
-
 interface UriInputScope extends IScope {
   model: Model;
 }
+
+export const UriInputDirective: DirectiveDeclaration = {
+  selector: 'uriInput',
+  /* @ngInject */
+  factory(languageService: LanguageService, gettextCatalog: GettextCatalog) {
+    return {
+      scope: {
+        model: '='
+      },
+      restrict: 'A',
+      require: 'ngModel',
+      link($scope: UriInputScope, element: JQuery, attributes: UriInputAttributes, modelController: INgModelController) {
+
+        if (!attributes['placeholder']) {
+          $scope.$watch(() => languageService.UILanguage, () => {
+            element.attr('placeholder', placeholderText(attributes.uriInput, gettextCatalog));
+          });
+        }
+
+        modelController.$parsers = [createParser(() => $scope.model)];
+        modelController.$formatters = [createFormatter()];
+
+        const validators = createValidators(attributes.uriInput, () => $scope.model);
+
+        for (const validatorName of Object.keys(validators)) {
+          modelController.$validators[validatorName] = validators[validatorName];
+        }
+      }
+    };
+  }
+};

@@ -1,0 +1,27 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../out-tsc/app",
+    "types": [
+      "webpack-env",
+      "Modernizr"
+    ],
+    "baseUrl": "",
+    "paths": {
+      "stream": ["../node_modules/readable-stream"]
+    }
+  },
+  "include": [
+    "init.ts",
+    "main.ts",
+    "polyfills.ts",
+    "augment.d.ts",
+    "../node_modules/yti-common-ui/**/*.ts"
+  ],
+  "exclude": [
+    "test.ts",
+    "**/*.spec.ts",
+    "../node_modules/yti-common-ui/**/*.spec.ts",
+    "../node_modules/yti-common-ui/node_modules"
+  ]
+}

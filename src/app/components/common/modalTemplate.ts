@@ -1,36 +1,49 @@
-import { IAttributes, IScope } from 'angular';
 import { EditableForm } from 'app/components/form/editableEntityController';
-import { module as mod } from './module';
 import { isDefined } from 'yti-common-ui/utils/object';
+import { ComponentDeclaration } from 'app/utils/angular';
+import { forwardRef } from '@angular/core';
 
-interface ModalTemplateAttributes extends IAttributes {
-  'default': string;
-  'editing': string;
-  'purpose': string;
-}
+export const ModalTemplateComponent: ComponentDeclaration = {
+  selector: 'modalTemplate',
+  bindings: {
+    default: '@',
+    editing: '@',
+    purpose: '@'
+  },
+  require: {
+    form: '?^form'
+  },
+  transclude: {
+    title: 'modalTitle',
+    body: 'modalBody',
+    buttons: '?modalButtons'
+  },
+  template: require('./modalTemplate.html'),
+  controller: forwardRef(() => ModalTemplateController)
+};
 
-mod.directive('modalTemplate', () => {
-  return {
-    restrict: 'E',
-    transclude: {
-      title: 'modalTitle',
-      body: 'modalBody',
-      buttons: '?modalButtons'
-    },
-    template: require('./modalTemplate.html'),
-    require: '^?form',
-    link($scope: ModalTemplateScope, _element: JQuery, attributes: ModalTemplateAttributes, formController: EditableForm) {
-      $scope.defaultButtons = attributes.default === 'true';
-      $scope.headerClass = 'modal-header-' + (isDefined(attributes.purpose) ? attributes.purpose : 'normal');
-      const editing = 'editing' in attributes.$attr ? attributes.editing === 'true' : true;
-      if (formController && editing) {
-        formController.editing = true;
-      }
+class ModalTemplateController {
+
+  default: string;
+  editing: string;
+  purpose: string;
+
+  form: EditableForm;
+
+  constructor() {
+  }
+
+  $postLink() {
+    if (this.form && this.editing === 'true') {
+      this.form.editing = true;
     }
-  };
-});
+  }
 
-interface ModalTemplateScope extends IScope {
-  defaultButtons: boolean;
-  headerClass: string;
+  get defaultButtons(): boolean {
+    return this.default === 'true';
+  }
+
+  get headerClass() {
+    return 'modal-header-' + (isDefined(this.purpose) ? this.purpose : 'normal');
+  }
 }

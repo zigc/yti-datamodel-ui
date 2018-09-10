@@ -1,6 +1,5 @@
 import { IHttpService, IPromise, IQService } from 'angular';
 import * as moment from 'moment';
-import { config } from 'config';
 import { upperCaseFirst } from 'change-case';
 import { Uri, Urn } from 'app/entities/uri';
 import { Language } from 'app/types/language';
@@ -9,6 +8,7 @@ import * as frames from 'app/entities/frames';
 import { FrameService } from './frameService';
 import { GraphData, KnownModelType } from 'app/types/entity';
 import { Model, ModelListItem, ImportedNamespace, Link } from 'app/entities/model';
+import { apiEndpointWithName } from './config';
 
 export interface ModelService {
   getModels(): IPromise<ModelListItem[]>;
@@ -30,22 +30,22 @@ export class DefaultModelService implements ModelService {
   }
 
   getModels(): IPromise<ModelListItem[]> {
-    return this.$http.get<GraphData>(config.apiEndpointWithName('model'))
+    return this.$http.get<GraphData>(apiEndpointWithName('model'))
       .then(response => this.deserializeModelList(response.data!));
   }
 
   getModelByUrn(urn: Uri|Urn): IPromise<Model> {
-    return this.$http.get<GraphData>(config.apiEndpointWithName('model'), { params: { id: urn.toString() } })
+    return this.$http.get<GraphData>(apiEndpointWithName('model'), { params: { id: urn.toString() } })
       .then(response => this.deserializeModelById(response.data!, urn));
   }
 
   getModelByPrefix(prefix: string): IPromise<Model> {
-    return this.$http.get<GraphData>(config.apiEndpointWithName('model'), { params: { prefix } })
+    return this.$http.get<GraphData>(apiEndpointWithName('model'), { params: { prefix } })
       .then(response => this.deserializeModelByPrefix(response.data!, prefix));
   }
 
   createModel(model: Model): IPromise<any> {
-    return this.$http.put<{ identifier: Urn }>(config.apiEndpointWithName('model'), model.serialize())
+    return this.$http.put<{ identifier: Urn }>(apiEndpointWithName('model'), model.serialize())
       .then(response => {
         model.unsaved = false;
         model.version = response.data!.identifier;
@@ -54,7 +54,7 @@ export class DefaultModelService implements ModelService {
   }
 
   updateModel(model: Model): IPromise<any> {
-    return this.$http.post<{ identifier: Urn }>(config.apiEndpointWithName('model'), model.serialize(), { params: { id: model.id.uri } })
+    return this.$http.post<{ identifier: Urn }>(apiEndpointWithName('model'), model.serialize(), { params: { id: model.id.uri } })
       .then(response => {
         model.version = response.data!.identifier;
         model.modifiedAt = moment();
@@ -62,7 +62,7 @@ export class DefaultModelService implements ModelService {
   }
 
   deleteModel(id: Uri): IPromise<any> {
-    return this.$http.delete(config.apiEndpointWithName('model'), { params: { id: id.uri } });
+    return this.$http.delete(apiEndpointWithName('model'), { params: { id: id.uri } });
   }
 
   newModel(prefix: string, label: string, classifications: string[], organizations: string[], lang: Language[], type: KnownModelType, redirect?: Uri): IPromise<Model> {
@@ -78,7 +78,7 @@ export class DefaultModelService implements ModelService {
       }
     }
 
-    return this.$http.get<GraphData>(config.apiEndpointWithName(mapEndpoint()), {
+    return this.$http.get<GraphData>(apiEndpointWithName(mapEndpoint()), {
       params: {
         prefix,
         label: upperCaseFirst(label),
@@ -113,12 +113,12 @@ export class DefaultModelService implements ModelService {
   }
 
   getAllImportableNamespaces(): IPromise<ImportedNamespace[]> {
-    return this.$http.get<GraphData>(config.apiEndpointWithName('listNamespaces'))
+    return this.$http.get<GraphData>(apiEndpointWithName('listNamespaces'))
       .then(response => this.deserializeImportedNamespaces(response.data!));
   }
 
   newNamespaceImport(namespace: string, prefix: string, label: string, lang: Language): IPromise<ImportedNamespace> {
-    return this.$http.get<GraphData>(config.apiEndpointWithName('modelRequirementCreator'), {params: {namespace, prefix, label, lang}})
+    return this.$http.get<GraphData>(apiEndpointWithName('modelRequirementCreator'), {params: {namespace, prefix, label, lang}})
       .then(response => this.deserializeImportedNamespace(response.data!));
   }
 

@@ -1,23 +1,18 @@
-import { IScope, IAttributes, ITranscludeFunction } from 'angular';
-import { module as mod } from './module';
+import { IAttributes, IScope, ITranscludeFunction } from 'angular';
 import { isDefined } from 'yti-common-ui/utils/object';
+import { ComponentDeclaration, DirectiveDeclaration } from 'app/utils/angular';
+import { forwardRef } from '@angular/core';
 
-mod.directive('accordion', () => {
-  return {
-    scope: {
-      openId: '=',
-      animate: '='
-    },
-    controllerAs: 'ctrl',
-    controller: AccordionController,
-    bindToController: true,
-    transclude: true,
-    template: `
-      <ng-transclude></ng-transclude>
-    `
-  };
-});
-
+export const AccordionComponent: ComponentDeclaration = {
+  selector: 'accordion',
+  bindings: {
+    openId: '=',
+    animate: '='
+  },
+  transclude: true,
+  template: `<ng-transclude></ng-transclude>`,
+  controller: forwardRef(() => AccordionController)
+};
 
 class AccordionController {
   openId: any;
@@ -36,72 +31,85 @@ class AccordionController {
   }
 }
 
-mod.directive('accordionGroup', () => {
-  return {
-    scope: {
-      id: '=',
-      identifier: '='
-    },
-    restrict: 'E',
-    transclude: {
-      heading: 'accordionHeading',
-      body: 'accordionBody'
-    },
-    template: `
-      <div class="card" ng-class="{ show: isOpen() }">
-        <div id="{{id + '_accordion_button'}}" class="card-header" ng-click="toggleVisibility()">
-          <div accordion-transclude="heading" is-open="isOpen"></div>
+export const AccordionGroupComponent: ComponentDeclaration = {
+  selector: 'accordionGroup',
+  bindings: {
+    id: '=',
+    identifier: '='
+  },
+  transclude: {
+    heading: 'accordionHeading',
+    body: 'accordionBody'
+  },
+  require: {
+    accordion: '^accordion'
+  },
+  template: `
+      <div class="card" ng-class="{ show: $ctrl.isOpen() }">
+        <div id="{{id + '_accordion_button'}}" class="card-header" ng-click="$ctrl.toggleVisibility()">
+          <div accordion-transclude="heading"></div>
         </div>
-        <div uib-collapse="!isOpen()" ng-if="isAnimate()">
-          <div class="card-body" ng-class="{ show: isOpen }">
-            <div accordion-transclude="body" is-open="isOpen"></div>
+        <div uib-collapse="!$ctrl.isOpen()" ng-if="$ctrl.isAnimate()">
+          <div class="card-body" ng-class="{ show: $ctrl.isOpen() }">
+            <div accordion-transclude="body"></div>
           </div>
         </div>
-        <div class="collapse" ng-show="isOpen()" ng-if="!isAnimate()">
+        <div class="collapse" ng-show="$ctrl.isOpen()" ng-if="!$ctrl.isAnimate()">
           <div class="card-body">
-            <div accordion-transclude="body" is-open="isOpen"></div>
+            <div accordion-transclude="body"></div>
           </div>
         </div>
       </div>
-    `,
-    require: '^accordion',
-    link: {
-      pre($scope: AccordionGroupScope, _element: JQuery, _attributes: IAttributes, accordionController: AccordionController) {
-        $scope.isOpen = () => accordionController.isOpen($scope.identifier);
-        $scope.toggleVisibility = () => accordionController.toggleVisibility($scope.identifier);
-        $scope.isAnimate = () => isDefined(accordionController.animate) ? accordionController.animate : true;
-      }
-    }
-  };
-});
+  `,
+  controller: forwardRef(() => AccordionGroupController)
+};
+
+class AccordionGroupController {
+
+  id: string;
+  identifier: string;
+
+  accordion: AccordionController;
+
+  isOpen() {
+    return this.accordion && this.accordion.isOpen(this.identifier);
+  }
+
+  toggleVisibility() {
+    this.accordion.toggleVisibility(this.identifier);
+  }
+
+  isAnimate() {
+    return (this.accordion && isDefined(this.accordion.animate)) ? this.accordion.animate : true;
+  }
+}
 
 interface AccordionGroupScope extends IScope {
-  id: string;
-  identifier: any;
-  isOpen: () => boolean;
-  toggleVisibility: () => void;
-  isAnimate(): boolean;  
+  $ctrl: AccordionGroupController;
 }
 
 interface AccordionTranscludeAttributes extends IAttributes {
   accordionTransclude: 'heading' | 'body';
-  isOpen: string;
 }
 
 interface AccordionTranscludeScope extends IScope {
   isOpen: () => boolean;
 }
 
-mod.directive('accordionTransclude', () => {
-  return {
-    restrict: 'A',
-    link($scope: AccordionGroupScope, element: JQuery, attributes: AccordionTranscludeAttributes, _controller: any, transclude: ITranscludeFunction) {
-      function ngTranscludeCloneAttachFn(clone: JQuery, transcludeScope: AccordionTranscludeScope) {
-        element.append(clone);
-        transcludeScope.isOpen = $scope.$eval(attributes.isOpen);
+export const AccordionTranscludeDirective: DirectiveDeclaration = {
+  selector: 'accordionTransclude',
+  factory() {
+    return {
+      restrict: 'A',
+      require: '^accordionGroup',
+      link($scope: AccordionGroupScope, element: JQuery, attributes: AccordionTranscludeAttributes, controller: AccordionGroupController, transclude: ITranscludeFunction) {
+        function ngTranscludeCloneAttachFn(clone: JQuery, transcludeScope: AccordionTranscludeScope) {
+          element.append(clone);
+          transcludeScope.isOpen = () => controller.isOpen();
+        }
+        const slotName = attributes.accordionTransclude;
+        transclude(ngTranscludeCloneAttachFn, undefined, slotName);
       }
-      const slotName = attributes.accordionTransclude;
-      transclude(ngTranscludeCloneAttachFn, null, slotName);
-    }
-  };
-});
+    };
+  }
+};

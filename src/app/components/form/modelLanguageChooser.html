@@ -1,14 +1,14 @@
 <div uib-dropdown>
   <button class="btn btn-language" id="data_language_dropdown_button" uib-dropdown-toggle>
-    {{ctrl.localizeLanguageName(ctrl.language)}}
+    {{$ctrl.localizeLanguageName($ctrl.language)}}
   </button>
   <div uib-dropdown-menu aria-labelledby="data_language_dropdown_button">
-    <button ng-repeat="option in ctrl.context.language"
-            ng-class="{active: option === ctrl.language}"
+    <button ng-repeat="option in $ctrl.context.language"
+            ng-class="{active: option === $ctrl.language}"
             class="dropdown-item"
-            ng-click="ctrl.language = option"
+            ng-click="$ctrl.language = option"
             id="{{option + '_data_language_dropdown_button'}}">
-      {{ctrl.localizeLanguageName(option)}}
+      {{$ctrl.localizeLanguageName(option)}}
     </button>
   </div>
 </div>

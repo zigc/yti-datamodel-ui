@@ -1,6 +1,5 @@
-import { IPromise, ui } from 'angular';
-import IModalService = ui.bootstrap.IModalService;
-import IModalServiceInstance = ui.bootstrap.IModalServiceInstance;
+import { IPromise } from 'angular';
+import { IModalService, IModalServiceInstance } from 'angular-ui-bootstrap';
 import { comparingLocalizable } from 'app/utils/comparator';
 import { comparingPrimitive } from 'yti-common-ui/utils/comparator';
 import { LanguageService, Localizer } from 'app/services/languageService';
@@ -23,7 +22,7 @@ export class SearchVocabularyModal {
       template: require('./searchVocabularyModal.html'),
       size: 'md',
       controller: SearchVocabularyController,
-      controllerAs: 'ctrl',
+      controllerAs: '$ctrl',
       backdrop: true,
       resolve: {
         exclude: () => exclude,

@@ -1,4 +1,5 @@
-import { module as mod } from './module';
+import * as angular from 'angular';
+import { ILocationService, IScope } from 'angular';
 import { LanguageService } from 'app/services/languageService';
 import { UserService } from 'app/services/userService';
 import { LoginModalService } from 'yti-common-ui/components/login-modal.component';
@@ -7,30 +8,27 @@ import { User } from 'app/entities/user';
 import { HelpSelectionModal } from 'app/components/common/helpSelectionModal';
 import { InteractiveHelp } from 'app/help/contract';
 import { HelpProvider } from 'app/components/common/helpProvider';
-import { IScope, ILocationService, route } from 'angular';
 import { InteractiveHelpService } from 'app/help/services/interactiveHelpService';
 import { identity } from 'yti-common-ui/utils/object';
-import { modalCancelHandler } from 'app/utils/angular';
-import { ImpersonationService } from '../../services/impersonationService';
+import { ComponentDeclaration, modalCancelHandler } from 'app/utils/angular';
+import { ImpersonationService } from 'app/services/impersonationService';
 import { ConfigService } from 'app/services/configService';
 import { Config } from 'app/entities/config';
+import { forwardRef } from '@angular/core';
 
 const logo = require('../../../assets/logo.svg');
 
-mod.directive('navigationBar', () => {
-  return {
-    restrict: 'E',
-    template: require('./navigationBar.html'),
-    scope: {
-      helpProvider: '<'
-    },
-    bindToController: true,
-    controllerAs: 'ctrl',
-    controller: NavigationController
-  };
-});
+export const NavigationBarComponent: ComponentDeclaration = {
+  selector: 'navigationBar',
+  bindings: {
+    helpProvider: '<'
+  },
+  template: require('./navigationBar.html'),
+  controller: forwardRef(() => NavigationBarController)
 
-class NavigationController {
+};
+
+class NavigationBarController {
 
   helpProvider: HelpProvider|null;
 
@@ -49,7 +47,7 @@ class NavigationController {
 
   /* @ngInject */
   constructor($scope: IScope,
-              $route: route.IRouteService,
+              $route: angular.route.IRouteService,
               $location: ILocationService,
               private languageService: LanguageService,
               private userService: UserService,

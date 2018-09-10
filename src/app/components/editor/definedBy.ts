@@ -1,21 +1,18 @@
-import { module as mod } from './module';
 import { Destination } from 'app/types/entity';
 import { Model } from 'app/entities/model';
 import { normalizeModelType } from 'app/utils/entity';
+import { ComponentDeclaration } from 'app/utils/angular';
+import { forwardRef } from '@angular/core';
 
-mod.directive('definedBy', () => {
-  return {
-    restrict: 'E',
-    template: require('./definedBy.html'),
-    scope: {
-      entity: '=',
-      model: '='
-    },
-    bindToController: true,
-    controllerAs: 'ctrl',
-    controller: DefinedByController
-  };
-});
+export const DefinedByComponent: ComponentDeclaration = {
+  selector: 'definedBy',
+  bindings: {
+    entity: '=',
+    model: '='
+  },
+  template: require('./definedBy.html'),
+  controller: forwardRef(() => DefinedByController)
+};
 
 class DefinedByController {
 

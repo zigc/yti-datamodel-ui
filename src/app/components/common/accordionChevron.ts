@@ -1,14 +1,19 @@
-import { module as mod } from './module';
+import { ComponentDeclaration } from 'app/utils/angular';
+import { forwardRef } from '@angular/core';
 
-mod.directive('accordionChevron', () => {
-  return {
-    restrict: 'EA',
-    scope: {
-      isOpen: '=',
-      noPull: '=?'
-    },
-    transclude: true,
-    template: `<ng-transclude></ng-transclude><span ng-class="['fas', {'pull-right': !noPull,'fa-angle-down': isOpen, 'fa-angle-right': !isOpen}]"></span>`,
-    require: '^uibAccordionGroup'
-  };
-});
+export const AccordionChevronComponent: ComponentDeclaration = {
+  selector: 'accordionChevron',
+  bindings: {
+    isOpen: '=',
+    noPull: '=?'
+  },
+  transclude: true,
+  template: `<ng-transclude></ng-transclude><span ng-class="['fas', {'pull-right': !$ctrl.noPull,'fa-angle-down': $ctrl.isOpen, 'fa-angle-right': !$ctrl.isOpen}]"></span>`,
+  controller: forwardRef(() => AccordionChevronController)
+};
+
+class AccordionChevronController {
+
+  isOpen: boolean;
+  noPull: boolean;
+}
