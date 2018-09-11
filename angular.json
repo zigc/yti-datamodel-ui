@@ -19,7 +19,7 @@
             "preserveSymlinks": true,
             "outputPath": "dist",
             "index": "src/index.html",
-            "main": "src/init.ts",
+            "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.app.json",
             "assets": [
