@@ -25,6 +25,7 @@ RUN ["npm", "install", "-g", "yarn"]
 # when we change our application's dependencies:
 ADD package.json /tmp/package.json
 ADD yarn.lock /tmp/yarn.lock
+ADD types /tmp/types
 WORKDIR /tmp
 RUN ["yarn", "install"]
 
