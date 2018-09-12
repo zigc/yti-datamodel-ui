@@ -9,8 +9,9 @@ import { Model } from 'app/entities/model';
 import { Usage, Referrer } from 'app/entities/usage';
 
 export class DeleteConfirmationModal {
-  /* @ngInject */
+
   constructor(private $uibModal: IModalService) {
+    'ngInject';
   }
 
   open(entity: EditableEntity, context: LanguageContext, onlyInDefinedModel: Model|null = null): IPromise<void> {
@@ -38,8 +39,8 @@ class DeleteConfirmationModalController {
        || !isDefined(referrer.definedBy) || referrer.definedBy.id.notEquals(this.onlyInDefinedModel.id));
   };
 
-  /* @ngInject */
   constructor(public entity: EditableEntity, public context: LanguageContext, private onlyInDefinedModel: Model|null, usageService: UsageService) {
+    'ngInject';
     usageService.getUsage(entity).then(usage => {
       this.usage = usage;
       this.hasReferrers = usage && anyMatching(usage.referrers, referrer => !this.exclude(referrer));

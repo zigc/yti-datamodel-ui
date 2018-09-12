@@ -15,12 +15,11 @@ export class LanguageService {
 
   language$: BehaviorSubject<UILanguage>;
 
-  /* @ngInject */
   constructor(private gettextCatalog: GettextCatalog /* AngularJS */,
               private translateService: TranslateService /* Angular */,
               public localizationStrings: { [key: string]: { [key: string]: string } },
               private sessionService: SessionService) {
-
+    'ngInject';
     const translationDefaultLanguage = 'en';
     gettextCatalog.baseLanguage = translationDefaultLanguage;
     translateService.setDefaultLang(translationDefaultLanguage);

@@ -32,8 +32,9 @@ const technicalNamespaces = {
 };
 
 export class AddEditNamespaceModal {
-  /* @ngInject */
+
   constructor(private $uibModal: IModalService) {
+    'ngInject';
   }
 
   private open(context: LanguageContext, language: Language, namespaceToEdit: ImportedNamespace|null): IPromise<ImportedNamespace> {
@@ -72,14 +73,13 @@ class AddEditNamespaceController {
   namespaceBeforeForced: string|null = null;
   prefixBeforeForced: string|null = null;
 
-  /* @ngInject */
   constructor(private $uibModalInstance: IModalServiceInstance,
               $scope: IScope,
               public context: LanguageContext,
               private language: Language,
               private namespaceToEdit: ImportedNamespace|null,
               private modelService: ModelService) {
-
+    'ngInject';
     this.edit = !!namespaceToEdit;
 
     if (namespaceToEdit) {

@@ -76,8 +76,8 @@ interface UriInputScope extends IScope {
 
 export const UriInputDirective: DirectiveDeclaration = {
   selector: 'uriInput',
-  /* @ngInject */
   factory(languageService: LanguageService, gettextCatalog: GettextCatalog) {
+    'ngInject';
     return {
       scope: {
         model: '='

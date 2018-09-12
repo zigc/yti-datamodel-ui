@@ -49,12 +49,12 @@ class ReferenceDatasViewController {
 
   form: EditableForm;
 
-  /* @ngInject */
   constructor(private $scope: IScope,
               private searchReferenceDataModal: SearchReferenceDataModal,
               private editReferenceDataModal: EditReferenceDataModal,
               private viewReferenceDataModal: ViewReferenceDataModal,
               private languageService: LanguageService) {
+    'ngInject';
   }
 
   $onInit() {

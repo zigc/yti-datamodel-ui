@@ -7,8 +7,8 @@ interface NgIfBodyAttributes extends IAttributes {
 
 export const NgIfBodyDirective: DirectiveDeclaration = {
   selector: 'ngIfBody',
-  /* @ngInject */
   factory($document: IDocumentService) {
+    'ngInject';
     return {
       transclude: 'element',
       priority: 600,

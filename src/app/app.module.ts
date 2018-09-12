@@ -217,7 +217,7 @@ mod.config(($locationProvider: ILocationProvider,
             $compileProvider: ICompileProvider,
             $animateProvider: IAnimateProvider,
             $uibTooltipProvider: ITooltipProvider) => {
-
+  'ngInject';
   $locationProvider.html5Mode(true);
   $logProvider.debugEnabled(false);
 

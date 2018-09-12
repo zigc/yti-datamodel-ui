@@ -33,8 +33,8 @@ class EditableConstraintController {
 
   form: EditableForm;
 
-  /* @ngInject */
   constructor(private searchClassModal: SearchClassModal) {
+    'ngInject';
   }
 
   isEditing() {

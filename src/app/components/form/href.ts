@@ -3,8 +3,8 @@ import { DirectiveDeclaration } from 'app/utils/angular';
 
 export const HrefDirective: DirectiveDeclaration = {
   selector: 'ngHref',
-  /* @ngInject */
   factory($timeout: ITimeoutService) {
+    'ngInject';
     return {
       restrict: 'A',
       link(_$scope: IScope, element: JQuery) {

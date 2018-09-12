@@ -17,8 +17,8 @@ export interface VisualizationService {
 
 export class DefaultVisualizationService implements VisualizationService {
 
-  /* @ngInject */
   constructor(private $http: IHttpService, private $q: IQService, private frameService: FrameService) {
+    'ngInject';
   }
 
   getVisualization(model: Model) {

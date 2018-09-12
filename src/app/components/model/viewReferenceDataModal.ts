@@ -5,8 +5,9 @@ import { identity } from 'yti-common-ui/utils/object';
 import { modalCancelHandler } from 'app/utils/angular';
 
 export class ViewReferenceDataModal {
-  /* @ngInject */
+
   constructor(private $uibModal: IModalService) {
+    'ngInject';
   }
 
   open(referenceData: ReferenceData, context: LanguageContext) {
@@ -44,7 +45,7 @@ export class ViewReferenceDataModal {
 
 export class ViewReferenceDataModalController {
 
-  /* @ngInject */
   constructor(public referenceData: ReferenceData, public context: LanguageContext) {
+    'ngInject';
   }
 }

@@ -54,7 +54,6 @@ export class ClassFormController {
   classView: ClassViewController;
   form: EditableForm;
 
-  /* @ngInject */
   constructor(private $scope: IScope,
               private classService: ClassService,
               private sessionService: SessionService,
@@ -62,6 +61,7 @@ export class ClassFormController {
               private searchPredicateModal: SearchPredicateModal,
               private searchClassModal: SearchClassModal,
               private addPropertiesFromClassModal: AddPropertiesFromClassModal) {
+    'ngInject';
   }
 
   $onInit() {

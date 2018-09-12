@@ -25,10 +25,9 @@ class SubjectViewController {
   isEditing: () => boolean;
   config: Config;
 
-  /* @ngInject */
   constructor(private searchConceptModal: SearchConceptModal,
               private configService: ConfigService) {
-
+    'ngInject';
     this.configService.getConfig().then(urlConfig => {
       this.config = urlConfig;
     });

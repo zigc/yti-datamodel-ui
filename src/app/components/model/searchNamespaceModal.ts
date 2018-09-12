@@ -14,8 +14,9 @@ import { filterAndSortSearchResults } from 'app/components/filter/util';
 const noExclude = (_ns: ImportedNamespace) => null;
 
 export class SearchNamespaceModal {
-  /* @ngInject */
+
   constructor(private $uibModal: IModalService) {
+    'ngInject';
   }
 
   open(context: LanguageContext, exclude: Exclusion<ImportedNamespace> = noExclude): IPromise<ImportedNamespace> {
@@ -44,7 +45,6 @@ class SearchNamespaceController implements SearchController<ImportedNamespace> {
   contentExtractors = [ (ns: ImportedNamespace) => ns.namespace, (ns: ImportedNamespace) => ns.label ];
   private searchFilters: SearchFilter<ImportedNamespace>[] = [];
 
-  /* @ngInject */
   constructor($scope: IScope,
               private $uibModalInstance: IModalServiceInstance,
               public exclude: Exclusion<ImportedNamespace>,
@@ -52,7 +52,7 @@ class SearchNamespaceController implements SearchController<ImportedNamespace> {
               modelService: ModelService,
               private languageService: LanguageService,
               private addEditNamespaceModal: AddEditNamespaceModal) {
-
+    'ngInject';
     this.loadingResults = true;
 
     modelService.getAllImportableNamespaces().then(result => {

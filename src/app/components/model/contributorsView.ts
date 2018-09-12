@@ -46,10 +46,10 @@ class ContributorsViewController {
 
   form: EditableForm;
 
-  /* @ngInject */
   constructor(private $scope: IScope,
               private languageService: LanguageService,
               private searchOrganizationModal: SearchOrganizationModal) {
+    'ngInject';
   }
 
   $onInit() {

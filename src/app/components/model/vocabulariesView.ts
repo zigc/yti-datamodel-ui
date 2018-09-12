@@ -48,10 +48,10 @@ class VocabulariesViewController {
 
   form: EditableForm;
 
-  /* @ngInject */
   constructor(private $scope: IScope,
               private searchVocabularyModal: SearchVocabularyModal,
               private languageService: LanguageService) {
+    'ngInject';
   }
 
   $onInit() {

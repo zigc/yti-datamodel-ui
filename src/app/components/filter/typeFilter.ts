@@ -38,8 +38,8 @@ class TypeFilterController {
   types: Type[];
   label: string;
 
-  /* @ngInject */
   constructor(private $scope: IScope) {
+    'ngInject';
   }
 
   $onInit() {

@@ -45,10 +45,10 @@ class LinksViewController {
 
   form: EditableForm;
 
-  /* @ngInject */
   constructor(private $scope: IScope,
               private addEditLinkModal: AddEditLinkModal,
               private languageService: LanguageService) {
+    'ngInject';
   }
 
   $onInit() {

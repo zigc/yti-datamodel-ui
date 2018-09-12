@@ -10,8 +10,8 @@ export class InteractiveHelpVisualizationService implements VisualizationService
 
   private modelPositions = new Map<string, ModelPositions>();
 
-  /* @ngInject */
   constructor(private $q: IQService, private defaultVisualizationService: DefaultVisualizationService, private helpClassService: InteractiveHelpClassService) {
+    'ngInject';
   }
 
   reset(): IPromise<any> {

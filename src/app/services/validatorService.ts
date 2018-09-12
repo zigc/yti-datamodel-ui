@@ -9,8 +9,9 @@ export interface ValidatorService {
 }
 
 export class DefaultValidatorService implements DefaultValidatorService {
-  /* @ngInject */
+
   constructor(private $q: IQService, private $http: IHttpService) {
+    'ngInject';
   }
 
   classDoesNotExist(id: Uri): IPromise<boolean> {

@@ -28,7 +28,6 @@ export class ModelViewController extends EditableEntityController<Model> {
   model: Model;
   modelController: ModelControllerService;
 
-  /* @ngInject */
   constructor($scope: EditableScope,
               $log: ILogService,
               private modelService: ModelService,
@@ -36,7 +35,7 @@ export class ModelViewController extends EditableEntityController<Model> {
               errorModal: ErrorModal,
               userService: UserService,
               private authorizationManagerService: AuthorizationManagerService) {
-
+    'ngInject';
     super($scope, $log, deleteConfirmationModal, errorModal, userService);
   }
 

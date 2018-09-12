@@ -68,11 +68,11 @@ class SearchResultsController<T extends WithId> {
   onSelect: ICompiledExpression;
   editInProgress: () => boolean;
 
-  /* @ngInject */
   constructor(private $scope: IScope,
               private $element: JQuery,
               private gettextCatalog: GettextCatalog,
               private confirmationModal: ConfirmationModal) {
+    'ngInject';
   }
 
   $onInit() {

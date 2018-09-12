@@ -45,7 +45,6 @@ class ButtonWithOptionsController {
   options: Option[];
   disabled: boolean;
 
-  /* @ngInject */
   constructor() {
   }
 

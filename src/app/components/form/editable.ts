@@ -45,12 +45,12 @@ class EditableController {
   input: JQuery;
   inputNgModelCtrl: INgModelController;
 
-  /* @ngInject */
   constructor(private $scope: IScope,
               private $parse: IParseService,
               private $animate: any,
               private $element: JQuery,
               private displayItemFactory: DisplayItemFactory) {
+    'ngInject';
   }
 
   $onInit() {

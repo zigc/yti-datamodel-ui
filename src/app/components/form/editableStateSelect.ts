@@ -38,8 +38,8 @@ class EditableStateSelectController {
 
   form: EditableForm;
 
-  /* @ngInject */
   constructor(private authorizationManagerService: AuthorizationManagerService) {
+    'ngInject';
   }
 
   isEditing() {

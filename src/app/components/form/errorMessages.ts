@@ -33,8 +33,8 @@ class ErrorMessagesController {
   ngModelControllers: INgModelController[];
   dynamicErrors = errors;
 
-  /* @ngInject */
   constructor(private $scope: ErrorMessagesScope) {
+    'ngInject';
   }
 
   isVisible() {

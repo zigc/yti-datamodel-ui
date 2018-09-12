@@ -8,8 +8,8 @@ import { apiEndpointWithName } from './config';
 
 export class SearchService {
 
-  /* @ngInject */
   constructor(private $http: IHttpService, private frameService: FrameService) {
+    'ngInject';
   }
 
   search(graph: string, search: string, language?: Language): IPromise<SearchResult[]> {

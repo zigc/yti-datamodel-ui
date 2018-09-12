@@ -48,10 +48,10 @@ class ExportController {
   frameUrlObject: string;
   frameUrlObjectRaw: string;
 
-  /* @ngInject */
   constructor(private $scope: IScope,
               private $window: IWindowService,
               private languageService: LanguageService) {
+    'ngInject';
   }
 
   $onInit() {

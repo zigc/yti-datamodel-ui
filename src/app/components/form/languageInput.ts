@@ -14,8 +14,8 @@ export function createValidators(): IModelValidators {
 
 export const LanguageInputDirective: DirectiveDeclaration = {
   selector: 'languageInput',
-  /* @ngInject */
   factory(languageService: LanguageService, gettextCatalog: GettextCatalog) {
+    'ngInject';
     return {
       scope: {
         model: '='

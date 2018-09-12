@@ -32,8 +32,8 @@ class UsageController {
 
   form: EditableForm;
 
-  /* @ngInject */
   constructor(private $scope: IScope) {
+    'ngInject';
   }
 
   $onInit() {

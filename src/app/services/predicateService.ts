@@ -39,8 +39,8 @@ export class DefaultPredicateService implements PredicateService {
 
   private modelPredicatesCache = new Map<string, PredicateListItem[]>();
 
-  /* @ngInject */
   constructor(private $http: IHttpService, private $q: IQService, private frameService: FrameService) {
+    'ngInject';
   }
 
   getPredicate(id: Uri|Urn, model?: Model): IPromise<Predicate> {

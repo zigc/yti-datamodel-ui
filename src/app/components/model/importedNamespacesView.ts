@@ -51,11 +51,11 @@ class ImportedNamespacesViewController {
 
   form: EditableForm;
 
-  /* @ngInject */
   constructor(private $scope: IScope,
               private searchNamespaceModal: SearchNamespaceModal,
               private addEditNamespaceModal: AddEditNamespaceModal,
               private languageService: LanguageService) {
+    'ngInject';
   }
 
   $onInit() {

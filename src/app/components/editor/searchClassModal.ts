@@ -20,8 +20,9 @@ export const noExclude = (_item: AbstractClass) => null;
 export const defaultTextForSelection = (_klass: Class) => 'Use class';
 
 export class SearchClassModal {
-  /* @ngInject */
+
   constructor(private $uibModal: IModalService) {
+    'ngInject';
   }
 
   private openModal(model: Model,
@@ -93,7 +94,6 @@ class SearchClassController implements SearchController<ClassListItem> {
 
   searchFilters: SearchFilter<ClassListItem>[] = [];
 
-  /* @ngInject */
   constructor(private $scope: SearchClassScope,
               private $uibModalInstance: IModalServiceInstance,
               private classService: ClassService,
@@ -105,7 +105,7 @@ class SearchClassController implements SearchController<ClassListItem> {
               public textForSelection: (klass: Optional<Class>) => string,
               private searchConceptModal: SearchConceptModal,
               private gettextCatalog: GettextCatalog) {
-
+    'ngInject';
     this.localizer = languageService.createLocalizer(model);
     this.loadingResults = true;
 

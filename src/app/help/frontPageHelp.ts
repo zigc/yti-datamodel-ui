@@ -100,12 +100,12 @@ function createNewModel(type: KnownModelType, gettextCatalog: GettextCatalog): S
 
 export class FrontPageHelpService {
 
-  /* @ngInject */
   constructor(private $uibModalStack: IModalStackService,
               private $location: ILocationService,
               private gettextCatalog: GettextCatalog,
               private modelService: ModelService,
               private entityLoaderService: EntityLoaderService) {
+    'ngInject';
   }
 
   getHelps(): InteractiveHelp[] {

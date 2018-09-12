@@ -118,11 +118,11 @@ function addAssociation(modelPrefix: string, className: string, addAssociationIt
 
 export class ModelPageHelpService {
 
-  /* @ngInject */
   constructor(private $uibModalStack: IModalStackService,
               private $location: ILocationService,
               private entityLoaderService: EntityLoaderService,
               private gettextCatalog: GettextCatalog) {
+    'ngInject';
   }
 
   private asLocalizable(key: string) {

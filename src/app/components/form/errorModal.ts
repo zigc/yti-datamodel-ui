@@ -10,8 +10,9 @@ interface UsageParameters {
 }
 
 export class ErrorModal {
-  /* @ngInject */
+
   constructor(private $uibModal: IModalService) {
+    'ngInject';
   }
 
   private open(title: string, errorMessage: string, usage: UsageParameters|null) {
@@ -57,7 +58,7 @@ export class ErrorModal {
 }
 
 class ErrorModalController {
-  /* @ngInject */
   constructor(public title: string, public errorMessage: string, public usage: UsageParameters|null) {
+    'ngInject';
   }
 }

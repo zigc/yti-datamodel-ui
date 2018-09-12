@@ -16,12 +16,11 @@ class BreadcrumbController {
 
   location: Location[];
 
-  /* @ngInject */
   constructor($scope: IScope,
               locationService: LocationService,
               private languageService: LanguageService,
               private translateService: TranslateService) {
-
+    'ngInject';
     $scope.$watch(() => locationService.location, location => {
       this.location = location;
     });

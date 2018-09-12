@@ -38,10 +38,10 @@ class VisualizationPopoverController {
 
   style: any = {};
 
-  /* @ngInject */
   constructor(private $scope: IScope,
               private $timeout: ITimeoutService,
               private $element: JQuery) {
+    'ngInject';
   }
 
   $onInit() {

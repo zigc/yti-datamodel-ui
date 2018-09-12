@@ -9,8 +9,8 @@ import { apiEndpointWithName } from './config';
 
 export class HistoryService {
 
-  /* @ngInject */
   constructor(private $http: IHttpService, private frameService: FrameService) {
+    'ngInject';
   }
 
   getHistory(id: Uri): IPromise<Activity> {

@@ -13,8 +13,9 @@ import { filterAndSortSearchResults, defaultTitleComparator } from 'app/componen
 const noExclude = (_vocabulary: Vocabulary) => null;
 
 export class SearchVocabularyModal {
-  /* @ngInject */
+
   constructor(private $uibModal: IModalService) {
+    'ngInject';
   }
 
   open(context: LanguageContext, exclude: Exclusion<Vocabulary> = noExclude): IPromise<Vocabulary> {
@@ -49,13 +50,12 @@ class SearchVocabularyController implements SearchController<Vocabulary> {
 
   private searchFilters: SearchFilter<Vocabulary>[] = [];
 
-  /* @ngInject */
   constructor(private $uibModalInstance: IModalServiceInstance,
               public exclude: Exclusion<Vocabulary>,
               vocabularyService: VocabularyService,
               languageService: LanguageService,
               public context: LanguageContext) {
-
+    'ngInject';
     this.localizer = languageService.createLocalizer(context);
     this.loadingResults = true;
 

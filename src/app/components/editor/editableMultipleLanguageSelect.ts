@@ -36,8 +36,8 @@ class EditableMultipleLanguageSelectController {
   id: string;
   title: string;
 
-  /* @ngInject */
   constructor(private $q: IQService) {
+    'ngInject';
   }
 
   datasource = (_search: string) => this.$q.when(availableLanguages);

@@ -36,51 +36,67 @@ function proxyConditionallyToHelp<T>(interactiveHelpService: InteractiveHelpServ
 
 mod.service('defaultClassService', DefaultClassService);
 mod.factory('classService',
-  (interactiveHelpService: InteractiveHelpService, defaultClassService: ClassService, helpClassService: ClassService) =>
-    proxyConditionallyToHelp(interactiveHelpService, defaultClassService, helpClassService));
+  (interactiveHelpService: InteractiveHelpService, defaultClassService: ClassService, helpClassService: ClassService) => {
+    'ngInject';
+    return proxyConditionallyToHelp(interactiveHelpService, defaultClassService, helpClassService);
+  });
 
 mod.service('defaultVocabularyService', DefaultVocabularyService);
 mod.factory('vocabularyService',
-  (interactiveHelpService: InteractiveHelpService, defaultVocabularyService: VocabularyService, helpVocabularyService: VocabularyService) =>
-    proxyConditionallyToHelp(interactiveHelpService, defaultVocabularyService, helpVocabularyService));
+  (interactiveHelpService: InteractiveHelpService, defaultVocabularyService: VocabularyService, helpVocabularyService: VocabularyService) => {
+    'ngInject';
+    return proxyConditionallyToHelp(interactiveHelpService, defaultVocabularyService, helpVocabularyService)
+  });
 
 mod.service('languageService', LanguageService);
 mod.service('locationService', LocationService);
 
 mod.service('defaultModelService', DefaultModelService);
 mod.factory('modelService',
-  (interactiveHelpService: InteractiveHelpService, defaultModelService: ModelService, helpModelService: ModelService) =>
-    proxyConditionallyToHelp(interactiveHelpService, defaultModelService, helpModelService));
+  (interactiveHelpService: InteractiveHelpService, defaultModelService: ModelService, helpModelService: ModelService) => {
+    'ngInject';
+    return proxyConditionallyToHelp(interactiveHelpService, defaultModelService, helpModelService);
+  });
 
 mod.service('defaultVisualizationService', DefaultVisualizationService);
 mod.factory('visualizationService',
-  (interactiveHelpService: InteractiveHelpService, defaultVisualizationService: VisualizationService, helpVisualizationService: VisualizationService) =>
-    proxyConditionallyToHelp(interactiveHelpService, defaultVisualizationService, helpVisualizationService));
+  (interactiveHelpService: InteractiveHelpService, defaultVisualizationService: VisualizationService, helpVisualizationService: VisualizationService) => {
+    'ngInject';
+    return proxyConditionallyToHelp(interactiveHelpService, defaultVisualizationService, helpVisualizationService);
+  });
 
 mod.service('referenceDataService', ReferenceDataService);
 
 mod.service('defaultPredicateService', DefaultPredicateService);
 mod.factory('predicateService',
-  (interactiveHelpService: InteractiveHelpService, defaultPredicateService: PredicateService, helpPredicateService: PredicateService) =>
-    proxyConditionallyToHelp(interactiveHelpService, defaultPredicateService, helpPredicateService));
+  (interactiveHelpService: InteractiveHelpService, defaultPredicateService: PredicateService, helpPredicateService: PredicateService) => {
+    'ngInject';
+    return proxyConditionallyToHelp(interactiveHelpService, defaultPredicateService, helpPredicateService);
+  });
 
 mod.service('searchService', SearchService);
 mod.service('usageService', UsageService);
 
 mod.factory('defaultUserService', downgradeInjectable(UserService));
 mod.factory('userService',
-  (interactiveHelpService: InteractiveHelpService, defaultUserService: UserService, helpUserService: UserService) =>
-    proxyConditionallyToHelp(interactiveHelpService, defaultUserService, helpUserService));
+  (interactiveHelpService: InteractiveHelpService, defaultUserService: UserService, helpUserService: UserService) => {
+    'ngInject';
+    return proxyConditionallyToHelp(interactiveHelpService, defaultUserService, helpUserService);
+  });
 
 mod.service('defaultValidatorService', DefaultValidatorService);
 mod.service('validatorService',
-  (interactiveHelpService: InteractiveHelpService, defaultValidatorService: ValidatorService, helpValidatorService: InteractiveHelpValidatorService) =>
-    proxyConditionallyToHelp(interactiveHelpService, defaultValidatorService, helpValidatorService));
+  (interactiveHelpService: InteractiveHelpService, defaultValidatorService: ValidatorService, helpValidatorService: InteractiveHelpValidatorService) => {
+    'ngInject';
+    return proxyConditionallyToHelp(interactiveHelpService, defaultValidatorService, helpValidatorService);
+  });
 
 mod.service('defaultOrganizationService', DefaultOrganizationService);
 mod.service('organizationService',
-  (interactiveHelpService: InteractiveHelpService, defaultOrganizationService: OrganizationService, helpOrganizationService: InteractiveHelpOrganizationService) =>
-    proxyConditionallyToHelp(interactiveHelpService, defaultOrganizationService, helpOrganizationService));
+  (interactiveHelpService: InteractiveHelpService, defaultOrganizationService: OrganizationService, helpOrganizationService: InteractiveHelpOrganizationService) => {
+    'ngInject';
+    return proxyConditionallyToHelp(interactiveHelpService, defaultOrganizationService, helpOrganizationService);
+  });
 
 mod.service('historyService', HistoryService);
 mod.service('resetService', ResetService);

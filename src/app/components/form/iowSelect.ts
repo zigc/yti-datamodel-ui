@@ -69,10 +69,10 @@ export class IowSelectController<T> implements InputWithPopupController<T> {
     [esc]: () => this.close()
   };
 
-  /* @ngInject */
   constructor(private $q: IQService,
               private $scope: SelectionScope,
               private $parse: IParseService) {
+    'ngInject';
   }
 
   $onInit() {
@@ -156,7 +156,8 @@ export class IowSelectController<T> implements InputWithPopupController<T> {
   }
 }
 
-mod.directive('iowSelectInput', /* @ngInject */ ($document: IDocumentService) => {
+// TODO
+mod.directive('iowSelectInput', ($document: IDocumentService) => {
   return {
     restrict: 'A',
     require: '^iowSelect',
@@ -192,6 +193,7 @@ mod.directive('iowSelectInput', /* @ngInject */ ($document: IDocumentService) =>
   };
 });
 
+// TODO
 mod.directive('iowSelectionTransclude', () => {
   return {
     link($scope: SelectionScope, element: JQuery, _attribute: IAttributes, _controller: any, transclude: ITranscludeFunction) {

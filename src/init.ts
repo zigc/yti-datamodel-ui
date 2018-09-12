@@ -19,8 +19,13 @@ if (Modernizr.es5syntax && Modernizr.svg) {
 
   require.ensure(
     ['./main'],
-    (require: NodeRequire) => require('./main').done.then(() => waitScreen.finish()),
-    (error: any) => {},
+    (require: NodeRequire) => {
+      console.log('requiring main');
+      require('./main').done.then(() => waitScreen.finish(), (err: any) => console.log('err', err))
+    },
+    (error: any) => {
+      console.log('error', error);
+    },
     'app'
   );
 

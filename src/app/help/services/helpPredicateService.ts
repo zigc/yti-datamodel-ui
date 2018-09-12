@@ -27,8 +27,8 @@ export class InteractiveHelpPredicateService implements PredicateService, Reseta
   trackModel = (model: Model|DefinedBy) => this.trackedModels.add(model.id.uri);
   tracksModel = (model: Model|DefinedBy) => this.trackedModels.has(model.id.uri);
 
-  /* @ngInject */
   constructor(private $q: IQService, private defaultPredicateService: PredicateService, private helpVocabularyService: VocabularyService) {
+    'ngInject';
   }
 
   reset(): IPromise<any> {

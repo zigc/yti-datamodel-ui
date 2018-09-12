@@ -52,11 +52,11 @@ class ModelFilterController {
   models: (Model|DefinedBy)[] = [];
   private currentModelItemIds: Set<string> = new Set<string>();
 
-  /* @ngInject */
   constructor(private $scope: IScope,
               private classService: ClassService,
               private predicateService: PredicateService,
               private languageService: LanguageService) {
+    'ngInject';
   }
 
   $onInit() {

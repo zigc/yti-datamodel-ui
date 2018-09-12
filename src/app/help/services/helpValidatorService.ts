@@ -7,10 +7,10 @@ import { InteractiveHelpPredicateService } from './helpPredicateService';
 
 export class InteractiveHelpValidatorService implements ValidatorService, ResetableService {
 
-  /* @ngInject */
   constructor(private $q: IQService,
               private helpClassService: InteractiveHelpClassService,
               private helpPredicateService: InteractiveHelpPredicateService) {
+    'ngInject';
   }
 
   classDoesNotExist(id: Uri): IPromise<boolean> {

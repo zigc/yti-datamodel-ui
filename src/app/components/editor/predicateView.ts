@@ -31,7 +31,6 @@ export class PredicateViewController extends EditableEntityController<Associatio
   model: Model;
   modelController: ModelControllerService;
 
-  /* @ngInject */
   constructor($scope: EditableScope,
               $log: ILogService,
               deleteConfirmationModal: DeleteConfirmationModal,
@@ -39,6 +38,7 @@ export class PredicateViewController extends EditableEntityController<Associatio
               private predicateService: PredicateService,
               userService: UserService,
               private authorizationManagerService: AuthorizationManagerService) {
+    'ngInject';
     super($scope, $log, deleteConfirmationModal, errorModal, userService);
   }
 

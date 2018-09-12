@@ -25,10 +25,10 @@ const noExclude = (_item: PredicateListItem) => null;
 
 export class SearchPredicateModal {
 
-  /* @ngInject */
   constructor(private $uibModal: IModalService,
               private choosePredicateTypeModal: ChoosePredicateTypeModal,
               private classService: ClassService) {
+    'ngInject';
   }
 
   private openModal(model: Model, type: KnownPredicateType|null, exclude: Exclusion<AbstractPredicate>, onlySelection: boolean, allowExternal: boolean) {
@@ -109,7 +109,6 @@ export class SearchPredicateController implements SearchController<PredicateList
 
   editInProgress = () => this.$scope.form.editing && this.$scope.form.$dirty;
 
-  /* @ngInject */
   constructor(private $scope: SearchPredicateScope,
               private $uibModalInstance: IModalServiceInstance,
               public model: Model,
@@ -121,7 +120,7 @@ export class SearchPredicateController implements SearchController<PredicateList
               languageService: LanguageService,
               private searchConceptModal: SearchConceptModal,
               private gettextCatalog: GettextCatalog) {
-
+    'ngInject';
     this.localizer = languageService.createLocalizer(model);
     this.loadingResults = true;
     this.typeSelectable = !type;

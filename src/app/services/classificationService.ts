@@ -8,9 +8,9 @@ import { apiEndpointWithName } from './config';
 
 export class ClassificationService {
 
-  /* @ngInject */
   constructor(private $http: IHttpService,
               private frameService: FrameService) {
+    'ngInject';
   }
 
   getClassifications(): IPromise<Classification[]> {

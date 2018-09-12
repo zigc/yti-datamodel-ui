@@ -37,11 +37,11 @@ class PropertyPredicateViewController {
 
   classForm: ClassFormController;
 
-  /* @ngInject */
   constructor(private $scope: IScope,
               private predicateService: PredicateService,
               private searchPredicateModal: SearchPredicateModal,
               private copyPredicateModal: CopyPredicateModal) {
+    'ngInject';
   }
 
   $onInit() {

@@ -32,7 +32,6 @@ const overlayOpenClass = 'overlay-open';
 
 export class OverlayService {
 
-  /* @ngInject */
   constructor(private $rootScope: IRootScopeService,
               private $q: IQService,
               private $document: IDocumentService,
@@ -40,6 +39,7 @@ export class OverlayService {
               private $compile: ICompileService,
               private $animate: IAnimateService,
               private $uibResolve: { resolve(options: any): IPromise<any> }) {
+    'ngInject';
   }
 
   open(options: OverlayOptions): OverlayInstance {

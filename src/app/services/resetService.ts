@@ -3,8 +3,8 @@ import { apiEndpointWithName } from './config';
 
 export class ResetService {
 
-  /* @ngInject */
   constructor(private $http: IHttpService) {
+    'ngInject';
   }
 
   reset(): IPromise<any> {

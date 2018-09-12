@@ -42,9 +42,9 @@ class EditableRangeSelectController {
 
   form: EditableForm;
 
-  /* @ngInject */
   constructor(private gettextCatalog: GettextCatalog,
               private $element: JQuery) {
+    'ngInject';
   }
 
   $postLink() {

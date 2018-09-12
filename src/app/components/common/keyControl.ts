@@ -25,9 +25,9 @@ export class KeyControlController {
     [enter]: () => this.selectSelection()
   };
 
-  /* @ngInject */
   constructor(private $scope: IScope,
               private $element: JQuery) {
+    'ngInject';
   }
 
   $postLink() {
@@ -76,10 +76,10 @@ export const KeyControlSelectionDirective: DirectiveDeclaration = {
 
 class KeyControlSelectionController {
 
-  /* @ngInject */
   constructor(private $scope: IRepeatScope,
               private $element: JQuery,
               private $timeout: ITimeoutService) {
+    'ngInject';
   }
 
   $postLink() {

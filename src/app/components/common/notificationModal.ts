@@ -5,8 +5,9 @@ import { identity } from 'yti-common-ui/utils/object';
 import { modalCancelHandler } from 'app/utils/angular';
 
 export class NotificationModal {
-  /* @ngInject */
+
   constructor(private $uibModal: IModalService, private $location: ILocationService) {
+    'ngInject';
   }
 
   private open(title: string, body: string): IPromise<any> {

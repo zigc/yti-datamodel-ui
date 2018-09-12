@@ -2,8 +2,9 @@ import { IPromise } from 'angular';
 import { IModalService } from 'angular-ui-bootstrap';
 
 export class ConfirmationModal {
-  /* @ngInject */
+
   constructor(private $uibModal: IModalService) {
+    'ngInject';
   }
 
   private open(title: string, body: string, additionalCssClass?: string): IPromise<void> {
@@ -15,7 +16,6 @@ export class ConfirmationModal {
                    </modal-template>
                  </div>`,
       controllerAs: '$ctrl',
-      /* @ngInject */
       controller: ConfirmationModalController,
       windowClass: additionalCssClass,
       resolve: {

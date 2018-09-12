@@ -33,11 +33,11 @@ class EditableReferenceDataSelectController {
 
   form: EditableForm;
 
-  /* @ngInject */
   constructor(private $scope: IScope,
               private searchReferenceDataModal: SearchReferenceDataModal,
               private languageService: LanguageService,
               private viewReferenceDataModal: ViewReferenceDataModal) {
+    'ngInject';
   }
 
   $onInit() {

@@ -21,11 +21,11 @@ class DividerController {
 
   selectionWidth: number;
 
-  /* @ngInject */
   constructor(private $scope: IScope,
               private $window: IWindowService,
               private zone: NgZone,
               private sessionService: SessionService) {
+    'ngInject';
   }
 
   $onInit() {

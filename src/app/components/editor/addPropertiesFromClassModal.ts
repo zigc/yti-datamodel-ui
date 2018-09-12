@@ -10,8 +10,9 @@ import { Model } from 'app/entities/model';
 const noExclude = (_property: Property) => false;
 
 export class AddPropertiesFromClassModal {
-  /* @ngInject */
+
   constructor(private $uibModal: IModalService) {
+    'ngInject';
   }
 
   open(klass: Class, classType: string, model: Model, exclude: (property: Property) => boolean = noExclude): IPromise<Property[]> {
@@ -35,7 +36,6 @@ export class AddPropertiesFromClassModalController {
   properties: { [type: string]: Property[] };
   selectedProperties: Property[];
 
-  /* @ngInject */
   constructor(private $uibModalInstance: IModalServiceInstance,
               public languageService: LanguageService,
               private gettextCatalog: GettextCatalog,
@@ -43,7 +43,7 @@ export class AddPropertiesFromClassModalController {
               public classType: string,
               public model: Model,
               private exclude: (property: Property) => boolean) {
-
+    'ngInject';
     const propertiesWithKnownType = klass.properties.filter(p => p.normalizedPredicateType);
     this.properties = stringMapToObject(groupBy(propertiesWithKnownType, property => property.normalizedPredicateType!));
     this.selectAllWithKnownPredicates();

@@ -21,8 +21,8 @@ class TechnicalNamespacesController {
   descriptor: TechnicalNamespaceTableDescriptor;
   expanded = false;
 
-  /* @ngInject */
   constructor(private $scope: IScope) {
+    'ngInject';
   }
 
   $onInit() {

@@ -39,8 +39,8 @@ interface CodeValueInputScope extends IScope {
 
 export const CodeValueInputDirective: DirectiveDeclaration = {
   selector: 'codeValueInput',
-  /* @ngInject */
   factory($q: IQService, referenceDataService: ReferenceDataService, languageService: LanguageService, gettextCatalog: GettextCatalog) {
+    'ngInject';
     return {
       bindToController: {
         referenceData: '='

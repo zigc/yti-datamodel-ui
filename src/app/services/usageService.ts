@@ -6,8 +6,9 @@ import { Usage, EmptyUsage, DefaultUsage } from 'app/entities/usage';
 import { apiEndpointWithName } from './config';
 
 export class UsageService {
-  /* @ngInject */
+
   constructor(private $http: IHttpService, private frameService: FrameService) {
+    'ngInject';
   }
 
   getUsage(entity: EditableEntity): IPromise<Usage> {

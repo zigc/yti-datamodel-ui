@@ -7,8 +7,9 @@ import { IModalService, IModalServiceInstance } from 'angular-ui-bootstrap';
 import { AuthorizationManagerService } from 'app/services/authorizationManagerService';
 
 export class SearchOrganizationModal {
-  /* @ngInject */
+
   constructor(private $uibModal: IModalService) {
+    'ngInject';
   }
 
   open(exclude: Exclusion<Organization>): IPromise<Organization> {
@@ -28,13 +29,12 @@ class SearchOrganizationModalController {
 
   organizations?: Organization[];
 
-  /* @ngInject */
   constructor($scope: IScope,
               private $uibModalInstance: IModalServiceInstance,
               organizationService: OrganizationService,
               authorizationManagerService: AuthorizationManagerService,
               exclude: Exclusion<Organization>) {
-
+    'ngInject';
     organizationService.getOrganizations()
       .then(organizations =>
         this.organizations = authorizationManagerService.filterOrganizationsAllowedForUser(organizations.filter(c => !exclude(c))));

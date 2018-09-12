@@ -94,7 +94,6 @@ export class ModelPageController implements ModelPageActions, HelpProvider, Mode
 
   application: ApplicationController;
 
-  /* @ngInject */
   constructor($scope: IScope,
               $location: ILocationService,
               private $route: IRouteService,
@@ -112,7 +111,7 @@ export class ModelPageController implements ModelPageActions, HelpProvider, Mode
               interactiveHelpService: InteractiveHelpService,
               modelPageHelpService: ModelPageHelpService,
               private authorizationManagerService: AuthorizationManagerService) {
-
+    'ngInject';
     this.localizerProvider = () => languageService.createLocalizer(this.model);
 
     this.initialRoute = $route.current!;

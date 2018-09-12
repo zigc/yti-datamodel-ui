@@ -18,9 +18,10 @@ export interface VocabularyService {
 }
 
 export class DefaultVocabularyService implements VocabularyService {
-  /* @ngInject */
+
   constructor(private $http: IHttpService,
               private frameService: FrameService) {
+    'ngInject';
   }
 
   getAllVocabularies(): IPromise<Vocabulary[]> {

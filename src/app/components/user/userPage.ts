@@ -36,7 +36,6 @@ class UserPageController {
   selectedOrganization: Organization | null = null;
   requestsInOrganizations = new Map<string, Set<Role>>();
 
-  /* @ngInject */
   constructor($scope: IScope,
               $location: ILocationService,
               private userService: UserService,
@@ -45,7 +44,7 @@ class UserPageController {
               private gettextCatalog: GettextCatalog,
               private languageService: LanguageService,
               private userRoleService: UserRoleService) {
-
+    'ngInject';
     locationService.atUser();
 
     $scope.$watch(() => userService.user, user => {

@@ -24,9 +24,9 @@ class HighlightController {
 
   localizedText: string;
 
-  /* @ngInject */
   constructor(private $scope: IScope,
               private languageService: LanguageService) {
+    'ngInject';
   }
 
   $onInit() {
@@ -100,8 +100,8 @@ class HighlightController {
 
 export const HighlightFilter: FilterDeclaration = {
   name: 'highlight',
-  /* @ngInject */
   factory($sce: ISCEService) {
+    'ngInject';
     return (text: string, search: string) => {
       const highlightedText = applyHighlight(text, search);
       return $sce.trustAsHtml(highlightedText);

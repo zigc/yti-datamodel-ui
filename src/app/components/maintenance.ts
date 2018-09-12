@@ -4,8 +4,9 @@ import { modalCancelHandler } from 'app/utils/angular';
 import { IModalService } from 'angular-ui-bootstrap';
 
 export class MaintenanceModal {
-  /* @ngInject */
+
   constructor(private $uibModal: IModalService, private $log: ILogService) {
+    'ngInject';
   }
 
   open(err: any) {

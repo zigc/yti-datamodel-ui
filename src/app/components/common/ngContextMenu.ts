@@ -7,8 +7,8 @@ interface ContextMenuAttributes extends IAttributes {
 
 export const ContextMenuDirective: DirectiveDeclaration = {
   selector: 'ngContextMenu',
-  /* @ngInject */
   factory($parse: IParseService) {
+    'ngInject';
     return {
       link(scope: IScope, element: JQuery, attrs: ContextMenuAttributes) {
 

@@ -11,8 +11,8 @@ interface ConfigType {
 
 export class ConfigService {
 
-  /* @ngInject */
   constructor(private $http: IHttpService) {
+    'ngInject';
   }
 
   getConfig(): IPromise<Config> {

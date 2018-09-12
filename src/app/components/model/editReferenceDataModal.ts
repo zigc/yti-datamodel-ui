@@ -6,8 +6,9 @@ import { identity } from 'yti-common-ui/utils/object';
 import { modalCancelHandler } from 'app/utils/angular';
 
 export class EditReferenceDataModal {
-  /* @ngInject */
+
   constructor(private $uibModal: IModalService) {
+    'ngInject';
   }
 
   private open(context: LanguageContext, lang: Language, referenceDataToEdit: ReferenceData) {
@@ -36,11 +37,11 @@ class EditReferenceDataModalController {
   title: string;
   description: string;
 
-  /* @ngInject */
   constructor(private $uibModalInstance: IModalServiceInstance,
               private lang: Language,
               public context: LanguageContext,
               private referenceDataToEdit: ReferenceData) {
+    'ngInject';
     this.id = referenceDataToEdit.id;
     this.title = referenceDataToEdit.title[lang];
     this.description = referenceDataToEdit.description[lang];

@@ -56,11 +56,11 @@ export class AutocompleteController<T> implements InputWithPopupController<T> {
     [esc]: () => this.clear()
   };
 
-  /* @ngInject */
   constructor(private $scope: IScope,
               private $q: IQService,
               private $element: JQuery,
               private $document: JQuery) {
+    'ngInject';
   }
 
   $postLink() {

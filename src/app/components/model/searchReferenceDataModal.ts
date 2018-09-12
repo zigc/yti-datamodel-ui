@@ -25,8 +25,9 @@ interface WithReferenceDatas {
 const noExclude = (_referenceData: ReferenceData) => null;
 
 export class SearchReferenceDataModal {
-  /* @ngInject */
+
   constructor(private $uibModal: IModalService) {
+    'ngInject';
   }
 
   private open(model: WithReferenceDatas|null, context: LanguageContext, exclude: Exclusion<ReferenceData>): IPromise<ReferenceData> {
@@ -85,7 +86,6 @@ export class SearchReferenceDataModalController implements SearchController<Refe
 
   private searchFilters: SearchFilter<ReferenceData>[] = [];
 
-  /* @ngInject */
   constructor(private $scope: SearchReferenceDataScope,
               private $uibModalInstance: IModalServiceInstance,
               public model: WithReferenceDatas|null,
@@ -94,7 +94,7 @@ export class SearchReferenceDataModalController implements SearchController<Refe
               languageService: LanguageService,
               private gettextCatalog: GettextCatalog,
               public exclude: Exclusion<ReferenceData>) {
-
+    'ngInject';
     this.localizer = languageService.createLocalizer(context);
 
     const init = (referenceDatas: ReferenceData[]) => {

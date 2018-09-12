@@ -24,8 +24,8 @@ class EditableRootClassController {
 
   form: EditableForm;
 
-  /* @ngInject */
   constructor(private searchClassModal: SearchClassModal) {
+    'ngInject';
   }
 
   isEditing() {

@@ -33,7 +33,6 @@ export class ClassViewController extends EditableEntityController<Class> {
   modelController: ModelControllerService;
   openPropertyId: string;
 
-  /* @ngInject */
   constructor($scope: EditableScope,
               $log: ILogService,
               private searchPredicateModal: SearchPredicateModal,
@@ -42,6 +41,7 @@ export class ClassViewController extends EditableEntityController<Class> {
               private classService: ClassService,
               userService: UserService,
               private authorizationManagerService: AuthorizationManagerService) {
+    'ngInject';
     super($scope, $log, deleteConfirmationModal, errorModal, userService);
   }
 

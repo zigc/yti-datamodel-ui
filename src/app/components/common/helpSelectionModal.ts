@@ -4,8 +4,8 @@ import { InteractiveHelpDisplay } from 'app/help/components/interactiveHelpDispl
 
 export class HelpSelectionModal {
 
-  /* @ngInject */
   constructor(private $uibModal: IModalService) {
+    'ngInject';
   }
 
   open(helps: InteractiveHelp[]) {
@@ -50,8 +50,8 @@ export class HelpSelectionModal {
 
 class HelpSelectionModalController {
 
-  /* @ngInject */
   constructor(private $uibModalInstance: IModalServiceInstance, public helps: InteractiveHelp[], private interactiveHelpDisplay: InteractiveHelpDisplay) {
+    'ngInject';
   }
 
   startHelp(help: InteractiveHelp) {

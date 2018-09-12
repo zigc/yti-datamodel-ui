@@ -38,11 +38,11 @@ export class FloatController {
   floating = false;
   enabled = true;
 
-  /* @ngInject */
   constructor(private $scope: IScope,
               private $element: JQuery,
               private interactiveHelpService: InteractiveHelpService,
               private zone: NgZone) {
+    'ngInject';
   }
 
   $postLink() {

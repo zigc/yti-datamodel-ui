@@ -10,8 +10,8 @@ export const InformationAboutServicePageComponent: ComponentDeclaration = {
 
 class InformationAboutServicePageController {
 
-  /* @ngInject */
   constructor(locationService: LocationService) {
+    'ngInject';
     locationService.atInformationAboutService();
   }
 }

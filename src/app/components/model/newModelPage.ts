@@ -51,11 +51,11 @@ export class NewModelPageController {
 
   namespacesInUse = new Set<string>();
 
-  /* @ngInject */
   constructor(private $location: ILocationService,
               private modelService: ModelService,
               private locationService: LocationService,
               private errorModal: ErrorModal) {
+    'ngInject';
   }
 
   $onInit() {

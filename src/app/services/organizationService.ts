@@ -11,9 +11,9 @@ export interface OrganizationService {
 
 export class DefaultOrganizationService implements OrganizationService {
 
-  /* @ngInject */
   constructor(private $http: IHttpService,
               private frameService: FrameService) {
+    'ngInject';
   }
 
   getOrganizations(): IPromise<Organization[]> {

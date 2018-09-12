@@ -195,7 +195,6 @@ class ClassVisualizationController implements ChangeListener<Class|Predicate>, C
 
   maximized: boolean;
 
-  /* @ngInject */
   constructor(private $scope: IScope,
               private $q: IQService,
               private $timeout: ITimeoutService,
@@ -209,6 +208,7 @@ class ClassVisualizationController implements ChangeListener<Class|Predicate>, C
               private interactiveHelpService: InteractiveHelpService,
               private confirmationModal: ConfirmationModal,
               private authorizationManagerService: AuthorizationManagerService) {
+    'ngInject';
   }
 
   $onInit() {

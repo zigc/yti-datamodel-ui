@@ -24,8 +24,8 @@ class HistoryController {
   model: Model;
   resource: Class|Predicate|Model;
 
-  /* @ngInject */
   constructor(private historyModal: HistoryModal) {
+    'ngInject';
   }
 
   openHistory() {

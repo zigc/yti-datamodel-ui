@@ -37,10 +37,10 @@ class NonEditableController {
 
   form: EditableForm;
 
-  /* @ngInject */
   constructor(private $scope: IScope,
               private $parse: IParseService,
               private displayItemFactory: DisplayItemFactory) {
+    'ngInject';
   }
 
   $onInit() {

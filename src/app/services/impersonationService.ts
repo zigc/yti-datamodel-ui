@@ -3,8 +3,8 @@ import { apiEndpointWithName } from './config';
 
 export class ImpersonationService {
 
-  /* @ngInject */
   constructor(private $http: IHttpService) {
+    'ngInject';
   }
 
   getFakeableUsers() {

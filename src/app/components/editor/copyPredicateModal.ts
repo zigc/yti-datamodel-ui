@@ -6,8 +6,9 @@ import { Predicate } from 'app/entities/predicate';
 import { Model } from 'app/entities/model';
 
 export class CopyPredicateModal {
-  /* @ngInject */
+
   constructor(private $uibModal: IModalService) {
+    'ngInject';
   }
 
   open(predicate: Predicate|Uri, type: 'attribute' | 'association', model: Model): IPromise<Predicate> {
@@ -58,13 +59,12 @@ export class CopyPredicateModalController {
 
   predicate: Predicate;
 
-  /* @ngInject */
   constructor(private $uibModalInstance: IModalServiceInstance,
               predicateService: PredicateService,
               predicate: Predicate|Uri,
               type: 'attribute' | 'association',
               public model: Model) {
-
+    'ngInject';
     predicateService.copyPredicate(predicate, type, model).then(copied => this.predicate = copied);
   }
 

@@ -36,10 +36,10 @@ class PredicateFormController {
   predicateView: PredicateViewController;
   form: EditableForm;
 
-  /* @ngInject */
   constructor(private predicateService: PredicateService,
               private usageService: UsageService,
               private errorModal: ErrorModal) {
+    'ngInject';
   }
 
   isEditing() {

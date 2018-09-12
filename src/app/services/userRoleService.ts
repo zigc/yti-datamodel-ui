@@ -10,8 +10,9 @@ export interface UserRequest {
 
 export class UserRoleService {
 
-  /* @ngInject */
+
   constructor(private $http: IHttpService) {
+    'ngInject';
   }
 
   sendUserRequest(id: Uri): IPromise<any> {

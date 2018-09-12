@@ -55,7 +55,6 @@ export class FrontPageController implements HelpProvider {
   subscriptionsToClean: Subscription[] = [];
   modelsLoaded = false;
 
-  /* @ngInject */
   constructor($scope: IScope,
               private $location: ILocationService,
               locationService: LocationService,
@@ -67,6 +66,8 @@ export class FrontPageController implements HelpProvider {
               classificationService: ClassificationService,
               organizationService: OrganizationService,
               private authorizationManagerService: AuthorizationManagerService) {
+
+    'ngInject';
 
     locationService.atFrontPage();
     const localizer = languageService.createLocalizer();

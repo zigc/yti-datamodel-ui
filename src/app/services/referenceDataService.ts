@@ -14,8 +14,8 @@ export class ReferenceDataService {
   // indexed by reference data id
   private referenceDataCodesCache = new Map<string, IPromise<ReferenceDataCode[]>>();
 
-  /* @ngInject */
   constructor(private $http: IHttpService, private $q: IQService, private frameService: FrameService) {
+    'ngInject';
   }
 
   getReferenceDataServers(): IPromise<ReferenceDataServer[]> {

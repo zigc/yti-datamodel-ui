@@ -25,8 +25,8 @@ export interface ModelService {
 
 export class DefaultModelService implements ModelService {
 
-  /* @ngInject */
   constructor(private $http: IHttpService, private $q: IQService, private frameService: FrameService) {
+    'ngInject';
   }
 
   getModels(): IPromise<ModelListItem[]> {

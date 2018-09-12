@@ -17,8 +17,8 @@ function isRemovableStatus(status: Status|null): boolean {
 
 export class AuthorizationManagerService {
 
-  /* @ngInject */
   constructor(private userService: UserService) {
+    'ngInject';
   }
 
   private get user(): User {

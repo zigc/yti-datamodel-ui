@@ -62,25 +62,30 @@ mod.service('historyModal', HistoryModal);
 mod.service('notificationModal', NotificationModal);
 mod.service('helpSelectionModal', HelpSelectionModal);
 
-mod.filter('translateValue', /* @ngInject */ (languageService: LanguageService) => {
+mod.filter('translateValue', (languageService: LanguageService) => {
+  'ngInject';
   return (input: Localizable, context?: LanguageContext) => input ? languageService.translate(input, context) : '';
 });
 
-mod.filter('translateLabel', /* @ngInject */ (translateValueFilter: any) => {
+mod.filter('translateLabel', (translateValueFilter: any) => {
+  'ngInject';
   return (input: { label: Localizable }, context?: LanguageContext) => input ? translateValueFilter(input.label, context) : '';
 });
 
 mod.filter('capitalize', function() {
+  'ngInject';
   return function(input: string) {
     return upperCaseFirst(input);
   };
 });
 
-mod.filter('trustAsHtml', /* @ngInject */ ($sce: ISCEService) => {
+mod.filter('trustAsHtml', ($sce: ISCEService) => {
+  'ngInject';
   return (text: string) => $sce.trustAsHtml(text);
 });
 
-mod.filter('localizedDate', /* @ngInject */ (gettextCatalog: GettextCatalog) => {
+mod.filter('localizedDate', (gettextCatalog: GettextCatalog) => {
+  'ngInject';
   return (moment: Moment) => {
     if (moment) {
       return moment.format(gettextCatalog.getString('date format'));

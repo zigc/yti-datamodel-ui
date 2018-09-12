@@ -6,8 +6,9 @@ import { Language } from 'app/types/language';
 import { Link } from 'app/entities/model';
 
 export class AddEditLinkModal {
-  /* @ngInject */
+
   constructor(private $uibModal: IModalService) {
+    'ngInject';
   }
 
   private open(lang: Language, linkToEdit: Link|null): IPromise<Link> {
@@ -40,7 +41,7 @@ class AddEditLinkModalController {
   homepage: Uri;
   edit: boolean;
 
-  /* @ngInject */
+  'ngInject': any;
   constructor(private $uibModalInstance: IModalServiceInstance,
               private modelService: ModelService,
               private lang: Language,

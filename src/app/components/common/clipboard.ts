@@ -36,9 +36,9 @@ class ClipboardController {
 
   form: EditableForm;
 
-  /* @ngInject */
   constructor(private gettextCatalog: GettextCatalog,
               private $timeout: ITimeoutService) {
+    'ngInject';
   }
 
   isEditing() {

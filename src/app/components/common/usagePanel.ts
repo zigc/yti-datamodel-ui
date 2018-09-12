@@ -25,9 +25,9 @@ class UsagePanelController {
   open = false;
   loading: boolean;
 
-  /* @ngInject */
   constructor(private $scope: IScope,
               private usageService: UsageService) {
+    'ngInject';
   }
 
   $onInit() {

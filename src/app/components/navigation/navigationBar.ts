@@ -45,7 +45,6 @@ class NavigationBarController {
   fakeableUsers: { email: string, firstName: string, lastName: string }[] = [];
   config: Config;
 
-  /* @ngInject */
   constructor($scope: IScope,
               $route: angular.route.IRouteService,
               $location: ILocationService,
@@ -56,7 +55,7 @@ class NavigationBarController {
               private interactiveHelpService: InteractiveHelpService,
               private helpSelectionModal: HelpSelectionModal,
               configService: ConfigService) {
-
+    'ngInject';
     impersonationService.getFakeableUsers()
       .then(users => this.fakeableUsers = users);
 

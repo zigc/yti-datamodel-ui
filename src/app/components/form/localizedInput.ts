@@ -16,8 +16,8 @@ interface LocalizedInputScope extends IScope {
 
 export const LocalizedInputDirective: DirectiveDeclaration = {
   selector: 'localizedInput',
-  /* @ngInject */
   factory(languageService: LanguageService) {
+    'ngInject';
     return {
       restrict: 'A',
       scope: {

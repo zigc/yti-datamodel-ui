@@ -84,9 +84,9 @@ export class InteractiveHelpVocabularyService implements VocabularyService, Rese
   vocabularyStore = new ResourceStore<Vocabulary>();
   conceptStore = new ResourceStore<Concept>();
 
-  /* @ngInject */
   constructor(private $q: IQService,
               private frameService: FrameService) {
+    'ngInject';
   }
 
   reset(): IPromise<any> {

@@ -19,10 +19,10 @@ class ModelLanguageChooserController {
 
   context: LanguageContext;
 
-  /* @ngInject */
   constructor(private $scope: IScope,
               private languageService: LanguageService,
               private gettextCatalog: GettextCatalog) {
+    'ngInject';
   }
 
   $onInit() {

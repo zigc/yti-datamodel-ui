@@ -78,11 +78,11 @@ class EditableMultipleUriSelectController {
 
   form: EditableForm;
 
-  /* @ngInject */
   constructor(private searchPredicateModal: SearchPredicateModal,
               private searchClassModal: SearchClassModal,
               private classService: ClassService,
               private predicateService: PredicateService) {
+    'ngInject';
   }
 
   $onOnit() {

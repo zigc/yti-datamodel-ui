@@ -35,10 +35,10 @@ export class PropertyViewController {
 
   classForm: ClassFormController;
 
-  /* @ngInject */
   constructor(private $scope: IScope,
               private $element: JQuery,
               private languageService: LanguageService) {
+    'ngInject';
   }
 
   $onInit() {

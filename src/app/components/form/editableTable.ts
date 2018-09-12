@@ -117,8 +117,8 @@ class EditableTableController<T> {
 
   form: EditableForm;
 
-  /* @ngInject */
   constructor(private $scope: IScope) {
+    'ngInject';
   }
 
   $onInit() {

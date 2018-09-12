@@ -34,8 +34,8 @@ const helpOrganizationsResponse = {
 
 export class InteractiveHelpOrganizationService implements OrganizationService {
 
-  /* @ngInject */
   constructor(private frameService: FrameService) {
+    'ngInject';
   }
 
   getOrganizations(): IPromise<Organization[]> {

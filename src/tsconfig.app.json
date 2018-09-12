@@ -4,7 +4,8 @@
     "outDir": "../out-tsc/app",
     "types": [
       "webpack-env",
-      "modernizr"
+      "modernizr",
+      "jquery"
     ],
     "baseUrl": "",
     "paths": {

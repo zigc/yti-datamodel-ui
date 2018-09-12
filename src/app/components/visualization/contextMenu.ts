@@ -44,9 +44,9 @@ class VisualizationContextMenuController {
   actions: Action[] = [];
   style: any;
 
-  /* @ngInject */
   constructor(private $scope: IScope,
               private classService: ClassService) {
+    'ngInject';
   }
 
   $onInit() {

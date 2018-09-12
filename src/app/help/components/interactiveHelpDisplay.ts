@@ -22,10 +22,10 @@ const arrowHeight = 13;
 
 export class InteractiveHelpDisplay {
 
-  /* @ngInject */
   constructor(private overlayService: OverlayService,
               private interactiveHelpService: InteractiveHelpService,
               private gettextCatalog: GettextCatalog) {
+    'ngInject';
   }
 
   open(help: InteractiveHelp) {
@@ -87,7 +87,6 @@ class InteractiveHelpController {
   currentScrollTop?: number;
   inTransition = false;
 
-  /* @ngInject */
   constructor(private $scope: IScope,
               private $overlayInstance: OverlayInstance,
               $document: IDocumentService,
@@ -98,7 +97,7 @@ class InteractiveHelpController {
               stateInitialization: () => IPromise<boolean>,
               $window: IWindowService,
               zone: NgZone) {
-
+    'ngInject';
     let continuing = false;
 
     stateInitialization().then(willChangeLocation => {

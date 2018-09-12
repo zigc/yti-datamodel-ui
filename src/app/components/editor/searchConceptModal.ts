@@ -41,8 +41,8 @@ class AddWithoutConceptData implements NewEntityData {
 
 export class SearchConceptModal {
 
-  /* @ngInject */
   constructor(private $uibModal: IModalService) {
+    'ngInject';
   }
 
   private open(vocabularies: Vocabulary[],
@@ -115,7 +115,6 @@ class SearchConceptController implements SearchController<Concept> {
 
   editInProgress = () => this.$scope.form.editing && this.$scope.form.$dirty;
 
-  /* @ngInject */
   constructor(private $scope: SearchPredicateScope,
               private $uibModalInstance: IModalServiceInstance,
               private $q: IQService,
@@ -128,7 +127,7 @@ class SearchConceptController implements SearchController<Concept> {
               public model: Model,
               private vocabularyService: VocabularyService,
               private gettextCatalog: GettextCatalog) {
-
+    'ngInject';
     this.localizer = languageService.createLocalizer(model);
     this.defineConceptTitle = type ? `Define concept for the ${newEntityCreation ? 'new ' : ''}${type}` : 'Search concept';
     this.buttonTitle = (newEntityCreation ? 'Create new ' + type : 'Use');

@@ -7,9 +7,6 @@ const debugPerformance = false;
 
 interface IdentifiedNode extends Node {
   id: string;
-  width?: number;
-  height?: number;
-  fixed: boolean;
 }
 
 class SimpleColaLayout extends Layout {
@@ -65,7 +62,7 @@ class SimpleColaLayout extends Layout {
   drag() {
   }
 
-  on(e: EventType | string, listener: (event: Event) => void): Layout {
+  on(e: EventType | string, listener: (event: Event) => void): this {
     return super.on(e, listener);
   }
 }
@@ -104,7 +101,7 @@ export function layout(graph: joint.dia.Graph, onlyNodeIds: string[] = []): Prom
       y: (element.attributes.position.y || hash('y' + element.id)),
       width: element.attributes.size.width / allElementScaleCorrection,
       height: element.attributes.size.height / allElementScaleCorrection,
-      fixed: onlyNodeIdsSet.size > 0 && !onlyNodeIdsSet.has(element.id)
+      fixed: (onlyNodeIdsSet.size > 0 && !onlyNodeIdsSet.has(element.id)) ? 1 : 0
     });
   });
 

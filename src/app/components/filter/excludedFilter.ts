@@ -20,8 +20,8 @@ class ExcludedFilterController<T> {
   searchText: string;
   exclude: Exclusion<T>;
 
-  /* @ngInject */
   constructor(private $scope: IScope) {
+    'ngInject';
   }
 
   $onInit() {

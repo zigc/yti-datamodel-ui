@@ -3,8 +3,9 @@ import { IModalService } from 'angular-ui-bootstrap';
 import { KnownPredicateType } from 'app/types/entity';
 
 export class ChoosePredicateTypeModal {
-  /* @ngInject */
+
   constructor(private $uibModal: IModalService) {
+    'ngInject';
   }
 
   open(): IPromise<KnownPredicateType> {

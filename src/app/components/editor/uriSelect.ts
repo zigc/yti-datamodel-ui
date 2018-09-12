@@ -79,13 +79,13 @@ class UriSelectController {
 
   form: EditableForm;
 
-  /* @ngInject */
   constructor(private $scope: IScope,
               private $q: IQService,
               private searchPredicateModal: SearchPredicateModal,
               private searchClassModal: SearchClassModal,
               private classService: ClassService,
               private predicateService: PredicateService) {
+    'ngInject';
   }
 
   $onInit() {

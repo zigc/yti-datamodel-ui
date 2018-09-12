@@ -33,11 +33,11 @@ class EditableLabelController {
 
   form: EditableForm;
 
-  /* @ngInject */
   constructor(private $scope: IScope,
               private $element: JQuery,
               private gettextCatalog: GettextCatalog,
               private languageService: LanguageService) {
+    'ngInject';
   }
 
   $onInit() {

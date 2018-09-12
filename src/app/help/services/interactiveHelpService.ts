@@ -15,7 +15,6 @@ export class InteractiveHelpService implements ResetableService {
 
   private helpServices: ResetableService[];
 
-  /* @ngInject */
   constructor(private $q: IQService,
               public helpModelService: InteractiveHelpModelService,
               public helpVisualizationService: InteractiveHelpVisualizationService,
@@ -24,7 +23,7 @@ export class InteractiveHelpService implements ResetableService {
               public helpPredicateService: InteractiveHelpPredicateService,
               public helpVocabularyService: InteractiveHelpVocabularyService,
               public helpValidatorService: InteractiveHelpValidatorService) {
-
+    'ngInject';
     this.helpServices = [
       helpModelService,
       helpVisualizationService,

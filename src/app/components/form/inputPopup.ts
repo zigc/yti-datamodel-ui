@@ -46,10 +46,10 @@ class InputPopupController<T> {
   ctrl: InputWithPopupController<T>;
   popupStyle: { top: string|number, left: string|number, width: string|number, position: string };
 
-  /* @ngInject */
   constructor(private $scope: InputPopupScope,
               private $window: IWindowService,
               private zone: NgZone) {
+    'ngInject';
   }
 
   $onInit() {

@@ -10,7 +10,7 @@ export const ParagraphizeComponent: ComponentDeclaration = {
     text: '=',
     context: '='
   },
-  template: '<span ng-bind-html="$ctrl.text | translateValue:$ctrlcontext | paragraphize"></span>',
+  template: '<span ng-bind-html="$ctrl.text | translateValue:$ctrl.context | paragraphize"></span>',
   controller: forwardRef(() => ParagraphizeController)
 };
 
@@ -21,8 +21,8 @@ class ParagraphizeController {
 
 export const ParagraphizeFilter: FilterDeclaration = {
   name: 'paragraphize',
-  /* @ngInject */
   factory($sce: ISCEService) {
+    'ngInject';
     return (text: string) => {
       return $sce.trustAsHtml(applyParagraph(text));
     };

@@ -96,13 +96,14 @@ export interface ConceptSuggestionDetails {
 }
 
 export class EntityLoaderService {
-  /* @ngInject */
+
   constructor(private $q: IQService,
               private modelService: ModelService,
               private predicateService: PredicateService,
               private classService: ClassService,
               private vocabularyService: VocabularyService,
               private resetService: ResetService) {
+    'ngInject';
   }
 
   create(shouldReset: boolean): EntityLoader {

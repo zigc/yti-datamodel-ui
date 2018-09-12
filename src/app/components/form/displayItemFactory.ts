@@ -84,8 +84,8 @@ export interface DisplayItemConfiguration {
 
 
 export class DisplayItemFactory {
-  /* @ngInject */
   constructor(private $location: ILocationService, private languageService: LanguageService, private gettextCatalog: GettextCatalog) {
+    'ngInject';
   }
 
   create(config: DisplayItemConfiguration) {

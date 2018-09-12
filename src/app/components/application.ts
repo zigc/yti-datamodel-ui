@@ -21,7 +21,6 @@ export class ApplicationController {
   showGoogleAnalytics: boolean;
   helpProvider: HelpProvider|null;
 
-  /* @ngInject */
   constructor($scope: IScope,
               private $location: ILocationService,
               $uibModalStack: IModalStackService,
@@ -29,6 +28,8 @@ export class ApplicationController {
               confirmationModal: ConfirmationModal,
               private locationService: LocationService,
               configService: ConfigService) {
+
+    'ngInject';
 
     userService.loggedIn$.subscribe(() => this.applicationInitialized = true);
 

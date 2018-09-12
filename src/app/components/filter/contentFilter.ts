@@ -27,8 +27,8 @@ class ContentFilterController<T> {
   contentMatchers: ContentMatcher<T>[];
   contentExtractors: ContentExtractor<T>[];
 
-  /* @ngInject */
   constructor(private $scope: IScope) {
+    'ngInject';
   }
 
   $onInit() {

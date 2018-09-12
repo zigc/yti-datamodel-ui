@@ -27,8 +27,8 @@ class TypesFilterController {
   types: Type[] = ['model', 'class', 'shape', 'attribute', 'association'];
   searchTypes: Type[] = this.types.slice();
 
-  /* @ngInject */
   constructor(private $scope: IScope) {
+    'ngInject';
   }
 
   $onInit() {

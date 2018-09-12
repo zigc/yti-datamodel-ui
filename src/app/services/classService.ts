@@ -43,8 +43,8 @@ export class DefaultClassService implements ClassService {
 
   private modelClassesCache = new Map<string, ClassListItem[]>();
 
-  /* @ngInject */
   constructor(private $http: IHttpService, private $q: IQService, private defaultPredicateService: PredicateService, private frameService: FrameService) {
+    'ngInject';
   }
 
   getClass(id: Uri|Urn, model: Model): IPromise<Class> {

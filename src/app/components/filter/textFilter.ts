@@ -32,8 +32,8 @@ class TextFilterController<T> {
   searchController: SearchController<T>;
   searchText: string;
 
-  /* @ngInject */
   constructor(private $scope: IScope) {
+    'ngInject';
   }
 
   $onInit() {

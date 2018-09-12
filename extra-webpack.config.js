@@ -1,26 +1,20 @@
-// webpackLoader initialization copied from @angular-devkit/build-angular/src/angular-cli-files/models/webpack-configs/typescript.js @ 0.7.4
+const tsconfig = require('./tsconfig.json');
 
-const g = typeof global !== 'undefined' ? global : {};
-const webpackLoader = g['_DevKitIsLocal'] ? require.resolve('@ngtools/webpack') : '@ngtools/webpack';
+const config = {
+  files: [],
+  ignore: false,
+  compilerOptions: Object.assign({}, tsconfig.compilerOptions, {
+    module: 'commonjs',
+    typeRoots: [ 'node_modules/@types' ],
+    types: [ 'node', 'webpack' ]
+  })
+};
+
+require('ts-node').register(config);
+const NgAnnotatePlugin = require('./ng-annotate.plugin.ts').NgAnnotatePlugin;
 
 module.exports = {
-  module: {
-    rules: [
-      {
-        test: /\.tsx?$/,
-        use: [
-          {
-            loader: 'ng-annotate-loader',
-            options: {
-              ngAnnotate: "ng-annotate-patched",
-              es6: true
-            }
-          },
-          {
-            loader: webpackLoader
-          }
-        ]
-      }
-    ]
-  }
+  plugins: [
+    new NgAnnotatePlugin()
+  ]
 };

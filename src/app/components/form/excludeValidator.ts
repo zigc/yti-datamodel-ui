@@ -8,8 +8,8 @@ interface ExcludeValidatorAttributes extends IAttributes {
 
 export const ExcludeValidatorDirective: DirectiveDeclaration = {
   selector: 'excludeValidator',
-  /* @ngInject */
   factory($q: IQService) {
+    'ngInject';
     return {
       restrict: 'A',
       require: 'ngModel',

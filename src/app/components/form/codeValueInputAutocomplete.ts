@@ -26,8 +26,8 @@ export class CodeValueInputAutocompleteController {
   context: LanguageContext;
   localizer: Localizer;
 
-  /* @ngInject */
   constructor(private referenceDataService: ReferenceDataService, languageService: LanguageService) {
+    'ngInject';
     this.localizer = languageService.createLocalizer(this.context);
   }
 

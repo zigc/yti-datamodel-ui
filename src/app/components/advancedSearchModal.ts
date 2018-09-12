@@ -15,8 +15,8 @@ export const languageContext: LanguageContext = {
 };
 
 export class AdvancedSearchModal {
-  /* @ngInject */
   constructor(private $uibModal: IModalService) {
+    'ngInject';
   }
 
   open(): IPromise<SearchResult> {
@@ -41,7 +41,7 @@ class AdvancedSearchController implements SearchController<SearchResult> {
   contentExtractors = [ (searchResult: SearchResult) => searchResult.label, (searchResult: SearchResult) => searchResult.comment ];
   private searchFilters: SearchFilter<SearchResult>[] = [];
 
-  /* @ngInject */
+  'ngInject': any;
   constructor($scope: IScope,
               private $uibModalInstance: IModalServiceInstance,
               private searchService: SearchService,

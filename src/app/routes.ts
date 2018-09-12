@@ -4,8 +4,7 @@ import { ILocationService } from 'angular';
 import { resourceUrl, modelUrl } from './utils/entity';
 import { NotificationModal } from './components/common/notificationModal';
 
-/* @ngInject */
-export function routeConfig($routeProvider: angular.route.IRouteProvider) {
+export const routeConfig = ['$routeProvider', function($routeProvider: angular.route.IRouteProvider) {
   $routeProvider
     .when('/', {
       template: '<front-page></front-page>'
@@ -48,9 +47,8 @@ export function routeConfig($routeProvider: angular.route.IRouteProvider) {
     })
     .otherwise({
       template: '',
-      /* @ngInject */
       controller(notificationModal: NotificationModal) {
         notificationModal.openPageNotFound();
       }
     });
-}
+}];

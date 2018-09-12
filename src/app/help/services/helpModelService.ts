@@ -15,11 +15,11 @@ export class InteractiveHelpModelService implements ModelService, ResetableServi
 
   store = new ResourceStore<Model>();
 
-  /* @ngInject */
   constructor(private $q: IQService,
               private defaultModelService: ModelService,
               private helpClassService: InteractiveHelpClassService,
               private helpPredicateService: InteractiveHelpPredicateService) {
+    'ngInject';
   }
 
   reset(): IPromise<any> {

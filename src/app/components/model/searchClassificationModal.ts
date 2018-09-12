@@ -8,8 +8,9 @@ import { comparingLocalizable } from 'app/utils/comparator';
 import { LanguageService } from 'app/services/languageService';
 
 export class SearchClassificationModal {
-  /* @ngInject */
+
   constructor(private $uibModal: IModalService) {
+    'ngInject';
   }
 
   open(exclude: Exclusion<WithId>): IPromise<Classification> {
@@ -29,13 +30,12 @@ class SearchClassificationModalController {
 
   classifications: Classification[];
 
-  /* @ngInject */
   constructor($scope: IScope,
               private $uibModalInstance: IModalServiceInstance,
               classificationService: ClassificationService,
               private languageService: LanguageService,
               exclude: Exclusion<WithId>) {
-
+    'ngInject';
     classificationService.getClassifications()
       .then(classifications => {
         this.classifications = classifications.filter(c => !exclude(c));

@@ -49,10 +49,10 @@ export class EditableMultipleController<T> {
   form: EditableForm;
   ngModelCtrl: INgModelController;
 
-  /* @ngInject */
   constructor(private $scope: EditableMultipleScope,
               private $q: IQService,
               private $element: JQuery) {
+    'ngInject';
   }
 
   $postLink() {

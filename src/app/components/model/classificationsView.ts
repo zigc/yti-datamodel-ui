@@ -44,10 +44,10 @@ class ClassificationsViewController {
 
   form: EditableForm;
 
-  /* @ngInject */
   constructor(private $scope: IScope,
               private languageService: LanguageService,
               private searchClassificationModal: SearchClassificationModal) {
+    'ngInject';
   }
 
   $onInit() {

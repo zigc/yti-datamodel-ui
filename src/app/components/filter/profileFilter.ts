@@ -26,8 +26,8 @@ class ProfileFilterController {
   searchController: SearchController<WithDefinedBy>;
   showProfiles = true;
 
-  /* @ngInject */
   constructor(private $scope: IScope) {
+    'ngInject';
   }
 
   $onInit() {

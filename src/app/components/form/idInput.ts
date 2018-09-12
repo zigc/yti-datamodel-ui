@@ -16,8 +16,8 @@ interface IdInputScope extends IScope {
 
 export const IdInputDirective: DirectiveDeclaration = {
   selector: 'idInput',
-  /* @ngInject */
   factory($q: IQService, validatorService: ValidatorService) {
+    'ngInject';
     return {
       scope: {
         old: '='

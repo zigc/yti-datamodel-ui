@@ -30,8 +30,8 @@ export class InteractiveHelpUserService implements UserService, ResetableService
 
   user = new InteractiveHelpUser();
 
-  /* @ngInject */
   constructor(private $q: IQService) {
+    'ngInject';
   }
 
   get loggedIn$(): Observable<boolean> {

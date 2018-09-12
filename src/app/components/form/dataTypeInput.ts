@@ -23,8 +23,8 @@ interface DatatypeInputScope extends IScope {
 
 export const DataTypeInputDirective: DirectiveDeclaration = {
   selector: 'datatypeInput',
-  /* @ngInject */
   factory($q: IQService, referenceDataService: ReferenceDataService, languageService: LanguageService, gettextCatalog: GettextCatalog) {
+    'ngInject';
     return {
       restrict: 'EA',
       scope: {

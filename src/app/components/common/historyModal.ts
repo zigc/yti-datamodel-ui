@@ -17,8 +17,9 @@ import { identity } from 'yti-common-ui/utils/object';
 import { modalCancelHandler } from 'app/utils/angular';
 
 export class HistoryModal {
-  /* @ngInject */
+
   constructor(private $uibModal: IModalService) {
+    'ngInject';
   }
 
   open(model: Model, resource: Class|Predicate|Model) {
@@ -43,7 +44,6 @@ class HistoryModalController {
   showAuthor: boolean;
   loading: boolean;
 
-  /* @ngInject */
   constructor(historyService: HistoryService,
               private classService: ClassService,
               private predicateService: PredicateService,
@@ -51,7 +51,7 @@ class HistoryModalController {
               userService: UserService,
               public model: Model,
               public resource: Class|Predicate|Model) {
-
+    'ngInject';
     this.showAuthor = userService.isLoggedIn();
 
     historyService.getHistory(resource.id).then(activity => {
