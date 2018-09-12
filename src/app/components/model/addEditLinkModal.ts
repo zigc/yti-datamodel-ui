@@ -41,11 +41,11 @@ class AddEditLinkModalController {
   homepage: Uri;
   edit: boolean;
 
-  'ngInject': any;
   constructor(private $uibModalInstance: IModalServiceInstance,
               private modelService: ModelService,
               private lang: Language,
               private linkToEdit: Link|null) {
+    'ngInject';
     this.edit = !!linkToEdit;
 
     if (linkToEdit) {

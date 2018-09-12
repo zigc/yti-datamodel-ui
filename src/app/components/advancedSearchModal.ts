@@ -41,11 +41,11 @@ class AdvancedSearchController implements SearchController<SearchResult> {
   contentExtractors = [ (searchResult: SearchResult) => searchResult.label, (searchResult: SearchResult) => searchResult.comment ];
   private searchFilters: SearchFilter<SearchResult>[] = [];
 
-  'ngInject': any;
   constructor($scope: IScope,
               private $uibModalInstance: IModalServiceInstance,
               private searchService: SearchService,
               languageService: LanguageService) {
+    'ngInject';
 
     this.localizer = languageService.createLocalizer(languageContext);
 
