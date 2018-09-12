@@ -25,6 +25,7 @@ class LocalizedSelectController {
   displayNameFormatter: (value: string, gettextCatalog: GettextCatalog) => string;
 
   constructor(private gettextCatalog: GettextCatalog) {
+    'ngInject';
   }
 
   getName(value: string) {
