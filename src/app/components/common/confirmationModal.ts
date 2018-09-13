@@ -44,5 +44,6 @@ export class ConfirmationModal {
 
 class ConfirmationModalController {
   constructor(public title: string, public body: string) {
+    'ngInject';
   }
 }
