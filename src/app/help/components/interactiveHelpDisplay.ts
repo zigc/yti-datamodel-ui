@@ -1,23 +1,34 @@
 import * as _ from 'lodash';
-import { OverlayService, OverlayInstance } from 'app/components/common/overlay';
-import { IScope, IPromise, IDocumentService, ILocationService, IWindowService } from 'angular';
+import { OverlayInstance, OverlayService } from 'app/components/common/overlay';
+import { IDocumentService, ILocationService, IPromise, IScope, IWindowService } from 'angular';
 import { IModalStackService } from 'angular-ui-bootstrap';
-import { assertNever, requireDefined, areEqual, Optional } from 'yti-common-ui/utils/object';
-import { tab, esc, enter } from 'yti-common-ui/utils/key-code';
-import { ComponentDeclaration, isTargetElementInsideElement, nextUrl } from 'app/utils/angular';
+import { assertNever, Optional, requireDefined } from 'yti-common-ui/utils/object';
+import { enter, esc, tab } from 'yti-common-ui/utils/key-code';
+import { isTargetElementInsideElement, nextUrl } from 'app/utils/angular';
 import { InteractiveHelpService } from 'app/help/services/interactiveHelpService';
-import {
-  NextCondition, Story, Notification, Click, ModifyingClick,
-  NavigatingClick, InteractiveHelp, createScrollWithDefault
-} from 'app/help/contract';
-import { contains } from 'yti-common-ui/utils/array';
+import { createScrollWithDefault, InteractiveHelp, NextCondition, Notification, Story } from 'app/help/contract';
 import { ConfirmationModal } from 'app/components/common/confirmationModal';
 import { moveCursorToEnd, scrollToTop } from 'app/help/utils';
 import { gettextCatalog as GettextCatalog } from 'angular-gettext';
-import { forwardRef, NgZone } from '@angular/core';
+import { NgZone } from '@angular/core';
+import {
+  arrowHeight,
+  elementExists,
+  elementPositioning, isClick,
+  isFocusInElement,
+  isNumberInMargin,
+  isPositionInMargin,
+  isVisible,
+  PopoverDimensionsProvider,
+  Positioning,
+  stopEvent
+} from './utils';
+import { HelpPopoverController } from './interactiveHelpPopover';
+import { InteractiveHelpBackdropController } from './interactiveHelpBackdrop';
 
-const popupAnimationTimeInMs = 300; // should match css help-popover transition time
-const arrowHeight = 13;
+const focusableSelector = 'a[href], area[href], input:not([disabled]), ' +
+  'button:not([disabled]),select:not([disabled]), textarea:not([disabled]), ' +
+  'iframe, object, embed, *[tabindex], *[contenteditable=true]';
 
 export class InteractiveHelpDisplay {
 
@@ -67,12 +78,7 @@ export class InteractiveHelpDisplay {
   }
 }
 
-const focusableSelector = 'a[href], area[href], input:not([disabled]), ' +
-                          'button:not([disabled]),select:not([disabled]), textarea:not([disabled]), ' +
-                          'iframe, object, embed, *[tabindex], *[contenteditable=true]';
-
-
-class InteractiveHelpController {
+export class InteractiveHelpController {
 
   item?: Story|Notification;
   items: (Story|Notification)[];
@@ -81,30 +87,33 @@ class InteractiveHelpController {
 
   popoverController: HelpPopoverController;
   popoverDimensionsProvider: PopoverDimensionsProvider;
-  backdropController: HelpBackdropController;
+  backdropController: InteractiveHelpBackdropController;
 
   currentScrollTop?: number;
   inTransition = false;
 
   constructor(private $scope: IScope,
               private $overlayInstance: OverlayInstance,
-              $document: IDocumentService,
-              $location: ILocationService,
+              private $document: IDocumentService,
+              private $location: ILocationService,
               private $uibModalStack: IModalStackService,
-              confirmationModal: ConfirmationModal,
+              private confirmationModal: ConfirmationModal,
               private help: InteractiveHelp,
-              stateInitialization: () => IPromise<boolean>,
-              $window: IWindowService,
-              zone: NgZone) {
+              private stateInitialization: () => IPromise<boolean>,
+              private $window: IWindowService,
+              private zone: NgZone) {
     'ngInject';
+  }
+
+  $onInit() {
 
     let continuing = false;
 
-    stateInitialization().then(willChangeLocation => {
+    this.stateInitialization().then(willChangeLocation => {
       continuing = willChangeLocation;
       // Reset expectation if navigation event happened before construction
       setTimeout(() => continuing = false, 500);
-      this.items = help.storyLine.items();
+      this.items = this.help.storyLine.items();
 
       if (this.items.length === 0) {
         throw new Error('No stories defined');
@@ -113,7 +122,7 @@ class InteractiveHelpController {
       this.showItem(0);
     });
 
-    $scope.$on('$locationChangeStart', (event, next) => {
+    this.$scope.$on('$locationChangeStart', (event, next) => {
       if (!continuing) {
         event.preventDefault();
 
@@ -121,12 +130,12 @@ class InteractiveHelpController {
         setTimeout(() => {
           if (this.changingLocation) {
             continuing = true;
-            $scope.$apply(() => {
-              $location.url(nextUrl($location, next));
+            this.$scope.$apply(() => {
+              this.$location.url(nextUrl(this.$location, next));
               this.moveToNextItem();
             });
           } else {
-            confirmationModal.openCloseHelp().then(() => this.close(true));
+            this.confirmationModal.openCloseHelp().then(() => this.close(true));
           }
         });
       } else {
@@ -136,7 +145,7 @@ class InteractiveHelpController {
 
     const debounceUpdatePositions = _.debounce(() => this.updatePositions(), 200);
 
-    $scope.$watch(() => this.item, debounceUpdatePositions);
+    this.$scope.$watch(() => this.item, debounceUpdatePositions);
 
     const itemPopoverPositioning = () => (this.item && this.item.type === 'story') ? elementPositioning(this.item.popover.element()) : null;
     const itemFocusPositioning = () => this.item && this.item.type === 'story' && this.item.focus ? elementPositioning(this.item.focus.element()) : null;
@@ -165,28 +174,28 @@ class InteractiveHelpController {
     }
 
     // Additional checks for sub-pixel fluctuation are needed for example because of float (fixed style)
-    $scope.$watch(itemPopoverPositioning, updateIfNeeded, true);
-    $scope.$watch(itemFocusPositioning, updateIfNeeded, true);
-    $scope.$watch(itemScrollPositioning, updateIfNeeded, true);
+    this.$scope.$watch(itemPopoverPositioning, updateIfNeeded, true);
+    this.$scope.$watch(itemFocusPositioning, updateIfNeeded, true);
+    this.$scope.$watch(itemScrollPositioning, updateIfNeeded, true);
 
-    $scope.$watch(() => this.getPopoverDimensions(), debounceUpdatePositions, true);
+    this.$scope.$watch(() => this.getPopoverDimensions(), debounceUpdatePositions, true);
 
-    zone.runOutsideAngular(() => {
+    this.zone.runOutsideAngular(() => {
       window.addEventListener('resize', debounceUpdatePositions);
       window.addEventListener('scroll', debounceUpdatePositions);
     });
 
     // Lazy initialization of listeners so that it doesn't intervene with help opening event
     setTimeout(() => {
-      $document.on('keydown', keyDownHandler);
-      $document.on('click', clickHandler);
+      this.$document.on('keydown', keyDownHandler);
+      this.$document.on('click', clickHandler);
     });
 
-    $scope.$on('$destroy', () => {
+    this.$scope.$on('$destroy', () => {
       window.removeEventListener('resize', debounceUpdatePositions);
       window.removeEventListener('scroll', debounceUpdatePositions);
-      $document.off('keydown', keyDownHandler);
-      $document.off('click', clickHandler);
+      this.$document.off('keydown', keyDownHandler);
+      this.$document.off('click', clickHandler);
     });
   }
 
@@ -355,26 +364,6 @@ class InteractiveHelpController {
     this.currentScrollTop = scrollTop;
   }
 
-  private static loadFocusableElementList(item: Story|Notification): Optional<HTMLElement[]> {
-
-    if (item.type === 'notification' || item.denyInteraction) {
-      return [];
-    } else if (!item.focus) {
-      return null;
-    }
-
-    const focusableElements = item.focus.element().find(focusableSelector).addBack(focusableSelector);
-    const result: HTMLElement[] = [];
-
-    focusableElements.each((_index: number, element: HTMLElement) => {
-      if (isVisible(element) && (!element.tabIndex || element.tabIndex > 0)) {
-        result.push(element);
-      }
-    });
-
-    return result;
-  };
-
 
   keyDownHandler(event: JQueryEventObject) {
 
@@ -394,9 +383,29 @@ class InteractiveHelpController {
       }
     };
 
+    const loadFocusableElementList = (item: Story|Notification): Optional<HTMLElement[]> => {
+
+      if (item.type === 'notification' || item.denyInteraction) {
+        return [];
+      } else if (!item.focus) {
+        return null;
+      }
+
+      const focusableElements = item.focus.element().find(focusableSelector).addBack(focusableSelector);
+      const result: HTMLElement[] = [];
+
+      focusableElements.each((_index: number, element: HTMLElement) => {
+        if (isVisible(element) && (!element.tabIndex || element.tabIndex > 0)) {
+          result.push(element);
+        }
+      });
+
+      return result;
+    };
+
     const manageTabKeyFocus = (item: Story|Notification) => {
 
-      const focusableElements = InteractiveHelpController.loadFocusableElementList(item);
+      const focusableElements = loadFocusableElementList(item);
 
       const activeElementIsFocusable = () => {
         for (const focusableElement of focusableElements || []) {
@@ -477,12 +486,13 @@ class InteractiveHelpController {
     waitForElementToDisappear();
   }
 
-  markLocationChange() {
-    this.changingLocation = true;
-    setTimeout(() => this.changingLocation = false, 3000);
-  }
-
   clickHandler(event: JQueryEventObject) {
+
+    const markLocationChange = () => {
+      this.changingLocation = true;
+      setTimeout(() => this.changingLocation = false, 3000);
+    };
+
     const item = this.item;
 
     if (item && item.type === 'story' && isClick(item.nextCondition) && this.isValid()) {
@@ -493,7 +503,7 @@ class InteractiveHelpController {
           if (item.nextCondition.type === 'modifying-click') {
             this.moveToNextItemAfterElementDisappeared(item.nextCondition.element);
           } else if (item.nextCondition.type === 'navigating-click') {
-            this.markLocationChange();
+            markLocationChange();
           } else {
             this.$scope.$apply(() => this.moveToNextItem());
           }
@@ -501,7 +511,7 @@ class InteractiveHelpController {
       } else if (item.nextCondition.type === 'modifying-click') {
         this.$scope.$apply(() => this.moveToNextItem());
       } else if (item.nextCondition.type === 'navigating-click') {
-        this.markLocationChange();
+        markLocationChange();
       } else {
         console.log(this.item);
         throw new Error('Next condition element not found');
@@ -524,7 +534,7 @@ class InteractiveHelpController {
     this.popoverDimensionsProvider = provider;
   }
 
-  registerBackdrop(backdrop: HelpBackdropController) {
+  registerBackdrop(backdrop: InteractiveHelpBackdropController) {
 
     this.backdropController = backdrop;
 
@@ -672,476 +682,4 @@ class InteractiveHelpController {
       }
     }
   }
-}
-
-export const HelpPopoverDimensionsCalculatorComponent: ComponentDeclaration = {
-  selector: 'helpPopoverDimensionsCalculator',
-  bindings: {
-    item: '<',
-    helpController: '<'
-  },
-  template: `
-        <span ng-class="$ctrl.arrowClass"></span>
-      
-        <div class="help-content-wrapper">
-          <h3 ng-show="$ctrl.item.title">{{$ctrl.item.title | translate}}</h3>
-          <p ng-show="$ctrl.item.content">{{$ctrl.item.content | translate}}</p>
-          <button ng-show="$ctrl.helpController.showPrevious" class="small button help-navigate" translate>previous</button>
-          <button ng-show="$ctrl.helpController.showNext" class="small button help-navigate" translate>next</button>
-          <button ng-show="$ctrl.helpController.showClose" class="small button help-next" translate>close</button>
-          <a class="help-close">&times;</a>
-        </div>
-  `,
-  controller: forwardRef(() => HelpPopoverDimensionsCalculatorController)
-};
-
-class HelpPopoverDimensionsCalculatorController implements PopoverDimensionsProvider {
-
-  item: Story|Notification;
-  helpController: InteractiveHelpController;
-  arrowClass: string[] = [];
-
-  constructor(private $scope: IScope,
-              private $element: JQuery) {
-    'ngInject';
-  }
-
-  $onInit() {
-    this.helpController.registerPopoverDimensionsProvider(this);
-    this.$scope.$watch(() => this.item, item => this.arrowClass = resolveArrowClass(item));
-  }
-
-  getDimensions(): { width: number; height: number } {
-    return requireDefined(elementPositioning(this.$element));
-  }
-}
-
-export const HelpPopoverComponent: ComponentDeclaration = {
-  selector: 'helpPopover',
-  bindings: {
-    item: '<',
-    helpController: '<'
-  },
-  template: `
-        <span ng-class="$ctrl.arrowClass"></span>
-      
-        <div class="help-content-wrapper">
-          <h3 ng-show="$ctrl.title" ng-bind="$ctrl.title | translate"></h3>
-          <p ng-show="$ctrl.content" ng-bind="$ctrl.content | translate"></p>
-          
-          <button ng-show="$ctrl.showPrevious" 
-                  ng-disabled="!ctrl.helpController.canMoveToPrevious()" 
-                  ng-click="$ctrl.helpController.moveToPreviousItem()" 
-                  class="small button help-navigate" translate>previous</button>
-                  
-          <button ng-show="$ctrl.showNext" 
-                  ng-disabled="!ctrl.helpController.canMoveToNext()" 
-                  ng-click="$ctrl.helpController.tryToMoveToNextItem()" 
-                  class="small button help-navigate" translate>next</button>
-                  
-          <button ng-show="$ctrl.showClose" 
-                  ng-disabled="!ctrl.helpController.canMoveToNext()" 
-                  ng-click="$ctrl.helpController.close(false)" 
-                  class="small button help-next" translate>close</button>
-                  
-          <a ng-click="$ctrl.helpController.close(true)" class="help-close">&times;</a>
-        </div>
-    `,
-  controller: forwardRef(() => HelpPopoverController)
-};
-
-class HelpPopoverController {
-
-  helpController: InteractiveHelpController;
-
-  item?: Story|Notification;
-  arrowClass: string[] = [];
-
-  title: string;
-  content?: string;
-  showPrevious: boolean;
-  showNext: boolean;
-  showClose: boolean;
-
-  positioning: Optional<Positioning>;
-
-  constructor(private $scope: IScope,
-              private $document: IDocumentService) {
-    'ngInject';
-  }
-
-  $onInit() {
-    this.helpController.registerPopover(this);
-    this.$scope.$watch(() => this.item, item => this.arrowClass = resolveArrowClass(item));
-  }
-
-  setPositioning(positioning: Positioning) {
-
-    const item = requireDefined(this.item);
-
-    if (isInWindow(positioning)) {
-
-      this.positioning = positioning;
-
-      // apply positioning before applying content, content is applied in the middle of animation
-      setTimeout(() => {
-        this.$scope.$apply(() => {
-          this.title = item.title;
-          this.content = item.content;
-          this.showNext = this.helpController.showNext;
-          this.showPrevious = this.helpController.showPrevious;
-          this.showClose = this.helpController.showClose;
-        });
-      }, popupAnimationTimeInMs / 2);
-    }
-  }
-
-  style() {
-    return this.positioning;
-  }
-
-  calculatePositioning(item: Story|Notification): Optional<Positioning> {
-
-    const popoverDimensions = this.helpController.getPopoverDimensions();
-    const documentDimensions = { width: this.$document.width(), height: this.$document.height() };
-
-    switch (item.type) {
-      case 'story':
-        return HelpPopoverController.calculateStoryPositioning(item, popoverDimensions, documentDimensions);
-      case 'notification':
-        return HelpPopoverController.calculateNotificationPositioning(popoverDimensions);
-      default:
-        return assertNever(item, 'Unknown item type');
-    }
-  }
-
-  private static calculateNotificationPositioning(popoverDimensions: Dimensions): Positioning {
-    return HelpPopoverController.calculateCenterPositioning(popoverDimensions);
-  }
-
-  private static calculateCenterPositioning(popoverDimensions: Dimensions) {
-    return {
-      top: window.innerHeight / 2 - popoverDimensions.height / 2,
-      left: window.innerWidth / 2 - popoverDimensions.width / 2,
-      width: popoverDimensions.width
-    };
-  }
-
-  private static calculateStoryPositioning(story: Story, popoverDimensions: Dimensions, documentDimensions: Dimensions): Optional<Positioning> {
-
-    const element = story.popover.element();
-
-    if (!element || element.length === 0 || !isVisible(element[0])) {
-      return null;
-    }
-
-    const popoverWidth = popoverDimensions.width;
-    const popoverHeight = popoverDimensions.height;
-    const destination = elementPositioning(element)!;
-    const documentWidth = documentDimensions.width;
-    const documentHeight = documentDimensions.height;
-
-    function calculateUnrestricted() {
-      switch (story.popover.position) {
-        case 'left-down':
-          return { top: destination.top, left: destination.left - popoverWidth - arrowHeight, width: popoverWidth, height: popoverHeight };
-        case 'left-up':
-          return { top: destination.bottom - popoverHeight, left: destination.left - popoverWidth - arrowHeight, width: popoverWidth, height: popoverHeight };
-        case 'right-down':
-          return { top: destination.top, left: destination.right + arrowHeight, width: popoverWidth, height: popoverHeight };
-        case 'right-up':
-          return { top: destination.bottom - popoverHeight, left: destination.right + arrowHeight, width: popoverWidth, height: popoverHeight };
-        case 'top-right':
-          return { top: destination.top - popoverHeight - arrowHeight, left: destination.left, width: popoverWidth, height: popoverHeight };
-        case 'top-left':
-          return { top: destination.top - popoverHeight - arrowHeight, left: destination.right - popoverWidth, width: popoverWidth, height: popoverHeight };
-        case 'bottom-right':
-          return { top: destination.bottom + arrowHeight, left: destination.left, width: popoverWidth, height: popoverHeight };
-        case 'bottom-left':
-          return { top: destination.bottom + arrowHeight, left: destination.right - popoverWidth, width: popoverWidth, height: popoverHeight };
-        default:
-          return assertNever(story.popover.position, 'Unsupported popover position');
-      }
-    }
-
-    function cropToWindow(position: { left: number, top: number, width: number, height: number }) {
-
-      let newLeft = position.left;
-      let newTop = position.top;
-      let newWidth: number|undefined = position.width;
-      let newHeight: number|undefined = position.height;
-
-      if (newLeft < 0) {
-        newWidth += newLeft;
-        newLeft = 0;
-        newHeight = undefined; // allow to expand
-      } else if (newTop < 0) {
-        newHeight += newTop;
-        newTop = 0;
-        newWidth = undefined; // allow to expand
-      }
-
-      if (newWidth) {
-        const right = newLeft + newWidth;
-
-        if (right > documentWidth) {
-          newWidth += documentWidth - right;
-          newLeft = documentWidth - newWidth;
-          newHeight = undefined; // allow to expand
-        }
-      }
-
-      if (newHeight) {
-        const bottom = newTop + newHeight;
-
-        if (bottom > documentHeight) {
-          newHeight += documentHeight - bottom;
-          newTop = documentHeight - newHeight;
-          newWidth = undefined; // allow to expand
-        }
-      }
-
-      return { left: newLeft, top: newTop, width: newWidth, height: newHeight };
-    }
-
-    return cropToWindow(calculateUnrestricted());
-  }
-}
-
-export const HelpBackdropComponent: ComponentDeclaration = {
-  selector: 'helpBackdrop',
-  bindings: {
-    item: '<',
-    helpController: '<'
-  },
-  template: `
-        <div ng-if="$ctrl.regions" class="help-backdrop" ng-style="$ctrl.regions.top"></div>
-        <div ng-if="$ctrl.regions" class="help-backdrop" ng-style="$ctrl.regions.right"></div>
-        <div ng-if="$ctrl.regions" class="help-backdrop" ng-style="$ctrl.regions.bottom"></div>
-        <div ng-if="$ctrl.regions" class="help-backdrop" ng-style="$ctrl.regions.left"></div>
-  `,
-  controller: forwardRef(() => HelpBackdropController)
-};
-
-class HelpBackdropController {
-
-  item?: Story|Notification;
-  regions: Optional<Regions>;
-
-  helpController: InteractiveHelpController;
-
-  private static fullBackdrop = {
-    top: { left: 0, top: 0, right: 0, bottom: 0 },
-    right: { left: 0, top: 0, width: 0, height: 0 },
-    bottom: { left: 0, top: 0, width: 0, height: 0 },
-    left: { left: 0, top: 0, width: 0, height: 0 },
-    focus: { left: 0, top: 0, width: 0, height: 0 }
-  };
-
-  constructor(private $document: IDocumentService) {
-    'ngInject';
-  }
-
-  $onInit() {
-    this.helpController.registerBackdrop(this);
-  }
-
-  setFullBackdrop() {
-    this.regions = HelpBackdropController.fullBackdrop;
-  }
-
-  updatePosition() {
-    if (this.item) {
-      this.regions = this.resolveRegions(this.item);
-    }
-  }
-
-  private resolveRegions(item: Story|Notification): Optional<Regions> {
-    switch (item.type) {
-      case 'story':
-        return HelpBackdropController.calculateRegions(item, this.$document.width());
-      case 'notification':
-        return HelpBackdropController.fullBackdrop;
-      default:
-        return assertNever(item, 'Unknown item type');
-    }
-  }
-
-  private static calculateRegions(story: Story, documentWidth: number): Optional<Regions> {
-
-    const positioning = HelpBackdropController.calculateFocusPositioning(story);
-
-    if (!positioning) {
-      return null;
-    }
-
-    return {
-      top: {
-        left: 0,
-        top: 0,
-        right: 0,
-        height: positioning.top - window.pageYOffset
-      },
-      right: {
-        left: positioning.left + positioning.width,
-        top: positioning.top - window.pageYOffset,
-        width: documentWidth - positioning.left - positioning.width,
-        height: positioning.height
-      },
-      bottom: {
-        left: 0,
-        top: positioning.top + positioning.height - window.pageYOffset,
-        right: 0,
-        bottom: 0
-      },
-      left: {
-        left: 0,
-        top: positioning.top - window.pageYOffset,
-        width: positioning.left,
-        height: positioning.height
-      },
-      focus: {
-        left: positioning.left,
-        top: positioning.top - window.pageYOffset,
-        width: positioning.width,
-        height: positioning.height
-      }
-    };
-  }
-
-  private static calculateFocusPositioning(story: Story) {
-
-    if (!story || !story.focus) {
-      return null;
-    }
-
-    const focusTo = story.focus;
-    const focusToElementPositioning = elementPositioning(story.focus.element())!;
-
-    if (!focusToElementPositioning) {
-      return null;
-    }
-
-    const marginTop = focusTo.margin && focusTo.margin.top || 0;
-    const marginRight = focusTo.margin && focusTo.margin.right || 0;
-    const marginBottom = focusTo.margin && focusTo.margin.bottom || 0;
-    const marginLeft = focusTo.margin && focusTo.margin.left || 0;
-
-    return {
-      width: focusToElementPositioning.width + marginLeft + marginRight,
-      height: focusToElementPositioning.height + marginTop + marginBottom,
-      left: focusToElementPositioning.left - marginLeft,
-      top: focusToElementPositioning.top - marginTop
-    };
-  }
-}
-
-function resolveArrowClass(item: Optional<Story|Notification>) {
-
-  if (!item) {
-    return [];
-  }
-
-  switch (item.type) {
-    case 'story':
-      return ['help-arrow', `help-${item.popover.position}`];
-    case 'notification':
-      return [];
-    default:
-      return assertNever(item, 'Unknown item type');
-  }
-}
-
-interface Dimensions {
-  width: number;
-  height: number
-}
-
-interface PopoverDimensionsProvider {
-  getDimensions(): Dimensions;
-}
-
-function elementPositioning(element: JQuery) {
-
-  if (!element || element.length === 0) {
-    return null;
-  }
-
-  const rect = element[0].getBoundingClientRect();
-
-  const left = rect.left + window.pageXOffset;
-  const top = rect.top + window.pageYOffset;
-  const width = rect.width;
-  const height = rect.height;
-
-  return {
-    left,
-    right: left + width,
-    top,
-    bottom: top + height,
-    width,
-    height
-  };
-}
-
-function isVisible(element: HTMLElement) {
-  return !!(element.offsetWidth || element.offsetHeight || element.getClientRects().length);
-}
-
-function elementExists(e: JQuery) {
-  return e && e.length > 0 && isVisible(e[0]);
-}
-
-function isClick(nextCondition: NextCondition): nextCondition is Click|ModifyingClick|NavigatingClick {
-  return contains(['click', 'navigating-click', 'modifying-click'], nextCondition.type);
-}
-
-function isFocusInElement(event: JQueryEventObject, element: HTMLElement) {
-  return (event.target || event.srcElement) === element;
-}
-
-function stopEvent(event: JQueryEventObject) {
-  event.preventDefault();
-  event.stopPropagation();
-}
-
-interface Positioning {
-  left: number;
-  top: number;
-  width?: number;
-  height?: number;
-  right?: number;
-  bottom?: number;
-}
-
-interface Regions {
-  top: Positioning;
-  right: Positioning;
-  bottom: Positioning;
-  left: Positioning;
-  focus: Positioning;
-}
-
-function isNumberInMargin(margin: number, lhs?: number, rhs?: number) {
-  return areEqual(lhs, rhs, (l, r) => r >= (l - margin) && r <= (l + margin));
-}
-
-function isPositionInMargin(margin: number, lhs: Optional<Positioning>, rhs: Optional<Positioning>) {
-  return areEqual(lhs, rhs, (l, r) =>
-    isNumberInMargin(margin, l.width, r.width) &&
-    isNumberInMargin(margin, l.height, r.height) &&
-    isNumberInMargin(margin, l.left, r.left) &&
-    isNumberInMargin(margin, l.top, r.top)
-  );
-}
-
-function isInWindow(positioning: Positioning) {
-
-  const windowTop = window.pageYOffset;
-  const windowBottom = windowTop + window.innerHeight;
-  const positionTop = positioning.top;
-  const positionBottom = positionTop + (positioning.height || 500);
-
-  return positionTop >= windowTop && positionTop <= windowBottom
-    || positionBottom >= windowTop && positionBottom <= windowBottom;
 }

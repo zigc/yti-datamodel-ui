@@ -1,5 +1,6 @@
 import { module as mod } from './module';
 export { module } from './module';
+import { registerComponent } from 'app/utils/angular';
 
 import { InteractiveHelpService } from './services/interactiveHelpService';
 import { InteractiveHelpModelService } from './services/helpModelService';
@@ -13,13 +14,15 @@ import { InteractiveHelpValidatorService } from './services/helpValidatorService
 import { FrontPageHelpService } from './frontPageHelp';
 import { ModelPageHelpService } from './modelPageHelp';
 
-import { HelpBackdropComponent, HelpPopoverComponent, HelpPopoverDimensionsCalculatorComponent, InteractiveHelpDisplay } from './components/interactiveHelpDisplay';
+import { InteractiveHelpDisplay } from './components/interactiveHelpDisplay';
 import { InteractiveHelpOrganizationService } from './services/helpOrganizationService';
-import { registerComponent } from 'app/utils/angular';
+import { InteractiveHelpPopoverComponent } from './components/interactiveHelpPopover';
+import { InteractiveHelpPopoverDimensionsCalculatorComponent } from './components/interactiveHelpPopoverDimensionsCalculator';
+import { InteractiveHelpBackdropComponent } from './components/interactiveHelpBackdrop';
 
-registerComponent(mod, HelpPopoverComponent);
-registerComponent(mod, HelpPopoverDimensionsCalculatorComponent);
-registerComponent(mod, HelpBackdropComponent);
+registerComponent(mod, InteractiveHelpPopoverComponent);
+registerComponent(mod, InteractiveHelpPopoverDimensionsCalculatorComponent);
+registerComponent(mod, InteractiveHelpBackdropComponent);
 
 mod.service('interactiveHelpService', InteractiveHelpService);
 mod.service('helpModelService', InteractiveHelpModelService);
