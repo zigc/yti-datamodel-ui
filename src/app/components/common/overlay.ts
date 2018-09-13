@@ -64,14 +64,15 @@ export class OverlayService {
           ...vars
         };
 
-        const instantiator: any = this.$controller(options.controller, locals);
+        // XXX: d.ts doesn't provide overload for this constructor anymore even though it exists at runtime
+        const instantiator: any = (this.$controller as any)(options.controller, locals, true);
         const ctrl = instantiator();
 
         if (options.controllerAs) {
           (scope as any)[options.controllerAs] = ctrl;
         }
 
-        if (jQuery.isFunction(ctrl.$onInit)) {
+        if (typeof ctrl.$onInit === 'function') {
           ctrl.$onInit();
         }
       }

@@ -1,6 +1,5 @@
-import { module as mod } from './module';
 import { IScope, IAttributes, ITranscludeFunction, IRepeatScope, IWindowService } from 'angular';
-import { scrollToElement, hasFixedPositioningParent, ComponentDeclaration } from 'app/utils/angular';
+import { scrollToElement, hasFixedPositioningParent, ComponentDeclaration, DirectiveDeclaration } from 'app/utils/angular';
 import { forwardRef, NgZone } from '@angular/core';
 
 export interface InputWithPopupController<T> {
@@ -97,33 +96,39 @@ interface SelectItemScope extends IRepeatScope, InputPopupScope {
   item: any;
 }
 
-mod.directive('inputPopupItemTransclude', () => {
-  return {
-    link($scope: SelectItemScope, element: JQuery, _attribute: IAttributes, _controller: any, transclude: ITranscludeFunction) {
-      transclude((clone, transclusionScope) => {
-        (transclusionScope as any)[$scope.$ctrl.ctrl.popupItemName] = $scope.item;
-        element.append(clone!);
-      });
-    }
-  };
-});
+export const InputPopupItemTranscludeDirective: DirectiveDeclaration = {
+  selector: 'inputPopupItemTransclude',
+  factory() {
+    return {
+      link($scope: SelectItemScope, element: JQuery, _attribute: IAttributes, _controller: any, transclude: ITranscludeFunction) {
+        transclude((clone, transclusionScope) => {
+          (transclusionScope as any)[$scope.$ctrl.ctrl.popupItemName] = $scope.item;
+          element.append(clone!);
+        });
+      }
+    };
+  }
+};
 
 interface InputPopupItemScope extends IRepeatScope {
   inputPopupSelectItem: InputWithPopupController<any>;
 }
 
-mod.directive('inputPopupSelectItem', () => {
-  return {
-    restrict: 'A',
-    scope: {
-      inputPopupSelectItem: '='
-    },
-    link($scope: InputPopupItemScope, element: JQuery) {
-      $scope.$watch(() => $scope.inputPopupSelectItem && $scope.inputPopupSelectItem.selectedSelectionIndex, index => {
-        if (($scope.$parent as IRepeatScope).$index === index) {
-          scrollToElement(element, element.parent());
-        }
-      });
-    }
-  };
-});
+export const InputPopupSelectItemDirective: DirectiveDeclaration = {
+  selector: 'inputPopupSelectItem',
+  factory() {
+    return {
+      restrict: 'A',
+      scope: {
+        inputPopupSelectItem: '='
+      },
+      link($scope: InputPopupItemScope, element: JQuery) {
+        $scope.$watch(() => $scope.inputPopupSelectItem && $scope.inputPopupSelectItem.selectedSelectionIndex, index => {
+          if (($scope.$parent as IRepeatScope).$index === index) {
+            scrollToElement(element, element.parent());
+          }
+        });
+      }
+    };
+  }
+};

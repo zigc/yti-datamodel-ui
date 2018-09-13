@@ -1,9 +1,8 @@
 import { IAttributes, IDocumentService, IParseService, IQService, IScope, ITranscludeFunction } from 'angular';
 import { isDefined } from 'yti-common-ui/utils/object';
 import { esc, tab, enter, pageUp, pageDown, arrowUp, arrowDown } from 'yti-common-ui/utils/key-code';
-import { module as mod } from './module';
 import { InputWithPopupController } from './inputPopup';
- import { ComponentDeclaration } from 'app/utils/angular';
+import { ComponentDeclaration, DirectiveDeclaration } from 'app/utils/angular';
 import { forwardRef } from '@angular/core';
 
 // TODO: similarities with autocomplete
@@ -156,72 +155,80 @@ export class IowSelectController<T> implements InputWithPopupController<T> {
   }
 }
 
-// TODO
-mod.directive('iowSelectInput', ($document: IDocumentService) => {
-  return {
-    restrict: 'A',
-    require: '^iowSelect',
-    link($scope: SelectionScope, element: JQuery, _attributes: IAttributes, controller: IowSelectController<any>) {
+export const IowSelectInputDirective: DirectiveDeclaration = {
+  selector: 'iowSelectInput',
+  factory($document: IDocumentService) {
+    'ngInject';
+    return {
+      restrict: 'A',
+      require: '^iowSelect',
+      link($scope: SelectionScope, element: JQuery, _attributes: IAttributes, controller: IowSelectController<any>) {
 
-      const iowSelectElement = element.closest('iow-select');
+        const iowSelectElement = element.closest('iow-select');
 
-      const keyDownHandler = (event: JQueryEventObject) => $scope.$apply(() => controller.keyPressed(event));
-      const clickHandler = () => $scope.$apply(() => controller.toggleOpen());
-      const blurClickHandler = (event: JQueryEventObject) => {
+        const keyDownHandler = (event: JQueryEventObject) => $scope.$apply(() => controller.keyPressed(event));
+        const clickHandler = () => $scope.$apply(() => controller.toggleOpen());
+        const blurClickHandler = (event: JQueryEventObject) => {
 
-        const eventIowSelectElement = jQuery(event.target).closest('iow-select');
+          const eventIowSelectElement = jQuery(event.target).closest('iow-select');
 
-        if (eventIowSelectElement[0] !== iowSelectElement[0]) {
-          $scope.$apply(() => controller.close());
-          $document.off('click', blurClickHandler);
-        }
-      };
-      const focusHandler = () => $document.on('click', blurClickHandler);
+          if (eventIowSelectElement[0] !== iowSelectElement[0]) {
+            $scope.$apply(() => controller.close());
+            $document.off('click', blurClickHandler);
+          }
+        };
+        const focusHandler = () => $document.on('click', blurClickHandler);
 
-      element.on('click', clickHandler);
-      element.on('keydown', keyDownHandler);
-      element.on('focus', focusHandler);
+        element.on('click', clickHandler);
+        element.on('keydown', keyDownHandler);
+        element.on('focus', focusHandler);
 
-      $scope.$on('$destroy', () => {
-        element.off('click', clickHandler);
-        element.off('keydown', keyDownHandler);
-        element.off('focus', focusHandler);
-      });
+        $scope.$on('$destroy', () => {
+          element.off('click', clickHandler);
+          element.off('keydown', keyDownHandler);
+          element.off('focus', focusHandler);
+        });
 
-      controller.element = element;
-    }
-  };
-});
+        controller.element = element;
+      }
+    };
+  }
+};
 
-// TODO
-mod.directive('iowSelectionTransclude', () => {
-  return {
-    link($scope: SelectionScope, element: JQuery, _attribute: IAttributes, _controller: any, transclude: ITranscludeFunction) {
+export const IowSelectSelectionTranscludeDirective: DirectiveDeclaration = {
+  selector: 'iowSelectionTransclude',
+  factory() {
+    return {
+      link($scope: SelectionScope, element: JQuery, _attribute: IAttributes, _controller: any, transclude: ITranscludeFunction) {
 
-      let childScope: IScope;
+        let childScope: IScope;
 
-      $scope.$watch(() => $scope.$ctrl.ngModel, item => {
-        if (!childScope) {
-          transclude((clone, transclusionScope) => {
-            childScope = transclusionScope!;
-            (transclusionScope as any)[$scope.$ctrl.popupItemName] = item;
-            element.append(clone!);
-          });
-        } else {
-          (childScope as any)[$scope.$ctrl.popupItemName] = item;
-        }
-      });
-    }
-  };
-});
+        $scope.$watch(() => $scope.$ctrl.ngModel, item => {
+          if (!childScope) {
+            transclude((clone, transclusionScope) => {
+              childScope = transclusionScope!;
+              (transclusionScope as any)[$scope.$ctrl.popupItemName] = item;
+              element.append(clone!);
+            });
+          } else {
+            (childScope as any)[$scope.$ctrl.popupItemName] = item;
+          }
+        });
+      }
+    };
+  }
+};
 
-mod.directive('iowSelectableItemTransclude', () => {
-  return {
-    link($scope: SelectionScope, element: JQuery, _attribute: IAttributes, _controller: any, transclude: ITranscludeFunction) {
-      transclude((clone, transclusionScope) => {
-        (transclusionScope as any)[$scope.$ctrl.popupItemName] = ($scope as any)[$scope.$ctrl.popupItemName];
-        element.append(clone!);
-      });
-    }
-  };
-});
+export const IowSelectSelectableItemTranscludeDirective: DirectiveDeclaration = {
+  selector: 'iowSelectableItemTransclude',
+  factory() {
+    return {
+      link($scope: SelectionScope, element: JQuery, _attribute: IAttributes, _controller: any, transclude: ITranscludeFunction) {
+        transclude((clone, transclusionScope) => {
+          (transclusionScope as any)[$scope.$ctrl.popupItemName] = ($scope as any)[$scope.$ctrl.popupItemName];
+          element.append(clone!);
+        });
+      }
+    };
+  }
+};

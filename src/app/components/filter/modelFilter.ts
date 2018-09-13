@@ -1,4 +1,3 @@
-import { module as mod } from './module';
 import * as _ from 'lodash';
 import { SearchController, TextAnalysis } from 'app/types/filter';
 import { IScope } from 'angular';

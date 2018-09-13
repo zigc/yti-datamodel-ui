@@ -13,8 +13,13 @@ import { InteractiveHelpValidatorService } from './services/helpValidatorService
 import { FrontPageHelpService } from './frontPageHelp';
 import { ModelPageHelpService } from './modelPageHelp';
 
-import { InteractiveHelpDisplay } from './components/interactiveHelpDisplay';
+import { HelpBackdropComponent, HelpPopoverComponent, HelpPopoverDimensionsCalculatorComponent, InteractiveHelpDisplay } from './components/interactiveHelpDisplay';
 import { InteractiveHelpOrganizationService } from './services/helpOrganizationService';
+import { registerComponent } from 'app/utils/angular';
+
+registerComponent(mod, HelpPopoverComponent);
+registerComponent(mod, HelpPopoverDimensionsCalculatorComponent);
+registerComponent(mod, HelpBackdropComponent);
 
 mod.service('interactiveHelpService', InteractiveHelpService);
 mod.service('helpModelService', InteractiveHelpModelService);

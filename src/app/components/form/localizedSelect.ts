@@ -1,5 +1,5 @@
 import { gettextCatalog as GettextCatalog } from 'angular-gettext';
-import { ComponentDeclaration } from '../../utils/angular';
+import { ComponentDeclaration } from 'app/utils/angular';
 import { forwardRef } from '@angular/core';
 
 export const LocalizedSelectComponent: ComponentDeclaration = {

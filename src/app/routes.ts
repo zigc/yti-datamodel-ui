@@ -4,7 +4,9 @@ import { ILocationService } from 'angular';
 import { resourceUrl, modelUrl } from './utils/entity';
 import { NotificationModal } from './components/common/notificationModal';
 
-export const routeConfig = ['$routeProvider', function($routeProvider: angular.route.IRouteProvider) {
+export function routeConfig($routeProvider: angular.route.IRouteProvider) {
+  'ngInject';
+
   $routeProvider
     .when('/', {
       template: '<front-page></front-page>'
@@ -18,12 +20,14 @@ export const routeConfig = ['$routeProvider', function($routeProvider: angular.r
     .when('/group', {
       template: '<group-page group-id="groupId"></group-page>',
       controller($scope: any, $route: angular.route.IRouteService) {
+        'ngInject';
         $scope.groupId = new Uri($route.current!.params.id, {});
       }
     })
     .when('/newModel', {
       template: '<new-model-page type="type"></new-model-page>',
       controller($scope: any, $route: angular.route.IRouteService) {
+        'ngInject';
         const params: any = $route.current!.params;
         $scope.type = params.type;
       }
@@ -31,6 +35,8 @@ export const routeConfig = ['$routeProvider', function($routeProvider: angular.r
     .when('/ns/:prefix*', {
       template: '',
       controller($location: ILocationService, $route: angular.route.IRouteService) {
+        'ngInject';
+
         const prefix = $route.current!.params.prefix;
         const resource = $location.hash();
 
@@ -48,7 +54,8 @@ export const routeConfig = ['$routeProvider', function($routeProvider: angular.r
     .otherwise({
       template: '',
       controller(notificationModal: NotificationModal) {
+        'ngInject';
         notificationModal.openPageNotFound();
       }
     });
-}];
+}

@@ -1,8 +1,7 @@
-import { IAttributes, IScope } from 'angular';
+import { IScope } from 'angular';
 import { LanguageService } from 'app/services/languageService';
 import { ColumnDescriptor, TableDescriptor } from 'app/components/form/editableTable';
 import { SearchVocabularyModal } from './searchVocabularyModal';
-import { module as mod } from './module';
 import { createExistsExclusion } from 'app/utils/exclusion';
 import { collectProperties } from 'yti-common-ui/utils/array';
 import { Vocabulary } from 'app/entities/vocabulary';

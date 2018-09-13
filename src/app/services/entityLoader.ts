@@ -130,6 +130,7 @@ export class EntityLoader {
               private vocabularyService: VocabularyService,
               resetService: ResetService,
               shouldReset: boolean) {
+    'ngInject';
 
     const reset = shouldReset ? resetService.reset() : $q.when();
 

@@ -1,11 +1,10 @@
-import { module as mod } from 'app/help/module';
 import * as _ from 'lodash';
 import { OverlayService, OverlayInstance } from 'app/components/common/overlay';
 import { IScope, IPromise, IDocumentService, ILocationService, IWindowService } from 'angular';
 import { IModalStackService } from 'angular-ui-bootstrap';
 import { assertNever, requireDefined, areEqual, Optional } from 'yti-common-ui/utils/object';
 import { tab, esc, enter } from 'yti-common-ui/utils/key-code';
-import { isTargetElementInsideElement, nextUrl } from 'app/utils/angular';
+import { ComponentDeclaration, isTargetElementInsideElement, nextUrl } from 'app/utils/angular';
 import { InteractiveHelpService } from 'app/help/services/interactiveHelpService';
 import {
   NextCondition, Story, Notification, Click, ModifyingClick,
@@ -15,7 +14,7 @@ import { contains } from 'yti-common-ui/utils/array';
 import { ConfirmationModal } from 'app/components/common/confirmationModal';
 import { moveCursorToEnd, scrollToTop } from 'app/help/utils';
 import { gettextCatalog as GettextCatalog } from 'angular-gettext';
-import { NgZone } from '@angular/core';
+import { forwardRef, NgZone } from '@angular/core';
 
 const popupAnimationTimeInMs = 300; // should match css help-popover transition time
 const arrowHeight = 13;
@@ -98,6 +97,7 @@ class InteractiveHelpController {
               $window: IWindowService,
               zone: NgZone) {
     'ngInject';
+
     let continuing = false;
 
     stateInitialization().then(willChangeLocation => {
@@ -674,11 +674,13 @@ class InteractiveHelpController {
   }
 }
 
-
-mod.directive('helpPopoverDimensionsCalculator', () => {
-  return {
-    restrict: 'E',
-    template: `
+export const HelpPopoverDimensionsCalculatorComponent: ComponentDeclaration = {
+  selector: 'helpPopoverDimensionsCalculator',
+  bindings: {
+    item: '<',
+    helpController: '<'
+  },
+  template: `
         <span ng-class="$ctrl.arrowClass"></span>
       
         <div class="help-content-wrapper">
@@ -689,16 +691,9 @@ mod.directive('helpPopoverDimensionsCalculator', () => {
           <button ng-show="$ctrl.helpController.showClose" class="small button help-next" translate>close</button>
           <a class="help-close">&times;</a>
         </div>
-    `,
-    bindToController: true,
-    scope: {
-      item: '<',
-      helpController: '<'
-    },
-    controller: HelpPopoverDimensionsCalculatorController,
-    controllerAs: '$ctrl'
-  };
-});
+  `,
+  controller: forwardRef(() => HelpPopoverDimensionsCalculatorController)
+};
 
 class HelpPopoverDimensionsCalculatorController implements PopoverDimensionsProvider {
 
@@ -706,10 +701,14 @@ class HelpPopoverDimensionsCalculatorController implements PopoverDimensionsProv
   helpController: InteractiveHelpController;
   arrowClass: string[] = [];
 
-  constructor($scope: IScope, private $element: JQuery) {
+  constructor(private $scope: IScope,
+              private $element: JQuery) {
+    'ngInject';
+  }
 
+  $onInit() {
     this.helpController.registerPopoverDimensionsProvider(this);
-    $scope.$watch(() => this.item, item => this.arrowClass = resolveArrowClass(item));
+    this.$scope.$watch(() => this.item, item => this.arrowClass = resolveArrowClass(item));
   }
 
   getDimensions(): { width: number; height: number } {
@@ -717,10 +716,13 @@ class HelpPopoverDimensionsCalculatorController implements PopoverDimensionsProv
   }
 }
 
-mod.directive('helpPopover', () => {
-  return {
-    restrict: 'E',
-    template: `
+export const HelpPopoverComponent: ComponentDeclaration = {
+  selector: 'helpPopover',
+  bindings: {
+    item: '<',
+    helpController: '<'
+  },
+  template: `
         <span ng-class="$ctrl.arrowClass"></span>
       
         <div class="help-content-wrapper">
@@ -745,15 +747,8 @@ mod.directive('helpPopover', () => {
           <a ng-click="$ctrl.helpController.close(true)" class="help-close">&times;</a>
         </div>
     `,
-    bindToController: true,
-    scope: {
-      item: '<',
-      helpController: '<'
-    },
-    controller: HelpPopoverController,
-    controllerAs: '$ctrl'
-  };
-});
+  controller: forwardRef(() => HelpPopoverController)
+};
 
 class HelpPopoverController {
 
@@ -770,9 +765,14 @@ class HelpPopoverController {
 
   positioning: Optional<Positioning>;
 
-  constructor(private $scope: IScope, private $document: IDocumentService) {
+  constructor(private $scope: IScope,
+              private $document: IDocumentService) {
+    'ngInject';
+  }
+
+  $onInit() {
     this.helpController.registerPopover(this);
-    $scope.$watch(() => this.item, item => this.arrowClass = resolveArrowClass(item));
+    this.$scope.$watch(() => this.item, item => this.arrowClass = resolveArrowClass(item));
   }
 
   setPositioning(positioning: Positioning) {
@@ -908,24 +908,20 @@ class HelpPopoverController {
   }
 }
 
-mod.directive('helpBackdrop', () => {
-  return {
-    restrict: 'E',
-    template: `
+export const HelpBackdropComponent: ComponentDeclaration = {
+  selector: 'helpBackdrop',
+  bindings: {
+    item: '<',
+    helpController: '<'
+  },
+  template: `
         <div ng-if="$ctrl.regions" class="help-backdrop" ng-style="$ctrl.regions.top"></div>
         <div ng-if="$ctrl.regions" class="help-backdrop" ng-style="$ctrl.regions.right"></div>
         <div ng-if="$ctrl.regions" class="help-backdrop" ng-style="$ctrl.regions.bottom"></div>
         <div ng-if="$ctrl.regions" class="help-backdrop" ng-style="$ctrl.regions.left"></div>
-    `,
-    bindToController: true,
-    scope: {
-      item: '<',
-      helpController: '<'
-    },
-    controller: HelpBackdropController,
-    controllerAs: '$ctrl'
-  };
-});
+  `,
+  controller: forwardRef(() => HelpBackdropController)
+};
 
 class HelpBackdropController {
 
@@ -943,6 +939,10 @@ class HelpBackdropController {
   };
 
   constructor(private $document: IDocumentService) {
+    'ngInject';
+  }
+
+  $onInit() {
     this.helpController.registerBackdrop(this);
   }
 

@@ -14,7 +14,6 @@ import { ChangeListener, ChangeNotifier, SearchClassType } from 'app/types/compo
 import { Uri } from 'app/entities/uri';
 import { comparingLocalizable } from 'app/utils/comparator';
 import { AddPropertiesFromClassModal } from 'app/components/editor/addPropertiesFromClassModal';
-import { module as mod } from './module';
 import { ComponentDeclaration, isDifferentUrl, modalCancelHandler, nextUrl } from 'app/utils/angular';
 import {
   combineExclusions,

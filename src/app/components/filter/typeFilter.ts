@@ -1,4 +1,3 @@
-import { module as mod } from './module';
 import { SearchController, TextAnalysis } from 'app/types/filter';
 import { IScope } from 'angular';
 import { isDefined } from 'yti-common-ui/utils/object';
