@@ -39,6 +39,12 @@ nav.navbar {
   float: left;
 }
 
+editable-multiple {
+  .form-control {
+    height: auto;
+  }
+}
+
 h4, .h4 {
   // TODO consider more generic overwrite in theme variables $h4-font-size
   font-size: 1.00625rem;
