@@ -11,11 +11,12 @@ import { ClassListItem } from 'app/entities/class';
 import { PredicateListItem } from 'app/entities/predicate';
 import { ClassType, KnownPredicateType } from 'app/types/entity';
 import { Model } from 'app/entities/model';
-import { ComponentDeclaration, modalCancelHandler } from 'app/utils/angular';
-import { forwardRef } from '@angular/core';
+import { LegacyComponent, modalCancelHandler } from 'app/utils/angular';
 
-export const UriSelectComponent: ComponentDeclaration = {
-  selector: 'uriSelect',
+
+type DataType = ClassListItem|PredicateListItem;
+
+@LegacyComponent({
   bindings: {
     uri: '=',
     type: '@',
@@ -51,13 +52,9 @@ export const UriSelectComponent: ComponentDeclaration = {
               ng-click="$ctrl.selectUri()">
         {{('Choose ' + $ctrl.type) | translate}}
       </button>
-  `,
-  controller: forwardRef(() => UriSelectController)
-};
-
-type DataType = ClassListItem|PredicateListItem;
-
-class UriSelectController {
+  `
+})
+export class UriSelectComponent {
 
   uri: Uri;
   type: ClassType|KnownPredicateType;

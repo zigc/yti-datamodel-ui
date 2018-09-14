@@ -1,8 +1,11 @@
- import { ComponentDeclaration } from 'app/utils/angular';
-import { forwardRef } from '@angular/core';
+import { LegacyComponent } from 'app/utils/angular';
 
-export const ButtonWithOptions: ComponentDeclaration = {
-  selector: 'buttonWithOptions',
+export interface Option {
+  name: string;
+  apply: () => void;
+}
+
+@LegacyComponent({
   bindings: {
     options: '=',
     disabled: '='
@@ -31,16 +34,9 @@ export const ButtonWithOptions: ComponentDeclaration = {
                 ng-click="$ctrl.options[0].apply()">
           {{$ctrl.options[0].name | translate}}
         </button>
-  `,
-  controller: forwardRef(() => ButtonWithOptionsController)
-};
-
-export interface Option {
-  name: string;
-  apply: () => void;
-}
-
-class ButtonWithOptionsController {
+  `
+})
+export class ButtonWithOptionsComponent {
 
   options: Option[];
   disabled: boolean;

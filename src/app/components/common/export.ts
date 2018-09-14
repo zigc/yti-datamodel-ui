@@ -6,8 +6,7 @@ import { Class } from 'app/entities/class';
 import { Predicate } from 'app/entities/predicate';
 import { LanguageContext } from 'app/types/language';
 import { apiEndpointWithName } from 'app/services/config';
-import { ComponentDeclaration } from 'app/utils/angular';
-import { forwardRef } from '@angular/core';
+import { LegacyComponent } from 'app/utils/angular';
 
 const exportOptions = [
   {type: 'application/ld+json', extension: 'json'},
@@ -20,23 +19,20 @@ const exportOptions = [
 
 const UTF8_BOM = '\ufeff';
 
-export const ExportComponent: ComponentDeclaration = {
-  selector: 'export',
-  bindings: {
-    entity: '=',
-    context: '='
-  },
-  template: require('./export.html'),
-  controller: forwardRef(() => ExportController)
-};
-
 type EntityType = Model|Class|Predicate;
 
 function formatFileName(entity: EntityType, extension: string) {
   return `${entity.id.uri.substr('http://'.length)}-${moment().format('YYYY-MM-DD')}.${extension}`;
 }
 
-class ExportController {
+@LegacyComponent({
+  bindings: {
+    entity: '=',
+    context: '='
+  },
+  template: require('./export.html')
+})
+export class ExportComponent {
 
   entity: Model|Class|Predicate;
   context: LanguageContext;

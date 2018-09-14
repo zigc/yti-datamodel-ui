@@ -10,25 +10,20 @@ import { InteractiveHelp } from 'app/help/contract';
 import { HelpProvider } from 'app/components/common/helpProvider';
 import { InteractiveHelpService } from 'app/help/services/interactiveHelpService';
 import { identity } from 'yti-common-ui/utils/object';
-import { ComponentDeclaration, modalCancelHandler } from 'app/utils/angular';
+import { LegacyComponent, modalCancelHandler } from 'app/utils/angular';
 import { ImpersonationService } from 'app/services/impersonationService';
 import { ConfigService } from 'app/services/configService';
 import { Config } from 'app/entities/config';
-import { forwardRef } from '@angular/core';
 
 const logo = require('../../../assets/logo.svg');
 
-export const NavigationBarComponent: ComponentDeclaration = {
-  selector: 'navigationBar',
+@LegacyComponent({
   bindings: {
     helpProvider: '<'
   },
-  template: require('./navigationBar.html'),
-  controller: forwardRef(() => NavigationBarController)
-
-};
-
-class NavigationBarController {
+  template: require('./navigationBar.html')
+})
+export class NavigationBarComponent {
 
   helpProvider: HelpProvider|null;
 

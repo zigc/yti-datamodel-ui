@@ -2,19 +2,15 @@ import { ILocationService, IScope } from 'angular';
 import { IModalScope, IModalStackService } from 'angular-ui-bootstrap';
 import { UserService } from 'app/services/userService';
 import { ConfirmationModal } from './common/confirmationModal';
-import { ComponentDeclaration, modalCancelHandler, nextUrl } from 'app/utils/angular';
+import { LegacyComponent, modalCancelHandler, nextUrl } from 'app/utils/angular';
 import { HelpProvider } from './common/helpProvider';
 import { LocationService } from 'app/services/locationService';
 import { ConfigService } from 'app/services/configService';
-import { forwardRef } from '@angular/core';
 
-export const ApplicationComponent: ComponentDeclaration = {
-  selector: 'application',
+@LegacyComponent({
   template: require('./application.html'),
-  controller: forwardRef(() => ApplicationController)
-};
-
-export class ApplicationController {
+})
+export class ApplicationComponent {
 
   applicationInitialized: boolean;
   showFooter: boolean;

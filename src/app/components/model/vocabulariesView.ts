@@ -5,10 +5,9 @@ import { SearchVocabularyModal } from './searchVocabularyModal';
 import { createExistsExclusion } from 'app/utils/exclusion';
 import { collectProperties } from 'yti-common-ui/utils/array';
 import { Vocabulary } from 'app/entities/vocabulary';
-import { ComponentDeclaration, modalCancelHandler } from 'app/utils/angular';
+import { LegacyComponent, modalCancelHandler } from 'app/utils/angular';
 import { LanguageContext } from 'app/types/language';
 import { EditableForm } from 'app/components/form/editableEntityController';
-import { forwardRef } from '@angular/core';
 
 interface WithVocabularies {
   vocabularies: Vocabulary[];
@@ -16,8 +15,7 @@ interface WithVocabularies {
   removeVocabulary(vocabulary: Vocabulary): void;
 }
 
-export const VocabulariesViewComponent: ComponentDeclaration = {
-  selector: 'vocabulariesView',
+@LegacyComponent({
   bindings: {
     value: '=',
     context: '='
@@ -33,11 +31,9 @@ export const VocabulariesViewComponent: ComponentDeclaration = {
         </button>
       </h4>
       <editable-table id="'vocabularies'" descriptor="$ctrl.descriptor" expanded="$ctrl.expanded"></editable-table>
-  `,
-  controller: forwardRef(() => VocabulariesViewController)
-};
-
-class VocabulariesViewController {
+  `
+})
+export class VocabulariesViewComponent {
 
   value: WithVocabularies;
   context: LanguageContext;

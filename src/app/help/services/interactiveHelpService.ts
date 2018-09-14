@@ -24,6 +24,7 @@ export class InteractiveHelpService implements ResetableService {
               public helpVocabularyService: InteractiveHelpVocabularyService,
               public helpValidatorService: InteractiveHelpValidatorService) {
     'ngInject';
+
     this.helpServices = [
       helpModelService,
       helpVisualizationService,

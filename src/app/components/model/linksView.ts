@@ -3,10 +3,9 @@ import { AddEditLinkModal } from './addEditLinkModal';
 import { LanguageService } from 'app/services/languageService';
 import { ColumnDescriptor, TableDescriptor } from 'app/components/form/editableTable';
 import { Link } from 'app/entities/model';
-import { ComponentDeclaration, modalCancelHandler } from 'app/utils/angular';
+import { LegacyComponent, modalCancelHandler } from 'app/utils/angular';
 import { LanguageContext } from 'app/types/language';
 import { EditableForm } from 'app/components/form/editableEntityController';
-import { forwardRef } from '@angular/core';
 
 interface WithLinks {
   links: Link[];
@@ -14,8 +13,7 @@ interface WithLinks {
   removeLink(link: Link): void;
 }
 
-export const LinksViewComponent: ComponentDeclaration = {
-  selector: 'linksView',
+@LegacyComponent({
   bindings: {
     value: '=',
     context: '='
@@ -31,11 +29,9 @@ export const LinksViewComponent: ComponentDeclaration = {
         </button>
       </h4>
       <editable-table id="'links'" descriptor="$ctrl.descriptor" expanded="$ctrl.expanded"></editable-table>
-  `,
-  controller: forwardRef(() => LinksViewController)
-};
-
-class LinksViewController {
+  `
+})
+export class LinksViewComponent {
 
   value: WithLinks;
   context: LanguageContext;

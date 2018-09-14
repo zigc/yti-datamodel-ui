@@ -1,16 +1,18 @@
 import { IModelFormatter, INgModelController, IQService, IScope } from 'angular';
 import { EditableForm } from 'app/components/form/editableEntityController';
 import { arrayAsyncValidator, arrayValidator } from 'app/components/form/validators';
-import { ComponentDeclaration, extendNgModelOptions, formatWithFormatters, validateWithValidators, ValidationResult } from 'app/utils/angular';
+import { extendNgModelOptions, formatWithFormatters, LegacyComponent, validateWithValidators, ValidationResult } from 'app/utils/angular';
 import { remove } from 'yti-common-ui/utils/array';
 import { enter } from 'yti-common-ui/utils/key-code';
 import { normalizeAsId } from 'yti-common-ui/utils/resource';
-import { forwardRef } from '@angular/core';
 
 const skipValidators = new Set<string>(['duplicate']);
 
-export const EditableMultipleComponent: ComponentDeclaration = {
-  selector: 'editableMultiple',
+interface EditableMultipleScope extends IScope {
+  ngModelControllers: INgModelController[];
+}
+
+@LegacyComponent({
   bindings: {
     ngModel: '=',
     input: '=',
@@ -27,15 +29,9 @@ export const EditableMultipleComponent: ComponentDeclaration = {
   require: {
     'ngModelCtrl': 'ngModel',
     'form': '?^form'
-  },
-  controller: forwardRef(() => EditableMultipleController)
-};
-
-interface EditableMultipleScope extends IScope {
-  ngModelControllers: INgModelController[];
-}
-
-export class EditableMultipleController<T> {
+  }
+})
+export class EditableMultipleComponent<T> {
 
   ngModel: T[];
   input: T|null;

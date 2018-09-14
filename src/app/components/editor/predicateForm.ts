@@ -4,15 +4,13 @@ import { ErrorModal } from 'app/components/form/errorModal';
 import { PredicateService } from 'app/services/predicateService';
 import { glyphIconClassForType } from 'app/utils/entity';
 import { EditableForm } from 'app/components/form/editableEntityController';
-import { PredicateViewController } from './predicateView';
+import { PredicateViewComponent } from './predicateView';
 import { Model } from 'app/entities/model';
 import { Association, Attribute } from 'app/entities/predicate';
 import { KnownPredicateType } from 'app/types/entity';
-import { ComponentDeclaration } from 'app/utils/angular';
-import { forwardRef } from '@angular/core';
+import { LegacyComponent } from 'app/utils/angular';
 
-export const PredicateFormComponent: ComponentDeclaration = {
-  selector: 'predicateForm',
+@LegacyComponent({
   bindings: {
     id: '=',
     predicate: '=',
@@ -23,17 +21,15 @@ export const PredicateFormComponent: ComponentDeclaration = {
     predicateView: '?^predicateView',
     form: '?^form'
   },
-  template: require('./predicateForm.html'),
-  controller: forwardRef(() => PredicateFormController)
-};
-
-class PredicateFormController {
+  template: require('./predicateForm.html')
+})
+export class PredicateFormComponent {
 
   model: Model;
   predicate: Attribute|Association;
   oldPredicate: Attribute|Association;
 
-  predicateView: PredicateViewController;
+  predicateView: PredicateViewComponent;
   form: EditableForm;
 
   constructor(private predicateService: PredicateService,

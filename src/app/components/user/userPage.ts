@@ -11,8 +11,7 @@ import { Options } from 'yti-common-ui/components/dropdown.component';
 import { combineSets, hasAny } from 'yti-common-ui/utils/set';
 import { gettextCatalog as GettextCatalog } from 'angular-gettext';
 import { UserRoleService } from 'app/services/userRoleService';
-import { ComponentDeclaration } from 'app/utils/angular';
-import { forwardRef } from '@angular/core';
+import { LegacyComponent } from 'app/utils/angular';
 
 interface UserOrganizationRoles {
   organization?: Organization;
@@ -20,14 +19,10 @@ interface UserOrganizationRoles {
   requests: Role[];
 }
 
-export const UserPageComponent: ComponentDeclaration = {
-  selector: 'userPage',
-  template: require('./userPage.html'),
-  controller: forwardRef(() => UserPageController)
-};
-
-// TODO clean the implementation
-class UserPageController {
+@LegacyComponent({
+  template: require('./userPage.html')
+})
+export class UserPageComponent {
 
   userOrganizations: UserOrganizationRoles[];
   organizationOptions: Options<Organization>;

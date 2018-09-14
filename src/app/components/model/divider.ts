@@ -1,23 +1,20 @@
 import { IScope, IWindowService } from 'angular';
 import { SessionService } from 'app/services/sessionService';
-import { forwardRef, NgZone } from '@angular/core';
- import { ComponentDeclaration } from 'app/utils/angular';
-
-export const DividerComponent: ComponentDeclaration = {
-  selector: 'divider',
-  bindings: {
-    selectionWidth: '='
-  },
-  template: `<div class="divider" ng-mousedown="$ctrl.moveDivider($event)"></div>`,
-  controller: forwardRef(() => DividerController)
-};
+import { NgZone } from '@angular/core';
+import { LegacyComponent } from 'app/utils/angular';
 
 const modelPanelLeft = 350;
 const minSelectionWidth = 520;
 const normalSelectionWidth = 720;
 const minVisualizationWidth = 321;
 
-class DividerController {
+@LegacyComponent({
+  bindings: {
+    selectionWidth: '='
+  },
+  template: `<div class="divider" ng-mousedown="$ctrl.moveDivider($event)"></div>`
+})
+export class DividerComponent {
 
   selectionWidth: number;
 

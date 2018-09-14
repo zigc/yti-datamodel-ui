@@ -11,20 +11,16 @@ import { ErrorModal } from 'app/components/form/errorModal';
 import { Vocabulary } from 'app/entities/vocabulary';
 import { ReferenceData } from 'app/entities/referenceData';
 import { ImportedNamespace, Link } from 'app/entities/model';
- import { ComponentDeclaration } from 'app/utils/angular';
-import { forwardRef } from '@angular/core';
+import { LegacyComponent } from 'app/utils/angular';
 import { EditableForm } from 'app/components/form/editableEntityController';
 
-export const NewModelPageComponent: ComponentDeclaration = {
-  selector: 'newModelPage',
+@LegacyComponent({
   bindings: {
     type: '='
   },
-  template: require('./newModelPage.html'),
-  controller: forwardRef(() => NewModelPageController)
-};
-
-export class NewModelPageController {
+  template: require('./newModelPage.html')
+})
+export class NewModelPageComponent {
 
   prefix: string;
   label: string;

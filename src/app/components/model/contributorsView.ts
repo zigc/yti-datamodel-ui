@@ -6,9 +6,8 @@ import { EditableForm } from 'app/components/form/editableEntityController';
 import { LanguageContext } from 'app/types/language';
 import { Organization } from 'app/entities/organization';
 import { SearchOrganizationModal } from './searchOrganizationModal';
-import { ComponentDeclaration, modalCancelHandler } from 'app/utils/angular';
+import { LegacyComponent, modalCancelHandler } from 'app/utils/angular';
 import { createExistsExclusion } from 'app/utils/exclusion';
-import { forwardRef } from '@angular/core';
 
 interface WithContributors {
   contributors: Organization[];
@@ -16,8 +15,7 @@ interface WithContributors {
   removeContributor(organization: Organization): void;
 }
 
-export const ContributosViewComponent: ComponentDeclaration = {
-  selector: 'contributorsView',
+@LegacyComponent({
   bindings: {
     value: '=',
     context: '='
@@ -32,11 +30,9 @@ export const ContributosViewComponent: ComponentDeclaration = {
         </button>
       </h4>
       <editable-table id="'contributors'" descriptor="$ctrl.descriptor" expanded="$ctrl.expanded"></editable-table>
-  `,
-  controller: forwardRef(() => ContributorsViewController)
-};
-
-class ContributorsViewController {
+  `
+})
+export class ContributorsViewComponent {
 
   value: WithContributors;
   context: LanguageContext;

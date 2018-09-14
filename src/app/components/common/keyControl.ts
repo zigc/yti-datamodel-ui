@@ -1,18 +1,11 @@
 import { IRepeatScope, IScope, ITimeoutService } from 'angular';
 import { arrowDown, arrowUp, enter, pageDown, pageUp } from 'yti-common-ui/utils/key-code';
-import { DirectiveDeclaration, scrollToElement } from 'app/utils/angular';
+import { LegacyDirective, scrollToElement } from 'app/utils/angular';
 
-export const KeyControlDirective: DirectiveDeclaration = {
-  selector: 'keyControl',
-  factory() {
-    return {
-      restrict: 'A',
-      controller: KeyControlController
-    };
-  }
-};
-
-export class KeyControlController {
+@LegacyDirective({
+  restrict: 'A'
+})
+export class KeyControlDirective {
 
   itemCount = 0;
   selectionIndex = -1;
@@ -64,17 +57,11 @@ export class KeyControlController {
 
 const selectionClass = 'active';
 
-export const KeyControlSelectionDirective: DirectiveDeclaration = {
-  selector: 'keyControlSelection',
-  factory() {
-    return {
-      restrict: 'A',
-      controller: KeyControlSelectionController
-    }
-  }
-};
 
-class KeyControlSelectionController {
+@LegacyDirective({
+  restrict: 'A'
+})
+export class KeyControlSelectionDirective {
 
   constructor(private $scope: IRepeatScope,
               private $element: JQuery,

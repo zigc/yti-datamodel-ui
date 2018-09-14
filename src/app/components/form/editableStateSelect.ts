@@ -2,11 +2,9 @@ import { EditableForm } from './editableEntityController';
 import { Model } from 'app/entities/model';
 import { AuthorizationManagerService } from 'app/services/authorizationManagerService';
 import { Status } from 'yti-common-ui/entities/status';
- import { ComponentDeclaration } from 'app/utils/angular';
-import { forwardRef } from '@angular/core';
+import { LegacyComponent } from 'app/utils/angular';
 
-export const EditableStateSelectComponent: ComponentDeclaration = {
-  selector: 'editableStateSelect',
+@LegacyComponent({
   bindings: {
     state: '=',
     model: '=',
@@ -26,11 +24,9 @@ export const EditableStateSelectComponent: ComponentDeclaration = {
     `,
   require: {
     form: '?^form'
-  },
-  controller: forwardRef(() => EditableStateSelectController)
-};
-
-class EditableStateSelectController {
+  }
+})
+export class EditableStateSelectComponent {
 
   model: Model;
   state: Status;

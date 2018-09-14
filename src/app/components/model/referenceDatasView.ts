@@ -7,10 +7,9 @@ import { SearchReferenceDataModal } from './searchReferenceDataModal';
 import { EditReferenceDataModal } from './editReferenceDataModal';
 import { ViewReferenceDataModal } from './viewReferenceDataModal';
 import { ReferenceData } from 'app/entities/referenceData';
-import { ComponentDeclaration, modalCancelHandler } from 'app/utils/angular';
+import { LegacyComponent, modalCancelHandler } from 'app/utils/angular';
 import { LanguageContext } from 'app/types/language';
 import { EditableForm } from 'app/components/form/editableEntityController';
-import { forwardRef } from '@angular/core';
 
 interface WithReferenceDatas {
   referenceDatas: ReferenceData[];
@@ -18,8 +17,7 @@ interface WithReferenceDatas {
   removeReferenceData(referenceData: ReferenceData): void;
 }
 
-export const ReferenceDatasViewComponent: ComponentDeclaration = {
-  selector: 'referenceDatasView',
+@LegacyComponent({
   bindings: {
     value: '=',
     context: '='
@@ -35,11 +33,9 @@ export const ReferenceDatasViewComponent: ComponentDeclaration = {
         </button>
       </h4>
       <editable-table id="'referenceData'" descriptor="$ctrl.descriptor" expanded="$ctrl.expanded"></editable-table>
-  `,
-  controller: forwardRef(() => ReferenceDatasViewController)
-};
-
-class ReferenceDatasViewController {
+  `
+})
+export class ReferenceDatasViewComponent {
 
   value: WithReferenceDatas;
   context: LanguageContext;

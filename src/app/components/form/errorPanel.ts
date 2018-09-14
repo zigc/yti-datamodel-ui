@@ -1,14 +1,10 @@
- import { ComponentDeclaration } from 'app/utils/angular';
-import { forwardRef } from '@angular/core';
+import { LegacyComponent } from 'app/utils/angular';
 
-export const ErrorPanelComponent: ComponentDeclaration = {
-  selector: 'errorPanel',
+@LegacyComponent({
   bindings: {
     error: '='
   },
-  template: require('./errorPanel.html'),
-  controller: forwardRef(() => ErrorPanelController)
-};
-
-export class ErrorPanelController {
+  template: require('./errorPanel.html')
+})
+export class ErrorPanelComponent {
 }

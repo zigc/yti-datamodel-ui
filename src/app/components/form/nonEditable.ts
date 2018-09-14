@@ -2,11 +2,9 @@ import { IParseService, IScope } from 'angular';
 import { DisplayItem, DisplayItemFactory, Value } from './displayItemFactory';
 import { EditableForm } from './editableEntityController';
 import { LanguageContext } from 'app/types/language';
- import { ComponentDeclaration } from 'app/utils/angular';
-import { forwardRef } from '@angular/core';
+import { LegacyComponent } from 'app/utils/angular';
 
-export const NonEditableComponent: ComponentDeclaration = {
-  selector: 'nonEditable',
+@LegacyComponent({
   bindings: {
     title: '@',
     value: '=',
@@ -19,11 +17,9 @@ export const NonEditableComponent: ComponentDeclaration = {
   require: {
     form: '?^form'
   },
-  template: require('./nonEditable.html'),
-  controller: forwardRef(() => NonEditableController)
-};
-
-class NonEditableController {
+  template: require('./nonEditable.html')
+})
+export class NonEditableComponent {
 
   title: string;
   value: Value;

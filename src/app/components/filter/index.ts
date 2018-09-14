@@ -6,14 +6,14 @@ import { ExcludedFilterComponent } from './excludedFilter';
 import { TypeFilterComponent } from './typeFilter';
 import { TypesFilterComponent } from './typesFilter';
 
-import { registerComponent } from 'app/utils/angular';
+import { componentDeclaration } from 'app/utils/angular';
 import { module as mod } from './module';
 export { module } from './module';
 
-registerComponent(mod, TextFilterComponent);
-registerComponent(mod, ContentFilterComponent);
-registerComponent(mod, ModelFilterComponent);
-registerComponent(mod, ProfileFilterComponent);
-registerComponent(mod, ExcludedFilterComponent);
-registerComponent(mod, TypeFilterComponent);
-registerComponent(mod, TypesFilterComponent);
+mod.component('textFilter', componentDeclaration(TextFilterComponent));
+mod.component('contentFilter', componentDeclaration(ContentFilterComponent));
+mod.component('modelFilter', componentDeclaration(ModelFilterComponent));
+mod.component('profileFilter', componentDeclaration(ProfileFilterComponent));
+mod.component('excludedFilter', componentDeclaration(ExcludedFilterComponent));
+mod.component('typeFilter', componentDeclaration(TypeFilterComponent));
+mod.component('typesFilter', componentDeclaration(TypesFilterComponent));

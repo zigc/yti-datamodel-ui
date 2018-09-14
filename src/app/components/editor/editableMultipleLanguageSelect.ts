@@ -1,10 +1,8 @@
 import { IQService } from 'angular';
 import { availableLanguages, Language } from 'app/types/language';
-import { ComponentDeclaration } from 'app/utils/angular';
-import { forwardRef } from '@angular/core';
+import { LegacyComponent } from 'app/utils/angular';
 
-export const EditableMultipleLanguageSelectComponent: ComponentDeclaration = {
-  selector: 'editableMultipleLanguageSelect',
+@LegacyComponent({
   bindings: {
     ngModel: '=',
     id: '@',
@@ -25,11 +23,9 @@ export const EditableMultipleLanguageSelectComponent: ComponentDeclaration = {
           </autocomplete>
         </input-container>
       </editable-multiple>
-  `,
-  controller: forwardRef(() => EditableMultipleLanguageSelectController)
-};
-
-class EditableMultipleLanguageSelectController {
+  `
+})
+export class EditableMultipleLanguageSelectComponent {
 
   ngModel: Language[];
   input: Language;

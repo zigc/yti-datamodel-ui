@@ -1,13 +1,15 @@
 import { SearchController, TextAnalysis } from 'app/types/filter';
 import { IScope } from 'angular';
 import { isDefined } from 'yti-common-ui/utils/object';
-import { ComponentDeclaration, ifChanged } from 'app/utils/angular';
+import { ifChanged, LegacyComponent } from 'app/utils/angular';
 import { Type } from 'app/types/entity';
 import * as _ from 'lodash';
-import { forwardRef } from '@angular/core';
 
-export const TypeFilterComponent: ComponentDeclaration = {
-  selector: 'typeFilter',
+interface WithNormalizedType {
+  normalizedType: Type|null;
+}
+
+@LegacyComponent({
   bindings: {
     searchController: '=',
     label: '@',
@@ -21,15 +23,9 @@ export const TypeFilterComponent: ComponentDeclaration = {
               ng-options="type | translate for type in $ctrl.types">
         <option value="" translate>All types</option>
       </select>
-  `,
-  controller: forwardRef(() => TypeFilterController)
-};
-
-interface WithNormalizedType {
-  normalizedType: Type|null;
-}
-
-class TypeFilterController {
+  `
+})
+export class TypeFilterComponent {
 
   searchController: SearchController<WithNormalizedType>;
   type: Type;

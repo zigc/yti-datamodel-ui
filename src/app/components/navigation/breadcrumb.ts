@@ -3,16 +3,13 @@ import { Location, LocationService } from 'app/services/locationService';
 import { labelNameToResourceIdIdentifier } from 'yti-common-ui/utils/resource';
 import { LanguageService } from 'app/services/languageService';
 import { TranslateService } from '@ngx-translate/core';
-import { ComponentDeclaration } from 'app/utils/angular';
-import { forwardRef } from '@angular/core';
+import { LegacyComponent } from 'app/utils/angular';
 
-export const BreadcrumbComponent: ComponentDeclaration = {
-  selector: 'breadcrumb',
-  template: require('./breadcrumb.html'),
-  controller: forwardRef(() => BreadcrumbController)
-};
 
-class BreadcrumbController {
+@LegacyComponent({
+  template: require('./breadcrumb.html')
+})
+export class BreadcrumbComponent {
 
   location: Location[];
 

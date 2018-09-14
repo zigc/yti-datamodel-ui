@@ -1,11 +1,9 @@
 import { DataType } from 'app/entities/dataTypes';
 import { ReferenceData } from 'app/entities/referenceData';
 import { LanguageContext } from 'app/types/language';
-import { ComponentDeclaration } from 'app/utils/angular';
-import { forwardRef } from '@angular/core';
+import { LegacyComponent } from 'app/utils/angular';
 
-export const EditableMultipleDataTypeInputComponent: ComponentDeclaration = {
-  selector: 'editableMultipleDataTypeInput',
+@LegacyComponent({
   bindings: {
     ngModel: '=',
     inputType: '=',
@@ -28,11 +26,9 @@ export const EditableMultipleDataTypeInputComponent: ComponentDeclaration = {
           </code-value-input-autocomplete>
         </input-container>
       </editable-multiple>
-  `,
-  controller: forwardRef(() => EditableMultipleDataTypeInputController)
-};
-
-class EditableMultipleDataTypeInputController {
+  `
+})
+export class EditableMultipleDataTypeInputComponent {
 
   ngModel: string[];
   input: string;

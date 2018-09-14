@@ -1,13 +1,11 @@
 import { ITimeoutService } from 'angular';
 import { EditableForm } from 'app/components/form/editableEntityController';
 import { gettextCatalog as GettextCatalog } from 'angular-gettext';
-import { ComponentDeclaration } from 'app/utils/angular';
-import { forwardRef } from '@angular/core';
+import { LegacyComponent } from 'app/utils/angular';
 
 const clipboardImage = require('../../../assets/clippy.svg');
 
-export const ClipboardComponent: ComponentDeclaration = {
-  selector: 'clipboard',
+@LegacyComponent({
   bindings: {
     text: '='
   },
@@ -24,11 +22,9 @@ export const ClipboardComponent: ComponentDeclaration = {
          ngclipboard 
          ngclipboard-success="$ctrl.onCopy()"
          data-clipboard-text="{{$ctrl.text}}" />
-    `,
-  controller: forwardRef(() => ClipboardController)
-};
-
-class ClipboardController {
+    `
+})
+export class ClipboardComponent {
 
   text: string;
   showCopiedMessage = false;

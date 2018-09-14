@@ -1,13 +1,11 @@
-import { ComponentDeclaration } from 'app/utils/angular';
-import { forwardRef } from '@angular/core';
+import { LegacyComponent } from 'app/utils/angular';
 import { Notification, Story } from 'app/help/contract';
 import { IScope } from 'angular';
 import { requireDefined } from 'yti-common-ui/utils/object';
 import { InteractiveHelpController } from './interactiveHelpDisplay';
 import { elementPositioning, PopoverDimensionsProvider, resolveArrowClass } from './utils';
 
-export const InteractiveHelpPopoverDimensionsCalculatorComponent: ComponentDeclaration = {
-  selector: 'helpPopoverDimensionsCalculator',
+@LegacyComponent({
   bindings: {
     item: '<',
     helpController: '<'
@@ -23,11 +21,9 @@ export const InteractiveHelpPopoverDimensionsCalculatorComponent: ComponentDecla
           <button ng-show="$ctrl.helpController.showClose" class="small button help-next" translate>close</button>
           <a class="help-close">&times;</a>
         </div>
-  `,
-  controller: forwardRef(() => InteractiveHelpPopoverDimensionsCalculatorController)
-};
-
-class InteractiveHelpPopoverDimensionsCalculatorController implements PopoverDimensionsProvider {
+  `
+})
+export class InteractiveHelpPopoverDimensionsCalculatorComponent implements PopoverDimensionsProvider {
 
   item: Story|Notification;
   helpController: InteractiveHelpController;

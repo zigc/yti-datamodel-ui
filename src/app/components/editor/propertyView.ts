@@ -1,5 +1,5 @@
 import { IScope } from 'angular';
-import { ClassFormController } from './classForm';
+import { ClassFormComponent } from './classForm';
 import { Uri } from 'app/entities/uri';
 import { LanguageService } from 'app/services/languageService';
 import { allMatching, anyMatching } from 'yti-common-ui/utils/array';
@@ -7,11 +7,9 @@ import { hasLocalization } from 'app/utils/language';
 import { Class, Property } from 'app/entities/class';
 import { Model } from 'app/entities/model';
 import { Predicate } from 'app/entities/predicate';
-import { ComponentDeclaration } from 'app/utils/angular';
-import { forwardRef } from '@angular/core';
+import { LegacyComponent } from 'app/utils/angular';
 
-export const PropertyViewComponent: ComponentDeclaration = {
-  selector: 'propertyView',
+@LegacyComponent({
   bindings: {
     id: '=',
     property: '=',
@@ -21,19 +19,15 @@ export const PropertyViewComponent: ComponentDeclaration = {
   require: {
     classForm: '^classForm'
   },
-  template: require('./propertyView.html'),
-  controller: forwardRef(() => PropertyViewController)
-};
-
-
-
-export class PropertyViewController {
+  template: require('./propertyView.html')
+})
+export class PropertyViewComponent {
 
   property: Property;
   class: Class;
   model: Model;
 
-  classForm: ClassFormController;
+  classForm: ClassFormComponent;
 
   constructor(private $scope: IScope,
               private $element: JQuery,

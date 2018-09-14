@@ -3,22 +3,18 @@ import { SearchClassModal } from 'app/components/editor/searchClassModal';
 import { requireDefined } from 'yti-common-ui/utils/object';
 import { Model } from 'app/entities/model';
 import { ClassListItem } from 'app/entities/class';
-import { ComponentDeclaration, modalCancelHandler } from 'app/utils/angular';
-import { forwardRef } from '@angular/core';
+import { LegacyComponent, modalCancelHandler } from 'app/utils/angular';
 
-export const EditableRootClassCompoonent: ComponentDeclaration = {
-  selector: 'editableRootClass',
+@LegacyComponent({
   bindings: {
     model: '='
   },
   require: {
     form: '?^form'
   },
-  template: require('./editableRootClass.html'),
-  controller: forwardRef(() => EditableRootClassController)
-};
-
-class EditableRootClassController {
+  template: require('./editableRootClass.html')
+})
+export class EditableRootClassComponent {
 
   model: Model;
 

@@ -1,9 +1,7 @@
 import { EditableEntityController, EditableForm } from './editableEntityController';
-import { ComponentDeclaration } from 'app/utils/angular';
-import { forwardRef } from '@angular/core';
+import { LegacyComponent } from 'app/utils/angular';
 
-export const EditableEntityButtons: ComponentDeclaration = {
-  selector: 'editableEntityButtons',
+@LegacyComponent({
   bindings: {
     ctrl: '=editableController',
     context: '='
@@ -12,11 +10,9 @@ export const EditableEntityButtons: ComponentDeclaration = {
     form: '^form'
   },
   transclude: true,
-  template: require('./editableEntityButtons.html'),
-  controller: forwardRef(() => EditableEntityButtonsController)
-};
-
-class EditableEntityButtonsController {
+  template: require('./editableEntityButtons.html')
+})
+export class EditableEntityButtonsComponent {
 
   ctrl: EditableEntityController<any>;
   form: EditableForm;

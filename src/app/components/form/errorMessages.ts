@@ -2,8 +2,7 @@ import { INgModelController, IScope } from 'angular';
 import { resolveValidator } from './validators';
 import { normalizeAsArray } from 'yti-common-ui/utils/array';
 import { dataTypes } from 'app/entities/dataTypes';
- import { ComponentDeclaration } from 'app/utils/angular';
-import { forwardRef } from '@angular/core';
+import { LegacyComponent } from 'app/utils/angular';
 
 interface Error {
   key: string;
@@ -18,16 +17,13 @@ for (const dataType of dataTypes) {
   errors.push({ key: dataType, message: dataType + ' error', format: format ? `(${format})` : ''});
 }
 
-export const ErrorMessagesComponent: ComponentDeclaration = {
-  selector: 'errorMessages',
+@LegacyComponent({
   template: require('./errorMessages.html'),
   bindings: {
     'ngModelController': '<'
-  },
-  controller: forwardRef(() => ErrorMessagesController)
-};
-
-class ErrorMessagesController {
+  }
+})
+export class ErrorMessagesComponent {
 
   ngModelController: INgModelController|INgModelController[];
   ngModelControllers: INgModelController[];

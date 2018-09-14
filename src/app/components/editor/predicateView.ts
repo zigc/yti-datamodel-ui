@@ -9,11 +9,9 @@ import { Model } from 'app/entities/model';
 import { LanguageContext } from 'app/types/language';
 import { ModelControllerService } from 'app/components/model/modelControllerService';
 import { AuthorizationManagerService } from 'app/services/authorizationManagerService';
- import { ComponentDeclaration } from 'app/utils/angular';
-import { forwardRef } from '@angular/core';
+import { LegacyComponent } from 'app/utils/angular';
 
-export const PredicateViewComponent: ComponentDeclaration = {
-  selector: 'predicateView',
+@LegacyComponent({
   bindings: {
     id: '=',
     predicate: '=',
@@ -21,11 +19,9 @@ export const PredicateViewComponent: ComponentDeclaration = {
     modelController: '=',
     width: '='
   },
-  template: require('./predicateView.html'),
-  controller: forwardRef(() => PredicateViewController)
-};
-
-export class PredicateViewController extends EditableEntityController<Association|Attribute> {
+  template: require('./predicateView.html')
+})
+export class PredicateViewComponent extends EditableEntityController<Association|Attribute> {
 
   predicate: Association|Attribute;
   model: Model;

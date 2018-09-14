@@ -1,20 +1,16 @@
 import { SearchController, TextAnalysis } from 'app/types/filter';
 import { IScope } from 'angular';
 import { Exclusion } from 'app/utils/exclusion';
-import { ComponentDeclaration, ifChanged } from 'app/utils/angular';
-import { forwardRef } from '@angular/core';
+import { ifChanged, LegacyComponent } from 'app/utils/angular';
 
-export const ExcludedFilterComponent: ComponentDeclaration = {
-  selector: 'excludedFilter',
+@LegacyComponent({
   bindings: {
     searchController: '=',
     exclude: '=',
     searchText: '='
-  },
-  controller: forwardRef(() => ExcludedFilterController)
-};
-
-class ExcludedFilterController<T> {
+  }
+})
+export class ExcludedFilterComponent<T> {
 
   searchController: SearchController<T>;
   searchText: string;

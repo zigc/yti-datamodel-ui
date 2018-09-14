@@ -1,10 +1,8 @@
 import { EditableForm } from 'app/components/form/editableEntityController';
 import { isDefined } from 'yti-common-ui/utils/object';
-import { ComponentDeclaration } from 'app/utils/angular';
-import { forwardRef } from '@angular/core';
+import { LegacyComponent } from 'app/utils/angular';
 
-export const ModalTemplateComponent: ComponentDeclaration = {
-  selector: 'modalTemplate',
+@LegacyComponent({
   bindings: {
     default: '@',
     editing: '@',
@@ -18,11 +16,9 @@ export const ModalTemplateComponent: ComponentDeclaration = {
     body: 'modalBody',
     buttons: '?modalButtons'
   },
-  template: require('./modalTemplate.html'),
-  controller: forwardRef(() => ModalTemplateController)
-};
-
-class ModalTemplateController {
+  template: require('./modalTemplate.html')
+})
+export class ModalTemplateComponent {
 
   default: string;
   editing: string;

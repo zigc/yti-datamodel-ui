@@ -6,16 +6,19 @@ import { Model } from 'app/entities/model';
 import { ClassService } from 'app/services/classService';
 import { ModelPageActions } from 'app/components/model/modelPage';
 import { labelNameToResourceIdIdentifier } from 'yti-common-ui/utils/resource';
-import { ComponentDeclaration } from 'app/utils/angular';
-import { forwardRef } from '@angular/core';
+import { LegacyComponent } from 'app/utils/angular';
 
 export interface ContextMenuTarget {
   coordinate: Coordinate;
   target: VisualizationClass;
 }
 
-export const VisualizationContextMenuComponent: ComponentDeclaration = {
-  selector: 'visualizationContextMenu',
+interface Action {
+  name: string;
+  invoke: () => void;
+}
+
+@LegacyComponent({
   bindings: {
     model: '=',
     modelPageActions: '=',
@@ -27,16 +30,9 @@ export const VisualizationContextMenuComponent: ComponentDeclaration = {
           <a id="{{$ctrl.getIdNameFromActionName(action.name) + '_context_dropdown_action'}}" ng-click="$ctrl.invokeAction(action)">{{action.name | translate}}</a>
         </div>
       </div>
-  `,
-  controller: forwardRef(() => VisualizationContextMenuController)
-};
-
-interface Action {
-  name: string;
-  invoke: () => void;
-}
-
-class VisualizationContextMenuController {
+  `
+})
+export class VisualizationContextMenuComponent {
 
   model: Model;
   modelPageActions: ModelPageActions;

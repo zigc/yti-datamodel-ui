@@ -1,5 +1,5 @@
 import { IScope } from 'angular';
-import { ClassViewController } from './classView';
+import { ClassViewComponent } from './classView';
 import { AddPropertiesFromClassModal } from './addPropertiesFromClassModal';
 import { Uri } from 'app/entities/uri';
 import { ClassService } from 'app/services/classService';
@@ -7,21 +7,18 @@ import { isDefined, requireDefined } from 'yti-common-ui/utils/object';
 import { SearchPredicateModal } from './searchPredicateModal';
 import { EditableForm } from 'app/components/form/editableEntityController';
 import { Option } from 'app/components/common/buttonWithOptions';
-import { SearchClassModal, noExclude } from './searchClassModal';
+import { noExclude, SearchClassModal } from './searchClassModal';
 import { SessionService } from 'app/services/sessionService';
 import { LanguageService } from 'app/services/languageService';
 import { Localizer } from 'app/types/language';
 import { comparingLocalizable } from 'app/utils/comparator';
-import { Class, Property, ClassListItem } from 'app/entities/class';
+import { Class, ClassListItem, Property } from 'app/entities/class';
 import { Model } from 'app/entities/model';
-import { modalCancelHandler } from 'app/utils/angular';
+import { LegacyComponent, modalCancelHandler } from 'app/utils/angular';
 import { labelNameToResourceIdIdentifier } from 'yti-common-ui/utils/resource';
 import { Localizable } from 'yti-common-ui/types/localization';
-import { ComponentDeclaration } from 'app/utils/angular';
-import { forwardRef } from '@angular/core';
 
-export const ClassFormComponent: ComponentDeclaration = {
-  selector: 'classForm',
+@LegacyComponent({
   template: require('./classForm.html'),
   require: {
     classView: '?^classView',
@@ -33,11 +30,9 @@ export const ClassFormComponent: ComponentDeclaration = {
     oldClass: '=',
     model: '=',
     openPropertyId: '='
-  },
-  controller: forwardRef(() => ClassFormController)
-};
-
-export class ClassFormController {
+  }
+})
+export class ClassFormComponent {
 
   class: Class;
   properties: Property[];
@@ -51,7 +46,7 @@ export class ClassFormController {
   onPropertyReorder = (property: Property, index: number) => property.index = index;
   superClassExclude = (klass: ClassListItem) => klass.isOfType('shape') ? 'Super cannot be shape' : null;
 
-  classView: ClassViewController;
+  classView: ClassViewComponent;
   form: EditableForm;
 
   constructor(private $scope: IScope,

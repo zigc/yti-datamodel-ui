@@ -3,8 +3,7 @@ import { hasLocalization } from 'app/utils/language';
 import { Coordinate } from 'app/types/visualization';
 import { Localizable } from 'yti-common-ui/types/localization';
 import { LanguageContext } from 'app/types/language';
-import { ComponentDeclaration } from 'app/utils/angular';
-import { forwardRef } from '@angular/core';
+import { LegacyComponent } from 'app/utils/angular';
 
 export interface VisualizationPopoverDetails {
   coordinate: Coordinate;
@@ -12,8 +11,7 @@ export interface VisualizationPopoverDetails {
   comment: Localizable;
 }
 
-export const VisualizationPopoverComponent: ComponentDeclaration = {
-  selector: 'visualizationPopover',
+@LegacyComponent({
   bindings: {
     details: '=',
     context: '='
@@ -28,11 +26,9 @@ export const VisualizationPopoverComponent: ComponentDeclaration = {
            {{$ctrl.details.comment | translateValue: $ctrl.context}}
          </div>
        </div>
-  `,
-  controller: forwardRef(() => VisualizationPopoverController)
-};
-
-class VisualizationPopoverController {
+  `
+})
+export class VisualizationPopoverComponent {
   details: VisualizationPopoverDetails;
   context: LanguageContext;
 

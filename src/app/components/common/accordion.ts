@@ -1,20 +1,16 @@
-import { IAttributes, IScope, ITranscludeFunction } from 'angular';
+import { IAttributes, IDirectiveFactory, IScope, ITranscludeFunction } from 'angular';
 import { isDefined } from 'yti-common-ui/utils/object';
-import { ComponentDeclaration, DirectiveDeclaration } from 'app/utils/angular';
-import { forwardRef } from '@angular/core';
+import { LegacyComponent } from 'app/utils/angular';
 
-export const AccordionComponent: ComponentDeclaration = {
-  selector: 'accordion',
+@LegacyComponent({
   bindings: {
     openId: '=',
     animate: '='
   },
   transclude: true,
-  template: `<ng-transclude></ng-transclude>`,
-  controller: forwardRef(() => AccordionController)
-};
-
-class AccordionController {
+  template: `<ng-transclude></ng-transclude>`
+})
+export class AccordionComponent {
   openId: any;
   animate: boolean;
 
@@ -31,8 +27,7 @@ class AccordionController {
   }
 }
 
-export const AccordionGroupComponent: ComponentDeclaration = {
-  selector: 'accordionGroup',
+@LegacyComponent({
   bindings: {
     id: '=',
     identifier: '='
@@ -61,15 +56,13 @@ export const AccordionGroupComponent: ComponentDeclaration = {
         </div>
       </div>
   `,
-  controller: forwardRef(() => AccordionGroupController)
-};
-
-class AccordionGroupController {
+})
+export class AccordionGroupComponent {
 
   id: string;
   identifier: string;
 
-  accordion: AccordionController;
+  accordion: AccordionComponent;
 
   isOpen() {
     return this.accordion && this.accordion.isOpen(this.identifier);
@@ -85,7 +78,7 @@ class AccordionGroupController {
 }
 
 interface AccordionGroupScope extends IScope {
-  $ctrl: AccordionGroupController;
+  $ctrl: AccordionGroupComponent;
 }
 
 interface AccordionTranscludeAttributes extends IAttributes {
@@ -96,20 +89,19 @@ interface AccordionTranscludeScope extends IScope {
   isOpen: () => boolean;
 }
 
-export const AccordionTranscludeDirective: DirectiveDeclaration = {
-  selector: 'accordionTransclude',
-  factory() {
-    return {
-      restrict: 'A',
-      require: '^accordionGroup',
-      link($scope: AccordionGroupScope, element: JQuery, attributes: AccordionTranscludeAttributes, controller: AccordionGroupController, transclude: ITranscludeFunction) {
-        function ngTranscludeCloneAttachFn(clone: JQuery, transcludeScope: AccordionTranscludeScope) {
-          element.append(clone);
-          transcludeScope.isOpen = () => controller.isOpen();
-        }
-        const slotName = attributes.accordionTransclude;
-        transclude(ngTranscludeCloneAttachFn, undefined, slotName);
+export const AccordionTranscludeDirective: IDirectiveFactory = () => {
+  return {
+    restrict: 'A',
+    require: '^accordionGroup',
+    link($scope: AccordionGroupScope, element: JQuery, attributes: AccordionTranscludeAttributes, controller: AccordionGroupComponent, transclude: ITranscludeFunction) {
+      function ngTranscludeCloneAttachFn(clone: JQuery, transcludeScope: AccordionTranscludeScope) {
+        element.append(clone);
+        transcludeScope.isOpen = () => controller.isOpen();
       }
-    };
+
+      const slotName = attributes.accordionTransclude;
+      transclude(ngTranscludeCloneAttachFn, undefined, slotName);
+    }
   }
 };
+

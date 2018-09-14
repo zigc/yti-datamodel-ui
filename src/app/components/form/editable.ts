@@ -2,14 +2,12 @@ import { INgModelController, IParseService, IScope } from 'angular';
 import { DisplayItem, DisplayItemFactory, Value } from './displayItemFactory';
 import { EditableForm } from './editableEntityController';
 import { LanguageContext } from 'app/types/language';
- import { ComponentDeclaration } from 'app/utils/angular';
-import { forwardRef } from '@angular/core';
+import { LegacyComponent } from 'app/utils/angular';
 
 const NG_HIDE_CLASS = 'ng-hide';
 const NG_HIDE_IN_PROGRESS_CLASS = 'ng-hide-animate';
 
-export const EditableComponent: ComponentDeclaration = {
-  selector: 'editable',
+@LegacyComponent({
   bindings: {
     title: '@',
     link: '=',
@@ -24,11 +22,9 @@ export const EditableComponent: ComponentDeclaration = {
   transclude: true,
   require: {
     form: '?^form'
-  },
-  controller: forwardRef(() => EditableController)
-};
-
-class EditableController {
+  }
+})
+export class EditableComponent {
 
   title: string;
   valueAsLocalizationKey: boolean;

@@ -1,9 +1,7 @@
 import { gettextCatalog as GettextCatalog } from 'angular-gettext';
-import { ComponentDeclaration } from 'app/utils/angular';
-import { forwardRef } from '@angular/core';
+import { LegacyComponent } from 'app/utils/angular';
 
-export const LocalizedSelectComponent: ComponentDeclaration = {
-  selector: 'localizedSelect',
+@LegacyComponent({
   bindings: {
     value: '=',
     values: '=',
@@ -14,11 +12,9 @@ export const LocalizedSelectComponent: ComponentDeclaration = {
       <iow-select id="{{$ctrl.id}}" required ng-model="$ctrl.value" options="value in $ctrl.values">
         <span>{{$ctrl.getName(value)}}</span>
       </iow-select>
-  `,
-  controller: forwardRef(() => LocalizedSelectController)
-};
-
-class LocalizedSelectController {
+  `
+})
+export class LocalizedSelectComponent {
   value: string;
   values: string[];
   id: string;

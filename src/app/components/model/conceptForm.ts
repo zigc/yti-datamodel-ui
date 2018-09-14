@@ -1,20 +1,16 @@
 import { Localizer } from 'app/services/languageService';
 import { Concept } from 'app/entities/vocabulary';
 import { Model } from 'app/entities/model';
-import { ComponentDeclaration } from 'app/utils/angular';
-import { forwardRef } from '@angular/core';
+import { LegacyComponent } from 'app/utils/angular';
 
-export const ConceptFormComponent: ComponentDeclaration = {
-  selector: 'conceptForm',
+@LegacyComponent({
   bindings: {
     concept: '=',
     model: '='
   },
-  template: require('./conceptForm.html'),
-  controller: forwardRef(() => ConceptFormController)
-};
-
-export class ConceptFormController {
+  template: require('./conceptForm.html')
+})
+export class ConceptFormComponent {
 
   concept: Concept;
   model: Model;

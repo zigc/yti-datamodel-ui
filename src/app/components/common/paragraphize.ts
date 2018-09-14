@@ -1,32 +1,25 @@
-import { ISCEService } from 'angular';
+import { FilterFactory, ISCEService } from 'angular';
 import { LanguageContext } from 'app/types/language';
 import { Localizable } from 'yti-common-ui/types/localization';
-import { ComponentDeclaration, FilterDeclaration } from 'app/utils/angular';
-import { forwardRef } from '@angular/core';
+import { LegacyComponent } from 'app/utils/angular';
 
-export const ParagraphizeComponent: ComponentDeclaration = {
-  selector: 'paragraphize',
+@LegacyComponent({
   bindings: {
     text: '=',
     context: '='
   },
   template: '<span ng-bind-html="$ctrl.text | translateValue:$ctrl.context | paragraphize"></span>',
-  controller: forwardRef(() => ParagraphizeController)
-};
-
-class ParagraphizeController {
+})
+export class ParagraphizeComponent {
   text: Localizable;
   context: LanguageContext;
 }
 
-export const ParagraphizeFilter: FilterDeclaration = {
-  name: 'paragraphize',
-  factory($sce: ISCEService) {
-    'ngInject';
-    return (text: string) => {
-      return $sce.trustAsHtml(applyParagraph(text));
-    };
-  }
+export const ParagraphizeFilter: FilterFactory = ($sce: ISCEService) => {
+  'ngInject';
+  return (text: string) => {
+    return $sce.trustAsHtml(applyParagraph(text));
+  };
 };
 
 const paragraphRegex = new RegExp(`(.*?\n\n})`);

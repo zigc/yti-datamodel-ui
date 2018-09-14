@@ -1,11 +1,9 @@
 import { Model } from 'app/entities/model';
 import { ModelControllerService } from './modelControllerService';
- import { ComponentDeclaration } from 'app/utils/angular';
-import { forwardRef } from '@angular/core';
+import { LegacyComponent } from 'app/utils/angular';
 import { EditableForm } from 'app/components/form/editableEntityController';
 
-export const ModelFormComponent: ComponentDeclaration = {
-  selector: 'modelForm',
+@LegacyComponent({
   bindings: {
     id: '=',
     model: '=',
@@ -14,11 +12,9 @@ export const ModelFormComponent: ComponentDeclaration = {
   require: {
     form: '?^form'
   },
-  template: require('./modelForm.html'),
-  controller: forwardRef(() => ModelFormController)
-};
-
-class ModelFormController {
+  template: require('./modelForm.html')
+})
+export class ModelFormComponent {
 
   model: Model;
   modelController: ModelControllerService;

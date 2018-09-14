@@ -1,4 +1,4 @@
-import { IAttributes, ILocationService, IPromise, IQService, IScope, route } from 'angular';
+import { ILocationService, IPromise, IQService, IScope, route } from 'angular';
 import * as _ from 'lodash';
 import { ClassService } from 'app/services/classService';
 import { LanguageService, Localizer } from 'app/services/languageService';
@@ -9,29 +9,22 @@ import { ConfirmationModal } from 'app/components/common/confirmationModal';
 import { SearchClassModal } from 'app/components/editor/searchClassModal';
 import { SearchPredicateModal } from 'app/components/editor/searchPredicateModal';
 import { EntityCreation } from 'app/components/editor/searchConceptModal';
-import { WithDefinedBy } from 'app/types/entity';
+import { ClassType, KnownPredicateType, SelectionType, WithDefinedBy } from 'app/types/entity';
 import { ChangeListener, ChangeNotifier, SearchClassType } from 'app/types/component';
 import { Uri } from 'app/entities/uri';
 import { comparingLocalizable } from 'app/utils/comparator';
 import { AddPropertiesFromClassModal } from 'app/components/editor/addPropertiesFromClassModal';
-import { ComponentDeclaration, isDifferentUrl, modalCancelHandler, nextUrl } from 'app/utils/angular';
-import {
-  combineExclusions,
-  createClassTypeExclusion,
-  createDefinedByExclusion,
-  createExistsExclusion,
-  Exclusion
-} from 'app/utils/exclusion';
+import { isDifferentUrl, LegacyComponent, modalCancelHandler, nextUrl } from 'app/utils/angular';
+import { combineExclusions, createClassTypeExclusion, createDefinedByExclusion, createExistsExclusion, Exclusion } from 'app/utils/exclusion';
 import { collectIds, glyphIconClassForType } from 'app/utils/entity';
 import { areEqual, Optional } from 'yti-common-ui/utils/object';
 import { AbstractPredicate, Predicate, PredicateListItem } from 'app/entities/predicate';
 import { AbstractClass, Class, ClassListItem, Property } from 'app/entities/class';
 import { Model } from 'app/entities/model';
 import { ExternalEntity } from 'app/entities/externalEntity';
-import { ClassType, KnownPredicateType, SelectionType } from 'app/types/entity';
 import { NotificationModal } from 'app/components/common/notificationModal';
 import { removeMatching } from 'yti-common-ui/utils/array';
-import { ApplicationController } from 'app/components/application';
+import { ApplicationComponent } from 'app/components/application';
 import { HelpProvider } from 'app/components/common/helpProvider';
 import { InteractiveHelp } from 'app/help/contract';
 import { ModelPageHelpService } from 'app/help/modelPageHelp';
@@ -40,16 +33,6 @@ import { ModelControllerService, View } from './modelControllerService';
 import { AuthorizationManagerService } from 'app/services/authorizationManagerService';
 import IRouteService = route.IRouteService;
 import ICurrentRoute = route.ICurrentRoute;
-import { forwardRef } from '@angular/core';
-
-export const ModelPageComponent: ComponentDeclaration = {
-  selector: 'modelPage',
-  require: {
-    application: '^application'
-  },
-  template: require('./modelPage.html'),
-  controller: forwardRef(() => ModelPageController)
-};
 
 export interface ModelPageActions extends ChangeNotifier<Class|Predicate> {
   select(item: WithIdAndType): void;
@@ -61,7 +44,13 @@ export interface ModelPageActions extends ChangeNotifier<Class|Predicate> {
   assignPredicateToModel(predicate: Predicate): void;
 }
 
-export class ModelPageController implements ModelPageActions, HelpProvider, ModelControllerService {
+@LegacyComponent({
+  require: {
+    application: '^application'
+  },
+  template: require('./modelPage.html')
+})
+export class ModelPageComponent implements ModelPageActions, HelpProvider, ModelControllerService {
 
   loading = true;
   views: View[] = [];
@@ -91,7 +80,7 @@ export class ModelPageController implements ModelPageActions, HelpProvider, Mode
 
   helps: InteractiveHelp[] = [];
 
-  application: ApplicationController;
+  application: ApplicationComponent;
 
   constructor($scope: IScope,
               $location: ILocationService,
@@ -693,7 +682,7 @@ class Tab {
   glyphIconClass: any;
   addNew: () => void;
 
-  constructor(public type: ClassType|KnownPredicateType, public items: () => SelectableItem[], modelController: ModelPageController) {
+  constructor(public type: ClassType|KnownPredicateType, public items: () => SelectableItem[], modelController: ModelPageComponent) {
     this.addLabel = 'Add ' + type;
     this.glyphIconClass = glyphIconClassForType([type]);
     this.addNew = () => modelController.addEntity(type);
@@ -727,7 +716,7 @@ class SelectableItem implements WithDefinedBy {
 
   hasOverlap = false;
 
-  constructor(public item: ClassListItem|PredicateListItem, private modelController: ModelPageController) {
+  constructor(public item: ClassListItem|PredicateListItem, private modelController: ModelPageComponent) {
   }
 
   get id(): Uri {

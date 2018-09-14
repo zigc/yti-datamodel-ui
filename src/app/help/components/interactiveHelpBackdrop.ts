@@ -1,13 +1,11 @@
-import { ComponentDeclaration } from 'app/utils/angular';
-import { forwardRef } from '@angular/core';
+import { LegacyComponent } from 'app/utils/angular';
 import { Notification, Story } from 'app/help/contract';
 import { assertNever, Optional } from 'yti-common-ui/utils/object';
 import { elementPositioning, Regions } from './utils';
 import { IDocumentService } from 'angular';
 import { InteractiveHelpController } from './interactiveHelpDisplay';
 
-export const InteractiveHelpBackdropComponent: ComponentDeclaration = {
-  selector: 'helpBackdrop',
+@LegacyComponent({
   bindings: {
     item: '<',
     helpController: '<'
@@ -17,11 +15,9 @@ export const InteractiveHelpBackdropComponent: ComponentDeclaration = {
         <div ng-if="$ctrl.regions" class="help-backdrop" ng-style="$ctrl.regions.right"></div>
         <div ng-if="$ctrl.regions" class="help-backdrop" ng-style="$ctrl.regions.bottom"></div>
         <div ng-if="$ctrl.regions" class="help-backdrop" ng-style="$ctrl.regions.left"></div>
-  `,
-  controller: forwardRef(() => InteractiveHelpBackdropController)
-};
-
-export class InteractiveHelpBackdropController {
+  `
+})
+export class InteractiveHelpBackdropComponent {
 
   item?: Story|Notification;
   regions: Optional<Regions>;
@@ -45,7 +41,7 @@ export class InteractiveHelpBackdropController {
   }
 
   setFullBackdrop() {
-    this.regions = InteractiveHelpBackdropController.fullBackdrop;
+    this.regions = InteractiveHelpBackdropComponent.fullBackdrop;
   }
 
   updatePosition() {
@@ -57,9 +53,9 @@ export class InteractiveHelpBackdropController {
   private resolveRegions(item: Story|Notification): Optional<Regions> {
     switch (item.type) {
       case 'story':
-        return InteractiveHelpBackdropController.calculateRegions(item, this.$document.width());
+        return InteractiveHelpBackdropComponent.calculateRegions(item, this.$document.width());
       case 'notification':
-        return InteractiveHelpBackdropController.fullBackdrop;
+        return InteractiveHelpBackdropComponent.fullBackdrop;
       default:
         return assertNever(item, 'Unknown item type');
     }
@@ -67,7 +63,7 @@ export class InteractiveHelpBackdropController {
 
   private static calculateRegions(story: Story, documentWidth: number): Optional<Regions> {
 
-    const positioning = InteractiveHelpBackdropController.calculateFocusPositioning(story);
+    const positioning = InteractiveHelpBackdropComponent.calculateFocusPositioning(story);
 
     if (!positioning) {
       return null;

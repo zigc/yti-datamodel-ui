@@ -3,12 +3,10 @@ import { Referrer, Usage } from 'app/entities/usage';
 import { LanguageContext } from 'app/types/language';
 import { groupBy } from 'yti-common-ui/utils/array';
 import { stringMapToObject } from 'yti-common-ui/utils/object';
-import { ComponentDeclaration } from 'app/utils/angular';
-import { forwardRef } from '@angular/core';
+import { LegacyComponent } from 'app/utils/angular';
 import { EditableForm } from 'app/components/form/editableEntityController';
 
-export const UsageComponent: ComponentDeclaration = {
-  selector: 'usage',
+@LegacyComponent({
   bindings: {
     usage: '=',
     exclude: '=',
@@ -18,11 +16,9 @@ export const UsageComponent: ComponentDeclaration = {
   require: {
     form: '?^form'
   },
-  template: require('./usage.html'),
-  controller: forwardRef(() => UsageController)
-};
-
-class UsageController {
+  template: require('./usage.html')
+})
+export class UsageComponent {
 
   usage: Usage;
   exclude: (referrer: Referrer) => boolean;

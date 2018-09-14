@@ -5,12 +5,10 @@ import { collectProperties } from 'yti-common-ui/utils/array';
 import { Class, ClassListItem, Constraint, ConstraintListItem } from 'app/entities/class';
 import { Model } from 'app/entities/model';
 import { ConstraintType } from 'app/types/entity';
-import { ComponentDeclaration, modalCancelHandler } from 'app/utils/angular';
+import { LegacyComponent, modalCancelHandler } from 'app/utils/angular';
 import { EditableForm } from 'app/components/form/editableEntityController';
-import { forwardRef } from '@angular/core';
 
-export const EditableConstraintComponent: ComponentDeclaration = {
-  selector: 'editableConstraint',
+@LegacyComponent({
   bindings: {
     id: '=',
     constraint: '=',
@@ -20,11 +18,9 @@ export const EditableConstraintComponent: ComponentDeclaration = {
   require: {
     form: '?^form'
   },
-  template: require('./editableConstraint.html'),
-  controller: forwardRef(() => EditableConstraintController)
-};
-
-class EditableConstraintController {
+  template: require('./editableConstraint.html')
+})
+export class EditableConstraintComponent {
 
   constraint: Constraint;
   model: Model;

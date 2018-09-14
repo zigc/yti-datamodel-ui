@@ -1,22 +1,18 @@
 import { Class } from 'app/entities/class';
 import { Predicate } from 'app/entities/predicate';
 import { Model } from 'app/entities/model';
-import { ComponentDeclaration } from 'app/utils/angular';
-import { forwardRef } from '@angular/core';
+import { LegacyComponent } from 'app/utils/angular';
 
-export const VisualizationViewComponent: ComponentDeclaration = {
-  selector: 'visualizationView',
+@LegacyComponent({
   bindings: {
     selection: '=',
     model: '=',
     modelPageActions: '=',
     maximized: '='
   },
-  template: require('./visualizationView.html'),
-  controller: forwardRef(() => VisualizationViewController)
-};
-
-export class VisualizationViewController {
+  template: require('./visualizationView.html')
+})
+export class VisualizationViewComponent {
 
   selection: Class|Predicate;
   model: Model;

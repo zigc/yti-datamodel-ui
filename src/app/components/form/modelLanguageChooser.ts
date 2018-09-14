@@ -3,19 +3,15 @@ import { gettextCatalog as GettextCatalog } from 'angular-gettext';
 import { LanguageService } from 'app/services/languageService';
 import { isLocalizationDefined } from 'app/utils/language';
 import { Language, LanguageContext } from 'app/types/language';
- import { ComponentDeclaration } from 'app/utils/angular';
-import { forwardRef } from '@angular/core';
+import { LegacyComponent } from 'app/utils/angular';
 
-export const ModelLanguageChooserComponent: ComponentDeclaration = {
-  selector: 'modelLanguageChooser',
+@LegacyComponent({
   bindings: {
     context: '='
   },
-  template: require('./modelLanguageChooser.html'),
-  controller: forwardRef(() => ModelLanguageChooserController)
-};
-
-class ModelLanguageChooserController {
+  template: require('./modelLanguageChooser.html')
+})
+export class ModelLanguageChooserComponent {
 
   context: LanguageContext;
 

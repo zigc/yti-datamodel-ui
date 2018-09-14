@@ -1,11 +1,9 @@
 import { SearchController, TextAnalysis } from 'app/types/filter';
 import { IScope } from 'angular';
 import { WithDefinedBy } from 'app/types/entity';
-import { ComponentDeclaration, ifChanged } from 'app/utils/angular';
-import { forwardRef } from '@angular/core';
+import { ifChanged, LegacyComponent } from 'app/utils/angular';
 
-export const ProfileFilterComponent: ComponentDeclaration = {
-  selector: 'profileFilter',
+@LegacyComponent({
   bindings: {
     searchController: '=',
     onlySelection: '='
@@ -17,11 +15,9 @@ export const ProfileFilterComponent: ComponentDeclaration = {
           {{'Show classes defined in profiles' | translate}}
         </label>
       </div>
-  `,
-  controller: forwardRef(() => ProfileFilterController)
-};
-
-class ProfileFilterController {
+  `
+})
+export class ProfileFilterComponent {
 
   searchController: SearchController<WithDefinedBy>;
   showProfiles = true;

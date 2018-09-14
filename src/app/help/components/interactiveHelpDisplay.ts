@@ -23,8 +23,8 @@ import {
   Positioning,
   stopEvent
 } from './utils';
-import { HelpPopoverController } from './interactiveHelpPopover';
-import { InteractiveHelpBackdropController } from './interactiveHelpBackdrop';
+import { InteractiveHelpPopoverComponent } from './interactiveHelpPopover';
+import { InteractiveHelpBackdropComponent } from './interactiveHelpBackdrop';
 
 const focusableSelector = 'a[href], area[href], input:not([disabled]), ' +
   'button:not([disabled]),select:not([disabled]), textarea:not([disabled]), ' +
@@ -85,9 +85,9 @@ export class InteractiveHelpController {
   activeIndex = 0;
   changingLocation = false;
 
-  popoverController: HelpPopoverController;
+  popoverController: InteractiveHelpPopoverComponent;
   popoverDimensionsProvider: PopoverDimensionsProvider;
-  backdropController: InteractiveHelpBackdropController;
+  backdropController: InteractiveHelpBackdropComponent;
 
   currentScrollTop?: number;
   inTransition = false;
@@ -526,7 +526,7 @@ export class InteractiveHelpController {
     return this.popoverDimensionsProvider.getDimensions();
   }
 
-  registerPopover(popover: HelpPopoverController) {
+  registerPopover(popover: InteractiveHelpPopoverComponent) {
     this.popoverController = popover;
   }
 
@@ -534,7 +534,7 @@ export class InteractiveHelpController {
     this.popoverDimensionsProvider = provider;
   }
 
-  registerBackdrop(backdrop: InteractiveHelpBackdropController) {
+  registerBackdrop(backdrop: InteractiveHelpBackdropComponent) {
 
     this.backdropController = backdrop;
 

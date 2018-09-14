@@ -1,22 +1,18 @@
 import { IScope } from 'angular';
 import { ColumnDescriptor, TableDescriptor } from 'app/components/form/editableTable';
 import { Model, Namespace, NamespaceType } from 'app/entities/model';
-import { ComponentDeclaration } from 'app/utils/angular';
-import { forwardRef } from '@angular/core';
+import { LegacyComponent } from 'app/utils/angular';
 
-export const TechnicalNamespacesComponent: ComponentDeclaration = {
-  selector: 'technicalNamespaces',
+@LegacyComponent({
   bindings: {
     model: '='
   },
   template: `
       <h4 translate>Technical namespaces</h4>
       <editable-table id="'technicalNamespaces'" descriptor="$ctrl.descriptor" expanded="$ctrl.expanded"></editable-table>
-  `,
-  controller: forwardRef(() => TechnicalNamespacesController)
-};
-
-class TechnicalNamespacesController {
+  `
+})
+export class TechnicalNamespacesComponent {
   model: Model;
   descriptor: TechnicalNamespaceTableDescriptor;
   expanded = false;

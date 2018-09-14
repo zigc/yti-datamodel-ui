@@ -5,9 +5,8 @@ import { AddEditNamespaceModal } from './addEditNamespaceModal';
 import { SearchNamespaceModal } from './searchNamespaceModal';
 import { combineExclusions } from 'app/utils/exclusion';
 import { ImportedNamespace, NamespaceType } from 'app/entities/model';
-import { ComponentDeclaration, modalCancelHandler } from 'app/utils/angular';
+import { LegacyComponent, modalCancelHandler } from 'app/utils/angular';
 import { LanguageContext } from 'app/types/language';
-import { forwardRef } from '@angular/core';
 import { EditableForm } from 'app/components/form/editableEntityController';
 
 interface WithImportedNamespaces {
@@ -16,8 +15,7 @@ interface WithImportedNamespaces {
   removeImportedNamespace(namespace: ImportedNamespace): void;
 }
 
-export const ImportedNamespacesViewComponent: ComponentDeclaration = {
-  selector: 'importedNamespacesView',
+@LegacyComponent({
   bindings: {
     value: '=',
     context: '=',
@@ -35,11 +33,9 @@ export const ImportedNamespacesViewComponent: ComponentDeclaration = {
         </button>
       </h4>
       <editable-table id="'importedNamespaces'" descriptor="$ctrl.descriptor" expanded="$ctrl.expanded"></editable-table>
-  `,
-  controller: forwardRef(() => ImportedNamespacesViewController)
-};
-
-class ImportedNamespacesViewController {
+  `
+})
+export class ImportedNamespacesViewComponent {
 
   value: WithImportedNamespaces;
   allowProfiles: boolean;

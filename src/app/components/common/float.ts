@@ -1,31 +1,18 @@
 import { IScope } from 'angular';
 import { InteractiveHelpService } from 'app/help/services/interactiveHelpService';
 import { NgZone } from '@angular/core';
-import { DirectiveDeclaration } from 'app/utils/angular';
+import { LegacyDirective } from 'app/utils/angular';
 
-interface Position {
-  left: number;
-  top: number;
-}
-
-export const FloatDirective: DirectiveDeclaration = {
-
-  selector: 'float',
-  factory() {
-    return {
-      restrict: 'A',
-      bindToController: {
-        float: '@',
-        snap: '@',
-        always: '@',
-        width: '@'
-      },
-      controller: FloatController,
-    };
+@LegacyDirective({
+  restrict: 'A',
+  bindToController: {
+    float: '@',
+    snap: '@',
+    always: '@',
+    width: '@'
   }
-};
-
-export class FloatController {
+})
+export class FloatDirective {
 
   float: string;
   snap: string;
@@ -34,7 +21,11 @@ export class FloatController {
 
   placeholder: JQuery;
 
-  elementStaticPosition: Position;
+  elementStaticPosition: {
+    left: number;
+    top: number;
+  };
+
   floating = false;
   enabled = true;
 

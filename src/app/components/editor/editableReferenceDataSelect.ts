@@ -8,11 +8,9 @@ import { collectProperties, remove } from 'yti-common-ui/utils/array';
 import { createExistsExclusion } from 'app/utils/exclusion';
 import { ReferenceData } from 'app/entities/referenceData';
 import { Model } from 'app/entities/model';
-import { ComponentDeclaration, modalCancelHandler } from 'app/utils/angular';
-import { forwardRef } from '@angular/core';
+import { LegacyComponent, modalCancelHandler } from 'app/utils/angular';
 
-export const EditableReferenceDataSelectComponent: ComponentDeclaration = {
-  selector: 'editableReferenceDataSelect',
+@LegacyComponent({
   bindings: {
     referenceData: '=',
     model: '='
@@ -20,11 +18,9 @@ export const EditableReferenceDataSelectComponent: ComponentDeclaration = {
   require: {
     form: '?^form'
   },
-  template: require('./editableReferenceDataSelect.html'),
-  controller: forwardRef(() => EditableReferenceDataSelectController)
-};
-
-class EditableReferenceDataSelectController {
+  template: require('./editableReferenceDataSelect.html')
+})
+export class EditableReferenceDataSelectComponent {
 
   referenceData: ReferenceData[];
   model: Model;

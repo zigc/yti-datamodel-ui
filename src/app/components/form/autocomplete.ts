@@ -1,15 +1,13 @@
 import { IModelFormatter, INgModelController, IQService, IScope } from 'angular';
 import { isDefined } from 'yti-common-ui/utils/object';
 import { arrowDown, arrowUp, enter, esc, pageDown, pageUp, tab } from 'yti-common-ui/utils/key-code';
-import { ComponentDeclaration, formatWithFormatters } from 'app/utils/angular';
+import { formatWithFormatters, LegacyComponent } from 'app/utils/angular';
 import { DataSource } from './dataSource';
 import { InputWithPopupController } from './inputPopup';
 import { limit } from 'yti-common-ui/utils/array';
-import { forwardRef } from '@angular/core';
 
 // TODO: similarities with iowSelect
-export const AutocompleteComponent: ComponentDeclaration = {
-  selector: 'autocomplete',
+@LegacyComponent({
   bindings: {
     datasource: '=',
     matcher: '=',
@@ -22,12 +20,9 @@ export const AutocompleteComponent: ComponentDeclaration = {
   template: `
       <ng-transclude></ng-transclude>
       <input-popup ctrl="$ctrl"><span class="content">{{::$ctrl.format(match)}}</span></input-popup>
-  `,
-  controller: forwardRef(() => AutocompleteController)
-};
-
-
-export class AutocompleteController<T> implements InputWithPopupController<T> {
+  `
+})
+export class AutocompleteComponent<T> implements InputWithPopupController<T> {
 
   datasource: DataSource<T>;
   matcher: (search: string, item: T) => boolean;

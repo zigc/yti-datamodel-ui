@@ -1,28 +1,24 @@
-import { IAttributes, IParseService, IScope } from 'angular';
-import { DirectiveDeclaration } from 'app/utils/angular';
+import { IAttributes, IDirectiveFactory, IParseService, IScope } from 'angular';
 
 interface ContextMenuAttributes extends IAttributes {
   ngContextMenu: string;
 }
 
-export const ContextMenuDirective: DirectiveDeclaration = {
-  selector: 'ngContextMenu',
-  factory($parse: IParseService) {
-    'ngInject';
-    return {
-      link(scope: IScope, element: JQuery, attrs: ContextMenuAttributes) {
+export const ContextMenuDirective: IDirectiveFactory = ($parse: IParseService) => {
+  'ngInject';
+  return {
+    link(scope: IScope, element: JQuery, attrs: ContextMenuAttributes) {
 
-        const fn = $parse(attrs.ngContextMenu);
+      const fn = $parse(attrs.ngContextMenu);
 
-        element.on('contextmenu', e => {
+      element.on('contextmenu', e => {
 
-          e.preventDefault();
+        e.preventDefault();
 
-          scope.$apply(() => {
-            fn(scope, {$event: e});
-          });
+        scope.$apply(() => {
+          fn(scope, {$event: e});
         });
-      }
-    };
-  }
+      });
+    }
+  };
 };

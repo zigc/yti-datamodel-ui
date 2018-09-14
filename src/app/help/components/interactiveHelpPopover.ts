@@ -1,13 +1,11 @@
-import { ComponentDeclaration } from 'app/utils/angular';
-import { forwardRef } from '@angular/core';
+import { LegacyComponent } from 'app/utils/angular';
 import { Notification, Story } from 'app/help/contract';
 import { assertNever, Optional, requireDefined } from 'yti-common-ui/utils/object';
 import { IDocumentService, IScope } from 'angular';
 import { arrowHeight, Dimensions, elementPositioning, isInWindow, isVisible, popupAnimationTimeInMs, Positioning, resolveArrowClass } from './utils';
 import { InteractiveHelpController } from './interactiveHelpDisplay';
 
-export const InteractiveHelpPopoverComponent: ComponentDeclaration = {
-  selector: 'helpPopover',
+@LegacyComponent({
   bindings: {
     item: '<',
     helpController: '<'
@@ -36,11 +34,9 @@ export const InteractiveHelpPopoverComponent: ComponentDeclaration = {
                   
           <a ng-click="$ctrl.helpController.close(true)" class="help-close">&times;</a>
         </div>
-    `,
-  controller: forwardRef(() => HelpPopoverController)
-};
-
-export class HelpPopoverController {
+  `
+})
+export class InteractiveHelpPopoverComponent {
 
   helpController: InteractiveHelpController;
 
@@ -97,16 +93,16 @@ export class HelpPopoverController {
 
     switch (item.type) {
       case 'story':
-        return HelpPopoverController.calculateStoryPositioning(item, popoverDimensions, documentDimensions);
+        return InteractiveHelpPopoverComponent.calculateStoryPositioning(item, popoverDimensions, documentDimensions);
       case 'notification':
-        return HelpPopoverController.calculateNotificationPositioning(popoverDimensions);
+        return InteractiveHelpPopoverComponent.calculateNotificationPositioning(popoverDimensions);
       default:
         return assertNever(item, 'Unknown item type');
     }
   }
 
   private static calculateNotificationPositioning(popoverDimensions: Dimensions): Positioning {
-    return HelpPopoverController.calculateCenterPositioning(popoverDimensions);
+    return InteractiveHelpPopoverComponent.calculateCenterPositioning(popoverDimensions);
   }
 
   private static calculateCenterPositioning(popoverDimensions: Dimensions) {

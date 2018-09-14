@@ -3,21 +3,17 @@ import { UsageService } from 'app/services/usageService';
 import { EditableEntity } from 'app/types/entity';
 import { LanguageContext } from 'app/types/language';
 import { Usage } from 'app/entities/usage';
-import { ComponentDeclaration } from 'app/utils/angular';
-import { forwardRef } from '@angular/core';
+import { LegacyComponent } from 'app/utils/angular';
 
-export const UsagePanelComponent: ComponentDeclaration = {
-  selector: 'usagePanel',
+@LegacyComponent({
   bindings: {
     id: '=',
     entity: '=',
     context: '='
   },
-  template: require('./usagePanel.html'),
-  controller: forwardRef(() => UsagePanelController)
-};
-
-class UsagePanelController {
+  template: require('./usagePanel.html')
+})
+export class UsagePanelComponent {
 
   entity: EditableEntity;
   context: LanguageContext;

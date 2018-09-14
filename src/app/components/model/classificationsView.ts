@@ -6,8 +6,7 @@ import { collectProperties } from 'yti-common-ui/utils/array';
 import { EditableForm } from 'app/components/form/editableEntityController';
 import { Classification } from 'app/entities/classification';
 import { SearchClassificationModal } from './searchClassificationModal';
-import { ComponentDeclaration, modalCancelHandler } from 'app/utils/angular';
-import { forwardRef } from '@angular/core';
+import { LegacyComponent, modalCancelHandler } from 'app/utils/angular';
 
 interface WithClassifications {
   classifications: Classification[];
@@ -15,8 +14,7 @@ interface WithClassifications {
   removeClassification(classification: Classification): void;
 }
 
-export const ClassificationsViewComponent: ComponentDeclaration = {
-  selector: 'classificationsView',
+@LegacyComponent({
   bindings: {
     value: '='
   },
@@ -31,11 +29,9 @@ export const ClassificationsViewComponent: ComponentDeclaration = {
         </button>
       </h4>
       <editable-table id="'classifications'" descriptor="$ctrl.descriptor" expanded="$ctrl.expanded"></editable-table>
-  `,
-  controller: forwardRef(() => ClassificationsViewController)
-};
-
-class ClassificationsViewController {
+  `
+})
+export class ClassificationsViewComponent {
 
   value: WithClassifications;
 

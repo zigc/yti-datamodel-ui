@@ -1,7 +1,6 @@
-import { ComponentDeclaration } from 'app/utils/angular';
+import { LegacyComponent } from 'app/utils/angular';
 
-export const NonEditableVocabularyComponent: ComponentDeclaration = {
-  selector: 'nonEditableVocabulary',
+@LegacyComponent({
   bindings: {
     vocabulary: '=',
     context: '=',
@@ -15,4 +14,6 @@ export const NonEditableVocabularyComponent: ComponentDeclaration = {
         <a ng-if="link" ng-href="{{link}}">{{$ctrl.vocabulary.title | translateValue: $ctrl.context}}</a>       
       </div>
     `
-};
+})
+export class NonEditableVocabularyComponent {
+}

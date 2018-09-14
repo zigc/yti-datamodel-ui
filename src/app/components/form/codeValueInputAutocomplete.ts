@@ -2,11 +2,9 @@ import { ReferenceDataService } from 'app/services/referenceDataService';
 import { LanguageService, Localizer } from 'app/services/languageService';
 import { ReferenceData, ReferenceDataCode } from 'app/entities/referenceData';
 import { LanguageContext } from 'app/types/language';
- import { ComponentDeclaration } from 'app/utils/angular';
-import { forwardRef } from '@angular/core';
+import { LegacyComponent } from 'app/utils/angular';
 
-export const CodeValueInputAutocompleteComponent: ComponentDeclaration = {
-  selector: 'codeValueInputAutocomplete',
+@LegacyComponent({
   bindings: {
     referenceData: '=',
     context: '='
@@ -16,11 +14,9 @@ export const CodeValueInputAutocompleteComponent: ComponentDeclaration = {
       <autocomplete datasource="$ctrl.datasource" matcher="$ctrl.matcher" value-extractor="$ctrl.valueExtractor" formatter="$ctrl.formatter">
         <ng-transclude></ng-transclude>
       </autocomplete>
-  `,
-  controller: forwardRef(() => CodeValueInputAutocompleteController)
-};
-
-export class CodeValueInputAutocompleteController {
+  `
+})
+export class CodeValueInputAutocompleteComponent {
 
   referenceData: ReferenceData[];
   context: LanguageContext;

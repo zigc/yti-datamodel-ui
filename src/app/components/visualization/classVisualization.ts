@@ -15,7 +15,7 @@ import { PaperHolder } from './paperHolder';
 import { centerToElement, focusElement, moveOrigin, scale, scaleToFit } from './paperUtil';
 import { adjustElementLinks, calculateLabelPosition, layoutGraph, VertexAction } from './layout';
 import { Localizer } from 'app/types/language';
-import { ComponentDeclaration, ifChanged, modalCancelHandler } from 'app/utils/angular';
+import { ifChanged, LegacyComponent, modalCancelHandler } from 'app/utils/angular';
 import { centerToPosition, coordinatesAreEqual, copyVertices } from 'app/utils/entity';
 import { mapOptional, Optional, requireDefined } from 'yti-common-ui/utils/object';
 import { Class, Property } from 'app/entities/class';
@@ -27,10 +27,9 @@ import * as moment from 'moment';
 import { ContextMenuTarget } from './contextMenu';
 import { ModelPageActions } from 'app/components/model/modelPage';
 import { AuthorizationManagerService } from 'app/services/authorizationManagerService';
-import { forwardRef, NgZone } from '@angular/core';
+import { NgZone } from '@angular/core';
 
-export const ClassVisualizationComponent: ComponentDeclaration = {
-  selector: 'classVisualization',
+@LegacyComponent({
   bindings: {
     selection: '=',
     model: '=',
@@ -151,12 +150,9 @@ export const ClassVisualizationComponent: ComponentDeclaration = {
                                  model-page-actions="$ctrl.modelPageActions"></visualization-context-menu>
                                  
      <ajax-loading-indicator ng-if="$ctrl.loading"></ajax-loading-indicator>
-    `,
-  controller: forwardRef(() => ClassVisualizationController)
-
-};
-
-class ClassVisualizationController implements ChangeListener<Class|Predicate>, ClassInteractionListener {
+  `
+})
+export class ClassVisualizationComponent implements ChangeListener<Class|Predicate>, ClassInteractionListener {
 
   selection: Class|Predicate;
 

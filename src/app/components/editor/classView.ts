@@ -5,16 +5,14 @@ import { SearchPredicateModal } from './searchPredicateModal';
 import { UserService } from 'app/services/userService';
 import { DeleteConfirmationModal } from 'app/components/common/deleteConfirmationModal';
 import { ErrorModal } from 'app/components/form/errorModal';
-import { ComponentDeclaration, modalCancelHandler } from 'app/utils/angular';
+import { LegacyComponent, modalCancelHandler } from 'app/utils/angular';
 import { Class } from 'app/entities/class';
 import { Model } from 'app/entities/model';
 import { LanguageContext } from 'app/types/language';
 import { ModelControllerService } from 'app/components/model/modelControllerService';
 import { AuthorizationManagerService } from 'app/services/authorizationManagerService';
-import { forwardRef } from '@angular/core';
 
-export const ClassViewComponent: ComponentDeclaration = {
-  selector: 'classView',
+@LegacyComponent({
   bindings: {
     id: '=',
     class: '=',
@@ -22,11 +20,9 @@ export const ClassViewComponent: ComponentDeclaration = {
     modelController: '=',
     openPropertyId: '='
   },
-  template: require('./classView.html'),
-  controller: forwardRef(() => ClassViewController)
-};
-
-export class ClassViewController extends EditableEntityController<Class> {
+  template: require('./classView.html')
+})
+export class ClassViewComponent extends EditableEntityController<Class> {
 
   class: Class;
   model: Model;

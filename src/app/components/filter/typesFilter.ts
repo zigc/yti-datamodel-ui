@@ -2,11 +2,9 @@ import { SearchController, TextAnalysis } from 'app/types/filter';
 import { IScope } from 'angular';
 import { Type, WithIdAndType } from 'app/types/entity';
 import { containsAny } from 'yti-common-ui/utils/array';
-import { ComponentDeclaration, ifChanged } from 'app/utils/angular';
-import { forwardRef } from '@angular/core';
+import { ifChanged, LegacyComponent } from 'app/utils/angular';
 
-export const TypesFilterComponent: ComponentDeclaration = {
-  selector: 'typesFilter',
+@LegacyComponent({
   bindings: {
     searchController: '='
   },
@@ -16,11 +14,9 @@ export const TypesFilterComponent: ComponentDeclaration = {
           <input class="form-check-input" type="checkbox" checklist-model="$ctrl.searchTypes" checklist-value="type" /> {{type | translate}}
         </label>
       </div>
-  `,
-  controller: forwardRef(() => TypesFilterController)
-};
-
-class TypesFilterController {
+  `
+})
+export class TypesFilterComponent {
 
   searchController: SearchController<WithIdAndType>;
 

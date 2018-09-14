@@ -2,23 +2,19 @@ import { SearchConceptModal } from './searchConceptModal';
 import { Class } from 'app/entities/class';
 import { Predicate } from 'app/entities/predicate';
 import { Model } from 'app/entities/model';
-import { ComponentDeclaration, modalCancelHandler } from 'app/utils/angular';
+import { LegacyComponent, modalCancelHandler } from 'app/utils/angular';
 import { ConfigService } from 'app/services/configService';
 import { Config } from 'app/entities/config';
-import { forwardRef } from '@angular/core';
 
-export const SubjectViewComponent: ComponentDeclaration = {
-  selector: 'subjectView',
+@LegacyComponent({
   bindings: {
     entity: '=',
     model: '=',
     isEditing: '='
   },
-  template: require('./subjectView.html'),
-  controller: forwardRef(() => SubjectViewController)
-};
-
-class SubjectViewController {
+  template: require('./subjectView.html')
+})
+export class SubjectViewComponent {
 
   entity: Class|Predicate;
   model: Model;

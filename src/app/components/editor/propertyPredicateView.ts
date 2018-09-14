@@ -3,18 +3,16 @@ import { Uri } from 'app/entities/uri';
 import { PredicateService } from 'app/services/predicateService';
 import { SearchPredicateModal } from './searchPredicateModal';
 import { createDefinedByExclusion } from 'app/utils/exclusion';
-import { ClassFormController } from './classForm';
+import { ClassFormComponent } from './classForm';
 import { anyMatching } from 'yti-common-ui/utils/array';
 import { CopyPredicateModal } from './copyPredicateModal';
 import { requireDefined } from 'yti-common-ui/utils/object';
 import { Property } from 'app/entities/class';
 import { Model } from 'app/entities/model';
 import { Association, Attribute, Predicate } from 'app/entities/predicate';
-import { ComponentDeclaration, modalCancelHandler } from 'app/utils/angular';
-import { forwardRef } from '@angular/core';
+import { LegacyComponent, modalCancelHandler } from 'app/utils/angular';
 
-export const PropertyPredicateViewComponent: ComponentDeclaration = {
-  selector: 'propertyPredicateView',
+@LegacyComponent({
   bindings: {
     property: '=',
     model: '='
@@ -22,12 +20,9 @@ export const PropertyPredicateViewComponent: ComponentDeclaration = {
   require: {
     classForm: '^classForm'
   },
-  template: require('./propertyPredicateView.html'),
-  controller: forwardRef(() => PropertyPredicateViewController)
-};
-
-
-class PropertyPredicateViewController {
+  template: require('./propertyPredicateView.html')
+})
+export class PropertyPredicateViewComponent {
 
   loading: boolean;
   property: Property;
@@ -35,7 +30,7 @@ class PropertyPredicateViewController {
   predicate: Predicate|null;
   changeActions: { name: string, apply: () => void }[] = [];
 
-  classForm: ClassFormController;
+  classForm: ClassFormComponent;
 
   constructor(private $scope: IScope,
               private predicateService: PredicateService,

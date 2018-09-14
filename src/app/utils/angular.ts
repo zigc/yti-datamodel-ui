@@ -1,48 +1,41 @@
 import {
-  FilterFactory,
-  IComponentOptions, IControllerConstructor, IDirective, IDirectiveFactory, ILocationService, IModelFormatter, IModule, INgModelController,
-  IPromise, IQService
+  IComponentOptions,
+  IControllerConstructor,
+  IDirective,
+  IDirectiveFactory,
+  ILocationService,
+  IModelFormatter,
+  INgModelController,
+  IPromise,
+  IQService
 } from 'angular';
 import { AsyncValidator, Validator } from 'app/components/form/validators';
 import { allMatching, normalizeAsArray } from 'yti-common-ui/utils/array';
-import { valuesExcludingKeys } from 'yti-common-ui/utils/object';
-import { resolveForwardRef } from '@angular/core';
+import { requireDefined, valuesExcludingKeys } from 'yti-common-ui/utils/object';
 
-export interface ComponentDeclaration extends IComponentOptions {
-  selector: string;
-  controller?: IControllerConstructor;
+const legacyComponentOptions = new Map<IControllerConstructor, IComponentOptions>();
+const legacyDirectiveOptions = new Map<IControllerConstructor, IDirective>();
+
+export function LegacyComponent(options: IComponentOptions) {
+  return function (constructor: IControllerConstructor) {
+    legacyComponentOptions.set(constructor, options);
+  }
 }
 
-export interface DirectiveDeclaration {
-  selector: string;
-  factory: IDirectiveFactory;
+export function LegacyDirective(options: IDirective) {
+  return function (constructor: IControllerConstructor) {
+    legacyDirectiveOptions.set(constructor, options);
+  }
 }
 
-export interface FilterDeclaration {
-  name: string;
-  factory: FilterFactory;
+export function componentDeclaration<T extends IControllerConstructor>(constructor: T): IComponentOptions {
+  const options = requireDefined(legacyComponentOptions.get(constructor));
+  return { ...options, controller: constructor };
 }
 
-export function registerComponent(module: IModule, componentDeclaration: ComponentDeclaration) {
-
-  const { selector, controller, ...options } = componentDeclaration;
-  const resolvedController = resolveForwardRef(controller);
-
-  module.component(selector, Object.assign({}, options, resolvedController ? { controller: resolvedController} : {}));
-}
-
-export function registerDirective(module: IModule, directiveDeclaration: DirectiveDeclaration) {
-
-  const { selector, factory } = directiveDeclaration;
-
-  module.directive(selector, factory);
-}
-
-export function registerFilter(module: IModule, filterDeclaration: FilterDeclaration) {
-
-  const { name, factory } = filterDeclaration;
-
-  module.filter(name, factory);
+export function directiveDeclaration<T extends IControllerConstructor>(constructor: T): IDirectiveFactory {
+  const options = requireDefined(legacyDirectiveOptions.get(constructor));
+  return () => ({ ...options, controller: constructor });
 }
 
 export function hasFixedPositioningParent(e: JQuery) {

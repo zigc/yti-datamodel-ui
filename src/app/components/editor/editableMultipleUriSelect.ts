@@ -12,11 +12,11 @@ import { ClassListItem } from 'app/entities/class';
 import { PredicateListItem } from 'app/entities/predicate';
 import { ClassType, KnownPredicateType } from 'app/types/entity';
 import { Model } from 'app/entities/model';
-import { ComponentDeclaration, modalCancelHandler } from 'app/utils/angular';
-import { forwardRef } from '@angular/core';
+import { LegacyComponent, modalCancelHandler } from 'app/utils/angular';
 
-export const EditableMultipleUriSelectComponent: ComponentDeclaration = {
-  selector: 'editableMultipleUriSelect',
+type DataType = ClassListItem|PredicateListItem;
+
+@LegacyComponent({
   bindings: {
     ngModel: '=',
     type: '@',
@@ -54,13 +54,9 @@ export const EditableMultipleUriSelectComponent: ComponentDeclaration = {
         </button-container>
 
       </editable-multiple>
-  `,
-  controller: forwardRef(() => EditableMultipleUriSelectController)
-};
-
-type DataType = ClassListItem|PredicateListItem;
-
-class EditableMultipleUriSelectController {
+  `
+})
+export class EditableMultipleUriSelectComponent {
 
   ngModel: Uri[];
   input: Uri;

@@ -1,8 +1,6 @@
-import { ComponentDeclaration } from 'app/utils/angular';
-import { forwardRef } from '@angular/core';
+import { LegacyComponent } from 'app/utils/angular';
 
-export const SelectionViewComponent: ComponentDeclaration = {
-  selector: 'selectionView',
+@LegacyComponent({
   bindings: {
     editableController: '=',
     model: '='
@@ -11,9 +9,7 @@ export const SelectionViewComponent: ComponentDeclaration = {
     'content': 'selectionContent',
     'buttons': '?selectionButtons'
   },
-  template: require('./selectionView.html'),
-  controller: forwardRef(() => SelectionViewController)
-};
-
-class SelectionViewController {
+  template: require('./selectionView.html')
+})
+export class SelectionViewComponent {
 }

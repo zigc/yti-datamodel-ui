@@ -1,22 +1,18 @@
-import { ISCEService, IScope } from 'angular';
+import { FilterFactory, ISCEService, IScope } from 'angular';
 import { LanguageService } from 'app/services/languageService';
 import { Language, LanguageContext } from 'app/types/language';
 import { Localizable } from 'yti-common-ui/types/localization';
-import { ComponentDeclaration, FilterDeclaration } from 'app/utils/angular';
-import { forwardRef } from '@angular/core';
+import { LegacyComponent } from 'app/utils/angular';
 
-export const HighlightComponent: ComponentDeclaration = {
-  selector: 'highlight',
+@LegacyComponent({
   bindings: {
     text: '<',
     search: '<',
     context: '='
   },
   template: '<span ng-bind-html="$ctrl.localizedText | highlight: $ctrl.search"></span>',
-  controller: forwardRef(() => HighlightController)
-};
-
-class HighlightController {
+})
+export class HighlightComponent {
 
   text: Localizable;
   search: string;
@@ -98,15 +94,12 @@ class HighlightController {
   }
 }
 
-export const HighlightFilter: FilterDeclaration = {
-  name: 'highlight',
-  factory($sce: ISCEService) {
-    'ngInject';
-    return (text: string, search: string) => {
-      const highlightedText = applyHighlight(text, search);
-      return $sce.trustAsHtml(highlightedText);
-    };
-  }
+export const HighlightFilter: FilterFactory = ($sce: ISCEService) => {
+  'ngInject';
+  return (text: string, search: string) => {
+    const highlightedText = applyHighlight(text, search);
+    return $sce.trustAsHtml(highlightedText);
+  };
 };
 
 function applyHighlight(text: string, search: string): string {

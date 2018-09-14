@@ -8,21 +8,17 @@ import { Model } from 'app/entities/model';
 import { LanguageContext } from 'app/types/language';
 import { ModelControllerService } from './modelControllerService';
 import { AuthorizationManagerService } from 'app/services/authorizationManagerService';
- import { ComponentDeclaration } from 'app/utils/angular';
-import { forwardRef } from '@angular/core';
+import { LegacyComponent } from 'app/utils/angular';
 
-export const ModelViewComponent: ComponentDeclaration = {
-  selector: 'modelView',
+@LegacyComponent({
   bindings: {
     id: '=',
     model: '=',
     modelController: '='
   },
-  template: require('./modelView.html'),
-  controller: forwardRef(() => ModelViewController)
-};
-
-export class ModelViewController extends EditableEntityController<Model> {
+  template: require('./modelView.html')
+})
+export class ModelViewComponent extends EditableEntityController<Model> {
 
   visible = false;
   model: Model;

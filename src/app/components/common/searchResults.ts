@@ -1,12 +1,11 @@
-import { IAttributes, ICompiledExpression, IScope, ITranscludeFunction } from 'angular';
+import { IAttributes, ICompiledExpression, IDirectiveFactory, IScope, ITranscludeFunction } from 'angular';
 import { gettextCatalog as GettextCatalog } from 'angular-gettext';
 import { ConfirmationModal } from './confirmationModal';
 import { Uri } from 'app/entities/uri';
 import { Exclusion } from 'app/utils/exclusion';
 import { WithId } from 'app/types/entity';
-import { ComponentDeclaration, DirectiveDeclaration, modalCancelHandler } from 'app/utils/angular';
+import { LegacyComponent, modalCancelHandler } from 'app/utils/angular';
 import { labelNameToResourceIdIdentifier } from 'yti-common-ui/utils/resource';
-import { forwardRef } from '@angular/core';
 
 export abstract class AddNew {
 
@@ -45,8 +44,7 @@ class SearchResult<T extends WithId> {
   }
 }
 
-export const SearchResultsComponent: ComponentDeclaration = {
-  selector: 'searchResults',
+@LegacyComponent({
   bindings: {
     items: '=',
     selected: '=',
@@ -55,11 +53,9 @@ export const SearchResultsComponent: ComponentDeclaration = {
     editInProgress: '='
   },
   transclude: true,
-  template: require('./searchResults.html'),
-  controller: forwardRef(() => SearchResultsController)
-};
-
-class SearchResultsController<T extends WithId> {
+  template: require('./searchResults.html')
+})
+export class SearchResultsComponent<T extends WithId> {
 
   items: (T|AddNew)[];
   exclude: Exclusion<T>;
@@ -135,16 +131,13 @@ interface SearchResultScope extends IScope {
   searchResult: SearchResult<any>;
 }
 
-export const SearchResultTranscludeDirective: DirectiveDeclaration = {
-  selector: 'searchResultTransclude',
-  factory() {
-    return {
-      link($scope: SearchResultScope, element: JQuery, _attribute: IAttributes, _ctrl: any, transclude: ITranscludeFunction) {
-        transclude((clone, transclusionScope) => {
-          (transclusionScope as SearchResultScope).searchResult = $scope.searchResult.item;
-          element.append(clone!);
-        });
-      }
-    };
-  }
+export const SearchResultTranscludeDirective: IDirectiveFactory = () => {
+  return {
+    link($scope: SearchResultScope, element: JQuery, _attribute: IAttributes, _ctrl: any, transclude: ITranscludeFunction) {
+      transclude((clone, transclusionScope) => {
+        (transclusionScope as SearchResultScope).searchResult = $scope.searchResult.item;
+        element.append(clone!);
+      });
+    }
+  };
 };

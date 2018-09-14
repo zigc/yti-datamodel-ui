@@ -1,10 +1,8 @@
 import { ContentExtractor, ContentMatcher, SearchController } from 'app/types/filter';
 import { IScope } from 'angular';
-import { ComponentDeclaration, ifChanged } from 'app/utils/angular';
-import { forwardRef } from '@angular/core';
+import { ifChanged, LegacyComponent } from 'app/utils/angular';
 
-export const ContentFilterComponent: ComponentDeclaration = {
-  selector: 'contentFilter',
+@LegacyComponent({
   bindings: {
     searchController: '=',
     contentMatchers: '=',
@@ -17,11 +15,9 @@ export const ContentFilterComponent: ComponentDeclaration = {
           {{matcher.name | translate}}
         </label>              
       </div>
-  `,
-  controller: forwardRef(() => ContentFilterController)
-};
-
-class ContentFilterController<T> {
+  `
+})
+export class ContentFilterComponent<T> {
 
   searchController: SearchController<T>;
   contentMatchers: ContentMatcher<T>[];

@@ -1,10 +1,10 @@
-import { IAttributes, INgModelController, IQService, IScope } from 'angular';
+import { IAttributes, IDirectiveFactory, INgModelController, IQService, IScope } from 'angular';
 import { ValidatorService } from 'app/services/validatorService';
 import { isValidClassIdentifier, isValidIdentifier, isValidLabelLength, isValidPredicateIdentifier } from './validators';
 import { Uri } from 'app/entities/uri';
 import { Class } from 'app/entities/class';
 import { Predicate } from 'app/entities/predicate';
-import { DirectiveDeclaration, extendNgModelOptions } from 'app/utils/angular';
+import { extendNgModelOptions } from 'app/utils/angular';
 
 interface IdInputAttributes extends IAttributes {
   idInput: 'class' | 'predicate';
@@ -14,70 +14,68 @@ interface IdInputScope extends IScope {
   old: Class|Predicate;
 }
 
-export const IdInputDirective: DirectiveDeclaration = {
-  selector: 'idInput',
-  factory($q: IQService, validatorService: ValidatorService) {
-    'ngInject';
-    return {
-      scope: {
-        old: '='
-      },
-      restrict: 'A',
-      require: 'ngModel',
-      link($scope: IdInputScope, _element: JQuery, attributes: IdInputAttributes, modelController: INgModelController) {
-        let previous: Uri|null = null;
+export const IdInputDirective: IDirectiveFactory = ($q: IQService,
+                                                    validatorService: ValidatorService) => {
+  'ngInject';
+  return {
+    scope: {
+      old: '='
+    },
+    restrict: 'A',
+    require: 'ngModel',
+    link($scope: IdInputScope, _element: JQuery, attributes: IdInputAttributes, modelController: INgModelController) {
+      let previous: Uri|null = null;
 
-        extendNgModelOptions(modelController, {
-          updateOnDefault: true,
-          updateOn: 'blur default',
-          debounce: {
-            'blur': 0,
-            'default': 1000
-          }
-        });
+      extendNgModelOptions(modelController, {
+        updateOnDefault: true,
+        updateOn: 'blur default',
+        debounce: {
+          'blur': 0,
+          'default': 1000
+        }
+      });
 
-        modelController.$parsers.push((value: string) => {
-          // doesn't handle scenario without initial Uri
-          return previous ? previous.withName(value) : null;
-        });
+      modelController.$parsers.push((value: string) => {
+        // doesn't handle scenario without initial Uri
+        return previous ? previous.withName(value) : null;
+      });
 
-        modelController.$formatters.push((value: Uri) => {
-          if (value) {
-            previous = value;
-            return value.name;
-          } else {
-            return undefined;
-          }
-        });
+      modelController.$formatters.push((value: Uri) => {
+        if (value) {
+          previous = value;
+          return value.name;
+        } else {
+          return undefined;
+        }
+      });
 
-        modelController.$asyncValidators['existingId'] = (modelValue: Uri) => {
-          if ($scope.old.unsaved || $scope.old.id.notEquals(modelValue)) {
-            if (attributes.idInput === 'class') {
-              return validatorService.classDoesNotExist(modelValue);
-            } else if (attributes.idInput === 'predicate') {
-              return validatorService.predicateDoesNotExist(modelValue);
-            } else {
-              throw new Error('Unknown type: ' + attributes.idInput);
-            }
-          } else {
-            return $q.when(true);
-          }
-        };
-
-        modelController.$validators['id'] = value => {
+      modelController.$asyncValidators['existingId'] = (modelValue: Uri) => {
+        if ($scope.old.unsaved || $scope.old.id.notEquals(modelValue)) {
           if (attributes.idInput === 'class') {
-            return value && isValidClassIdentifier(value.name, attributes.idInput);
+            return validatorService.classDoesNotExist(modelValue);
           } else if (attributes.idInput === 'predicate') {
-            return value && isValidPredicateIdentifier(value.name, attributes.idInput);
+            return validatorService.predicateDoesNotExist(modelValue);
           } else {
-            return value && isValidIdentifier(value.name, attributes.idInput);
+            throw new Error('Unknown type: ' + attributes.idInput);
           }
-        };
+        } else {
+          return $q.when(true);
+        }
+      };
 
-        modelController.$validators['length'] = value => {
-          return value && isValidLabelLength(value.name);
-        };
-      }
-    };
-  }
+      modelController.$validators['id'] = value => {
+        if (attributes.idInput === 'class') {
+          return value && isValidClassIdentifier(value.name, attributes.idInput);
+        } else if (attributes.idInput === 'predicate') {
+          return value && isValidPredicateIdentifier(value.name, attributes.idInput);
+        } else {
+          return value && isValidIdentifier(value.name, attributes.idInput);
+        }
+      };
+
+      modelController.$validators['length'] = value => {
+        return value && isValidLabelLength(value.name);
+      };
+    }
+  };
 };

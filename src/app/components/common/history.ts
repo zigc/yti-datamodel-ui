@@ -2,11 +2,9 @@ import { HistoryModal } from './historyModal';
 import { Model } from 'app/entities/model';
 import { Class } from 'app/entities/class';
 import { Predicate } from 'app/entities/predicate';
-import { ComponentDeclaration } from 'app/utils/angular';
-import { forwardRef } from '@angular/core';
+import { LegacyComponent } from 'app/utils/angular';
 
-export const HistoryComponent: ComponentDeclaration = {
-  selector: 'history',
+@LegacyComponent({
   bindings: {
     model: '=',
     resource: '='
@@ -15,11 +13,9 @@ export const HistoryComponent: ComponentDeclaration = {
       <button type="button" class="btn btn-secondary-action pull-right" ng-click="$ctrl.openHistory()">
         <span translate>Show history</span>
       </button>
-  `,
-  controller: forwardRef(() => HistoryController)
-};
-
-class HistoryController {
+  `
+})
+export class HistoryComponent {
 
   model: Model;
   resource: Class|Predicate|Model;

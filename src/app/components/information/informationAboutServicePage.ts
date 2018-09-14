@@ -1,14 +1,10 @@
 import { LocationService } from 'app/services/locationService';
-import { ComponentDeclaration } from 'app/utils/angular';
-import { forwardRef } from '@angular/core';
+import { LegacyComponent } from 'app/utils/angular';
 
-export const InformationAboutServicePageComponent: ComponentDeclaration = {
-  selector: 'informationAboutServicePage',
-  template: require('./informationAboutServicePage.html'),
-  controller: forwardRef(() => InformationAboutServicePageController)
-};
-
-class InformationAboutServicePageController {
+@LegacyComponent({
+  template: require('./informationAboutServicePage.html')
+})
+export class InformationAboutServicePageComponent {
 
   constructor(locationService: LocationService) {
     'ngInject';

@@ -3,11 +3,9 @@ import { gettextCatalog as GettextCatalog } from 'angular-gettext';
 import { EditableForm } from './editableEntityController';
 import { LanguageService } from 'app/services/languageService';
 import { isLocalizationDefined } from 'app/utils/language';
- import { ComponentDeclaration } from 'app/utils/angular';
-import { forwardRef } from '@angular/core';
+import { LegacyComponent } from 'app/utils/angular';
 
-export const EditableLabelComponent: ComponentDeclaration = {
-  selector: 'editableLabel',
+@LegacyComponent({
   bindings: {
     title: '=',
     inputId: '=',
@@ -21,11 +19,9 @@ export const EditableLabelComponent: ComponentDeclaration = {
          <span ng-show="$ctrl.infoText" class="fas fa-info-circle info" uib-tooltip="{{$ctrl.infoText}}"></span>
          <span ng-show="$ctrl.required && $ctrl.isEditing()" class="fas fa-asterisk" uib-tooltip="{{'Required' | translate}}"></span>
       </label>
-  `,
-  controller: forwardRef(() => EditableLabelController)
-};
-
-class EditableLabelController {
+  `
+})
+export class EditableLabelComponent {
 
   title: string;
   inputId: string;

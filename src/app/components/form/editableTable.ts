@@ -1,12 +1,46 @@
 import { IScope } from 'angular';
 import { Url } from 'app/entities/uri';
 import { labelNameToResourceIdIdentifier } from 'yti-common-ui/utils/resource';
- import { ComponentDeclaration } from 'app/utils/angular';
-import { forwardRef } from '@angular/core';
 import { EditableForm } from './editableEntityController';
+import { LegacyComponent } from 'app/utils/angular';
 
-export const EditableTableComponent: ComponentDeclaration = {
-  selector: 'editableTable',
+export abstract class TableDescriptor<T> {
+
+  abstract columnDescriptors(): ColumnDescriptor<T>[];
+  abstract canEdit(value: T): boolean;
+  abstract canRemove(value: T): boolean;
+  abstract values(): T[];
+
+  hasOrder(): boolean {
+    return false;
+  }
+
+  edit(_value: T): any {
+  }
+
+  remove(_value: T): any {
+  }
+
+  filter(_value: T): boolean {
+    return true;
+  }
+
+  orderBy(_value: T): any {
+    return undefined;
+  }
+}
+
+export interface ColumnDescriptor<T> {
+  headerName: string;
+  nameExtractor: (value: T) => string;
+  hrefExtractor?: (value: T) => Url;
+  onClick?: (value: T) => any;
+  cssClass?: string;
+}
+
+const nonExpandedLimit = 2;
+
+@LegacyComponent({
   bindings: {
     id: '=',
     descriptor: '=',
@@ -63,47 +97,9 @@ export const EditableTableComponent: ComponentDeclaration = {
           </tr>
         </tfoot>
       </table>
-    `,
-  controller: forwardRef(() => EditableTableController)
-};
-
-export abstract class TableDescriptor<T> {
-
-  abstract columnDescriptors(): ColumnDescriptor<T>[];
-  abstract canEdit(value: T): boolean;
-  abstract canRemove(value: T): boolean;
-  abstract values(): T[];
-
-  hasOrder(): boolean {
-    return false;
-  }
-
-  edit(_value: T): any {
-  }
-
-  remove(_value: T): any {
-  }
-
-  filter(_value: T): boolean {
-    return true;
-  }
-
-  orderBy(_value: T): any {
-    return undefined;
-  }
-}
-
-export interface ColumnDescriptor<T> {
-  headerName: string;
-  nameExtractor: (value: T) => string;
-  hrefExtractor?: (value: T) => Url;
-  onClick?: (value: T) => any;
-  cssClass?: string;
-}
-
-const nonExpandedLimit = 2;
-
-class EditableTableController<T> {
+    `
+})
+export class EditableTableComponent<T> {
 
   values: T[];
   expanded: boolean;

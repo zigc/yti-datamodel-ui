@@ -1,12 +1,10 @@
 import { gettextCatalog as GettextCatalog } from 'angular-gettext';
 import { EditableForm } from 'app/components/form/editableEntityController';
 import { DataType, dataTypes } from 'app/entities/dataTypes';
-import { ComponentDeclaration } from 'app/utils/angular';
-import { forwardRef } from '@angular/core';
+import { LegacyComponent } from 'app/utils/angular';
 import { INgModelController } from 'angular';
 
-export const EditableRangeSelectComponent: ComponentDeclaration = {
-  selector: 'editableRangeSelect',
+@LegacyComponent({
   bindings: {
     range: '=',
     id: '@'
@@ -28,12 +26,9 @@ export const EditableRangeSelectComponent: ComponentDeclaration = {
         
         <error-messages ng-model-controller="$ctrl.inputNgModelCtrl"></error-messages>
       </div>
-  `,
-  controller: forwardRef(() => EditableRangeSelectController)
-};
-
-
-class EditableRangeSelectController {
+  `
+})
+export class EditableRangeSelectComponent {
 
   range: DataType;
   ranges: DataType[] = dataTypes;

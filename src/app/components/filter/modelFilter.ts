@@ -1,22 +1,21 @@
 import * as _ from 'lodash';
 import { SearchController, TextAnalysis } from 'app/types/filter';
-import { IScope } from 'angular';
+import { IPromise, IScope } from 'angular';
 import { isDefined } from 'yti-common-ui/utils/object';
 import { ClassService } from 'app/services/classService';
 import { PredicateService } from 'app/services/predicateService';
 import { collectIds } from 'app/utils/entity';
-import { IPromise } from 'angular';
 import { comparingLocalizable } from 'app/utils/comparator';
 import { LanguageService } from 'app/services/languageService';
-import { ComponentDeclaration, ifChanged } from 'app/utils/angular';
+import { ifChanged, LegacyComponent } from 'app/utils/angular';
 import { ClassListItem } from 'app/entities/class';
 import { PredicateListItem } from 'app/entities/predicate';
 import { Model } from 'app/entities/model';
 import { DefinedBy } from 'app/entities/definedBy';
-import { forwardRef } from '@angular/core';
 
-export const ModelFilterComponent: ComponentDeclaration = {
-  selector: 'modelFilter',
+type ItemType = ClassListItem|PredicateListItem;
+
+@LegacyComponent({
   bindings: {
     searchController: '=',
     type: '@',
@@ -34,13 +33,9 @@ export const ModelFilterComponent: ComponentDeclaration = {
                         for model in $ctrl.models">
         <option value="" translate>All models</option>
       </select>
-  `,
-  controller: forwardRef(() => ModelFilterController)
-};
-
-type ItemType = ClassListItem|PredicateListItem;
-
-class ModelFilterController {
+  `
+})
+export class ModelFilterComponent {
 
   searchController: SearchController<ItemType>;
   type: 'class'|'predicate';

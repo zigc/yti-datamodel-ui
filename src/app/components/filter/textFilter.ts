@@ -1,11 +1,9 @@
 import { SearchController, TextAnalysis } from 'app/types/filter';
 import { IScope } from 'angular';
-import { ComponentDeclaration, ifChanged } from 'app/utils/angular';
+import { ifChanged, LegacyComponent } from 'app/utils/angular';
 import { isDefined } from 'yti-common-ui/utils/object';
-import { forwardRef } from '@angular/core';
 
-export const TextFilterComponent: ComponentDeclaration = {
-  selector: 'textFilter',
+@LegacyComponent({
   bindings: {
     searchText: '=',
     contentExtractors: '=',
@@ -22,11 +20,9 @@ export const TextFilterComponent: ComponentDeclaration = {
                    ng-model-options="{ debounce: { 'default': 500, 'blur': 0 } }"
                    key-control="$ctrl.searchController.searchResults" />
           </div>
-  `,
-  controller: forwardRef(() => TextFilterController)
-};
-
-class TextFilterController<T> {
+  `
+})
+export class TextFilterComponent<T> {
 
   placeholder: string;
   searchController: SearchController<T>;

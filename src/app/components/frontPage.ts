@@ -2,21 +2,20 @@ import { ILocationService, IScope } from 'angular';
 import { LocationService } from 'app/services/locationService';
 import { LanguageService } from 'app/services/languageService';
 import { AdvancedSearchModal } from './advancedSearchModal';
-import { ApplicationController } from './application';
+import { ApplicationComponent } from './application';
 import { HelpProvider } from './common/helpProvider';
 import { FrontPageHelpService } from 'app/help/frontPageHelp';
-import { ComponentDeclaration, modalCancelHandler } from 'app/utils/angular';
+import { LegacyComponent, modalCancelHandler } from 'app/utils/angular';
 import { ModelService } from 'app/services/modelService';
 import { ModelListItem } from 'app/entities/model';
 import { ClassificationService } from 'app/services/classificationService';
 import { Classification } from 'app/entities/classification';
 import { Url } from 'app/entities/uri';
 import { comparingLocalizable } from 'app/utils/comparator';
-import { BehaviorSubject, Subscription, combineLatest } from 'rxjs';
+import { BehaviorSubject, combineLatest, Subscription } from 'rxjs';
 import { fromIPromise } from 'app/utils/observable';
 import { anyMatching } from 'yti-common-ui/utils/array';
 import { matches } from 'yti-common-ui/utils/string';
-import { forwardRef } from '@angular/core';
 import { FilterOptions } from 'yti-common-ui/components/filter-dropdown.component';
 import { KnownModelType } from 'app/types/entity';
 import { gettextCatalog as GettextCatalog } from 'angular-gettext';
@@ -26,18 +25,15 @@ import { Organization } from 'app/entities/organization';
 import { labelNameToResourceIdIdentifier } from 'yti-common-ui/utils/resource';
 import { tap } from 'rxjs/operators';
 
-export const FrontPageComponent: ComponentDeclaration = {
-  selector: 'frontPage',
+@LegacyComponent({
   template: require('./frontPage.html'),
   require: {
     applicationCtrl: '^application'
-  },
-  controller: forwardRef(() => FrontPageController)
-};
+  }
+})
+export class FrontPageComponent implements HelpProvider {
 
-export class FrontPageController implements HelpProvider {
-
-  applicationCtrl: ApplicationController;
+  applicationCtrl: ApplicationComponent;
 
   helps = this.frontPageHelpService.getHelps();
 

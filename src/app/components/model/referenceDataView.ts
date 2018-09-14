@@ -3,22 +3,18 @@ import { ReferenceDataService } from 'app/services/referenceDataService';
 import { ViewReferenceDataModal } from './viewReferenceDataModal';
 import { ReferenceData, ReferenceDataCode } from 'app/entities/referenceData';
 import { LanguageContext } from 'app/types/language';
-import { ComponentDeclaration } from 'app/utils/angular';
-import { forwardRef } from '@angular/core';
+import { LegacyComponent } from 'app/utils/angular';
 
-export const ReferenceDataViewComponent: ComponentDeclaration = {
-  selector: 'referenceDataView',
+@LegacyComponent({
   bindings: {
     referenceData: '=',
     context: '=',
     title: '@',
     showCodes: '='
   },
-  template: require('./referenceDataView.html'),
-  controller: forwardRef(() => ReferenceDataViewController)
-};
-
-class ReferenceDataViewController {
+  template: require('./referenceDataView.html')
+})
+export class ReferenceDataViewComponent {
 
   referenceData: ReferenceData;
   context: LanguageContext;
