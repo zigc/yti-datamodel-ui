@@ -1,30 +1,35 @@
 <form name="editCodeSchemeForm">
-  <modal-template>
-    <modal-title translate>Edit reference data</modal-title>
 
-    <modal-body>
-      <editable data-title="Reference data URI" context="$ctrl.context" autofocus>
-        <div class="input-group input-group-md">
-          <input id="uri" type="text" class="form-control" required uri-input="free-url" ng-model="$ctrl.id" />
-        </div>
-      </editable>
+  <div class="modal-header">
+    <h4 class="modal-title">
+      <a><i ng-click="$dismiss('cancel')" class="fas fa-times"></i></a>
+      <span translate>Edit reference data</span>
+    </h4>
+  </div>
 
-      <editable data-title="Reference data label" context="$ctrl.context">
-        <div class="input-group input-group-md">
-          <input id="label" type="text" class="form-control" required string-input="label" ng-model="$ctrl.title" />
-        </div>
-      </editable>
+  <div class="modal-body">
+    <editable data-title="Reference data URI" context="$ctrl.context" autofocus>
+      <div class="input-group input-group-md">
+        <input id="uri" type="text" class="form-control" required uri-input="free-url" ng-model="$ctrl.id" />
+      </div>
+    </editable>
 
-      <editable data-title="Description" context="$ctrl.context">
-        <div class="input-group input-group-md">
-          <textarea id="description" class="form-control" required string-input ng-model="$ctrl.description"></textarea>
-        </div>
-      </editable>
-    </modal-body>
+    <editable data-title="Reference data label" context="$ctrl.context">
+      <div class="input-group input-group-md">
+        <input id="label" type="text" class="form-control" required string-input="label" ng-model="$ctrl.title" />
+      </div>
+    </editable>
 
-    <modal-buttons>
-      <button class="btn btn-action" type="button" ng-click="$ctrl.create()" ng-disabled="!editCodeSchemeForm.$valid" translate>Edit</button>
-      <button class="btn btn-link" type="button" ng-click="$ctrl.cancel()" translate>Cancel</button>
-    </modal-buttons>
-  </modal-template>
+    <editable data-title="Description" context="$ctrl.context">
+      <div class="input-group input-group-md">
+        <textarea id="description" class="form-control" required string-input ng-model="$ctrl.description"></textarea>
+      </div>
+    </editable>
+  </div>
+
+  <div class="modal-footer">
+    <button class="btn btn-action" type="button" ng-click="$ctrl.create()" ng-disabled="!editCodeSchemeForm.$valid" translate>Edit</button>
+    <button class="btn btn-link" type="button" ng-click="$ctrl.cancel()" translate>Cancel</button>
+  </div>
+
 </form>

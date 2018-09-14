@@ -12,21 +12,21 @@ export class NotificationModal {
 
   private open(title: string, body: string): IPromise<any> {
     const modal = this.$uibModal.open({
-      template:
-        `
-          <modal-template purpose="warning">
-          
-            <modal-title translate>${title}</modal-title>
-          
-            <modal-body>
-              <span translate>${body}</span>
-            </modal-body>
-          
-            <modal-buttons>
-              <button class="btn btn-link" type="button" ng-click="$close('cancel')" translate>Close</button>
-            </modal-buttons>
-                      
-          </modal-template>
+      template: `
+        <div class="modal-header modal-header-warning">
+          <h4 class="modal-title">
+            <a><i ng-click="$dismiss('cancel')" class="fas fa-times"></i></a>
+            <span translate>${title}</span>
+          </h4>
+        </div>
+        
+        <div class="modal-body">
+          <span translate>${body}</span>
+        </div>
+
+        <div class="modal-footer">
+          <button class="btn btn-link" type="button" ng-click="$close('cancel')" translate>Close</button>
+        </div>
         `,
       size: 'adapting'
     });
@@ -40,10 +40,6 @@ export class NotificationModal {
 
   openModelNotFound() {
     this.open('Model not found', 'You will be redirected to the front page').then(() => this.$location.url('/'), modalCancelHandler);
-  }
-
-  openGroupNotFound() {
-    this.open('Group not found', 'You will be redirected to the front page').then(() => this.$location.url('/'), modalCancelHandler);
   }
 
   openPageNotFound() {

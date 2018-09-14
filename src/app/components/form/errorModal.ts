@@ -19,24 +19,22 @@ export class ErrorModal {
     this.$uibModal.open({
       template:
         `
-          <modal-template purpose="danger">
+          <div class="modal-header modal-header-danger">
+            <h4 class="modal-title">
+              <a><i ng-click="$dismiss('cancel')" class="fas fa-times"></i></a>
+              <i class="fas fa-exclamation-circle"></i>{{$ctrl.title | translate}}
+            </h4>
+          </div>          
           
-            <modal-title>
-              <i class="fas fa-exclamation-circle"></i>
-              {{$ctrl.title | translate}}
-            </modal-title>
-          
-            <modal-body>
-              <p>{{$ctrl.errorMessage | translate}}</p>
-              <usage ng-if="$ctrl.usage" usage="$ctrl.usage.usage" context="$ctrl.usage.context"></usage>
-            </modal-body>
-          
-            <modal-buttons>
-              <button class="btn btn-link" type="button" ng-click="$dismiss('cancel')" translate>Close</button>
-            </modal-buttons>
-                      
-          </modal-template>
-        `,
+          <div class="modal-body">
+            <p>{{$ctrl.errorMessage | translate}}</p>
+            <usage ng-if="$ctrl.usage" usage="$ctrl.usage.usage" context="$ctrl.usage.context"></usage>
+          </div>
+        
+          <div class="modal-footer">
+            <button class="btn btn-link" type="button" ng-click="$dismiss('cancel')" translate>Close</button>
+          </div>
+      `,
       size: 'adapting',
       controllerAs: '$ctrl',
       controller: ErrorModalController,

@@ -1,7 +1,13 @@
-<modal-template class="add-properties-from-class">
-  <modal-title>{{'Add properties from ' + $ctrl.classType | translate}}</modal-title>
+<div class="add-properties-from-class">
 
-  <modal-body>
+  <div class="modal-header">
+    <h4 class="modal-title">
+      <a><i ng-click="$dismiss('cancel')" class="fas fa-times"></i></a>
+      {{'Add properties from ' + $ctrl.classType | translate}}
+    </h4>
+  </div>
+
+  <div class="modal-body">
     <p><span>{{'Do you want to add following properties from ' + $ctrl.classType + '?' | translate}}</span></p>
 
     <div class="properties">
@@ -26,10 +32,11 @@
 
     <button id="select_all_properties_button" class="btn btn-action btn-sm" ng-click="$ctrl.selectAll()" translate>Select all</button>
     <button id="deselect_all_properties_button" class="btn btn-action btn-sm" ng-click="$ctrl.deselectAll()" translate>Deselect all</button>
-  </modal-body>
+  </div>
 
-  <modal-buttons>
+  <div class="modal-footer">
     <button id="confirm_properties_from_class_button" class="btn btn-action confirm" type="button" ng-click="$ctrl.confirm()" translate>Yes</button>
     <button id="cancel_properties_from_class_button" class="btn btn-link" type="button" ng-click="$dismiss('cancel')" translate>Cancel</button>
-  </modal-buttons>
-</modal-template>
+  </div>
+
+</div>

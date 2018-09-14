@@ -15,10 +15,15 @@ export class CopyPredicateModal {
     return this.$uibModal.open({
       template: `
         <form name="form">
-          <modal-template>
-            <modal-title>{{'Copy' | translate}} {{$ctrl.predicate.type | translate}}</modal-title>
           
-            <modal-body>
+            <div class="modal-header">
+              <h4 class="modal-title">
+                <a><i ng-click="$dismiss('cancel')" class="fas fa-times"></i></a>
+                {{'Copy' | translate}} {{$ctrl.predicate.type | translate}}
+              </h4>
+            </div>
+                     
+            <div class="modal-body">
               <div class="row">
                 <div class="col-md-12">
                   <model-language-chooser class="pull-right" context="$ctrl.model"></model-language-chooser>
@@ -29,9 +34,9 @@ export class CopyPredicateModal {
                   <predicate-form id="'copy_predicate'" predicate="$ctrl.predicate" old-predicate="$ctrl.predicate" model="$ctrl.model"></predicate-form>
                 </div>
               </div>
-            </modal-body>
+            </div>
           
-            <modal-buttons>
+            <div class="modal-footer">
               <button type="button"
                       class="btn btn-action confirm"
                       ng-click="$ctrl.confirm()"
@@ -39,8 +44,8 @@ export class CopyPredicateModal {
               </button>
               
               <button class="btn btn-link" type="button" ng-click="$dismiss('cancel')" translate>Cancel</button>
-            </modal-buttons>
-          </modal-template>
+            </div>
+
         </form>
       `,
       size: 'md',

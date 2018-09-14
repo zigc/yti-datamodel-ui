@@ -1,24 +1,29 @@
-<form name="addModelForm" class="add-edit-link">
-  <modal-template>
-    <modal-title>{{$ctrl.titleLabel | translate}}</modal-title>
+<form name="addModelForm" class="add-edit-link" implicit-edit-mode>
 
-    <modal-body>
-      <editable data-title="Homepage" context="$ctrl.model">
-        <input class="form-control" type="text" uri-input="free-url" model="$ctrl.model" autofocus required ng-model="$ctrl.homepage" />
-      </editable>
+  <div class="modal-header">
+    <h4 class="modal-title">
+      <a><i ng-click="$dismiss('cancel')" class="fas fa-times"></i></a>
+      {{$ctrl.titleLabel | translate}}
+    </h4>
+  </div>
 
-      <editable data-title="Title" context="$ctrl.model">
-        <input class="form-control" type="text" required string-input="label" ng-model="$ctrl.title"/>
-      </editable>
+  <div class="modal-body">
+    <editable data-title="Homepage" context="$ctrl.model">
+      <input class="form-control" type="text" uri-input="free-url" model="$ctrl.model" autofocus required ng-model="$ctrl.homepage" />
+    </editable>
 
-      <editable data-title="Description" context="$ctrl.model">
-        <textarea class="form-control" string-input ng-model="$ctrl.description"></textarea>
-      </editable>
-    </modal-body>
+    <editable data-title="Title" context="$ctrl.model">
+      <input class="form-control" type="text" required string-input="label" ng-model="$ctrl.title"/>
+    </editable>
 
-    <modal-buttons>
-      <button class="btn btn-action confirm" type="button" ng-click="$ctrl.create()" ng-disabled="!addModelForm.$valid">{{$ctrl.confirmLabel | translate}}</button>
-      <button class="btn btn-link cancel" type="button" ng-click="$ctrl.cancel()" translate>Cancel</button>
-    </modal-buttons>
-  </modal-template>
+    <editable data-title="Description" context="$ctrl.model">
+      <textarea class="form-control" string-input ng-model="$ctrl.description"></textarea>
+    </editable>
+  </div>
+
+  <div class="modal-footer">
+    <button class="btn btn-action confirm" type="button" ng-click="$ctrl.create()" ng-disabled="!addModelForm.$valid">{{$ctrl.confirmLabel | translate}}</button>
+    <button class="btn btn-link cancel" type="button" ng-click="$ctrl.cancel()" translate>Cancel</button>
+  </div>
+
 </form>

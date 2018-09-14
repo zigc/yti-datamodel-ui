@@ -1,16 +1,25 @@
 <div class="confirmation">
-  <modal-template purpose="warning" default="true">
-    <modal-title translate>Confirm delete</modal-title>
-    <modal-body>
 
-      <div ng-if="$ctrl.usage && $ctrl.hasReferrers">
-        <p><span translate>Following items are depending on the deleted</span> <span>{{'of ' + $ctrl.entity.normalizedType | translate}}</span></p>
-        <usage usage="$ctrl.usage" exclude="$ctrl.exclude" context="$ctrl.context"></usage>
-        <br />
-      </div>
+  <div class="modal-header modal-header-warning">
+    <h4 class="modal-title">
+      <a><i ng-click="$dismiss('cancel')" class="fas fa-times"></i></a>
+      {{'Confirm delete' | translate}}
+    </h4>
+  </div>
 
-      <span translate>Are you sure that you want to delete?</span>
+  <div class="modal-body">
+    <div ng-if="$ctrl.usage && $ctrl.hasReferrers">
+      <p><span translate>Following items are depending on the deleted</span> <span>{{'of ' + $ctrl.entity.normalizedType | translate}}</span></p>
+      <usage usage="$ctrl.usage" exclude="$ctrl.exclude" context="$ctrl.context"></usage>
+      <br />
+    </div>
 
-    </modal-body>
-  </modal-template>
+    <span translate>Are you sure that you want to delete?</span>
+  </div>
+
+  <div class="modal-footer">
+    <button id="confirm_modal_template_button" class="btn btn-action confirm" type="button" ng-click="$close()" translate>Yes</button>
+    <button id="cancel_modal_template_button" class="btn btn-link" type="button" ng-click="$dismiss('cancel')" translate>Cancel</button>
+  </div>
+
 </div>

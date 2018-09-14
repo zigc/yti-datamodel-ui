@@ -14,21 +14,26 @@ export class ViewReferenceDataModal {
     this.$uibModal.open({
       template: `
         <form class="view-reference-data">
-          <modal-template>
-            <modal-title translate>Reference data information</modal-title>
-            
-            <modal-body class="full-height">
-              <div class="row">
-                <div class="col-md-12">
-                  <reference-data-view reference-data="$ctrl.referenceData" context="$ctrl.context" class="popup" show-codes="true"></reference-data-view>
-                </div>
+          
+          <div class="modal-header">
+            <h4 class="modal-title">
+              <a><i ng-click="$dismiss('cancel')" class="fas fa-times"></i></a>
+              <span translate>Reference data information</span>
+            </h4>
+          </div>
+          
+          <div class="modal-body full-height">
+            <div class="row">
+              <div class="col-md-12">
+                <reference-data-view reference-data="$ctrl.referenceData" context="$ctrl.context" class="popup" show-codes="true"></reference-data-view>
               </div>
-            </modal-body>
-            
-            <modal-buttons>
-              <button class="btn btn-link" type="button" ng-click="$dismiss('cancel')" translate>Close</button>
-            </modal-buttons>
-          </modal-template>
+            </div>
+          </div>
+          
+          <div class="modal-footer">
+            <button class="btn btn-link" type="button" ng-click="$dismiss('cancel')" translate>Close</button>
+          </div>
+          
         </form>
       `,
       size: 'md',

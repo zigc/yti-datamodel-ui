@@ -32,6 +32,7 @@ import { MinInputDirective } from './minInput';
 import { IgnoreDirtyDirective } from './ignoreDirty';
 import { IgnoreFormDirective } from './ignoreForm';
 import { DragSortableDirective, DragSortableItemDirective } from './dragSortable';
+import { ImplicitEditModeDirective } from './implicitEditMode';
 
 import { componentDeclaration, directiveDeclaration } from 'app/utils/angular';
 import { module as mod } from './module';
@@ -76,6 +77,7 @@ mod.directive('ignoreDirty', IgnoreDirtyDirective);
 mod.directive('ignoreForm', IgnoreFormDirective);
 mod.directive('dragSortable', directiveDeclaration(DragSortableDirective));
 mod.directive('dragSortableItem', DragSortableItemDirective);
+mod.directive('implicitEditMode', ImplicitEditModeDirective);
 
 mod.service('errorModal', ErrorModal);
 mod.service('displayItemFactory', DisplayItemFactory);

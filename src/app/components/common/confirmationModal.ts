@@ -9,12 +9,27 @@ export class ConfirmationModal {
 
   private open(title: string, body: string, additionalCssClass?: string): IPromise<void> {
     return this.$uibModal.open({
-      template: `<div class="confirmation">
-                   <modal-template purpose="warning" default="true">
-                     <modal-title>{{$ctrl.title | translate}}</modal-title>
-                     <modal-body>{{$ctrl.body | translate}}</modal-body>
-                   </modal-template>
-                 </div>`,
+      template: `
+        <div class="confirmation">
+
+          <div class="modal-header modal-header-warning">
+            <h4 class="modal-title">
+              <a><i ng-click="$dismiss('cancel')" class="fas fa-times"></i></a>
+              {{$ctrl.title | translate}}
+            </h4>
+          </div>
+          
+          <div class="modal-body">
+            {{$ctrl.body | translate}}
+          </div>
+          
+          <div class="modal-footer">
+            <button id="confirm_modal_template_button" class="btn btn-action confirm" type="button" ng-click="$close()" translate>Yes</button>
+            <button id="cancel_modal_template_button" class="btn btn-link" type="button" ng-click="$dismiss('cancel')" translate>Cancel</button>
+          </div>
+
+       </div>
+      `,
       controllerAs: '$ctrl',
       controller: ConfirmationModalController,
       windowClass: additionalCssClass,

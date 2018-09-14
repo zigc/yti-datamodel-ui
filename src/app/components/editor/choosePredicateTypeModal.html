@@ -1,15 +1,19 @@
-<modal-template>
-  <modal-title translate>Define type for class property</modal-title>
+<div class="modal-header">
+  <h4 class="modal-title">
+    <a><i ng-click="$dismiss('cancel')" class="fas fa-times"></i></a>
+    <span translate>Define type for class property</span>
+  </h4>
+</div>
 
-  <modal-body>
-    <div class="input-group input-group-lg">
-      <div class="selectContainer">
-        <select class="form-control" ng-model="$ctrl.type" ng-options="type | translate for type in ['attribute', 'association']"></select>
-      </div>
+<div class="modal-body">
+  <div class="input-group input-group-lg">
+    <div class="selectContainer">
+      <select class="form-control" ng-model="$ctrl.type" ng-options="type | translate for type in ['attribute', 'association']"></select>
     </div>
-  </modal-body>
+  </div>
+</div>
 
-  <modal-buttons>
-    <button class="btn btn-action" type="button" ng-click="$close($ctrl.type)" translate>Choose</button>
-  </modal-buttons>
-</modal-template>
+<div class="modal-footer">
+  <button class="btn btn-action" type="button" ng-click="$close($ctrl.type)" translate>Choose</button>
+</div>
+
