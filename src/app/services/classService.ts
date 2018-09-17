@@ -244,7 +244,7 @@ export class DefaultClassService implements ClassService {
       predicatePromise,
       this.$http.get<GraphData>(apiEndpointWithName('classProperty'), {params: {predicateID: id.toString(), type: reverseMapType(type)}})
         .then(expandContextWithKnownModels(model))
-        .then((response: any) => this.deserializeProperty(response.data, false))
+        .then((response: any) => this.deserializeProperty(response.data))
     ])
       .then(([predicate, property]: [Predicate, Property]) => {
 
@@ -280,7 +280,7 @@ export class DefaultClassService implements ClassService {
     return this.frameService.frameAndMap(data, optional, frames.classFrame(data), () => Class);
   }
 
-  private deserializeProperty(data: GraphData, optional: boolean): IPromise<Property|null> {
-    return this.frameService.frameAndMap(data, optional, frames.propertyFrame(data), () => Property);
+  private deserializeProperty(data: GraphData): IPromise<Property> {
+    return this.frameService.frameAndMap(data, false, frames.propertyFrame(data), () => Property).then(requireDefined);
   }
 }
