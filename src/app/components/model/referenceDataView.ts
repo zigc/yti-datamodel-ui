@@ -25,6 +25,7 @@ export class ReferenceDataViewComponent {
   constructor(private $scope: IScope,
               private referenceDataService: ReferenceDataService,
               private viewReferenceDataModal: ViewReferenceDataModal) {
+    'ngInject';
   }
 
   $onInit() {
