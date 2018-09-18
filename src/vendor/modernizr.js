@@ -1,6 +1,6 @@
 /*!
- * modernizr v3.3.1
- * Build http://modernizr.com/download?-bloburls-cssanimations-es5syntax-svg-setclasses-dontmin
+ * modernizr v3.6.0
+ * Build https://modernizr.com/download?-bloburls-cssanimations-es5syntax-svg-setclasses-dontmin
  *
  * Copyright (c)
  *  Faruk Ates
@@ -20,7 +20,7 @@
  * a global `Modernizr` object, and as classes on the `<html>` element. This
  * information allows you to progressively enhance your pages with a granular level
  * of control over the experience.
- */
+*/
 
 ;(function(window, document, undefined){
   var classes = [];
@@ -39,7 +39,7 @@
 
   var ModernizrProto = {
     // The current version, dummy
-    _version: '3.3.1',
+    _version: '3.6.0',
 
     // Any settings that don't work as separate modules
     // can go in here as configuration.
@@ -88,53 +88,54 @@
 
 
   /*!
-   {
-   "name": "SVG",
-   "property": "svg",
-   "caniuse": "svg",
-   "tags": ["svg"],
-   "authors": ["Erik Dahlstrom"],
-   "polyfills": [
-   "svgweb",
-   "raphael",
-   "amplesdk",
-   "canvg",
-   "svg-boilerplate",
-   "sie",
-   "dojogfx",
-   "fabricjs"
-   ]
-   }
-   !*/
+  {
+    "name": "SVG",
+    "property": "svg",
+    "caniuse": "svg",
+    "tags": ["svg"],
+    "authors": ["Erik Dahlstrom"],
+    "polyfills": [
+      "svgweb",
+      "raphael",
+      "amplesdk",
+      "canvg",
+      "svg-boilerplate",
+      "sie",
+      "dojogfx",
+      "fabricjs"
+    ]
+  }
+  !*/
   /* DOC
-   Detects support for SVG in `<embed>` or `<object>` elements.
-   */
+  Detects support for SVG in `<embed>` or `<object>` elements.
+  */
 
   Modernizr.addTest('svg', !!document.createElementNS && !!document.createElementNS('http://www.w3.org/2000/svg', 'svg').createSVGRect);
 
   /*!
-   {
-   "name": "ES5 Syntax",
-   "property": "es5syntax",
-   "notes": [{
-   "name": "ECMAScript 5.1 Language Specification",
-   "href": "http://www.ecma-international.org/ecma-262/5.1/"
-   }, {
-   "name": "original implementation of detect code",
-   "href": "http://kangax.github.io/es5-compat-table/"
-   }],
-   "authors": ["Ron Waldon (@jokeyrhyme)"],
-   "warnings": ["This detect uses `eval()`, so CSP may be a problem."],
-   "tags": ["es5"]
-   }
-   !*/
+  {
+    "name": "ES5 Syntax",
+    "property": "es5syntax",
+    "notes": [{
+      "name": "ECMAScript 5.1 Language Specification",
+      "href": "http://www.ecma-international.org/ecma-262/5.1/"
+    }, {
+      "name": "original implementation of detect code",
+      "href": "http://kangax.github.io/es5-compat-table/"
+    }],
+    "authors": ["Ron Waldon (@jokeyrhyme)"],
+    "warnings": ["This detect uses `eval()`, so CSP may be a problem."],
+    "tags": ["es5"]
+  }
+  !*/
   /* DOC
-   Check if browser accepts ECMAScript 5 syntax.
-   */
+  Check if browser accepts ECMAScript 5 syntax.
+  */
 
   Modernizr.addTest('es5syntax', function() {
     var value, obj, stringAccess, getter, setter, reservedWords, zeroWidthChars;
     try {
+      /* eslint no-eval: "off" */
       // Property access on strings
       stringAccess = eval('"foobar"[3] === "b"');
       // Getter in property initializer
@@ -226,7 +227,6 @@
             Modernizr[featureNameSplit[0]] = result;
           } else {
             // cast to a Boolean, if not one already
-            /* jshint -W053 */
             if (Modernizr[featureNameSplit[0]] && !(Modernizr[featureNameSplit[0]] instanceof Boolean)) {
               Modernizr[featureNameSplit[0]] = new Boolean(Modernizr[featureNameSplit[0]]);
             }
@@ -289,7 +289,11 @@
     if (Modernizr._config.enableClasses) {
       // Add the new classes
       className += ' ' + classPrefix + classes.join(' ' + classPrefix);
-      isSVG ? docElement.className.baseVal = className : docElement.className = className;
+      if (isSVG) {
+        docElement.className.baseVal = className;
+      } else {
+        docElement.className = className;
+      }
     }
 
   }
@@ -314,12 +318,12 @@
   ;
 
   /**
-   * If the browsers follow the spec, then they would expose vendor-specific style as:
+   * If the browsers follow the spec, then they would expose vendor-specific styles as:
    *   elem.style.WebkitBorderRadius
-   * instead of something like the following, which would be technically incorrect:
+   * instead of something like the following (which is technically incorrect):
    *   elem.style.webkitBorderRadius
 
-   * Webkit ghosts their properties in lowercase but Opera & Moz do not.
+   * WebKit ghosts their properties in lowercase but Opera & Moz do not.
    * Microsoft uses a lowercase `ms` instead of the correct `Ms` in IE8+
    *   erik.eae.net/archives/2008/03/10/21.48.10/
 
@@ -443,31 +447,6 @@
   ;
 
   /**
-   * createElement is a convenience wrapper around document.createElement. Since we
-   * use createElement all over the place, this allows for (slightly) smaller code
-   * as well as abstracting away issues with creating elements in contexts other than
-   * HTML documents (e.g. SVG documents).
-   *
-   * @access private
-   * @function createElement
-   * @returns {HTMLElement|SVGElement} An HTML or SVG element
-   */
-
-  function createElement() {
-    if (typeof document.createElement !== 'function') {
-      // This is the case in IE7, where the type of createElement is "object".
-      // For this reason, we cannot call apply() as Object is not a Function.
-      return document.createElement(arguments[0]);
-    } else if (isSVG) {
-      return document.createElementNS.call(document, 'http://www.w3.org/2000/svg', arguments[0]);
-    } else {
-      return document.createElement.apply(document, arguments);
-    }
-  }
-
-  ;
-
-  /**
    * fnBind is a super small [bind](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind) polyfill.
    *
    * @access private
@@ -494,6 +473,7 @@
    * @param {array.<string>} props - An array of properties to test for
    * @param {object} obj - An object or Element you want to use to test the parameters again
    * @param {boolean|object} elem - An Element to bind the property lookup again. Use `false` to prevent the check
+   * @returns {false|*} returns false if the prop is unsupported, otherwise the value that is supported
    */
   function testDOMProps(props, obj, elem) {
     var item;
@@ -519,6 +499,31 @@
       }
     }
     return false;
+  }
+
+  ;
+
+  /**
+   * createElement is a convenience wrapper around document.createElement. Since we
+   * use createElement all over the place, this allows for (slightly) smaller code
+   * as well as abstracting away issues with creating elements in contexts other than
+   * HTML documents (e.g. SVG documents).
+   *
+   * @access private
+   * @function createElement
+   * @returns {HTMLElement|SVGElement} An HTML or SVG element
+   */
+
+  function createElement() {
+    if (typeof document.createElement !== 'function') {
+      // This is the case in IE7, where the type of createElement is "object".
+      // For this reason, we cannot call apply() as Object is not a Function.
+      return document.createElement(arguments[0]);
+    } else if (isSVG) {
+      return document.createElementNS.call(document, 'http://www.w3.org/2000/svg', arguments[0]);
+    } else {
+      return document.createElement.apply(document, arguments);
+    }
   }
 
   ;
@@ -551,6 +556,44 @@
   });
 
 
+
+
+  /**
+   * wrapper around getComputedStyle, to fix issues with Firefox returning null when
+   * called inside of a hidden iframe
+   *
+   * @access private
+   * @function computedStyle
+   * @param {HTMLElement|SVGElement} - The element we want to find the computed styles of
+   * @param {string|null} [pseudoSelector]- An optional pseudo element selector (e.g. :before), of null if none
+   * @returns {CSSStyleDeclaration}
+   */
+
+  function computedStyle(elem, pseudo, prop) {
+    var result;
+
+    if ('getComputedStyle' in window) {
+      result = getComputedStyle.call(window, elem, pseudo);
+      var console = window.console;
+
+      if (result !== null) {
+        if (prop) {
+          result = result.getPropertyValue(prop);
+        }
+      } else {
+        if (console) {
+          var method = console.error ? 'error' : 'log';
+          console[method].call(console, 'getComputedStyle returning null, its possible modernizr test results are inaccurate');
+        }
+      }
+    } else {
+      result = !pseudo && elem.currentStyle && elem.currentStyle[prop];
+    }
+
+    return result;
+  }
+
+  ;
 
   /**
    * domToCSS takes a camelCase string and converts it to kebab-case
@@ -657,6 +700,7 @@
       body.parentNode.removeChild(body);
       docElement.style.overflow = docOverflow;
       // Trigger layout so kinetic scrolling isn't disabled in iOS6+
+      // eslint-disable-next-line
       docElement.offsetHeight;
     } else {
       div.parentNode.removeChild(div);
@@ -702,7 +746,7 @@
       }
       conditionText = conditionText.join(' or ');
       return injectElementWithStyles('@supports (' + conditionText + ') { #modernizr { position: absolute; } }', function(node) {
-        return getComputedStyle(node, null).position == 'absolute';
+        return computedStyle(node, null, 'position') == 'absolute';
       });
     }
     return undefined;
@@ -742,8 +786,9 @@
     // inside of an SVG element, in certain browsers, the `style` element is only
     // defined for valid tags. Therefore, if `modernizr` does not have one, we
     // fall back to a less used element and hope for the best.
-    var elems = ['modernizr', 'tspan'];
-    while (!mStyle.style) {
+    // for strict XHTML browsers the hardly used samp element is used
+    var elems = ['modernizr', 'tspan', 'samp'];
+    while (!mStyle.style && elems.length) {
       afterInit = true;
       mStyle.modElem = createElement(elems.shift());
       mStyle.style = mStyle.modElem.style;
@@ -815,6 +860,7 @@
    * @param {HTMLElement|SVGElement} [elem] - An element used to test the property and value against
    * @param {string} [value] - A string of a css value
    * @param {boolean} [skipValueTest] - An boolean representing if you want to test if value sticks when set
+   * @returns {false|string} returns the string version of the property, or false if it is unsupported
    */
   function testPropsAll(prop, prefixed, elem, value, skipValueTest) {
 
@@ -884,22 +930,22 @@
   ModernizrProto.testAllProps = testAllProps;
 
   /*!
-   {
-   "name": "CSS Animations",
-   "property": "cssanimations",
-   "caniuse": "css-animation",
-   "polyfills": ["transformie", "csssandpaper"],
-   "tags": ["css"],
-   "warnings": ["Android < 4 will pass this test, but can only animate a single property at a time"],
-   "notes": [{
-   "name" : "Article: 'Dispelling the Android CSS animation myths'",
-   "href": "https://goo.gl/OGw5Gm"
-   }]
-   }
-   !*/
+  {
+    "name": "CSS Animations",
+    "property": "cssanimations",
+    "caniuse": "css-animation",
+    "polyfills": ["transformie", "csssandpaper"],
+    "tags": ["css"],
+    "warnings": ["Android < 4 will pass this test, but can only animate a single property at a time"],
+    "notes": [{
+      "name" : "Article: 'Dispelling the Android CSS animation myths'",
+      "href": "https://goo.gl/OGw5Gm"
+    }]
+  }
+  !*/
   /* DOC
-   Detects whether or not elements can be animated using CSS
-   */
+  Detects whether or not elements can be animated using CSS
+  */
 
   Modernizr.addTest('cssanimations', testAllProps('animationName', 'a', true));
 
@@ -988,21 +1034,21 @@
 
 
   /*!
-   {
-   "name": "Blob URLs",
-   "property": "bloburls",
-   "caniuse": "bloburls",
-   "notes": [{
-   "name": "W3C Working Draft",
-   "href": "https://www.w3.org/TR/FileAPI/#creating-revoking"
-   }],
-   "tags": ["file", "url"],
-   "authors": ["Ron Waldon (@jokeyrhyme)"]
-   }
-   !*/
+  {
+    "name": "Blob URLs",
+    "property": "bloburls",
+    "caniuse": "bloburls",
+    "notes": [{
+      "name": "W3C Working Draft",
+      "href": "https://www.w3.org/TR/FileAPI/#creating-revoking"
+    }],
+    "tags": ["file", "url"],
+    "authors": ["Ron Waldon (@jokeyrhyme)"]
+  }
+  !*/
   /* DOC
-   Detects support for creating Blob URLs
-   */
+  Detects support for creating Blob URLs
+  */
 
   var url = prefixed('URL', window, false);
   url = url && window[url];
