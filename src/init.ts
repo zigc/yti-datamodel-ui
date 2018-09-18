@@ -1,6 +1,5 @@
 const pw = require('please-wait');
 
-import './vendor/modernizr';
 const logo = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
 const backgroundColor = '#FFFFFF';
 

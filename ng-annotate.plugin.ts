@@ -7,12 +7,12 @@ export class NgAnnotatePlugin {
 
   apply(compiler: any) {
 
-    compiler.hooks.compilation.tap('NgAnnotateWebpackPlugin', function(compilation: any) {
-      compilation.hooks.optimizeChunkAssets.tapAsync('NgAnnotateWebpackPlugin', function(chunks: any, callback: any) {
+    compiler.hooks.compilation.tap('NgAnnotateWebpackPlugin', (compilation: any) => {
+      compilation.hooks.optimizeChunkAssets.tapAsync('NgAnnotateWebpackPlugin', (chunks: any, callback: any) => {
 
         for (const chunk of chunks) {
           for (const file of chunk.files) {
-            if (file.endsWith('.js') && file !== 'vendor.js') {
+            if (file.endsWith('.js') && file.includes('main') && !file.includes('map')) {
 
               const { source, map } = compilation.assets[file].sourceAndMap();
 

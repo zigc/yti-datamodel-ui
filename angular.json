@@ -30,7 +30,9 @@
               "src/styles/loading.scss",
               "src/styles/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "src/vendor/modernizr.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -42,12 +44,12 @@
               ],
               "optimization": true,
               "outputHashing": "all",
-              "sourceMap": false,
+              "sourceMap": true,
               "extractCss": true,
-              "namedChunks": false,
+              "namedChunks": true,
               "aot": true,
               "extractLicenses": true,
-              "vendorChunk": false,
+              "vendorChunk": true,
               "buildOptimizer": true
             }
           }
