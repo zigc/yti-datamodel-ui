@@ -18,17 +18,17 @@ import { InteractiveHelpController } from './interactiveHelpDisplay';
           <p ng-show="$ctrl.content" ng-bind="$ctrl.content | translate"></p>
           
           <button ng-show="$ctrl.showPrevious" 
-                  ng-disabled="!ctrl.helpController.canMoveToPrevious()" 
+                  ng-disabled="!$ctrl.helpController.canMoveToPrevious()" 
                   ng-click="$ctrl.helpController.moveToPreviousItem()" 
                   class="small button help-navigate" translate>previous</button>
                   
           <button ng-show="$ctrl.showNext" 
-                  ng-disabled="!ctrl.helpController.canMoveToNext()" 
+                  ng-disabled="!$ctrl.helpController.canMoveToNext()" 
                   ng-click="$ctrl.helpController.tryToMoveToNextItem()" 
                   class="small button help-navigate" translate>next</button>
                   
           <button ng-show="$ctrl.showClose" 
-                  ng-disabled="!ctrl.helpController.canMoveToNext()" 
+                  ng-disabled="!$ctrl.helpController.canMoveToNext()" 
                   ng-click="$ctrl.helpController.close(false)" 
                   class="small button help-next" translate>close</button>
                   
