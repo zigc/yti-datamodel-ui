@@ -82,9 +82,9 @@ export class ClassListItem extends AbstractClass {
 export class Class extends AbstractClass implements VisualizationClass {
 
   static classMappings = {
-    localName: { name: 'localName',           serializer: optional(stringSerializer) },
+    localName:         { name: 'localName',       serializer: optional(stringSerializer) },
     subClassOf:        { name: 'subClassOf',      serializer: entityAwareOptional(uriSerializer) },
-    scopeClass:        { name: 'targetClass',      serializer: entityAwareOptional(uriSerializer) },
+    scopeClass:        { name: 'targetClass',     serializer: entityAwareOptional(uriSerializer) },
     status:            { name: 'versionInfo',     serializer: optional(identitySerializer<Status>()) },
     properties:        { name: 'property',        serializer: entityAwareList(entity(() => Property)) },
     subject:           { name: 'subject',         serializer: entityAwareOptional(entity(() => Concept)) },
@@ -312,16 +312,16 @@ export class Property extends GraphNode {
 
   static propertyMapping = {
     internalId:         { name: '@id',                  serializer: uriSerializer },
-    externalId:         { name: 'localName',           serializer: optional(stringSerializer) },
+    externalId:         { name: 'localName',            serializer: optional(stringSerializer) },
     status:             { name: 'versionInfo',          serializer: valueOrDefault(identitySerializer<Status>(), 'DRAFT') },
-    label:              { name: 'name',                serializer: localizableSerializer },
-    comment:            { name: 'description',              serializer: localizableSerializer },
+    label:              { name: 'name',                 serializer: localizableSerializer },
+    comment:            { name: 'description',          serializer: localizableSerializer },
     example:            { name: 'example',              serializer: list(stringSerializer) },
     defaultValue:       { name: 'defaultValue',         serializer: optional(stringSerializer) },
     dataType:           { name: 'datatype',             serializer: optional(identitySerializer<DataType>()) },
-    languageIn:           { name: 'languageIn',             serializer: list(identitySerializer<Language>()) },
-    valueClass:         { name: 'node',           serializer: entityAwareOptional(uriSerializer) },
-    predicate:          { name: 'path',            serializer: entityOrId(entity(resolvePredicateConstructor)) },
+    languageIn:         { name: 'languageIn',           serializer: list(identitySerializer<Language>()) },
+    valueClass:         { name: 'node',                 serializer: entityAwareOptional(uriSerializer) },
+    predicate:          { name: 'path',                 serializer: entityOrId(entity(resolvePredicateConstructor)) },
     index:              { name: 'order',                serializer: identitySerializer<number>() },
     minCount:           { name: 'minCount',             serializer: optional(identitySerializer<number>()) },
     maxCount:           { name: 'maxCount',             serializer: optional(identitySerializer<number>()) },
@@ -339,7 +339,7 @@ export class Property extends GraphNode {
     predicateType:      { name: 'type',                 serializer: optional(propertyTypeSerializer) },
     xmlWrapper:         { name: 'isXmlWrapper',         serializer: booleanSerializer },
     xmlAttribute:       { name: 'isXmlAttribute',       serializer: booleanSerializer },
-    readOnlyValue:      { name: 'readOnlyValue',       serializer: booleanSerializer }
+    readOnlyValue:      { name: 'readOnlyValue',        serializer: booleanSerializer }
   };
 
   internalId: Uri;
