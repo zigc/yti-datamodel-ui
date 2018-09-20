@@ -203,6 +203,29 @@ export class InteractiveHelpController {
 
     const item = this.items[index];
 
+    const logItem = (tryCount = 0) => {
+
+      let element: JQuery|undefined|null;
+
+      if (item.type === 'story') {
+        element = item.popover.element();
+      } else {
+        element = null;
+      }
+
+      if (element && element.length === 0 && tryCount < 10) {
+        setTimeout(() => logItem(tryCount++), 100);
+      } else if (element === null) {
+        console.log(`[${index + 1}/${this.items.length}]`, item.type, item.title, 'no popover element');
+      } else if (element === undefined) {
+        console.log(`[${index + 1}/${this.items.length}]`, item.type, item.title, 'popover element not found');
+      } else {
+        console.log(`[${index + 1}/${this.items.length}]`, item.type, item.title, 'popover', element[0]);
+      }
+    };
+
+    logItem();
+
     if (item.type === 'story' && item.initialize) {
 
       const tryToInitialize = (init: () => boolean, retryCount = 0) => {
