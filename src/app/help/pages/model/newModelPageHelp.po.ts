@@ -1,10 +1,20 @@
 import { upperCaseFirst } from 'change-case';
 import { child, editableByTitle, editableFocus, editableMultipleByTitle, input, multiInput } from 'app/help/selectors';
-import { createStory, createNavigatingClickNextCondition, createExpectedStateNextCondition, createClickNextCondition } from 'app/help/contract';
+import {
+  createClickNextCondition,
+  createExpectedStateNextCondition,
+  createExplicitNextCondition,
+  createNavigatingClickNextCondition,
+  createScrollNone,
+  createStory,
+  Story
+} from 'app/help/contract';
 import { editableMargin, initialInputValue, validInput } from 'app/help/utils';
 import { KnownModelType } from 'app/types/entity';
-import { createExplicitNextCondition, createScrollNone } from 'app/help/contract';
-import { gettextCatalog as GettextCatalog } from 'angular-gettext';
+import * as SearchClassificationModal from './modal/searchClassificationModalHelp.po';
+import * as SearchOrganizationsModal from './modal/searchOrganizationModalHelp.po';
+import { Localizable } from 'yti-common-ui/types/localization';
+import { Language } from 'app/types/language';
 
 const form = () => jQuery('form');
 
@@ -15,8 +25,8 @@ export function enterModelPrefix(prefix: string) {
 
   return createStory({
 
-    title: 'Prefix',
-    content: 'Prefix info',
+    title: { key: 'Prefix' },
+    content: { key: 'Prefix info' },
     popover: { element: enterModelPrefixInputElement, position: 'right-down' },
     focus: { element: editableFocus(enterModelPrefixElement), margin: editableMargin },
     nextCondition: createExpectedStateNextCondition(validInput(enterModelPrefixInputElement)),
@@ -25,7 +35,7 @@ export function enterModelPrefix(prefix: string) {
   });
 }
 
-export function enterModelLabel(type: KnownModelType, label: string, gettextCatalog: GettextCatalog) {
+export function enterModelLabel(type: KnownModelType, label: string) {
 
   const title = upperCaseFirst(type) + ' label';
   const enterModelLabelElement = editableByTitle(form, title);
@@ -33,17 +43,17 @@ export function enterModelLabel(type: KnownModelType, label: string, gettextCata
 
   return createStory({
 
-    title: title,
-    content: title + ' info',
+    title: { key: title },
+    content: { key: title + ' info' },
     popover: { element: enterModelLabelInputElement, position: 'right-down' },
     focus: { element: editableFocus(enterModelLabelElement), margin: editableMargin },
     nextCondition: createExpectedStateNextCondition(validInput(enterModelLabelInputElement)),
     reversible: true,
-    initialize: initialInputValue(enterModelLabelInputElement, gettextCatalog.getString(label))
+    initialize: initialInputValue(enterModelLabelInputElement, label)
   });
 }
 
-export function enterModelComment(initialValue: string, gettextCatalog: GettextCatalog) {
+export function enterModelComment(initialValue: string) {
 
   const title = 'Description';
   const enterModelCommentElement = editableByTitle(form, title);
@@ -51,13 +61,13 @@ export function enterModelComment(initialValue: string, gettextCatalog: GettextC
 
   return createStory({
 
-    title: title,
-    content: title + ' info',
+    title: { key: title },
+    content: { key: title + ' info' },
     popover: { element: enterModelCommentInputElement, position: 'right-down' },
     focus: { element: editableFocus(enterModelCommentElement), margin: editableMargin },
     nextCondition: createExpectedStateNextCondition(validInput(enterModelCommentInputElement)),
     reversible: true,
-    initialize: initialInputValue(enterModelCommentInputElement, gettextCatalog.getString(initialValue))
+    initialize: initialInputValue(enterModelCommentInputElement, initialValue)
   });
 }
 
@@ -65,8 +75,8 @@ const enterModelLanguageElement = editableMultipleByTitle(form, 'Model languages
 const enterModelLanguageInputElement = multiInput(enterModelLanguageElement);
 export const enterModelLanguage = createStory({
 
-  title: 'Model languages',
-  content: 'Model languages info',
+  title: { key: 'Model languages' },
+  content: { key: 'Model languages info' },
   popover: { element: enterModelLanguageInputElement, position: 'right-down' },
   focus: { element: editableFocus(enterModelLanguageElement), margin: editableMargin },
   reversible: true,
@@ -76,8 +86,8 @@ export const enterModelLanguage = createStory({
 const addClassificationElement = () => jQuery('classifications-view button');
 export const addClassification = createStory({
 
-  title: 'Add classification',
-  content: 'Add classification info',
+  title: { key: 'Add classification' },
+  content: { key: 'Add classification info' },
   popover: { element: addClassificationElement, position: 'left-down' },
   focus: { element: addClassificationElement },
   reversible: true,
@@ -87,8 +97,8 @@ export const addClassification = createStory({
 const addContributorElement = () => jQuery('contributors-view button');
 export const addContributor = createStory({
 
-  title: 'Add contributor',
-  content: 'Add contributor info',
+  title: { key: 'Add contributor' },
+  content: { key: 'Add contributor info' },
   popover: { element: addContributorElement, position: 'left-down' },
   focus: { element: addContributorElement },
   reversible: true,
@@ -97,7 +107,7 @@ export const addContributor = createStory({
 
 const focusClassificationsElement = () => jQuery('classifications-view editable-table');
 export const focusClassifications = createStory({
-  title: 'Classifications are here',
+  title: { key: 'Classifications are here' },
   scroll: createScrollNone(),
   popover: { element: focusClassificationsElement, position: 'left-down' },
   focus: { element: focusClassificationsElement },
@@ -107,7 +117,7 @@ export const focusClassifications = createStory({
 
 const focusContributorsElement = () => jQuery('contributors-view editable-table');
 export const focusContributors = createStory({
-  title: 'Contributors are here',
+  title: { key: 'Contributors are here' },
   scroll: createScrollNone(),
   popover: { element: focusContributorsElement, position: 'left-down' },
   focus: { element: focusContributorsElement },
@@ -117,10 +127,43 @@ export const focusContributors = createStory({
 
 const saveUnsavedModelElement = child(form, 'button.save');
 export const saveUnsavedModel = createStory({
-
-  title: 'Save changes',
-  content: 'Changes need to be saved',
+  title: { key: 'Save changes' },
+  content: { key: 'Changes need to be saved' },
   popover: { element: saveUnsavedModelElement, position: 'left-down' },
   focus: { element: saveUnsavedModelElement },
   nextCondition: createNavigatingClickNextCondition(saveUnsavedModelElement)
 });
+
+export interface CreateModelDetails {
+  model: {
+    type: KnownModelType;
+    prefix: string;
+    label: Localizable;
+    comment: Localizable;
+  };
+  classification: {
+    name: Localizable;
+    id: string;
+  },
+  organization: {
+    name: Localizable;
+    id: string;
+  }
+}
+
+export function createModelItems(details: CreateModelDetails, lang: Language): Story[] {
+
+  return [
+    enterModelLabel(details.model.type, details.model.label[lang]),
+    enterModelComment(details.model.comment[lang]),
+    enterModelLanguage,
+    enterModelPrefix(details.model.prefix),
+    addClassification,
+    SearchClassificationModal.selectClassification(details.classification.name[lang], details.classification.id),
+    focusClassifications,
+    addContributor,
+    SearchOrganizationsModal.selectOrganization(details.organization.name[lang], details.organization.id),
+    focusContributors,
+    saveUnsavedModel
+  ]
+}

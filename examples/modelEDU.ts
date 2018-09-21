@@ -8,12 +8,15 @@ function breakCyclicDependency(id: string) {
   return modelPrefix + ':' + id;
 }
 
-export const model = loader.createLibrary({
+export const model = loader.createModel({
+  type: 'library',
   prefix: modelPrefix,
   label:   { fi: 'Opiskelun, opetuksen ja koulutuksen tietokomponentit',
              en: 'Core Vocabulary of Education' },
   comment: { fi: 'Opiskelun, opetuksen ja koulutuksen yhteiset tietokomponentit',
              en: 'Common core data model of teaching, learning and education' },
+  organizations: ['88ce73b9-376c-4ff1-8c51-e4159b0af75c'],
+  classifications: ['P1'],
   namespaces: [
     Jhs.model,
     {

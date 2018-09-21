@@ -1,12 +1,15 @@
 import { INgModelController } from 'angular';
-import { upperCaseFirst, lowerCaseFirst } from 'change-case';
+import { lowerCaseFirst, upperCaseFirst } from 'change-case';
 import { anyMatching, contains, keepMatching } from 'yti-common-ui/utils/array';
 import { Property } from 'app/entities/class';
 import { createScrollWithDefault } from './contract';
+import { ClassDetails, PredicateDetails } from '../services/entityLoader';
+import { Language } from 'app/types/language';
+import { KnownPredicateType } from 'app/types/entity';
 
 export const editableMargin = { left: 20, right: 20, bottom: 15 };
 
-export function getModalController<T>(controllerName = 'ctrl') {
+export function getModalController<T>(controllerName = '$ctrl') {
   return (jQuery('.modal').scope() as any)[controllerName] as T;
 }
 
@@ -79,11 +82,7 @@ function normalizeAsId(resourceName: string) {
 }
 
 export function modelIdFromPrefix(modelPrefix: string) {
-  return defaultModelNamespace(modelPrefix);
-}
-
-export function defaultModelNamespace(prefix: string) {
-  return `http://uri.suomi.fi/datamodel/ns/${prefix}`;
+  return `http://uri.suomi.fi/datamodel/ns/${modelPrefix}`
 }
 
 export function classNameToResourceIdName(className: string) {
@@ -98,12 +97,34 @@ export function classIdFromNamespaceId(namespaceId: string, name: string) {
   return namespaceId + '#' + classNameToResourceIdName(name);
 }
 
+export function classIdFromPrefixAndName(prefix: string, name: string) {
+  return classIdFromNamespaceId(modelIdFromPrefix(prefix), name);
+}
+
+export function classIdAndNameFromHelpData(data: { prefix: string, details: ClassDetails }, lang: Language) {
+  return {
+    id: data.details.id || classIdFromPrefixAndName(data.prefix, data.details.label.fi),
+    name: data.details.label[lang]
+  };
+}
+
 export function predicateIdFromNamespaceId(namespaceId: string, name: string) {
   return namespaceId + '#' + predicateNameToResourceIdName(name);
 }
 
+export function predicateIdFromPrefixAndName(prefix: string, name: string) {
+  return predicateIdFromNamespaceId(modelIdFromPrefix(prefix), name);
+}
+
+export function predicateIdAndNameFromHelpData(data: { type: KnownPredicateType, prefix: string, details: PredicateDetails }, lang: Language) {
+  return {
+    id: data.details.id || predicateIdFromPrefixAndName(data.prefix, data.details.label.fi),
+    name: data.details.label[lang]
+  };
+}
+
 export const isExpectedProperty = (expectedProperties: string[]) =>
-  (property: Property) => anyMatching(expectedProperties, predicateCurie => property.predicateId.curie === predicateCurie);
+  (property: Property) => anyMatching(expectedProperties, predicateUri => property.predicateId.uri === predicateUri);
 
 export function onlyProperties(properties: Property[], expectedProperties: string[]) {
   keepMatching(properties, isExpectedProperty(expectedProperties));
@@ -117,4 +138,8 @@ export function moveCursorToEnd(input: JQuery) {
       setTimeout(() => (input[0] as HTMLInputElement).setSelectionRange(valueLength, valueLength));
     }
   }
+}
+
+export function formatSearch(name: string, length = 4) {
+  return name.toLowerCase().substring(0, Math.min(length, name.length))
 }

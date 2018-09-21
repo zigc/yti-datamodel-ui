@@ -52,8 +52,8 @@ export interface Notification extends NotificationDetails {
 }
 
 export interface NotificationDetails {
-  title: string;
-  content?: string;
+  title: { key: string, context?: any };
+  content?: { key: string, context?: any };
 }
 
 export interface Story extends StoryDetails {
@@ -61,8 +61,8 @@ export interface Story extends StoryDetails {
 }
 
 export interface StoryDetails {
-  title: string;
-  content?: string;
+  title: { key: string, context?: any };
+  content?: { key: string, context?: any };
   scroll?: Scroll; // when not defined it will be implicitly ScrollWithDefault to popover element with 100px offset
   popover: {
     element: () => JQuery,

@@ -24,6 +24,7 @@ import { AuthorizationManagerService } from 'app/services/authorizationManagerSe
 import { Organization } from 'app/entities/organization';
 import { labelNameToResourceIdIdentifier } from 'yti-common-ui/utils/resource';
 import { tap } from 'rxjs/operators';
+import { InteractiveHelp } from '../help/contract';
 
 @LegacyComponent({
   template: require('./frontPage.html'),
@@ -35,7 +36,7 @@ export class FrontPageComponent implements HelpProvider {
 
   applicationCtrl: ApplicationComponent;
 
-  helps = this.frontPageHelpService.getHelps();
+  helps: InteractiveHelp[] = [];
 
   modelTypes: FilterOptions<KnownModelType>;
   organizations: FilterOptions<Organization>;
@@ -67,6 +68,10 @@ export class FrontPageComponent implements HelpProvider {
 
     locationService.atFrontPage();
     const localizer = languageService.createLocalizer();
+
+    $scope.$watch(() => languageService.UILanguage, () => {
+      this.helps = frontPageHelpService.getHelps();
+    });
 
     this.modelTypes = [null, 'library', 'profile'].map(type => {
       return {

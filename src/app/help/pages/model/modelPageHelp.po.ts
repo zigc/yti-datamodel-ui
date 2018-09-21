@@ -1,16 +1,15 @@
-import {
-  createClickNextCondition, createStory, createNavigatingClickNextCondition,
-  createScrollWithDefault, Story, createModifyingClickNextCondition
-} from 'app/help/contract';
+import { createClickNextCondition, createModifyingClickNextCondition, createNavigatingClickNextCondition, createScrollWithDefault, createStory, Story } from 'app/help/contract';
 import { child, modelPanelElement } from 'app/help/selectors';
 import { KnownModelType, KnownPredicateType } from 'app/types/entity';
-import { scrollToTop, classIdFromNamespaceId } from 'app/help/utils';
-import { gettextCatalog as GettextCatalog } from 'angular-gettext';
+import { classIdAndNameFromHelpData, scrollToTop } from 'app/help/utils';
 import * as SearchClassModal from './modal/searchClassModalHelp.po';
 import * as AddPropertiesFromClass from './modal/addPropertiesFromClassModalHelp.po';
 import * as ModelView from './modelViewHelp.po';
 import * as ClassView from './classViewHelp.po';
 import * as ClassForm from './classFormHelp.po';
+import { Localizable } from 'yti-common-ui/types/localization';
+import { Language } from 'app/types/language';
+import { ClassDetails } from 'app/services/entityLoader';
 
 export function openModelDetails(type: KnownModelType) {
 
@@ -18,8 +17,8 @@ export function openModelDetails(type: KnownModelType) {
 
   return createStory({
 
-    title: `Open ${type} details`,
-    content: `Open ${type} details description`,
+    title: { key: `Open ${type} details` },
+    content: { key: `Open ${type} details description` },
     scroll: scrollToTop,
     popover: { element: openModelDetailsElement, position: 'bottom-right' },
     focus: { element: openModelDetailsElement },
@@ -32,51 +31,58 @@ export function openAddResource(type: 'class' | KnownPredicateType) {
   const openAddResourceElement = () => jQuery('button.add-new-button');
 
   return createStory({
+    title: { key: 'Add ' + type },
+    content: { key: 'Add ' + type + ' description' },
     scroll: createScrollWithDefault(modelPanelElement),
     popover: { element: openAddResourceElement, position: 'right-down' },
     focus: { element: openAddResourceElement },
-    title: 'Add ' + type,
-    content: 'Add ' + type + ' description',
     nextCondition: createClickNextCondition(openAddResourceElement)
   });
 }
 
-export function selectClass(namespaceId: string, name: string) {
+export function selectClass(prefix: string, klass: ClassDetails, lang: Language) {
 
-  const selectClassElement = child(modelPanelElement, `li#${CSS.escape(classIdFromNamespaceId(namespaceId, name) + '_tabset_link' )}`);
+  const { id, name } = classIdAndNameFromHelpData({prefix, details: klass}, lang);
+  const selectClassElement = child(modelPanelElement, `li#${CSS.escape(id + '_tabset_link' )}`);
 
   return createStory({
+    title: { key: 'Select class', context: { name: name.toLowerCase() } },
+    content: { key: 'Select class description', context: { name: name.toLowerCase()} },
     scroll: createScrollWithDefault(modelPanelElement),
     popover: { element: selectClassElement, position: 'right-down' },
     focus: { element: selectClassElement },
-    title: 'Select ' + name.toLowerCase(),
-    content: 'Select ' + name.toLowerCase() + ' description',
     nextCondition: createNavigatingClickNextCondition(selectClassElement)
   });
 }
 
-export function specializeClassItems(klass: { namespaceId: string, name: string, properties: string[] }, gettextCatalog: GettextCatalog): Story[] {
+export function specializeClassItems(klass: { prefix: string, details: ClassDetails, properties: string[] }, lang: Language): Story[] {
+
+  const { id, name } = classIdAndNameFromHelpData(klass, lang);
+
   return [
     openAddResource('class'),
-    ...SearchClassModal.findAndSelectExistingClassItems(klass.namespaceId, klass.name, false, gettextCatalog),
+    ...SearchClassModal.findAndSelectExistingClassItems(name, id, false),
     ...AddPropertiesFromClass.selectAndConfirmPropertiesItems('Select name and description', true, klass.properties),
     ClassForm.focusClass(ClassView.element),
     ClassView.saveClassChanges
   ];
 }
 
-export function assignClassItems(klass: { namespaceId: string, name: string }, gettextCatalog: GettextCatalog): Story[] {
+export function assignClassItems(klass: { prefix: string, details: ClassDetails }, lang: Language): Story[] {
+
+  const { id, name } = classIdAndNameFromHelpData(klass, lang)
+
   return [
     openAddResource('class'),
-    ...SearchClassModal.findAndSelectExistingClassItems(klass.namespaceId, klass.name, true, gettextCatalog),
+    ...SearchClassModal.findAndSelectExistingClassItems(name, id, true),
     ClassForm.focusClass(ClassView.element)
   ];
 }
 
-export function createNewClassItems(klass: { name: string, comment: string }, gettextCatalog: GettextCatalog): Story[] {
+export function createNewClassItems(klass: { label: Localizable, comment: Localizable }, lang: Language): Story[] {
   return [
     openAddResource('class'),
-    ...SearchClassModal.findAndCreateNewBasedOnConceptSuggestionItems(klass.name, klass.comment, gettextCatalog),
+    ...SearchClassModal.findAndCreateNewBasedOnConceptSuggestionItems(klass.label[lang], klass.comment[lang]),
     ClassForm.focusClass(ClassView.element)
   ];
 }

@@ -2,7 +2,7 @@ import { createStory, createExplicitNextCondition, createScrollWithDefault } fro
 const focusVisualizationElement = () => jQuery('class-visualization');
 
 export const focusVisualization = createStory({
-  title: 'Classes can be seen visually here',
+  title: { key: 'Classes can be seen visually here' },
   scroll: createScrollWithDefault(focusVisualizationElement),
   popover: { element: focusVisualizationElement, position: 'left-down' },
   focus: { element: focusVisualizationElement },

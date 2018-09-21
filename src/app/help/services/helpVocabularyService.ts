@@ -2,80 +2,26 @@ import { VocabularyService } from 'app/services/vocabularyService';
 import { ResetableService } from './resetableService';
 import { IPromise, IQService } from 'angular';
 import { Language } from 'app/types/language';
-import { Vocabulary, Concept } from 'app/entities/vocabulary';
+import { Concept, Vocabulary } from 'app/entities/vocabulary';
 import { Uri } from 'app/entities/uri';
-import * as frames from 'app/entities/frames';
 import { ResourceStore } from './resourceStore';
 import { analyze } from 'app/components/filter/textAnalyzer';
-import { GraphData } from 'app/types/entity';
-import { Url } from 'app/entities/uri';
-import { FrameService } from 'app/services/frameService';
 import { Localizable } from 'yti-common-ui/types/localization';
-import { v4 as uuid } from 'uuid';
-import { requireDefined } from 'yti-common-ui/utils/object';
+import { isDefined, requireDefined } from 'yti-common-ui/utils/object';
+import { EntityCreatorService } from './entityCreatorService';
 
-const context = {
-  prefLabel : { '@id' : 'http://www.w3.org/2004/02/skos/core#prefLabel' },
-  definition : { '@id' : 'http://www.w3.org/2004/02/skos/core#definition' },
-  description : { '@id' : 'http://purl.org/dc/terms/description' },
-  inScheme : { '@id' : 'http://www.w3.org/2004/02/skos/core#inScheme', '@type' : '@id' },
-  id : { '@id' : 'http://termed.thl.fi/meta/id' },
-  graph : { '@id' : 'http://termed.thl.fi/meta/graph' },
-  type : { '@id' : 'http://termed.thl.fi/meta/type' },
-  uri : { '@id' : 'http://termed.thl.fi/meta/uri' },
+export const helpVocabularyName: Localizable = {
+  fi: 'Julkisen hallinnon yhteinen sanasto',
+  en: 'Finnish Public Sector Terminological Glossary (Controlled Vocabulary)'
 };
 
-function toJsonLDLocalizations(localizable: Localizable) {
-  return Object.entries(localizable).map(([lang, value]) => {
-    return {
-      '@language': lang,
-      '@value': value
-    }
-  });
+export const helpVocabularyId = 'http://uri.suomi.fi/terminology/jhs/terminological-vocabulary-1';
+
+export function helpConceptIdForIndex(index: number) {
+  return 'http://uri.suomi.fi/terminology/jhs/concept-' + (index + 1);
 }
 
-function createVocabularyJsonLD(prefix: string, index: number, label: Localizable, description: Localizable) {
-
-  const id = `http://uri.suomi.fi/terminology/${prefix}/terminological-vocabulary-${index}`;
-
-  return {
-    '@graph': {
-      '@id': id,
-      '@type': 'skos:ConceptScheme',
-      graph: uuid(),
-      id: uuid(),
-      type: 'TerminologicalVocabulary',
-      uri: id,
-      prefLabel: toJsonLDLocalizations(label),
-      description: toJsonLDLocalizations(description)
-    },
-    '@context': context
-  };
-}
-
-function createConceptJsonLD(vocabulary: Vocabulary, index: number, label: Localizable, definition: Localizable) {
-
-  const vocabularyId = vocabulary.id.uri;
-  const vocabularyNamespace = vocabularyId.substr(0, vocabularyId.indexOf('terminological-vocabulary-'));
-  const id = vocabularyNamespace + 'concept' + index;
-
-  return {
-    '@graph': [
-      {
-        '@id' : id,
-        '@type' : 'skos:Concept',
-        inScheme : vocabulary.id.uri,
-        id : uuid(),
-        graph : vocabulary.vocabularyGraph,
-        definition : toJsonLDLocalizations(definition),
-        prefLabel : toJsonLDLocalizations(label)
-      },
-      vocabulary.graph
-    ],
-    '@context': context
-  };
-}
-
+// TODO Move vocabulary initialization as EntityLoader responsibility
 export class InteractiveHelpVocabularyService implements VocabularyService, ResetableService {
 
   private vocabularyIndex = 0;
@@ -85,7 +31,7 @@ export class InteractiveHelpVocabularyService implements VocabularyService, Rese
   conceptStore = new ResourceStore<Concept>();
 
   constructor(private $q: IQService,
-              private frameService: FrameService) {
+              private entityCreatorService: EntityCreatorService) {
     'ngInject';
   }
 
@@ -96,57 +42,62 @@ export class InteractiveHelpVocabularyService implements VocabularyService, Rese
     this.conceptIndex = 0;
     this.conceptStore.clear();
 
-    // TODO this logic/data should be in callers of HelpBuilder
-    return this.addVocabulary('jhs', { fi: 'Julkisen hallinnon yhteinen sanasto' }, {})
-      .then(jhs => {
-
-        return this.$q.all([
-          this.addConcept(jhs, { fi: 'omistaja' }, { fi: 'omistajan määritelmä' })
-        ]);
-      });
+    return this.entityCreatorService.createVocabulary({
+      prefix: 'jhs',
+      index: ++this.vocabularyIndex,
+      label: helpVocabularyName,
+      description: {
+        en: 'The Finnish Public Sector Terminological Glossary is a controlled vocabulary consisting of terms representing concepts that are defined in accordance with the Finnish Public Sector Recommendation JHS175. The concepts form a shared and harmonized core vocabulary for all public sector organizations.'
+      }
+    }).then(vocab => this.vocabularyStore.add(vocab));
   }
 
   getAllVocabularies(): IPromise<Vocabulary[]> {
-    return this.$q.resolve(this.vocabularyStore.findAll(() => true));
+    return this.$q.resolve(this.vocabularyStore.values());
   }
 
   searchConcepts(searchText: string, vocabulary?: Vocabulary): IPromise<Concept[]> {
+
+    console.log(searchText);
+    console.log(this.conceptStore);
+
     return this.$q.resolve(this.conceptStore.findAll(c => {
       const analysis = analyze(searchText, c, [x => x.label, x => x.definition]);
-      return !!analysis.matchScore && (!vocabulary || vocabulary.id.equals(c.vocabulary.id));
+      return isDefined(analysis.matchScore) && (!vocabulary || vocabulary.id.equals(c.vocabulary.id));
     }));
   }
 
   createConceptSuggestion(vocabulary: Vocabulary, label: string, comment: string, lang: Language): IPromise<Uri> {
-    return this.addConcept(vocabulary, { [lang]: label }, { [lang]: comment }).then(c => c.id);
+
+    return this.entityCreatorService.createConcept({
+      vocabulary,
+      index: ++this.conceptIndex,
+      label: { [lang]: label },
+      definition: { [lang]: comment }
+    }).then(concept => {
+      this.conceptStore.add(concept);
+      return concept.id;
+    });
   }
 
   getConcept(id: Uri): IPromise<Concept> {
     return this.$q.when(requireDefined(this.conceptStore.findFirst(cs => cs.id.equals(id))));
   }
 
-  private addConcept(vocabulary: Vocabulary, label: Localizable, definition: Localizable): IPromise<Concept> {
+  createConcept(label: Localizable, definition: Localizable): IPromise<Concept> {
 
-    const data = createConceptJsonLD(vocabulary, ++this.conceptIndex, label, definition);
-
-    return this.deserializeConcept(data, data['@graph'][0]['@id']).then(c => {
-      this.conceptStore.add(c);
-      return c;
-    });
-  }
-
-  private addVocabulary(prefix: string, label: Localizable, description: Localizable): IPromise<Vocabulary> {
-    return this.deserializeVocabulary(createVocabularyJsonLD(prefix, ++this.vocabularyIndex, label, description)).then(v => {
-      this.vocabularyStore.add(v);
-      return v;
-    });
-  }
-
-  private deserializeConcept(data: GraphData, id: Url): IPromise<Concept> {
-    return this.frameService.frameAndMap(data, false, frames.conceptFrame(data, id), () => Concept).then(requireDefined);
-  }
-
-  private deserializeVocabulary(data: GraphData): IPromise<Vocabulary> {
-    return this.frameService.frameAndMap(data, false, frames.vocabularyFrame(data), () => Vocabulary).then(requireDefined);
+    return this.getAllVocabularies()
+      .then(vocabs => vocabs[0])
+      .then(vocabulary => {
+        return this.entityCreatorService.createConcept({
+          vocabulary,
+          index: ++this.conceptIndex,
+          label,
+          definition
+        }).then(concept => {
+          this.conceptStore.add(concept);
+          return concept;
+        });
+      });
   }
 }

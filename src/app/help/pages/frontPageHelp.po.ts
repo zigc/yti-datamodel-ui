@@ -12,8 +12,8 @@ export function startModelCreation(type: KnownModelType): Story[] {
 
     createStory({
 
-      title: 'Add model',
-      content: 'Add model description',
+      title: { key: 'Add model' },
+      content: { key: 'Add model description' },
       popover: { element: startModelCreationButton, position: 'left-down' },
       focus: { element: startModelCreationButton },
       nextCondition: createClickNextCondition(startModelCreationButton)
@@ -21,8 +21,8 @@ export function startModelCreation(type: KnownModelType): Story[] {
 
     createStory({
 
-      title: 'Add ' + type,
-      content: 'Add ' + type + ' description',
+      title: { key: 'Add ' + type },
+      content: { key: 'Add ' + type + ' description' },
       popover: { element: dropdownSelectionElement, position: 'left-down' },
       focus: { element: dropdownSelectionElement },
       nextCondition: createNavigatingClickNextCondition(dropdownSelectionElement)

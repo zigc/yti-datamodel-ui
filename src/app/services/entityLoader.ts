@@ -7,17 +7,20 @@ import { Uri, Url } from 'app/entities/uri';
 import { DataType } from 'app/entities/dataTypes';
 import { identity, requireDefined } from 'yti-common-ui/utils/object';
 import { ConstraintType, KnownModelType, KnownPredicateType } from 'app/types/entity';
-import { ImportedNamespace, Model } from 'app/entities/model';
-import { Vocabulary } from 'app/entities/vocabulary';
+import { Model } from 'app/entities/model';
+import { Concept, Vocabulary } from 'app/entities/vocabulary';
 import { Class, Property } from 'app/entities/class';
 import { Association, Attribute, Predicate } from 'app/entities/predicate';
 import { VocabularyService } from './vocabularyService';
 import { firstMatching, keepMatching } from 'yti-common-ui/utils/array';
 import { Localizable } from 'yti-common-ui/types/localization';
 import { Status } from 'yti-common-ui/entities/status';
+import { EntityCreatorService } from '../help/services/entityCreatorService';
+import { Organization } from 'app/entities/organization';
+import { Classification } from 'app/entities/classification';
+import { InteractiveHelpVocabularyService } from '../help/services/helpVocabularyService';
 
-export type Resolvable<T> = IPromise<T>|(() => IPromise<T>);
-export type UriResolvable<T extends { id: Uri }> = Url|IPromise<T>|(() => IPromise<T>);
+export type Resolvable<T> = string|IPromise<T>|(() => IPromise<T>);
 
 export interface EntityDetails {
   label?: Localizable;
@@ -32,10 +35,13 @@ export interface ExternalNamespaceDetails {
 }
 
 export interface ModelDetails extends EntityDetails {
+  type: KnownModelType;
   label: Localizable;
   prefix: string;
-  vocabularies?: string[];
-  namespaces?: (UriResolvable<Model>|ExternalNamespaceDetails)[];
+  vocabularies?: Resolvable<Vocabulary>[];
+  namespaces?: (Resolvable<Model>|ExternalNamespaceDetails)[];
+  organizations: Resolvable<Organization>[];
+  classifications: Resolvable<Classification>[];
 }
 
 export interface ConstraintDetails {
@@ -47,17 +53,17 @@ export interface ConstraintDetails {
 export interface ClassDetails extends EntityDetails {
   label: Localizable;
   id?: string;
-  subClassOf?: UriResolvable<Class>;
-  concept?: Url|ConceptSuggestionDetails;
-  equivalentClasses?: UriResolvable<Class>[];
+  subClassOf?: Resolvable<Class>;
+  concept?: Url|ConceptDetails;
+  equivalentClasses?: Resolvable<Class>[];
   properties?: PropertyDetails[];
   constraint?: ConstraintDetails;
 }
 
 export interface ShapeDetails extends EntityDetails {
-  class: UriResolvable<Class>;
+  class: Resolvable<Class>;
   id?: string;
-  equivalentClasses?: UriResolvable<Class>[];
+  equivalentClasses?: Resolvable<Class>[];
   propertyFilter?: (accept: Property) => boolean;
   properties?: PropertyDetails[];
   constraint?: ConstraintDetails;
@@ -66,9 +72,9 @@ export interface ShapeDetails extends EntityDetails {
 export interface PredicateDetails extends EntityDetails {
   label: Localizable;
   id?: string;
-  subPropertyOf?: UriResolvable<Predicate>;
-  concept?: string|ConceptSuggestionDetails;
-  equivalentProperties?: UriResolvable<Predicate>[];
+  subPropertyOf?: Resolvable<Predicate>;
+  concept?: string|ConceptDetails;
+  equivalentProperties?: Resolvable<Predicate>[];
 }
 
 export interface AttributeDetails extends PredicateDetails {
@@ -76,23 +82,37 @@ export interface AttributeDetails extends PredicateDetails {
 }
 
 export interface AssociationDetails extends PredicateDetails {
-  valueClass?: UriResolvable<Class>;
+  valueClass?: Resolvable<Class>;
 }
 
 export interface PropertyDetails extends EntityDetails {
-  predicate: UriResolvable<Predicate>;
+  predicate: Resolvable<Predicate>;
   example?: string;
   dataType?: DataType;
-  valueClass?: UriResolvable<Class>;
+  valueClass?: Resolvable<Class>;
   minCount?: number;
   maxCount?: number;
   pattern?: string;
   internalId?: string;
 }
 
+export interface ConceptDetails {
+  label: Localizable,
+  definition: Localizable
+}
+
 export interface ConceptSuggestionDetails {
   label: string;
   comment: string;
+}
+
+export type VocabularyDefinition = ConceptDetails[];
+
+export interface ModelWithResourcesDefinition {
+  model: ModelDetails;
+  classes: { [name: string]: ClassDetails };
+  attributes: { [name: string]: AttributeDetails };
+  associations: { [name: string]: AssociationDetails };
 }
 
 export class EntityLoaderService {
@@ -102,20 +122,52 @@ export class EntityLoaderService {
               private predicateService: PredicateService,
               private classService: ClassService,
               private vocabularyService: VocabularyService,
+              private helpVocabularyService: InteractiveHelpVocabularyService|null,
+              private entityCreatorService: EntityCreatorService,
               private resetService: ResetService) {
     'ngInject';
   }
 
   create(shouldReset: boolean): EntityLoader {
-    return new EntityLoader(this.$q, this.modelService, this.predicateService, this.classService, this.vocabularyService, this.resetService, shouldReset);
+    return new EntityLoader(
+      this.$q,
+      this.modelService,
+      this.predicateService,
+      this.classService,
+      this.vocabularyService,
+      this.helpVocabularyService,
+      this.entityCreatorService,
+      this.resetService,
+      shouldReset
+    );
   }
 }
 
-const context = {
-  'skos' : 'http://www.w3.org/2004/02/skos/core#',
-  'dc' : 'http://purl.org/dc/elements/1.1/',
-  'schema' : 'http://schema.org/',
-  'foaf' : 'http://xmlns.com/foaf/0.1/'
+// copy-paste with entityCreatorService
+const technicalNamespaces = {
+  'schema': 'http://schema.org/',
+  'dcap': 'http://purl.org/ws-mmi-dc/terms/',
+  'void': 'http://rdfs.org/ns/void#',
+  'adms': 'http://www.w3.org/ns/adms#',
+  'skosxl': 'http://www.w3.org/2008/05/skos-xl#',
+  'dcam': 'http://purl.org/dc/dcam/',
+  'owl': 'http://www.w3.org/2002/07/owl#',
+  'afn': 'http://jena.hpl.hp.com/ARQ/function#',
+  'xsd': 'http://www.w3.org/2001/XMLSchema#',
+  'skos': 'http://www.w3.org/2004/02/skos/core#',
+  'rdfs': 'http://www.w3.org/2000/01/rdf-schema#',
+  'iow': 'http://uri.suomi.fi/datamodel/ns/iow#',
+  'sd': 'http://www.w3.org/ns/sparql-service-description#',
+  'at': 'http://publications.europa.eu/ontology/authority/',
+  'sh': 'http://www.w3.org/ns/shacl#',
+  'rdf': 'http://www.w3.org/1999/02/22-rdf-syntax-ns#',
+  'dcterms': 'http://purl.org/dc/terms/',
+  'text': 'http://jena.apache.org/text#',
+  'termed': 'http://termed.thl.fi/meta/',
+  'prov': 'http://www.w3.org/ns/prov#',
+  'foaf': 'http://xmlns.com/foaf/0.1/',
+  'ts': 'http://www.w3.org/2003/06/sw-vocab-status/ns#',
+  'dc': 'http://purl.org/dc/elements/1.1/'
 };
 
 export class EntityLoader {
@@ -123,11 +175,15 @@ export class EntityLoader {
   private initialized: IPromise<any>;
   private actions: IPromise<any>[] = [];
 
+  private context: any = { ...technicalNamespaces };
+
   constructor(private $q: IQService,
               private modelService: ModelService,
               private predicateService: PredicateService,
               private classService: ClassService,
               private vocabularyService: VocabularyService,
+              private helpVocabularyService: InteractiveHelpVocabularyService|null,
+              private entityCreatorService: EntityCreatorService,
               resetService: ResetService,
               shouldReset: boolean) {
     'ngInject';
@@ -140,18 +196,49 @@ export class EntityLoader {
     reset.then(() => initialized.resolve());
   }
 
-  addAction<T>(action: IPromise<T>, details: any): IPromise<T> {
+  private addAction<T>(action: IPromise<T>, details: any): IPromise<T> {
     const withDetails = action.then(identity, failWithDetails(this.$q, details));
     this.actions.push(withDetails);
     return withDetails;
   }
 
-  createUri(value: string) {
-    return new Uri(value, context);
-  }
-
   get result(): IPromise<any> {
     return this.$q.all(this.actions);
+  }
+
+  createModelWithResources(modelWithResources: ModelWithResourcesDefinition) {
+
+    const modelPromise = this.createModel(modelWithResources.model);
+    const promises: IPromise<any>[] = [modelPromise];
+
+    for (const attributeDetails of Object.values(modelWithResources.attributes)) {
+      promises.push(this.createAttribute(modelPromise, attributeDetails));
+    }
+
+    for (const associationDetails of Object.values(modelWithResources.associations)) {
+      promises.push(this.createAssociation(modelPromise, associationDetails));
+    }
+
+    this.$q.all(promises).then(() => {
+      for (const classDetails of Object.values(modelWithResources.classes)) {
+        promises.push(this.createClass(modelPromise, classDetails));
+      }
+    });
+  }
+
+  createConcept(details: ConceptDetails): IPromise<Concept> {
+
+    if (!this.helpVocabularyService) {
+      throw new Error('Concept creation is only available to help');
+    }
+
+    return this.addAction(this.helpVocabularyService.createConcept(details.label, details.definition), details);
+  }
+
+  createVocabulary(details: VocabularyDefinition) {
+    for (const conceptDetails of details) {
+      this.createConcept(conceptDetails);
+    }
   }
 
   createConceptSuggestion(details: ConceptSuggestionDetails, modelPromise: IPromise<Model>): IPromise<Uri> {
@@ -161,93 +248,90 @@ export class EntityLoader {
     return this.addAction(result, details);
   }
 
-  getModel(id: Uri|Url) {
-    return this.modelService.getModelByUrn(id);
-  }
+  createModel(details: ModelDetails): IPromise<Model> {
 
-  createModel(type: KnownModelType, details: ModelDetails): IPromise<Model> {
+    const classificationsPromise = this.$q.all((details.classifications || []).map(asIdentifierPromise));
+    const organizationsPromise = this.$q.all((details.organizations || []).map(resolvable => asUuidPromise(resolvable)));
+
+    const allVocabulariesPromise = this.vocabularyService.getAllVocabularies();
+
+    const fetchVocabulary = (id: string) => allVocabulariesPromise.then(
+      allVocabularies => requireDefined(firstMatching(allVocabularies, (voc: Vocabulary) => voc.id.toString() === id), 'vocabulary not found')
+    );
+
     const result =
-      this.initialized.then(() =>
-        this.modelService.newModel(
-          details.prefix,
-          details.label['fi'],
-          ['P1'],
-          ['88ce73b9-376c-4ff1-8c51-e4159b0af75c'],
-          ['fi', 'en'],
-          type
-        )
-      ).then(model => this.$q.all([model, this.vocabularyService.getAllVocabularies()]))
-        .then(([model, vocabularies]) => {
-          setDetails(model, details);
+      this.initialized.then(() => this.$q.all([classificationsPromise, organizationsPromise]))
+        .then(([classifications, organizations]) =>
+          this.modelService.newModel(
+            details.prefix,
+            details.label['fi'],
+            classifications,
+            organizations,
+            ['fi', 'en'],
+            details.type)
+        ).then(model => {
 
-          const promises: IPromise<any>[] = [];
+        setDetails(model, details);
 
-          const resolveVocabulary = (importedVocabulary: string) => {
-            const vocabulary = firstMatching(vocabularies, (voc: Vocabulary) => voc.id.toString() === importedVocabulary);
+        this.context[model.prefix] = model.namespace;
 
-            if (!vocabulary) {
-              throw new Error('Vocabulary not found: ' + vocabulary);
-            }
+        const promises: IPromise<any>[] = [];
 
-            return vocabulary;
-          };
+        for (const vocabulary of details.vocabularies || []) {
+          promises.push(asPromise(vocabulary, fetchVocabulary)
+            .then(importedVocabulary => model.addVocabulary(importedVocabulary))
+          );
+        }
 
-          for (const importedVocabulary of details.vocabularies || []) {
-            model.addVocabulary(resolveVocabulary(importedVocabulary));
+        for (const namespace of details.namespaces || []) {
+
+          if (isResolvable(namespace)) {
+
+            const fetchImportedNamespace = (id: string) => this.modelService.getModelByUrn(id);
+
+            promises.push(
+              asPromise(namespace, fetchImportedNamespace)
+                .then(importedModel => this.entityCreatorService.createImportedNamespace(importedModel))
+                .then(ns => model.addImportedNamespace(ns))
+            );
+
+          } else if (isExternalNamespace(namespace)) {
+            promises.push(this.modelService.newNamespaceImport(namespace.namespace, namespace.prefix, namespace.label, 'fi')
+              .then(newImportedNamespace => model.addImportedNamespace(newImportedNamespace))
+            );
+          } else {
+            throw new Error('Unknown namespace: ' + namespace);
           }
+        }
 
-          for (const namespace of details.namespaces || []) {
-
-            if (isUriResolvable(namespace)) {
-              promises.push(
-                asUriPromise(assertExists(namespace, 'namespace for ' + model.label['fi']), context)
-                  .then(importedNamespace =>
-                    this.$q.all([this.$q.when(importedNamespace), this.modelService.getAllImportableNamespaces()]))
-                  .then(([importedNamespace, importableNamespaces]: [Uri, ImportedNamespace[]]) =>
-                    model.addImportedNamespace(requireDefined(firstMatching(importableNamespaces, ns => ns.id.equals(importedNamespace)))))
-              );
-            } else if (isExternalNamespace(namespace)) {
-              promises.push(this.modelService.newNamespaceImport(namespace.namespace, namespace.prefix, namespace.label, 'fi')
-                .then(newImportedNamespace => model.addImportedNamespace(newImportedNamespace))
-              );
-            } else {
-              throw new Error('Unknown namespace: ' + namespace);
-            }
-          }
-
-          return this.$q.all(promises)
-            .then(() => this.modelService.createModel(model))
-            .then(() => model);
-        });
+        return this.$q.all(promises)
+          .then(() => this.modelService.createModel(model))
+          .then(() => model);
+      });
 
     return this.addAction(result, details);
   }
 
-  createLibrary(details: ModelDetails): IPromise<Model> {
-    return this.createModel('library', details);
-  }
+  assignClass(modelPromise: IPromise<Model>, klass: Resolvable<Class>): IPromise<any> {
 
-  createProfile(details: ModelDetails): IPromise<Model> {
-    return this.createModel('profile', details);
-  }
+    const classIdPromise = asIdPromise(klass, this.context);
 
-  getClass(modelPromise: IPromise<Model>, id: Uri|Url) {
-    return modelPromise.then(model => this.classService.getClass(id, model));
-  }
-
-  assignClass(modelPromise: IPromise<Model>, classPromise: IPromise<Class>): IPromise<Class> {
     const result =
-      this.$q.all([modelPromise, classPromise])
-        .then(([model, klass]: [Model, Class]) => this.classService.assignClassToModel(klass.id, model).then(() => klass));
+      this.$q.all([modelPromise, classIdPromise])
+        .then(([model, classId]: [Model, Uri]) => this.classService.assignClassToModel(classId, model));
 
     return this.addAction(result, 'assign class');
   }
 
   specializeClass(modelPromise: IPromise<Model>, details: ShapeDetails): IPromise<Class> {
+
     const result =
-      this.$q.all([modelPromise, asUriPromise(assertExists(details.class, 'class to specialize for ' + details.class.toString()))])
-        .then(([model, classId]: [Model, Uri]) => this.classService.getClass(classId, model).then(klass => [model, klass]))
+      modelPromise.then(model => {
+        const fetchClass = (id: string) => this.classService.getClass(new Uri(id, this.context), model);
+        return asPromise(details.class, fetchClass).then(klass => [model, klass])
+      })
         .then(([model, klass]: [Model, Class]) => {
+          const fetchClass = (id: string) => this.classService.getClass(new Uri(id, this.context), model);
           return this.classService.newShape(klass, model, false, 'fi')
             .then(shape => {
               setDetails(shape, details);
@@ -270,7 +354,7 @@ export class EntityLoader {
               }
 
               for (const equivalentClass of details.equivalentClasses || []) {
-                promises.push(asUriPromise(assertExists(equivalentClass, 'equivalent class for ' + details.class.toString()), context, shape.context)
+                promises.push(asIdPromise(equivalentClass, this.context)
                   .then(id => shape.equivalentClasses.push(id)));
               }
 
@@ -279,7 +363,7 @@ export class EntityLoader {
                 shape.constraint.comment = details.constraint.comment;
 
                 for (const constraintShape of details.constraint.shapes) {
-                  promises.push(asPromise(assertExists(constraintShape, 'constraint item for ' + details.class.toString()))
+                  promises.push(asPromise(constraintShape, fetchClass)
                     .then(item => shape.constraint.addItem(item)));
                 }
               }
@@ -302,8 +386,11 @@ export class EntityLoader {
 
     const result =
       this.$q.all([modelPromise, conceptIdPromise])
-        .then(([model, conceptId]: [Model, Uri]) => this.classService.newClass(model, details.label['fi'], conceptId, 'fi'))
-        .then((klass: Class) => {
+        .then(([model, conceptId]: [Model, Uri]) => this.$q.all([model, this.classService.newClass(model, details.label['fi'], conceptId, 'fi')]))
+        .then(([model, klass]) => {
+
+          const fetchClass = (id: string) => this.classService.getClass(new Uri(id, this.context), model);
+
           setDetails(klass, details);
           setId(klass, details);
 
@@ -314,11 +401,13 @@ export class EntityLoader {
               .then(prop => klass.addProperty(prop)));
           }
 
-          assertPropertyValueExists(details, 'subClassOf for ' + details.label['fi']);
-          promises.push(asUriPromise(details.subClassOf!, context, klass.context).then(uri => klass.subClassOf = uri));
+          if (details.subClassOf) {
+            promises.push(asIdPromise(details.subClassOf, this.context)
+              .then(uri => klass.subClassOf = uri));
+          }
 
           for (const equivalentClass of details.equivalentClasses || []) {
-            promises.push(asUriPromise(assertExists(equivalentClass, 'equivalent class for ' + details.label['fi']), context, klass.context)
+            promises.push(asIdPromise(equivalentClass, this.context)
               .then(uri => klass.equivalentClasses.push(uri)));
           }
 
@@ -327,7 +416,7 @@ export class EntityLoader {
             klass.constraint.comment = details.constraint.comment;
 
             for (const constraintShape of details.constraint.shapes) {
-              promises.push(asPromise(assertExists(constraintShape, 'constraint item for ' + details.label['fi']))
+              promises.push(asPromise(constraintShape, fetchClass)
                 .then(item => klass.constraint.addItem(item)));
             }
           }
@@ -340,22 +429,19 @@ export class EntityLoader {
     return this.addAction(result, details);
   }
 
-  getPredicate(modelPromise: IPromise<Model>, id: Uri|Url) {
-    return modelPromise.then(model => this.predicateService.getPredicate(id, model));
-  }
-
   assignPredicate(modelPromise: IPromise<Model>, predicatePromise: IPromise<Predicate>): IPromise<Predicate> {
     const result =
       this.$q.all([modelPromise, predicatePromise])
-        .then(([model, predicate]: [Model, Predicate]) => this.predicateService.assignPredicateToModel(predicate.id, model).then(() => predicate));
+        .then(([model, predicate]: [Model, Predicate]) =>
+          this.predicateService.assignPredicateToModel(predicate.id, model).then(() => predicate));
 
     return this.addAction(result, 'assign predicate');
   }
 
-  createPredicate<T extends Attribute|Association>(modelPromise: IPromise<Model>,
-                                                   type: KnownPredicateType,
-                                                   details: PredicateDetails,
-                                                   mangler: (predicate: T) => IPromise<any>): IPromise<T> {
+  private createPredicate<T extends Attribute|Association>(modelPromise: IPromise<Model>,
+                                                           type: KnownPredicateType,
+                                                           details: PredicateDetails,
+                                                           mangler: (predicate: T) => IPromise<any>): IPromise<T> {
 
     const concept = details.concept;
     const conceptIdPromise = isConceptSuggestion(concept)
@@ -371,11 +457,13 @@ export class EntityLoader {
 
           const promises: IPromise<any>[] = [];
 
-          assertPropertyValueExists(details, 'subPropertyOf for ' + details.label['fi]']);
-          promises.push(asUriPromise(details.subPropertyOf!, context, predicate.context).then(uri => predicate.subPropertyOf = uri));
+          if (details.subPropertyOf) {
+            promises.push(asIdPromise(details.subPropertyOf, this.context)
+              .then(uri => predicate.subPropertyOf = uri));
+          }
 
           for (const equivalentProperty of details.equivalentProperties || []) {
-            promises.push(asUriPromise(assertExists(equivalentProperty, 'equivalent property for ' + details.label['fi']), context, predicate.context)
+            promises.push(asIdPromise(equivalentProperty, this.context)
               .then(uri => predicate.equivalentProperties.push(uri)));
           }
 
@@ -398,45 +486,49 @@ export class EntityLoader {
 
   createAssociation(modelPromise: IPromise<Model>, details: AssociationDetails): IPromise<Association> {
     return this.createPredicate<Association>(modelPromise, 'association', details, association => {
-      assertPropertyValueExists(details, 'valueClass');
-      return asUriPromise(details.valueClass!, context, association.context)
-        .then(uri => association.valueClass = uri);
+      if (details.valueClass) {
+        return asIdPromise(details.valueClass, this.context).then(uri => association.valueClass = uri);
+      } else {
+        return this.$q.when();
+      }
     });
   }
 
   createProperty(modelPromise: IPromise<Model>, details: PropertyDetails): IPromise<Property> {
     const result =
-      this.$q.all([modelPromise, asUriPromise(assertExists(details.predicate, 'predicate'))])
-        .then(([model, predicateId]: [Model, Uri]) => this.predicateService.getPredicate(predicateId, model).then(predicate => [model, predicate]))
-        .then(([model, p]: [Model, Predicate]) => {
-          if (p.normalizedType === 'property') {
+      modelPromise.then(model => {
+        const fetchPredicate = (id: string) => this.predicateService.getPredicate(id, model);
+        return asPromise(details.predicate, fetchPredicate).then(predicate => [model, predicate])
+      })
+        .then(([model, predicate]: [Model, Predicate]) => {
+          if (predicate.normalizedType === 'property') {
             throw new Error('Type must not be property');
           }
-          return this.classService.newProperty(p, p.normalizedType, model);
+          return this.classService.newProperty(predicate, predicate.normalizedType, model);
         })
-        .then((p: Property) => {
-          setDetails(p, details);
-          assertPropertyValueExists(details, 'valueClass');
-          const valueClassPromise = asUriPromise(details.valueClass!, context, p.context).then(id => {
-            if (id) {
-              p.valueClass = id;
-            }
-          });
+        .then((property: Property) => {
+          setDetails(property, details);
+
+          if (details.valueClass) {
+            asIdPromise(details.valueClass, this.context).then(classId => {
+              property.valueClass = classId;
+            });
+          }
 
           if (details.internalId) {
-            p.internalId = Uri.fromUUID(details.internalId);
+            property.internalId = Uri.fromUUID(details.internalId);
           }
 
           if (details.dataType) {
-            p.dataType = details.dataType;
+            property.dataType = details.dataType;
           }
 
-          p.example = details.example ? [details.example] : [];
-          p.minCount = details.minCount || null;
-          p.maxCount = details.maxCount || null;
-          p.pattern = details.pattern || null;
+          property.example = details.example ? [details.example] : [];
+          property.minCount = details.minCount || null;
+          property.maxCount = details.maxCount || null;
+          property.pattern = details.pattern || null;
 
-          return valueClassPromise.then(() => p);
+          return property;
         });
 
     return this.addAction(result, details);
@@ -469,21 +561,6 @@ function setId(entity: { id: Uri }, details: { id?: string }) {
   }
 }
 
-function assertPropertyValueExists(obj: any, property: string) {
-  if (obj.hasOwnProperty(property)) {
-    return assertExists(obj[property], ' property: ' + property);
-  }
-
-  return obj[property];
-}
-
-function assertExists<T>(obj: T, msg: string): T {
-  if (obj === null || obj === undefined) {
-    throw new Error('Null or undefined: ' + msg);
-  }
-  return obj;
-}
-
 function isPromise<T>(obj: any): obj is IPromise<T> {
   return !!(obj && obj.then);
 }
@@ -500,40 +577,39 @@ function isExternalNamespace(obj: any): obj is ExternalNamespaceDetails {
   return !!obj.label && !!obj.namespace && !!obj.prefix;
 }
 
-function isUriResolvable<T extends { id: Uri }>(obj: any): obj is UriResolvable<T> {
+function isResolvable<T>(obj: any): obj is Resolvable<T> {
   return typeof obj === 'string' || isPromiseProvider(obj) || isPromise(obj);
 }
 
-function asUriPromise<T extends { id: Uri }>(resolvable: UriResolvable<T>, ...contexts: any[]): IPromise<Uri> {
-  if (isPromiseProvider(resolvable)) {
-    const promise = resolvable();
-    if (isPromise<T>(promise)) {
-      return promise.then(withId => withId.id);
-    } else {
-      throw new Error('Must be promise');
-    }
-  } else if (isPromise(resolvable)) {
-    return resolvable.then(withId => withId.id);
-  } else if (typeof resolvable === 'string') {
-
-    const uriContext: any = {};
-
-    for (const c of contexts) {
-      Object.assign(uriContext, c);
-    }
-
-    return <IPromise<Uri>> <any> Promise.resolve(new Uri(resolvable, Object.assign({}, uriContext)));
+function asMappedPromise<T, R>(resolvable: Resolvable<T>,
+                               mapper: (input: T) => R,
+                               fetchResource: (id: string) => IPromise<R>|R): IPromise<R> {
+  if (isPromiseProvider<T>(resolvable)) {
+    return resolvable().then(mapper);
+  } else if (isPromise<T>(resolvable)) {
+    return resolvable.then(mapper);
   } else {
-    return <IPromise<Uri>> <any> Promise.resolve(null);
+    const result = fetchResource(resolvable);
+    if (isPromise(result)) {
+      return result;
+    } else {
+      return <IPromise<R>> <any> Promise.resolve(result);
+    }
   }
 }
 
-function asPromise<T>(resolvable: Resolvable<T>): IPromise<T> {
-  if (isPromiseProvider<T>(resolvable)) {
-    return resolvable();
-  } else if (isPromise<T>(resolvable)) {
-    return resolvable;
-  } else {
-    throw new Error('Not resolvable: ' + resolvable);
-  }
+function asPromise<T>(resolvable: Resolvable<T>, fetchResource: (id: string) => IPromise<T>): IPromise<T> {
+  return asMappedPromise(resolvable, identity, fetchResource);
+}
+
+function asIdPromise<T extends { id: Uri }>(resolvable: Resolvable<T>, context: any): IPromise<Uri> {
+  return asMappedPromise(resolvable, item => item.id, id => new Uri(id, context));
+}
+
+function asUuidPromise<T extends { id: Uri }>(resolvable: Resolvable<T>): IPromise<string> {
+  return asMappedPromise(resolvable, item => item.id.uuid, identity);
+}
+
+function asIdentifierPromise<T extends { identifier: string }>(resolvable: Resolvable<T>): IPromise<string> {
+  return asMappedPromise(resolvable, item => item.identifier, identity);
 }

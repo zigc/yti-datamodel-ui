@@ -14,8 +14,8 @@ import { elementPositioning, PopoverDimensionsProvider, resolveArrowClass } from
         <span ng-class="$ctrl.arrowClass"></span>
       
         <div class="help-content-wrapper">
-          <h3 ng-show="$ctrl.item.title">{{$ctrl.item.title | translate}}</h3>
-          <p ng-show="$ctrl.item.content">{{$ctrl.item.content | translate}}</p>
+          <h3 ng-show="$ctrl.item.title">{{$ctrl.item.title.key | translate: $ctrl.item.title.context}}</h3>
+          <p ng-show="$ctrl.item.content">{{$ctrl.item.content.key | translate: $ctrl.item.content.context}}</p>
           <button ng-show="$ctrl.helpController.showPrevious" class="small button help-navigate" translate>previous</button>
           <button ng-show="$ctrl.helpController.showNext" class="small button help-navigate" translate>next</button>
           <button ng-show="$ctrl.helpController.showClose" class="small button help-next" translate>close</button>

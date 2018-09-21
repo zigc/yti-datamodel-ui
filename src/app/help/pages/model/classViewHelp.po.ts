@@ -1,20 +1,20 @@
 import { child, first } from 'app/help/selectors';
-import {
-  createStory, createModifyingClickNextCondition,
-  createClickNextCondition, createScrollWithDefault, createScrollNone, Story
-} from 'app/help/contract';
+import { createClickNextCondition, createModifyingClickNextCondition, createScrollNone, createScrollWithDefault, createStory, Story } from 'app/help/contract';
 import * as ClassForm from './classFormHelp.po';
 import * as SearchPredicateModal from './modal/searchPredicateModalHelp.po';
 import { KnownPredicateType } from 'app/types/entity';
-import { gettextCatalog as GettextCatalog } from 'angular-gettext';
+import { PredicateDetails } from 'app/services/entityLoader';
+import { Language } from 'app/types/language';
+import { predicateIdAndNameFromHelpData } from '../../utils';
+import { Localizable } from 'yti-common-ui/types/localization';
 
 export const element = () => jQuery('class-view');
 
 const modifyClassElement = child(element, 'button.edit');
 export const modifyClass = createStory({
 
-  title: 'Modify class',
-  content: 'Classes can be modified',
+  title: { key: 'Modify class' },
+  content: { key: 'Classes can be modified' },
   scroll: createScrollWithDefault(element),
   popover: { element: modifyClassElement, position: 'left-down' },
   focus: { element: modifyClassElement },
@@ -24,8 +24,8 @@ export const modifyClass = createStory({
 const saveClassChangesElement = child(element, 'button.save');
 export const saveClassChanges = createStory({
 
-  title: 'Save changes',
-  content: 'Changes need to be saved',
+  title: { key: 'Save changes' },
+  content: { key: 'Changes need to be saved' },
   scroll: createScrollWithDefault(element),
   popover: { element: saveClassChangesElement, position: 'left-down' },
   focus: { element: saveClassChangesElement },
@@ -36,49 +36,48 @@ const addPropertyElement = child(element, '.add-property');
 const addPropertyDropdownElement = child(addPropertyElement, 'button');
 const addNewPropertyElement = first(child(addPropertyElement, '[uib-dropdown-menu] a'));
 export const addProperty = createStory({
-  title: 'Add property',
-  content: 'You can add new attribute or association to the Class from here',
-  scroll: createScrollNone(),
+  title: { key: 'Add property' },
+  content: { key: 'You can add new attribute or association to the Class from here' },
   popover: { element: addPropertyDropdownElement, position: 'top-left' },
   focus: { element: addPropertyDropdownElement },
   nextCondition: createClickNextCondition(addPropertyDropdownElement)
 });
 
 export const addNewProperty = createStory({
-  title: 'Add new property',
-  content: 'Add new property description',
+  title: { key: 'Add new property' },
+  content: { key: 'Add new property description' },
   scroll: createScrollNone(),
   popover: { element: addNewPropertyElement, position: 'top-left' },
   focus: { element: addNewPropertyElement },
   nextCondition: createClickNextCondition(addNewPropertyElement)
 });
 
-export function addPropertyUsingExistingPredicateItems(predicate: { type: KnownPredicateType, namespaceId: string, name: string },
-                                                       gettextCatalog: GettextCatalog): Story[] {
+export function addPropertyUsingExistingPredicateItems(predicate: { type: KnownPredicateType, prefix: string, details: PredicateDetails }, lang: Language): Story[] {
+
+  const { id, name } = predicateIdAndNameFromHelpData(predicate, lang);
+
   return [
     addProperty,
     addNewProperty,
-    ...SearchPredicateModal.findAndSelectExistingPredicateItems(predicate.type, predicate.namespaceId, predicate.name, gettextCatalog),
+    ...SearchPredicateModal.findAndSelectExistingPredicateItems(predicate.type, name, id),
     ClassForm.focusOpenProperty(element)
   ];
 }
 
-export function addPropertyBasedOnSuggestionItems(predicate: { type: KnownPredicateType, searchName: string, name: string, comment: string },
-                                                  gettextCatalog: GettextCatalog): Story[] {
+export function addPropertyBasedOnSuggestionItems(predicate: { type: KnownPredicateType, label: Localizable, comment: Localizable }, lang: Language): Story[] {
   return [
     addProperty,
     addNewProperty,
-    ...SearchPredicateModal.findAndCreateNewPropertyBasedOnSuggestionItems(predicate.type, predicate.searchName, predicate.name, predicate.comment, gettextCatalog),
+    ...SearchPredicateModal.findAndCreateNewPropertyBasedOnSuggestionItems(predicate.type, predicate.label[lang], predicate.comment[lang]),
     ClassForm.focusOpenProperty(element)
   ];
 }
 
-export function addPropertyBasedOnExistingConceptItems(predicate: { type: KnownPredicateType, searchName: string, name: string, conceptId: string },
-                                                       gettextCatalog: GettextCatalog): Story[] {
+export function addPropertyBasedOnExistingConceptItems(predicate: { type: KnownPredicateType, name: Localizable, conceptId: string }, lang: Language): Story[] {
   return [
     addProperty,
     addNewProperty,
-    ...SearchPredicateModal.findAndCreateNewPropertyBasedOnExistingConceptItems(predicate.type, predicate.searchName, predicate.name, predicate.conceptId, gettextCatalog),
+    ...SearchPredicateModal.findAndCreateNewPropertyBasedOnExistingConceptItems(predicate.type, predicate.name[lang], predicate.conceptId),
     ClassForm.focusOpenProperty(element)
   ];
 }

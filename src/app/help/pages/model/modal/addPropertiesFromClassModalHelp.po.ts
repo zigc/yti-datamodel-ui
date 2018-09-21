@@ -11,9 +11,9 @@ export function selectProperties(title: string, expectProperties: string[]) {
 
   return createStory({
 
-    title: title,
-    content: title + ' info',
-    popover: { element: selectPropertiesElement, position: 'left-down' },
+    title: { key: title },
+    content: { key: title + ' info' },
+    popover: { element: selectPropertiesElement, position: 'bottom-right' },
     focus: { element: selectPropertiesElement },
     nextCondition: createExpectedStateNextCondition(() => {
 
@@ -23,7 +23,7 @@ export function selectProperties(title: string, expectProperties: string[]) {
         return true;
       }
 
-      return arraysAreEqual(Object.values(ctrl.selectedProperties.map(p => p.predicateId.curie)), expectProperties);
+      return arraysAreEqual(Object.values(ctrl.selectedProperties.map(p => p.predicateId.uri)), expectProperties);
     }),
     initialize: () => {
       if (expectProperties) {
@@ -31,6 +31,7 @@ export function selectProperties(title: string, expectProperties: string[]) {
           const ctrl = getModalController<AddPropertiesFromClassModalController>();
           onlyProperties(ctrl.selectedProperties, expectProperties);
         } catch (e) {
+          console.log(e);
           return false;
         }
       }

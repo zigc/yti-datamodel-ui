@@ -29,6 +29,7 @@ import { ImpersonationService } from './impersonationService';
 import { ConfigService } from './configService';
 import { UserRoleService } from './userRoleService';
 import { InteractiveHelpOrganizationService } from 'app/help/services/helpOrganizationService';
+import { EntityCreatorService } from 'app/help/services/entityCreatorService';
 
 function proxyConditionallyToHelp<T>(interactiveHelpService: InteractiveHelpService, defaultService: T, helpService: T) {
   return proxyToInstance(() => interactiveHelpService.isOpen() ? helpService : defaultService);
@@ -101,6 +102,7 @@ mod.service('organizationService',
 mod.service('historyService', HistoryService);
 mod.service('resetService', ResetService);
 mod.service('entityLoaderService', EntityLoaderService);
+mod.service('entityCreatorService', EntityCreatorService);
 mod.service('sessionService', SessionService);
 mod.service('frameService', FrameService);
 mod.service('authorizationManagerService', AuthorizationManagerService);

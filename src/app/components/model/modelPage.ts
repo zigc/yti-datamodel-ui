@@ -125,13 +125,17 @@ export class ModelPageComponent implements ModelPageActions, HelpProvider, Model
       }
     });
 
+    const setHelps = (model: Model) => this.helps = model ? modelPageHelpService.getHelps(model.normalizedType, model.prefix) : [];
+
     $scope.$watch(() => this.model, (newModel: Model, oldModel: Model) => {
       if (oldModel && !newModel) { // model removed
         $location.url('/');
       }
 
-      this.helps = modelPageHelpService.getHelps(newModel);
+      setHelps(newModel);
     });
+
+    $scope.$watch(() => this.languageService.UILanguage, () => setHelps(this.model));
 
     $scope.$watch(() => this.selection, (selection, oldSelection) => {
 

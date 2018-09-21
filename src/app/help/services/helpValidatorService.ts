@@ -14,11 +14,11 @@ export class InteractiveHelpValidatorService implements ValidatorService, Reseta
   }
 
   classDoesNotExist(id: Uri): IPromise<boolean> {
-    return this.$q.when(this.helpClassService.store.getResourcesForAllModels().has(id.toString()));
+    return this.$q.when(!this.helpClassService.classExists(id));
   }
 
   predicateDoesNotExist(id: Uri): IPromise<boolean> {
-    return this.$q.when(this.helpPredicateService.store.getResourcesForAllModels().has(id.toString()));
+    return this.$q.when(!this.helpPredicateService.predicateExists(id));
   }
 
   reset(): IPromise<any> {

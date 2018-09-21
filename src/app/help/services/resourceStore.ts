@@ -3,11 +3,12 @@ import { Model } from 'app/entities/model';
 import { Uri, Url } from 'app/entities/uri';
 import { flatten } from 'yti-common-ui/utils/array';
 import { DefinedBy } from 'app/entities/definedBy';
-import { Optional } from 'yti-common-ui/utils/object';
+import { Optional, requireDefined } from 'yti-common-ui/utils/object';
 
 type ModelId = string;
 type ResourceId = string;
 type ResourceEntry<T> = [ResourceId, T];
+type Namespace = string;
 
 export class ResourceStore<T extends { id: Uri }> {
 
@@ -21,8 +22,12 @@ export class ResourceStore<T extends { id: Uri }> {
     return Array.from(this.resources.entries());
   }
 
-  get(id: ResourceId): T|undefined {
+  find(id: ResourceId): T|undefined {
     return this.resources.get(id);
+  }
+
+  get(id: ResourceId): T {
+    return requireDefined(this.find(id));
   }
 
   add(resource: T) {
@@ -48,14 +53,19 @@ export class ResourceStore<T extends { id: Uri }> {
 
 export class ModelResourceStore<T extends { id: Uri }> {
 
-  resources = new Map<ModelId, ResourceStore<T>>();
-  assignedResources = new Map<ModelId, Set<ResourceId>>();
+  private resources = new Map<ModelId, ResourceStore<T>>();
+  private assignedResources = new Map<ModelId, Set<ResourceId>>();
+  private externalResources = new Map<Namespace, ResourceStore<T>>();
 
-  constructor(private $q: IQService, private fetchFallback: (id: ResourceId, model: Model) => IPromise<T>) {
+  constructor(private $q: IQService) {
   }
 
   getResourcesForAllModels(): Map<ResourceId, T> {
     return ModelResourceStore.createMapFromEntries(this.getAllResourceEntries());
+  }
+
+  resourceExistsInAnyModel(id: ResourceId): boolean {
+    return this.getResourcesForAllModels().has(id);
   }
 
   getResourceValuesForAllModels(): T[] {
@@ -77,8 +87,21 @@ export class ModelResourceStore<T extends { id: Uri }> {
     return store;
   }
 
-  getResourceValuesForModel(model: Model|DefinedBy): T[] {
-    return Array.from(this.getResourcesForModel(model).values());
+  getExternalResourcesForNamespace(ns: Namespace): T[] {
+    return requireDefined(this.externalResources.get(ns)).values();
+  }
+
+  findExternalResource(id: Uri): T|null {
+
+    const uri = id.uri;
+
+    for (const [ns, store] of Array.from(this.externalResources.entries())) {
+      if (uri.startsWith(ns)) {
+        return store.get(uri);
+      }
+    }
+
+    return null;
   }
 
   getAssignedResourcesIdsForModel(model: Model|DefinedBy): Set<ResourceId> {
@@ -95,27 +118,10 @@ export class ModelResourceStore<T extends { id: Uri }> {
 
   getAssignedResourcesForModel(model: Model): IPromise<Map<ResourceId, T>> {
 
-    const assignedSet = this.getAssignedResourcesIdsForModel(model);
+    const assignedIds = this.getAssignedResourcesIdsForModel(model);
     const allResources: [ResourceId, T][] = this.getAllResourceEntries();
-    const linkedResourcesFromStore = new Map<ResourceId, T>(allResources.filter(entry => assignedSet.has(entry[0])));
-    const fallbackResourcePromises: IPromise<T>[] = [];
-
-    for (const assigned of Array.from(assignedSet)) {
-      if (!linkedResourcesFromStore.has(assigned)) {
-        fallbackResourcePromises.push(this.fetchFallback(assigned, model));
-      }
-    }
-
-    function wrapAsEntry(resource: T): ResourceEntry<T> {
-      return [resource.id.uri, resource];
-    }
-
-    return this.$q.all(fallbackResourcePromises)
-      .then((fallbackResources: T[]) => ModelResourceStore.createMapFromEntries(linkedResourcesFromStore.entries(), fallbackResources.map(wrapAsEntry)));
-  }
-
-  getAssignedResourceValuesForModel(model: Model): IPromise<T[]> {
-    return this.getAssignedResourcesForModel(model).then(resources => Array.from(resources.values()));
+    const assignedResourcesFromStore = ModelResourceStore.createMapFromEntries(allResources.filter(([id]) => assignedIds.has(id)));
+    return this.$q.when(assignedResourcesFromStore);
   }
 
   getAllResourcesForModel(model: Model): IPromise<Map<ResourceId, T>> {
@@ -127,12 +133,19 @@ export class ModelResourceStore<T extends { id: Uri }> {
     return this.getAllResourcesForModel(model).then(resources => Array.from(resources.values()));
   }
 
-  getResourceForModelById(model: Model, id: Uri|Url): IPromise<T|undefined> {
-    return this.getAllResourcesForModel(model).then(resources => resources.get(id.toString()));
+  getResourceForAnyModelById(id: Uri|Url): T {
+    return requireDefined(this.getResourcesForAllModels().get(id.toString()));
   }
 
-  getResourceForAnyModelById(id: Uri|Url): T|undefined {
-    return this.getResourcesForAllModels().get(id.toString());
+  getInternalOrExternalResource(id: Uri): T|null {
+
+    const internal = this.getResourcesForAllModels().get(id.toString());
+
+    if (internal) {
+      return internal;
+    } else {
+      return this.findExternalResource(id);
+    }
   }
 
   assignResourceToModel(model: Model|DefinedBy, id: ResourceId) {

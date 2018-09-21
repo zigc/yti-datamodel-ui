@@ -14,8 +14,8 @@ import { InteractiveHelpController } from './interactiveHelpDisplay';
         <span ng-class="$ctrl.arrowClass"></span>
       
         <div class="help-content-wrapper">
-          <h3 ng-show="$ctrl.title" ng-bind="$ctrl.title | translate"></h3>
-          <p ng-show="$ctrl.content" ng-bind="$ctrl.content | translate"></p>
+          <h3 ng-show="$ctrl.title" ng-bind="$ctrl.title.key | translate: $ctrl.title.context"></h3>
+          <p ng-show="$ctrl.content" ng-bind="$ctrl.content.key | translate: $ctrl.content.context"></p>
           
           <button ng-show="$ctrl.showPrevious" 
                   ng-disabled="!$ctrl.helpController.canMoveToPrevious()" 
@@ -43,8 +43,8 @@ export class InteractiveHelpPopoverComponent {
   item?: Story|Notification;
   arrowClass: string[] = [];
 
-  title: string;
-  content?: string;
+  title: { key: string, context?: any };
+  content?: { key: string, context?: any };
   showPrevious: boolean;
   showNext: boolean;
   showClose: boolean;

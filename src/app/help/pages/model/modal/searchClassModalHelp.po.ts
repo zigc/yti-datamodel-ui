@@ -1,26 +1,21 @@
 import { confirm } from 'app/help/pages/modal/modalHelp.po';
-import {
-  filterForSearchResult, selectSearchResult, focusSearchSelection,
-  filterForAddNewResult, selectAddNewResult
-} from 'app/help/pages/modal/searchModalHelp.po';
-import { modal, child } from 'app/help/selectors';
-import { classIdFromNamespaceId } from 'app/help/utils';
+import { filterForAddNewResult, filterForSearchResult, focusSearchSelection, selectAddNewResult, selectSearchResult } from 'app/help/pages/modal/searchModalHelp.po';
+import { child, modal } from 'app/help/selectors';
 import * as SearchConceptModal from './searchConceptModalHelp.po';
-import { gettextCatalog as GettextCatalog } from 'angular-gettext';
 import { Story } from 'app/help/contract';
 
 const searchClassModal = child(modal, '.search-class');
 
-export function filterForClass(namespaceId: string, className: string, gettextCatalog: GettextCatalog) {
-  return filterForSearchResult(searchClassModal, className, classIdFromNamespaceId(namespaceId, className), gettextCatalog);
+export function filterForClass(className: string, classId: string) {
+  return filterForSearchResult(searchClassModal, className, classId, true);
 }
 
-export function filterForNewClass(className: string, gettextCatalog: GettextCatalog) {
-  return filterForAddNewResult(searchClassModal, className, gettextCatalog, 'class');
+export function filterForNewClass(className: string, abbreviate: boolean) {
+  return filterForAddNewResult(searchClassModal, className, 'class', abbreviate);
 }
 
-export function selectClass(namespaceId: string, className: string) {
-  return selectSearchResult(searchClassModal, className, classIdFromNamespaceId(namespaceId, className), true);
+export function selectClass(className: string, classId: string) {
+  return selectSearchResult(searchClassModal, className, classId, true);
 }
 
 export const selectAddNewClassSearchResult = selectAddNewResult(searchClassModal, 0, 'Select new creation');
@@ -29,19 +24,19 @@ export const focusSelectedClass = focusSearchSelection(searchClassModal, 'Class 
 
 export const confirmClassSelection = (navigates: boolean) => confirm(searchClassModal, navigates);
 
-export function findAndSelectExistingClassItems(namespaceId: string, className: string, navigates: boolean, gettextCatalog: GettextCatalog): Story[] {
+export function findAndSelectExistingClassItems(className: string, classId: string, navigates: boolean): Story[] {
   return [
-    filterForClass(namespaceId, className, gettextCatalog),
-    selectClass(namespaceId, className),
+    filterForClass(className, classId),
+    selectClass(className, classId),
     focusSelectedClass,
     confirmClassSelection(navigates)
   ];
 }
 
-export function findAndCreateNewBasedOnConceptSuggestionItems(name: string, comment: string, gettextCatalog: GettextCatalog): Story[] {
+export function findAndCreateNewBasedOnConceptSuggestionItems(name: string, comment: string): Story[] {
   return [
-    filterForNewClass(name, gettextCatalog),
+    filterForNewClass(name, true),
     selectAddNewClassSearchResult,
-    ...SearchConceptModal.findAndCreateNewSuggestionItems(name, comment, true, gettextCatalog)
+    ...SearchConceptModal.findAndCreateNewSuggestionItems(name, comment, true)
   ];
 }

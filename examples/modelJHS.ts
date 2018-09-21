@@ -1,10 +1,12 @@
 import { loader } from './exampleLoader';
 
-export const model = loader.createLibrary({
+export const model = loader.createModel({
+  type: 'library',
   prefix: 'jhs',
   label:   { fi: 'Julkishallinnon tietokomponentit' },
-  comment: { fi: 'Julkisessa hallinnossa ja kaikilla toimialoilla yleisesti käytössä olevat tietosisällöt' }
-  // vocabularies: ['http://purl.org/att/tuha/'] // FIXME
+  comment: { fi: 'Julkisessa hallinnossa ja kaikilla toimialoilla yleisesti käytössä olevat tietosisällöt' },
+  organizations: ['88ce73b9-376c-4ff1-8c51-e4159b0af75c'],
+  classifications: ['P1']
 });
 
 export namespace Associations {

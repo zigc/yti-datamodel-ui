@@ -160,7 +160,7 @@ class SearchClassController implements SearchController<ClassListItem> {
     return !this.onlySelection && !!this.searchText;
   }
 
-  selectItem(item: ClassListItem|Class|AddNewClass) {
+  selectItem(item: AbstractClass|AddNewClass) {
     this.selectedItem = item;
     this.externalClass = undefined;
     this.excludeError = null;
@@ -174,7 +174,7 @@ class SearchClassController implements SearchController<ClassListItem> {
       } else {
         this.createNewClass();
       }
-    } else if (item instanceof ClassListItem || item instanceof Class /* FIXME: help needs to accept full entities instead of list items */) {
+    } else {
       this.cannotConfirm = this.exclude(item);
 
       if (this.model.isNamespaceKnownToBeNotModel(item.definedBy.id.toString())) {
@@ -184,8 +184,6 @@ class SearchClassController implements SearchController<ClassListItem> {
       } else {
         this.classService.getClass(item.id, this.model).then(result => this.selection = result);
       }
-    } else {
-      throw new Error('Unsupported item: ' + item);
     }
   }
 

@@ -9,6 +9,7 @@ import { DefaultClassService } from '../src/app/services/classService';
 import { DefaultVocabularyService } from '../src/app/services/vocabularyService';
 import { ResetService } from '../src/app/services/resetService';
 import { FrameService } from '../src/app/services/frameService';
+import { EntityCreatorService } from '../src/app/help/services/entityCreatorService';
 
 const argv = require('optimist')
   .default({
@@ -26,6 +27,6 @@ const predicateService = new DefaultPredicateService(httpService, q, frameServic
 const classService = new DefaultClassService(httpService, q, predicateService, frameService);
 const vocabularyService = new DefaultVocabularyService(httpService, frameService);
 const resetService = new ResetService(httpService);
+const entityCreatorService = new EntityCreatorService(q);
 
-
-export const loader = new EntityLoader(q, modelService, predicateService, classService, vocabularyService, resetService, true);
+export const loader = new EntityLoader(q, modelService, predicateService, classService, vocabularyService, null, entityCreatorService, resetService, true);

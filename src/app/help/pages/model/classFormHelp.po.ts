@@ -1,19 +1,19 @@
-import {
-  createStory, createClickNextCondition, createExplicitNextCondition, createScrollNone, createScrollWithDefault, Story
-} from 'app/help/contract';
-import { editableByTitle, child, editableFocus } from 'app/help/selectors';
+import { createClickNextCondition, createExplicitNextCondition, createScrollNone, createScrollWithDefault, createStory, Story } from 'app/help/contract';
+import { child, editableByTitle, editableFocus } from 'app/help/selectors';
 import { editableMargin } from 'app/help/utils';
 import * as SearchClassModal from './modal/searchClassModalHelp.po';
 import * as AddPropertiesFromClassModal from './modal/addPropertiesFromClassModalHelp.po';
-import { gettextCatalog as GettextCatalog } from 'angular-gettext';
+import { ClassDetails } from '../../../services/entityLoader';
+import { Language } from '../../../types/language';
+import { classIdAndNameFromHelpData } from '../../utils';
 
 export function focusClass(parent: () => JQuery) {
 
   const focusClassElement = child(parent, 'form');
 
   return createStory({
-    title: 'Class is here',
-    content: 'Class is here info',
+    title: { key: 'Class is here' },
+    content: { key: 'Class is here info' },
     popover: { element: focusClassElement, position: 'top-right' },
     focus: { element: focusClassElement },
     denyInteraction: true,
@@ -26,8 +26,8 @@ export function focusOpenProperty(parent: () => JQuery) {
   const focusOpenPropertyElement = child(parent, 'property-view div[ng-if="$ctrl.isOpen()"]');
 
   return createStory({
-    title: 'Property is here',
-    content: 'Property is here info',
+    title: { key: 'Property is here' },
+    content: { key: 'Property is here info' },
     scroll: createScrollNone(),
     popover: { element: focusOpenPropertyElement, position: 'right-down' },
     focus: { element: focusOpenPropertyElement, margin: { left: 10, right: 10, top: 0, bottom: 10 } },
@@ -43,8 +43,8 @@ export function selectAssociationTarget(parent: () => JQuery) {
 
   return createStory({
 
-    title: 'Select association target',
-    content: 'Association target must be selected from list of existing classes',
+    title: { key: 'Select association target' },
+    content: { key: 'Association target must be selected from list of existing classes' },
     scroll: createScrollNone(),
     popover: { element: enterAssociationTargetSelectButtonElement, position: 'right-down' },
     focus: { element: enterAssociationTargetSelectButtonElement },
@@ -59,8 +59,8 @@ export function selectSuperClass(parent: () => JQuery) {
 
   return createStory({
 
-    title: 'Select super class',
-    content: 'Super class must be selected from list of existing classes',
+    title: { key: 'Select super class' },
+    content: { key: 'Super class must be selected from list of existing classes' },
     scroll: createScrollNone(),
     popover: { element: enterSuperClassSelectButtonElement, position: 'right-down' },
     focus: { element: enterSuperClassSelectButtonElement },
@@ -75,8 +75,8 @@ export function focusAssociationTarget(parent: () => JQuery) {
 
   return createStory({
 
-    title: 'Association target is here',
-    content: 'Association target can be changed from the list or by typing the identifier',
+    title: { key: 'Association target is here' },
+    content: { key: 'Association target can be changed from the list or by typing the identifier' },
     scroll: createScrollWithDefault(enterAssociationTargetElement, 150),
     popover: { element: enterAssociationTargetSelectFocusElement, position: 'right-down' },
     focus: { element: enterAssociationTargetSelectFocusElement, margin: editableMargin },
@@ -92,8 +92,8 @@ export function focusSuperClass(parent: () => JQuery) {
 
   return createStory({
 
-    title: 'Super class is here',
-    content: 'Super class can be changed from the list or by typing the identifier',
+    title: { key: 'Super class is here' },
+    content: { key: 'Super class can be changed from the list or by typing the identifier' },
     scroll: createScrollWithDefault(enterSuperClassElement, 150),
     popover: { element: enterSuperClassSelectFocusElement, position: 'right-down' },
     focus: { element: enterSuperClassSelectFocusElement, margin: editableMargin },
@@ -102,18 +102,24 @@ export function focusSuperClass(parent: () => JQuery) {
   });
 }
 
-export function addAssociationTargetItems(context: () => JQuery, target: { namespaceId: string, name: string }, gettextCatalog: GettextCatalog): Story[] {
+export function addAssociationTargetItems(context: () => JQuery, target: { prefix: string, details: ClassDetails }, lang: Language): Story[] {
+
+  const { id, name } = classIdAndNameFromHelpData(target, lang);
+
   return [
     selectAssociationTarget(context),
-    ...SearchClassModal.findAndSelectExistingClassItems(target.namespaceId, target.name, false, gettextCatalog),
+    ...SearchClassModal.findAndSelectExistingClassItems(name, id, false),
     focusAssociationTarget(context)
   ];
 }
 
-export function addSuperClassItems(context: () => JQuery, superClass: { name: string, namespaceId: string, properties: string[] }, gettextCatalog: GettextCatalog): Story[] {
+export function addSuperClassItems(context: () => JQuery, superClass: { prefix: string, details: ClassDetails, properties: string[] }, lang: Language): Story[] {
+
+  const { id, name } = classIdAndNameFromHelpData(superClass, lang);
+
   return [
     selectSuperClass(context),
-    ...SearchClassModal.findAndSelectExistingClassItems(superClass.namespaceId, superClass.name, false, gettextCatalog),
+    ...SearchClassModal.findAndSelectExistingClassItems(name, id, false),
     ...AddPropertiesFromClassModal.selectAndConfirmPropertiesItems('Select registration number and vehicle code', false, superClass.properties),
     focusSuperClass(context)
   ];

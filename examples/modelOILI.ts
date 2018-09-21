@@ -1,10 +1,13 @@
 import { loader } from './exampleLoader';
 import * as Jhs from './modelJHS';
 
-export const model = loader.createProfile({
+export const model = loader.createModel({
+  type: 'profile',
   prefix: 'oili',
   label:   { fi: 'Opiskelijaksi ilmoittautuminen esimerkkiprofiili' },
   comment: { fi: 'Esimerkki profiilin ominaisuuksista OILI casella' },
+  organizations: ['88ce73b9-376c-4ff1-8c51-e4159b0af75c'],
+  classifications: ['P1'],
   namespaces: [Jhs.model]
 });
 

@@ -1,13 +1,12 @@
 import { filterForSearchResult, selectSearchResult } from 'app/help/pages/modal/searchModalHelp.po';
-import { modal, child } from 'app/help/selectors';
-import { gettextCatalog as GettextCatalog } from 'angular-gettext';
+import { child, modal } from 'app/help/selectors';
 
 const searchVocabularyModal = child(modal, '.search-vocabulary');
 
-export function filterForVocabulary(label: string, vocabularyId: string, gettextCatalog: GettextCatalog) {
-  return filterForSearchResult(searchVocabularyModal, label, vocabularyId, gettextCatalog);
+export function filterForVocabulary(name: string, vocabularyId: string) {
+  return filterForSearchResult(searchVocabularyModal, name, vocabularyId, true);
 }
 
-export function selectVocabualry(label: string, vocabularyId: string) {
+export function selectVocabulary(label: string, vocabularyId: string) {
   return selectSearchResult(searchVocabularyModal, label, vocabularyId, false);
 }

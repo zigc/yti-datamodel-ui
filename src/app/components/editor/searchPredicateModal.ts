@@ -189,7 +189,7 @@ export class SearchPredicateController implements SearchController<PredicateList
     ];
   }
 
-  selectItem(item: PredicateListItem|AddNewPredicate) {
+  selectItem(item: AbstractPredicate|AddNewPredicate) {
     this.selectedItem = item;
     this.externalPredicate = undefined;
     this.excludeError = null;
@@ -203,7 +203,7 @@ export class SearchPredicateController implements SearchController<PredicateList
       } else {
         this.createNew(item.type!);
       }
-    } else if (item instanceof PredicateListItem) {
+    } else {
       this.cannotConfirm = this.exclude(item);
 
       if (this.model.isNamespaceKnownToBeNotModel(item.definedBy.id.toString())) {
@@ -213,8 +213,6 @@ export class SearchPredicateController implements SearchController<PredicateList
       } else {
         this.predicateService.getPredicate(item.id, this.model).then(result => this.selection = result);
       }
-    } else {
-      throw new Error('Unsupported item: ' + item);
     }
   }
 

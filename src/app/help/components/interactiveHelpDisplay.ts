@@ -71,9 +71,21 @@ export class InteractiveHelpDisplay {
         stateInitialization: () => stateInitialization
       },
       disableScroll: true
-    }).result.then(() => {
+    }).result.then((cancel) => {
       this.interactiveHelpService.close();
       this.gettextCatalog.debug = originalGettextCatalogDebug;
+
+      setTimeout(() => {
+        if (cancel) {
+          if (help.onCancel) {
+            help.onCancel();
+          }
+        } else {
+          if (help.onComplete) {
+            help.onComplete();
+          }
+        }
+      }, 500);
     });
   }
 }
@@ -693,16 +705,6 @@ export class InteractiveHelpController {
   }
 
   close(cancel: boolean) {
-    this.$overlayInstance.close();
-
-    if (cancel) {
-      if (this.help.onCancel) {
-        this.help.onCancel();
-      }
-    } else {
-      if (this.help.onComplete) {
-        this.help.onComplete();
-      }
-    }
+    this.$overlayInstance.close(cancel);
   }
 }

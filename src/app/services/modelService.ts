@@ -126,8 +126,8 @@ export class DefaultModelService implements ModelService {
     return this.frameService.frameAndMapArray(data, frames.modelListFrame(data), () => ModelListItem);
   }
 
-  private deserializeModel(data: GraphData): IPromise<Model|null> {
-    return this.frameService.frameAndMap(data, true, frames.modelFrame(data), () => Model);
+  private deserializeModel(data: GraphData): IPromise<Model> {
+    return this.frameService.frameAndMap(data, false, frames.modelFrame(data), () => Model).then(requireDefined);
   }
 
   private deserializeModelById(data: GraphData, id: Uri|Urn): IPromise<Model> {
