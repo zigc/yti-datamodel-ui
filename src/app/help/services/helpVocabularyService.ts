@@ -57,10 +57,6 @@ export class InteractiveHelpVocabularyService implements VocabularyService, Rese
   }
 
   searchConcepts(searchText: string, vocabulary?: Vocabulary): IPromise<Concept[]> {
-
-    console.log(searchText);
-    console.log(this.conceptStore);
-
     return this.$q.resolve(this.conceptStore.findAll(c => {
       const analysis = analyze(searchText, c, [x => x.label, x => x.definition]);
       return isDefined(analysis.matchScore) && (!vocabulary || vocabulary.id.equals(c.vocabulary.id));
