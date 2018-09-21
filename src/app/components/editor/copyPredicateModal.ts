@@ -40,7 +40,7 @@ export class CopyPredicateModal {
               <button type="button"
                       class="btn btn-action confirm"
                       ng-click="$ctrl.confirm()"
-                      ng-disabled="form.$invalid || form.$pending || !ctrl.predicate.subject">{{'Copy' | translate}}
+                      ng-disabled="form.$invalid || form.$pending || !$ctrl.predicate.subject">{{'Copy' | translate}}
               </button>
               
               <button class="btn btn-link" type="button" ng-click="$dismiss('cancel')" translate>Cancel</button>

@@ -20,7 +20,7 @@ import { INgModelController } from 'angular';
           <localized-select id="{{$ctrl.id}}" values="$ctrl.ranges" value="$ctrl.range" display-name-formatter="$ctrl.displayNameFormatter"></localized-select>
         </div>
       
-        <div ng-if="!ctrl.isEditing()" class="content">
+        <div ng-if="!$ctrl.isEditing()" class="content">
           <span>{{$ctrl.displayName}}</span>
         </div>
         

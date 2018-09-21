@@ -40,7 +40,7 @@ import { NgZone } from '@angular/core';
      <div class="visualization-buttons">
        
        <button id="maximize_button"
-               ng-if="!ctrl.maximized" 
+               ng-if="!$ctrl.maximized" 
                class="btn btn-link btn-lg pull-right pt-0 pb-0 pr-0"
                uib-tooltip="{{'Maximize' | translate}}"
                tooltip-placement="left"
