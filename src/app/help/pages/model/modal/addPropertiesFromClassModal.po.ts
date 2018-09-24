@@ -1,6 +1,6 @@
 import { createStory, createExpectedStateNextCondition, Story } from 'app/help/contract';
 import { modal, child } from 'app/help/selectors';
-import { confirm } from 'app/help/pages/modal/modalHelp.po';
+import { confirm } from 'app/help/pages/modal/modal.po';
 import { AddPropertiesFromClassModalController } from 'app/components/editor/addPropertiesFromClassModal';
 import { arraysAreEqual } from 'yti-common-ui/utils/array';
 import { getModalController, onlyProperties } from 'app/help/utils';

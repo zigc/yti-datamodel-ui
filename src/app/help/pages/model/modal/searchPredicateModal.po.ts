@@ -1,9 +1,9 @@
-import { confirm } from 'app/help/pages/modal/modalHelp.po';
-import { filterForAddNewResult, filterForSearchResult, focusSearchSelection, selectAddNewResult, selectSearchResult } from 'app/help/pages/modal/searchModalHelp.po';
+import { confirm } from 'app/help/pages/modal/modal.po';
+import { filterForAddNewResult, filterForSearchResult, focusSearchSelection, selectAddNewResult, selectSearchResult } from 'app/help/pages/modal/searchModal.po';
 import { child, modal } from 'app/help/selectors';
 import { KnownPredicateType } from 'app/types/entity';
-import * as SearchConceptModal from './searchConceptModalHelp.po';
-import * as PredicateForm from 'app/help/pages/model/predicateFormHelp.po';
+import * as SearchConceptModal from './searchConceptModal.po';
+import * as PredicateForm from 'app/help/pages/model/predicateForm.po';
 import { Story } from 'app/help/contract';
 
 export const searchPredicateModalElement = child(modal, '.search-predicate');

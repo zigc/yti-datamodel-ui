@@ -1,12 +1,12 @@
 import { createNotification, InteractiveHelp, Story, StoryLine } from './contract';
 import { KnownModelType, KnownPredicateType } from 'app/types/entity';
-import * as ModelPage from './pages/model/modelPageHelp.po';
-import * as ModelView from './pages/model/modelViewHelp.po';
-import * as ClassView from './pages/model/classViewHelp.po';
+import * as ModelPage from './pages/model/modelPage.po';
+import * as ModelView from './pages/model/modelView.po';
+import * as ClassView from './pages/model/classView.po';
 import { helpLibrary, helpProfile } from './data';
 import { classIdFromPrefixAndName, isExpectedProperty, predicateIdFromPrefixAndName } from './utils';
-import * as ClassForm from './pages/model/classFormHelp.po';
-import * as VisualizationView from './pages/model/visualizationViewHelp.po';
+import * as ClassForm from './pages/model/classForm.po';
+import * as VisualizationView from './pages/model/visualizationView.po';
 import { HelpBuilderService, NavigationEvents } from './services/helpBuilder';
 import { ClassDetails, PredicateDetails } from 'app/services/entityLoader';
 import { Language } from 'app/types/language';

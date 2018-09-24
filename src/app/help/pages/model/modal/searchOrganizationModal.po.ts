@@ -1,5 +1,5 @@
 import { Story } from 'app/help/contract';
-import { selectSearchResult } from 'app/help/pages/modal/searchModalHelp.po';
+import { selectSearchResult } from 'app/help/pages/modal/searchModal.po';
 import { modal } from 'app/help/selectors';
 
 export function selectOrganization(name: string, id: string): Story {

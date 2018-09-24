@@ -1,7 +1,7 @@
-import { confirm } from 'app/help/pages/modal/modalHelp.po';
-import { filterForAddNewResult, filterForSearchResult, focusSearchSelection, selectAddNewResult, selectSearchResult } from 'app/help/pages/modal/searchModalHelp.po';
+import { confirm } from 'app/help/pages/modal/modal.po';
+import { filterForAddNewResult, filterForSearchResult, focusSearchSelection, selectAddNewResult, selectSearchResult } from 'app/help/pages/modal/searchModal.po';
 import { child, modal } from 'app/help/selectors';
-import * as SearchConceptModal from './searchConceptModalHelp.po';
+import * as SearchConceptModal from './searchConceptModal.po';
 import { Story } from 'app/help/contract';
 
 const searchClassModal = child(modal, '.search-class');

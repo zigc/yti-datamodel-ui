@@ -11,8 +11,8 @@ import {
 } from 'app/help/contract';
 import { editableMargin, initialInputValue, validInput } from 'app/help/utils';
 import { KnownModelType } from 'app/types/entity';
-import * as SearchClassificationModal from './modal/searchClassificationModalHelp.po';
-import * as SearchOrganizationsModal from './modal/searchOrganizationModalHelp.po';
+import * as SearchClassificationModal from './modal/searchClassificationModal.po';
+import * as SearchOrganizationsModal from './modal/searchOrganizationModal.po';
 import { Localizable } from 'yti-common-ui/types/localization';
 import { Language } from 'app/types/language';
 import { Uri } from 'app/entities/uri';

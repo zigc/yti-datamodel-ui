@@ -1,8 +1,8 @@
 import { createClickNextCondition, createExplicitNextCondition, createModifyingClickNextCondition, createScrollNone, createStory, Story } from 'app/help/contract';
 import { child } from 'app/help/selectors';
 import { KnownModelType } from 'app/types/entity';
-import * as SearchNamespaceModal from './modal/searchNamepaceModalHelp.po';
-import * as SearchVocabularyModal from './modal/searchVocabularyModalHelp.po';
+import * as SearchNamespaceModal from './modal/searchNamepaceModal.po';
+import * as SearchVocabularyModal from './modal/searchVocabularyModal.po';
 import { Localizable } from 'yti-common-ui/types/localization';
 import { Language } from 'app/types/language';
 import { modelIdFromPrefix, vocabularyIdFromPrefix } from 'app/help/utils';

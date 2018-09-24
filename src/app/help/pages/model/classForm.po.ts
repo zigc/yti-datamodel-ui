@@ -1,11 +1,11 @@
 import { createClickNextCondition, createExplicitNextCondition, createScrollNone, createScrollWithDefault, createStory, Story } from 'app/help/contract';
 import { child, editableByTitle, editableFocus } from 'app/help/selectors';
 import { editableMargin } from 'app/help/utils';
-import * as SearchClassModal from './modal/searchClassModalHelp.po';
-import * as AddPropertiesFromClassModal from './modal/addPropertiesFromClassModalHelp.po';
-import { ClassDetails } from '../../../services/entityLoader';
-import { Language } from '../../../types/language';
-import { classIdAndNameFromHelpData } from '../../utils';
+import * as SearchClassModal from './modal/searchClassModal.po';
+import * as AddPropertiesFromClassModal from './modal/addPropertiesFromClassModal.po';
+import { ClassDetails } from 'app/services/entityLoader';
+import { Language } from 'app/types/language';
+import { classIdAndNameFromHelpData } from 'app/help/utils';
 
 export function focusClass(parent: () => JQuery) {
 

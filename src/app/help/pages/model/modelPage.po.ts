@@ -2,11 +2,11 @@ import { createClickNextCondition, createModifyingClickNextCondition, createNavi
 import { child, modelPanelElement } from 'app/help/selectors';
 import { KnownModelType, KnownPredicateType } from 'app/types/entity';
 import { classIdAndNameFromHelpData, scrollToTop } from 'app/help/utils';
-import * as SearchClassModal from './modal/searchClassModalHelp.po';
-import * as AddPropertiesFromClass from './modal/addPropertiesFromClassModalHelp.po';
-import * as ModelView from './modelViewHelp.po';
-import * as ClassView from './classViewHelp.po';
-import * as ClassForm from './classFormHelp.po';
+import * as SearchClassModal from './modal/searchClassModal.po';
+import * as AddPropertiesFromClass from './modal/addPropertiesFromClassModal.po';
+import * as ModelView from './modelView.po';
+import * as ClassView from './classView.po';
+import * as ClassForm from './classForm.po';
 import { Localizable } from 'yti-common-ui/types/localization';
 import { Language } from 'app/types/language';
 import { ClassDetails } from 'app/services/entityLoader';

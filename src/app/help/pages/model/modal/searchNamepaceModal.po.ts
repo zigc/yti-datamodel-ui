@@ -1,4 +1,4 @@
-import { filterForSearchResult, selectSearchResult } from 'app/help/pages/modal/searchModalHelp.po';
+import { filterForSearchResult, selectSearchResult } from 'app/help/pages/modal/searchModal.po';
 import { child, modal } from 'app/help/selectors';
 
 const searchNamespaceModal = child(modal, '.search-namespace');
