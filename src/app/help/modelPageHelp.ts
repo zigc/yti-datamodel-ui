@@ -1,4 +1,3 @@
-import { IQService } from 'angular';
 import { createNotification, InteractiveHelp, Story, StoryLine } from './contract';
 import { KnownModelType, KnownPredicateType } from 'app/types/entity';
 import * as ModelPage from './pages/model/modelPageHelp.po';
@@ -8,7 +7,6 @@ import { helpLibrary, helpProfile } from './data';
 import { classIdFromPrefixAndName, isExpectedProperty, predicateIdFromPrefixAndName } from './utils';
 import * as ClassForm from './pages/model/classFormHelp.po';
 import * as VisualizationView from './pages/model/visualizationViewHelp.po';
-import { LanguageService } from 'app/services/languageService';
 import { HelpBuilderService, NavigationEvents } from './services/helpBuilder';
 import { ClassDetails, PredicateDetails } from 'app/services/entityLoader';
 import { Language } from 'app/types/language';
@@ -115,15 +113,11 @@ function addAssociation(prefix: string,
 
 export class ModelPageHelpService {
 
-  constructor(private $q: IQService,
-              private languageService: LanguageService,
-              private helpBuilderService: HelpBuilderService) {
+  constructor(private helpBuilderService: HelpBuilderService) {
     'ngInject';
   }
 
-  getHelps(modelType: KnownModelType, currentModelPrefix: string): InteractiveHelp[] {
-
-    const lang = this.languageService.UILanguage;
+  getHelps(modelType: KnownModelType, currentModelPrefix: string, lang: Language): InteractiveHelp[] {
 
     const navigation: NavigationEvents = {
       onStart: modelUrl(modelType === 'profile' ? helpProfile.model.prefix : helpLibrary.model.prefix),

@@ -69,8 +69,8 @@ export class FrontPageComponent implements HelpProvider {
     locationService.atFrontPage();
     const localizer = languageService.createLocalizer();
 
-    $scope.$watch(() => languageService.UILanguage, () => {
-      this.helps = frontPageHelpService.getHelps();
+    $scope.$watch(() => languageService.UILanguage, lang => {
+      this.helps = frontPageHelpService.getHelps(lang);
     });
 
     this.modelTypes = [null, 'library', 'profile'].map(type => {

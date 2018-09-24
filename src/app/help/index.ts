@@ -20,6 +20,9 @@ import { InteractiveHelpPopoverDimensionsCalculatorComponent } from './component
 import { InteractiveHelpBackdropComponent } from './components/interactiveHelpBackdrop';
 import { HelpBuilderService } from './services/helpBuilder';
 import { InteractiveHelp } from './contract';
+import { comparingPrimitive } from 'yti-common-ui/utils/comparator';
+import { availableUILanguages } from 'app/types/language';
+import { flatten } from 'yti-common-ui/utils/array';
 
 export { module } from './module';
 
@@ -52,44 +55,47 @@ mod.run((
   'ngInject';
 
   if (logTranslations) {
-    logTranslation([
-      ...frontPageHelpService.getHelps(),
-      ...modelPageHelpService.getHelps('library', 'bogusPrefix'),
-      ...modelPageHelpService.getHelps('profile', 'bogusPrefix')
-    ]);
+    logTranslation(flatten(availableUILanguages.map(lang => [
+      ...frontPageHelpService.getHelps(lang),
+      ...modelPageHelpService.getHelps('library', 'bogusPrefix', lang),
+      ...modelPageHelpService.getHelps('profile', 'bogusPrefix', lang)
+    ])));
   }
 });
 
 function logTranslation(helps: InteractiveHelp[]) {
 
-  const keys: string[] = [];
+  const translations: { key: string, context?: any }[] = [];
 
   for (const help of helps) {
     const storyLine = help.storyLine;
 
-    keys.push(storyLine.title);
-    keys.push(storyLine.description);
+    translations.push({ key: storyLine.title });
+    translations.push({ key: storyLine.description });
 
     for (const item of storyLine.items()) {
-      keys.push(item.title.key);
+      translations.push(item.title);
 
       if (item.content) {
-        keys.push(item.content.key);
+        translations.push(item.content);
       }
     }
   }
 
-  keys.sort();
+  translations.sort(comparingPrimitive(translation => translation.key));
 
   let result = '';
-  let previous = '';
+  let previousKey = '';
 
-  for (const key of keys) {
-    if (key !== previous) {
-      result += `<div translate>${key}</div>\n`;
+  for (const {key, context} of translations) {
+
+    const contextKeys = Object.keys(context || {}).map(k => `{{${k}}}`).join(' ');
+
+    if (key !== previousKey) {
+      result += `<div translate>${key}</div> ${contextKeys}\n`;
     }
 
-    previous = key;
+    previousKey = key;
   }
 
   console.log(result);

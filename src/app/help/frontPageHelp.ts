@@ -1,4 +1,3 @@
-import { IQService } from 'angular';
 import { createNotification, InteractiveHelp, Notification, Story, StoryLine } from './contract';
 import { KnownModelType } from 'app/types/entity';
 import * as FrontPage from './pages/frontPageHelp.po';
@@ -12,7 +11,6 @@ import { helpLibrary, helpProfile } from './data';
 import { HelpBuilderService } from './services/helpBuilder';
 import { EntityLoader } from 'app/services/entityLoader';
 import { Language } from 'app/types/language';
-import { LanguageService } from 'app/services/languageService';
 
 function createNewLibraryItems(lang: Language): Story[] {
 
@@ -78,13 +76,11 @@ function createNewModel(type: KnownModelType, lang: Language): StoryLine {
 
 export class FrontPageHelpService {
 
-  constructor(private $q: IQService,
-              private languageService: LanguageService,
-              private helpBuilderService: HelpBuilderService) {
+  constructor(private helpBuilderService: HelpBuilderService) {
     'ngInject';
   }
 
-  getHelps(): InteractiveHelp[] {
+  getHelps(lang: Language): InteractiveHelp[] {
 
     const initializer = (loader: EntityLoader) => {
     };
@@ -93,8 +89,8 @@ export class FrontPageHelpService {
       onEnd: '/'
     });
 
-    builder.add(createNewModel('library', this.languageService.UILanguage), initializer);
-    builder.add(createNewModel('profile', this.languageService.UILanguage), initializer);
+    builder.add(createNewModel('library', lang), initializer);
+    builder.add(createNewModel('profile', lang), initializer);
 
     return builder.helps;
   }

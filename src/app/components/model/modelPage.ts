@@ -125,7 +125,7 @@ export class ModelPageComponent implements ModelPageActions, HelpProvider, Model
       }
     });
 
-    const setHelps = (model: Model) => this.helps = model ? modelPageHelpService.getHelps(model.normalizedType, model.prefix) : [];
+    const setHelps = (model: Model) => this.helps = model ? modelPageHelpService.getHelps(model.normalizedType, model.prefix, this.languageService.UILanguage) : [];
 
     $scope.$watch(() => this.model, (newModel: Model, oldModel: Model) => {
       if (oldModel && !newModel) { // model removed
