@@ -4,7 +4,7 @@ import { Uri } from 'app/entities/uri';
 import { availableLanguages } from 'app/types/language';
 import { contains } from 'yti-common-ui/utils/array';
 import { DataType } from 'app/entities/dataTypes';
-const URI = require('uri-js');
+import { parse as parseUri } from 'uri-js';
 
 export type Validator<T> = (input: T, raw?: any) =>  boolean;
 export type AsyncValidator<T> = (input: T, raw?: any) => IPromise<any>;
@@ -61,7 +61,7 @@ export function isValidUrl(url: string|Uri): boolean {
   if (!url) {
     return true;
   } else {
-    const parsed = URI.parse(url.toString());
+    const parsed = parseUri(url.toString());
     return !parsed.error && !!parsed.scheme && !!parsed.host && !parsed.scheme.startsWith('urn');
   }
 }
@@ -70,7 +70,7 @@ export function isValidUri(uri: string|Uri, toleratedErrors: string[] = []): boo
   if (!uri) {
     return true;
   } else {
-    const parsed = URI.parse(uri.toString());
+    const parsed = parseUri(uri.toString());
     return !parsed.error || contains(toleratedErrors, parsed.error) && !!parsed.scheme;
   }
 }

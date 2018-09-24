@@ -53,7 +53,7 @@
     "proxy-polyfill": "0.1.6",
     "rxjs": "^6.0.0",
     "ui-bootstrap4": "^3.0.0",
-    "uri-js": "2.1.1",
+    "uri-js": "4.2.2",
     "uuid": "3.0.1",
     "webcola": "3.3.8",
     "yti-common-ui": "https://github.com/VRK-YTI/yti-common-ui.git/#0f7292f107758f4ac177354bd7a2d5aca22df6ab",
