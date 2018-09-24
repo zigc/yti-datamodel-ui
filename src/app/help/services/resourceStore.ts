@@ -32,6 +32,7 @@ export class ResourceStore<T extends { id: Uri }> {
 
   add(resource: T) {
     this.resources.set(resource.id.uri, resource);
+    return resource;
   }
 
   delete(id: ResourceId): boolean {

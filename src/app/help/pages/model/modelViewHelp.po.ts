@@ -83,12 +83,11 @@ export function addNamespaceItems(ns: { prefix: string, id: string }): Story[] {
   ];
 }
 
-export function addVocabularyItems(vocabulary: { name: Localizable, id: string }, lang: Language): Story[] {
-
+export function addVocabularyItems(vocabulary: { label: Localizable, id: string }, lang: Language): Story[] {
   return [
     addVocabulary,
-    SearchVocabularyModal.filterForVocabulary(vocabulary.name[lang], vocabulary.id),
-    SearchVocabularyModal.selectVocabulary(vocabulary.name[lang], vocabulary.id),
+    SearchVocabularyModal.filterForVocabulary(vocabulary.label[lang], vocabulary.id),
+    SearchVocabularyModal.selectVocabulary(vocabulary.label[lang], vocabulary.id),
     focusVocabularies
   ];
 }

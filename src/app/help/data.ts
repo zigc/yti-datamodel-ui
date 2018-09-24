@@ -1,18 +1,38 @@
-import { classIdFromPrefixAndName, modelIdFromPrefix, predicateIdFromPrefixAndName } from 'app/help/utils';
+import { classIdFromPrefixAndName, conceptIdFromPrefixAndIndex, modelIdFromPrefix, predicateIdFromPrefixAndName, vocabularyIdFromPrefix } from 'app/help/utils';
 import { KnownModelType, KnownPredicateType } from 'app/types/entity';
-import { helpOrganizationId, helpOrganizationName } from './services/helpOrganizationService';
-import { helpConceptIdForIndex, helpVocabularyId, helpVocabularyName } from './services/helpVocabularyService';
-import { VocabularyDefinition } from 'app/services/entityLoader';
+import { VocabularyWithConceptsDetails } from 'app/services/entityLoader';
 import { Localizable } from 'yti-common-ui/types/localization';
+import { Uri } from 'app/entities/uri';
+import { OrganizationDetails } from './services/entityCreatorService';
 
 // TODO: more complete data with localizations to all UI languages
 
-export const helpVocabulary: VocabularyDefinition = [
-  {
-    label: { fi: 'omistaja', en: 'owner' },
-    definition: { fi: 'omistajan määritelmä', en: 'owner definition' }
+export const helpOrganization: OrganizationDetails = {
+  id: Uri.fromUUID('74a41211-8c99-4835-a519-7a61612b1098'),
+  label: {
+    fi: 'Ohjeen organisaatio',
+    en: 'Help organization'
   }
-];
+};
+
+export const helpVocabulary: VocabularyWithConceptsDetails = {
+  vocabulary: {
+    prefix: 'jhs',
+    label: {
+      fi: 'Julkisen hallinnon yhteinen sanasto',
+      en: 'Finnish Public Sector Terminological Glossary (Controlled Vocabulary)'
+    },
+    description: {
+      en: 'The Finnish Public Sector Terminological Glossary is a controlled vocabulary consisting of terms representing concepts that are defined in accordance with the Finnish Public Sector Recommendation JHS175. The concepts form a shared and harmonized core vocabulary for all public sector organizations.'
+    }
+  },
+  concepts: [
+    {
+      label: { fi: 'omistaja', en: 'owner' },
+      definition: { fi: 'omistajan määritelmä', en: 'owner definition' }
+    }
+  ]
+};
 
 export const helpImportedLibrary = {
   model: {
@@ -22,8 +42,8 @@ export const helpImportedLibrary = {
       fi: 'Julkishallinnon tietokomponentit',
       en: 'Finnish Public Sector Core Components'
     },
-    organizations: [helpOrganizationId],
-    vocabularies: [helpVocabularyId],
+    organizations: [helpOrganization.id.uri],
+    vocabularies: [vocabularyIdFromPrefix(helpVocabulary.vocabulary.prefix)],
     classifications: ['P9'],
   },
   classes: {
@@ -79,8 +99,8 @@ export const helpLibrary = {
     prefix: 'sea',
     label: { fi: 'Merenkulun tietokomponentit', en: 'Seafaring information components' },
     comment: { fi: 'Merenkulun tietokomponentit', en: 'Seafaring information components' },
-    organizations: [helpOrganizationId],
-    vocabularies: [helpVocabularyId],
+    organizations: [helpOrganization.id.uri],
+    vocabularies: [vocabularyIdFromPrefix(helpVocabulary.vocabulary.prefix)],
     classifications: ['P16'],
     namespaces: [modelIdFromPrefix(helpImportedLibrary.model.prefix)]
   },
@@ -89,17 +109,14 @@ export const helpLibrary = {
     id: modelIdFromPrefix(helpImportedLibrary.model.prefix)
   },
   vocabulary: {
-    name: helpVocabularyName,
-    id: helpVocabularyId,
+    label: helpVocabulary.vocabulary.label,
+    id: vocabularyIdFromPrefix(helpVocabulary.vocabulary.prefix),
   },
   classification: {
-    name: { fi: 'Liikenne', en: 'Transport' } as Localizable,
+    label: { fi: 'Liikenne', en: 'Transport' } as Localizable,
     id: 'http://urn.fi/URN:NBN:fi:au:ptvl:v1142'
   },
-  organization: {
-    name: helpOrganizationName,
-    id: helpOrganizationId
-  },
+  organization: helpOrganization,
   person: {
     prefix: helpImportedLibrary.model.prefix,
     details: helpImportedLibrary.classes.person
@@ -137,7 +154,7 @@ export const helpLibrary = {
       owner: {
         type: 'association' as KnownPredicateType,
         name: { fi: 'Omistaja', en: 'Owner' },
-        conceptId: helpConceptIdForIndex(0),
+        conceptId: conceptIdFromPrefixAndIndex(helpVocabulary.vocabulary.prefix, 0),
         target: {
           prefix: helpImportedLibrary.model.prefix,
           details: helpImportedLibrary.classes.person
@@ -153,8 +170,8 @@ export const helpProfile = {
     prefix: 'plv',
     label: { fi: 'Palveluprofiili', en: 'Service profile' },
     comment: { fi: 'Palveluprofiili', en: 'Service profile' },
-    organizations: [helpOrganizationId],
-    vocabularies: [helpVocabularyId],
+    organizations: [helpOrganization.id.uri],
+    vocabularies: [vocabularyIdFromPrefix(helpVocabulary.vocabulary.prefix)],
     classifications: ['P9'],
     namespaces: [modelIdFromPrefix(helpImportedLibrary.model.prefix)]
   },
@@ -163,17 +180,14 @@ export const helpProfile = {
     id: modelIdFromPrefix(helpImportedLibrary.model.prefix)
   },
   vocabulary: {
-    name: helpVocabularyName,
-    id: helpVocabularyId,
+    label: helpVocabulary.vocabulary.label,
+    id: vocabularyIdFromPrefix(helpVocabulary.vocabulary.prefix),
   },
   classification: {
-    name: { fi: 'Yleiset tieto- ja hallintopalvelut', en: 'General information and administrative services' } as Localizable,
+    label: { fi: 'Yleiset tieto- ja hallintopalvelut', en: 'General information and administrative services' } as Localizable,
     id: 'http://urn.fi/URN:NBN:fi:au:ptvl:v1095',
   },
-  organization: {
-    name: helpOrganizationName,
-    id: helpOrganizationId
-  },
+  organization: helpOrganization,
   newClass: {
     label: { fi: 'Tuote', en: 'Product'} as Localizable,
     comment: { fi: 'Asia joka tuotetaan', en: 'Thing that is produced'} as Localizable,

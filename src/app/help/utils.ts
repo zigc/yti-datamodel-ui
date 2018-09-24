@@ -81,8 +81,20 @@ function normalizeAsId(resourceName: string) {
     .replace(/Å/g, 'A');
 }
 
+const baseNamespace = 'http://uri.suomi.fi/';
+const dataModelNamespace = `${baseNamespace}datamodel/`;
+const terminologyNamespace = `${baseNamespace}terminology/`;
+
+export function vocabularyIdFromPrefix(prefix: string) {
+  return `${terminologyNamespace}${prefix}/terminological-vocabulary-1`;
+}
+
+export function conceptIdFromPrefixAndIndex(prefix: string, index: number) {
+  return `${terminologyNamespace}${prefix}/concept-${index + 1}`;
+}
+
 export function modelIdFromPrefix(modelPrefix: string) {
-  return `http://uri.suomi.fi/datamodel/ns/${modelPrefix}`
+  return `${dataModelNamespace}ns/${modelPrefix}`
 }
 
 export function classNameToResourceIdName(className: string) {

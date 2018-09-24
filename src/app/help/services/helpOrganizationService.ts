@@ -1,30 +1,24 @@
 import { OrganizationService } from 'app/services/organizationService';
-import { IPromise } from 'angular';
+import { IPromise, IQService } from 'angular';
 import { Organization } from 'app/entities/organization';
-import { Uri } from 'app/entities/uri';
-import { EntityCreatorService } from './entityCreatorService';
-import { Localizable } from 'yti-common-ui/types/localization';
+import { EntityCreatorService, OrganizationDetails } from './entityCreatorService';
+import { ResourceStore } from './resourceStore';
 
-export const helpOrganizationName: Localizable = {
-  fi: 'Ohjeen organisaatio',
-  en: 'Help organization'
-};
-
-export const helpOrganizationId = 'urn:uuid:74a41211-8c99-4835-a519-7a61612b1098';
-
-// TODO Move organization initialization as EntityLoader responsibility
 export class InteractiveHelpOrganizationService implements OrganizationService {
 
-  constructor(private entityCreatorService: EntityCreatorService) {
+  private store = new ResourceStore<Organization>();
+
+  constructor(private $q: IQService,
+              private entityCreatorService: EntityCreatorService) {
     'ngInject';
   }
 
+  createOrganization(organization: OrganizationDetails) {
+    return this.entityCreatorService.createOrganization(organization)
+      .then(o => this.store.add(o));
+  }
+
   getOrganizations(): IPromise<Organization[]> {
-    return this.entityCreatorService.createOrganizations([
-      {
-        id: Uri.fromUUID(helpOrganizationId),
-        label: helpOrganizationName
-      }
-    ]);
+    return this.$q.when(this.store.values());
   }
 }

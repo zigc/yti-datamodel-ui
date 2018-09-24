@@ -15,10 +15,11 @@ import { VocabularyService } from './vocabularyService';
 import { firstMatching, keepMatching } from 'yti-common-ui/utils/array';
 import { Localizable } from 'yti-common-ui/types/localization';
 import { Status } from 'yti-common-ui/entities/status';
-import { EntityCreatorService } from '../help/services/entityCreatorService';
+import { EntityCreatorService, OrganizationDetails, technicalNamespaces, VocabularyDetails } from 'app/help/services/entityCreatorService';
 import { Organization } from 'app/entities/organization';
 import { Classification } from 'app/entities/classification';
-import { InteractiveHelpVocabularyService } from '../help/services/helpVocabularyService';
+import { InteractiveHelpVocabularyService } from 'app/help/services/helpVocabularyService';
+import { InteractiveHelpOrganizationService } from 'app/help/services/helpOrganizationService';
 
 export type Resolvable<T> = string|IPromise<T>|(() => IPromise<T>);
 
@@ -106,13 +107,16 @@ export interface ConceptSuggestionDetails {
   comment: string;
 }
 
-export type VocabularyDefinition = ConceptDetails[];
-
-export interface ModelWithResourcesDefinition {
+export interface ModelWithResourcesDetails {
   model: ModelDetails;
   classes: { [name: string]: ClassDetails };
   attributes: { [name: string]: AttributeDetails };
   associations: { [name: string]: AssociationDetails };
+}
+
+export interface VocabularyWithConceptsDetails {
+  vocabulary: VocabularyDetails;
+  concepts: ConceptDetails[];
 }
 
 export class EntityLoaderService {
@@ -123,6 +127,7 @@ export class EntityLoaderService {
               private classService: ClassService,
               private vocabularyService: VocabularyService,
               private helpVocabularyService: InteractiveHelpVocabularyService|null,
+              private helpOrganizationService: InteractiveHelpOrganizationService|null,
               private entityCreatorService: EntityCreatorService,
               private resetService: ResetService) {
     'ngInject';
@@ -136,39 +141,13 @@ export class EntityLoaderService {
       this.classService,
       this.vocabularyService,
       this.helpVocabularyService,
+      this.helpOrganizationService,
       this.entityCreatorService,
       this.resetService,
       shouldReset
     );
   }
 }
-
-// copy-paste with entityCreatorService
-const technicalNamespaces = {
-  'schema': 'http://schema.org/',
-  'dcap': 'http://purl.org/ws-mmi-dc/terms/',
-  'void': 'http://rdfs.org/ns/void#',
-  'adms': 'http://www.w3.org/ns/adms#',
-  'skosxl': 'http://www.w3.org/2008/05/skos-xl#',
-  'dcam': 'http://purl.org/dc/dcam/',
-  'owl': 'http://www.w3.org/2002/07/owl#',
-  'afn': 'http://jena.hpl.hp.com/ARQ/function#',
-  'xsd': 'http://www.w3.org/2001/XMLSchema#',
-  'skos': 'http://www.w3.org/2004/02/skos/core#',
-  'rdfs': 'http://www.w3.org/2000/01/rdf-schema#',
-  'iow': 'http://uri.suomi.fi/datamodel/ns/iow#',
-  'sd': 'http://www.w3.org/ns/sparql-service-description#',
-  'at': 'http://publications.europa.eu/ontology/authority/',
-  'sh': 'http://www.w3.org/ns/shacl#',
-  'rdf': 'http://www.w3.org/1999/02/22-rdf-syntax-ns#',
-  'dcterms': 'http://purl.org/dc/terms/',
-  'text': 'http://jena.apache.org/text#',
-  'termed': 'http://termed.thl.fi/meta/',
-  'prov': 'http://www.w3.org/ns/prov#',
-  'foaf': 'http://xmlns.com/foaf/0.1/',
-  'ts': 'http://www.w3.org/2003/06/sw-vocab-status/ns#',
-  'dc': 'http://purl.org/dc/elements/1.1/'
-};
 
 export class EntityLoader {
 
@@ -183,6 +162,7 @@ export class EntityLoader {
               private classService: ClassService,
               private vocabularyService: VocabularyService,
               private helpVocabularyService: InteractiveHelpVocabularyService|null,
+              private helpOrganizationService: InteractiveHelpOrganizationService|null,
               private entityCreatorService: EntityCreatorService,
               resetService: ResetService,
               shouldReset: boolean) {
@@ -206,7 +186,7 @@ export class EntityLoader {
     return this.$q.all(this.actions);
   }
 
-  createModelWithResources(modelWithResources: ModelWithResourcesDefinition) {
+  createModelWithResources(modelWithResources: ModelWithResourcesDetails): IPromise<any> {
 
     const modelPromise = this.createModel(modelWithResources.model);
     const promises: IPromise<any>[] = [modelPromise];
@@ -224,21 +204,50 @@ export class EntityLoader {
         promises.push(this.createClass(modelPromise, classDetails));
       }
     });
+
+    return this.$q.all(promises);
   }
 
-  createConcept(details: ConceptDetails): IPromise<Concept> {
+  createVocabulary(vocabulary: VocabularyDetails): IPromise<Vocabulary> {
+
+    if (!this.helpVocabularyService) {
+      throw new Error('Vocabulary creation is only available to help');
+    }
+
+    return this.addAction(this.helpVocabularyService.createVocabulary(vocabulary), vocabulary);
+  }
+
+  createConcept(vocabulary: Resolvable<Vocabulary>, details: ConceptDetails): IPromise<Concept> {
 
     if (!this.helpVocabularyService) {
       throw new Error('Concept creation is only available to help');
     }
 
-    return this.addAction(this.helpVocabularyService.createConcept(details.label, details.definition), details);
+    const service = this.helpVocabularyService;
+
+    return this.addAction(asPromise(vocabulary, id => this.getVocabulary(id))
+      .then((v: Vocabulary) => service.createConcept(v, details)), details);
   }
 
-  createVocabulary(details: VocabularyDefinition) {
-    for (const conceptDetails of details) {
-      this.createConcept(conceptDetails);
+  createVocabularyWithConcepts(details: VocabularyWithConceptsDetails): IPromise<any> {
+
+    const vocabularyPromise = this.createVocabulary(details.vocabulary);
+    const promises: IPromise<any>[] = [vocabularyPromise];
+
+    for (const conceptDetails of details.concepts) {
+      promises.push(this.createConcept(vocabularyPromise, conceptDetails));
     }
+
+    return this.$q.all(promises);
+  }
+
+  createOrganization(organization: OrganizationDetails): IPromise<Organization> {
+
+    if (!this.helpOrganizationService) {
+      throw new Error('Organization creation is only available to help');
+    }
+
+    return this.addAction(this.helpOrganizationService.createOrganization(organization), organization);
   }
 
   createConceptSuggestion(details: ConceptSuggestionDetails, modelPromise: IPromise<Model>): IPromise<Uri> {
@@ -248,16 +257,15 @@ export class EntityLoader {
     return this.addAction(result, details);
   }
 
+  getVocabulary(id: string) {
+    return this.vocabularyService.getAllVocabularies().then(
+      allVocabularies => requireDefined(firstMatching(allVocabularies, (voc: Vocabulary) => voc.id.toString() === id), 'vocabulary not found'))
+  }
+
   createModel(details: ModelDetails): IPromise<Model> {
 
     const classificationsPromise = this.$q.all((details.classifications || []).map(asIdentifierPromise));
     const organizationsPromise = this.$q.all((details.organizations || []).map(resolvable => asUuidPromise(resolvable)));
-
-    const allVocabulariesPromise = this.vocabularyService.getAllVocabularies();
-
-    const fetchVocabulary = (id: string) => allVocabulariesPromise.then(
-      allVocabularies => requireDefined(firstMatching(allVocabularies, (voc: Vocabulary) => voc.id.toString() === id), 'vocabulary not found')
-    );
 
     const result =
       this.initialized.then(() => this.$q.all([classificationsPromise, organizationsPromise]))
@@ -278,7 +286,7 @@ export class EntityLoader {
         const promises: IPromise<any>[] = [];
 
         for (const vocabulary of details.vocabularies || []) {
-          promises.push(asPromise(vocabulary, fetchVocabulary)
+          promises.push(asPromise(vocabulary, (id: string) => this.getVocabulary(id))
             .then(importedVocabulary => model.addVocabulary(importedVocabulary))
           );
         }

@@ -15,6 +15,7 @@ import * as SearchClassificationModal from './modal/searchClassificationModalHel
 import * as SearchOrganizationsModal from './modal/searchOrganizationModalHelp.po';
 import { Localizable } from 'yti-common-ui/types/localization';
 import { Language } from 'app/types/language';
+import { Uri } from 'app/entities/uri';
 
 const form = () => jQuery('form');
 
@@ -142,12 +143,12 @@ export interface CreateModelDetails {
     comment: Localizable;
   };
   classification: {
-    name: Localizable;
     id: string;
+    label: Localizable;
   },
   organization: {
-    name: Localizable;
-    id: string;
+    id: Uri;
+    label: Localizable;
   }
 }
 
@@ -159,10 +160,10 @@ export function createModelItems(details: CreateModelDetails, lang: Language): S
     enterModelLanguage,
     enterModelPrefix(details.model.prefix),
     addClassification,
-    SearchClassificationModal.selectClassification(details.classification.name[lang], details.classification.id),
+    SearchClassificationModal.selectClassification(details.classification.label[lang], details.classification.id),
     focusClassifications,
     addContributor,
-    SearchOrganizationsModal.selectOrganization(details.organization.name[lang], details.organization.id),
+    SearchOrganizationsModal.selectOrganization(details.organization.label[lang], details.organization.id.uri),
     focusContributors,
     saveUnsavedModel
   ]

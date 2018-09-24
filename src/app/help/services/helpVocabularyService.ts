@@ -10,21 +10,8 @@ import { Localizable } from 'yti-common-ui/types/localization';
 import { isDefined, requireDefined } from 'yti-common-ui/utils/object';
 import { EntityCreatorService } from './entityCreatorService';
 
-export const helpVocabularyName: Localizable = {
-  fi: 'Julkisen hallinnon yhteinen sanasto',
-  en: 'Finnish Public Sector Terminological Glossary (Controlled Vocabulary)'
-};
-
-export const helpVocabularyId = 'http://uri.suomi.fi/terminology/jhs/terminological-vocabulary-1';
-
-export function helpConceptIdForIndex(index: number) {
-  return 'http://uri.suomi.fi/terminology/jhs/concept-' + (index + 1);
-}
-
-// TODO Move vocabulary initialization as EntityLoader responsibility
 export class InteractiveHelpVocabularyService implements VocabularyService, ResetableService {
 
-  private vocabularyIndex = 0;
   private conceptIndex = 0;
 
   vocabularyStore = new ResourceStore<Vocabulary>();
@@ -37,19 +24,11 @@ export class InteractiveHelpVocabularyService implements VocabularyService, Rese
 
   reset(): IPromise<any> {
 
-    this.vocabularyIndex = 0;
     this.vocabularyStore.clear();
     this.conceptIndex = 0;
     this.conceptStore.clear();
 
-    return this.entityCreatorService.createVocabulary({
-      prefix: 'jhs',
-      index: ++this.vocabularyIndex,
-      label: helpVocabularyName,
-      description: {
-        en: 'The Finnish Public Sector Terminological Glossary is a controlled vocabulary consisting of terms representing concepts that are defined in accordance with the Finnish Public Sector Recommendation JHS175. The concepts form a shared and harmonized core vocabulary for all public sector organizations.'
-      }
-    }).then(vocab => this.vocabularyStore.add(vocab));
+    return this.$q.when();
   }
 
   getAllVocabularies(): IPromise<Vocabulary[]> {
@@ -70,30 +49,25 @@ export class InteractiveHelpVocabularyService implements VocabularyService, Rese
       index: ++this.conceptIndex,
       label: { [lang]: label },
       definition: { [lang]: comment }
-    }).then(concept => {
-      this.conceptStore.add(concept);
-      return concept.id;
-    });
+    }).then(concept => this.conceptStore.add(concept))
+      .then(concept => concept.id);
   }
 
   getConcept(id: Uri): IPromise<Concept> {
     return this.$q.when(requireDefined(this.conceptStore.findFirst(cs => cs.id.equals(id))));
   }
 
-  createConcept(label: Localizable, definition: Localizable): IPromise<Concept> {
+  createVocabulary(vocabulary: { prefix: string, label: Localizable, description: Localizable }): IPromise<Vocabulary> {
+    return this.entityCreatorService.createVocabulary(vocabulary)
+      .then(v => this.vocabularyStore.add(v));
+  }
 
-    return this.getAllVocabularies()
-      .then(vocabs => vocabs[0])
-      .then(vocabulary => {
-        return this.entityCreatorService.createConcept({
-          vocabulary,
-          index: ++this.conceptIndex,
-          label,
-          definition
-        }).then(concept => {
-          this.conceptStore.add(concept);
-          return concept;
-        });
-      });
+  createConcept(vocabulary: Vocabulary, concept: { label: Localizable, definition: Localizable }): IPromise<Concept> {
+    return this.entityCreatorService.createConcept({
+      vocabulary,
+      index: ++this.conceptIndex,
+      label: concept.label,
+      definition: concept.definition
+    }).then(c => this.conceptStore.add(c));
   }
 }

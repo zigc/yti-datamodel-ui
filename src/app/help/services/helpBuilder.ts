@@ -5,7 +5,7 @@ import { EntityLoader, EntityLoaderService } from 'app/services/entityLoader';
 import { InteractiveHelpService } from './interactiveHelpService';
 import { identity } from 'yti-common-ui/utils/object';
 import { gettextCatalog as GettextCatalog } from 'angular-gettext';
-import { helpImportedLibrary, helpVocabulary } from '../data';
+import { helpImportedLibrary, helpOrganization, helpVocabulary } from '../data';
 
 export interface NavigationEvents {
   onStart?: string;
@@ -51,12 +51,14 @@ export class HelpBuilder {
 
             // default data for all helps
             return this.$q.all([
-              loader.createVocabulary(helpVocabulary),
-              loader.createModelWithResources(helpImportedLibrary)
-            ]).then(() => {
-              initializer(loader);
-              return loader.result;
-            });
+              loader.createVocabularyWithConcepts(helpVocabulary),
+              loader.createOrganization(helpOrganization)
+            ])
+              .then(() => loader.createModelWithResources(helpImportedLibrary))
+              .then(() => {
+                initializer(loader);
+                return loader.result;
+              });
           })
           .then(identity, err => {
             console.log(err);

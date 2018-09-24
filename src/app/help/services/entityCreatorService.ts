@@ -4,7 +4,7 @@ import { dateSerializer, typeSerializer } from 'app/entities/serializer/serializ
 import { uriSerializer } from 'app/entities/serializer/entitySerializer';
 import { KnownModelType, KnownPredicateType } from 'app/types/entity';
 import { Uri } from 'app/entities/uri';
-import { classIdFromNamespaceId, modelIdFromPrefix, predicateIdFromNamespaceId } from 'app/help/utils';
+import { classIdFromNamespaceId, modelIdFromPrefix, predicateIdFromNamespaceId, vocabularyIdFromPrefix } from 'app/help/utils';
 import { upperCaseFirst } from 'change-case';
 import { Language } from 'app/types/language';
 import { Concept, Vocabulary } from 'app/entities/vocabulary';
@@ -15,7 +15,7 @@ import { Class, Property } from 'app/entities/class';
 import { Organization } from 'app/entities/organization';
 import { Classification } from 'app/entities/classification';
 
-const technicalNamespaces = {
+export const technicalNamespaces = {
   'schema': 'http://schema.org/',
   'dcap': 'http://purl.org/ws-mmi-dc/terms/',
   'void': 'http://rdfs.org/ns/void#',
@@ -85,7 +85,6 @@ export interface PropertyDetails {
 
 export interface VocabularyDetails {
   prefix: string;
-  index: number;
   label: Localizable;
   description: Localizable;
 }
@@ -220,10 +219,6 @@ export class EntityCreatorService {
     };
 
     return this.$q.when(new ImportedNamespace(graph, context, null));
-  }
-
-  createOrganizations(detailsList: OrganizationDetails[]): IPromise<Organization[]> {
-    return this.$q.all(detailsList.map(details => this.createOrganization(details)));
   }
 
   createOrganization(details: OrganizationDetails): IPromise<Organization> {
@@ -461,7 +456,7 @@ export class EntityCreatorService {
 
   createVocabulary(details: VocabularyDetails): IPromise<Vocabulary> {
 
-    const id = `http://uri.suomi.fi/terminology/${details.prefix}/terminological-vocabulary-${details.index}`;
+    const id = vocabularyIdFromPrefix(details.prefix);
 
     const graph = {
       '@id': id,
