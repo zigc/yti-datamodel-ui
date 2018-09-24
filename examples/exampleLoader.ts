@@ -29,4 +29,4 @@ const vocabularyService = new DefaultVocabularyService(httpService, frameService
 const resetService = new ResetService(httpService);
 const entityCreatorService = new EntityCreatorService(q);
 
-export const loader = new EntityLoader(q, modelService, predicateService, classService, vocabularyService, null, entityCreatorService, resetService, true);
+export const loader = new EntityLoader(q, modelService, predicateService, classService, vocabularyService, null, null, entityCreatorService, resetService, true);
