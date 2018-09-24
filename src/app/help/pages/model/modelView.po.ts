@@ -75,24 +75,25 @@ export const focusVocabularies = createStory({
   nextCondition: createExplicitNextCondition()
 });
 
-export function addModelNamespaceItems(model: { prefix: string }): Story[] {
-  return [
-    requireNamespace,
-    SearchNamespaceModal.filterForModel(model.prefix, modelIdFromPrefix(model.prefix)),
-    SearchNamespaceModal.selectNamespace(model.prefix, modelIdFromPrefix(model.prefix)),
-    focusNamespaces
-  ];
-}
+export const UseCases = {
 
-export function addVocabularyItems(vocabulary: { label: Localizable, prefix: string }, lang: Language): Story[] {
+  addModelNamespace(model: { prefix: string }): Story[] {
+    return [
+      requireNamespace,
+      ...SearchNamespaceModal.UseCases.filterAndSelect(model.prefix, modelIdFromPrefix(model.prefix)),
+      focusNamespaces
+    ];
+  },
+  addVocabulary(vocabulary: { label: Localizable, prefix: string }, lang: Language): Story[] {
 
-  const label = vocabulary.label[lang];
-  const vocabularyId = vocabularyIdFromPrefix(vocabulary.prefix);
+    const label = vocabulary.label[lang];
+    const vocabularyId = vocabularyIdFromPrefix(vocabulary.prefix);
 
-  return [
-    addVocabulary,
-    SearchVocabularyModal.filterForVocabulary(label, vocabularyId),
-    SearchVocabularyModal.selectVocabulary(label, vocabularyId),
-    focusVocabularies
-  ];
-}
+    return [
+      addVocabulary,
+      ...SearchVocabularyModal.UseCases.filterAndSelect(label, vocabularyId),
+      focusVocabularies
+    ];
+  }
+};
+

@@ -154,19 +154,21 @@ export interface CreateModelDetails {
   }
 }
 
-export function createModelItems(details: CreateModelDetails, lang: Language): Story[] {
+export const UseCases = {
 
-  return [
-    enterModelLabel(details.model.type, details.model.label[lang]),
-    enterModelComment(details.model.comment[lang]),
-    enterModelLanguage,
-    enterModelPrefix(details.model.prefix),
-    addClassification,
-    SearchClassificationModal.selectClassification(details.classification.label[lang], details.classification.id),
-    focusClassifications,
-    addContributor,
-    SearchOrganizationsModal.selectOrganization(details.organization.label[lang], details.organization.id.uri),
-    focusContributors,
-    saveUnsavedModel
-  ]
-}
+  createModel(details: CreateModelDetails, lang: Language): Story[] {
+    return [
+      enterModelLabel(details.model.type, details.model.label[lang]),
+      enterModelComment(details.model.comment[lang]),
+      enterModelLanguage,
+      enterModelPrefix(details.model.prefix),
+      addClassification,
+      ...SearchClassificationModal.UseCases.selectClassification(details.classification.label[lang], details.classification.id),
+      focusClassifications,
+      addContributor,
+      ...SearchOrganizationsModal.UseCases.selectOrganization(details.organization.label[lang], details.organization.id.uri),
+      focusContributors,
+      saveUnsavedModel
+    ]
+  }
+};

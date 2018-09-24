@@ -5,7 +5,6 @@ import * as NewModelPage from 'app/help/pages/model/newModelPage.po';
 import * as ModelPage from 'app/help/pages/model/modelPage.po';
 import * as ModelView from 'app/help/pages/model/modelView.po';
 import * as ClassView from 'app/help/pages/model/classView.po';
-import * as ClassForm from 'app/help/pages/model/classForm.po';
 import * as VisualizationView from 'app/help/pages/model/visualizationView.po';
 import { helpLibrary, helpProfile } from 'app/help/providers/data';
 import { HelpBuilderService } from 'app/help/providers/helpBuilderService';
@@ -15,22 +14,22 @@ import { Language } from 'app/types/language';
 function createNewLibraryItems(lang: Language): Story[] {
 
   return [
-    ...FrontPage.startModelCreation('library'),
-    ...NewModelPage.createModelItems(helpLibrary, lang),
+    ...FrontPage.UseCases.startModelCreation('library'),
+    ...NewModelPage.UseCases.createModel(helpLibrary, lang),
     ModelPage.openModelDetails('library'),
     ModelView.modifyModel('library'),
-    ...ModelView.addVocabularyItems(helpLibrary.vocabulary, lang),
-    ...ModelView.addModelNamespaceItems(helpLibrary.importedLibrary),
+    ...ModelView.UseCases.addVocabulary(helpLibrary.vocabulary, lang),
+    ...ModelView.UseCases.addModelNamespace(helpLibrary.importedLibrary),
     ModelView.saveModelChanges,
-    ...ModelPage.assignClassItems(helpLibrary.person, lang),
-    ...ModelPage.assignClassItems(helpLibrary.contact, lang),
-    ...ModelPage.assignClassItems(helpLibrary.address, lang),
-    ...ModelPage.createNewClassItems(helpLibrary.newClass, lang),
-    ...ClassForm.addSuperClassItems(ClassView.element, helpLibrary.newClass.superClass, lang),
-    ...ClassView.addPropertyUsingExistingPredicateItems(helpLibrary.newClass.property.name, lang),
-    ...ClassView.addPropertyBasedOnSuggestionItems(helpLibrary.newClass.property.passengers, lang),
-    ...ClassView.addPropertyBasedOnExistingConceptItems(helpLibrary.newClass.property.owner, lang),
-    ...ClassForm.addAssociationTargetItems(ClassView.element, helpLibrary.newClass.property.owner.target, lang),
+    ...ModelPage.UseCases.assignClass(helpLibrary.person, lang),
+    ...ModelPage.UseCases.assignClass(helpLibrary.contact, lang),
+    ...ModelPage.UseCases.assignClass(helpLibrary.address, lang),
+    ...ModelPage.UseCases.createNewClass(helpLibrary.newClass, lang),
+    ...ClassView.UseCases.addSuperClass(helpLibrary.newClass.superClass, lang),
+    ...ClassView.UseCases.addPropertyUsingExistingPredicate(helpLibrary.newClass.property.name, lang),
+    ...ClassView.UseCases.addPropertyBasedOnSuggestion(helpLibrary.newClass.property.passengers, lang),
+    ...ClassView.UseCases.addPropertyBasedOnExistingConcept(helpLibrary.newClass.property.owner, lang),
+    ...ClassView.UseCases.addAssociationTarget(helpLibrary.newClass.property.owner.target, lang),
     ClassView.saveClassChanges,
     VisualizationView.focusVisualization
   ];
@@ -39,18 +38,18 @@ function createNewLibraryItems(lang: Language): Story[] {
 function createNewProfileItems(lang: Language): Story[] {
 
   return [
-    ...FrontPage.startModelCreation('profile'),
-    ...NewModelPage.createModelItems(helpProfile, lang),
+    ...FrontPage.UseCases.startModelCreation('profile'),
+    ...NewModelPage.UseCases.createModel(helpProfile, lang),
     ModelPage.openModelDetails('profile'),
     ModelView.modifyModel('profile'),
-    ...ModelView.addVocabularyItems(helpProfile.vocabulary, lang),
-    ...ModelView.addModelNamespaceItems(helpProfile.importedLibrary),
+    ...ModelView.UseCases.addVocabulary(helpProfile.vocabulary, lang),
+    ...ModelView.UseCases.addModelNamespace(helpProfile.importedLibrary),
     ModelView.saveModelChanges,
-    ...ModelPage.specializeClassItems(helpProfile.specializedClass, lang),
-    ...ModelPage.createNewClassItems(helpProfile.newClass, lang),
-    ...ClassView.addPropertyUsingExistingPredicateItems(helpProfile.newClass.property.name, lang),
-    ...ClassView.addPropertyBasedOnSuggestionItems(helpProfile.newClass.property.produced, lang),
-    ...ClassForm.addAssociationTargetItems(ClassView.element, helpProfile.newClass.property.produced.target, lang),
+    ...ModelPage.UseCases.specializeClass(helpProfile.specializedClass, lang),
+    ...ModelPage.UseCases.createNewClass(helpProfile.newClass, lang),
+    ...ClassView.UseCases.addPropertyUsingExistingPredicate(helpProfile.newClass.property.name, lang),
+    ...ClassView.UseCases.addPropertyBasedOnSuggestion(helpProfile.newClass.property.produced, lang),
+    ...ClassView.UseCases.addAssociationTarget(helpProfile.newClass.property.produced.target, lang),
     ClassView.saveClassChanges,
     VisualizationView.focusVisualization
   ];

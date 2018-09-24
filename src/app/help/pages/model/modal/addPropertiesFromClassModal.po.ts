@@ -1,6 +1,6 @@
 import { createStory, createExpectedStateNextCondition, Story } from 'app/help/contract';
 import { modal, child } from 'app/help/utils/selector';
-import { confirm } from 'app/help/pages/modal/modal.po';
+import * as Modal from 'app/help/pages/modal/modal.po';
 import { AddPropertiesFromClassModalController } from 'app/components/editor/addPropertiesFromClassModal';
 import { arraysAreEqual } from 'yti-common-ui/utils/array';
 import { getModalController } from 'app/help/utils/angular';
@@ -43,12 +43,15 @@ export function selectProperties(title: string, expectProperties: string[]) {
 }
 
 export function confirmProperties(navigates: boolean) {
-  return confirm(child(modal, '.add-properties-from-class'), navigates);
+  return Modal.confirm(child(modal, '.add-properties-from-class'), navigates);
 }
 
-export function selectAndConfirmPropertiesItems(title: string, navigates: boolean, properties: string[]): Story[] {
-  return [
-    selectProperties(title, properties),
-    confirmProperties(navigates)
-  ];
-}
+export const UseCases = {
+
+  selectAndConfirmProperties(title: string, navigates: boolean, properties: string[]): Story[] {
+    return [
+      selectProperties(title, properties),
+      confirmProperties(navigates)
+    ];
+  }
+};

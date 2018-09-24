@@ -6,7 +6,6 @@ import * as ClassView from 'app/help/pages/model/classView.po';
 import { helpLibrary, helpProfile } from 'app/help/providers/data';
 import { classIdFromPrefixAndName, predicateIdFromPrefixAndName } from 'app/help/utils/id';
 import { isExpectedProperty } from 'app/help/utils/init';
-import * as ClassForm from 'app/help/pages/model/classForm.po';
 import * as VisualizationView from 'app/help/pages/model/visualizationView.po';
 import { HelpBuilderService, NavigationEvents } from 'app/help/providers/helpBuilderService';
 import { ClassDetails, PredicateDetails } from 'app/services/entityLoader';
@@ -21,7 +20,7 @@ function addModelNamespace(type: KnownModelType, model: { prefix: string }): Sto
     items: () => [
       ModelPage.openModelDetails(type),
       ModelView.modifyModel(type),
-      ...ModelView.addModelNamespaceItems(model),
+      ...ModelView.UseCases.addModelNamespace(model),
       ModelView.saveModelChanges,
       createNotification({
         title: { key: 'Congratulations for completing namespace require!' }
@@ -35,7 +34,7 @@ function specializeClass(klass: { prefix: string, details: ClassDetails, propert
     title: 'Guide through specializing a class',
     description: 'This tutorial shows how to create a new shape from a class',
     items: () => [
-      ...ModelPage.specializeClassItems(klass, lang),
+      ...ModelPage.UseCases.specializeClass(klass, lang),
       createNotification({
         title: { key: 'Congratulations for completing specialize class!' }
       })
@@ -48,7 +47,7 @@ function assignClass(klass: { prefix: string, details: ClassDetails }, lang: Lan
     title: 'Guide through assigning class to a library',
     description: 'This tutorial shows how to add Class from existing library',
     items: () => [
-      ...ModelPage.assignClassItems(klass, lang),
+      ...ModelPage.UseCases.assignClass(klass, lang),
       createNotification({
         title: { key: 'Congratulations for completing class assignation!' }
       })
@@ -66,7 +65,7 @@ function addAttribute(prefix: string,
     items: () => [
       ModelPage.selectClass(prefix, klass, lang),
       ClassView.modifyClass,
-      ...ClassView.addPropertyUsingExistingPredicateItems(predicate, lang),
+      ...ClassView.UseCases.addPropertyUsingExistingPredicate(predicate, lang),
       ClassView.saveClassChanges,
       createNotification({
         title: { key: 'Congratulations for completing adding an attribute!' }
@@ -82,8 +81,8 @@ function createNewClass(klass: { label: Localizable, comment: Localizable },
     title: 'Guide through creating a class',
     description: 'This tutorial shows how to create a new Class',
     items: () => [
-      ...ModelPage.createNewClassItems(klass, lang),
-      ...ClassView.addPropertyUsingExistingPredicateItems(propertyByExistingPredicate, lang),
+      ...ModelPage.UseCases.createNewClass(klass, lang),
+      ...ClassView.UseCases.addPropertyUsingExistingPredicate(propertyByExistingPredicate, lang),
       ClassView.saveClassChanges,
       createNotification({
         title: { key: 'Congratulations for completing new class creation!' }
@@ -95,14 +94,14 @@ function createNewClass(klass: { label: Localizable, comment: Localizable },
 function addAssociation(prefix: string,
                         klass: ClassDetails,
                         lang: Language,
-                        addAssociationItems: () => Story[]): StoryLine {
+                        addAssociationUseCase: Story[]): StoryLine {
   return {
     title: 'Guide through adding an association',
     description: 'This tutorial shows how to add association to a Class',
     items: () => [
       ModelPage.selectClass(prefix, klass, lang),
       ClassView.modifyClass,
-      ...addAssociationItems(),
+      ...addAssociationUseCase,
       ClassView.saveClassChanges,
       VisualizationView.focusVisualization,
       createNotification({
@@ -152,9 +151,9 @@ export class ModelPageHelpService {
         });
       });
 
-      helps.add(addAssociation(helpProfile.model.prefix, helpProfile.newClass, lang, () => [
-          ...ClassView.addPropertyBasedOnSuggestionItems(helpProfile.newClass.property.produced, lang),
-          ...ClassForm.addAssociationTargetItems(ClassView.element, helpProfile.newClass.property.produced.target, lang)
+      helps.add(addAssociation(helpProfile.model.prefix, helpProfile.newClass, lang, [
+          ...ClassView.UseCases.addPropertyBasedOnSuggestion(helpProfile.newClass.property.produced, lang),
+          ...ClassView.UseCases.addAssociationTarget(helpProfile.newClass.property.produced.target, lang)
         ]), loader => {
 
           const model = loader.createModel(helpProfile.model);
@@ -200,9 +199,9 @@ export class ModelPageHelpService {
         });
       });
 
-      helps.add(addAssociation(helpLibrary.model.prefix, helpLibrary.newClass, lang, () => [
-        ...ClassView.addPropertyBasedOnExistingConceptItems(helpLibrary.newClass.property.owner, lang),
-        ...ClassForm.addAssociationTargetItems(ClassView.element, helpLibrary.newClass.property.owner.target, lang)
+      helps.add(addAssociation(helpLibrary.model.prefix, helpLibrary.newClass, lang, [
+        ...ClassView.UseCases.addPropertyBasedOnExistingConcept(helpLibrary.newClass.property.owner, lang),
+        ...ClassView.UseCases.addAssociationTarget(helpLibrary.newClass.property.owner.target, lang)
       ]), loader => {
         const model = loader.createModel(helpLibrary.model);
         const passengersAttribute = loader.createAttribute(model, helpLibrary.newClass.property.passengers);

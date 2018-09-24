@@ -55,34 +55,35 @@ export function selectClass(prefix: string, klass: ClassDetails, lang: Language)
   });
 }
 
-export function specializeClassItems(klass: { prefix: string, details: ClassDetails, properties: string[] }, lang: Language): Story[] {
+export const UseCases = {
 
-  const { id, name } = classIdAndNameFromHelpData(klass, lang);
+  specializeClass(klass: { prefix: string, details: ClassDetails, properties: string[] }, lang: Language): Story[] {
 
-  return [
-    openAddResource('class'),
-    ...SearchClassModal.findAndSelectExistingClassItems(name, id, false),
-    ...AddPropertiesFromClass.selectAndConfirmPropertiesItems('Select name and description', true, klass.properties),
-    ClassForm.focusClass(ClassView.element),
-    ClassView.saveClassChanges
-  ];
-}
+    const { id, name } = classIdAndNameFromHelpData(klass, lang);
 
-export function assignClassItems(klass: { prefix: string, details: ClassDetails }, lang: Language): Story[] {
+    return [
+      openAddResource('class'),
+      ...SearchClassModal.UseCases.findAndSelectExistingClass(name, id, false),
+      ...AddPropertiesFromClass.UseCases.selectAndConfirmProperties('Select name and description', true, klass.properties),
+      ClassForm.focusClass(ClassView.element),
+      ClassView.saveClassChanges
+    ];
+  },
+  assignClass(klass: { prefix: string, details: ClassDetails }, lang: Language): Story[] {
 
-  const { id, name } = classIdAndNameFromHelpData(klass, lang)
+    const { id, name } = classIdAndNameFromHelpData(klass, lang);
 
-  return [
-    openAddResource('class'),
-    ...SearchClassModal.findAndSelectExistingClassItems(name, id, true),
-    ClassForm.focusClass(ClassView.element)
-  ];
-}
-
-export function createNewClassItems(klass: { label: Localizable, comment: Localizable }, lang: Language): Story[] {
-  return [
-    openAddResource('class'),
-    ...SearchClassModal.findAndCreateNewBasedOnConceptSuggestionItems(klass.label[lang], klass.comment[lang]),
-    ClassForm.focusClass(ClassView.element)
-  ];
-}
+    return [
+      openAddResource('class'),
+      ...SearchClassModal.UseCases.findAndSelectExistingClass(name, id, true),
+      ClassForm.focusClass(ClassView.element)
+    ];
+  },
+  createNewClass(klass: { label: Localizable, comment: Localizable }, lang: Language): Story[] {
+    return [
+      openAddResource('class'),
+      ...SearchClassModal.UseCases.findAndCreateNewBasedOnConceptSuggestion(klass.label[lang], klass.comment[lang]),
+      ClassForm.focusClass(ClassView.element)
+    ];
+  }
+};

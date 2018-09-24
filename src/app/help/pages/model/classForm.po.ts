@@ -1,11 +1,5 @@
-import { createClickNextCondition, createExplicitNextCondition, createScrollNone, createScrollWithDefault, createStory, Story } from 'app/help/contract';
-import { child, editableByTitle, editableFocus } from 'app/help/utils/selector';
-import { editableMargin } from 'app/help/utils/selector';
-import * as SearchClassModal from './modal/searchClassModal.po';
-import * as AddPropertiesFromClassModal from './modal/addPropertiesFromClassModal.po';
-import { ClassDetails } from 'app/services/entityLoader';
-import { Language } from 'app/types/language';
-import { classIdAndNameFromHelpData } from 'app/help/utils/id';
+import { createClickNextCondition, createExplicitNextCondition, createScrollNone, createScrollWithDefault, createStory } from 'app/help/contract';
+import { child, editableByTitle, editableFocus, editableMargin } from 'app/help/utils/selector';
 
 export function focusClass(parent: () => JQuery) {
 
@@ -100,27 +94,4 @@ export function focusSuperClass(parent: () => JQuery) {
     denyInteraction: true,
     nextCondition: createExplicitNextCondition()
   });
-}
-
-export function addAssociationTargetItems(context: () => JQuery, target: { prefix: string, details: ClassDetails }, lang: Language): Story[] {
-
-  const { id, name } = classIdAndNameFromHelpData(target, lang);
-
-  return [
-    selectAssociationTarget(context),
-    ...SearchClassModal.findAndSelectExistingClassItems(name, id, false),
-    focusAssociationTarget(context)
-  ];
-}
-
-export function addSuperClassItems(context: () => JQuery, superClass: { prefix: string, details: ClassDetails, properties: string[] }, lang: Language): Story[] {
-
-  const { id, name } = classIdAndNameFromHelpData(superClass, lang);
-
-  return [
-    selectSuperClass(context),
-    ...SearchClassModal.findAndSelectExistingClassItems(name, id, false),
-    ...AddPropertiesFromClassModal.selectAndConfirmPropertiesItems('Select registration number and vehicle code', false, superClass.properties),
-    focusSuperClass(context)
-  ];
 }

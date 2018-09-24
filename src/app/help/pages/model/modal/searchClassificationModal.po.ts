@@ -1,7 +1,12 @@
 import { Story } from 'app/help/contract';
-import { selectSearchResult } from 'app/help/pages/modal/searchModal.po';
+import * as SearchModal from 'app/help/pages/modal/searchModal.po';
 import { modal } from 'app/help/utils/selector';
 
-export function selectClassification(name: string, id: string): Story {
-  return selectSearchResult(modal, name, id, true);
-}
+export const UseCases = {
+
+  selectClassification(name: string, id: string): Story[] {
+    return [
+      SearchModal.selectSearchResult(modal, name, id, true)
+    ];
+  }
+};

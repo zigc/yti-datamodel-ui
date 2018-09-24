@@ -2,30 +2,31 @@ import { createStory, createClickNextCondition, Story, createNavigatingClickNext
 import { KnownModelType } from 'app/types/entity';
 import { child } from 'app/help/utils/selector';
 
-export function startModelCreation(type: KnownModelType): Story[] {
+export const UseCases = {
 
-  const startModelCreationElement = () => jQuery(`#add-new-datamodel`);
-  const startModelCreationButton = child(startModelCreationElement, `button.btn-action`);
-  const dropdownSelectionElement = child(startModelCreationElement, `#add_${type}_button`);
+  startModelCreation(type: KnownModelType): Story[] {
 
-  return [
+    const startModelCreationElement = () => jQuery(`#add-new-datamodel`);
+    const startModelCreationButton = child(startModelCreationElement, `button.btn-action`);
+    const dropdownSelectionElement = child(startModelCreationElement, `#add_${type}_button`);
 
-    createStory({
+    return [
+      createStory({
 
-      title: { key: 'Add model' },
-      content: { key: 'Add model description' },
-      popover: { element: startModelCreationButton, position: 'left-down' },
-      focus: { element: startModelCreationButton },
-      nextCondition: createClickNextCondition(startModelCreationButton)
-    }),
+        title: { key: 'Add model' },
+        content: { key: 'Add model description' },
+        popover: { element: startModelCreationButton, position: 'left-down' },
+        focus: { element: startModelCreationButton },
+        nextCondition: createClickNextCondition(startModelCreationButton)
+      }),
+      createStory({
 
-    createStory({
-
-      title: { key: 'Add ' + type },
-      content: { key: 'Add ' + type + ' description' },
-      popover: { element: dropdownSelectionElement, position: 'left-down' },
-      focus: { element: dropdownSelectionElement },
-      nextCondition: createNavigatingClickNextCondition(dropdownSelectionElement)
-    }),
-  ];
-}
+        title: { key: 'Add ' + type },
+        content: { key: 'Add ' + type + ' description' },
+        popover: { element: dropdownSelectionElement, position: 'left-down' },
+        focus: { element: dropdownSelectionElement },
+        nextCondition: createNavigatingClickNextCondition(dropdownSelectionElement)
+      }),
+    ];
+  }
+};

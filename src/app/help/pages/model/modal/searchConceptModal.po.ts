@@ -1,27 +1,27 @@
-import { confirm } from 'app/help/pages/modal/modal.po';
 import { child, editableByTitle, editableFocus, input, modal, editableMargin } from 'app/help/utils/selector';
 import { createExpectedStateNextCondition, createStory, Story } from 'app/help/contract';
 import { validInput } from 'app/help/utils/condition';
 import { initialInputValue } from 'app/help/utils/init';
-import { filterForAddNewResult, filterForSearchResult, focusSearchSelection, selectAddNewResult, selectSearchResult } from 'app/help/pages/modal/searchModal.po';
+import * as Modal from 'app/help/pages/modal/modal.po';
+import * as SearchModal from 'app/help/pages/modal/searchModal.po';
 
 const searchConceptModal = child(modal, '.search-concept');
 
 export function filterForConceptSuggestionConcept(conceptName: string) {
-  return filterForAddNewResult(searchConceptModal, conceptName, 'concept', false);
+  return SearchModal.filterForAddNewResult(searchConceptModal, conceptName, 'concept', false);
 }
 
 export function filterForConcept(className: string, conceptId: string) {
-  return filterForSearchResult(searchConceptModal, className, conceptId, false);
+  return SearchModal.filterForSearchResult(searchConceptModal, className, conceptId, false);
 }
 
-export const addConceptSuggestionSearchResult = selectAddNewResult(searchConceptModal, 0, 'Select concept suggest creation');
+export const addConceptSuggestionSearchResult = SearchModal.selectAddNewResult(searchConceptModal, 0, 'Select concept suggest creation');
 
 export function selectConcept(conceptId: string, conceptName: string) {
-  return selectSearchResult(searchConceptModal, conceptName, conceptId, true);
+  return SearchModal.selectSearchResult(searchConceptModal, conceptName, conceptId, true);
 }
 
-export const focusSelectedConcept = focusSearchSelection(searchConceptModal, 'Concept is here', 'Concept is here info');
+export const focusSelectedConcept = SearchModal.focusSearchSelection(searchConceptModal, 'Concept is here', 'Concept is here info');
 
 const enterVocabularyElement = editableByTitle(modal, 'Vocabulary');
 const enterVocabularyInputElement = input(enterVocabularyElement);
@@ -65,25 +65,27 @@ export function enterDefinition(initialValue: string) {
 }
 
 export function confirmConceptSelection(navigates: boolean) {
-  return confirm(searchConceptModal, navigates);
+  return Modal.confirm(searchConceptModal, navigates);
 }
 
-export function findAndCreateNewSuggestionItems(name: string, definition: string, navigates: boolean): Story[] {
-  return [
-    filterForConceptSuggestionConcept(name),
-    addConceptSuggestionSearchResult,
-    enterVocabulary,
-    enterLabel,
-    enterDefinition(definition),
-    confirmConceptSelection(navigates)
-  ];
-}
+export const UseCases = {
 
-export function findAndSelectExistingConceptItems(name: string, conceptId: string, navigates: boolean): Story[] {
-  return [
-    filterForConcept(name, conceptId),
-    selectConcept(conceptId, name),
-    focusSelectedConcept,
-    confirmConceptSelection(navigates)
-  ];
-}
+  findAndCreateNewSuggestion(name: string, definition: string, navigates: boolean): Story[] {
+    return [
+      filterForConceptSuggestionConcept(name),
+      addConceptSuggestionSearchResult,
+      enterVocabulary,
+      enterLabel,
+      enterDefinition(definition),
+      confirmConceptSelection(navigates)
+    ];
+  },
+  findAndSelectExistingConcept(name: string, conceptId: string, navigates: boolean): Story[] {
+    return [
+      filterForConcept(name, conceptId),
+      selectConcept(conceptId, name),
+      focusSelectedConcept,
+      confirmConceptSelection(navigates)
+    ];
+  }
+};

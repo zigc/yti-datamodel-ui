@@ -1,12 +1,16 @@
 import { child, first } from 'app/help/utils/selector';
 import { createClickNextCondition, createModifyingClickNextCondition, createScrollNone, createScrollWithDefault, createStory, Story } from 'app/help/contract';
-import * as ClassForm from './classForm.po';
-import * as SearchPredicateModal from './modal/searchPredicateModal.po';
 import { KnownPredicateType } from 'app/types/entity';
 import { PredicateDetails } from 'app/services/entityLoader';
 import { Language } from 'app/types/language';
 import { predicateIdAndNameFromHelpData } from 'app/help/utils/id';
 import { Localizable } from 'yti-common-ui/types/localization';
+import { ClassDetails } from 'app/services/entityLoader';
+import { classIdAndNameFromHelpData } from 'app/help/utils/id';
+import * as SearchClassModal from './modal/searchClassModal.po';
+import * as AddPropertiesFromClassModal from './modal/addPropertiesFromClassModal.po';
+import * as ClassForm from './classForm.po';
+import * as SearchPredicateModal from './modal/searchPredicateModal.po';
 
 export const element = () => jQuery('class-view');
 
@@ -52,32 +56,54 @@ export const addNewProperty = createStory({
   nextCondition: createClickNextCondition(addNewPropertyElement)
 });
 
-export function addPropertyUsingExistingPredicateItems(predicate: { type: KnownPredicateType, prefix: string, details: PredicateDetails }, lang: Language): Story[] {
+export const UseCases = {
 
-  const { id, name } = predicateIdAndNameFromHelpData(predicate, lang);
+  addPropertyUsingExistingPredicate(predicate: { type: KnownPredicateType, prefix: string, details: PredicateDetails }, lang: Language): Story[] {
 
-  return [
-    addProperty,
-    addNewProperty,
-    ...SearchPredicateModal.findAndSelectExistingPredicateItems(predicate.type, name, id),
-    ClassForm.focusOpenProperty(element)
-  ];
-}
+    const { id, name } = predicateIdAndNameFromHelpData(predicate, lang);
 
-export function addPropertyBasedOnSuggestionItems(predicate: { type: KnownPredicateType, label: Localizable, comment: Localizable }, lang: Language): Story[] {
-  return [
-    addProperty,
-    addNewProperty,
-    ...SearchPredicateModal.findAndCreateNewPropertyBasedOnSuggestionItems(predicate.type, predicate.label[lang], predicate.comment[lang]),
-    ClassForm.focusOpenProperty(element)
-  ];
-}
+    return [
+      addProperty,
+      addNewProperty,
+      ...SearchPredicateModal.UseCases.findAndSelectExistingPredicate(predicate.type, name, id),
+      ClassForm.focusOpenProperty(element)
+    ];
+  },
+  addPropertyBasedOnSuggestion(predicate: { type: KnownPredicateType, label: Localizable, comment: Localizable }, lang: Language): Story[] {
+    return [
+      addProperty,
+      addNewProperty,
+      ...SearchPredicateModal.UseCases.findAndCreateNewPropertyBasedOnSuggestion(predicate.type, predicate.label[lang], predicate.comment[lang]),
+      ClassForm.focusOpenProperty(element)
+    ];
+  },
+  addPropertyBasedOnExistingConcept(predicate: { type: KnownPredicateType, name: Localizable, conceptId: string }, lang: Language): Story[] {
+    return [
+      addProperty,
+      addNewProperty,
+      ...SearchPredicateModal.UseCases.findAndCreateNewPropertyBasedOnExistingConcept(predicate.type, predicate.name[lang], predicate.conceptId),
+      ClassForm.focusOpenProperty(element)
+    ];
+  },
+  addAssociationTarget(target: { prefix: string, details: ClassDetails }, lang: Language): Story[] {
 
-export function addPropertyBasedOnExistingConceptItems(predicate: { type: KnownPredicateType, name: Localizable, conceptId: string }, lang: Language): Story[] {
-  return [
-    addProperty,
-    addNewProperty,
-    ...SearchPredicateModal.findAndCreateNewPropertyBasedOnExistingConceptItems(predicate.type, predicate.name[lang], predicate.conceptId),
-    ClassForm.focusOpenProperty(element)
-  ];
-}
+    const { id, name } = classIdAndNameFromHelpData(target, lang);
+
+    return [
+      ClassForm.selectAssociationTarget(element),
+      ...SearchClassModal.UseCases.findAndSelectExistingClass(name, id, false),
+      ClassForm.focusAssociationTarget(element)
+    ];
+  },
+  addSuperClass(superClass: { prefix: string, details: ClassDetails, properties: string[] }, lang: Language): Story[] {
+
+    const { id, name } = classIdAndNameFromHelpData(superClass, lang);
+
+    return [
+      ClassForm.selectSuperClass(element),
+      ...SearchClassModal.UseCases.findAndSelectExistingClass(name, id, false),
+      ...AddPropertiesFromClassModal.UseCases.selectAndConfirmProperties('Select registration number and vehicle code', false, superClass.properties),
+      ClassForm.focusSuperClass(element)
+    ];
+  }
+};
