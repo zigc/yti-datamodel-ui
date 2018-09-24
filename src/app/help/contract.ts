@@ -121,3 +121,5 @@ export function createScrollWithElement(scrollElement: () => JQuery, element: ()
 export function createScrollNone(): ScrollNone {
   return { type: 'scroll-none' };
 }
+
+export const scrollToTop = createScrollWithDefault(() => jQuery('body'));

@@ -4,7 +4,7 @@ import { dateSerializer, typeSerializer } from 'app/entities/serializer/serializ
 import { uriSerializer } from 'app/entities/serializer/entitySerializer';
 import { KnownModelType, KnownPredicateType } from 'app/types/entity';
 import { Uri } from 'app/entities/uri';
-import { classIdFromNamespaceId, modelIdFromPrefix, predicateIdFromNamespaceId, vocabularyIdFromPrefix } from 'app/help/utils';
+import { classIdFromNamespaceId, modelIdFromPrefix, predicateIdFromNamespaceId, vocabularyIdFromPrefix } from 'app/help/utils/id';
 import { upperCaseFirst } from 'change-case';
 import { Language } from 'app/types/language';
 import { Concept, Vocabulary } from 'app/entities/vocabulary';

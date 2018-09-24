@@ -1,7 +1,7 @@
-import { createClickNextCondition, createModifyingClickNextCondition, createNavigatingClickNextCondition, createScrollWithDefault, createStory, Story } from 'app/help/contract';
-import { child, modelPanelElement } from 'app/help/selectors';
+import { createClickNextCondition, createModifyingClickNextCondition, createNavigatingClickNextCondition, createScrollWithDefault, createStory, Story, scrollToTop } from 'app/help/contract';
+import { child, modelPanelElement } from 'app/help/utils/selector';
 import { KnownModelType, KnownPredicateType } from 'app/types/entity';
-import { classIdAndNameFromHelpData, scrollToTop } from 'app/help/utils';
+import { classIdAndNameFromHelpData } from 'app/help/utils/id';
 import * as SearchClassModal from './modal/searchClassModal.po';
 import * as AddPropertiesFromClass from './modal/addPropertiesFromClassModal.po';
 import * as ModelView from './modelView.po';

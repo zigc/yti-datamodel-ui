@@ -1,6 +1,6 @@
 import { createStory, createClickNextCondition, Story, createNavigatingClickNextCondition } from 'app/help/contract';
 import { KnownModelType } from 'app/types/entity';
-import { child } from 'app/help/selectors';
+import { child } from 'app/help/utils/selector';
 
 export function startModelCreation(type: KnownModelType): Story[] {
 

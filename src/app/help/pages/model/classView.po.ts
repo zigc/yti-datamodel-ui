@@ -1,11 +1,11 @@
-import { child, first } from 'app/help/selectors';
+import { child, first } from 'app/help/utils/selector';
 import { createClickNextCondition, createModifyingClickNextCondition, createScrollNone, createScrollWithDefault, createStory, Story } from 'app/help/contract';
 import * as ClassForm from './classForm.po';
 import * as SearchPredicateModal from './modal/searchPredicateModal.po';
 import { KnownPredicateType } from 'app/types/entity';
 import { PredicateDetails } from 'app/services/entityLoader';
 import { Language } from 'app/types/language';
-import { predicateIdAndNameFromHelpData } from 'app/help/utils';
+import { predicateIdAndNameFromHelpData } from 'app/help/utils/id';
 import { Localizable } from 'yti-common-ui/types/localization';
 
 export const element = () => jQuery('class-view');

@@ -1,9 +1,10 @@
-import { searchResult, child, nth, first } from 'app/help/selectors';
+import { searchResult, child, nth, first } from 'app/help/utils/selector';
 import {
   createStory, createModifyingClickNextCondition,
   createClickNextCondition, createExplicitNextCondition, createExpectedStateNextCondition, createScrollWithElement
 } from 'app/help/contract';
-import { initialInputValue, elementExists, inputHasExactValue, expectAll, formatSearch } from 'app/help/utils';
+import { elementExists, inputHasExactValue, expectAll } from 'app/help/utils/condition';
+import { initialInputValue, formatSearch } from 'app/help/utils/init';
 
 export const textSearchElement = (modalParent: () => JQuery) => child(modalParent, 'text-filter input');
 export const searchSelectionElement = (modalParent: () => JQuery) => child(modalParent, '.search-selection');

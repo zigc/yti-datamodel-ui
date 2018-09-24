@@ -1,3 +1,6 @@
+
+export const editableMargin = { left: 20, right: 20, bottom: 15 };
+
 export const modal = () => jQuery('.modal-dialog');
 export const modalBody = child(modal, '.modal-body');
 

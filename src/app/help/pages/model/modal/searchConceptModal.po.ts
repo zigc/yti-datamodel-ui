@@ -1,7 +1,8 @@
 import { confirm } from 'app/help/pages/modal/modal.po';
-import { child, editableByTitle, editableFocus, input, modal } from 'app/help/selectors';
+import { child, editableByTitle, editableFocus, input, modal, editableMargin } from 'app/help/utils/selector';
 import { createExpectedStateNextCondition, createStory, Story } from 'app/help/contract';
-import { editableMargin, initialInputValue, validInput } from 'app/help/utils';
+import { validInput } from 'app/help/utils/condition';
+import { initialInputValue } from 'app/help/utils/init';
 import { filterForAddNewResult, filterForSearchResult, focusSearchSelection, selectAddNewResult, selectSearchResult } from 'app/help/pages/modal/searchModal.po';
 
 const searchConceptModal = child(modal, '.search-concept');

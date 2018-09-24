@@ -1,6 +1,6 @@
 import { confirm } from 'app/help/pages/modal/modal.po';
 import { filterForAddNewResult, filterForSearchResult, focusSearchSelection, selectAddNewResult, selectSearchResult } from 'app/help/pages/modal/searchModal.po';
-import { child, modal } from 'app/help/selectors';
+import { child, modal } from 'app/help/utils/selector';
 import * as SearchConceptModal from './searchConceptModal.po';
 import { Story } from 'app/help/contract';
 

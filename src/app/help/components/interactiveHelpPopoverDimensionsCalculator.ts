@@ -3,7 +3,7 @@ import { Notification, Story } from 'app/help/contract';
 import { IScope } from 'angular';
 import { requireDefined } from 'yti-common-ui/utils/object';
 import { InteractiveHelpController } from './interactiveHelpDisplay';
-import { elementPositioning, PopoverDimensionsProvider, resolveArrowClass } from './utils';
+import { elementPositioning, PopoverDimensionsProvider, resolveArrowClass } from 'app/help/utils/component';
 
 @LegacyComponent({
   bindings: {

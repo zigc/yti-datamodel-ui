@@ -1,5 +1,5 @@
 import { upperCaseFirst } from 'change-case';
-import { child, editableByTitle, editableFocus, editableMultipleByTitle, input, multiInput } from 'app/help/selectors';
+import { child, editableByTitle, editableFocus, editableMultipleByTitle, input, multiInput } from 'app/help/utils/selector';
 import {
   createClickNextCondition,
   createExpectedStateNextCondition,
@@ -9,7 +9,9 @@ import {
   createStory,
   Story
 } from 'app/help/contract';
-import { editableMargin, initialInputValue, validInput } from 'app/help/utils';
+import { validInput } from 'app/help/utils/condition';
+import { initialInputValue } from 'app/help/utils/init';
+import { editableMargin } from 'app/help/utils/selector';
 import { KnownModelType } from 'app/types/entity';
 import * as SearchClassificationModal from './modal/searchClassificationModal.po';
 import * as SearchOrganizationsModal from './modal/searchOrganizationModal.po';

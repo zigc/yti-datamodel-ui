@@ -1,7 +1,7 @@
 import { LegacyComponent } from 'app/utils/angular';
 import { Notification, Story } from 'app/help/contract';
 import { assertNever, Optional } from 'yti-common-ui/utils/object';
-import { elementPositioning, Regions } from './utils';
+import { elementPositioning, Regions } from 'app/help/utils/component';
 import { IDocumentService } from 'angular';
 import { InteractiveHelpController } from './interactiveHelpDisplay';
 

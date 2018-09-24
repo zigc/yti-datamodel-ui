@@ -1,5 +1,5 @@
 import { filterForSearchResult, selectSearchResult } from 'app/help/pages/modal/searchModal.po';
-import { child, modal } from 'app/help/selectors';
+import { child, modal } from 'app/help/utils/selector';
 
 const searchVocabularyModal = child(modal, '.search-vocabulary');
 

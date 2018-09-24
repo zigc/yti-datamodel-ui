@@ -1,8 +1,9 @@
 import { createStory, createExpectedStateNextCondition } from 'app/help/contract';
 import { KnownPredicateType } from 'app/types/entity';
 import { upperCaseFirst } from 'change-case';
-import { editableByTitle, input, editableFocus } from 'app/help/selectors';
-import { validInput, initialInputValue, editableMargin } from 'app/help/utils';
+import { editableByTitle, input, editableFocus, editableMargin } from 'app/help/utils/selector';
+import { initialInputValue } from 'app/help/utils/init';
+import { validInput } from 'app/help/utils/condition';
 
 export function enterPredicateLabel(parent: () => JQuery, type: KnownPredicateType, initialValue: string) {
 

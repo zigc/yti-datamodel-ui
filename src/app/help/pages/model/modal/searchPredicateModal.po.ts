@@ -1,6 +1,6 @@
 import { confirm } from 'app/help/pages/modal/modal.po';
 import { filterForAddNewResult, filterForSearchResult, focusSearchSelection, selectAddNewResult, selectSearchResult } from 'app/help/pages/modal/searchModal.po';
-import { child, modal } from 'app/help/selectors';
+import { child, modal } from 'app/help/utils/selector';
 import { KnownPredicateType } from 'app/types/entity';
 import * as SearchConceptModal from './searchConceptModal.po';
 import * as PredicateForm from 'app/help/pages/model/predicateForm.po';

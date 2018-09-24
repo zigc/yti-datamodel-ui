@@ -1,4 +1,4 @@
-import { classIdFromPrefixAndName, conceptIdFromPrefixAndIndex, modelIdFromPrefix, predicateIdFromPrefixAndName, vocabularyIdFromPrefix } from 'app/help/utils';
+import { classIdFromPrefixAndName, conceptIdFromPrefixAndIndex, modelIdFromPrefix, predicateIdFromPrefixAndName, vocabularyIdFromPrefix } from 'app/help/utils/id';
 import { KnownModelType, KnownPredicateType } from 'app/types/entity';
 import { VocabularyWithConceptsDetails } from 'app/services/entityLoader';
 import { Localizable } from 'yti-common-ui/types/localization';

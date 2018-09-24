@@ -6,9 +6,8 @@ import { assertNever, Optional, requireDefined } from 'yti-common-ui/utils/objec
 import { enter, esc, tab } from 'yti-common-ui/utils/key-code';
 import { isTargetElementInsideElement, nextUrl } from 'app/utils/angular';
 import { InteractiveHelpService } from 'app/help/services/interactiveHelpService';
-import { createScrollWithDefault, InteractiveHelp, NextCondition, Notification, Story } from 'app/help/contract';
+import { createScrollWithDefault, InteractiveHelp, NextCondition, Notification, Story, scrollToTop } from 'app/help/contract';
 import { ConfirmationModal } from 'app/components/common/confirmationModal';
-import { moveCursorToEnd, scrollToTop } from 'app/help/utils';
 import { gettextCatalog as GettextCatalog } from 'angular-gettext';
 import { NgZone } from '@angular/core';
 import {
@@ -22,9 +21,10 @@ import {
   PopoverDimensionsProvider,
   Positioning,
   stopEvent
-} from './utils';
+} from 'app/help/utils/component';
 import { InteractiveHelpPopoverComponent } from './interactiveHelpPopover';
 import { InteractiveHelpBackdropComponent } from './interactiveHelpBackdrop';
+import { contains } from 'yti-common-ui/utils/array';
 
 const focusableSelector = 'a[href], area[href], input:not([disabled]), ' +
   'button:not([disabled]),select:not([disabled]), textarea:not([disabled]), ' +
@@ -270,6 +270,17 @@ export class InteractiveHelpController {
   }
 
   private manageActiveElement(item: Story|Notification) {
+
+    function moveCursorToEnd(input: JQuery) {
+      if (contains(['INPUT', 'TEXTAREA'], input.prop('tagName'))) {
+        const valueLength = input.val().length;
+        // ensures that cursor will be at the end of the input
+        if (!contains(['checkbox', 'radio'], input.attr('type'))) {
+          setTimeout(() => (input[0] as HTMLInputElement).setSelectionRange(valueLength, valueLength));
+        }
+      }
+    }
+
     // Handle focus off frame since it can cause duplicate digest
     setTimeout(() => {
 
