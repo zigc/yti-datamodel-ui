@@ -4,7 +4,7 @@ import { LanguageService } from 'app/services/languageService';
 import { AdvancedSearchModal } from './advancedSearchModal';
 import { ApplicationComponent } from './application';
 import { HelpProvider } from './common/helpProvider';
-import { FrontPageHelpService } from 'app/help/frontPageHelp';
+import { FrontPageHelpService } from 'app/help/providers/frontPageHelpService';
 import { LegacyComponent, modalCancelHandler } from 'app/utils/angular';
 import { ModelService } from 'app/services/modelService';
 import { ModelListItem } from 'app/entities/model';
@@ -24,7 +24,7 @@ import { AuthorizationManagerService } from 'app/services/authorizationManagerSe
 import { Organization } from 'app/entities/organization';
 import { labelNameToResourceIdIdentifier } from 'yti-common-ui/utils/resource';
 import { tap } from 'rxjs/operators';
-import { InteractiveHelp } from '../help/contract';
+import { InteractiveHelp } from 'app/help/contract';
 
 @LegacyComponent({
   template: require('./frontPage.html'),

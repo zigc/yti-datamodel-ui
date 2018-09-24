@@ -1,11 +1,11 @@
-import { InteractiveHelp, StoryLine } from '../contract';
+import { InteractiveHelp, StoryLine } from 'app/help/contract';
 import { ILocationService, IQService } from 'angular';
 import { IModalStackService } from 'angular-ui-bootstrap';
 import { EntityLoader, EntityLoaderService } from 'app/services/entityLoader';
-import { InteractiveHelpService } from './interactiveHelpService';
+import { InteractiveHelpService } from 'app/help/services/interactiveHelpService';
 import { identity } from 'yti-common-ui/utils/object';
 import { gettextCatalog as GettextCatalog } from 'angular-gettext';
-import { helpImportedLibrary, helpOrganization, helpVocabulary } from '../data';
+import { helpImportedLibrary, helpOrganization, helpVocabulary } from 'app/help/providers/data';
 
 export interface NavigationEvents {
   onStart?: string;

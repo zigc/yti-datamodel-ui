@@ -1,14 +1,14 @@
-import { createNotification, InteractiveHelp, Notification, Story, StoryLine } from './contract';
+import { createNotification, InteractiveHelp, Notification, Story, StoryLine } from 'app/help/contract';
 import { KnownModelType } from 'app/types/entity';
-import * as FrontPage from './pages/frontPage.po';
-import * as NewModelPage from './pages/model/newModelPage.po';
-import * as ModelPage from './pages/model/modelPage.po';
-import * as ModelView from './pages/model/modelView.po';
-import * as ClassView from './pages/model/classView.po';
-import * as ClassForm from './pages/model/classForm.po';
-import * as VisualizationView from './pages/model/visualizationView.po';
-import { helpLibrary, helpProfile } from './data';
-import { HelpBuilderService } from './services/helpBuilder';
+import * as FrontPage from 'app/help/pages/frontPage.po';
+import * as NewModelPage from 'app/help/pages/model/newModelPage.po';
+import * as ModelPage from 'app/help/pages/model/modelPage.po';
+import * as ModelView from 'app/help/pages/model/modelView.po';
+import * as ClassView from 'app/help/pages/model/classView.po';
+import * as ClassForm from 'app/help/pages/model/classForm.po';
+import * as VisualizationView from 'app/help/pages/model/visualizationView.po';
+import { helpLibrary, helpProfile } from 'app/help/providers/data';
+import { HelpBuilderService } from 'app/help/providers/helpBuilderService';
 import { EntityLoader } from 'app/services/entityLoader';
 import { Language } from 'app/types/language';
 

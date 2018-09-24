@@ -9,16 +9,14 @@ import { InteractiveHelpUserService } from './services/helpUserService';
 import { InteractiveHelpVocabularyService } from './services/helpVocabularyService';
 import { InteractiveHelpVisualizationService } from './services/helpVisualizationService';
 import { InteractiveHelpValidatorService } from './services/helpValidatorService';
-
-import { FrontPageHelpService } from './frontPageHelp';
-import { ModelPageHelpService } from './modelPageHelp';
-
+import { HelpBuilderService } from './providers/helpBuilderService';
+import { FrontPageHelpService } from './providers/frontPageHelpService';
+import { ModelPageHelpService } from './providers/modelPageHelpService';
 import { InteractiveHelpDisplay } from './components/interactiveHelpDisplay';
 import { InteractiveHelpOrganizationService } from './services/helpOrganizationService';
 import { InteractiveHelpPopoverComponent } from './components/interactiveHelpPopover';
 import { InteractiveHelpPopoverDimensionsCalculatorComponent } from './components/interactiveHelpPopoverDimensionsCalculator';
 import { InteractiveHelpBackdropComponent } from './components/interactiveHelpBackdrop';
-import { HelpBuilderService } from './services/helpBuilder';
 import { InteractiveHelp } from './contract';
 import { comparingPrimitive } from 'yti-common-ui/utils/comparator';
 import { availableUILanguages } from 'app/types/language';

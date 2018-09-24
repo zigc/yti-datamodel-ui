@@ -27,7 +27,7 @@ import { removeMatching } from 'yti-common-ui/utils/array';
 import { ApplicationComponent } from 'app/components/application';
 import { HelpProvider } from 'app/components/common/helpProvider';
 import { InteractiveHelp } from 'app/help/contract';
-import { ModelPageHelpService } from 'app/help/modelPageHelp';
+import { ModelPageHelpService } from 'app/help/providers/modelPageHelpService';
 import { InteractiveHelpService } from 'app/help/services/interactiveHelpService';
 import { ModelControllerService, View } from './modelControllerService';
 import { AuthorizationManagerService } from 'app/services/authorizationManagerService';

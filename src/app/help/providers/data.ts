@@ -3,7 +3,7 @@ import { KnownModelType, KnownPredicateType } from 'app/types/entity';
 import { VocabularyWithConceptsDetails } from 'app/services/entityLoader';
 import { Localizable } from 'yti-common-ui/types/localization';
 import { Uri } from 'app/entities/uri';
-import { OrganizationDetails } from './services/entityCreatorService';
+import { OrganizationDetails } from 'app/help/services/entityCreatorService';
 
 // TODO: more complete data with localizations to all UI languages
 
