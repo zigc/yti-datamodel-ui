@@ -13,14 +13,14 @@ import { Language } from 'app/types/language';
 import { Localizable } from 'yti-common-ui/types/localization';
 import { modelUrl } from 'app/utils/entity';
 
-function addNamespace(type: KnownModelType, data: { prefix: string, id: string }): StoryLine {
+function addModelNamespace(type: KnownModelType, model: { prefix: string }): StoryLine {
   return {
     title: 'Guide through requiring a namespace',
     description: 'This tutorial shows how to import new namespace to the model',
     items: () => [
       ModelPage.openModelDetails(type),
       ModelView.modifyModel(type),
-      ...ModelView.addNamespaceItems(data),
+      ...ModelView.addModelNamespaceItems(model),
       ModelView.saveModelChanges,
       createNotification({
         title: { key: 'Congratulations for completing namespace require!' }
@@ -128,7 +128,7 @@ export class ModelPageHelpService {
 
     if (modelType === 'profile') {
 
-      helps.add(addNamespace(modelType, helpProfile.importedLibrary), loader => {
+      helps.add(addModelNamespace(modelType, helpProfile.importedLibrary), loader => {
         loader.createModel({
           ...helpProfile.model,
           namespaces: []
@@ -175,7 +175,7 @@ export class ModelPageHelpService {
 
     } else {
       //
-      helps.add(addNamespace(modelType, helpLibrary.importedLibrary), loader => {
+      helps.add(addModelNamespace(modelType, helpLibrary.importedLibrary), loader => {
         loader.createModel({
           ...helpLibrary.model,
           namespaces: []

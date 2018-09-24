@@ -5,6 +5,7 @@ import * as SearchNamespaceModal from './modal/searchNamepaceModalHelp.po';
 import * as SearchVocabularyModal from './modal/searchVocabularyModalHelp.po';
 import { Localizable } from 'yti-common-ui/types/localization';
 import { Language } from 'app/types/language';
+import { modelIdFromPrefix, vocabularyIdFromPrefix } from 'app/help/utils';
 
 export const element = () => jQuery('model-view');
 
@@ -74,20 +75,24 @@ export const focusVocabularies = createStory({
   nextCondition: createExplicitNextCondition()
 });
 
-export function addNamespaceItems(ns: { prefix: string, id: string }): Story[] {
+export function addModelNamespaceItems(model: { prefix: string }): Story[] {
   return [
     requireNamespace,
-    SearchNamespaceModal.filterForModel(ns.prefix, ns.id),
-    SearchNamespaceModal.selectNamespace(ns.prefix, ns.id),
+    SearchNamespaceModal.filterForModel(model.prefix, modelIdFromPrefix(model.prefix)),
+    SearchNamespaceModal.selectNamespace(model.prefix, modelIdFromPrefix(model.prefix)),
     focusNamespaces
   ];
 }
 
-export function addVocabularyItems(vocabulary: { label: Localizable, id: string }, lang: Language): Story[] {
+export function addVocabularyItems(vocabulary: { label: Localizable, prefix: string }, lang: Language): Story[] {
+
+  const label = vocabulary.label[lang];
+  const vocabularyId = vocabularyIdFromPrefix(vocabulary.prefix);
+
   return [
     addVocabulary,
-    SearchVocabularyModal.filterForVocabulary(vocabulary.label[lang], vocabulary.id),
-    SearchVocabularyModal.selectVocabulary(vocabulary.label[lang], vocabulary.id),
+    SearchVocabularyModal.filterForVocabulary(label, vocabularyId),
+    SearchVocabularyModal.selectVocabulary(label, vocabularyId),
     focusVocabularies
   ];
 }

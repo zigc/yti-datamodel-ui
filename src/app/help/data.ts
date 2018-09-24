@@ -104,14 +104,8 @@ export const helpLibrary = {
     classifications: ['P16'],
     namespaces: [modelIdFromPrefix(helpImportedLibrary.model.prefix)]
   },
-  importedLibrary: {
-    prefix: helpImportedLibrary.model.prefix,
-    id: modelIdFromPrefix(helpImportedLibrary.model.prefix)
-  },
-  vocabulary: {
-    label: helpVocabulary.vocabulary.label,
-    id: vocabularyIdFromPrefix(helpVocabulary.vocabulary.prefix),
-  },
+  importedLibrary: helpImportedLibrary.model,
+  vocabulary: helpVocabulary.vocabulary,
   classification: {
     label: { fi: 'Liikenne', en: 'Transport' } as Localizable,
     id: 'http://urn.fi/URN:NBN:fi:au:ptvl:v1142'
@@ -175,14 +169,8 @@ export const helpProfile = {
     classifications: ['P9'],
     namespaces: [modelIdFromPrefix(helpImportedLibrary.model.prefix)]
   },
-  importedLibrary: {
-    prefix: helpImportedLibrary.model.prefix,
-    id: modelIdFromPrefix(helpImportedLibrary.model.prefix)
-  },
-  vocabulary: {
-    label: helpVocabulary.vocabulary.label,
-    id: vocabularyIdFromPrefix(helpVocabulary.vocabulary.prefix),
-  },
+  importedLibrary: helpImportedLibrary.model,
+  vocabulary: helpVocabulary.vocabulary,
   classification: {
     label: { fi: 'Yleiset tieto- ja hallintopalvelut', en: 'General information and administrative services' } as Localizable,
     id: 'http://urn.fi/URN:NBN:fi:au:ptvl:v1095',
