@@ -104,6 +104,8 @@ function addAssociation(prefix: string,
       ModelPage.selectClass(prefix, klass, lang),
       ClassView.modifyClass,
       ...addAssociationItems(),
+      ClassView.saveClassChanges,
+      VisualizationView.focusVisualization,
       createNotification({
         title: { key: 'Congratulations for completing adding an association!' }
       })
@@ -157,9 +159,7 @@ export class ModelPageHelpService {
 
       helps.add(addAssociation(helpProfile.model.prefix, helpProfile.newClass, lang, () => [
           ...ClassView.addPropertyBasedOnSuggestionItems(helpProfile.newClass.property.produced, lang),
-          ...ClassForm.addAssociationTargetItems(ClassView.element, helpProfile.newClass.property.produced.target, lang),
-          ClassView.saveClassChanges,
-          VisualizationView.focusVisualization
+          ...ClassForm.addAssociationTargetItems(ClassView.element, helpProfile.newClass.property.produced.target, lang)
         ]), loader => {
 
           const model = loader.createModel(helpProfile.model);
@@ -207,9 +207,7 @@ export class ModelPageHelpService {
 
       helps.add(addAssociation(helpLibrary.model.prefix, helpLibrary.newClass, lang, () => [
         ...ClassView.addPropertyBasedOnExistingConceptItems(helpLibrary.newClass.property.owner, lang),
-        ...ClassForm.addAssociationTargetItems(ClassView.element, helpLibrary.newClass.property.owner.target, lang),
-        ClassView.saveClassChanges,
-        VisualizationView.focusVisualization
+        ...ClassForm.addAssociationTargetItems(ClassView.element, helpLibrary.newClass.property.owner.target, lang)
       ]), loader => {
         const model = loader.createModel(helpLibrary.model);
         const passengersAttribute = loader.createAttribute(model, helpLibrary.newClass.property.passengers);
