@@ -236,7 +236,7 @@ export class EntityCreatorService {
     };
 
     const graph = {
-      '@id': details.id.uuid,
+      '@id': details.id.uri,
       '@type': 'foaf:Organization',
       'prefLabel': { ...details.label }
     };
