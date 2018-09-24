@@ -5,12 +5,15 @@ import { Model } from 'app/entities/model';
 import { LegacyComponent, modalCancelHandler } from 'app/utils/angular';
 import { ConfigService } from 'app/services/configService';
 import { Config } from 'app/entities/config';
+import { EditableForm } from 'app/components/form/editableEntityController';
 
 @LegacyComponent({
   bindings: {
     entity: '=',
-    model: '=',
-    isEditing: '='
+    model: '='
+  },
+  require: {
+    form: '?^form'
   },
   template: require('./subjectView.html')
 })
@@ -18,8 +21,8 @@ export class SubjectViewComponent {
 
   entity: Class|Predicate;
   model: Model;
-  isEditing: () => boolean;
   config: Config;
+  form: EditableForm;
 
   constructor(private searchConceptModal: SearchConceptModal,
               private configService: ConfigService) {
@@ -27,6 +30,10 @@ export class SubjectViewComponent {
     this.configService.getConfig().then(urlConfig => {
       this.config = urlConfig;
     });
+  }
+
+  isEditing() {
+    return this.form && this.form.editing;
   }
 
   get conceptLink() {
