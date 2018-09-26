@@ -57,7 +57,7 @@
         <div class="selection-container"
              ng-style="{ width: $ctrl.selectionWidth }">
 
-          <class-view id="'class'"
+          <class-view id="class"
                       ng-if="$ctrl.selection.isClass()"
                       data-class="$ctrl.selection"
                       open-property-id="$ctrl.openPropertyId"
@@ -65,7 +65,7 @@
                       model-controller="$ctrl">
           </class-view>
 
-          <predicate-view id="'predicate'"
+          <predicate-view id="predicate"
                           ng-if="$ctrl.selection.isPredicate()"
                           predicate="$ctrl.selection"
                           model="$ctrl.model"

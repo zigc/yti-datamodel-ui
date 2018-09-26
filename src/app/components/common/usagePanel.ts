@@ -7,7 +7,7 @@ import { LegacyComponent } from 'app/utils/angular';
 
 @LegacyComponent({
   bindings: {
-    id: '=',
+    id: '@',
     entity: '=',
     context: '='
   },

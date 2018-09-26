@@ -29,7 +29,7 @@ export class AccordionComponent {
 
 @LegacyComponent({
   bindings: {
-    id: '=',
+    id: '@',
     identifier: '='
   },
   transclude: {
@@ -41,7 +41,7 @@ export class AccordionComponent {
   },
   template: `
       <div class="card" ng-class="{ show: $ctrl.isOpen() }">
-        <div id="{{id + '_accordion_button'}}" class="card-header" ng-click="$ctrl.toggleVisibility()">
+        <div id="{{$ctrl.id + '_accordion_button'}}" class="card-header" ng-click="$ctrl.toggleVisibility()">
           <div accordion-transclude="heading"></div>
         </div>
         <div uib-collapse="!$ctrl.isOpen()" ng-if="$ctrl.isAnimate()">

@@ -25,7 +25,7 @@ import { Localizable } from 'yti-common-ui/types/localization';
     form: '?^form'
   },
   bindings: {
-    id: '=',
+    id: '@',
     class: '=',
     oldClass: '=',
     model: '=',

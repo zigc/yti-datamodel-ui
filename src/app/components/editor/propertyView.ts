@@ -11,7 +11,7 @@ import { LegacyComponent } from 'app/utils/angular';
 
 @LegacyComponent({
   bindings: {
-    id: '=',
+    id: '@',
     property: '=',
     class: '=',
     model: '='

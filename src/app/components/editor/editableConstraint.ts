@@ -10,7 +10,7 @@ import { EditableForm } from 'app/components/form/editableEntityController';
 
 @LegacyComponent({
   bindings: {
-    id: '=',
+    id: '@',
     constraint: '=',
     model: '=',
     class: '='

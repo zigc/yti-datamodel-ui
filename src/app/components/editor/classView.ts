@@ -14,7 +14,7 @@ import { AuthorizationManagerService } from 'app/services/authorizationManagerSe
 
 @LegacyComponent({
   bindings: {
-    id: '=',
+    id: '@',
     class: '=',
     model: '=',
     modelController: '=',

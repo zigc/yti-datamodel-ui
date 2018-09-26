@@ -12,7 +12,7 @@ import { LegacyComponent } from 'app/utils/angular';
 
 @LegacyComponent({
   bindings: {
-    id: '=',
+    id: '@',
     predicate: '=',
     oldPredicate: '=',
     model: '='

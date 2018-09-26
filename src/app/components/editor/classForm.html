@@ -41,7 +41,7 @@
   </div>
 </div>
 
-<subject-view entity="$ctrl.class" model="$ctrl.model"></subject-view>
+<subject-view id="{{$ctrl.id + '_subject'}}" entity="$ctrl.class" model="$ctrl.model"></subject-view>
 
 <hr />
 
@@ -69,7 +69,7 @@
                drag-sortable="$ctrl.properties"
                drag-disabled="!$ctrl.isEditing()"
                on-reorder="$ctrl.onPropertyReorder">
-       <accordion-group id="$ctrl.id + '_property_' + $ctrl.formLabelNameToIdName(property.label)" ng-repeat="property in $ctrl.properties track by property.internalId" identifier="property.internalId.uuid">
+       <accordion-group id="{{$ctrl.id + '_property_' + $ctrl.formLabelNameToIdName(property.label)}}" ng-repeat="property in $ctrl.properties track by property.internalId" identifier="property.internalId.uuid">
         <accordion-heading>
           <div drag-sortable-item>
             <h5>
@@ -86,7 +86,7 @@
         </accordion-heading>
 
         <accordion-body>
-          <property-view id="$ctrl.id + '_property_' + $ctrl.formLabelNameToIdName(property.label)" property="property" data-class="$ctrl.class" model="$ctrl.model"></property-view>
+          <property-view id="{{$ctrl.id + '_property_' + $ctrl.formLabelNameToIdName(property.label)}}" property="property" data-class="$ctrl.class" model="$ctrl.model"></property-view>
         </accordion-body>
       </accordion-group>
     </accordion>
@@ -120,9 +120,9 @@
 <div class="row">
   <div class="col-md-12">
     <div ng-show="$ctrl.model.isOfType('profile') && ($ctrl.class.constraint.isVisible() || $ctrl.isEditing())">
-      <editable-constraint id="$ctrl.id + '_' + $ctrl.class.id.uri" constraint="$ctrl.class.constraint" model="$ctrl.model" class="$ctrl.class"></editable-constraint>
+      <editable-constraint id="{{$ctrl.id + '_' + $ctrl.class.id.uri}}" constraint="$ctrl.class.constraint" model="$ctrl.model" class="$ctrl.class"></editable-constraint>
     </div>
 
-    <usage-panel id="$ctrl.id + '_' + $ctrl.class.id.uri" entity="$ctrl.class" context="$ctrl.model"></usage-panel>
+    <usage-panel id="{{$ctrl.id + '_' + $ctrl.class.id.uri}}" entity="$ctrl.class" context="$ctrl.model"></usage-panel>
   </div>
 </div>
