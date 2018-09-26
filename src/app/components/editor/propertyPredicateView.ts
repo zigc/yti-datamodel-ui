@@ -14,6 +14,7 @@ import { LegacyComponent, modalCancelHandler } from 'app/utils/angular';
 
 @LegacyComponent({
   bindings: {
+    id: '=',
     property: '=',
     model: '='
   },
