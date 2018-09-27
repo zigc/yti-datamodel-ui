@@ -6,6 +6,7 @@
     <div class="col-md-12 mb-2">
       <h4 class="pull-left" translate>Reusable predicate information</h4>
       <button-with-options ng-show="$ctrl.isEditing()"
+                           id="{{$ctrl.id + '_options_button_change_reusable_predicate'}}"
                            options="$ctrl.changeActions"
                            class="pull-right"
                            disabled="!$ctrl.property.inUnstableState">
@@ -33,7 +34,8 @@
 
 <div ng-if="$ctrl.predicate === null && !$ctrl.loading">
   <span class="pull-left" translate>Predicate information not found</span>
-  <button-with-options options="$ctrl.changeActions"
+  <button-with-options id="{{$ctrl.id + '_options_button_change_reusable_predicate_not_found'}}"
+                       options="$ctrl.changeActions"
                        class="pull-right"
                        disabled="!$ctrl.property.inUnstableState">
     <span translate>Change reusable predicate</span>
