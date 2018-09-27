@@ -856,7 +856,7 @@ msgid "Save changes"
 msgstr "Tallenna muutokset"
 
 msgid "Search for"
-msgstr "Etsi"
+msgstr "Etsi {{name}}"
 
 msgid "Search for class"
 msgstr "Etsi luokkaa"
@@ -926,10 +926,10 @@ msgid "Select registration number and vehicle code info"
 msgstr "Täältä voit valita käyttöön haluamasi yläluokan ominaisuudet"
 
 msgid "Select search result"
-msgstr "Valitse hakutulos"
+msgstr "Valitse {{name}}"
 
 msgid "Select search result info"
-msgstr "Valitse haluamasi hakutulos"
+msgstr "Valitse listalta oikea arvo"
 
 msgid "Select super class"
 msgstr "Valitse yläluokka"
