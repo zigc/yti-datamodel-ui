@@ -4,6 +4,7 @@ import { assertNever, Optional, requireDefined } from 'yti-common-ui/utils/objec
 import { IDocumentService, IScope } from 'angular';
 import { arrowHeight, Dimensions, elementPositioning, isInWindow, isVisible, popupAnimationTimeInMs, Positioning, resolveArrowClass } from 'app/help/utils/component';
 import { InteractiveHelpController } from './interactiveHelpDisplay';
+import { gettextCatalog as GettextCatalog } from 'angular-gettext';
 
 @LegacyComponent({
   bindings: {
@@ -14,8 +15,8 @@ import { InteractiveHelpController } from './interactiveHelpDisplay';
         <span ng-class="$ctrl.arrowClass"></span>
       
         <div class="help-content-wrapper">
-          <h3 ng-show="$ctrl.title" ng-bind="$ctrl.title.key | translate: $ctrl.title.context"></h3>
-          <p ng-show="$ctrl.content" ng-bind="$ctrl.content.key | translate: $ctrl.content.context"></p>
+          <h3 ng-show="$ctrl.title">{{$ctrl.localizedTitle}}</h3>
+          <p ng-show="$ctrl.content">{{$ctrl.localizedContent}}</p>
           
           <button ng-show="$ctrl.showPrevious" 
                   ng-disabled="!$ctrl.helpController.canMoveToPrevious()" 
@@ -52,13 +53,30 @@ export class InteractiveHelpPopoverComponent {
   positioning: Optional<Positioning>;
 
   constructor(private $scope: IScope,
-              private $document: IDocumentService) {
+              private $document: IDocumentService,
+              private gettextCatalog: GettextCatalog) {
     'ngInject';
   }
 
   $onInit() {
     this.helpController.registerPopover(this);
     this.$scope.$watch(() => this.item, item => this.arrowClass = resolveArrowClass(item));
+  }
+
+  get localizedTitle() {
+    if (this.title) {
+      return this.gettextCatalog.getString(this.title.key, this.title.context);
+    } else {
+      return '';
+    }
+  }
+
+  get localizedContent() {
+    if (this.content) {
+      return this.gettextCatalog.getString(this.content.key, this.content.context);
+    } else {
+      return '';
+    }
   }
 
   setPositioning(positioning: Positioning) {
