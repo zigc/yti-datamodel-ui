@@ -7,6 +7,12 @@ msgstr ""
 msgid "Copied"
 msgstr ""
 
+msgid "Yes"
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
 msgid "Select help topic"
 msgstr ""
 
@@ -23,9 +29,6 @@ msgid "${body}"
 msgstr ""
 
 msgid "Copy"
-msgstr ""
-
-msgid "Cancel"
 msgstr ""
 
 msgid "All models"
@@ -103,6 +106,15 @@ msgstr ""
 msgid "Minimize"
 msgstr ""
 
+msgid "previous"
+msgstr ""
+
+msgid "next"
+msgstr ""
+
+msgid "close"
+msgstr ""
+
 msgid "Advanced search"
 msgstr ""
 
@@ -131,9 +143,6 @@ msgid "Export"
 msgstr ""
 
 msgid "Historical versions"
-msgstr ""
-
-msgid "Yes"
 msgstr ""
 
 msgid "No referrers"
@@ -541,30 +550,157 @@ msgstr ""
 msgid "xsd:base64Binary error"
 msgstr ""
 
-msgid "Select new attribute creation"
+msgid "Guide through specializing a class"
 msgstr ""
 
-msgid "previous"
+msgid "Add classification info"
 msgstr ""
 
-msgid "close"
+msgid "Add contributor info"
 msgstr ""
 
-msgid "Class description info"
+msgid "Add library description"
 msgstr ""
 
-msgid "Diipadaa"
+msgid "Add model description"
 msgstr ""
 
-msgid "Select group"
+msgid "Add new property"
+msgstr ""
+
+msgid "Add new property description"
+msgstr ""
+
+msgid "Add profile description"
+msgstr ""
+
+msgid "Add reference to namespace"
+msgstr ""
+
+msgid "Add reference to namespace description"
+msgstr ""
+
+msgid "Add vocabulary description"
+msgstr ""
+
+msgid "Association is here"
+msgstr ""
+
+msgid "Association label"
+msgstr ""
+
+msgid "Association label info"
+msgstr ""
+
+msgid "Association target can be changed from the list or by typing the identifier"
+msgstr ""
+
+msgid "Association target is here"
+msgstr ""
+
+msgid "Association target must be selected from list of existing classes"
+msgstr ""
+
+msgid "Attribute is here"
+msgstr ""
+
+msgid "Attribute is here info"
+msgstr ""
+
+msgid "Attribute label"
+msgstr ""
+
+msgid "Attribute label info"
+msgstr ""
+
+msgid "Changes need to be saved"
+msgstr ""
+
+msgid "Class is here"
+msgstr ""
+
+msgid "Class is here info"
+msgstr ""
+
+msgid "Classes can be modified"
+msgstr ""
+
+msgid "Classes can be seen visually here"
+msgstr ""
+
+msgid "Classifications are here"
+msgstr ""
+
+msgid "Concept is here"
+msgstr ""
+
+msgid "Concept is here info"
+msgstr ""
+
+msgid "Concept label"
+msgstr ""
+
+msgid "Concept label info"
+msgstr ""
+
+msgid "Confirm selection"
 msgstr ""
 
 msgid "Confirm selection info"
 msgstr ""
 
-msgid ""
-"Group is a categorization of interoperability descriptions to different "
-"fields and domains"
+msgid "Congratulations for completing adding an association!"
+msgstr ""
+
+msgid "Congratulations for completing adding an attribute!"
+msgstr ""
+
+msgid "Congratulations for completing class assignation!"
+msgstr ""
+
+msgid "Congratulations for completing library creation!"
+msgstr ""
+
+msgid "Congratulations for completing library creation! description"
+msgstr ""
+
+msgid "Congratulations for completing namespace require!"
+msgstr ""
+
+msgid "Congratulations for completing new class creation!"
+msgstr ""
+
+msgid "Congratulations for completing profile creation!"
+msgstr ""
+
+msgid "Congratulations for completing profile creation! description"
+msgstr ""
+
+msgid "Congratulations for completing specialize class!"
+msgstr ""
+
+msgid "Contributors are here"
+msgstr ""
+
+msgid "Definition"
+msgstr ""
+
+msgid "Description"
+msgstr ""
+
+msgid "Description info"
+msgstr ""
+
+msgid "Guide through adding an association"
+msgstr ""
+
+msgid "Guide through adding an attribute"
+msgstr ""
+
+msgid "Guide through assigning class to a library"
+msgstr ""
+
+msgid "Guide through creating a class"
 msgstr ""
 
 msgid "Guide through creating new library"
@@ -582,49 +718,40 @@ msgstr ""
 msgid "Guide through requiring a namespace"
 msgstr ""
 
-msgid "Guide through specializing a class"
+msgid "Add class description"
 msgstr ""
 
-msgid "Guide through assigning class to a library"
+msgid "Imported namespaces are here"
 msgstr ""
 
-msgid "Guide through creating a class"
+msgid "Imported namespaces can be used to link resources to existing standards"
 msgstr ""
 
-msgid "Guide through adding an attribute"
+msgid "Library label"
 msgstr ""
 
-msgid "Guide through adding an association"
+msgid "Library label info"
 msgstr ""
 
-msgid "Congratulations for completing library creation!"
+msgid "Model languages"
 msgstr ""
 
-msgid "Congratulations for completing profile creation!"
+msgid "Model languages info"
 msgstr ""
 
-msgid "Congratulations for completing library creation! description"
+msgid "Modify class"
 msgstr ""
 
-msgid "Congratulations for completing profile creation! description"
+msgid "Modify library"
 msgstr ""
 
-msgid "Congratulations for completing namespace require!"
+msgid "Modify library description"
 msgstr ""
 
-msgid "Congratulations for completing specialize class!"
+msgid "Modify profile"
 msgstr ""
 
-msgid "Congratulations for completing class assignation!"
-msgstr ""
-
-msgid "Congratulations for completing new class creation!"
-msgstr ""
-
-msgid "Congratulations for completing adding an attribute!"
-msgstr ""
-
-msgid "Congratulations for completing adding an association!"
+msgid "Modify profile description"
 msgstr ""
 
 msgid "Open library details"
@@ -639,286 +766,16 @@ msgstr ""
 msgid "Open profile details description"
 msgstr ""
 
-msgid "Modify library"
+msgid "Prefix"
 msgstr ""
 
-msgid "Modify profile"
+msgid "Prefix info"
 msgstr ""
 
-msgid "Modify class"
+msgid "Profile label"
 msgstr ""
 
-msgid "Modify library description"
-msgstr ""
-
-msgid "Modify profile description"
-msgstr ""
-
-msgid "Modify class description"
-msgstr ""
-
-msgid "Add reference to namespace"
-msgstr ""
-
-msgid "Add reference to namespace description"
-msgstr ""
-
-msgid "Add profile description"
-msgstr ""
-
-msgid "Add library description"
-msgstr ""
-
-msgid "Add class description"
-msgstr ""
-
-msgid "Search for jhs"
-msgstr ""
-
-msgid "Search for palvelu"
-msgstr ""
-
-msgid "Search for tuote class"
-msgstr ""
-
-msgid "Search for tuote concept"
-msgstr ""
-
-msgid "Search for nimi"
-msgstr ""
-
-msgid "Search for tuotetaan"
-msgstr ""
-
-msgid "Search for tuotetaan concept"
-msgstr ""
-
-msgid "Search for henkilö"
-msgstr ""
-
-msgid "Search for henkilö info"
-msgstr ""
-
-msgid "Search for yhteystiedot"
-msgstr ""
-
-msgid "Search for yhteystiedot info"
-msgstr ""
-
-msgid "Search for osoite"
-msgstr ""
-
-msgid "Search for osoite info"
-msgstr ""
-
-msgid "Search for vene class"
-msgstr ""
-
-msgid "Search for vene class info"
-msgstr ""
-
-msgid "Search for vene concept"
-msgstr ""
-
-msgid "Search for vene concept info"
-msgstr ""
-
-msgid "Search for liikenneväline"
-msgstr ""
-
-msgid "Search for liikenneväline info"
-msgstr ""
-
-msgid "Select jhs"
-msgstr ""
-
-msgid "Select palvelu"
-msgstr ""
-
-msgid "Select nimi"
-msgstr ""
-
-msgid "Select tuote"
-msgstr ""
-
-msgid "Select henkilö"
-msgstr ""
-
-msgid "Select henkilö info"
-msgstr ""
-
-msgid "Select yhteystiedot"
-msgstr ""
-
-msgid "Select yhteystiedot info"
-msgstr ""
-
-msgid "Select osoite"
-msgstr ""
-
-msgid "Select osoite info"
-msgstr ""
-
-msgid "Select liikenneväline"
-msgstr ""
-
-msgid "Select liikenneväline info"
-msgstr ""
-
-msgid "Select name and description"
-msgstr ""
-
-msgid "Select registration number and vehicle code"
-msgstr ""
-
-msgid "Select registration number and vehicle code info"
-msgstr ""
-
-msgid "Select new creation"
-msgstr ""
-
-msgid "next"
-msgstr ""
-
-msgid "Select new association creation"
-msgstr ""
-
-msgid "Select concept suggest creation"
-msgstr ""
-
-msgid "Select association target"
-msgstr ""
-
-msgid "Select super class"
-msgstr ""
-
-msgid "Search for jhs info"
-msgstr ""
-
-msgid "Search for palvelu info"
-msgstr ""
-
-msgid "Search for tuote class info"
-msgstr ""
-
-msgid "Search for tuote concept info"
-msgstr ""
-
-msgid "Search for nimi info"
-msgstr ""
-
-msgid "Search for tuotetaan info"
-msgstr ""
-
-msgid "Search for tuotetaan concept info"
-msgstr ""
-
-msgid "Search for tuotetaan predicate"
-msgstr ""
-
-msgid "Search for tuotetaan predicate info"
-msgstr ""
-
-msgid "Search for omistaja"
-msgstr ""
-
-msgid "Search for omistaja info"
-msgstr ""
-
-msgid "Search for omistaja predicate"
-msgstr ""
-
-msgid "Search for omistaja predicate info"
-msgstr ""
-
-msgid "Search for matkustajien lukumäärä"
-msgstr ""
-
-msgid "Search for matkustajien lukumäärä info"
-msgstr ""
-
-msgid "Search for matkustajien lukumäärä concept"
-msgstr ""
-
-msgid "Search for matkustajien lukumäärä concept info"
-msgstr ""
-
-msgid "Select omistaja"
-msgstr ""
-
-msgid "Select omistaja info"
-msgstr ""
-
-msgid "Select jhs info"
-msgstr ""
-
-msgid "Select palvelu info"
-msgstr ""
-
-msgid "Select nimi info"
-msgstr ""
-
-msgid "Select tuote info"
-msgstr ""
-
-msgid "Select name and description info"
-msgstr ""
-
-msgid "Select new creation info"
-msgstr ""
-
-msgid "Select new attribute creation info"
-msgstr ""
-
-msgid "Select new association creation info"
-msgstr ""
-
-msgid "Select concept suggest creation info"
-msgstr ""
-
-msgid "Select association target info"
-msgstr ""
-
-msgid "Help is open"
-msgstr ""
-
-msgid "Are you sure that you want to close help?"
-msgstr ""
-
-msgid "Confirm selection"
-msgstr ""
-
-msgid "Imported namespaces are here"
-msgstr ""
-
-msgid "Class is here"
-msgstr ""
-
-msgid "Class is here info"
-msgstr ""
-
-msgid "Attribute is here"
-msgstr ""
-
-msgid "Attribute is here info"
-msgstr ""
-
-msgid "Association is here"
-msgstr ""
-
-msgid "Association is here info"
-msgstr ""
-
-msgid "Association target is here"
-msgstr ""
-
-msgid "Super class is here"
-msgstr ""
-
-msgid "Concept is here"
-msgstr ""
-
-msgid "Concept is here info"
+msgid "Profile label info"
 msgstr ""
 
 msgid "Property is here"
@@ -927,49 +784,82 @@ msgstr ""
 msgid "Property is here info"
 msgstr ""
 
-msgid "Label can be changed"
+msgid "Save changes"
 msgstr ""
 
-msgid "Classes can be seen visually here"
+msgid "Search for"
 msgstr ""
 
-msgid "Palvelu"
+msgid "Search for class"
 msgstr ""
 
-msgid "Testikirjasto"
+msgid "Search for class info"
 msgstr ""
 
-msgid "Palveluprofiili"
+msgid "Search for concept"
 msgstr ""
 
-msgid "Tuote"
+msgid "Search for concept info"
 msgstr ""
 
-msgid "Asia joka tuotetaan"
+msgid "Search for info"
 msgstr ""
 
-msgid "Nimi"
+msgid "Search for predicate"
 msgstr ""
 
-msgid "Tuotetaan"
+msgid "Search for predicate info"
 msgstr ""
 
-msgid "Tuotetaan palvelussa"
+msgid "Select association target"
 msgstr ""
 
-msgid "tapahtumaketju joka toteuttaa jotain"
+msgid "Select class description"
 msgstr ""
 
-msgid "jhs"
+msgid "Select concept suggest creation"
 msgstr ""
 
-msgid "Classes can be modified"
+msgid "Select concept suggest creation info"
 msgstr ""
 
-msgid "Changes need to be saved"
+msgid "Select name and description"
 msgstr ""
 
-msgid "Imported namespaces can be used to link resources to existing standards"
+msgid "Select name and description info"
+msgstr ""
+
+msgid "Select new association creation"
+msgstr ""
+
+msgid "Select new association creation info"
+msgstr ""
+
+msgid "Select new attribute creation"
+msgstr ""
+
+msgid "Select new attribute creation info"
+msgstr ""
+
+msgid "Select new creation"
+msgstr ""
+
+msgid "Select new creation info"
+msgstr ""
+
+msgid "Select registration number and vehicle code"
+msgstr ""
+
+msgid "Select registration number and vehicle code info"
+msgstr ""
+
+msgid "Select search result"
+msgstr ""
+
+msgid "Select search result info"
+msgstr ""
+
+msgid "Select super class"
 msgstr ""
 
 msgid "Select the vocabulary that is missing the required concept"
@@ -978,31 +868,19 @@ msgstr ""
 msgid "Suggest definition or description for the concept"
 msgstr ""
 
-msgid "Create new info"
+msgid "Super class can be changed from the list or by typing the identifier"
 msgstr ""
 
-msgid "Association target must be selected from list of existing classes"
-msgstr ""
-
-msgid "Association target can be changed from the list or by typing the identifier"
+msgid "Super class is here"
 msgstr ""
 
 msgid "Super class must be selected from list of existing classes"
 msgstr ""
 
-msgid "Super class can be changed from the list or by typing the identifier"
-msgstr ""
-
-msgid "You can add new attribute or association to the Class from here"
-msgstr ""
-
-msgid "This tutorial shows how to import new namespace to the model"
-msgstr ""
-
-msgid "This tutorial shows how to create a new shape from a class"
-msgstr ""
-
 msgid "This tutorial shows how to add Class from existing library"
+msgstr ""
+
+msgid "This tutorial shows how to add association to a Class"
 msgstr ""
 
 msgid "This tutorial shows how to add new attribute"
@@ -1011,7 +889,22 @@ msgstr ""
 msgid "This tutorial shows how to create a new Class"
 msgstr ""
 
-msgid "This tutorial shows how to add association to a Class"
+msgid "This tutorial shows how to create a new shape from a class"
+msgstr ""
+
+msgid "This tutorial shows how to import new namespace to the model"
+msgstr ""
+
+msgid "Vocabularies are here"
+msgstr ""
+
+msgid "Vocabularies can be used to link resources to existing concepts"
+msgstr ""
+
+msgid "Vocabulary"
+msgstr ""
+
+msgid "You can add new attribute or association to the Class from here"
 msgstr ""
 
 msgid "Created at"
@@ -1750,15 +1643,6 @@ msgstr ""
 msgid "Specialized from class"
 msgstr ""
 
-msgid "Definition"
-msgstr ""
-
-msgid "Description"
-msgstr ""
-
-msgid "Description info"
-msgstr ""
-
 msgid "Editorial note"
 msgstr ""
 
@@ -1819,18 +1703,6 @@ msgstr ""
 msgid "Reference data URI info"
 msgstr ""
 
-msgid "Library label"
-msgstr ""
-
-msgid "Library label info"
-msgstr ""
-
-msgid "Profile label"
-msgstr ""
-
-msgid "Profile label info"
-msgstr ""
-
 msgid "Group label"
 msgstr ""
 
@@ -1849,18 +1721,6 @@ msgstr ""
 msgid "Shape label info"
 msgstr ""
 
-msgid "Association label"
-msgstr ""
-
-msgid "Association label info"
-msgstr ""
-
-msgid "Attribute label"
-msgstr ""
-
-msgid "Attribute label info"
-msgstr ""
-
 msgid "Property label"
 msgstr ""
 
@@ -1871,12 +1731,6 @@ msgid "Class property label"
 msgstr ""
 
 msgid "Class property label info"
-msgstr ""
-
-msgid "Concept label"
-msgstr ""
-
-msgid "Concept label info"
 msgstr ""
 
 msgid "Concept suggestion label"
@@ -2023,9 +1877,6 @@ msgstr ""
 msgid "Internal group page info"
 msgstr ""
 
-msgid "Vocabulary"
-msgstr ""
-
 msgid "Vocabulary info"
 msgstr ""
 
@@ -2033,12 +1884,6 @@ msgid "Namespace"
 msgstr ""
 
 msgid "Namespace info"
-msgstr ""
-
-msgid "Prefix"
-msgstr ""
-
-msgid "Prefix info"
 msgstr ""
 
 msgid "Resource identifier"
@@ -2117,12 +1962,6 @@ msgid "Homepage"
 msgstr ""
 
 msgid "Homepage info"
-msgstr ""
-
-msgid "Model languages"
-msgstr ""
-
-msgid "Model languages info"
 msgstr ""
 
 msgid "Title info"
