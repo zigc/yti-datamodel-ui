@@ -370,7 +370,7 @@ msgstr ""
 msgid "Title"
 msgstr ""
 
-msgid "Select classification"
+msgid "Select information domain"
 msgstr ""
 
 msgid "Show technical namespaces"

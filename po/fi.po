@@ -395,8 +395,8 @@ msgstr "Tunniste"
 msgid "Title"
 msgstr "Nimi"
 
-msgid "Select classification"
-msgstr "Valitse luokitus"
+msgid "Select information domain"
+msgstr "Valitse tietoalue"
 
 msgid "Show technical namespaces"
 msgstr "Näytä tekniset nimiavaruudet"
@@ -2180,6 +2180,9 @@ msgstr "Attribuutti"
 
 msgid "owl:ObjectProperty"
 msgstr "Assosiaatio"
+
+#~ msgid "Select classification"
+#~ msgstr "Valitse luokitus"
 
 #~ msgid "Search"
 #~ msgstr "Etsi"
