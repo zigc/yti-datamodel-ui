@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2018-10-03 12:12+0300\n"
+"PO-Revision-Date: 2018-10-03 12:32+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -394,7 +394,7 @@ msgstr ""
 msgid "Title"
 msgstr ""
 
-msgid "Select information domain"
+msgid "Select domain"
 msgstr ""
 
 msgid "Show technical namespaces"
@@ -2153,9 +2153,6 @@ msgstr "Association"
 
 #~ msgid "Select palvelu"
 #~ msgstr "Select Public Service"
-
-#~ msgid "Select nimi"
-#~ msgstr "Select name"
 
 #~ msgid "Select tuote"
 #~ msgstr "Select Product"

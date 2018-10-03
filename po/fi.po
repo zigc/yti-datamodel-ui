@@ -395,7 +395,7 @@ msgstr "Tunniste"
 msgid "Title"
 msgstr "Nimi"
 
-msgid "Select information domain"
+msgid "Select domain"
 msgstr "Valitse tietoalue"
 
 msgid "Show technical namespaces"
@@ -2181,6 +2181,9 @@ msgstr "Attribuutti"
 msgid "owl:ObjectProperty"
 msgstr "Assosiaatio"
 
+#~ msgid "Select information domain"
+#~ msgstr "Valitse tietoalue"
+
 #~ msgid "Select classification"
 #~ msgstr "Valitse luokitus"
 
@@ -2239,9 +2242,6 @@ msgstr "Assosiaatio"
 
 #~ msgid "Select palvelu"
 #~ msgstr "Valitse palvelu"
-
-#~ msgid "Select nimi"
-#~ msgstr "Valitse nimi"
 
 #~ msgid "Select tuote"
 #~ msgstr "Valitse tuote"
