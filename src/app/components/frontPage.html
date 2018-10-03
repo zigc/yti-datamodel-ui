@@ -1,6 +1,6 @@
 <ajax-loading-indicator ng-if="$ctrl.loading"></ajax-loading-indicator>
 
-<div ng-if="!$ctrl.loading">
+<div class="yti-tool-front-page" ng-if="!$ctrl.loading">
 
   <div class="pull-right" id="add-new-datamodel" uib-dropdown ng-if="$ctrl.canAddModel()">
     <button id="model_creation_button" class="btn btn-action" uib-dropdown-toggle>
@@ -15,6 +15,10 @@
 
   <div class="tool-info"><p translate>ToolInfo</p></div>
 
+  <div>
+    <span class="search-label" translate>Search model</span>
+    <span class="fas fa-info-circle info" uib-tooltip="{{'INFO_TEXT_FRONTPAGE_SEARCH' | translate}}"></span>
+  </div>
   <div class="row">
     <div class="col-md-6 mb-3">
       <div class="input-group input-group-lg input-group-search">
@@ -22,74 +26,96 @@
                class="form-control"
                type="text"
                ng-model="$ctrl.search"
-               placeholder="{{'Search' | translate}}" />
+               placeholder="{{'Search term (model name)' | translate}}" />
       </div>
       <a id="advanced_search_link" href="#" ng-click="$ctrl.openAdvancedSearch()" translate>Advanced search</a>
     </div>
   </div>
 
+  <div>
+    <span class="search-label" translate>Filter with information domain</span>
+    <span class="fas fa-info-circle info" uib-tooltip="{{'INFO_TEXT_FRONTPAGE_FILTER_W_CLASSIFICATION' | translate}}"></span>
+  </div>
   <div class="row">
 
     <div class="col-md-4">
-      <div class="content-box">
-        <h4 class="strong" translate>Classification</h4>
-
-        <div id="{{classification.node.id + '_classification_filter_link'}}"
-             ng-repeat="classification in $ctrl.classifications"
-             class="classification"
-             ng-class="{ active: $ctrl.isClassificationSelected(classification.node) }"
-             ng-click="$ctrl.toggleClassification(classification.node)">
-
-          <span class="name">{{classification.node.label | translateValue}}</span>
-          <span class="count">({{classification.count}})</span>
+      <div class="information-domain-container">
+        <div class="content-box">        
+          <div id="{{classification.node.id + '_classification_filter_link'}}"
+              ng-repeat="classification in $ctrl.classifications"
+              class="information-domain"
+              ng-class="{ active: $ctrl.isClassificationSelected(classification.node) }"
+              ng-click="$ctrl.toggleClassification(classification.node)">
+              <img ng-src="{{$ctrl.informationDomainIconSrc(classification.node.identifier)}}" />
+              <span class="name">{{classification.node.label | translateValue}}</span>
+            <span class="count">({{classification.count}})</span>
+          </div>
         </div>
       </div>
     </div>
 
     <div class="col-md-8">
 
-      <div class="row mb-4">
-        <div class="col-md-12">
+      <div class="content-box result-list-container">
 
-          <app-filter-dropdown id="organization_filter_dropdown"
-                               class="pull-left"
-                               [options]="$ctrl.organizations"
-                               [filter-subject]="$ctrl.organization$"></app-filter-dropdown>
+        <div class="row mb-4">
+          <div class="col-md-12 result-list-filter-row">
 
-          <app-filter-dropdown id="model_type_filter_dropdown"
-                               class="pull-left ml-2"
-                               [options]="$ctrl.modelTypes"
-                               [filter-subject]="$ctrl.modelType$"></app-filter-dropdown>
+            <span class="search-label search-label-inline" translate>Filter results</span>
+            <span class="fas fa-info-circle info" style="padding-right: 10px" uib-tooltip="{{'INFO_TEXT_FRONTPAGE_FILTER_RESULTS' | translate}}"></span>
+
+            <app-filter-dropdown id="organization_filter_dropdown"
+                                class="pull-left"
+                                [options]="$ctrl.organizations"
+                                [filter-subject]="$ctrl.organization$"></app-filter-dropdown>
+
+            <app-filter-dropdown id="model_type_filter_dropdown"
+                                class="pull-left ml-2"
+                                [options]="$ctrl.modelTypes"
+                                [filter-subject]="$ctrl.modelType$"></app-filter-dropdown>
+          </div>
         </div>
-      </div>
-
-      <div class="content-box">
 
         <div class="row mb-4">
           <div class="col-md-12">
             <div>
-              <strong>{{$ctrl.filteredModels.length}}</strong>
-              <span ng-show="$ctrl.filteredModels.length === 1" translate>model</span>
-              <span ng-show="$ctrl.filteredModels.length !== 1" translate>models</span>
+              {{$ctrl.filteredModels.length}}
+              <span ng-show="$ctrl.filteredModels.length === 1" translate>result</span>
+              <span ng-show="$ctrl.filteredModels.length !== 1" translate>results</span>
             </div>
           </div>
         </div>
 
         <div class="row">
           <div class="col-md-12">
-            <div id="{{model.prefix + '_filtered_model_link'}}" class="model" ng-repeat="model in $ctrl.filteredModels" ng-click="$ctrl.selectModel(model)">
-
-              <span class="name">{{model.label | translateValue}}</span>
-
-              <span class="type">{{model.normalizedType | translate}}</span>
-
-              <span class="organization" ng-repeat="organization in model.contributors">
-                {{organization.label | translateValue}}
+            <div class="result-list-item" ng-repeat="model in $ctrl.filteredModels">
+              <span class="type">
+                <i class="material-icons {{$ctrl.modelTypeIconDef(model.normalizedType).colorClass}}">{{$ctrl.modelTypeIconDef(model.normalizedType).name}}</i>
+                {{model.normalizedType | translate}}
               </span>
 
-              <span class="group" ng-repeat="classification in model.classifications">
-                {{classification.label | translateValue}}
-              </span>
+              <app-status class="status" [status]="model.status"></app-status>
+
+              <a id="{{model.prefix + '_filtered_model_link'}}" class="name" href="#" ng-click="$ctrl.selectModel(model)">{{model.label | translateValue}}</a>
+              
+              <div class="description-container" ng-class="{'expand': $ctrl.fullDescription[model.id]}">
+                <span class="description">{{model.comment | translateValue}}</span>
+                <div class="limiter-container">
+                  <div class="description-limiter" ng-click="$ctrl.toggleFullDescription(model.id)"></div>
+                </div>
+              </div>
+
+              <span class="information-domains">
+                <span class="badge badge-light" ng-repeat="classification in model.classifications">
+                    {{classification.label | translateValue}}
+                </span>
+              </span>             
+
+              <ul class="organizations dot-separated-list">
+                <li class="organization" ng-repeat="organization in model.contributors">
+                  {{organization.label | translateValue}}
+                </li>
+              </ul>
 
             </div>
           </div>

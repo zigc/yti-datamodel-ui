@@ -1,30 +1,31 @@
 import { ILocationService, IScope } from 'angular';
-import { LocationService } from 'app/services/locationService';
-import { LanguageService } from 'app/services/languageService';
+import { LocationService } from '../services/locationService';
+import { LanguageService } from '../services/languageService';
 import { AdvancedSearchModal } from './advancedSearchModal';
 import { ApplicationComponent } from './application';
 import { HelpProvider } from './common/helpProvider';
-import { FrontPageHelpService } from 'app/help/providers/frontPageHelpService';
-import { LegacyComponent, modalCancelHandler } from 'app/utils/angular';
-import { ModelService } from 'app/services/modelService';
-import { ModelListItem } from 'app/entities/model';
-import { ClassificationService } from 'app/services/classificationService';
-import { Classification } from 'app/entities/classification';
-import { Url } from 'app/entities/uri';
-import { comparingLocalizable } from 'app/utils/comparator';
+import { FrontPageHelpService } from '../help/providers/frontPageHelpService';
+import { LegacyComponent, modalCancelHandler } from '../utils/angular';
+import { ModelService } from '../services/modelService';
+import { ModelListItem } from '../entities/model';
+import { ClassificationService } from '../services/classificationService';
+import { Classification } from '../entities/classification';
+import { Url } from '../entities/uri';
+import { comparingLocalizable } from '../utils/comparator';
 import { BehaviorSubject, combineLatest, Subscription } from 'rxjs';
-import { fromIPromise } from 'app/utils/observable';
+import { fromIPromise } from '../utils/observable';
 import { anyMatching } from 'yti-common-ui/utils/array';
 import { matches } from 'yti-common-ui/utils/string';
 import { FilterOptions } from 'yti-common-ui/components/filter-dropdown.component';
-import { KnownModelType } from 'app/types/entity';
+import { KnownModelType } from '../types/entity';
 import { gettextCatalog as GettextCatalog } from 'angular-gettext';
-import { OrganizationService } from 'app/services/organizationService';
-import { AuthorizationManagerService } from 'app/services/authorizationManagerService';
-import { Organization } from 'app/entities/organization';
+import { OrganizationService } from '../services/organizationService';
+import { AuthorizationManagerService } from '../services/authorizationManagerService';
+import { Organization } from '../entities/organization';
 import { labelNameToResourceIdIdentifier } from 'yti-common-ui/utils/resource';
 import { tap } from 'rxjs/operators';
-import { InteractiveHelp } from 'app/help/contract';
+import { InteractiveHelp } from '../help/contract';
+import { getInformationDomainSvgIcon, getDataModelingMaterialIcon } from 'yti-common-ui/utils/icons';
 
 @LegacyComponent({
   template: require('./frontPage.html'),
@@ -51,6 +52,10 @@ export class FrontPageComponent implements HelpProvider {
 
   subscriptionsToClean: Subscription[] = [];
   modelsLoaded = false;
+
+  fullDescription: { [key: string]: boolean } = {};
+  modelTypeIconDef = getDataModelingMaterialIcon;
+  informationDomainIconSrc = getInformationDomainSvgIcon;
 
   constructor($scope: IScope,
               private $location: ILocationService,
@@ -196,6 +201,14 @@ export class FrontPageComponent implements HelpProvider {
   addModel(type: KnownModelType) {
     this.$location.path('/newModel');
     this.$location.search({ type });
+  }
+
+  toggleFullDescription(id: string) {
+    if (this.fullDescription[id]) {
+      delete this.fullDescription[id];
+    } else {
+      this.fullDescription[id] = true;
+    }
   }
 
   private go(withIowUrl: {iowUrl(): Url|null}) {

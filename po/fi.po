@@ -303,8 +303,28 @@ msgstr "Ei ole tunnettu kielikoodi"
 msgid "Is not valid reference data code"
 msgstr "Ei tunnettu koodiston arvo"
 
-msgid "Search"
-msgstr "Etsi"
+msgid "INFO_TEXT_FRONTPAGE_SEARCH"
+msgstr ""
+"Haku kohdistuu oletuksena tietomallien nimiin. Voit hakea muilla "
+"hakuehdoilla käyttämällä \"Tarkennettu haku\" -toimintoa."
+
+msgid "Search term (model name)"
+msgstr "Hakusana (tietomallin nimi)"
+
+msgid "INFO_TEXT_FRONTPAGE_FILTER_W_CLASSIFICATION"
+msgstr ""
+"Kaikki tietomallit on luokiteltu johonkin tietoalueeseen. Tietoaluetta "
+"klikkaamalla voit suodattaa hakutuloksiin näkyviin vain tiettyyn "
+"tietoalueeseen kuuluvat tietomallit. Poistat valinnan klikkaamalla uudestaan "
+"samaa tietoaluetta."
+
+msgid "INFO_TEXT_FRONTPAGE_FILTER_RESULTS"
+msgstr ""
+"Voit suodattaa hakutuloksia organisaatiolla, tyypillä tai tilalla. "
+"Organisaatio tarkoittaa tietomallin sisällöntuottajaorganisaatiota, joka "
+"vastaa tietomallin ylläpidosta. Tyyppi tarkoittaa tietomallin tyyppiä, joka "
+"voi olla tietokomponenttikirjasto tai soveltamisprofiili. Tila tarkoittaa "
+"tietomallin hallinnan tilaa."
 
 msgid "Add model"
 msgstr "Lisää tietomalli"
@@ -323,14 +343,20 @@ msgstr ""
 "loogisesta tietomallityöstä avointa ja julkista, minkä vuoksi tietomallien "
 "hyödyntäminen organisaatiorajojen yli helpottuu"
 
-msgid "Classification"
-msgstr "Tietoalue"
+msgid "Search model"
+msgstr "Hae tietomallia"
 
-msgid "model"
-msgstr "Tietokomponenttikirjasto"
+msgid "Filter with information domain"
+msgstr "Rajaa tietoalueella"
 
-msgid "models"
-msgstr "tietomallia"
+msgid "Filter results"
+msgstr "Suodata hakutuloksia"
+
+msgid "result"
+msgstr "hakutulos"
+
+msgid "results"
+msgstr "hakutulosta"
 
 msgid "Maintenance content"
 msgstr ""
@@ -1073,6 +1099,9 @@ msgstr "Poista soveltamisprofiili"
 
 msgid "group"
 msgstr "Ryhmä"
+
+msgid "model"
+msgstr "Tietokomponenttikirjasto"
 
 msgid "library"
 msgstr "Tietokomponenttikirjasto"
@@ -2152,6 +2181,15 @@ msgstr "Attribuutti"
 msgid "owl:ObjectProperty"
 msgstr "Assosiaatio"
 
+#~ msgid "Search"
+#~ msgstr "Etsi"
+
+#~ msgid "Classification"
+#~ msgstr "Tietoalue"
+
+#~ msgid "models"
+#~ msgstr "tietomallia"
+
 #~ msgid "Class description info"
 #~ msgstr "Luokan tietosisällön kuvaus"
 
@@ -2269,9 +2307,6 @@ msgstr "Assosiaatio"
 
 #~ msgid "Localname description"
 #~ msgstr "Voidaan käyttää skeemoissa tai muissa paikallisissta toteutuksissa"
-
-#~ msgid "Filter results"
-#~ msgstr "Rajaa hakutuloksia"
 
 #~ msgid "Group"
 #~ msgstr "Ryhmä"

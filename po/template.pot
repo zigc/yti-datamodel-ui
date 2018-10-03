@@ -295,7 +295,16 @@ msgstr ""
 msgid "Is not valid reference data code"
 msgstr ""
 
-msgid "Search"
+msgid "INFO_TEXT_FRONTPAGE_SEARCH"
+msgstr ""
+
+msgid "Search term (model name)"
+msgstr ""
+
+msgid "INFO_TEXT_FRONTPAGE_FILTER_W_CLASSIFICATION"
+msgstr ""
+
+msgid "INFO_TEXT_FRONTPAGE_FILTER_RESULTS"
 msgstr ""
 
 msgid "Add model"
@@ -310,13 +319,19 @@ msgstr ""
 msgid "ToolInfo"
 msgstr ""
 
-msgid "Classification"
+msgid "Search model"
 msgstr ""
 
-msgid "model"
+msgid "Filter with information domain"
 msgstr ""
 
-msgid "models"
+msgid "Filter results"
+msgstr ""
+
+msgid "result"
+msgstr ""
+
+msgid "results"
 msgstr ""
 
 msgid "Maintenance content"
@@ -992,6 +1007,9 @@ msgid "Delete profile"
 msgstr ""
 
 msgid "group"
+msgstr ""
+
+msgid "model"
 msgstr ""
 
 msgid "library"

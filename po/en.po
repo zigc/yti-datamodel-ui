@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2018-09-27 16:07+0300\n"
+"PO-Revision-Date: 2018-10-02 17:03+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -304,8 +304,26 @@ msgstr ""
 msgid "Is not valid reference data code"
 msgstr ""
 
-msgid "Search"
+msgid "INFO_TEXT_FRONTPAGE_SEARCH"
 msgstr ""
+"The names of the models are searched as a default. You may search with more "
+"options by clicking \"Advanced search\" link."
+
+msgid "Search term (model name)"
+msgstr ""
+
+msgid "INFO_TEXT_FRONTPAGE_FILTER_W_CLASSIFICATION"
+msgstr ""
+"All models are classified into information domains. To see models classified "
+"into a certain information domain, click the name of the information domain. "
+"You may remove the filter by clicking the name of information domain again."
+
+msgid "INFO_TEXT_FRONTPAGE_FILTER_RESULTS"
+msgstr ""
+"You may filter the search results with the organization, type or status "
+"information. Organization is for the organization that is responsible for "
+"upkeeping the model. Type is either core vocabulary or application profile. "
+"Status is for the governance status of the model."
 
 msgid "Add model"
 msgstr ""
@@ -324,13 +342,19 @@ msgstr ""
 "the Data Vocabularies Tool is used, when necessary, for managing API’s or "
 "the contents of various data resources."
 
-msgid "Classification"
-msgstr "Domain"
+msgid "Search model"
+msgstr ""
 
-msgid "model"
-msgstr "Core Vocabulary Library"
+msgid "Filter with information domain"
+msgstr ""
 
-msgid "models"
+msgid "Filter results"
+msgstr ""
+
+msgid "result"
+msgstr ""
+
+msgid "results"
 msgstr ""
 
 msgid "Maintenance content"
@@ -1042,6 +1066,9 @@ msgstr ""
 
 msgid "group"
 msgstr "Group"
+
+msgid "model"
+msgstr "Core Vocabulary Library"
 
 msgid "library"
 msgstr "Core Vocabulary"
@@ -2105,6 +2132,9 @@ msgstr "Attribute"
 msgid "owl:ObjectProperty"
 msgstr "Association"
 
+#~ msgid "Classification"
+#~ msgstr "Domain"
+
 #~ msgid "Diipadaa"
 #~ msgstr ""
 #~ "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod "
@@ -2114,9 +2144,6 @@ msgstr "Association"
 #~ "velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint "
 #~ "occaecat cupidatat non proident, sunt in culpa qui officia deserunt "
 #~ "mollit anim id est laborum."
-
-#~ msgid "Search for palvelu"
-#~ msgstr "Search for service"
 
 #~ msgid "Search for tuotetaan"
 #~ msgstr "Search for produces"

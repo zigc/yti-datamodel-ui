@@ -59,10 +59,14 @@ export abstract class AbstractModel extends GraphNode {
 export class ModelListItem extends AbstractModel {
 
   static modelListItemMappings = {
+    comment:         { name: 'comment',     serializer: localizableSerializer },
+    status:          { name: 'versionInfo', serializer: identitySerializer<Status>() },
     classifications: { name: 'isPartOf',    serializer: entityAwareList(entity(() => Classification)) },
     contributors:    { name: 'contributor', serializer: entityAwareList(entity(() => Organization)) }
   };
 
+  comment: Localizable;
+  status: Status;
   classifications: Classification[];
   contributors: Organization[];
 
