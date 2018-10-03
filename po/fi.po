@@ -178,7 +178,7 @@ msgid "Additional information"
 msgstr "Lisätiedot"
 
 msgid "Add property"
-msgstr "Lisää ominaisuus"
+msgstr "Lisää attribuutti tai assosiaatio"
 
 msgid "No properties yet"
 msgstr "Ei vielä yhtään ominaisuutta"
@@ -1404,7 +1404,7 @@ msgid "Concept suggestion information"
 msgstr "Käsite-ehdotuksen tiedot"
 
 msgid "Class properties"
-msgstr "Luokan ominaisuudet"
+msgstr "Luokan attribuutit ja assosiaatiot"
 
 msgid "Shape properties"
 msgstr "Tarkennetun luokan ominaisuudet"
@@ -1710,7 +1710,7 @@ msgid "Copy properties"
 msgstr "Kopioi ominaisuuksia"
 
 msgid "Copy properties from class"
-msgstr "Kopioi ominaisuuksia luokalta"
+msgstr "Kopioi attribuutteja tai assosiaatioita luokalta"
 
 msgid "Session expired"
 msgstr "Istunto on vanhentunut"
