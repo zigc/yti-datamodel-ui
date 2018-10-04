@@ -141,15 +141,16 @@ function calculateRecurseSiblingVertices(element: joint.dia.Element, siblingInde
 
   const bbox = element.getBBox();
   const offset = 50;
-  const sign = { x: 1, y: 1 };
-  const center = joint.g.point(bbox.x + bbox.width / 2 - (sign.x * siblingIndex * 10), bbox.y + bbox.height / 2 - (sign.y * siblingIndex * 10));
-  const corner = joint.g.point(center).offset(bbox.width / 2 * sign.x, bbox.height / 2 * sign.y);
+  const signX = 1;
+  const signY = 1;
+  const center = joint.g.point(bbox.x + bbox.width / 2 - (signX * siblingIndex * 10), bbox.y + bbox.height / 2 - (signY * siblingIndex * 10));
+  const corner = joint.g.point(center).offset(bbox.width / 2 * signX, bbox.height / 2 * signY);
   const scale = (siblingIndex + 1) * 0.5;
 
   return [
-    joint.g.point(corner).offset(-sign.x * bbox.width / 4, sign.y * (offset * scale)),
-    joint.g.point(corner).offset(sign.x * (offset * scale), sign.y * (offset * scale)),
-    joint.g.point(corner).offset(sign.x * (offset * scale), -sign.y * bbox.height / 4)
+    joint.g.point(corner).offset(-signX * bbox.width / 4, signY * (offset * scale)),
+    joint.g.point(corner).offset(signX * (offset * scale), signY * (offset * scale)),
+    joint.g.point(corner).offset(signX * (offset * scale), -signY * bbox.height / 4)
   ];
 }
 
