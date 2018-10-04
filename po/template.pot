@@ -310,10 +310,10 @@ msgstr ""
 msgid "Add model"
 msgstr ""
 
-msgid "Add library"
+msgid "ADD_LIBRARY_BUTTON_TEXT"
 msgstr ""
 
-msgid "Add profile"
+msgid "ADD_PROFILE_BUTTON_TEXT"
 msgstr ""
 
 msgid "ToolInfo"
@@ -574,6 +574,9 @@ msgstr ""
 msgid "Add contributor info"
 msgstr ""
 
+msgid "Add library"
+msgstr ""
+
 msgid "Add library description"
 msgstr ""
 
@@ -584,6 +587,9 @@ msgid "Add new property"
 msgstr ""
 
 msgid "Add new property description"
+msgstr ""
+
+msgid "Add profile"
 msgstr ""
 
 msgid "Add profile description"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2018-10-03 15:27+0300\n"
+"PO-Revision-Date: 2018-10-04 11:25+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -328,10 +328,10 @@ msgstr ""
 msgid "Add model"
 msgstr ""
 
-msgid "Add library"
+msgid "ADD_LIBRARY_BUTTON_TEXT"
 msgstr "New Core Vocabulary"
 
-msgid "Add profile"
+msgid "ADD_PROFILE_BUTTON_TEXT"
 msgstr "New profile"
 
 msgid "ToolInfo"
@@ -598,6 +598,9 @@ msgstr "Domain classifies data models to certain use context"
 msgid "Add contributor info"
 msgstr "Contributors are organisations that can edit the data model."
 
+msgid "Add library"
+msgstr "New Core Vocabulary"
+
 msgid "Add library description"
 msgstr "Add new Core Vocabulary from here"
 
@@ -611,6 +614,9 @@ msgstr ""
 
 msgid "Add new property description"
 msgstr "Add new attribute or association"
+
+msgid "Add profile"
+msgstr "New profile"
 
 msgid "Add profile description"
 msgstr "Add new Application Profile from here"

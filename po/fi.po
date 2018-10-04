@@ -329,11 +329,11 @@ msgstr ""
 msgid "Add model"
 msgstr "Lisää tietomalli"
 
-msgid "Add library"
-msgstr "Lisää tietoaluekohtainen tietomalli"
+msgid "ADD_LIBRARY_BUTTON_TEXT"
+msgstr "Lisää tietokomponenttikirjasto"
 
-msgid "Add profile"
-msgstr "Lisää sovelluskohtainen tietomalli"
+msgid "ADD_PROFILE_BUTTON_TEXT"
+msgstr "Lisää soveltamisprofiili"
 
 msgid "ToolInfo"
 msgstr ""
@@ -602,6 +602,9 @@ msgstr ""
 "organisaation tietomallintajat voivat muokata tietomalleja joille "
 "organisaatio on määritelty sisällöntuottajaksi"
 
+msgid "Add library"
+msgstr "Lisää tietoaluekohtainen tietomalli"
+
 msgid "Add library description"
 msgstr ""
 "Lisäämällä uuden tietokomponenttikirjaston voit kuvata tietoalueella "
@@ -623,6 +626,9 @@ msgid "Add new property description"
 msgstr ""
 "Attribuutti ja assosiaatio ovat luokan ominaisuuksia, joilla voidaan "
 "määritellä luokan tarkempi sisältö ja suhteet muihin luokkiin"
+
+msgid "Add profile"
+msgstr "Lisää sovelluskohtainen tietomalli"
 
 msgid "Add profile description"
 msgstr ""
