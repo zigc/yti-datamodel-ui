@@ -894,7 +894,7 @@ msgid "Search for concept"
 msgstr "Etsi käsitettä"
 
 msgid "Search for concept info"
-msgstr ""
+msgstr "Hae käsitettä sanastosta"
 
 msgid "Search for info"
 msgstr "Voit hakea haluamaasi sisältöä täältä"
@@ -908,10 +908,8 @@ msgstr "Hae tarvitsemaasi attribuuttia tai assosiaatiota"
 msgid "Select association target"
 msgstr "Aloita assosiaation kohteen valinta"
 
-#, fuzzy
-#| msgid "Add class description"
 msgid "Select class description"
-msgstr "Voit lisätä uuden luokan täältä"
+msgstr "Voit valita luokan täältä"
 
 msgid "Select concept suggest creation"
 msgstr "Ehdota uutta käsitettä sanastoon"
@@ -934,10 +932,10 @@ msgid "Select new association creation info"
 msgstr "Tee uusi assosiaatio jos et löydä uudelleenkäytettäviä ominaisuuksia"
 
 msgid "Select new attribute creation"
-msgstr ""
+msgstr "Valitse lisää uusi attribuutti"
 
 msgid "Select new attribute creation info"
-msgstr ""
+msgstr "Täältä voit tehdä uuden attribuutin"
 
 msgid "Select new creation"
 msgstr "Valitse uuden luominen"
