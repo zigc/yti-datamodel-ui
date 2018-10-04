@@ -53,7 +53,7 @@ export const addNewProperty = createStory({
   scroll: createScrollNone(),
   popover: { element: addNewPropertyElement, position: 'top-left' },
   focus: { element: addNewPropertyElement },
-  nextCondition: createClickNextCondition(addNewPropertyElement)
+  nextCondition: createModifyingClickNextCondition(addNewPropertyElement)
 });
 
 export const UseCases = {
