@@ -1408,7 +1408,7 @@ msgid "Class properties"
 msgstr "Luokan attribuutit ja assosiaatiot"
 
 msgid "Shape properties"
-msgstr "Tarkennetun luokan ominaisuudet"
+msgstr "Tarkennetun luokan attribuutit ja assosiaatiot"
 
 msgid "Show excluded"
 msgstr "Näytä myös ne, joita ei voi lisätä"
