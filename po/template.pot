@@ -193,12 +193,6 @@ msgstr ""
 msgid "Predicate information not found"
 msgstr ""
 
-msgid "Delete property"
-msgstr ""
-
-msgid "Property information"
-msgstr ""
-
 msgid "Optional metadata"
 msgstr ""
 
@@ -928,7 +922,7 @@ msgstr ""
 msgid "You can add new attribute or association to the Class from here"
 msgstr ""
 
-msgid "Created at"
+msgid "Modified at"
 msgstr ""
 
 msgid "not found in the concept database"
@@ -1284,6 +1278,9 @@ msgstr ""
 msgid "Association information"
 msgstr ""
 
+msgid "Property information"
+msgstr ""
+
 msgid "Concept suggestion information"
 msgstr ""
 
@@ -1335,10 +1332,10 @@ msgstr ""
 msgid "User name"
 msgstr ""
 
-msgid "Define concept for the class"
+msgid "Created at"
 msgstr ""
 
-msgid "Modified at"
+msgid "Define concept for the class"
 msgstr ""
 
 msgid "Member groups"
@@ -1664,7 +1661,7 @@ msgstr ""
 msgid "InformationDescription"
 msgstr ""
 
-msgid "Specialized from class"
+msgid "Superproperty"
 msgstr ""
 
 msgid "Editorial note"
@@ -1707,6 +1704,18 @@ msgid "Class property id"
 msgstr ""
 
 msgid "Class property id info"
+msgstr ""
+
+msgid "Class attribute id"
+msgstr ""
+
+msgid "Class attribute id info"
+msgstr ""
+
+msgid "Class association id"
+msgstr ""
+
+msgid "Class association id info"
 msgstr ""
 
 msgid "Concept id"
@@ -1755,6 +1764,18 @@ msgid "Class property label"
 msgstr ""
 
 msgid "Class property label info"
+msgstr ""
+
+msgid "Class attribute label"
+msgstr ""
+
+msgid "Class attribute label info"
+msgstr ""
+
+msgid "Class association label"
+msgstr ""
+
+msgid "Class association label info"
 msgstr ""
 
 msgid "Concept suggestion label"
@@ -1829,7 +1850,7 @@ msgstr ""
 msgid "Superattribute info"
 msgstr ""
 
-msgid "Superproperty"
+msgid "Definition info"
 msgstr ""
 
 msgid "Superproperty info"
@@ -1841,7 +1862,7 @@ msgstr ""
 msgid "Range info"
 msgstr ""
 
-msgid "Definition info"
+msgid "Specialized from class"
 msgstr ""
 
 msgid "Specialized from class info"

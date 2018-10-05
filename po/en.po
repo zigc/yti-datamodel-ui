@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2018-10-04 11:25+0300\n"
+"PO-Revision-Date: 2018-10-05 15:20+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -200,12 +200,6 @@ msgid "Change reusable predicate"
 msgstr ""
 
 msgid "Predicate information not found"
-msgstr ""
-
-msgid "Delete property"
-msgstr ""
-
-msgid "Property information"
 msgstr ""
 
 msgid "Optional metadata"
@@ -986,7 +980,7 @@ msgstr "Terminology"
 msgid "You can add new attribute or association to the Class from here"
 msgstr ""
 
-msgid "Created at"
+msgid "Modified at"
 msgstr ""
 
 msgid "not found in the concept database"
@@ -1371,6 +1365,9 @@ msgstr ""
 msgid "Association information"
 msgstr ""
 
+msgid "Property information"
+msgstr ""
+
 msgid "Concept suggestion information"
 msgstr ""
 
@@ -1422,10 +1419,10 @@ msgstr ""
 msgid "User name"
 msgstr ""
 
-msgid "Define concept for the class"
+msgid "Created at"
 msgstr ""
 
-msgid "Modified at"
+msgid "Define concept for the class"
 msgstr ""
 
 msgid "Member groups"
@@ -1754,7 +1751,7 @@ msgstr "Exchange format"
 msgid "InformationDescription"
 msgstr "Information description"
 
-msgid "Specialized from class"
+msgid "Superproperty"
 msgstr ""
 
 msgid "Editorial note"
@@ -1798,6 +1795,22 @@ msgstr "Class property localname"
 
 msgid "Class property id info"
 msgstr ""
+
+msgid "Class attribute id"
+msgstr "Class attribute localname"
+
+msgid "Class attribute id info"
+msgstr ""
+"Secondary identifier of class attribute that can be used in scheme or in "
+"other local implementation"
+
+msgid "Class association id"
+msgstr "Class association localname"
+
+msgid "Class association id info"
+msgstr ""
+"Secondary identifier of class association that can be used in scheme or in "
+"other local implementation"
 
 msgid "Concept id"
 msgstr ""
@@ -1846,6 +1859,18 @@ msgstr ""
 
 msgid "Class property label info"
 msgstr ""
+
+msgid "Class attribute label"
+msgstr ""
+
+msgid "Class attribute label info"
+msgstr "Name of the attribute"
+
+msgid "Class association label"
+msgstr ""
+
+msgid "Class association label info"
+msgstr "Name of the association"
 
 msgid "Concept suggestion label"
 msgstr ""
@@ -1921,8 +1946,8 @@ msgstr ""
 msgid "Superattribute info"
 msgstr ""
 
-msgid "Superproperty"
-msgstr ""
+msgid "Definition info"
+msgstr "Definition of the concept"
 
 msgid "Superproperty info"
 msgstr ""
@@ -1933,8 +1958,8 @@ msgstr ""
 msgid "Range info"
 msgstr "Value range of the property"
 
-msgid "Definition info"
-msgstr "Definition of the concept"
+msgid "Specialized from class"
+msgstr ""
 
 msgid "Specialized from class info"
 msgstr "Reference to the Class of the Shape"

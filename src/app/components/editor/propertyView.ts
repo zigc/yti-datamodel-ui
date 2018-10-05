@@ -133,4 +133,16 @@ export class PropertyViewComponent {
       throw new Error('Unsupported predicate: ' + predicate);
     }
   }
+
+  get propertyInformationLabel() {
+
+    switch (this.property.normalizedPredicateType) {
+      case 'attribute':
+        return 'Attribute information';
+      case 'association':
+        return 'Association information';
+      default:
+        return 'Property information';
+    }
+  }
 }
