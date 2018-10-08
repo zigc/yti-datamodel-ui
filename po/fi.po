@@ -201,12 +201,6 @@ msgstr "Vaihda uudelleenkäytettävä ominaisuus"
 msgid "Predicate information not found"
 msgstr "Uudelleenkäytettävää ominaisuutta ei löydy"
 
-msgid "Delete property"
-msgstr "Poista ominaisuus"
-
-msgid "Property information"
-msgstr "Ominaisuuden tiedot"
-
 msgid "Optional metadata"
 msgstr "Valinnaiset metatiedot"
 
@@ -1017,8 +1011,8 @@ msgstr ""
 "Täältä voit lisätä luokalle uuden attribuutin jonka arvoalue perustuu "
 "tietotyyppiin tai assosiaation jolla viitataan toiseen luokkaan"
 
-msgid "Created at"
-msgstr "Luotu"
+msgid "Modified at"
+msgstr "Muokattu"
 
 msgid "not found in the concept database"
 msgstr "ei löydy sanastosta"
@@ -1404,6 +1398,9 @@ msgstr "Attribuutin tiedot"
 msgid "Association information"
 msgstr "Assosiaation tiedot"
 
+msgid "Property information"
+msgstr "Ominaisuuden tiedot"
+
 msgid "Concept suggestion information"
 msgstr "Käsite-ehdotuksen tiedot"
 
@@ -1411,7 +1408,7 @@ msgid "Class properties"
 msgstr "Luokan attribuutit ja assosiaatiot"
 
 msgid "Shape properties"
-msgstr "Tarkennetun luokan ominaisuudet"
+msgstr "Tarkennetun luokan attribuutit ja assosiaatiot"
 
 msgid "Show excluded"
 msgstr "Näytä myös ne, joita ei voi lisätä"
@@ -1455,11 +1452,11 @@ msgstr "Käyttäjätunnus"
 msgid "User name"
 msgstr "Nimi"
 
+msgid "Created at"
+msgstr "Luotu"
+
 msgid "Define concept for the class"
 msgstr "Määrittele käsite luokalle"
-
-msgid "Modified at"
-msgstr "Muokattu"
 
 msgid "Member groups"
 msgstr "Käyttäjänä ryhmissä"
@@ -1788,8 +1785,8 @@ msgstr "Siirtoformaatti"
 msgid "InformationDescription"
 msgstr "Tietosisältö"
 
-msgid "Specialized from class"
-msgstr "Tarkennettu luokasta"
+msgid "Superproperty"
+msgstr "Yläkäsite"
 
 msgid "Editorial note"
 msgstr "Muokkaajan kommentti"
@@ -1833,6 +1830,22 @@ msgstr "Luokan ominaisuuden paikallinen tunniste"
 msgid "Class property id info"
 msgstr ""
 "Luokan ominaisuuden toissijainen tunniste jota voidaan käyttää skeemassa tai "
+"muussa paikallisessa toteutuksessa"
+
+msgid "Class attribute id"
+msgstr "Luokan attribuutin paikallinen tunniste"
+
+msgid "Class attribute id info"
+msgstr ""
+"Luokan attribuutin toissijainen tunniste jota voidaan käyttää skeemassa tai "
+"muussa paikallisessa toteutuksessa"
+
+msgid "Class association id"
+msgstr "Luokan assosiaation paikallinen tunniste"
+
+msgid "Class association id info"
+msgstr ""
+"Luokan assosiaation toissijainen tunniste jota voidaan käyttää skeemassa tai "
 "muussa paikallisessa toteutuksessa"
 
 msgid "Concept id"
@@ -1883,6 +1896,18 @@ msgstr "Luokan ominaisuuden nimi"
 
 msgid "Class property label info"
 msgstr "Luokan ominaisuuden ihmisluettava nimi"
+
+msgid "Class attribute label"
+msgstr "Luokan attribuutin nimi"
+
+msgid "Class attribute label info"
+msgstr "Luokan attribuutin ihmisluettava nimi"
+
+msgid "Class association label"
+msgstr "Luokan assosiaation nimi"
+
+msgid "Class association label info"
+msgstr "Luokan assosiaation ihmisluettava nimi"
 
 msgid "Concept suggestion label"
 msgstr "Käsite-ehdotuksen nimi"
@@ -1962,8 +1987,8 @@ msgstr "Yläattribuutti"
 msgid "Superattribute info"
 msgstr "Yleistettävissä oleva attribuutti, joka on semantiikaltaan laajempi"
 
-msgid "Superproperty"
-msgstr "Yläkäsite"
+msgid "Definition info"
+msgstr "Käsitteen määritelmä"
 
 msgid "Superproperty info"
 msgstr "Yleistettävissä oleva ominaisuus, joka on semantiikaltaan laajempi"
@@ -1974,8 +1999,8 @@ msgstr "Arvoalue"
 msgid "Range info"
 msgstr "Ominaisuuden arvoalue"
 
-msgid "Definition info"
-msgstr "Käsitteen määritelmä"
+msgid "Specialized from class"
+msgstr "Tarkennettu luokasta"
 
 msgid "Specialized from class info"
 msgstr "Luokka jota soveltamisprofiilissa on tarkennettu"
@@ -2184,6 +2209,9 @@ msgstr "Attribuutti"
 
 msgid "owl:ObjectProperty"
 msgstr "Assosiaatio"
+
+#~ msgid "Delete property"
+#~ msgstr "Poista ominaisuus"
 
 #~ msgid "Select information domain"
 #~ msgstr "Valitse tietoalue"
