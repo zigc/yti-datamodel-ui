@@ -12,7 +12,7 @@ import { ClassificationService } from '../services/classificationService';
 import { Classification } from '../entities/classification';
 import { Url } from '../entities/uri';
 import { comparingLocalizable } from '../utils/comparator';
-import { BehaviorSubject, combineLatest, Subscription } from 'rxjs';
+import { BehaviorSubject, combineLatest, Subscription, Observable } from 'rxjs';
 import { fromIPromise } from '../utils/observable';
 import { anyMatching } from 'yti-common-ui/utils/array';
 import { matches } from 'yti-common-ui/utils/string';
@@ -26,6 +26,7 @@ import { labelNameToResourceIdIdentifier } from 'yti-common-ui/utils/resource';
 import { tap } from 'rxjs/operators';
 import { InteractiveHelp } from '../help/contract';
 import { getInformationDomainSvgIcon, getDataModelingMaterialIcon } from 'yti-common-ui/utils/icons';
+import { Status, allStatuses } from 'yti-common-ui/entities/status';
 
 @LegacyComponent({
   template: require('./frontPage.html'),
@@ -41,11 +42,13 @@ export class FrontPageComponent implements HelpProvider {
 
   modelTypes: FilterOptions<KnownModelType>;
   organizations: FilterOptions<Organization>;
+  statuses: FilterOptions<Status>;
 
   search$ = new BehaviorSubject('');
   classification$ = new BehaviorSubject<Classification|null>(null);
   modelType$ = new BehaviorSubject<KnownModelType|null>(null);
   organization$ = new BehaviorSubject<Organization|null>(null);
+  status$ = new BehaviorSubject<Status|null>(null);
 
   classifications: { node: Classification, count: number }[];
   filteredModels: ModelListItem[] = [];
@@ -97,6 +100,12 @@ export class FrontPageComponent implements HelpProvider {
       });
     });
 
+    this.statuses = [null, ...allStatuses].map(status => ({
+      value: status,
+      name: () => gettextCatalog.getString(status ? status : 'All statuses'),
+      idIdentifier: () => status ? status : 'all_selected'
+    }));
+
     const models$ = fromIPromise(modelService.getModels()).pipe(tap(() => this.modelsLoaded = true));
     const classifications$ = fromIPromise(classificationService.getClassifications());
 
@@ -116,13 +125,18 @@ export class FrontPageComponent implements HelpProvider {
       return !org || anyMatching(model.contributors, modelOrg => modelOrg.id.equals(org.id));
     }
 
-    this.subscriptionsToClean.push(combineLatest(classifications$, models$, this.search$, this.modelType$, this.organization$, languageService.language$)
-      .subscribe(([classifications, models, search, modelType, org]) => {
+    function statusMatches(status: Status|null, model: ModelListItem) {
+      return !status || model.status === status;
+    }
+
+    this.subscriptionsToClean.push(combineLatest(classifications$, models$, this.search$, this.modelType$, this.organization$, this.status$, languageService.language$)
+      .subscribe(([classifications, models, search, modelType, org, status]) => {
 
         const matchingVocabularies = models.filter(model =>
           searchMatches(search, model) &&
           typeMatches(modelType, model) &&
-          organizationMatches(org, model)
+          organizationMatches(org, model) &&
+          statusMatches(status, model)
         );
 
         const modelCount = (classification: Classification) =>
@@ -132,14 +146,15 @@ export class FrontPageComponent implements HelpProvider {
         this.classifications.sort(comparingLocalizable<{ node: Classification, count: number }>(localizer, c => c.node.label));        
       }));
 
-    this.subscriptionsToClean.push(combineLatest(models$, this.search$, this.classification$, this.modelType$, this.organization$, languageService.language$)
-      .subscribe(([models, search, classification, modelType, org]) => {
+    this.subscriptionsToClean.push(combineLatest(models$, this.search$, this.classification$, this.modelType$, this.organization$, this.status$, languageService.language$)
+      .subscribe(([models, search, classification, modelType, org, status]) => {
 
         this.filteredModels = models.filter(model =>
           searchMatches(search, model) &&
           classificationMatches(classification, model) &&
           typeMatches(modelType, model) &&
-          organizationMatches(org, model)
+          organizationMatches(org, model) &&
+          statusMatches(status, model)
         );
 
         this.filteredModels.sort(comparingLocalizable<ModelListItem>(localizer, m => m.label));
