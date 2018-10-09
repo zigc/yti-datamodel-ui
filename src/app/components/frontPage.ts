@@ -12,7 +12,7 @@ import { ClassificationService } from '../services/classificationService';
 import { Classification } from '../entities/classification';
 import { Url } from '../entities/uri';
 import { comparingLocalizable } from '../utils/comparator';
-import { BehaviorSubject, combineLatest, Subscription, Observable } from 'rxjs';
+import { BehaviorSubject, combineLatest, Subscription, Observable, ObservableInput } from 'rxjs';
 import { fromIPromise } from '../utils/observable';
 import { anyMatching } from 'yti-common-ui/utils/array';
 import { matches } from 'yti-common-ui/utils/string';
@@ -27,6 +27,17 @@ import { tap } from 'rxjs/operators';
 import { InteractiveHelp } from '../help/contract';
 import { getInformationDomainSvgIcon, getDataModelingMaterialIcon } from 'yti-common-ui/utils/icons';
 import { Status, allStatuses } from 'yti-common-ui/entities/status';
+
+// XXX: fixes problem with type definition having strongly typed parameters ending with 6
+function myCombineLatest<T, T2, T3, T4, T5, T6, T7>(v1: ObservableInput<T>,
+                                                    v2: ObservableInput<T2>,
+                                                    v3: ObservableInput<T3>,
+                                                    v4: ObservableInput<T4>,
+                                                    v5: ObservableInput<T5>,
+                                                    v6: ObservableInput<T6>,
+                                                    v7: ObservableInput<T7>): Observable<[T, T2, T3, T4, T5, T6, T7]> {
+  return combineLatest(v1, v2, v3, v4, v5, v6, v7);
+}
 
 @LegacyComponent({
   template: require('./frontPage.html'),
@@ -129,7 +140,7 @@ export class FrontPageComponent implements HelpProvider {
       return !status || model.status === status;
     }
 
-    this.subscriptionsToClean.push(combineLatest(classifications$, models$, this.search$, this.modelType$, this.organization$, this.status$, languageService.language$)
+    this.subscriptionsToClean.push(myCombineLatest(classifications$, models$, this.search$, this.modelType$, this.organization$, this.status$, languageService.language$)
       .subscribe(([classifications, models, search, modelType, org, status]) => {
 
         const matchingVocabularies = models.filter(model =>
@@ -146,7 +157,7 @@ export class FrontPageComponent implements HelpProvider {
         this.classifications.sort(comparingLocalizable<{ node: Classification, count: number }>(localizer, c => c.node.label));        
       }));
 
-    this.subscriptionsToClean.push(combineLatest(models$, this.search$, this.classification$, this.modelType$, this.organization$, this.status$, languageService.language$)
+    this.subscriptionsToClean.push(myCombineLatest(models$, this.search$, this.classification$, this.modelType$, this.organization$, this.status$, languageService.language$)
       .subscribe(([models, search, classification, modelType, org, status]) => {
 
         this.filteredModels = models.filter(model =>
