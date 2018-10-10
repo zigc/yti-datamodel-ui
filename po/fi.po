@@ -335,7 +335,7 @@ msgstr ""
 "tietoarkkitehtien työkalu, jolla kuvataan omien järjestelmien tietosisältöjä "
 "ja -rakennetta. Tietomallit-työkalu tekee julkishallinnon julkisten tietojen "
 "loogisesta tietomallityöstä avointa ja julkista, minkä vuoksi tietomallien "
-"hyödyntäminen organisaatiorajojen yli helpottuu"
+"hyödyntäminen organisaatiorajojen yli helpottuu."
 
 msgid "Search model"
 msgstr "Hae tietomallia"
