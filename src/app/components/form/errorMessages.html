@@ -1,5 +1,5 @@
 
-<div ng-if="isVisible()">
+<div ng-if="$ctrl.isVisible()">
   <ul ng-messages="ngModelController.$error" ng-messages-multiple class="errors" ng-repeat="ngModelController in $ctrl.ngModelControllers">
     <li ng-message="url">{{'Invalid url error' | translate}}</li>
     <li ng-message="stem">{{'Invalid stem error' | translate}}</li>
