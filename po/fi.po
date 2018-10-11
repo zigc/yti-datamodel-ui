@@ -1785,6 +1785,9 @@ msgstr "Siirtoformaatti"
 msgid "InformationDescription"
 msgstr "Tietosisältö"
 
+msgid "Search"
+msgstr "Etsi"
+
 msgid "Superproperty"
 msgstr "Yläkäsite"
 
@@ -2218,9 +2221,6 @@ msgstr "Assosiaatio"
 
 #~ msgid "Select classification"
 #~ msgstr "Valitse luokitus"
-
-#~ msgid "Search"
-#~ msgstr "Etsi"
 
 #~ msgid "Classification"
 #~ msgstr "Tietoalue"
