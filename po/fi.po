@@ -271,7 +271,7 @@ msgid "Length error"
 msgstr "Syöte on liian pitkä"
 
 msgid "Prefix error"
-msgstr "Etuliite saa sisältää vain pieniä kirjaimia"
+msgstr "Etuliite saa sisältää vain pieniä kirjaimia. Ei ääkkösiä."
 
 msgid "Negative error"
 msgstr "Ei saa olla negatiivinen"
