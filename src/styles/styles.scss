@@ -204,8 +204,8 @@ visualization-view ajax-loading-indicator {
 
   &:before {
     color: $gray-600;
-    content: $fa-var-search;
-    font-family: "Font Awesome 5 Free";
+    content: '\f002'; // FIXME: $fa-var-search variable doesn't work
+    font-family: "Font Awesome 5 Free Solid";
     top: 10px;
     right: 15px;
     font-size: $font-size-lg;
