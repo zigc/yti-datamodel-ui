@@ -30,7 +30,9 @@
       <div class="content-box">
         <div class="search-results">
 
-          <div ng-show="$ctrl.searchText && $ctrl.searchResults.length === 0" translate>No search results</div>
+          <ajax-loading-indicator ng-if="$ctrl.loadingResults"></ajax-loading-indicator>
+
+          <div ng-show="$ctrl.searchText && $ctrl.searchResults.length === 0 && !$ctrl.loadingResults" translate>No search results</div>
 
           <div ng-repeat="searchResult in $ctrl.searchResults track by searchResult.id"
                class="search-result"

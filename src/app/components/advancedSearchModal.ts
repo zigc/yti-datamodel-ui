@@ -36,6 +36,7 @@ class AdvancedSearchController implements SearchController<SearchResult> {
   searchResults: SearchResult[];
   types: Type[] = ['model', 'class', 'shape', 'attribute', 'association'];
   searchText = '';
+  loadingResults: boolean;
   private localizer: Localizer;
 
   contentExtractors = [ (searchResult: SearchResult) => searchResult.label, (searchResult: SearchResult) => searchResult.comment ];
@@ -47,17 +48,22 @@ class AdvancedSearchController implements SearchController<SearchResult> {
               languageService: LanguageService) {
     'ngInject';
 
-    this.localizer = languageService.createLocalizer(languageContext);
+    this.localizer = languageService.createLocalizer(languageContext);    
 
-    $scope.$watch(() => this.searchText, text => {
+    $scope.$watch(() => this.searchText, text => {      
       if (text) {
+        this.loadingResults = true;
+
         this.searchService.searchAnything(text)
           .then(results => this.apiSearchResults = results)
-          .then(() => this.search());
+          .then(() => {
+            this.search();
+            this.loadingResults = false;
+          });
       } else {
         this.apiSearchResults = [];
         this.search();
-      }
+      }   
     });
   }
 
