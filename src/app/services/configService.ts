@@ -7,6 +7,7 @@ interface ConfigType {
   conceptsFrontend: string;
   codesFrontend: string;
   dev: boolean;
+  env: string;
 }
 
 export class ConfigService {
@@ -20,7 +21,7 @@ export class ConfigService {
     return this.$http.get<ConfigType>(apiEndpointWithName('config'))
       .then(response => {
         const data = response.data!;
-        return new Config(data.groupsFrontend, data.conceptsFrontend, data.codesFrontend, data.dev);
+        return new Config(data.groupsFrontend, data.conceptsFrontend, data.codesFrontend, data.dev, data.env);
       });
   }
 }

@@ -102,6 +102,10 @@ export class NavigationBarComponent {
     return !this.userService.isLoggedIn();
   }
 
+  get environmentIdentifier() {
+    return this.config ? this.config.env !== 'prod' ? ' - ' + this.config.env.toUpperCase() : '' : '';
+  }
+
   isLoggedIn() {
     return !this.user.anonymous;
   }
