@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.1.1\n"
+"X-Generator: Poedit 2.2\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "Copied"
@@ -720,7 +720,7 @@ msgid "Congratulations for completing adding an association!"
 msgstr "Onnittelut assosiaation lisäämisessä onnistumisesta!"
 
 msgid "Congratulations for completing adding an attribute!"
-msgstr "Onnittelut attribuutin lisäämisessä onnstumisesta!"
+msgstr "Onnittelut attribuutin lisäämisessä onnistumisesta!"
 
 msgid "Congratulations for completing class assignation!"
 msgstr "Onnittelut luokan kirjastoon liittämisessä onnistumisesta!"
