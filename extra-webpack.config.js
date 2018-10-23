@@ -1,3 +1,4 @@
+const path = require('path');
 const tsconfig = require('./tsconfig.json');
 
 const config = {
@@ -14,6 +15,11 @@ require('ts-node').register(config);
 const NgAnnotatePlugin = require('./ng-annotate.plugin.ts').NgAnnotatePlugin;
 
 module.exports = {
+  resolve: {
+    alias: {
+      'proxy-polyfill': path.resolve(__dirname, 'node_modules/proxy-polyfill/proxy.min.js')
+    }
+  },
   plugins: [
     new NgAnnotatePlugin()
   ]
