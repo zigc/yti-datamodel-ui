@@ -10,12 +10,14 @@
         <button id="show_model_details_button"
                 class="btn btn-action"
                 ng-hide="$ctrl.visible"
-                ng-click="$ctrl.visible = true" translate>Show model details</button>
+                ng-click="$ctrl.visible = true" translate>Show model details
+        </button>
 
         <button id="hide_model_details_button"
                 class="btn btn-action"
                 ng-show="$ctrl.visible"
-                ng-click="$ctrl.visible = false" translate>Hide model details</button>
+                ng-click="$ctrl.visible = false" translate>Hide model details
+        </button>
 
       </h2>
 
@@ -28,16 +30,30 @@
     <fieldset ng-if="$ctrl.model" ng-disabled="$ctrl.persisting">
       <div uib-collapse="!$ctrl.visible" class="main-editable-content">
 
-        <hr />
-
+        <hr/>
+        <div uib-dropdown id="uib-dropdown-div" class="pull-right" ng-hide="$ctrl.isEditing()">
+          <button class="btn btn-action" id="choose_action_dropdown_button" uib-dropdown-toggle>
+            <span translate>Choose action</span>
+          </button>
+          <div uib-dropdown-menu aria-labelledby="choose_action_dropdown_button" id="choose_action_dropdown_menu"
+               style="overflow: hidden">
+            <history model="$ctrl.model" resource="$ctrl.model" ng-hide="$ctrl.isEditing()"></history>
+            <div class="btn btn-link remove dropdown-item"
+                 ng-click="$ctrl.removeEdited()"
+                 ng-show="$ctrl.canRemove()">
+              <span translate>Remove</span>
+            </div>
+            <export ng-hide="$ctrl.isEditing()" entity="$ctrl.model" context="$ctrl.model" pull-right></export>
+          </div>
+        </div>
         <editable-entity-buttons context="$ctrl.model" editable-controller="$ctrl">
           <app-status [status]="$ctrl.model.status"></app-status>
-          <export ng-hide="$ctrl.isEditing()" entity="$ctrl.model" context="$ctrl.model"></export>
-          <history model="$ctrl.model" resource="$ctrl.model" ng-hide="$ctrl.isEditing()"></history>
+
           <button id="close_model_details_button" class="btn btn-link pull-right" ng-click="$ctrl.visible = false">
             <i class="fas fa-times"></i>
             <span translate>Close</span>
           </button>
+
         </editable-entity-buttons>
 
         <model-form id="$ctrl.id" model="$ctrl.editableInEdit" model-controller="$ctrl.modelController"></model-form>
@@ -45,3 +61,14 @@
     </fieldset>
   </form>
 </div>
+
+<style>
+  #choose_action_dropdown_menu {
+    height: auto;
+    max-height: max-content;
+  }
+
+  #uib-dropdown-div {
+    padding-left: 10px;
+  }
+</style>

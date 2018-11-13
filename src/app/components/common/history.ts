@@ -10,9 +10,9 @@ import { LegacyComponent } from 'app/utils/angular';
     resource: '='
   },
   template: `
-      <button type="button" class="btn btn-secondary-action pull-right" ng-click="$ctrl.openHistory()">
+      <div class="btn-secondary-action dropdown-item" ng-click="$ctrl.openHistory()">
         <span translate>Show history</span>
-      </button>
+      </div>
   `
 })
 export class HistoryComponent {

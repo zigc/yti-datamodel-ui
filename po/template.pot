@@ -124,13 +124,7 @@ msgstr ""
 msgid "Data Vocabularies"
 msgstr ""
 
-msgid "Confirm delete"
-msgstr ""
-
-msgid "Following items are depending on the deleted"
-msgstr ""
-
-msgid "Are you sure that you want to delete?"
+msgid "Choose action"
 msgstr ""
 
 msgid "Show"
@@ -139,7 +133,13 @@ msgstr ""
 msgid "Download"
 msgstr ""
 
-msgid "Export"
+msgid "Confirm delete"
+msgstr ""
+
+msgid "Following items are depending on the deleted"
+msgstr ""
+
+msgid "Are you sure that you want to delete?"
 msgstr ""
 
 msgid "Historical versions"
