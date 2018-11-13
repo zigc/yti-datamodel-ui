@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.1.1\n"
+"X-Generator: Poedit 2.2\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "Copied"
@@ -210,11 +210,26 @@ msgstr "Tekninen metadata"
 msgid "Reusable predicate"
 msgstr "Uudelleenkäytettävä ominaisuus"
 
+msgid "Add class"
+msgstr "Lisää luokka"
+
 msgid "Select class"
 msgstr "Valitse luokka"
 
-msgid "Add class"
-msgstr "Lisää luokka"
+msgid "All statuses"
+msgstr "Kaikki tilat"
+
+msgid "Name"
+msgstr "Nimi"
+
+msgid "Model"
+msgstr "Tietomalli"
+
+msgid "Description"
+msgstr "Kuvaus"
+
+msgid "Modified at"
+msgstr "Muokattu"
 
 msgid " without referencing concept"
 msgstr ""
@@ -413,9 +428,6 @@ msgstr "Kaikki palvelimet"
 msgid "All groups"
 msgstr "Kaikki ryhmät"
 
-msgid "All statuses"
-msgstr "Kaikki tilat"
-
 msgid "Create new"
 msgstr "Luo uusi"
 
@@ -448,9 +460,6 @@ msgstr "Suomi.fi-koodistot"
 
 msgid "User right management"
 msgstr "Oikeuksienhallinta"
-
-msgid "Name"
-msgstr "Nimi"
 
 msgid "Email"
 msgstr "Sähköposti"
@@ -752,9 +761,6 @@ msgstr "Sisällöntuottajat näkyvät täällä"
 msgid "Definition"
 msgstr "Määritelmä"
 
-msgid "Description"
-msgstr "Kuvaus"
-
 msgid "Description info"
 msgstr "Tietosisällön kuvaus"
 
@@ -1010,9 +1016,6 @@ msgid "You can add new attribute or association to the Class from here"
 msgstr ""
 "Täältä voit lisätä luokalle uuden attribuutin jonka arvoalue perustuu "
 "tietotyyppiin tai assosiaation jolla viitataan toiseen luokkaan"
-
-msgid "Modified at"
-msgstr "Muokattu"
 
 msgid "not found in the concept database"
 msgstr "ei löydy sanastosta"
@@ -2434,9 +2437,6 @@ msgstr "Assosiaatio"
 
 #~ msgid "Logout"
 #~ msgstr "Kirjaudu ulos"
-
-#~ msgid "Models"
-#~ msgstr "Tietokomponenttikirjastot"
 
 #~ msgid "No models yet"
 #~ msgstr "Ei vielä yhtään tietokomponenttikirjastoa"

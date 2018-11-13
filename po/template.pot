@@ -202,10 +202,25 @@ msgstr ""
 msgid "Reusable predicate"
 msgstr ""
 
+msgid "Add class"
+msgstr ""
+
 msgid "Select class"
 msgstr ""
 
-msgid "Add class"
+msgid "All statuses"
+msgstr ""
+
+msgid "Name"
+msgstr ""
+
+msgid "Model"
+msgstr ""
+
+msgid "Description"
+msgstr ""
+
+msgid "Modified at"
 msgstr ""
 
 msgid " without referencing concept"
@@ -388,9 +403,6 @@ msgstr ""
 msgid "All groups"
 msgstr ""
 
-msgid "All statuses"
-msgstr ""
-
 msgid "Create new"
 msgstr ""
 
@@ -422,9 +434,6 @@ msgid "Suomi.fi Reference Data"
 msgstr ""
 
 msgid "User right management"
-msgstr ""
-
-msgid "Name"
 msgstr ""
 
 msgid "Email"
@@ -700,9 +709,6 @@ msgstr ""
 msgid "Definition"
 msgstr ""
 
-msgid "Description"
-msgstr ""
-
 msgid "Description info"
 msgstr ""
 
@@ -920,9 +926,6 @@ msgid "Vocabulary"
 msgstr ""
 
 msgid "You can add new attribute or association to the Class from here"
-msgstr ""
-
-msgid "Modified at"
 msgstr ""
 
 msgid "not found in the concept database"
