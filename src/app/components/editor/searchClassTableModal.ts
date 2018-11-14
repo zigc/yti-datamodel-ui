@@ -35,7 +35,7 @@ export class SearchClassTableModal {
                     textForSelection: (klass: Optional<Class>) => string) {
 
     return this.$uibModal.open({
-      template: require('./SearchClassTableModal.html'),
+      template: require('./searchClassTableModal.html'),
       size: 'xl',
       controller: SearchClassTableController,
       controllerAs: '$ctrl',
