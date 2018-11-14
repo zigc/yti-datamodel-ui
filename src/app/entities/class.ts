@@ -36,16 +36,20 @@ import { labelNameToResourceIdIdentifier } from 'yti-common-ui/utils/resource';
 export abstract class AbstractClass extends GraphNode {
 
   static abstractClassMappings = {
-    id:        { name: '@id',         serializer: uriSerializer },
-    label:     { name: 'name',       serializer: localizableSerializer },
-    comment:   { name: 'description',     serializer: localizableSerializer },
-    definedBy: { name: 'isDefinedBy', serializer: normalizingDefinedBySerializer }
+    id:         { name: '@id',         serializer: uriSerializer },
+    label:      { name: 'name',       serializer: localizableSerializer },
+    comment:    { name: 'description',     serializer: localizableSerializer },
+    definedBy:  { name: 'isDefinedBy', serializer: normalizingDefinedBySerializer },
+    status:     { name: 'versionInfo',     serializer: optional(identitySerializer<Status>()) },
+    modifiedAt: { name: 'modified',        serializer: optional(dateSerializer) },
   };
 
   id: Uri;
   label: Localizable;
   comment: Localizable;
   definedBy: DefinedBy;
+  status: Status|null;
+  modifiedAt: Moment|null;
 
   selectionType: SelectionType = 'class';
   normalizedType = requireDefined(normalizeClassType(this.type));
@@ -84,8 +88,7 @@ export class Class extends AbstractClass implements VisualizationClass {
   static classMappings = {
     localName:         { name: 'localName',       serializer: optional(stringSerializer) },
     subClassOf:        { name: 'subClassOf',      serializer: entityAwareOptional(uriSerializer) },
-    scopeClass:        { name: 'targetClass',     serializer: entityAwareOptional(uriSerializer) },
-    status:            { name: 'versionInfo',     serializer: optional(identitySerializer<Status>()) },
+    scopeClass:        { name: 'targetClass',     serializer: entityAwareOptional(uriSerializer) },    
     properties:        { name: 'property',        serializer: entityAwareList(entity(() => Property)) },
     subject:           { name: 'subject',         serializer: entityAwareOptional(entity(() => Concept)) },
     equivalentClasses: { name: 'equivalentClass', serializer: entityAwareList(uriSerializer) },
@@ -93,21 +96,18 @@ export class Class extends AbstractClass implements VisualizationClass {
         (constraint: Constraint) => constraint.items.length > 0 || hasLocalization(constraint.comment)) },
     version:           { name: 'identifier',      serializer: optional(identitySerializer<Urn>()) },
     editorialNote:     { name: 'editorialNote',   serializer: localizableSerializer },
-    modifiedAt:        { name: 'modified',        serializer: optional(dateSerializer) },
     createdAt:         { name: 'created',         serializer: optional(dateSerializer) }
   };
 
   subClassOf: Uri|null;
   scopeClass: Uri|null;
-  localName: string|null;
-  status: Status|null;
+  localName: string|null;  
   properties: Property[];
   subject: Concept|null;
   equivalentClasses: Uri[];
   constraint: Constraint;
   version: Urn;
   editorialNote: Localizable;
-  modifiedAt: Moment|null;
   createdAt: Moment|null;
 
   resolved = true;

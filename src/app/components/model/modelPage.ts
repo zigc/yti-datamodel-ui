@@ -1,36 +1,37 @@
 import { ILocationService, IPromise, IQService, IScope, route } from 'angular';
 import * as _ from 'lodash';
-import { ClassService } from 'app/services/classService';
-import { LanguageService, Localizer } from 'app/services/languageService';
-import { LocationService } from 'app/services/locationService';
-import { ModelService } from 'app/services/modelService';
-import { PredicateService } from 'app/services/predicateService';
-import { ConfirmationModal } from 'app/components/common/confirmationModal';
-import { SearchClassModal } from 'app/components/editor/searchClassModal';
-import { SearchPredicateModal } from 'app/components/editor/searchPredicateModal';
-import { EntityCreation } from 'app/components/editor/searchConceptModal';
-import { ClassType, KnownPredicateType, SelectionType, WithDefinedBy } from 'app/types/entity';
-import { ChangeListener, ChangeNotifier, SearchClassType } from 'app/types/component';
-import { Uri } from 'app/entities/uri';
-import { comparingLocalizable } from 'app/utils/comparator';
-import { AddPropertiesFromClassModal } from 'app/components/editor/addPropertiesFromClassModal';
-import { isDifferentUrl, LegacyComponent, modalCancelHandler, nextUrl } from 'app/utils/angular';
-import { combineExclusions, createClassTypeExclusion, createDefinedByExclusion, createExistsExclusion, Exclusion } from 'app/utils/exclusion';
-import { collectIds, glyphIconClassForType } from 'app/utils/entity';
+import { ClassService } from '../../services/classService';
+import { LanguageService, Localizer } from '../../services/languageService';
+import { LocationService } from '../../services/locationService';
+import { ModelService } from '../../services/modelService';
+import { PredicateService } from '../../services/predicateService';
+import { ConfirmationModal } from '../../components/common/confirmationModal';
+import { SearchClassModal } from '../../components/editor/searchClassModal';
+import { SearchClassTableModal } from '../../components/editor/searchClassTableModal';
+import { SearchPredicateModal } from '../../components/editor/searchPredicateModal';
+import { EntityCreation } from '../../components/editor/searchConceptModal';
+import { ClassType, KnownPredicateType, SelectionType, WithDefinedBy } from '../../types/entity';
+import { ChangeListener, ChangeNotifier, SearchClassType } from '../../types/component';
+import { Uri } from '../../entities/uri';
+import { comparingLocalizable } from '../../utils/comparator';
+import { AddPropertiesFromClassModal } from '../../components/editor/addPropertiesFromClassModal';
+import { isDifferentUrl, LegacyComponent, modalCancelHandler, nextUrl } from '../../utils/angular';
+import { combineExclusions, createClassTypeExclusion, createDefinedByExclusion, createExistsExclusion, Exclusion } from '../../utils/exclusion';
+import { collectIds, glyphIconClassForType } from '../../utils/entity';
 import { areEqual, Optional } from 'yti-common-ui/utils/object';
-import { AbstractPredicate, Predicate, PredicateListItem } from 'app/entities/predicate';
-import { AbstractClass, Class, ClassListItem, Property } from 'app/entities/class';
-import { Model } from 'app/entities/model';
-import { ExternalEntity } from 'app/entities/externalEntity';
-import { NotificationModal } from 'app/components/common/notificationModal';
+import { AbstractPredicate, Predicate, PredicateListItem } from '../../entities/predicate';
+import { AbstractClass, Class, ClassListItem, Property } from '../../entities/class';
+import { Model } from '../../entities/model';
+import { ExternalEntity } from '../../entities/externalEntity';
+import { NotificationModal } from '../../components/common/notificationModal';
 import { removeMatching } from 'yti-common-ui/utils/array';
-import { ApplicationComponent } from 'app/components/application';
-import { HelpProvider } from 'app/components/common/helpProvider';
-import { InteractiveHelp } from 'app/help/contract';
-import { ModelPageHelpService } from 'app/help/providers/modelPageHelpService';
-import { InteractiveHelpService } from 'app/help/services/interactiveHelpService';
+import { ApplicationComponent } from '../../components/application';
+import { HelpProvider } from '../../components/common/helpProvider';
+import { InteractiveHelp } from '../../help/contract';
+import { ModelPageHelpService } from '../../help/providers/modelPageHelpService';
+import { InteractiveHelpService } from '../../help/services/interactiveHelpService';
 import { ModelControllerService, View } from './modelControllerService';
-import { AuthorizationManagerService } from 'app/services/authorizationManagerService';
+import { AuthorizationManagerService } from '../../services/authorizationManagerService';
 import IRouteService = route.IRouteService;
 import ICurrentRoute = route.ICurrentRoute;
 
@@ -91,6 +92,7 @@ export class ModelPageComponent implements ModelPageActions, HelpProvider, Model
               private classService: ClassService,
               private predicateService: PredicateService,
               private searchClassModal: SearchClassModal,
+              private searchClassTableModal: SearchClassTableModal,
               private searchPredicateModal: SearchPredicateModal,
               private confirmationModal: ConfirmationModal,
               private notificationModal: NotificationModal,
@@ -362,8 +364,15 @@ export class ModelPageComponent implements ModelPageActions, HelpProvider, Model
       }
     };
 
+    // CURRENT FEATURE: Search class modal
+    const searchClassModal = () => this.searchClassModal.open(this.model, exclusion, textForSelection);
+    
+    // NEW FEATURE: Search class table view modal, not complete yet. (Jira issue: YTI-546)
+    // Uncomment this and comment class search modal above if you want to test, but DO NOT COMMIT this until YTI-546 is done.
+    // const searchClassModal = () => this.searchClassTableModal.open(this.model, exclusion, textForSelection);
+
     this.createOrAssignEntity(
-      () => this.searchClassModal.open(this.model, exclusion, textForSelection),
+      () => searchClassModal(),
       (external: ExternalEntity) => {
         if (isProfile) {
           this.createShape(external, true);
