@@ -3,7 +3,6 @@
     <div ng-if="$ctrl.class && $ctrl.model">
       <selection-view model="$ctrl.model" editable-controller="$ctrl">
         <selection-buttons>
-          <export ng-hide="$ctrl.isEditing()" entity="$ctrl.class" context="$ctrl.model"></export>
           <history model="$ctrl.model" resource="$ctrl.class" ng-hide="$ctrl.isEditing()"></history>
           <app-status [status]="$ctrl.class.status"></app-status>
         </selection-buttons>
