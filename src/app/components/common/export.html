@@ -1,77 +1,33 @@
-<style>
-  #show_accordion_button, #download_accordion_button {
-    background-color: #eee;
-    background: white;
-    cursor: pointer;
-    padding: 8px 18px 8px 18px;
-    width: 100%;
-    border: none;
-    text-align: left;
-    outline: none;
-    font-size: 15px;
-    transition: 0.4s;
-  }
+<div uib-dropdown class="pull-right" ng-hide="$ctrl.isEditing()">
 
-  #download_accordion_panel, #show_accordion_panel {
-    padding: 0 18px;
-    display: none;
-    background-color: white !important;
-    overflow: hidden;
-  }
+  <button class="btn btn-action dropdown-toggle" uib-dropdown-toggle>
+    <span translate>Export</span>
+  </button>
 
-  #show_accordion_panel > a, #download_accordion_panel > a {
-    padding: 1px 18px 1px 18px; !important;
-  }
+  <div uib-dropdown-menu>
+    <div class="dropdown-header">{{'Show' | translate | uppercase}}</div>
 
-  #download_accordion_panel, #show_accordion_panel:hover {
-    background: white;
-  }
+    <a ng-repeat="download in $ctrl.downloads track by download.name"
+       class="dropdown-item"
+       target="_blank"
+       ng-href="{{download.hrefRaw}}"
+       ng-click="download.onClick()">
+      {{download.name | translate}}
+    </a>
 
-</style>
-<script>
-  var acc = document.getElementsByClassName("accordion");
-  var i;
+    <div class="dropdown-divider"></div>
 
-  for (i = 0; i < acc.length; i++) {
-    acc[i].addEventListener("click", function () {
-      this.classList.toggle("active");
-      var panel = this.nextElementSibling;
-      if (panel.style.display === "block") {
-        panel.style.display = "none";
-      } else {
-        panel.style.display = "block";
-      }
-    });
-  }
+    <div class="dropdown-header">{{'Download' | translate | uppercase}}</div>
 
-  document.getElementById('show_accordion_button').addEventListener('click', function (event) {
-    event.stopPropagation();
-  });
+    <a ng-repeat="download in $ctrl.downloads track by download.name"
+       class="dropdown-item"
+       target="_self"
+       download="{{download.filename}}"
+       ng-href="{{download.href}}"
+       ng-click="download.onClick()">
+      {{download.name | translate}}
+    </a>
 
-  document.getElementById('download_accordion_button').addEventListener('click', function (event) {
-    event.stopPropagation();
-  });
+  </div>
 
-</script>
-
-<button class="accordion button-toggle dropdown-toggle" id="show_accordion_button">{{'Show' | translate}}<span class="caret"></span></button>
-<div class="panel" id="show_accordion_panel">
-  <a ng-repeat="download in $ctrl.downloads track by download.name"
-     class="dropdown-item"
-     target="_blank"
-     ng-href="{{download.hrefRaw}}"
-     ng-click="download.onClick()">
-    {{download.name | translate}}
-  </a>
-</div>
-<button class="accordion button-toggle dropdown-toggle" id="download_accordion_button">{{'Download' | translate}}<span class="caret"></span></button>
-<div class="panel" id="download_accordion_panel">
-  <a ng-repeat="download in $ctrl.downloads track by download.name"
-     class="dropdown-item"
-     target="_self"
-     download="{{download.filename}}"
-     ng-href="{{download.href}}"
-     ng-click="download.onClick()">
-    {{download.name | translate}}
-  </a>
 </div>
