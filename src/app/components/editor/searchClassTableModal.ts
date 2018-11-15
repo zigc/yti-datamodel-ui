@@ -133,8 +133,8 @@ class SearchClassTableController implements SearchController<ClassListItem> {
       }
     });
 
-    this.addFilter(referenceData =>
-      !this.showStatus || referenceData.item.status === this.showStatus
+    this.addFilter(classListItem =>
+      !this.showStatus || classListItem.item.status === this.showStatus
     );
 
     $scope.$watch(() => this.showStatus, ifChanged<Status|null>(() => this.search()));
@@ -192,7 +192,7 @@ class SearchClassTableController implements SearchController<ClassListItem> {
     } else {
       this.cannotConfirm = this.exclude(item);
 
-      console.log('Selected item', item);
+      // console.log('Selected item', item);
 
       if (this.model.isNamespaceKnownToBeNotModel(item.definedBy.id.toString())) {
         this.classService.getExternalClass(item.id, this.model).then(result => {
