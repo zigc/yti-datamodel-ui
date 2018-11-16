@@ -142,6 +142,9 @@ msgstr ""
 msgid "Are you sure that you want to delete?"
 msgstr ""
 
+msgid "Export"
+msgstr ""
+
 msgid "Historical versions"
 msgstr ""
 
@@ -202,10 +205,10 @@ msgstr ""
 msgid "Reusable predicate"
 msgstr ""
 
-msgid "Add class"
+msgid "Select class"
 msgstr ""
 
-msgid "Select class"
+msgid "Add class"
 msgstr ""
 
 msgid "All statuses"

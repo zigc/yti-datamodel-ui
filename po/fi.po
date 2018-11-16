@@ -150,6 +150,9 @@ msgstr "Seuraavat asiat riippuvat poistettavasta"
 msgid "Are you sure that you want to delete?"
 msgstr "Oletko varma, että haluat poistaa?"
 
+msgid "Export"
+msgstr "Lataa"
+
 msgid "Historical versions"
 msgstr "Historialliset versiot"
 
@@ -210,11 +213,11 @@ msgstr "Tekninen metadata"
 msgid "Reusable predicate"
 msgstr "Uudelleenkäytettävä ominaisuus"
 
-msgid "Add class"
-msgstr "Lisää luokka"
-
 msgid "Select class"
 msgstr "Valitse luokka"
+
+msgid "Add class"
+msgstr "Lisää luokka"
 
 msgid "All statuses"
 msgstr "Kaikki tilat"
@@ -2215,9 +2218,6 @@ msgstr "Attribuutti"
 
 msgid "owl:ObjectProperty"
 msgstr "Assosiaatio"
-
-#~ msgid "Export"
-#~ msgstr "Lataa"
 
 #~ msgid "Delete property"
 #~ msgstr "Poista ominaisuus"

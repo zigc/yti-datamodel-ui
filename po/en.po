@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2018-11-13 17:07+0200\n"
+"PO-Revision-Date: 2018-11-16 09:36+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -151,6 +151,9 @@ msgstr ""
 msgid "Are you sure that you want to delete?"
 msgstr ""
 
+msgid "Export"
+msgstr ""
+
 msgid "Historical versions"
 msgstr ""
 
@@ -211,10 +214,10 @@ msgstr "Technical metadata"
 msgid "Reusable predicate"
 msgstr ""
 
-msgid "Add class"
+msgid "Select class"
 msgstr ""
 
-msgid "Select class"
+msgid "Add class"
 msgstr ""
 
 msgid "All statuses"
