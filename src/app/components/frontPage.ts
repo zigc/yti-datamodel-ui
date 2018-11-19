@@ -143,7 +143,7 @@ export class FrontPageComponent implements HelpProvider {
     this.subscriptionsToClean.push(myCombineLatest(classifications$, models$, this.search$, this.modelType$, this.organization$, this.status$, languageService.language$)
       .subscribe(([classifications, models, search, modelType, org, status]) => {
 
-        const matchingVocabularies = models.filter(model =>
+        const matchingModels = models.filter(model =>
           searchMatches(search, model) &&
           typeMatches(modelType, model) &&
           organizationMatches(org, model) &&
@@ -151,7 +151,7 @@ export class FrontPageComponent implements HelpProvider {
         );
 
         const modelCount = (classification: Classification) =>
-          matchingVocabularies.filter(voc => classificationMatches(classification, voc)).length;
+          matchingModels.filter(model => classificationMatches(classification, model)).length;
 
         this.classifications = classifications.map(c => ({ node: c, count: modelCount(c) })).filter(c => c.count > 0);
         this.classifications.sort(comparingLocalizable<{ node: Classification, count: number }>(localizer, c => c.node.label));        
