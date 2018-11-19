@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2018-11-16 09:36+0200\n"
+"PO-Revision-Date: 2018-11-19 16:24+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -133,15 +133,6 @@ msgstr ""
 msgid "Data Vocabularies"
 msgstr ""
 
-msgid "Choose action"
-msgstr ""
-
-msgid "Show"
-msgstr ""
-
-msgid "Download"
-msgstr ""
-
 msgid "Confirm delete"
 msgstr ""
 
@@ -149,6 +140,12 @@ msgid "Following items are depending on the deleted"
 msgstr ""
 
 msgid "Are you sure that you want to delete?"
+msgstr ""
+
+msgid "Show"
+msgstr ""
+
+msgid "Download"
 msgstr ""
 
 msgid "Export"
@@ -218,6 +215,9 @@ msgid "Select class"
 msgstr ""
 
 msgid "Add class"
+msgstr ""
+
+msgid "All information domains"
 msgstr ""
 
 msgid "All statuses"

@@ -132,15 +132,6 @@ msgstr "Ei hakutuloksia"
 msgid "Data Vocabularies"
 msgstr "Tietomallit"
 
-msgid "Choose action"
-msgstr "Valitse toiminto"
-
-msgid "Show"
-msgstr "Näytä"
-
-msgid "Download"
-msgstr "tallenna"
-
 msgid "Confirm delete"
 msgstr "Poistamisen hyväksyntä"
 
@@ -149,6 +140,12 @@ msgstr "Seuraavat asiat riippuvat poistettavasta"
 
 msgid "Are you sure that you want to delete?"
 msgstr "Oletko varma, että haluat poistaa?"
+
+msgid "Show"
+msgstr "Näytä"
+
+msgid "Download"
+msgstr "tallenna"
 
 msgid "Export"
 msgstr "Lataa"
@@ -218,6 +215,9 @@ msgstr "Valitse luokka"
 
 msgid "Add class"
 msgstr "Lisää luokka"
+
+msgid "All information domains"
+msgstr "Kaikki tietoalueet"
 
 msgid "All statuses"
 msgstr "Kaikki tilat"
@@ -2219,11 +2219,11 @@ msgstr "Attribuutti"
 msgid "owl:ObjectProperty"
 msgstr "Assosiaatio"
 
+#~ msgid "Choose action"
+#~ msgstr "Valitse toiminto"
+
 #~ msgid "Delete property"
 #~ msgstr "Poista ominaisuus"
-
-#~ msgid "Select information domain"
-#~ msgstr "Valitse tietoalue"
 
 #~ msgid "Select classification"
 #~ msgstr "Valitse luokitus"

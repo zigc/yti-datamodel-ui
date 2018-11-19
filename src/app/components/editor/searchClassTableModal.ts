@@ -10,7 +10,7 @@ import { glyphIconClassForType } from '../../utils/entity';
 import { Exclusion } from '../../utils/exclusion';
 import { SearchFilter, SearchController } from '../../types/filter';
 import { AbstractClass, Class, ClassListItem } from '../../entities/class';
-import { Model } from '../../entities/model';
+import { Model, ModelListItem } from '../../entities/model';
 import { ExternalEntity } from '../../entities/externalEntity';
 import { filterAndSortSearchResults, defaultLabelComparator } from '../../components/filter/util';
 import { Optional, requireDefined } from 'yti-common-ui/utils/object';
@@ -18,6 +18,12 @@ import { ignoreModalClose } from 'yti-common-ui/utils/modal';
 import { DisplayItemFactory, Value } from '../form/displayItemFactory';
 import { Status, selectableStatuses } from 'yti-common-ui/entities/status';
 import { ifChanged } from '../../utils/angular';
+import { Classification } from '../../entities/classification';
+import { ClassificationService } from '../../services/classificationService';
+import { contains, anyMatching } from 'yti-common-ui/utils/array';
+import { ModelService } from '../../services/modelService';
+import { comparingLocalizable } from '../../utils/comparator';
+import { Language } from '../../types/language';
 
 export const noExclude = (_item: AbstractClass) => null;
 export const defaultTextForSelection = (_klass: Class) => 'Use class';
@@ -82,6 +88,8 @@ class SearchClassTableController implements SearchController<ClassListItem> {
   selectedItem: ClassListItem|AddNewClass;
   excludeError: string|null = null;
   showStatus: Status|null;
+  showInfoDomain: Classification|null;
+  infoDomains: Classification[];
 
   // undefined means not fetched, null means does not exist
   externalClass: Class|null|undefined;
@@ -109,10 +117,33 @@ class SearchClassTableController implements SearchController<ClassListItem> {
               public textForSelection: (klass: Optional<Class>) => string,
               private searchConceptModal: SearchConceptModal,
               private gettextCatalog: GettextCatalog,
-              private displayItemFactory: DisplayItemFactory) {
+              private displayItemFactory: DisplayItemFactory,
+              classificationService: ClassificationService,
+              modelService: ModelService) {
     'ngInject';
     this.localizer = languageService.createLocalizer(model);
     this.loadingResults = true;
+
+
+    function infoDomainMatches(infoDomain: Classification|null, modelItem: ModelListItem) {
+      return !infoDomain || anyMatching(modelItem.classifications, c => c.id.equals(infoDomain.id));
+    }
+
+    const sortInfoDomains = () => {
+      this.infoDomains.sort(comparingLocalizable<Classification>(this.localizer, infoDomain => infoDomain.label));
+    }
+
+    classificationService.getClassifications().then(infoDomains => {
+
+      modelService.getModels().then(models => {
+        
+        const modelCount = (infoDomain: Classification) =>
+          models.filter(mod => infoDomainMatches(infoDomain, mod)).length;
+
+        this.infoDomains = infoDomains.filter(infoDomain => modelCount(infoDomain) > 0);
+        sortInfoDomains();
+      });
+    });
 
     const appendResults = (classes: ClassListItem[]) => {
       this.classes = this.classes.concat(classes);
@@ -136,8 +167,18 @@ class SearchClassTableController implements SearchController<ClassListItem> {
     this.addFilter(classListItem =>
       !this.showStatus || classListItem.item.status === this.showStatus
     );
+    
+    // TARVITAAN filttöintiä varten apista:
+    // - Tietomallin tyyppi
+
+    this.addFilter(classListItem => {
+      return !this.showInfoDomain || contains(classListItem.item.definedBy.classifications.map(classification => classification.identifier), this.showInfoDomain.identifier);
+    }
+    );
 
     $scope.$watch(() => this.showStatus, ifChanged<Status|null>(() => this.search()));
+    $scope.$watch(() => this.showInfoDomain, ifChanged<Classification|null>(() => this.search()));
+    $scope.$watch(() => languageService.getModelLanguage(model), ifChanged<Language>(() => sortInfoDomains()));
   }
 
   get items() {
@@ -176,6 +217,9 @@ class SearchClassTableController implements SearchController<ClassListItem> {
   }
 
   selectItem(item: AbstractClass|AddNewClass) {
+
+    // console.log(this.infoDomains);
+
     this.selectedItem = item;
     this.externalClass = undefined;
     this.excludeError = null;
@@ -192,7 +236,7 @@ class SearchClassTableController implements SearchController<ClassListItem> {
     } else {
       this.cannotConfirm = this.exclude(item);
 
-      // console.log('Selected item', item);
+      console.log('Selected item', item);
 
       if (this.model.isNamespaceKnownToBeNotModel(item.definedBy.id.toString())) {
         this.classService.getExternalClass(item.id, this.model).then(result => {

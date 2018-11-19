@@ -1,22 +1,25 @@
 import { localizableSerializer, stringSerializer, optional } from './serializer/serializer';
 import { Uri } from './uri';
-import { createConstantLocalizable } from 'app/utils/language';
+import { createConstantLocalizable } from '../utils/language';
 import { init } from './mapping';
 import { GraphNode } from './graphNode';
-import { uriSerializer } from './serializer/entitySerializer';
+import { uriSerializer, entityAwareList, entity, entityAwareOptional } from './serializer/entitySerializer';
 import { Localizable } from 'yti-common-ui/types/localization';
+import { Classification } from './classification';
 
 export class DefinedBy extends GraphNode {
 
   static definedByMapping = {
     id: { name: '@id', serializer: uriSerializer },
     label: { name: 'label', serializer: localizableSerializer },
-    prefix: { name: 'preferredXMLNamespacePrefix', serializer: optional(stringSerializer) }
+    prefix: { name: 'preferredXMLNamespacePrefix', serializer: optional(stringSerializer) },
+    classifications: { name: 'isPartOf',    serializer: entityAwareOptional(entityAwareList(entity(() => Classification))) }
   };
 
   id: Uri;
   label: Localizable;
   prefix: string|null;
+  classifications: Classification[];
 
   constructor(graph: any, context: any, frame: any) {
     super(graph, context, frame);
