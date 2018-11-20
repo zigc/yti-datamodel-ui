@@ -365,11 +365,11 @@ export class ModelPageComponent implements ModelPageActions, HelpProvider, Model
     };
 
     // CURRENT FEATURE: Search class modal
-    const searchClassModal = () => this.searchClassModal.open(this.model, exclusion, textForSelection);
+    // const searchClassModal = () => this.searchClassModal.open(this.model, exclusion, textForSelection);
     
     // NEW FEATURE: Search class table view modal, not complete yet. (Jira issue: YTI-546)
     // Uncomment this and comment class search modal above if you want to test, but DO NOT COMMIT this until YTI-546 is done.
-    // const searchClassModal = () => this.searchClassTableModal.open(this.model, exclusion, textForSelection);
+    const searchClassModal = () => this.searchClassTableModal.open(this.model, exclusion, textForSelection);
 
     this.createOrAssignEntity(
       () => searchClassModal(),

@@ -6,6 +6,7 @@ import { GraphNode } from './graphNode';
 import { uriSerializer, entityAwareList, entity } from './serializer/entitySerializer';
 import { Localizable } from 'yti-common-ui/types/localization';
 import { Classification } from './classification';
+import { normalizeModelType } from '../utils/entity';
 
 export class DefinedBy extends GraphNode {
 
@@ -20,6 +21,7 @@ export class DefinedBy extends GraphNode {
   label: Localizable;
   prefix: string|null;
   classifications: Classification[];
+  normalizedType: string|null = normalizeModelType(this.type);
 
   constructor(graph: any, context: any, frame: any) {
     super(graph, context, frame);

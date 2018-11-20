@@ -24,8 +24,6 @@
                           content-extractors="$ctrl.contentExtractors"></content-filter>
         </div>
 
-        <!-- Tähän tyyppifiltteri -->
-
         <select id="class_information_domain_filter_dropdown"
                 class="form-control pull-left ml-2"
                 style="width: auto"
@@ -33,6 +31,14 @@
                 ng-options="(infoDomain.label | translateValue: $ctrl.model) for infoDomain in $ctrl.infoDomains">
           <option value="" translate>All information domains</option>
         </select>
+
+        <select id="class_model_type_filter_dropdown"
+                class="form-control pull-left ml-2"
+                style="width: auto"
+                ng-model="$ctrl.showModelType"
+                ng-options="(modelType | translate) for modelType in $ctrl.modelTypes">
+          <option value="" translate>All types</option>
+        </select>        
 
         <select id="class_status_filter_dropdown"
                 class="form-control pull-left ml-2"
@@ -103,6 +109,9 @@
                 <td>
                   <div>
                     <highlight text="searchResult.definedBy.label" context="$ctrl.model" search="$ctrl.searchText"></highlight>
+                  </div>
+                  <div>
+                    {{searchResult.definedBy.normalizedType | translate}}
                   </div>
                   <div>
                     <span class="information-domains">

@@ -24,6 +24,7 @@ import { contains, anyMatching } from 'yti-common-ui/utils/array';
 import { ModelService } from '../../services/modelService';
 import { comparingLocalizable } from '../../utils/comparator';
 import { Language } from '../../types/language';
+import { KnownModelType } from '../../types/entity';
 
 export const noExclude = (_item: AbstractClass) => null;
 export const defaultTextForSelection = (_klass: Class) => 'Use class';
@@ -90,6 +91,8 @@ class SearchClassTableController implements SearchController<ClassListItem> {
   showStatus: Status|null;
   showInfoDomain: Classification|null;
   infoDomains: Classification[];
+  modelTypes: KnownModelType[];
+  showModelType: KnownModelType|null;
 
   // undefined means not fetched, null means does not exist
   externalClass: Class|null|undefined;
@@ -123,6 +126,8 @@ class SearchClassTableController implements SearchController<ClassListItem> {
     'ngInject';
     this.localizer = languageService.createLocalizer(model);
     this.loadingResults = true;
+
+    this.modelTypes = ['library', 'profile'];
 
 
     function infoDomainMatches(infoDomain: Classification|null, modelItem: ModelListItem) {
@@ -167,16 +172,17 @@ class SearchClassTableController implements SearchController<ClassListItem> {
     this.addFilter(classListItem =>
       !this.showStatus || classListItem.item.status === this.showStatus
     );
-    
-    // TARVITAAN filttöintiä varten apista:
-    // - Tietomallin tyyppi
 
-    this.addFilter(classListItem => {
-      return !this.showInfoDomain || contains(classListItem.item.definedBy.classifications.map(classification => classification.identifier), this.showInfoDomain.identifier);
-    }
+    this.addFilter(classListItem =>
+      !this.showInfoDomain || contains(classListItem.item.definedBy.classifications.map(classification => classification.identifier), this.showInfoDomain.identifier)
+    );
+    
+    this.addFilter(classListItem =>
+      !this.showModelType || classListItem.item.definedBy.normalizedType === this.showModelType
     );
 
     $scope.$watch(() => this.showStatus, ifChanged<Status|null>(() => this.search()));
+    $scope.$watch(() => this.showModelType, ifChanged<KnownModelType|null>(() => this.search()));
     $scope.$watch(() => this.showInfoDomain, ifChanged<Classification|null>(() => this.search()));
     $scope.$watch(() => languageService.getModelLanguage(model), ifChanged<Language>(() => sortInfoDomains()));
   }
