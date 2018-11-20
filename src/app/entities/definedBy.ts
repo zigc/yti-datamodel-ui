@@ -3,7 +3,7 @@ import { Uri } from './uri';
 import { createConstantLocalizable } from '../utils/language';
 import { init } from './mapping';
 import { GraphNode } from './graphNode';
-import { uriSerializer, entityAwareList, entity, entityAwareOptional } from './serializer/entitySerializer';
+import { uriSerializer, entityAwareList, entity } from './serializer/entitySerializer';
 import { Localizable } from 'yti-common-ui/types/localization';
 import { Classification } from './classification';
 
@@ -13,7 +13,7 @@ export class DefinedBy extends GraphNode {
     id: { name: '@id', serializer: uriSerializer },
     label: { name: 'label', serializer: localizableSerializer },
     prefix: { name: 'preferredXMLNamespacePrefix', serializer: optional(stringSerializer) },
-    classifications: { name: 'isPartOf',    serializer: entityAwareOptional(entityAwareList(entity(() => Classification))) }
+    classifications: { name: 'isPartOf',    serializer: entityAwareList(entity(() => Classification)) }
   };
 
   id: Uri;
