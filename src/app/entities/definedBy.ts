@@ -21,7 +21,6 @@ export class DefinedBy extends GraphNode {
   label: Localizable;
   prefix: string|null;
   classifications: Classification[];
-  normalizedType: string|null = normalizeModelType(this.type);
 
   constructor(graph: any, context: any, frame: any) {
     super(graph, context, frame);
@@ -36,5 +35,9 @@ export class DefinedBy extends GraphNode {
     } else {
       throw new Error('Unsupported is defined sub-graph');
     }
+  }
+
+  get normalizedType(): string|null {
+    return normalizeModelType(this.type);
   }
 }
