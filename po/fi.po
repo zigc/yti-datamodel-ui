@@ -1020,6 +1020,9 @@ msgstr ""
 "Täältä voit lisätä luokalle uuden attribuutin jonka arvoalue perustuu "
 "tietotyyppiin tai assosiaation jolla viitataan toiseen luokkaan"
 
+msgid "Member groups"
+msgstr "Käyttäjänä ryhmissä"
+
 msgid "not found in the concept database"
 msgstr "ei löydy sanastosta"
 
@@ -1464,9 +1467,6 @@ msgstr "Luotu"
 msgid "Define concept for the class"
 msgstr "Määrittele käsite luokalle"
 
-msgid "Member groups"
-msgstr "Käyttäjänä ryhmissä"
-
 msgid "Admin groups"
 msgstr "Pääkäyttäjänä ryhmissä"
 
@@ -1793,6 +1793,9 @@ msgstr "Tietosisältö"
 
 msgid "Search"
 msgstr "Etsi"
+
+msgid "standard"
+msgstr "Kansainvälinen suositus"
 
 msgid "Superproperty"
 msgstr "Yläkäsite"

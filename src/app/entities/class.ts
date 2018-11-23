@@ -1,17 +1,17 @@
 import { requireDefined, assertNever } from 'yti-common-ui/utils/object';
 import {
   resourceUrl, glyphIconClassForType, glyphIconClassUnknown
-} from 'app/utils/entity';
-import { SelectionType, PredicateType, KnownPredicateType, ConstraintType } from 'app/types/entity';
-import { normalizeClassType, mapType, reverseMapType } from 'app/utils/entity';
+} from '../utils/entity';
+import { SelectionType, PredicateType, KnownPredicateType, ConstraintType } from '../types/entity';
+import { normalizeClassType, mapType, reverseMapType } from '../utils/entity';
 import { Uri, Urn } from './uri';
 import { DefinedBy } from './definedBy';
-import { EntityConstructor } from 'app/types/entity';
+import { EntityConstructor } from '../types/entity';
 import { DataType } from './dataTypes';
 import { containsAny, remove, removeMatching } from 'yti-common-ui/utils/array';
 import { ReferenceData } from './referenceData';
-import { hasLocalization } from 'app/utils/language';
-import { Language, Localizer } from 'app/types/language';
+import { hasLocalization } from '../utils/language';
+import { Language, Localizer } from '../types/language';
 import { VisualizationClass } from './visualization';
 import { comparingPrimitive } from 'yti-common-ui/utils/comparator';
 import { Predicate, Attribute, Association } from './predicate';
@@ -41,7 +41,7 @@ export abstract class AbstractClass extends GraphNode {
     comment:    { name: 'description',     serializer: localizableSerializer },
     definedBy:  { name: 'isDefinedBy', serializer: normalizingDefinedBySerializer },
     status:     { name: 'versionInfo',     serializer: optional(identitySerializer<Status>()) },
-    modifiedAt: { name: 'modified',        serializer: optional(dateSerializer) },
+    modifiedAt: { name: 'modified',        serializer: optional(dateSerializer) }
   };
 
   id: Uri;

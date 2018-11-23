@@ -1,10 +1,10 @@
 import { collectProperties, containsAny, firstMatchingValue, index } from 'yti-common-ui/utils/array';
-import { ClassType, Destination, GraphData, GroupType, ModelType, PredicateType, Type, WithId } from 'app/types/entity';
+import { ClassType, Destination, GraphData, GroupType, ModelType, PredicateType, Type, WithId, DefinedByType } from '../types/entity';
 import { areEqual, requireDefined } from 'yti-common-ui/utils/object';
 import { IHttpPromiseCallbackArg } from 'angular';
-import { RelativeUrl, Uri, Urn } from 'app/entities/uri';
-import { Coordinate, Dimensions } from 'app/types/visualization';
-import { Model } from 'app/entities/model';
+import { RelativeUrl, Uri, Urn } from '../entities/uri';
+import { Coordinate, Dimensions } from '../types/visualization';
+import { Model } from '../entities/model';
 
 const fromType = new Map<Type, string[]>();
 const toType = new Map<string, Type>();
@@ -79,6 +79,10 @@ export function normalizeModelType(types: Type[]): ModelType|null {
   } else {
     return type;
   }
+}
+
+export function normalizeDefinedByType(types: Type[]): DefinedByType|null {
+  return firstMatchingValue<Type>(['profile', 'library', 'standard'], types) as DefinedByType;
 }
 
 export function normalizeGroupType(types: Type[]): GroupType|null {

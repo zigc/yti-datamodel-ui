@@ -24,7 +24,7 @@ import { contains, anyMatching } from 'yti-common-ui/utils/array';
 import { ModelService } from '../../services/modelService';
 import { comparingLocalizable } from '../../utils/comparator';
 import { Language } from '../../types/language';
-import { KnownModelType } from '../../types/entity';
+import { DefinedByType } from '../../types/entity';
 
 export const noExclude = (_item: AbstractClass) => null;
 export const defaultTextForSelection = (_klass: Class) => 'Use class';
@@ -91,8 +91,8 @@ class SearchClassTableController implements SearchController<ClassListItem> {
   showStatus: Status|null;
   showInfoDomain: Classification|null;
   infoDomains: Classification[];
-  modelTypes: KnownModelType[];
-  showModelType: KnownModelType|null;
+  modelTypes: DefinedByType[];
+  showModelType: DefinedByType|null;
 
   // undefined means not fetched, null means does not exist
   externalClass: Class|null|undefined;
@@ -127,7 +127,7 @@ class SearchClassTableController implements SearchController<ClassListItem> {
     this.localizer = languageService.createLocalizer(model);
     this.loadingResults = true;
 
-    this.modelTypes = ['library', 'profile'];
+    this.modelTypes = ['library', 'profile', 'standard'];
 
 
     function infoDomainMatches(infoDomain: Classification|null, modelItem: ModelListItem) {
@@ -182,7 +182,7 @@ class SearchClassTableController implements SearchController<ClassListItem> {
     );
 
     $scope.$watch(() => this.showStatus, ifChanged<Status|null>(() => this.search()));
-    $scope.$watch(() => this.showModelType, ifChanged<KnownModelType|null>(() => this.search()));
+    $scope.$watch(() => this.showModelType, ifChanged<DefinedByType|null>(() => this.search()));
     $scope.$watch(() => this.showInfoDomain, ifChanged<Classification|null>(() => this.search()));
     $scope.$watch(() => languageService.getModelLanguage(model), ifChanged<Language>(() => sortInfoDomains()));
   }
@@ -222,9 +222,11 @@ class SearchClassTableController implements SearchController<ClassListItem> {
     return !this.onlySelection && !!this.searchText;
   }
 
-  selectItem(item: AbstractClass|AddNewClass) {
+  // canAddNewShape() {
+  //   return this.canAddNew() && this.model.isOfType('profile');
+  // }
 
-    // console.log(this.infoDomains);
+  selectItem(item: AbstractClass|AddNewClass) {
 
     this.selectedItem = item;
     this.externalClass = undefined;

@@ -1,7 +1,7 @@
-import { Uri } from 'app/entities/uri';
-import { GraphNode, GraphNodes } from 'app/entities/graphNode';
+import { Uri } from '../entities/uri';
+import { GraphNode, GraphNodes } from '../entities/graphNode';
 import { Localizable } from 'yti-common-ui/types/localization';
-import { DefinedBy } from 'app/entities/definedBy';
+import { DefinedBy } from '../entities/definedBy';
 
 export type Type = ModelType
                  | ClassType
@@ -30,6 +30,9 @@ export type ModelType = KnownModelType
 
 export type KnownModelType = 'library'
                            | 'profile';
+
+export type DefinedByType = KnownModelType
+                            | 'standard';
 
 export type ClassType = 'class'
                       | 'shape';

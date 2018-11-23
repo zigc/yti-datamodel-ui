@@ -931,6 +931,9 @@ msgstr ""
 msgid "You can add new attribute or association to the Class from here"
 msgstr ""
 
+msgid "Member groups"
+msgstr ""
+
 msgid "not found in the concept database"
 msgstr ""
 
@@ -1344,9 +1347,6 @@ msgstr ""
 msgid "Define concept for the class"
 msgstr ""
 
-msgid "Member groups"
-msgstr ""
-
 msgid "Admin groups"
 msgstr ""
 
@@ -1668,6 +1668,9 @@ msgid "InformationDescription"
 msgstr ""
 
 msgid "Search"
+msgstr ""
+
+msgid "standard"
 msgstr ""
 
 msgid "Superproperty"

@@ -83,10 +83,10 @@
             <tr>
               <th style="width: 20%" translate>Name</th>
               <th style="width: 20%" translate>Model</th>
-              <th style="width: 40%" translate>Description</th>
+              <th style="width: 45%" translate>Description</th>
               <!-- <th style="width: 20%" translate>Super class</th> YLÄLUOKKAA EI VIELÄ TOTEUTETA, KOSKA SITÄ TIETOA EI OLE OLEMASSA VIELÄ. -->
               <th style="width: 10%" translate>Modified at</th>
-              <th style="width: 10%"></th>
+              <th style="width: 5%"></th>
             </tr>
             </thead>
             <tbody class="search-results">
@@ -110,7 +110,7 @@
                   <div>
                     <highlight text="searchResult.definedBy.label" context="$ctrl.model" search="$ctrl.searchText"></highlight>
                   </div>
-                  <div>
+                  <div ng-if="searchResult.definedBy.normalizedType">
                     {{searchResult.definedBy.normalizedType | translate}}
                   </div>
                   <div>
@@ -152,6 +152,23 @@
             ng-disabled="!$ctrl.selection || $ctrl.cannotConfirm || (form.editing && (form.$invalid || form.$pending)) || $ctrl.isExternalClassPending()">
       {{$ctrl.textForSelection($ctrl.selection) | translate}}
     </button>
+
+    <!-- <button id="create_class_button"
+            type="button"
+            class="btn btn-secondary-action"
+            ng-click="$ctrl.close()"
+            ng-show="$ctrl.canAddNewShape()"> 
+      + <span translate>New class</span>
+    </button>
+
+    <button id="create_shape_button"
+        type="button"
+        class="btn btn-secondary-action"
+        ng-click="$ctrl.close()"
+        ng-show="$ctrl.canAddNewShape()"> 
+      + <span translate>Shape from URI</span>      
+    </button> -->
+    <!-- "Tarkenna URI-tunnisteesta" -->
 
     <button id="cancel_class_table_modal_button" type="button" class="btn btn-link cancel" ng-click="$ctrl.close()" translate>Cancel</button>
 
