@@ -3,10 +3,7 @@ import { IModalService, IModalServiceInstance } from 'angular-ui-bootstrap';
 import { SearchConceptModal, EntityCreation } from './searchConceptModal';
 import { ClassService } from '../../services/classService';
 import { LanguageService, Localizer } from '../../services/languageService';
-import { AddNew } from '../../components/common/searchResults';
-import { gettextCatalog as GettextCatalog } from 'angular-gettext';
 import { EditableForm } from '../../components/form/editableEntityController';
-import { glyphIconClassForType } from '../../utils/entity';
 import { Exclusion } from '../../utils/exclusion';
 import { SearchFilter, SearchController } from '../../types/filter';
 import { AbstractClass, Class, ClassListItem } from '../../entities/class';
@@ -81,12 +78,12 @@ class SearchClassTableController implements SearchController<ClassListItem> {
 
   private classes: ClassListItem[] = [];
 
-  searchResults: (ClassListItem|AddNewClass)[] = [];
+  searchResults: (ClassListItem)[] = [];
   selection: Class|ExternalEntity;
   searchText = '';
   cannotConfirm: string|null;
   loadingResults: boolean;
-  selectedItem: ClassListItem|AddNewClass;
+  selectedItem: ClassListItem;
   excludeError: string|null = null;
   showStatus: Status|null;
   showInfoDomain: Classification|null;
@@ -119,7 +116,6 @@ class SearchClassTableController implements SearchController<ClassListItem> {
               public onlySelection: boolean,
               public textForSelection: (klass: Optional<Class>) => string,
               private searchConceptModal: SearchConceptModal,
-              private gettextCatalog: GettextCatalog,
               private displayItemFactory: DisplayItemFactory,
               classificationService: ClassificationService,
               modelService: ModelService) {
@@ -226,7 +222,7 @@ class SearchClassTableController implements SearchController<ClassListItem> {
   //   return this.canAddNew() && this.model.isOfType('profile');
   // }
 
-  selectItem(item: AbstractClass|AddNewClass) {
+  selectItem(item: AbstractClass) {
 
     this.selectedItem = item;
     this.externalClass = undefined;
@@ -234,26 +230,26 @@ class SearchClassTableController implements SearchController<ClassListItem> {
     this.$scope.form.editing = false;
     this.$scope.form.$setPristine();
 
-    if (item instanceof AddNewClass) {
-      if (item.external) {
-        this.$scope.form.editing = true;
-        this.selection = new ExternalEntity(this.localizer.language, this.searchText, 'class');
-      } else {
-        this.createNewClass();
-      }
+    // if (item instanceof AddNewClass) {
+    //   if (item.external) {
+    //     this.$scope.form.editing = true;
+    //     this.selection = new ExternalEntity(this.localizer.language, this.searchText, 'class');
+    //   } else {
+    //     this.createNewClass();
+    //   }
+    // } else {
+    this.cannotConfirm = this.exclude(item);
+
+    // console.log('Selected item', item);
+
+    if (this.model.isNamespaceKnownToBeNotModel(item.definedBy.id.toString())) {
+      this.classService.getExternalClass(item.id, this.model).then(result => {
+        this.selection = requireDefined(result); // TODO check if result can actually be null
+      });
     } else {
-      this.cannotConfirm = this.exclude(item);
-
-      console.log('Selected item', item);
-
-      if (this.model.isNamespaceKnownToBeNotModel(item.definedBy.id.toString())) {
-        this.classService.getExternalClass(item.id, this.model).then(result => {
-          this.selection = requireDefined(result); // TODO check if result can actually be null
-        });
-      } else {
-        this.classService.getClass(item.id, this.model).then(result => this.selection = result);
-      }
+      this.classService.getClass(item.id, this.model).then(result => this.selection = result);
     }
+    // }
   }
 
   isSelected(item: AbstractClass) {
@@ -264,13 +260,9 @@ class SearchClassTableController implements SearchController<ClassListItem> {
     return this.exclude(item);
   }
 
-  loadingSelection(item: ClassListItem|AddNewClass) {
+  loadingSelection(item: ClassListItem) {
     const selection = this.selection;
-    if (item instanceof ClassListItem) {
-      return item === this.selectedItem && (!selection || (selection instanceof Class && !item.id.equals(selection.id)));
-    } else {
-      return false;
-    }
+    return item === this.selectedItem && (!selection || (selection instanceof Class && !item.id.equals(selection.id)));
   }
 
   isExternalClassPending() {
@@ -314,14 +306,14 @@ class SearchClassTableController implements SearchController<ClassListItem> {
     }).displayValue;
   }
 
-  generateSearchResultID(item: AbstractClass|AddNewClass): string {
+  generateSearchResultID(item: AbstractClass): string {
     return `${item.id.toString()}${'_search_class_link'}`;
   }
 
 }
 
-class AddNewClass extends AddNew {
-  constructor(public label: string, public show: () => boolean, public external: boolean) {
-    super(label, show, glyphIconClassForType(['class']));
-  }
-}
+// class AddNewClass extends AddNew {
+//   constructor(public label: string, public show: () => boolean, public external: boolean) {
+//     super(label, show, glyphIconClassForType(['class']));
+//   }
+// }

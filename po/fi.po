@@ -234,6 +234,9 @@ msgstr "Kuvaus"
 msgid "Modified at"
 msgstr "Muokattu"
 
+msgid "New class"
+msgstr "Uusi luokka"
+
 msgid " without referencing concept"
 msgstr ""
 

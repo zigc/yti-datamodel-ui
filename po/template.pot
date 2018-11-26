@@ -226,6 +226,9 @@ msgstr ""
 msgid "Modified at"
 msgstr ""
 
+msgid "New class"
+msgstr ""
+
 msgid " without referencing concept"
 msgstr ""
 
