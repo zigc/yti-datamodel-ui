@@ -1,11 +1,13 @@
 <form name="form" class="search-class">
 
   <div class="modal-header">
-    <h4 class="modal-title">
-      <a><i id="close_class_table_modal_button" ng-click="$dismiss('cancel')" class="fas fa-times"></i></a>
+    <h4 class="modal-title">      
       <span ng-show="$ctrl.onlySelection" translate>Select class</span>
       <span ng-hide="$ctrl.onlySelection" translate>Add class</span>
     </h4>
+    <model-language-chooser class="pull-right mr-4"
+                            context="$ctrl.model"></model-language-chooser>
+    <a><i id="close_class_table_modal_button" ng-click="$dismiss('cancel')" class="fas fa-times"></i></a>
   </div>
 
   <div class="modal-body full-height">
@@ -47,9 +49,6 @@
                 ng-options="(status | translate) for status in $ctrl.statuses">
           <option value="" translate>All statuses</option>
         </select>
-
-        <model-language-chooser class="pull-right"
-                                context="$ctrl.model"></model-language-chooser>
       </div>
     </div>
 
