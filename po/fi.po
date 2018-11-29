@@ -222,6 +222,12 @@ msgstr "Kaikki tietoalueet"
 msgid "All statuses"
 msgstr "Kaikki tilat"
 
+msgid "Create shape from external URI"
+msgstr "Luo luokka ulkoisesta URI-tunnisteesta"
+
+msgid "Search existing class"
+msgstr "Hae olemassaolevaa luokkaa"
+
 msgid "Name"
 msgstr "Nimi"
 
@@ -236,6 +242,9 @@ msgstr "Muokattu"
 
 msgid "New class"
 msgstr "Uusi luokka"
+
+msgid "Shape from URI"
+msgstr "Tarkenna URI-tunnisteesta"
 
 msgid " without referencing concept"
 msgstr ""
@@ -2574,9 +2583,6 @@ msgstr "Assosiaatio"
 
 #~ msgid "Reference"
 #~ msgstr "Sanasto"
-
-#~ msgid "Create new external class"
-#~ msgstr "Luo uusi tarkennettu luokka viittaamalla ulkoiseen tunnisteeseen"
 
 #~ msgid "Chosen concept"
 #~ msgstr "Valittu käsite"

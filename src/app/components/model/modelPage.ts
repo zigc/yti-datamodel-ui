@@ -354,7 +354,7 @@ export class ModelPageComponent implements ModelPageActions, HelpProvider, Model
     const isProfile = this.model.isOfType('profile');
     const textForSelection = (klass: Optional<Class>) => {
       if (isProfile) {
-        if (klass && klass.isOfType('shape')) {
+        if (klass instanceof Class && klass.isOfType('shape')) {
           return 'Copy shape';
         } else {
           return 'Specialize class';
@@ -367,8 +367,8 @@ export class ModelPageComponent implements ModelPageActions, HelpProvider, Model
     // CURRENT FEATURE: Search class modal
     // const searchClassModal = () => this.searchClassModal.open(this.model, exclusion, textForSelection);
     
-    // NEW FEATURE: Search class table view modal, not complete yet. (Jira issue: YTI-546)
-    // Uncomment this and comment class search modal above if you want to test, but DO NOT COMMIT this until YTI-546 is done.
+    // NEW FEATURE: Search class table view modal, not complete yet. - eJira issue: YTI-304 (old Jira: YTI-546)
+    // Uncomment this and comment class search modal above if you want to test, but DO NOT COMMIT this until YTI-304 is done.
     const searchClassModal = () => this.searchClassTableModal.open(this.model, exclusion, textForSelection);
 
     this.createOrAssignEntity(

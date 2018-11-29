@@ -70,6 +70,39 @@
                          exclude="$ctrl.exclude"></excluded-filter>
       </div>
     </div>
+    
+    <div ng-if="$ctrl.isSelectionExternalEntity()">      
+      
+      <h4 class="mt-4" translate>Create shape from external URI</h4>
+      
+      <div class="row">
+        <div class="col-md-4">
+
+          <editable data-title="External URI" context="$ctrl.model" autofocus>
+            <div class="input-group input-group-md">
+              <input id="externalUri" type="text" class="form-control" required uri-input="required-namespace" model="$ctrl.model" ng-model="$ctrl.selection.id" />
+            </div>
+          </editable>
+
+        </div>
+
+        <div class="col-md-4">
+
+          <div ng-if="$ctrl.externalClass === null">
+            <editable data-title="Class label" context="$ctrl.model">
+              <input type="text" class="form-control" string-input="label" required ng-model="$ctrl.selection.label" />
+            </editable>
+          </div>
+
+          <div ng-if="$ctrl.externalClass">
+            <non-editable data-title="Class label" value="$ctrl.externalClass.label" context="$ctrl.model"></non-editable>
+          </div>
+
+        </div>
+      </div>
+
+      <h4 class="mt-4" translate>Search existing class</h4>
+    </div>
 
     <div class="row full-height">
 
@@ -165,15 +198,15 @@
             ng-show="$ctrl.canAddNew()"> 
       + <span translate>New class</span>
     </button>
-    <!-- 
+    
     <button id="create_shape_button"
         type="button"
         class="btn btn-secondary-action"
-        ng-click="$ctrl.close()"
-        ng-show="$ctrl.canAddNewShape()"> 
+        ng-click="$ctrl.createNewShape()"
+        ng-show="$ctrl.canAddNewShape()"
+        ng-disabled="$ctrl.isSelectionExternalEntity()"> 
       + <span translate>Shape from URI</span>      
-    </button> -->
-    <!-- "Tarkenna URI-tunnisteesta" -->
+    </button>
 
     <button id="cancel_class_table_modal_button" type="button" class="btn btn-link cancel" ng-click="$ctrl.close()" translate>Cancel</button>
 

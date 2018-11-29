@@ -83,8 +83,7 @@ class SearchClassTableController implements SearchController<ClassListItem> {
   searchText = '';
   cannotConfirm: string|null;
   loadingResults: boolean;
-  selectedItem: ClassListItem;
-  excludeError: string|null = null;
+  selectedItem: ClassListItem|null;
   showStatus: Status|null;
   showInfoDomain: Classification|null;
   infoDomains: Classification[];
@@ -201,15 +200,6 @@ class SearchClassTableController implements SearchController<ClassListItem> {
 
   search() {
     this.searchResults = [
-      // new AddNewClass(
-      //   `${this.gettextCatalog.getString('Create new class')} '${this.searchText}'`,
-      //   this.canAddNew.bind(this),
-      //   false
-      // ),
-      // new AddNewClass(
-      //   `${this.gettextCatalog.getString('Create new shape')} ${this.gettextCatalog.getString('by referencing external uri')}`,
-      //   () => this.canAddNew() && this.model.isOfType('profile'),
-      //   true),
       ...filterAndSortSearchResults(this.classes, this.searchText, this.contentExtractors, this.searchFilters, defaultLabelComparator(this.localizer, this.exclude))
     ];
   }
@@ -218,38 +208,28 @@ class SearchClassTableController implements SearchController<ClassListItem> {
     return !this.onlySelection && !!this.searchText;
   }
 
-  // canAddNewShape() {
-  //   return this.canAddNew() && this.model.isOfType('profile');
-  // }
+  canAddNewShape() {
+    return this.canAddNew() && this.model.isOfType('profile');
+  }
 
   selectItem(item: AbstractClass) {
 
     this.selectedItem = item;
     this.externalClass = undefined;
-    this.excludeError = null;
+    this.cannotConfirm = null;
     this.$scope.form.editing = false;
     this.$scope.form.$setPristine();
 
-    // if (item instanceof AddNewClass) {
-    //   if (item.external) {
-    //     this.$scope.form.editing = true;
-    //     this.selection = new ExternalEntity(this.localizer.language, this.searchText, 'class');
-    //   } else {
-    //     this.createNewClass();
-    //   }
-    // } else {
     this.cannotConfirm = this.exclude(item);
-
-    // console.log('Selected item', item);
 
     if (this.model.isNamespaceKnownToBeNotModel(item.definedBy.id.toString())) {
       this.classService.getExternalClass(item.id, this.model).then(result => {
         this.selection = requireDefined(result); // TODO check if result can actually be null
+        this.cannotConfirm = this.exclude(requireDefined(result));
       });
     } else {
       this.classService.getClass(item.id, this.model).then(result => this.selection = result);
     }
-    // }
   }
 
   isSelected(item: AbstractClass) {
@@ -278,7 +258,7 @@ class SearchClassTableController implements SearchController<ClassListItem> {
       if (this.externalClass) {
         const exclude = this.exclude(this.externalClass);
         if (exclude) {
-          this.excludeError = exclude;
+          this.cannotConfirm = exclude;
         } else {
           this.$uibModalInstance.close(this.externalClass);
         }
@@ -299,6 +279,16 @@ class SearchClassTableController implements SearchController<ClassListItem> {
       .then(conceptCreation => this.$uibModalInstance.close(conceptCreation), ignoreModalClose);
   }
 
+  createNewShape() {
+
+    this.externalClass = undefined;
+    this.cannotConfirm = null;
+    this.$scope.form.$setPristine();
+    this.selectedItem = null;
+    this.$scope.form.editing = true;
+    this.selection = new ExternalEntity(this.localizer.language, this.searchText, 'class');
+  }
+
   showItemValue(value: Value) {
     return this.displayItemFactory.create({
       context: () => this.model,
@@ -312,8 +302,3 @@ class SearchClassTableController implements SearchController<ClassListItem> {
 
 }
 
-// class AddNewClass extends AddNew {
-//   constructor(public label: string, public show: () => boolean, public external: boolean) {
-//     super(label, show, glyphIconClassForType(['class']));
-//   }
-// }
