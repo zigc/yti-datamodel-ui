@@ -2,23 +2,24 @@ import { IHttpService, IPromise, IQService } from 'angular';
 import * as moment from 'moment';
 import { PredicateService } from './predicateService';
 import { upperCaseFirst } from 'change-case';
-import { Uri, Urn } from 'app/entities/uri';
-import { reverseMapType } from 'app/utils/entity';
-import { expandContextWithKnownModels } from 'app/utils/entity';
-import { hasLocalization } from 'app/utils/language';
-import { Language } from 'app/types/language';
-import { DataSource } from 'app/components/form/dataSource';
-import { modelScopeCache } from 'app/components/form/cache';
+import { Uri, Urn } from '../entities/uri';
+import { reverseMapType } from '../utils/entity';
+import { expandContextWithKnownModels } from '../utils/entity';
+import { hasLocalization } from '../utils/language';
+import { Language } from '../types/language';
+import { DataSource } from '../components/form/dataSource';
+import { modelScopeCache } from '../components/form/cache';
 import { requireDefined } from 'yti-common-ui/utils/object';
-import { GraphData, KnownPredicateType } from 'app/types/entity';
+import { GraphData, KnownPredicateType } from '../types/entity';
 import { FrameService } from './frameService';
-import * as frames from 'app/entities/frames';
-import { ClassListItem, Class, Property } from 'app/entities/class';
-import { Model } from 'app/entities/model';
-import { ExternalEntity } from 'app/entities/externalEntity';
-import { Predicate, Attribute, Association } from 'app/entities/predicate';
+import * as frames from '../entities/frames';
+import { ClassListItem, Class, Property } from '../entities/class';
+import { Model } from '../entities/model';
+import { ExternalEntity } from '../entities/externalEntity';
+import { Predicate, Attribute, Association } from '../entities/predicate';
 import { flatten } from 'yti-common-ui/utils/array';
 import { apiEndpointWithName } from './config';
+import { RelatedClass } from '../components/editor/searchClassTableModal';
 
 export interface ClassService {
   getClass(id: Uri|Urn, model: Model): IPromise<Class>;
@@ -31,6 +32,7 @@ export interface ClassService {
   deleteClass(id: Uri, model: Model): IPromise<any>;
   assignClassToModel(classId: Uri, model: Model): IPromise<any>;
   newClass(model: Model, classLabel: string, conceptID: Uri|null, lang: Language): IPromise<Class>;
+  newRelatedClass?(model: Model, relatedClass: RelatedClass): IPromise<Class>;
   newShape(classOrExternal: Class|ExternalEntity, profile: Model, external: boolean, lang: Language): IPromise<Class>;
   newClassFromExternal(externalId: Uri, model: Model): IPromise<Class>;
   getExternalClass(externalId: Uri, model: Model): IPromise<Class|null>;
@@ -156,11 +158,45 @@ export class DefaultClassService implements ClassService {
 
     return this.$http.get<GraphData>(apiEndpointWithName('classCreator'), {params})
       .then(expandContextWithKnownModels(model))
-      .then((response: any) => this.deserializeClass(response.data, false))
+      .then((response: any) => {
+        console.log('response.data', response.data);
+        return this.deserializeClass(response.data, false);
+      }
+      )
       .then((klass: Class) => {
         klass.definedBy = model.asDefinedBy();
         klass.unsaved = true;
         klass.external = model.isNamespaceKnownToBeNotModel(klass.definedBy.id.toString());
+
+        // console.log('klass', klass);
+
+        return klass;
+      });
+  }
+
+  newRelatedClass(model: Model, relatedClass: RelatedClass): IPromise<Class> {
+
+    const params: any = {
+      modelID: model.id.uri,
+      oldClass: relatedClass.oldClassId.uri,
+      relationType: relatedClass.relationType
+    };
+
+    console.log('params', params);
+
+    return this.$http.get<GraphData>(apiEndpointWithName('relatedClassCreator'), {params})
+      .then(expandContextWithKnownModels(model))
+      .then((response: any) => {
+        console.log('response.data', response.data);
+        return this.deserializeClass(response.data, false);
+      })
+      .then((klass: Class) => {
+        klass.definedBy = model.asDefinedBy();
+        klass.unsaved = true;
+        klass.external = model.isNamespaceKnownToBeNotModel(klass.definedBy.id.toString());
+        
+        console.log('klass', klass);
+
         return klass;
       });
   }

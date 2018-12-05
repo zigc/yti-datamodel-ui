@@ -168,7 +168,32 @@
                     {{$ctrl.showItemValue(searchResult.modifiedAt)}}
                   </td>
                   <td>
-
+                    <div class="pull-right" ng-if="$ctrl.showActions(searchResult)" uib-dropdown>                      
+                      <button id="{{'class_' + searchResult.id + '_actions_button'}}" class="btn btn-language dropdown-toggle" uib-dropdown-toggle>
+                        <span>...</span>
+                      </button>
+                  
+                      <div uib-dropdown-menu class="dropdown-menu-right" aria-labelledby="{{'class_' + searchResult.id + '_actions_button'}}">
+                        <button id="{{'copy_class_' + searchResult.id + '_button'}}"
+                                class="dropdown-item"
+                                ng-click="$ctrl.copyClass(searchResult)"
+                                translate>
+                          Copy class
+                        </button>
+                        <button id="{{'create_sub_class_' + searchResult.id + '_button'}}"
+                                class="dropdown-item"
+                                ng-click="$ctrl.createSubClass(searchResult)"
+                                translate>
+                          Create sub class
+                        </button>
+                        <button id="{{'create_super_class_' + searchResult.id + '_button'}}"
+                                class="dropdown-item"
+                                ng-click="$ctrl.createSuperClass(searchResult)"
+                                translate>
+                          Create super class
+                        </button>
+                      </div>
+                    </div>
                   </td>
                 <tr>
 

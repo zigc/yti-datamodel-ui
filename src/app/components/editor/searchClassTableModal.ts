@@ -22,9 +22,15 @@ import { ModelService } from '../../services/modelService';
 import { comparingLocalizable } from '../../utils/comparator';
 import { Language } from '../../types/language';
 import { DefinedByType } from '../../types/entity';
+import { Uri } from '../../entities/uri';
 
 export const noExclude = (_item: AbstractClass) => null;
 export const defaultTextForSelection = (_klass: Class) => 'Use class';
+
+export class RelatedClass {
+  constructor(public oldClassId: Uri, public relationType: string) {
+  }
+}
 
 export class SearchClassTableModal {
 
@@ -214,6 +220,11 @@ class SearchClassTableController implements SearchController<ClassListItem> {
 
   selectItem(item: AbstractClass) {
 
+    // console.log(item.normalizedType);
+    // console.log(item.definedBy.normalizedType);
+    // console.log(item.definedBy.type);
+    // console.log(item.definedBy.isOfType('standard'));
+
     this.selectedItem = item;
     this.externalClass = undefined;
     this.cannotConfirm = null;
@@ -295,10 +306,29 @@ class SearchClassTableController implements SearchController<ClassListItem> {
       value: () => value
     }).displayValue;
   }
-
+ 
   generateSearchResultID(item: AbstractClass): string {
     return `${item.id.toString()}${'_search_class_link'}`;
   }
 
+  showActions(item: AbstractClass) {    
+    return !item.isOfType('shape') && !item.definedBy.isOfType('standard');
+  }
+
+  copyClass(item: AbstractClass) {
+
+    // console.log('this.model.id', this.model.id);
+    // console.log('item.id', item.id);
+
+    this.$uibModalInstance.close(new RelatedClass(item.id, 'prov:wasDerivedFrom'));
+  }
+  
+  createSubClass(item: AbstractClass) {
+    this.$uibModalInstance.close(new RelatedClass(item.id, 'rdfs:subClassOf'));
+  }
+  
+  createSuperClass(item: AbstractClass) {
+    this.$uibModalInstance.close(new RelatedClass(item.id, 'iow:superClassOf'));
+  }
 }
 

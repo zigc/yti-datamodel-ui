@@ -7,7 +7,7 @@ import { ModelService } from '../../services/modelService';
 import { PredicateService } from '../../services/predicateService';
 import { ConfirmationModal } from '../../components/common/confirmationModal';
 import { SearchClassModal } from '../../components/editor/searchClassModal';
-import { SearchClassTableModal } from '../../components/editor/searchClassTableModal';
+import { SearchClassTableModal, RelatedClass } from '../../components/editor/searchClassTableModal';
 import { SearchPredicateModal } from '../../components/editor/searchPredicateModal';
 import { EntityCreation } from '../../components/editor/searchConceptModal';
 import { ClassType, KnownPredicateType, SelectionType, WithDefinedBy } from '../../types/entity';
@@ -38,6 +38,7 @@ import ICurrentRoute = route.ICurrentRoute;
 export interface ModelPageActions extends ChangeNotifier<Class|Predicate> {
   select(item: WithIdAndType): void;
   createClass(conceptCreation: EntityCreation): void;
+  createRelatedClass(relatedClass: RelatedClass): void;
   createShape(classOrExternal: Class|ExternalEntity, external: boolean): void;
   copyShape(shape: Class): void;
   assignClassToModel(klass: Class): void;
@@ -381,16 +382,21 @@ export class ModelPageComponent implements ModelPageActions, HelpProvider, Model
         }
       },
       (concept: EntityCreation) => this.createClass(concept),
-      (klass: Class) => {
-        if (klass.unsaved) {
-          this.selectNewlyCreatedOrAssignedEntity(klass);
-        } else if (klass.isOfType('shape')) {
-          this.copyShape(klass);
-        } else if (isProfile) {
-          this.createShape(klass, klass.external);
+      (klass: Class|RelatedClass) => {
+        if (klass instanceof Class) {
+          if (klass.unsaved) {
+            this.selectNewlyCreatedOrAssignedEntity(klass);
+          } else if (klass.isOfType('shape')) {
+            this.copyShape(klass);
+          } else if (isProfile) {
+            this.createShape(klass, klass.external);
+          } else {
+            this.assignClassToModel(klass).then(() => klass);
+          }
         } else {
-          this.assignClassToModel(klass).then(() => klass);
+          this.createRelatedClass(klass);
         }
+
       }
     );
   }
@@ -404,10 +410,10 @@ export class ModelPageComponent implements ModelPageActions, HelpProvider, Model
     );
   }
 
-  private createOrAssignEntity<T extends Class|Predicate>(modal: () => IPromise<ExternalEntity|EntityCreation|T>,
-                                                          fromExternalEntity: (external: ExternalEntity) => void,
-                                                          fromConcept: (concept: EntityCreation) => void,
-                                                          fromEntity: (entity: T) => void) {
+  private createOrAssignEntity<T extends Class|Predicate|RelatedClass>(modal: () => IPromise<ExternalEntity|EntityCreation|T>,
+                                                                       fromExternalEntity: (external: ExternalEntity) => void,
+                                                                       fromConcept: (concept: EntityCreation) => void,
+                                                                       fromEntity: (entity: T) => void) {
 
     this.askPermissionWhenEditing(() => {
       modal().then(result => {
@@ -437,6 +443,11 @@ export class ModelPageComponent implements ModelPageActions, HelpProvider, Model
 
   createClass(conceptCreation: EntityCreation) {
     this.classService.newClass(this.model, conceptCreation.entity.label, conceptCreation.conceptId, this.languageService.getModelLanguage(this.model))
+      .then(klass => this.selectNewlyCreatedOrAssignedEntity(klass));
+  }
+
+  createRelatedClass(relatedClass: RelatedClass) {
+    this.classService.newRelatedClass!(this.model, relatedClass)
       .then(klass => this.selectNewlyCreatedOrAssignedEntity(klass));
   }
 
