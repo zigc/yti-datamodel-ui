@@ -232,6 +232,15 @@ msgstr ""
 msgid "Modified at"
 msgstr ""
 
+msgid "Copy class"
+msgstr ""
+
+msgid "Create sub class"
+msgstr ""
+
+msgid "Create super class"
+msgstr ""
+
 msgid "New class"
 msgstr ""
 

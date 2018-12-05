@@ -220,11 +220,6 @@ class SearchClassTableController implements SearchController<ClassListItem> {
 
   selectItem(item: AbstractClass) {
 
-    // console.log(item.normalizedType);
-    // console.log(item.definedBy.normalizedType);
-    // console.log(item.definedBy.type);
-    // console.log(item.definedBy.isOfType('standard'));
-
     this.selectedItem = item;
     this.externalClass = undefined;
     this.cannotConfirm = null;
@@ -316,10 +311,6 @@ class SearchClassTableController implements SearchController<ClassListItem> {
   }
 
   copyClass(item: AbstractClass) {
-
-    // console.log('this.model.id', this.model.id);
-    // console.log('item.id', item.id);
-
     this.$uibModalInstance.close(new RelatedClass(item.id, 'prov:wasDerivedFrom'));
   }
   

@@ -158,18 +158,11 @@ export class DefaultClassService implements ClassService {
 
     return this.$http.get<GraphData>(apiEndpointWithName('classCreator'), {params})
       .then(expandContextWithKnownModels(model))
-      .then((response: any) => {
-        console.log('response.data', response.data);
-        return this.deserializeClass(response.data, false);
-      }
-      )
+      .then((response: any) => this.deserializeClass(response.data, false))
       .then((klass: Class) => {
         klass.definedBy = model.asDefinedBy();
         klass.unsaved = true;
         klass.external = model.isNamespaceKnownToBeNotModel(klass.definedBy.id.toString());
-
-        // console.log('klass', klass);
-
         return klass;
       });
   }
@@ -182,21 +175,13 @@ export class DefaultClassService implements ClassService {
       relationType: relatedClass.relationType
     };
 
-    console.log('params', params);
-
     return this.$http.get<GraphData>(apiEndpointWithName('relatedClassCreator'), {params})
       .then(expandContextWithKnownModels(model))
-      .then((response: any) => {
-        console.log('response.data', response.data);
-        return this.deserializeClass(response.data, false);
-      })
+      .then((response: any) => this.deserializeClass(response.data, false))
       .then((klass: Class) => {
         klass.definedBy = model.asDefinedBy();
         klass.unsaved = true;
         klass.external = model.isNamespaceKnownToBeNotModel(klass.definedBy.id.toString());
-        
-        console.log('klass', klass);
-
         return klass;
       });
   }

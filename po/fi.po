@@ -240,6 +240,15 @@ msgstr "Kuvaus"
 msgid "Modified at"
 msgstr "Muokattu"
 
+msgid "Copy class"
+msgstr "Kopio luokka"
+
+msgid "Create sub class"
+msgstr "Luo alaluokka"
+
+msgid "Create super class"
+msgstr "Luo yläluokka"
+
 msgid "New class"
 msgstr "Uusi luokka"
 
