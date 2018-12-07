@@ -10,7 +10,7 @@ import { Language } from '../types/language';
 import { DataSource } from '../components/form/dataSource';
 import { modelScopeCache } from '../components/form/cache';
 import { requireDefined } from 'yti-common-ui/utils/object';
-import { GraphData, KnownPredicateType } from '../types/entity';
+import { GraphData, KnownPredicateType, ClassRelationType } from '../types/entity';
 import { FrameService } from './frameService';
 import * as frames from '../entities/frames';
 import { ClassListItem, Class, Property } from '../entities/class';
@@ -19,7 +19,11 @@ import { ExternalEntity } from '../entities/externalEntity';
 import { Predicate, Attribute, Association } from '../entities/predicate';
 import { flatten } from 'yti-common-ui/utils/array';
 import { apiEndpointWithName } from './config';
-import { RelatedClass } from '../components/editor/searchClassTableModal';
+
+export class RelatedClass {
+  constructor(public oldClassId: Uri, public relationType: ClassRelationType) {
+  }
+}
 
 export interface ClassService {
   getClass(id: Uri|Urn, model: Model): IPromise<Class>;
@@ -32,7 +36,7 @@ export interface ClassService {
   deleteClass(id: Uri, model: Model): IPromise<any>;
   assignClassToModel(classId: Uri, model: Model): IPromise<any>;
   newClass(model: Model, classLabel: string, conceptID: Uri|null, lang: Language): IPromise<Class>;
-  newRelatedClass?(model: Model, relatedClass: RelatedClass): IPromise<Class>;
+  newRelatedClass(model: Model, relatedClass: RelatedClass): IPromise<Class>;
   newShape(classOrExternal: Class|ExternalEntity, profile: Model, external: boolean, lang: Language): IPromise<Class>;
   newClassFromExternal(externalId: Uri, model: Model): IPromise<Class>;
   getExternalClass(externalId: Uri, model: Model): IPromise<Class|null>;

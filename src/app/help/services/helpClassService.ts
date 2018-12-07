@@ -1,18 +1,18 @@
 import { IPromise, IQService } from 'angular';
-import { ClassService } from 'app/services/classService';
-import { Class, Property } from 'app/entities/class';
-import { Model } from 'app/entities/model';
-import { Uri, Urn } from 'app/entities/uri';
-import { DataSource } from 'app/components/form/dataSource';
-import { Language } from 'app/types/language';
-import { ExternalEntity } from 'app/entities/externalEntity';
-import { Predicate } from 'app/entities/predicate';
-import { KnownPredicateType } from 'app/types/entity';
+import { ClassService, RelatedClass } from '../../services/classService';
+import { Class, Property } from '../../entities/class';
+import { Model } from '../../entities/model';
+import { Uri, Urn } from '../../entities/uri';
+import { DataSource } from '../../components/form/dataSource';
+import { Language } from '../../types/language';
+import { ExternalEntity } from '../../entities/externalEntity';
+import { Predicate } from '../../entities/predicate';
+import { KnownPredicateType } from '../../types/entity';
 import { ResetableService } from './resetableService';
 import * as moment from 'moment';
-import { VocabularyService } from 'app/services/vocabularyService';
+import { VocabularyService } from '../../services/vocabularyService';
 import { ModelResourceStore } from './resourceStore';
-import { Concept } from 'app/entities/vocabulary';
+import { Concept } from '../../entities/vocabulary';
 import { flatten } from 'yti-common-ui/utils/array';
 import { EntityCreatorService } from './entityCreatorService';
 import { requireDefined } from 'yti-common-ui/utils/object';
@@ -91,6 +91,10 @@ export class InteractiveHelpClassService implements ClassService, ResetableServi
           return klass;
         });
       });
+  }
+
+  newRelatedClass(model: Model, relatedClass: RelatedClass): IPromise<Class> {
+    throw new Error('newRelatedClass is not yet implemented in help');
   }
 
   newShape(classOrExternal: Class|ExternalEntity, profile: Model, external: boolean, lang: Language): IPromise<Class> {

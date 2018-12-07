@@ -1,13 +1,13 @@
 import { ILocationService, IPromise, IQService, IScope, route } from 'angular';
 import * as _ from 'lodash';
-import { ClassService } from '../../services/classService';
+import { ClassService, RelatedClass } from '../../services/classService';
 import { LanguageService, Localizer } from '../../services/languageService';
 import { LocationService } from '../../services/locationService';
 import { ModelService } from '../../services/modelService';
 import { PredicateService } from '../../services/predicateService';
 import { ConfirmationModal } from '../../components/common/confirmationModal';
 import { SearchClassModal } from '../../components/editor/searchClassModal';
-import { SearchClassTableModal, RelatedClass } from '../../components/editor/searchClassTableModal';
+import { SearchClassTableModal } from '../../components/editor/searchClassTableModal';
 import { SearchPredicateModal } from '../../components/editor/searchPredicateModal';
 import { EntityCreation } from '../../components/editor/searchConceptModal';
 import { ClassType, KnownPredicateType, SelectionType, WithDefinedBy } from '../../types/entity';
@@ -447,7 +447,7 @@ export class ModelPageComponent implements ModelPageActions, HelpProvider, Model
   }
 
   createRelatedClass(relatedClass: RelatedClass) {
-    this.classService.newRelatedClass!(this.model, relatedClass)
+    this.classService.newRelatedClass(this.model, relatedClass)
       .then(klass => this.selectNewlyCreatedOrAssignedEntity(klass));
   }
 

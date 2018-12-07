@@ -57,6 +57,10 @@ export type UseContext = 'InformationPool'
                        | 'ExchangeFormat'
                        | 'InformationDescription';
 
+export type ClassRelationType = 'prov:wasDerivedFrom'
+                              | 'rdfs:subClassOf'
+                              | 'iow:superClassOf';
+
 export const profileUseContexts: UseContext[] = ['InformationPool', 'InformationSystem', 'ExchangeFormat', 'InformationDescription'];
 export const libraryUseContexts: UseContext[] = ['InformationDescription'];
 

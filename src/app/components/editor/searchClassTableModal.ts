@@ -1,7 +1,7 @@
 import { IPromise, IScope } from 'angular';
 import { IModalService, IModalServiceInstance } from 'angular-ui-bootstrap';
 import { SearchConceptModal, EntityCreation } from './searchConceptModal';
-import { ClassService } from '../../services/classService';
+import { ClassService, RelatedClass } from '../../services/classService';
 import { LanguageService, Localizer } from '../../services/languageService';
 import { EditableForm } from '../../components/form/editableEntityController';
 import { Exclusion } from '../../utils/exclusion';
@@ -22,15 +22,9 @@ import { ModelService } from '../../services/modelService';
 import { comparingLocalizable } from '../../utils/comparator';
 import { Language } from '../../types/language';
 import { DefinedByType } from '../../types/entity';
-import { Uri } from '../../entities/uri';
 
 export const noExclude = (_item: AbstractClass) => null;
 export const defaultTextForSelection = (_klass: Class) => 'Use class';
-
-export class RelatedClass {
-  constructor(public oldClassId: Uri, public relationType: string) {
-  }
-}
 
 export class SearchClassTableModal {
 
