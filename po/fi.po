@@ -241,7 +241,7 @@ msgid "Modified at"
 msgstr "Muokattu"
 
 msgid "Copy class"
-msgstr "Kopio luokka"
+msgstr "Kopioi luokka"
 
 msgid "Create sub class"
 msgstr "Luo alaluokka"
