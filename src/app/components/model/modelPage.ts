@@ -7,7 +7,7 @@ import { ModelService } from '../../services/modelService';
 import { PredicateService } from '../../services/predicateService';
 import { ConfirmationModal } from '../../components/common/confirmationModal';
 import { SearchClassModal } from '../../components/editor/searchClassModal';
-import { SearchClassTableModal } from '../../components/editor/searchClassTableModal';
+import { SearchClassTableModal, noExclude } from '../../components/editor/searchClassTableModal';
 import { SearchPredicateModal } from '../../components/editor/searchPredicateModal';
 import { EntityCreation } from '../../components/editor/searchConceptModal';
 import { ClassType, KnownPredicateType, SelectionType, WithDefinedBy } from '../../types/entity';
@@ -334,12 +334,16 @@ export class ModelPageComponent implements ModelPageActions, HelpProvider, Model
       if (this.model.isOfType('profile')) {
         // profiles can create multiple shapes of single class so exists exclusion is not wanted
         // profiles can create copy of shapes so type exclusion is not wanted
-        return this.addClass(createDefinedByExclusion(this.model));
+        return this.addClass(createDefinedByExclusion(this.model), noExclude);
       } else {
-        return this.addClass(combineExclusions<AbstractClass>(
-          createClassTypeExclusion(SearchClassType.Class),
-          createDefinedByExclusion(this.model),
-          createExistsExclusion(collectIds(this.classes)))
+        return this.addClass(
+          combineExclusions<AbstractClass>(
+            createClassTypeExclusion(SearchClassType.Class),
+            createDefinedByExclusion(this.model),
+            createExistsExclusion(collectIds(this.classes))),
+          combineExclusions<AbstractClass>(
+            createClassTypeExclusion(SearchClassType.Class),
+            createExistsExclusion(collectIds(this.classes)))
         );
       }
     } else {
@@ -350,7 +354,8 @@ export class ModelPageComponent implements ModelPageActions, HelpProvider, Model
     }
   }
 
-  private addClass(exclusion: Exclusion<AbstractClass>) {
+  private addClass(exclusion: Exclusion<AbstractClass>,
+                   filterExclusion: Exclusion<AbstractClass>) {
 
     const isProfile = this.model.isOfType('profile');
     const textForSelection = (klass: Optional<Class>) => {
@@ -370,7 +375,7 @@ export class ModelPageComponent implements ModelPageActions, HelpProvider, Model
     
     // NEW FEATURE: Search class table view modal, not complete yet. - eJira issue: YTI-304 (old Jira: YTI-546)
     // Uncomment this and comment class search modal above if you want to test, but DO NOT COMMIT this until YTI-304 is done.
-    const searchClassModal = () => this.searchClassTableModal.open(this.model, exclusion, textForSelection);
+    const searchClassModal = () => this.searchClassTableModal.open(this.model, exclusion, filterExclusion, textForSelection);
 
     this.createOrAssignEntity(
       () => searchClassModal(),

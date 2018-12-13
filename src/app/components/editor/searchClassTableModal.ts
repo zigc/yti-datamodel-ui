@@ -34,6 +34,7 @@ export class SearchClassTableModal {
 
   private openModal(model: Model,
                     exclude: Exclusion<AbstractClass>,
+                    filterExclude: Exclusion<AbstractClass>,
                     defaultToCurrentModel: boolean,
                     onlySelection: boolean,
                     textForSelection: (klass: Optional<Class>) => string) {
@@ -47,6 +48,7 @@ export class SearchClassTableModal {
       resolve: {
         model: () => model,
         exclude: () => exclude,
+        filterExclude: () => filterExclude,
         defaultToCurrentModel: () => defaultToCurrentModel,
         onlySelection: () => onlySelection,
         textForSelection: () => textForSelection
@@ -56,17 +58,19 @@ export class SearchClassTableModal {
 
   open(model: Model,
        exclude: Exclusion<AbstractClass>,
+       filterExclude: Exclusion<AbstractClass> = exclude,
        textForSelection: (klass: Optional<Class>) => string): IPromise<ExternalEntity|EntityCreation|Class> {
 
-    return this.openModal(model, exclude, false, false, textForSelection);
+    return this.openModal(model, exclude, filterExclude, false, false, textForSelection);
   }
 
   openWithOnlySelection(model: Model,
                         defaultToCurrentModel: boolean,
                         exclude: Exclusion<AbstractClass>,
+                        filterExclude: Exclusion<AbstractClass> = exclude,
                         textForSelection: (klass: Optional<Class>) => string = defaultTextForSelection): IPromise<Class> {
 
-    return this.openModal(model, exclude, defaultToCurrentModel, true, textForSelection);
+    return this.openModal(model, exclude, filterExclude, defaultToCurrentModel, true, textForSelection);
   }
 }
 
@@ -111,6 +115,7 @@ class SearchClassTableController implements SearchController<ClassListItem> {
               languageService: LanguageService,
               public model: Model,
               public exclude: Exclusion<AbstractClass>,
+              public filterExclude: Exclusion<AbstractClass>,
               public defaultToCurrentModel: boolean,
               public onlySelection: boolean,
               public textForSelection: (klass: Optional<Class>) => string,
@@ -123,7 +128,6 @@ class SearchClassTableController implements SearchController<ClassListItem> {
     this.loadingResults = true;
 
     this.modelTypes = ['library', 'profile', 'standard'];
-
 
     function infoDomainMatches(infoDomain: Classification|null, modelItem: ModelListItem) {
       return !infoDomain || anyMatching(modelItem.classifications, c => c.id.equals(infoDomain.id));
@@ -200,7 +204,7 @@ class SearchClassTableController implements SearchController<ClassListItem> {
 
   search() {
     this.searchResults = [
-      ...filterAndSortSearchResults(this.classes, this.searchText, this.contentExtractors, this.searchFilters, defaultLabelComparator(this.localizer, this.exclude))
+      ...filterAndSortSearchResults(this.classes, this.searchText, this.contentExtractors, this.searchFilters, defaultLabelComparator(this.localizer, this.filterExclude))
     ];
   }
 
@@ -301,7 +305,7 @@ class SearchClassTableController implements SearchController<ClassListItem> {
   }
 
   showActions(item: AbstractClass) {    
-    return !item.isOfType('shape') && !item.definedBy.isOfType('standard');
+    return !this.onlySelection && !item.isOfType('shape') && !item.definedBy.isOfType('standard');
   }
 
   copyClass(item: AbstractClass) {

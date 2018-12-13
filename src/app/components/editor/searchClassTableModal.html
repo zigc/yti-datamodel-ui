@@ -67,7 +67,7 @@
 
         <excluded-filter search-controller="$ctrl"
                          search-text="$ctrl.searchText"
-                         exclude="$ctrl.exclude"></excluded-filter>
+                         exclude="$ctrl.filterExclude"></excluded-filter>
       </div>
     </div>
     
@@ -120,7 +120,8 @@
                 <th style="width: 20%" translate>Name</th>
                 <th style="width: 20%" translate>Model</th>
                 <th style="width: 45%" translate>Description</th>
-                <!-- <th style="width: 20%" translate>Super class</th> YLÄLUOKKAA EI VIELÄ TOTEUTETA, KOSKA SITÄ TIETOA EI OLE OLEMASSA VIELÄ. -->
+                <!-- Showing of super class is not implemented yet. -->
+                <!-- <th style="width: 20%" translate>Super class</th> -->
                 <th style="width: 10%" translate>Modified at</th>
                 <th style="width: 5%"></th>
               </tr>
@@ -160,10 +161,13 @@
                   </td>
                   <td>
                     <highlight text="searchResult.comment" context="$ctrl.model" search="$ctrl.searchText"></highlight>
+                  </td>                  
+                  <!-- Showing of super class is not implemented yet. -->
+                  <!--
+                  <td>
+                    {{$ctrl.model.linkToResource(searchResult.superClassOf)}}
                   </td>
-                  <!-- <td>
-                    {{searchResult.}}
-                  </td> -->
+                  -->
                   <td>
                     {{$ctrl.showItemValue(searchResult.modifiedAt)}}
                   </td>
