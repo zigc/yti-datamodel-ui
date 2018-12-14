@@ -1,17 +1,15 @@
 import * as _ from 'lodash';
-import { SearchController, TextAnalysis } from 'app/types/filter';
-import { IPromise, IScope } from 'angular';
+import { SearchController, TextAnalysis } from '../../types/filter';
+import { IScope } from 'angular';
 import { isDefined } from 'yti-common-ui/utils/object';
-import { ClassService } from 'app/services/classService';
-import { PredicateService } from 'app/services/predicateService';
-import { collectIds } from 'app/utils/entity';
-import { comparingLocalizable } from 'app/utils/comparator';
-import { LanguageService } from 'app/services/languageService';
-import { ifChanged, LegacyComponent } from 'app/utils/angular';
-import { ClassListItem } from 'app/entities/class';
-import { PredicateListItem } from 'app/entities/predicate';
-import { Model } from 'app/entities/model';
-import { DefinedBy } from 'app/entities/definedBy';
+import { collectIds } from '../../utils/entity';
+import { comparingLocalizable } from '../../utils/comparator';
+import { LanguageService } from '../../services/languageService';
+import { ifChanged, LegacyComponent } from '../../utils/angular';
+import { ClassListItem } from '../../entities/class';
+import { PredicateListItem } from '../../entities/predicate';
+import { Model } from '../../entities/model';
+import { DefinedBy } from '../../entities/definedBy';
 
 type ItemType = ClassListItem|PredicateListItem;
 
@@ -28,7 +26,7 @@ type ItemType = ClassListItem|PredicateListItem;
               style="width: auto"
               ng-model="$ctrl.showModel"
               ng-options="$ctrl.isThisModel(model)
-                        ? ('Assigned to this ' + $ctrl.model.normalizedType | translate)
+                        ? ('Imported namespaces' | translate)
                         : (model | translateLabel: $ctrl.model)
                         for model in $ctrl.models">
         <option value="" translate>All models</option>
@@ -44,11 +42,9 @@ export class ModelFilterComponent {
 
   showModel: Model|DefinedBy;
   models: (Model|DefinedBy)[] = [];
-  private currentModelItemIds: Set<string> = new Set<string>();
+  private currentModelImportedNamespaceIds: Set<string> = new Set<string>();
 
   constructor(private $scope: IScope,
-              private classService: ClassService,
-              private predicateService: PredicateService,
               private languageService: LanguageService) {
     'ngInject';
   }
@@ -60,12 +56,8 @@ export class ModelFilterComponent {
     this.showModel = this.defaultShow;
 
     this.$scope.$watch(() => this.model, () => {
-      const promise: IPromise<(PredicateListItem|ClassListItem)[]> =
-        (this.type === 'class' ? this.classService.getClassesAssignedToModel(this.model)
-                               : this.predicateService.getPredicatesAssignedToModel(this.model));
-
-      promise.then(items => this.currentModelItemIds = collectIds(items))
-        .then(() => this.searchController.search());
+      this.currentModelImportedNamespaceIds = collectIds(this.model.importedNamespaces);
+      this.searchController.search();
     });
 
     this.$scope.$watch(() => this.searchController.items, items => {
@@ -82,14 +74,16 @@ export class ModelFilterComponent {
         if (!this.showModel) {
           return true;
         } else if (this.showModel === this.model) {
-          return this.currentModelItemIds.has(item.item.id.toString());
+          return this.currentModelImportedNamespaceIds.has(item.item.definedBy.id.toString());
         } else {
           return isDefined(item.item.definedBy) && item.item.definedBy.id.equals(this.showModel.id);
         }
       }
     );
 
-    this.$scope.$watch(() => this.showModel, ifChanged(() => this.searchController.search()));
+    this.$scope.$watch(() => this.showModel, ifChanged(() => {
+      return this.searchController.search();
+    }));
   }
 
   isThisModel(item: DefinedBy|Model) {
