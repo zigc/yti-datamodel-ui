@@ -132,6 +132,7 @@
                     id="{{$ctrl.generateSearchResultID(searchResult)}}"
                     ng-class="['search-result', {active: $ctrl.isSelected(searchResult), disabled: $ctrl.isDisabled(searchResult)} ]"
                     ng-click="$ctrl.selectItem(searchResult)"
+                    title="{{$ctrl.itemTitle(searchResult)}}"
                     key-control-selection>
 
                   <td>

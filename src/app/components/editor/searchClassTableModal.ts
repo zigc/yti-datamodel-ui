@@ -22,6 +22,7 @@ import { ModelService } from '../../services/modelService';
 import { comparingLocalizable } from '../../utils/comparator';
 import { Language } from '../../types/language';
 import { DefinedByType } from '../../types/entity';
+import { gettextCatalog as GettextCatalog } from 'angular-gettext';
 
 export const noExclude = (_item: AbstractClass) => null;
 export const defaultTextForSelection = (_klass: Class) => 'Use class';
@@ -121,6 +122,7 @@ class SearchClassTableController implements SearchController<ClassListItem> {
               public textForSelection: (klass: Optional<Class>) => string,
               private searchConceptModal: SearchConceptModal,
               private displayItemFactory: DisplayItemFactory,
+              private gettextCatalog: GettextCatalog,
               classificationService: ClassificationService,
               modelService: ModelService) {
     'ngInject';
@@ -220,7 +222,6 @@ class SearchClassTableController implements SearchController<ClassListItem> {
 
     this.selectedItem = item;
     this.externalClass = undefined;
-    this.cannotConfirm = null;
     this.$scope.form.editing = false;
     this.$scope.form.$setPristine();
 
@@ -318,6 +319,17 @@ class SearchClassTableController implements SearchController<ClassListItem> {
   
   createSuperClass(item: AbstractClass) {
     this.$uibModalInstance.close(new RelatedClass(item.id, 'iow:superClassOf'));
+  }
+
+  itemTitle(item: AbstractClass) {
+
+    const disabledReason = this.exclude(item);
+
+    if (!!disabledReason) {
+      return this.gettextCatalog.getString(disabledReason);
+    } else {
+      return null;
+    }
   }
 }
 
