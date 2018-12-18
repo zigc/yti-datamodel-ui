@@ -1,10 +1,11 @@
-import { collectProperties, containsAny, firstMatchingValue, index } from 'yti-common-ui/utils/array';
+import { collectProperties, containsAny, firstMatchingValue, index, anyMatching } from 'yti-common-ui/utils/array';
 import { ClassType, Destination, GraphData, GroupType, ModelType, PredicateType, Type, WithId, DefinedByType } from '../types/entity';
 import { areEqual, requireDefined } from 'yti-common-ui/utils/object';
 import { IHttpPromiseCallbackArg } from 'angular';
 import { RelativeUrl, Uri, Urn } from '../entities/uri';
 import { Coordinate, Dimensions } from '../types/visualization';
-import { Model } from '../entities/model';
+import { Model, ModelListItem } from '../entities/model';
+import { Classification } from '../entities/classification';
 
 const fromType = new Map<Type, string[]>();
 const toType = new Map<string, Type>();
@@ -183,3 +184,7 @@ export function glyphIconClassForType(type: Type[]) {
 }
 
 export const glyphIconClassUnknown = ['fas', 'fa-question-circle'];
+
+export function infoDomainMatches(infoDomain: Classification|null, modelItem: ModelListItem) {
+  return !infoDomain || anyMatching(modelItem.classifications, c => c.id.equals(infoDomain.id));
+}

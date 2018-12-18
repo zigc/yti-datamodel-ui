@@ -7,7 +7,7 @@ import { EditableForm } from '../../components/form/editableEntityController';
 import { Exclusion } from '../../utils/exclusion';
 import { SearchFilter, SearchController } from '../../types/filter';
 import { AbstractClass, Class, ClassListItem } from '../../entities/class';
-import { Model, ModelListItem } from '../../entities/model';
+import { Model } from '../../entities/model';
 import { ExternalEntity } from '../../entities/externalEntity';
 import { filterAndSortSearchResults, defaultLabelComparator } from '../../components/filter/util';
 import { Optional, requireDefined } from 'yti-common-ui/utils/object';
@@ -17,12 +17,13 @@ import { Status, selectableStatuses } from 'yti-common-ui/entities/status';
 import { ifChanged } from '../../utils/angular';
 import { Classification } from '../../entities/classification';
 import { ClassificationService } from '../../services/classificationService';
-import { contains, anyMatching } from 'yti-common-ui/utils/array';
+import { contains } from 'yti-common-ui/utils/array';
 import { ModelService } from '../../services/modelService';
 import { comparingLocalizable } from '../../utils/comparator';
 import { Language } from '../../types/language';
 import { DefinedByType } from '../../types/entity';
 import { gettextCatalog as GettextCatalog } from 'angular-gettext';
+import { infoDomainMatches } from '../../utils/entity';
 
 export const noExclude = (_item: AbstractClass) => null;
 export const defaultTextForSelection = (_klass: Class) => 'Use class';
@@ -130,10 +131,6 @@ class SearchClassTableController implements SearchController<ClassListItem> {
     this.loadingResults = true;
 
     this.modelTypes = ['library', 'profile', 'standard'];
-
-    function infoDomainMatches(infoDomain: Classification|null, modelItem: ModelListItem) {
-      return !infoDomain || anyMatching(modelItem.classifications, c => c.id.equals(infoDomain.id));
-    }
 
     const sortInfoDomains = () => {
       this.infoDomains.sort(comparingLocalizable<Classification>(this.localizer, infoDomain => infoDomain.label));
