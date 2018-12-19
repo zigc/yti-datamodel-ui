@@ -34,6 +34,7 @@ import { ModelControllerService, View } from './modelControllerService';
 import { AuthorizationManagerService } from '../../services/authorizationManagerService';
 import IRouteService = route.IRouteService;
 import ICurrentRoute = route.ICurrentRoute;
+import { SearchPredicateTableModal } from '../editor/searchPredicateTableModal';
 
 export interface ModelPageActions extends ChangeNotifier<Class|Predicate> {
   select(item: WithIdAndType): void;
@@ -95,6 +96,7 @@ export class ModelPageComponent implements ModelPageActions, HelpProvider, Model
               private searchClassModal: SearchClassModal,
               private searchClassTableModal: SearchClassTableModal,
               private searchPredicateModal: SearchPredicateModal,
+              private searchPredicateTableModal: SearchPredicateTableModal,
               private confirmationModal: ConfirmationModal,
               private notificationModal: NotificationModal,
               private addPropertiesFromClassModal: AddPropertiesFromClassModal,
@@ -347,9 +349,12 @@ export class ModelPageComponent implements ModelPageActions, HelpProvider, Model
         );
       }
     } else {
-      this.addPredicate(type, combineExclusions<AbstractPredicate>(
-        createExistsExclusion(collectIds([this.attributes, this.associations])),
-        createDefinedByExclusion(this.model))
+      this.addPredicate(
+        type,
+        combineExclusions<AbstractPredicate>(
+          createExistsExclusion(collectIds([this.attributes, this.associations])),
+          createDefinedByExclusion(this.model)),
+        createExistsExclusion(collectIds([this.attributes, this.associations]))
       );
     }
   }
@@ -406,9 +411,16 @@ export class ModelPageComponent implements ModelPageActions, HelpProvider, Model
     );
   }
 
-  private addPredicate(type: KnownPredicateType, exclusion: Exclusion<AbstractPredicate>) {
+  private addPredicate(type: KnownPredicateType, exclusion: Exclusion<AbstractPredicate>, filterExclusion: Exclusion<AbstractPredicate>) {
+
+    // CURRENT FEATURE: Search predicate modal
+    // const searchPredicateModal = () => this.searchPredicateModal.openAddPredicate(this.model, type, exclusion);
+    
+    // NEW FEATURE: Search predicate table modal
+    const searchPredicateModal = () => this.searchPredicateTableModal.openAddPredicate(this.model, type, exclusion, filterExclusion);
+
     this.createOrAssignEntity(
-      () => this.searchPredicateModal.openAddPredicate(this.model, type, exclusion),
+      () => searchPredicateModal(),
       (_external: ExternalEntity) => this.$q.reject('Unsupported operation'),
       (concept: EntityCreation) => this.createPredicate(concept, type),
       (predicate: Predicate) => this.assignPredicateToModel(predicate)

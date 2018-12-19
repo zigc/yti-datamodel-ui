@@ -233,6 +233,9 @@ visualization-view ajax-loading-indicator {
       &.add-new {
         background-color: lighten($primary, 52%);
       }
+      .glyph-icon {
+        color: $primary;
+      }
     }
   }
 }

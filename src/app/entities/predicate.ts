@@ -21,16 +21,20 @@ import { Status } from 'yti-common-ui/entities/status';
 export abstract class AbstractPredicate extends GraphNode {
 
   static abstractPredicateMappings = {
-    id:        { name: '@id',         serializer: uriSerializer },
-    label:     { name: 'label',       serializer: localizableSerializer },
-    comment:   { name: 'comment',     serializer: localizableSerializer },
-    definedBy: { name: 'isDefinedBy', serializer: normalizingDefinedBySerializer }
+    id:         { name: '@id',         serializer: uriSerializer },
+    label:      { name: 'label',       serializer: localizableSerializer },
+    comment:    { name: 'comment',     serializer: localizableSerializer },
+    definedBy:  { name: 'isDefinedBy', serializer: normalizingDefinedBySerializer },
+    status:     { name: 'versionInfo', serializer: optional(identitySerializer<Status>()) },
+    modifiedAt: { name: 'modified',    serializer: optional(dateSerializer) }
   };
 
   id: Uri;
   label: Localizable;
   comment: Localizable;
   definedBy: DefinedBy;
+  status: Status|null; // External don't have status
+  modifiedAt: Moment|null;
 
   normalizedType: PredicateType = requireDefined(normalizePredicateType(this.type));
   selectionType: SelectionType = 'predicate';
@@ -71,23 +75,20 @@ export class PredicateListItem extends AbstractPredicate {
 export class Predicate extends AbstractPredicate {
 
   static predicateMappings = {
-    status:               { name: 'versionInfo',        serializer: optional(identitySerializer<Status>()) },
+    
     subPropertyOf:        { name: 'subPropertyOf',      serializer: entityAwareOptional(uriSerializer) },
     subject:              { name: 'subject',            serializer: entityAwareOptional(entity(() => Concept)) },
     equivalentProperties: { name: 'equivalentProperty', serializer: entityAwareList(uriSerializer) },
     version:              { name: 'identifier',         serializer: optional(identitySerializer<Urn>()) },
     editorialNote:        { name: 'editorialNote',      serializer: localizableSerializer },
-    modifiedAt:           { name: 'modified',           serializer: optional(dateSerializer) },
     createdAt:            { name: 'created',            serializer: optional(dateSerializer) }
   };
-
-  status: Status|null; // External don't have status
+  
   subPropertyOf: Uri|null;
   subject: Concept|null;
   equivalentProperties: Uri[];
   version: Urn|null;
   editorialNote: Localizable;
-  modifiedAt: Moment|null;
   createdAt: Moment|null;
 
   unsaved = false;
