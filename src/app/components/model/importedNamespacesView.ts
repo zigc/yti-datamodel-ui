@@ -11,7 +11,7 @@ import { EditableForm } from '../../components/form/editableEntityController';
 import { Uri } from '../../entities/uri';
 
 interface WithImportedNamespaces {
-  id: Uri;
+  id: Uri|null;
   importedNamespaces: ImportedNamespace[];
   addImportedNamespace(namespace: ImportedNamespace): void;
   removeImportedNamespace(namespace: ImportedNamespace): void;
@@ -77,8 +77,10 @@ export class ImportedNamespacesViewComponent {
       return null;
     };
 
+    const namespaceOfThisModel = this.value.id ? this.value.id.uri : '';
+    
     const profileExclude = (ns: ImportedNamespace) => (!this.allowProfiles && ns.isOfType('profile')) ? 'Cannot import profile' : null;
-    const thisModelExclude = (ns: ImportedNamespace) => (this.value.id.uri === ns.id.uri) ? 'Cannot import namespace of this model' : null;
+    const thisModelExclude = (ns: ImportedNamespace) => (namespaceOfThisModel === ns.id.uri) ? 'Cannot import namespace of this model' : null;
     const exclude = combineExclusions(existsExclude, profileExclude, thisModelExclude);
 
     this.searchNamespaceModal.open(this.context, exclude)
