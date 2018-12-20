@@ -1,8 +1,8 @@
-import { SearchController, TextAnalysis } from 'app/types/filter';
+import { SearchController, TextAnalysis } from '../../types/filter';
 import { IScope } from 'angular';
 import { isDefined } from 'yti-common-ui/utils/object';
-import { ifChanged, LegacyComponent } from 'app/utils/angular';
-import { Type } from 'app/types/entity';
+import { ifChanged, LegacyComponent } from '../../utils/angular';
+import { Type } from '../../types/entity';
 import * as _ from 'lodash';
 
 interface WithNormalizedType {
@@ -38,6 +38,11 @@ export class TypeFilterComponent {
   }
 
   $onInit() {
+
+    if (!!this.defaultType) {
+      this.type = this.defaultType;
+    }
+
     this.$scope.$watch(() => this.searchController.items, ifChanged<WithNormalizedType[]>(items => {
       this.types = _.chain(items)
         .map(item => item.normalizedType!)
