@@ -1,15 +1,17 @@
 import { IScope } from 'angular';
-import { LanguageService } from 'app/services/languageService';
-import { ColumnDescriptor, TableDescriptor } from 'app/components/form/editableTable';
+import { LanguageService } from '../../services/languageService';
+import { ColumnDescriptor, TableDescriptor } from '../../components/form/editableTable';
 import { AddEditNamespaceModal } from './addEditNamespaceModal';
 import { SearchNamespaceModal } from './searchNamespaceModal';
-import { combineExclusions } from 'app/utils/exclusion';
-import { ImportedNamespace, NamespaceType } from 'app/entities/model';
-import { LegacyComponent, modalCancelHandler } from 'app/utils/angular';
-import { LanguageContext } from 'app/types/language';
-import { EditableForm } from 'app/components/form/editableEntityController';
+import { combineExclusions } from '../../utils/exclusion';
+import { ImportedNamespace, NamespaceType } from '../../entities/model';
+import { LegacyComponent, modalCancelHandler } from '../../utils/angular';
+import { LanguageContext } from '../../types/language';
+import { EditableForm } from '../../components/form/editableEntityController';
+import { Uri } from '../../entities/uri';
 
 interface WithImportedNamespaces {
+  id: Uri;
   importedNamespaces: ImportedNamespace[];
   addImportedNamespace(namespace: ImportedNamespace): void;
   removeImportedNamespace(namespace: ImportedNamespace): void;
@@ -76,7 +78,8 @@ export class ImportedNamespacesViewComponent {
     };
 
     const profileExclude = (ns: ImportedNamespace) => (!this.allowProfiles && ns.isOfType('profile')) ? 'Cannot import profile' : null;
-    const exclude = combineExclusions(existsExclude, profileExclude);
+    const thisModelExclude = (ns: ImportedNamespace) => (this.value.id.uri === ns.id.uri) ? 'Cannot import namespace of this model' : null;
+    const exclude = combineExclusions(existsExclude, profileExclude, thisModelExclude);
 
     this.searchNamespaceModal.open(this.context, exclude)
       .then((ns: ImportedNamespace) => {
