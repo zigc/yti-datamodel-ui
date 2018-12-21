@@ -62,7 +62,7 @@
                       search-controller="$ctrl"
                       type="predicate"
                       model="$ctrl.model"></model-filter>
-                      
+
         <type-filter class="pull-left ml-2"
                      search-controller="$ctrl"
                      ng-show="$ctrl.typeSelectable"
@@ -178,21 +178,21 @@
 
   <div class="modal-footer">
 
-    <button type="button"
+    <button id="confirm_predicate_button"
+            type="button"
             class="btn btn-action confirm"
             ng-click="$ctrl.confirm()"
             ng-disabled="!$ctrl.selection || $ctrl.cannotConfirm || (form.editing && (form.$invalid || form.$pending)) || $ctrl.isExternalPredicatePending()">
       {{'Use ' + $ctrl.type | translate}}
     </button>
 
-    <!-- NOT IMPLEMENTED YET -->
-    <!-- <button id="create_predicate_button"
+    <button id="create_predicate_button"
         type="button"
         class="btn btn-secondary-action"
         ng-click="$ctrl.createNew($ctrl.type)"
-        ng-show="$ctrl.canAddNew()"> 
-    + <span translate>{{'New ' + $ctrl.type}}</span>
-    </button> -->
+        ng-show="$ctrl.canAddNew()">
+      + {{'New ' + $ctrl.type | translate}}
+    </button>
 
     <button type="button" class="btn btn-link cancel" ng-click="$ctrl.close()" translate>Cancel</button>
 

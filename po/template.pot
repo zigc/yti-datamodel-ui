@@ -31,6 +31,9 @@ msgstr ""
 msgid "Copy"
 msgstr ""
 
+msgid "Imported namespaces"
+msgstr ""
+
 msgid "All models"
 msgstr ""
 
@@ -68,9 +71,6 @@ msgid "Contributors"
 msgstr ""
 
 msgid "Add contributor"
-msgstr ""
-
-msgid "Imported namespaces"
 msgstr ""
 
 msgid "Import namespace"
@@ -952,7 +952,7 @@ msgstr ""
 msgid "You can add new attribute or association to the Class from here"
 msgstr ""
 
-msgid "Member groups"
+msgid "Admin groups"
 msgstr ""
 
 msgid "not found in the concept database"
@@ -1365,10 +1365,10 @@ msgstr ""
 msgid "Created at"
 msgstr ""
 
-msgid "Define concept for the class"
+msgid "Member groups"
 msgstr ""
 
-msgid "Admin groups"
+msgid "Define concept for the class"
 msgstr ""
 
 msgid "Add properties from class"
@@ -1450,6 +1450,12 @@ msgid "Create new attribute"
 msgstr ""
 
 msgid "Create new association"
+msgstr ""
+
+msgid "New attribute"
+msgstr ""
+
+msgid "New association"
 msgstr ""
 
 msgid "by referencing external uri"

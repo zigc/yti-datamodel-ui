@@ -39,6 +39,9 @@ msgstr ""
 msgid "Copy"
 msgstr "Kopioi"
 
+msgid "Imported namespaces"
+msgstr "Käytetyt nimiavaruudet"
+
 msgid "All models"
 msgstr "Kaikki tietomallit"
 
@@ -77,9 +80,6 @@ msgstr "Sisällöntuottajat"
 
 msgid "Add contributor"
 msgstr "Lisää sisällöntuottaja"
-
-msgid "Imported namespaces"
-msgstr "Käytetyt nimiavaruudet"
 
 msgid "Import namespace"
 msgstr "Lisää nimiavaruus"
@@ -1041,8 +1041,8 @@ msgstr ""
 "Täältä voit lisätä luokalle uuden attribuutin jonka arvoalue perustuu "
 "tietotyyppiin tai assosiaation jolla viitataan toiseen luokkaan"
 
-msgid "Member groups"
-msgstr "Käyttäjänä ryhmissä"
+msgid "Admin groups"
+msgstr "Pääkäyttäjänä ryhmissä"
 
 msgid "not found in the concept database"
 msgstr "ei löydy sanastosta"
@@ -1485,11 +1485,11 @@ msgstr "Nimi"
 msgid "Created at"
 msgstr "Luotu"
 
+msgid "Member groups"
+msgstr "Käyttäjänä ryhmissä"
+
 msgid "Define concept for the class"
 msgstr "Määrittele käsite luokalle"
-
-msgid "Admin groups"
-msgstr "Pääkäyttäjänä ryhmissä"
 
 msgid "Add properties from class"
 msgstr "Lisää ominaisuudet luokasta"
@@ -1571,6 +1571,12 @@ msgstr "Lisää uusi attribuutti"
 
 msgid "Create new association"
 msgstr "Lisää uusi assosiaatio"
+
+msgid "New attribute"
+msgstr "Uusi attribuutti"
+
+msgid "New association"
+msgstr "Uusi assosiaatio"
 
 msgid "by referencing external uri"
 msgstr "viittaamalla ulkoiseen tunnisteeseen"
