@@ -1041,8 +1041,8 @@ msgstr ""
 "Täältä voit lisätä luokalle uuden attribuutin jonka arvoalue perustuu "
 "tietotyyppiin tai assosiaation jolla viitataan toiseen luokkaan"
 
-msgid "Admin groups"
-msgstr "Pääkäyttäjänä ryhmissä"
+msgid "Add properties from scope class"
+msgstr "Lisää ominaisuudet tarkennettavasta luokasta"
 
 msgid "not found in the concept database"
 msgstr "ei löydy sanastosta"
@@ -1488,8 +1488,8 @@ msgstr "Luotu"
 msgid "Member groups"
 msgstr "Käyttäjänä ryhmissä"
 
-msgid "Define concept for the class"
-msgstr "Määrittele käsite luokalle"
+msgid "Admin groups"
+msgstr "Pääkäyttäjänä ryhmissä"
 
 msgid "Add properties from class"
 msgstr "Lisää ominaisuudet luokasta"
@@ -1497,8 +1497,8 @@ msgstr "Lisää ominaisuudet luokasta"
 msgid "Add properties from super class"
 msgstr "Lisää ominaisuudet yläluokasta"
 
-msgid "Add properties from scope class"
-msgstr "Lisää ominaisuudet tarkennettavasta luokasta"
+msgid "Define concept for the class"
+msgstr "Määrittele käsite luokalle"
 
 msgid "Add properties from profile class"
 msgstr "Lisää ominaisuudet nostettavaan luokkaan"
@@ -1577,6 +1577,24 @@ msgstr "Uusi attribuutti"
 
 msgid "New association"
 msgstr "Uusi assosiaatio"
+
+msgid "Copy attribute"
+msgstr "Kopioi attribuutti"
+
+msgid "Copy association"
+msgstr "Kopio assosiaatio"
+
+msgid "Create sub attribute"
+msgstr "Luo ala-attribuutti"
+
+msgid "Create sub association"
+msgstr "Luo ala-assosiaatio"
+
+msgid "Create super attribute"
+msgstr "Luo yläattribuutti"
+
+msgid "Create super association"
+msgstr "Luo yläassosiaatio"
 
 msgid "by referencing external uri"
 msgstr "viittaamalla ulkoiseen tunnisteeseen"

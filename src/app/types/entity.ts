@@ -61,6 +61,10 @@ export type ClassRelationType = 'prov:wasDerivedFrom'
                               | 'rdfs:subClassOf'
                               | 'iow:superClassOf';
 
+export type PredicateRelationType = 'prov:wasDerivedFrom'
+                                  | 'rdfs:subPropertyOf'
+                                  | 'iow:superPropertyOf';
+
 export const profileUseContexts: UseContext[] = ['InformationPool', 'InformationSystem', 'ExchangeFormat', 'InformationDescription'];
 export const libraryUseContexts: UseContext[] = ['InformationDescription'];
 

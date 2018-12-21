@@ -135,35 +135,31 @@
                   <td>
                     {{$ctrl.showItemValue(searchResult.modifiedAt)}}
                   </td>
-                  <!-- NOT IMPLEMENTED YET -->
-                  <!-- <td>
-                    <div class="pull-right" ng-if="$ctrl.showActions(searchResult)" uib-dropdown>                      
-                      <button id="{{'class_' + searchResult.id + '_actions_button'}}" class="btn btn-language dropdown-toggle" uib-dropdown-toggle>
+                  <td>
+                    <div class="pull-right" uib-dropdown>                      
+                      <button id="{{'predicate_' + searchResult.id + '_actions_button'}}" class="btn btn-language dropdown-toggle" uib-dropdown-toggle>
                         <span>...</span>
                       </button>
                   
-                      <div uib-dropdown-menu class="dropdown-menu-right" aria-labelledby="{{'class_' + searchResult.id + '_actions_button'}}">
-                        <button id="{{'copy_class_' + searchResult.id + '_button'}}"
+                      <div uib-dropdown-menu class="dropdown-menu-right" aria-labelledby="{{'predicate_' + searchResult.id + '_actions_button'}}">
+                        <button id="{{'copy_predicate_' + searchResult.id + '_button'}}"
                                 class="dropdown-item"
-                                ng-click="$ctrl.copyClass(searchResult)"
-                                translate>
-                          Copy class
+                                ng-click="$ctrl.copyPredicate(searchResult)">
+                          {{'Copy ' + $ctrl.type | translate}}
                         </button>
-                        <button id="{{'create_sub_class_' + searchResult.id + '_button'}}"
+                        <button id="{{'create_sub_predicate_' + searchResult.id + '_button'}}"
                                 class="dropdown-item"
-                                ng-click="$ctrl.createSubClass(searchResult)"
-                                translate>
-                          Create sub class
+                                ng-click="$ctrl.createSubPredicate(searchResult)">
+                          {{'Create sub ' + $ctrl.type | translate}}
                         </button>
-                        <button id="{{'create_super_class_' + searchResult.id + '_button'}}"
+                        <button id="{{'create_super_predicate_' + searchResult.id + '_button'}}"
                                 class="dropdown-item"
-                                ng-click="$ctrl.createSuperClass(searchResult)"
-                                translate>
-                          Create super class
+                                ng-click="$ctrl.createSuperPredicate(searchResult)">
+                          {{'Create super ' + $ctrl.type | translate}}
                         </button>
                       </div>
                     </div>
-                  </td> -->
+                  </td>
                 <tr>
 
               </tbody>

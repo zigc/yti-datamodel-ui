@@ -1,18 +1,19 @@
 import { IPromise, IQService } from 'angular';
-import { PredicateService } from 'app/services/predicateService';
+import { PredicateService } from '../../services/predicateService';
 import { ResetableService } from './resetableService';
-import { Association, Attribute, Predicate } from 'app/entities/predicate';
-import { Model } from 'app/entities/model';
-import { Uri, Urn } from 'app/entities/uri';
-import { DataSource } from 'app/components/form/dataSource';
-import { KnownPredicateType } from 'app/types/entity';
-import { Language } from 'app/types/language';
+import { Association, Attribute, Predicate } from '../../entities/predicate';
+import { Model } from '../../entities/model';
+import { Uri, Urn } from '../../entities/uri';
+import { DataSource } from '../../components/form/dataSource';
+import { KnownPredicateType } from '../../types/entity';
+import { Language } from '../../types/language';
 import * as moment from 'moment';
-import { VocabularyService } from 'app/services/vocabularyService';
+import { VocabularyService } from '../../services/vocabularyService';
 import { ModelResourceStore } from './resourceStore';
-import { Concept } from 'app/entities/vocabulary';
+import { Concept } from '../../entities/vocabulary';
 import { flatten } from 'yti-common-ui/utils/array';
 import { EntityCreatorService } from './entityCreatorService';
+import { RelatedPredicate } from '../../services/predicateService';
 
 export class InteractiveHelpPredicateService implements PredicateService, ResetableService {
 
@@ -89,6 +90,10 @@ export class InteractiveHelpPredicateService implements PredicateService, Reseta
           return predicate as T;
         });
       });
+  }
+
+  newRelatedPredicate<T extends Attribute|Association>(model: Model, relatedClass: RelatedPredicate): IPromise<T> {
+    throw new Error('newRelatedPredicate is not yet implemented in help');
   }
 
   changePredicateType(predicate: Attribute|Association, newType: KnownPredicateType, model: Model): IPromise<Attribute|Association> {

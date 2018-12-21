@@ -1,22 +1,27 @@
 import { IHttpService, IPromise, IQService } from 'angular';
 import * as moment from 'moment';
 import { upperCaseFirst } from 'change-case';
-import { KnownPredicateType } from 'app/types/entity';
-import { reverseMapType } from 'app/utils/entity';
-import { Urn, Uri } from 'app/entities/uri';
-import { expandContextWithKnownModels } from 'app/utils/entity';
-import { Language } from 'app/types/language';
-import { DataSource } from 'app/components/form/dataSource';
-import { modelScopeCache } from 'app/components/form/cache';
+import { KnownPredicateType, PredicateRelationType } from '../types/entity';
+import { reverseMapType } from '../utils/entity';
+import { Urn, Uri } from '../entities/uri';
+import { expandContextWithKnownModels } from '../utils/entity';
+import { Language } from '../types/language';
+import { DataSource } from '../components/form/dataSource';
+import { modelScopeCache } from '../components/form/cache';
 import { requireDefined } from 'yti-common-ui/utils/object';
 import { FrameService } from './frameService';
-import { GraphData, EntityFactory } from 'app/types/entity';
-import * as frames from 'app/entities/frames';
+import { GraphData, EntityFactory } from '../types/entity';
+import * as frames from '../entities/frames';
 import { containsAny, flatten } from 'yti-common-ui/utils/array';
-import { PredicateListItem, Predicate, Attribute, Association } from 'app/entities/predicate';
-import { Model } from 'app/entities/model';
-import { typeSerializer } from 'app/entities/serializer/serializer';
+import { PredicateListItem, Predicate, Attribute, Association } from '../entities/predicate';
+import { Model } from '../entities/model';
+import { typeSerializer } from '../entities/serializer/serializer';
 import { apiEndpointWithName } from './config';
+
+export class RelatedPredicate {
+  constructor(public oldPredicateId: Uri, public relationType: PredicateRelationType) {
+  }
+}
 
 export interface PredicateService {
   getPredicate(id: Uri|Urn, model?: Model): IPromise<Predicate>;
@@ -29,6 +34,7 @@ export interface PredicateService {
   deletePredicate(id: Uri, model: Model): IPromise<any>;
   assignPredicateToModel(predicateId: Uri, model: Model): IPromise<any>;
   newPredicate<T extends Attribute|Association>(model: Model, predicateLabel: string, conceptID: Uri|null, type: KnownPredicateType, lang: Language): IPromise<T>;
+  newRelatedPredicate<T extends Attribute|Association>(model: Model, relatedPredicate: RelatedPredicate): IPromise<T>;
   changePredicateType(predicate: Attribute|Association, newType: KnownPredicateType, model: Model): IPromise<Attribute|Association>;
   copyPredicate(predicate: Predicate|Uri, type: KnownPredicateType, model: Model): IPromise<Predicate>;
   getExternalPredicate(externalId: Uri, model: Model): IPromise<Predicate|null>;
@@ -151,6 +157,27 @@ export class DefaultPredicateService implements PredicateService {
     }
 
     return this.$http.get<GraphData>(apiEndpointWithName('predicateCreator'), {params})
+      .then(expandContextWithKnownModels(model))
+      .then(response => this.deserializePredicate(response.data!, false))
+      .then((predicate: T) => {
+        predicate.definedBy = model.asDefinedBy();
+        if (predicate instanceof Attribute && !predicate.dataType) {
+          predicate.dataType = 'xsd:string';
+        }
+        predicate.unsaved = true;
+        return predicate;
+      });
+  }
+
+  newRelatedPredicate<T extends Attribute|Association>(model: Model, relatedPredicate: RelatedPredicate): IPromise<T> {
+
+    const params: any = {
+      modelID: model.id.uri,
+      oldPredicate: relatedPredicate.oldPredicateId.uri,
+      relationType: relatedPredicate.relationType
+    };
+
+    return this.$http.get<GraphData>(apiEndpointWithName('relatedPredicateCreator'), {params})
       .then(expandContextWithKnownModels(model))
       .then(response => this.deserializePredicate(response.data!, false))
       .then((predicate: T) => {

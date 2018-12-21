@@ -1,7 +1,7 @@
 import { IPromise, IScope } from 'angular';
 import { IModalService, IModalServiceInstance } from 'angular-ui-bootstrap';
 import { gettextCatalog as GettextCatalog } from 'angular-gettext';
-import { PredicateService } from '../../services/predicateService';
+import { PredicateService, RelatedPredicate } from '../../services/predicateService';
 import { SearchConceptModal, EntityCreation } from './searchConceptModal';
 import { LanguageService, Localizer } from '../../services/languageService';
 import { EditableForm } from '../../components/form/editableEntityController';
@@ -251,10 +251,21 @@ class SearchPredicateTableController implements SearchController<PredicateListIt
     }).displayValue;
   }
 
-    generateSearchResultID(item: AbstractPredicate): string {
-      return `${item.id.toString()}${'_search_predicate_link'}`;
-    }
+  generateSearchResultID(item: AbstractPredicate): string {
+    return `${item.id.toString()}${'_search_predicate_link'}`;
+  }
 
+  copyPredicate(item: AbstractPredicate) {
+    this.$uibModalInstance.close(new RelatedPredicate(item.id, 'prov:wasDerivedFrom'));
+  }
+  
+  createSubPredicate(item: AbstractPredicate) {
+    this.$uibModalInstance.close(new RelatedPredicate(item.id, 'rdfs:subPropertyOf'));
+  }
+  
+  createSuperPredicate(item: AbstractPredicate) {
+    this.$uibModalInstance.close(new RelatedPredicate(item.id, 'iow:superPropertyOf'));
+  }
 
   itemTitle(item: AbstractPredicate) {
 

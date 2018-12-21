@@ -4,7 +4,7 @@ import { ClassService, RelatedClass } from '../../services/classService';
 import { LanguageService, Localizer } from '../../services/languageService';
 import { LocationService } from '../../services/locationService';
 import { ModelService } from '../../services/modelService';
-import { PredicateService } from '../../services/predicateService';
+import { PredicateService, RelatedPredicate } from '../../services/predicateService';
 import { ConfirmationModal } from '../../components/common/confirmationModal';
 import { SearchClassModal } from '../../components/editor/searchClassModal';
 import { SearchClassTableModal, noExclude } from '../../components/editor/searchClassTableModal';
@@ -44,6 +44,7 @@ export interface ModelPageActions extends ChangeNotifier<Class|Predicate> {
   copyShape(shape: Class): void;
   assignClassToModel(klass: Class): void;
   createPredicate(conceptCreation: EntityCreation, type: KnownPredicateType): void;
+  createRelatedPredicate(relatedPredicate: RelatedPredicate): void;
   assignPredicateToModel(predicate: Predicate): void;
 }
 
@@ -423,11 +424,17 @@ export class ModelPageComponent implements ModelPageActions, HelpProvider, Model
       () => searchPredicateModal(),
       (_external: ExternalEntity) => this.$q.reject('Unsupported operation'),
       (concept: EntityCreation) => this.createPredicate(concept, type),
-      (predicate: Predicate) => this.assignPredicateToModel(predicate)
+      (predicate: Predicate|RelatedPredicate) => {
+        if (predicate instanceof Predicate) {
+          this.assignPredicateToModel(predicate);
+        } else {
+          this.createRelatedPredicate(predicate);
+        }
+      }
     );
   }
 
-  private createOrAssignEntity<T extends Class|Predicate|RelatedClass>(modal: () => IPromise<ExternalEntity|EntityCreation|T>,
+  private createOrAssignEntity<T extends Class|Predicate|RelatedClass|RelatedPredicate>(modal: () => IPromise<ExternalEntity|EntityCreation|T>,
                                                                        fromExternalEntity: (external: ExternalEntity) => void,
                                                                        fromConcept: (concept: EntityCreation) => void,
                                                                        fromEntity: (entity: T) => void) {
@@ -501,6 +508,11 @@ export class ModelPageComponent implements ModelPageActions, HelpProvider, Model
 
   createPredicate(conceptCreation: EntityCreation, type: KnownPredicateType) {
     return this.predicateService.newPredicate(this.model, conceptCreation.entity.label, conceptCreation.conceptId, type, this.languageService.getModelLanguage(this.model))
+      .then(predicate => this.selectNewlyCreatedOrAssignedEntity(predicate));
+  }
+
+  createRelatedPredicate(relatedPredicate: RelatedPredicate) {
+    return this.predicateService.newRelatedPredicate(this.model, relatedPredicate)
       .then(predicate => this.selectNewlyCreatedOrAssignedEntity(predicate));
   }
 
