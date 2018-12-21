@@ -178,7 +178,7 @@
             type="button"
             class="btn btn-action confirm"
             ng-click="$ctrl.confirm()"
-            ng-disabled="!$ctrl.selection || $ctrl.cannotConfirm || (form.editing && (form.$invalid || form.$pending)) || $ctrl.isExternalPredicatePending()">
+            ng-disabled="!$ctrl.selection || $ctrl.cannotConfirm || (form.editing && (form.$invalid || form.$pending))">
       {{'Use ' + $ctrl.type | translate}}
     </button>
 
