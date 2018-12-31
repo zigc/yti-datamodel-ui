@@ -117,12 +117,48 @@
             <table ng-if="!$ctrl.loadingResults" class="table" width="100%">
               <thead>
               <tr>
-                <th style="width: 20%" translate>Name</th>
-                <th style="width: 20%" translate>Model</th>
-                <th style="width: 45%" translate>Description</th>
+                <th style="width: 20%" ng-click="$ctrl.setSortBy('name')">
+                  <button id="sort_class_by_name_button"
+                          type="button"
+                          ng-class="['btn btn-link', {'sort-by-selected': $ctrl.isSortBySelected('name')}]"                          
+                          translate>
+                    Name
+                  </button>
+                  <i id="sort_up_name_icon" class="fas fa-sort-up primary-color-item" ng-if="$ctrl.sortUp('name')"></i>
+                  <i id="sort_down_name_icon" class="fas fa-sort-down primary-color-item" ng-if="$ctrl.sortDown('name')"></i>
+                </th>
+                <th style="width: 20%" ng-click="$ctrl.setSortBy('model')">
+                  <button id="sort_class_by_model_button"
+                          type="button"
+                          ng-class="['btn btn-link', {'sort-by-selected': $ctrl.isSortBySelected('model')}]"                          
+                          translate>
+                    Model
+                  </button>
+                  <i id="sort_up_model_icon" class="fas fa-sort-up primary-color-item" ng-if="$ctrl.sortUp('model')"></i>
+                  <i id="sort_down_model_icon" class="fas fa-sort-down primary-color-item" ng-if="$ctrl.sortDown('model')"></i>
+                </th>
+                <th style="width: 45%" ng-click="$ctrl.setSortBy('description')">
+                  <button id="sort_class_by_description_button"
+                          type="button"
+                          ng-class="['btn btn-link', {'sort-by-selected': $ctrl.isSortBySelected('description')}]"                          
+                          translate>
+                      Description
+                  </button>
+                  <i id="sort_up_description_icon" class="fas fa-sort-up primary-color-item" ng-if="$ctrl.sortUp('description')"></i>
+                  <i id="sort_down_description_icon" class="fas fa-sort-down primary-color-item" ng-if="$ctrl.sortDown('description')"></i>
+                </th>
                 <!-- Showing of super class is not implemented yet. -->
                 <!-- <th style="width: 20%" translate>Super class</th> -->
-                <th style="width: 10%" translate>Modified at</th>
+                <th style="width: 10%" ng-click="$ctrl.setSortBy('modifiedAt')">
+                  <button id="sort_class_by_modified_at_button"
+                          type="button"
+                          ng-class="['btn btn-link', {'sort-by-selected': $ctrl.isSortBySelected('modifiedAt')}]"                          
+                          translate>
+                    Modified at
+                  </button>
+                  <i id="sort_up_modified_at_icon" class="fas fa-sort-up primary-color-item" ng-if="$ctrl.sortUp('modifiedAt')"></i>
+                  <i id="sort_down_modified_at_icon" class="fas fa-sort-down primary-color-item" ng-if="$ctrl.sortDown('modifiedAt')"></i>
+                </th>
                 <th style="width: 5%"></th>
               </tr>
               </thead>

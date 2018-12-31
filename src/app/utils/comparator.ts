@@ -1,12 +1,15 @@
 import { Moment } from 'moment';
-import { Optional } from 'yti-common-ui/utils/object';
+import { Optional, isDefined } from 'yti-common-ui/utils/object';
 import { ChainableComparator, makeChainable, optional, property } from 'yti-common-ui/utils/comparator';
-import { Localizer } from 'app/types/language';
+import { Localizer } from '../types/language';
 import { Localizable } from 'yti-common-ui/types/localization';
 import { Comparator, primitiveComparator } from 'yti-common-ui/utils/comparator';
 
 export function comparingDate<T>(propertyExtractor: (item: T) => Optional<Moment>): ChainableComparator<T> {
   return makeChainable(property(propertyExtractor, optional(dateComparator)));
+}
+export function comparingDateAllowNull<T>(propertyExtractor: (item: T) => Optional<Moment>): ChainableComparator<T> {
+  return makeChainable(property(propertyExtractor, optional(dateComparatorAllowNull)));
 }
 
 export function comparingLocalizable<T>(localizer: Localizer, propertyExtractor: (item: T) => Optional<Localizable>): ChainableComparator<T> {
@@ -19,6 +22,18 @@ function localized<T extends Localizable>(localizer: Localizer, localizedCompara
 
 export function dateComparator(lhs: Moment, rhs: Moment) {
   if (lhs.isAfter(rhs)) {
+    return 1;
+  } else if (lhs.isBefore(rhs)) {
+    return -1;
+  } else {
+    return 0;
+  }
+}
+
+export function dateComparatorAllowNull(lhs: Moment, rhs: Moment) {
+    if (!isDefined(lhs)) {
+    return 0;
+  } else if (lhs.isAfter(rhs)) {
     return 1;
   } else if (lhs.isBefore(rhs)) {
     return -1;

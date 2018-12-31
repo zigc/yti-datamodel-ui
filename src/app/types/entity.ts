@@ -2,6 +2,9 @@ import { Uri } from '../entities/uri';
 import { GraphNode, GraphNodes } from '../entities/graphNode';
 import { Localizable } from 'yti-common-ui/types/localization';
 import { DefinedBy } from '../entities/definedBy';
+import { ChainableComparator } from 'yti-common-ui/utils/comparator';
+import { TextAnalysis } from './filter';
+import { AbstractClass } from '../entities/class';
 
 export type Type = ModelType
                  | ClassType
@@ -113,3 +116,14 @@ export interface Destination {
   prefix: string|null;
   definedBy: DefinedBy|null;
 }
+
+export type SortByTableColumn = 'name'
+                              | 'model'
+                              | 'description'
+                              | 'modifiedAt';
+
+export interface SortBy {
+  name: SortByTableColumn;
+  comparator: ChainableComparator<TextAnalysis<AbstractClass>>;
+  descOrder: boolean;
+}                            
