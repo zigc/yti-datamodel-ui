@@ -45,6 +45,7 @@ import { UseContextDropdownComponent } from './components/model/use-context-drop
 import { UseContextInputComponent } from './components/form/use-context-input.component';
 import { HttpClientModule } from '@angular/common/http';
 import { apiEndpointWithName } from 'app/services/config';
+import { ExpandableTextComponent } from 'yti-common-ui/components/expandable-text.component';
 
 require('angular-gettext');
 require('checklist-model');
@@ -126,6 +127,7 @@ export function createMissingTranslationHandler(): MissingTranslationHandler {
     AjaxLoadingIndicatorSmallComponent,
     DropdownComponent,
     FilterDropdownComponent,
+    ExpandableTextComponent,
     StatusComponent,
     UseContextDropdownComponent,
     UseContextInputComponent
@@ -191,6 +193,10 @@ mod.directive('ajaxLoadingIndicatorSmall', downgradeComponent({component: AjaxLo
 mod.directive('appDropdown', downgradeComponent({
   component: DropdownComponent,
   inputs: ['options', 'showNullOption', 'placement']
+}));
+mod.directive('appExpandableText', downgradeComponent({
+  component: ExpandableTextComponent,
+  inputs: ['text', 'rows']
 }));
 mod.directive('appFilterDropdown', downgradeComponent({
   component: FilterDropdownComponent,

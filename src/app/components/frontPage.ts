@@ -67,7 +67,6 @@ export class FrontPageComponent implements HelpProvider {
   subscriptionsToClean: Subscription[] = [];
   modelsLoaded = false;
 
-  fullDescription: { [key: string]: boolean } = {};
   modelTypeIconDef = getDataModelingMaterialIcon;
   informationDomainIconSrc = getInformationDomainSvgIcon;
 
@@ -227,14 +226,6 @@ export class FrontPageComponent implements HelpProvider {
   addModel(type: KnownModelType) {
     this.$location.path('/newModel');
     this.$location.search({ type });
-  }
-
-  toggleFullDescription(id: string) {
-    if (this.fullDescription[id]) {
-      delete this.fullDescription[id];
-    } else {
-      this.fullDescription[id] = true;
-    }
   }
 
   private go(withIowUrl: {iowUrl(): Url|null}) {

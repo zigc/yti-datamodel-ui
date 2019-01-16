@@ -102,12 +102,9 @@
               <app-status class="status" [status]="model.status"></app-status>
 
               <a id="{{model.prefix + '_filtered_model_link'}}" class="name" href="#" ng-click="$ctrl.selectModel(model)">{{model.label | translateValue}}</a>
-              
-              <div class="description-container" ng-class="{'expand': $ctrl.fullDescription[model.id]}">
-                <span class="description">{{model.comment | translateValue}}</span>
-                <div class="limiter-container">
-                  <div class="description-limiter" ng-click="$ctrl.toggleFullDescription(model.id)"></div>
-                </div>
+
+              <div ng-if="model.comment | translateValue" class="description-component-container">
+                <app-expandable-text [text]="model.comment | translateValue"></app-expandable-text>
               </div>
 
               <span class="information-domains">

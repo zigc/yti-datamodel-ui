@@ -12,3 +12,4 @@ typings/*
 .idea/tasks.xml
 .idea/shelf/
 **/idea/shelf/
+yti-datamodel-ui.iml
