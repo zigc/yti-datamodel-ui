@@ -61,23 +61,24 @@
         <div class="row mb-4">
           <div class="col-md-12 result-list-filter-row">
 
-            <span class="search-label search-label-inline" translate>Filter results</span>
-            <span class="fas fa-info-circle info" style="padding-right: 10px" uib-tooltip="{{'INFO_TEXT_FRONTPAGE_FILTER_RESULTS' | translate}}"></span>
+            <span class="search-label search-label-inline with-info" translate>Filter results</span>
+            <div style="padding-left: 0.2rem">
+              <span class="fas fa-info-circle info" uib-tooltip="{{'INFO_TEXT_FRONTPAGE_FILTER_RESULTS' | translate}}"></span>
+            </div>
 
-            <app-filter-dropdown id="organization_filter_dropdown"
-                                class="pull-left"
-                                [options]="$ctrl.organizations"
-                                [filter-subject]="$ctrl.organization$"></app-filter-dropdown>
+            <div class="result-list-filter-dropdowns">
+              <app-filter-dropdown id="organization_filter_dropdown"
+                                  [options]="$ctrl.organizations"
+                                  [filter-subject]="$ctrl.organization$"></app-filter-dropdown>
 
-            <app-filter-dropdown id="model_type_filter_dropdown"
-                                class="pull-left ml-2"
-                                [options]="$ctrl.modelTypes"
-                                [filter-subject]="$ctrl.modelType$"></app-filter-dropdown>
+              <app-filter-dropdown id="model_type_filter_dropdown"
+                                  [options]="$ctrl.modelTypes"
+                                  [filter-subject]="$ctrl.modelType$"></app-filter-dropdown>
 
-            <app-filter-dropdown id="model_status_filter_dropdown"
-                                class="pull-left ml-2"
-                                [options]="$ctrl.statuses"
-                                [filter-subject]="$ctrl.status$"></app-filter-dropdown>
+              <app-filter-dropdown id="model_status_filter_dropdown"
+                                  [options]="$ctrl.statuses"
+                                  [filter-subject]="$ctrl.status$"></app-filter-dropdown>
+            </div>
           </div>
         </div>
 
