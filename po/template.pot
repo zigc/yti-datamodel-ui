@@ -94,7 +94,7 @@ msgstr ""
 msgid "Reference data information"
 msgstr ""
 
-msgid "Controlled vocabularies"
+msgid "Terminologies"
 msgstr ""
 
 msgid "Add vocabulary"
@@ -124,15 +124,6 @@ msgstr ""
 msgid "Data Vocabularies"
 msgstr ""
 
-msgid "Choose action"
-msgstr ""
-
-msgid "Show"
-msgstr ""
-
-msgid "Download"
-msgstr ""
-
 msgid "Confirm delete"
 msgstr ""
 
@@ -140,6 +131,12 @@ msgid "Following items are depending on the deleted"
 msgstr ""
 
 msgid "Are you sure that you want to delete?"
+msgstr ""
+
+msgid "Show"
+msgstr ""
+
+msgid "Download"
 msgstr ""
 
 msgid "Export"
@@ -430,7 +427,7 @@ msgstr ""
 msgid "User details"
 msgstr ""
 
-msgid "Suomi.fi Controlled Vocabularies"
+msgid "Suomi.fi Terminologies"
 msgstr ""
 
 msgid "Suomi.fi Reference Data"
