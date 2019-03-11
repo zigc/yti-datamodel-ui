@@ -390,6 +390,26 @@ msgstr ""
 msgid "Edit reference data"
 msgstr ""
 
+#, fuzzy
+#| msgid "Add model description"
+msgid "Datamodel definition"
+msgstr ""
+"Add domain specific Core Vocabulary or application specific Application "
+"Profile"
+
+msgid "Datamodel details"
+msgstr ""
+
+#, fuzzy
+#| msgid "InformationPool"
+msgid "Information domain"
+msgstr "Information pool"
+
+#, fuzzy
+#| msgid "association"
+msgid "Organization"
+msgstr "Association"
+
 msgid "Show model details"
 msgstr ""
 

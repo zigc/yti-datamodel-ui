@@ -42,7 +42,7 @@ export class ImportedNamespacesViewComponent {
   value: WithImportedNamespaces;
   allowProfiles: boolean;
   context: LanguageContext;
-  namespacesInUse: Set<string>;
+  namespacesInUse?: Set<string>;
 
   descriptor: ImportedNamespaceTableDescriptor;
   expanded = false;
@@ -97,7 +97,7 @@ class ImportedNamespaceTableDescriptor extends TableDescriptor<ImportedNamespace
               private value: WithImportedNamespaces,
               private context: LanguageContext,
               private languageService: LanguageService,
-              private namespacesInUse: Set<string>) {
+              private namespacesInUse?: Set<string>) {
     super();
   }
 
@@ -130,6 +130,9 @@ class ImportedNamespaceTableDescriptor extends TableDescriptor<ImportedNamespace
   }
 
   canRemove(ns: ImportedNamespace): boolean {
-    return !this.namespacesInUse.has(ns.id.uri);
+    if (this.namespacesInUse) {
+      return !this.namespacesInUse.has(ns.id.uri);
+    }
+    return false;
   }
 }

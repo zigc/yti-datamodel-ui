@@ -27,8 +27,8 @@ function formatFileName(entity: EntityType, extension: string) {
 
 @LegacyComponent({
   bindings: {
-    entity: '=',
-    context: '='
+    entity: '<',
+    context: '<'
   },
   template: require('./export.html')
 })

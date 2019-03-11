@@ -1,3 +1,4 @@
+import * as angular from 'angular';
 import { SearchNamespaceModal } from './searchNamespaceModal';
 import { SearchVocabularyModal } from './searchVocabularyModal';
 import { AddEditLinkModal } from './addEditLinkModal';
@@ -26,6 +27,8 @@ import { NonEditableVocabularyComponent } from './nonEditableVocabulary';
 
 import { componentDeclaration } from 'app/utils/angular';
 import { module as mod } from './module';
+import { downgradeComponent } from '@angular/upgrade/static';
+import { ModelMainComponent } from './modelMain';
 export { module } from './module';
 
 mod.component('editableRootClass', componentDeclaration(EditableRootClassComponent));
@@ -54,3 +57,5 @@ mod.service('editReferenceDataModal', EditReferenceDataModal);
 mod.service('viewReferenceDataModal', ViewReferenceDataModal);
 mod.service('searchClassificationModal', SearchClassificationModal);
 mod.service('searchOrganizationModal', SearchOrganizationModal);
+
+mod.directive('modelMain', downgradeComponent({component: ModelMainComponent}) as angular.IDirectiveFactory);
