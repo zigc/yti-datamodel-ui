@@ -364,16 +364,10 @@ msgstr ""
 msgid "Edit reference data"
 msgstr ""
 
-msgid "Datamodel definition"
+msgid "Show model details"
 msgstr ""
 
-msgid "Datamodel details"
-msgstr ""
-
-msgid "Information domain"
-msgstr ""
-
-msgid "Organization"
+msgid "Hide model details"
 msgstr ""
 
 msgid "Browse reference data codes"

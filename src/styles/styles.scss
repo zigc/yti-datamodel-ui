@@ -348,6 +348,7 @@ model-page {
       border: 1px solid $gray;
 
       &.floating {
+        border-bottom: none;
       }
 
       ul.nav-tabs {
@@ -438,7 +439,7 @@ model-page {
       divider {
         display: inline-block;
         float: left;
-        height: 100vh;
+        height: calc(100vh - 5px);
         width: $divider-width;
 
         -webkit-user-select: none;
@@ -462,7 +463,7 @@ model-page {
         float: left;
         display: inline-block;
         width: calc(100% - 10px);
-        height: 100vh;
+        height: calc(100vh - 5px);
         border: 1px solid $gray;
 
         &.without-divider {
@@ -475,7 +476,6 @@ model-page {
           left: 0;
           width: 100%;
           height: 100%;
-          z-index: 2;
         }
 
         class-visualization {

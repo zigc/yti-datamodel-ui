@@ -46,16 +46,6 @@ import { UseContextInputComponent } from './components/form/use-context-input.co
 import { HttpClientModule } from '@angular/common/http';
 import { apiEndpointWithName } from 'app/services/config';
 import { ExpandableTextComponent } from 'yti-common-ui/components/expandable-text.component';
-import { ModelMainComponent } from './components/model/modelMain';
-import {
-  confirmationModalProvider,
-  locationServiceProvider,
-  modelServiceProvider,
-  notificationModalFactory, notificationModalProvider,
-  routeServiceProvider,
-  scopeProvider
-} from './ajs-upgraded-providers';
-import { ExportDirective, ModelLanguageChooserDirective, ModelPageDirective, ModelViewDirective } from './ajs-upgraded-components';
 
 require('angular-gettext');
 require('checklist-model');
@@ -128,12 +118,7 @@ export function createMissingTranslationHandler(): MissingTranslationHandler {
   ],
   declarations: [
     UseContextDropdownComponent,
-    UseContextInputComponent,
-    ModelMainComponent,
-    ModelPageDirective,
-    ModelViewDirective,
-    ModelLanguageChooserDirective,
-    ExportDirective
+    UseContextInputComponent
   ],
   entryComponents: [
     FooterComponent,
@@ -145,15 +130,14 @@ export function createMissingTranslationHandler(): MissingTranslationHandler {
     ExpandableTextComponent,
     StatusComponent,
     UseContextDropdownComponent,
-    UseContextInputComponent,
-    ModelMainComponent
+    UseContextInputComponent
   ],
   providers: [
     { provide: AUTHENTICATED_USER_ENDPOINT, useFactory: resolveAuthenticatedUserEndpoint },
     {
       provide: LanguageService,
-      useFactory(injector: IInjectorService): LanguageService {
-        return injector.get<LanguageService>('languageService');
+      useFactory(injector: IInjectorService): AngularLocalizer {
+        return new DefaultAngularLocalizer(injector.get<LanguageService>('languageService'));
       },
       deps: ['$injector']
     },
@@ -162,13 +146,7 @@ export function createMissingTranslationHandler(): MissingTranslationHandler {
         return new DefaultAngularLocalizer(languageService);
       },
       deps: [LanguageService]
-    },
-    scopeProvider,
-    routeServiceProvider,
-    locationServiceProvider,
-    modelServiceProvider,
-    notificationModalProvider,
-    confirmationModalProvider
+    }
   ]
 })
 export class AppModule {

@@ -6,28 +6,23 @@ import { DeleteConfirmationModal } from 'app/components/common/deleteConfirmatio
 import { ErrorModal } from 'app/components/form/errorModal';
 import { Model } from 'app/entities/model';
 import { LanguageContext } from 'app/types/language';
-import { EditorContainer } from './modelControllerService';
+import { ModelControllerService } from './modelControllerService';
 import { AuthorizationManagerService } from 'app/services/authorizationManagerService';
 import { LegacyComponent } from 'app/utils/angular';
 
 @LegacyComponent({
   bindings: {
-    id: '<',
-    model: '<',
-    parent: '<',
-    deleted: '&',
-    updated: '&',
-    namespacesInUse: '<'
+    id: '=',
+    model: '=',
+    modelController: '='
   },
   template: require('./modelView.html')
 })
 export class ModelViewComponent extends EditableEntityController<Model> {
 
+  visible = false;
   model: Model;
-  parent: EditorContainer;
-  deleted: (model: Model) => void;
-  updated: (model: Model) => void;
-  namespacesInUse: Set<string>;
+  modelController: ModelControllerService;
 
   constructor($scope: EditableScope,
               $log: ILogService,
@@ -41,11 +36,16 @@ export class ModelViewComponent extends EditableEntityController<Model> {
   }
 
   $onInit() {
-    this.parent.registerView(this);
-  }
 
-  $onDestroy() {
-    this.parent.deregisterView(this);
+    if (this.modelController) {
+      this.modelController.registerView(this);
+    }
+
+    this.$scope.$watch(() => this.isEditing(), editing => {
+      if (editing) {
+        this.visible = true;
+      }
+    });
   }
 
   create(model: Model) {
@@ -53,11 +53,11 @@ export class ModelViewComponent extends EditableEntityController<Model> {
   }
 
   update(model: Model, _oldEntity: Model) {
-    return this.modelService.updateModel(model).then(() => this.updated(model));
+    return this.modelService.updateModel(model);
   }
 
   remove(model: Model): IPromise<any> {
-    return this.modelService.deleteModel(model.id).then(() => this.deleted(model));
+    return this.modelService.deleteModel(model.id);
   }
 
   rights(): Rights {

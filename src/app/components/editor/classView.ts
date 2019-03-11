@@ -9,7 +9,7 @@ import { LegacyComponent, modalCancelHandler } from 'app/utils/angular';
 import { Class } from 'app/entities/class';
 import { Model } from 'app/entities/model';
 import { LanguageContext } from 'app/types/language';
-import { EditorContainer, ModelControllerService } from 'app/components/model/modelControllerService';
+import { ModelControllerService } from 'app/components/model/modelControllerService';
 import { AuthorizationManagerService } from 'app/services/authorizationManagerService';
 
 @LegacyComponent({
@@ -17,8 +17,7 @@ import { AuthorizationManagerService } from 'app/services/authorizationManagerSe
     id: '@',
     class: '=',
     model: '=',
-    modelController: '<',
-    parent: '<',
+    modelController: '=',
     openPropertyId: '='
   },
   template: require('./classView.html')
@@ -28,7 +27,6 @@ export class ClassViewComponent extends EditableEntityController<Class> {
   class: Class;
   model: Model;
   modelController: ModelControllerService;
-  parent: EditorContainer;
   openPropertyId: string;
 
   constructor($scope: EditableScope,
@@ -44,11 +42,7 @@ export class ClassViewComponent extends EditableEntityController<Class> {
   }
 
   $onInit() {
-    this.parent.registerView(this);
-  }
-
-  $onDestroy() {
-    this.parent.deregisterView(this);
+    this.modelController.registerView(this);
   }
 
   addProperty() {

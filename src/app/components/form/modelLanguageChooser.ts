@@ -7,7 +7,7 @@ import { LegacyComponent } from 'app/utils/angular';
 
 @LegacyComponent({
   bindings: {
-    context: '<'
+    context: '='
   },
   template: require('./modelLanguageChooser.html')
 })

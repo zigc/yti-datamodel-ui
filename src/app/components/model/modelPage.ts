@@ -1,4 +1,4 @@
-import { ILocationService, IPromise, IQService, IScope } from 'angular';
+import { ILocationService, IPromise, IQService, IScope, route } from 'angular';
 import * as _ from 'lodash';
 import { ClassService } from '../../services/classService';
 import { LanguageService, Localizer } from '../../services/languageService';
@@ -15,14 +15,8 @@ import { ChangeListener, ChangeNotifier, SearchClassType } from '../../types/com
 import { Uri } from '../../entities/uri';
 import { comparingLocalizable } from '../../utils/comparator';
 import { AddPropertiesFromClassModal } from '../../components/editor/addPropertiesFromClassModal';
-import { LegacyComponent, modalCancelHandler } from '../../utils/angular';
-import {
-  combineExclusions,
-  createClassTypeExclusion,
-  createDefinedByExclusion,
-  createExistsExclusion,
-  Exclusion
-} from '../../utils/exclusion';
+import { isDifferentUrl, LegacyComponent, modalCancelHandler, nextUrl } from '../../utils/angular';
+import { combineExclusions, createClassTypeExclusion, createDefinedByExclusion, createExistsExclusion, Exclusion } from '../../utils/exclusion';
 import { collectIds, glyphIconClassForType } from '../../utils/entity';
 import { areEqual, Optional } from 'yti-common-ui/utils/object';
 import { AbstractPredicate, Predicate, PredicateListItem } from '../../entities/predicate';
@@ -36,35 +30,22 @@ import { HelpProvider } from '../../components/common/helpProvider';
 import { InteractiveHelp } from '../../help/contract';
 import { ModelPageHelpService } from '../../help/providers/modelPageHelpService';
 import { InteractiveHelpService } from '../../help/services/interactiveHelpService';
-import { EditorContainer, ModelControllerService } from './modelControllerService';
+import { ModelControllerService, View } from './modelControllerService';
 import { AuthorizationManagerService } from '../../services/authorizationManagerService';
-import { ModelAndSelection } from '../../services/subRoutingHackService';
-import { BehaviorSubject, Subscription } from 'rxjs';
+import IRouteService = route.IRouteService;
+import ICurrentRoute = route.ICurrentRoute;
 
-
-export interface ModelPageActions extends ChangeNotifier<Class | Predicate> {
-  selectResource(item: WithIdAndType): void;
-
+export interface ModelPageActions extends ChangeNotifier<Class|Predicate> {
+  select(item: WithIdAndType): void;
   createClass(conceptCreation: EntityCreation): void;
-
-  createShape(classOrExternal: Class | ExternalEntity, external: boolean): void;
-
+  createShape(classOrExternal: Class|ExternalEntity, external: boolean): void;
   copyShape(shape: Class): void;
-
   assignClassToModel(klass: Class): void;
-
   createPredicate(conceptCreation: EntityCreation, type: KnownPredicateType): void;
-
   assignPredicateToModel(predicate: Predicate): void;
 }
 
 @LegacyComponent({
-  bindings: {
-    currentSelection: '<',
-    select: '&',
-    updateNamespaces: '&',
-    parent: '<'
-  },
   require: {
     application: '^application'
   },
@@ -72,20 +53,13 @@ export interface ModelPageActions extends ChangeNotifier<Class | Predicate> {
 })
 export class ModelPageComponent implements ModelPageActions, HelpProvider, ModelControllerService {
 
-  currentSelection: BehaviorSubject<ModelAndSelection>;
-  select: (selection: { resourceCurie?: string, propertyId?: string }) => void;
-  updateNamespaces: (namespacesInUse: Set<string>) => void;
-  parent: EditorContainer;
-  subscriptions: Subscription[] = [];
-
+  loading = true;
+  views: View[] = [];
+  changeListeners: ChangeListener<Class|Predicate>[] = [];
+  selectedItem: WithIdAndType|null = null;
   model: Model;
-  resource?: Class | Predicate;
-  propertyId?: string;
-
-  loadingResource?: WithIdAndType;
-  loadingResourcePromise?: IPromise<Class | Predicate>;
-
-  changeListeners: ChangeListener<Class | Predicate>[] = [];
+  selection: Class|Predicate|null = null;
+  openPropertyId?: string;
   classes: SelectableItem[] = [];
   associations: SelectableItem[] = [];
   attributes: SelectableItem[] = [];
@@ -99,11 +73,19 @@ export class ModelPageComponent implements ModelPageActions, HelpProvider, Model
     new Tab('attribute', () => this.attributes, this),
     new Tab('association', () => this.associations, this)
   ];
+
+  private localizerProvider: () => Localizer;
+
+  private initialRoute: ICurrentRoute;
+  private currentRouteParams: any;
+
   helps: InteractiveHelp[] = [];
+
   application: ApplicationComponent;
 
   constructor($scope: IScope,
               $location: ILocationService,
+              private $route: IRouteService,
               private $q: IQService,
               private locationService: LocationService,
               private modelService: ModelService,
@@ -117,11 +99,57 @@ export class ModelPageComponent implements ModelPageActions, HelpProvider, Model
               private addPropertiesFromClassModal: AddPropertiesFromClassModal,
               public languageService: LanguageService,
               interactiveHelpService: InteractiveHelpService,
-              private modelPageHelpService: ModelPageHelpService,
+              modelPageHelpService: ModelPageHelpService,
               private authorizationManagerService: AuthorizationManagerService) {
     'ngInject';
+    this.localizerProvider = () => languageService.createLocalizer(this.model);
 
-    $scope.$watch(() => this.languageService.UILanguage, () => this.setHelps());
+    this.initialRoute = $route.current!;
+    this.currentRouteParams = this.initialRoute.params;
+
+    this.init(new RouteData(this.currentRouteParams));
+
+    $scope.$on('$locationChangeSuccess', () => {
+      if ($location.path().startsWith('/model')) {
+        this.init(new RouteData($route.current!.params));
+
+        // FIXME: hack to prevent reload on params update
+        // https://github.com/angular/angular.js/issues/1699#issuecomment-45048054
+        // TODO: consider migration to angular-ui-router if it fixes the problem elegantly (https://ui-router.github.io/ng1/)
+        this.currentRouteParams = $route.current!.params;
+        $route.current = this.initialRoute;
+      }
+    });
+
+    $scope.$on('$locationChangeStart', (event, next, current) => {
+      if (interactiveHelpService.isClosed() && isDifferentUrl(current, next)) {
+        this.ifEditing(() => event.preventDefault(), () => $location.url(nextUrl($location, next)));
+      }
+    });
+
+    const setHelps = (model: Model) => this.helps = model ? modelPageHelpService.getHelps(model.normalizedType, model.prefix, this.languageService.UILanguage) : [];
+
+    $scope.$watch(() => this.model, (newModel: Model, oldModel: Model) => {
+      if (oldModel && !newModel) { // model removed
+        $location.url('/');
+      }
+
+      setHelps(newModel);
+    });
+
+    $scope.$watch(() => this.languageService.UILanguage, () => setHelps(this.model));
+
+    $scope.$watch(() => this.selection, (selection, oldSelection) => {
+
+      this.alignTabWithSelection();
+
+      if (!matchesIdentity(selection, oldSelection)) {
+        if (oldSelection) {
+          this.openPropertyId = undefined;
+        }
+        this.updateLocation();
+      }
+    });
 
     $scope.$watch(() => this.model && this.languageService.getModelLanguage(this.model), () => {
       if (this.model) {
@@ -129,15 +157,7 @@ export class ModelPageComponent implements ModelPageActions, HelpProvider, Model
       }
     });
 
-    $scope.$watch(() => this.propertyId, (newId: string, oldId: string) => {
-      const current = this.currentSelection.getValue();
-      if (oldId === current.propertyId && oldId !== newId) {
-        this.select({ resourceCurie: current.resourceCurie, propertyId: newId });
-      }
-    });
-
-    $scope.$watch(() => this.resource, () => {
-      this.alignTabWithSelection();
+    $scope.$watch(() => this.selection, () => {
       for (const changeListener of this.changeListeners) {
         changeListener.onResize();
       }
@@ -146,6 +166,13 @@ export class ModelPageComponent implements ModelPageActions, HelpProvider, Model
     $scope.$watch(() => this.selectionWidth, () => {
       for (const changeListener of this.changeListeners) {
         changeListener.onResize();
+      }
+    });
+
+    $scope.$watch(() => $route.current!.params.property, propertyId => this.openPropertyId = propertyId);
+    $scope.$watch(() => this.openPropertyId, propertyId => {
+      if (this.currentRouteParams.property !== propertyId) {
+        this.updateLocation();
       }
     });
 
@@ -161,38 +188,80 @@ export class ModelPageComponent implements ModelPageActions, HelpProvider, Model
     });
   }
 
-  get visualizationWidth() {
-    return this.resource ? `calc(100% - ${this.selectionWidth}px)` : '100%';
-  }
-
-  get selectableItemComparator() {
-    return comparingLocalizable<SelectableItem>(this.localizerProvider(), selectableItem => selectableItem.item.label);
-  }
-
-  $onInit() {
-    this.subscriptions.push(this.currentSelection.subscribe(newModelAndSelection => {
-      if (newModelAndSelection.model) {
-        const modelChanged = !this.model || this.model.prefix !== newModelAndSelection.model.prefix;
-        if (modelChanged) {
-          this.model = newModelAndSelection.model;
-          this.setHelps();
-        }
-        this.obeySelectionChange(modelChanged, newModelAndSelection.resourceCurie, newModelAndSelection.propertyId);
-      } else {
-        // NOTE: This component will be destroyed instantaneously, and currently this.model is not optional. So let us do nothing.
-      }
-    }));
-  }
-
-  $onDestroy() {
-    this.subscriptions.forEach(s => s.unsubscribe());
-  }
-
   $postLink() {
     this.application.registerHelpProvider(this);
   }
 
-  addListener(listener: ChangeListener<Class | Predicate>) {
+  private init(routeData: RouteData) {
+
+    const modelChanged = !this.model || this.model.prefix !== routeData.existingModelPrefix;
+    const selectionChanged = !areEqual((this.selection && this.selection.id.curie), routeData.resourceCurie);
+
+    this.openPropertyId = routeData.propertyId;
+
+    const modelNotFoundHandler = () => {
+      this.notificationModal.openModelNotFound();
+      return this.$q.reject('model not found');
+    };
+
+    const resourceNotFoundHandler = () => this.notificationModal.openResourceNotFound(this.model);
+
+    if (modelChanged) {
+      this.loading = true;
+
+      this.updateModelByPrefix(routeData.existingModelPrefix)
+        .then(() => true, modelNotFoundHandler)
+        .then(() => this.$q.all([this.selectRouteOrDefault(routeData).then(() => true, resourceNotFoundHandler), this.updateSelectables()]))
+        .then(() => this.updateLocation())
+        .then(() => this.loading = false)
+        .catch(err => {
+          // TODO handle with error modal
+          console.log(err);
+          throw err;
+        });
+
+    } else if (selectionChanged) {
+      this.selectRouteOrDefault(routeData).then(() => true, resourceNotFoundHandler)
+        .then(() => this.updateLocation())
+        .catch(err => {
+          // TODO handle with error modal
+          console.log(err);
+          throw err;
+        });
+    }
+  }
+
+  private updateLocation() {
+
+    if (this.model) {
+      this.locationService.atModel(this.model, this.selection);
+
+      const newParams: any = { prefix: this.model.prefix };
+
+      if (this.selection) {
+        newParams.resource = this.selection.id.namespace === this.model.namespace
+          ? this.selection.id.name
+          : this.selection.id.curie;
+      } else {
+        newParams.resource = undefined;
+      }
+
+      newParams.property = this.openPropertyId;
+
+      if (!areEqual(newParams.prefix, this.currentRouteParams.prefix)
+        || !areEqual(newParams.resource, this.currentRouteParams.resource)
+        || !areEqual(newParams.property, this.currentRouteParams.property)) {
+
+        this.$route.updateParams(newParams);
+      }
+    }
+  }
+
+  get visualizationWidth() {
+    return this.selection ? `calc(100% - ${this.selectionWidth}px)` : '100%';
+  }
+
+  addListener(listener: ChangeListener<Class|Predicate>) {
     this.changeListeners.push(listener);
   }
 
@@ -213,31 +282,43 @@ export class ModelPageComponent implements ModelPageActions, HelpProvider, Model
     setOverlaps(this.attributes);
   }
 
+  get selectableItemComparator() {
+    return comparingLocalizable<SelectableItem>(this.localizerProvider(), selectableItem => selectableItem.item.label);
+  }
+
+  registerView(view: View) {
+    this.views.push(view);
+  }
+
   isSelected(selection: SelectableItem) {
-    return selection.matchesIdentity(this.resource);
+    return selection.matchesIdentity(this.selectedItem);
   }
 
   isLoading(listItem: SelectableItem) {
-    return matchesIdentity(listItem, this.loadingResource) && !matchesIdentity(listItem, this.resource);
+    return matchesIdentity(listItem, this.selectedItem) && !matchesIdentity(listItem, this.selection);
+  }
+
+  select(item: WithIdAndType) {
+    this.askPermissionWhenEditing(() => {
+      this.selectByTypeAndId(item);
+    });
+  }
+
+  selectionEdited(oldSelection: Class|Predicate|null, newSelection: Class|Predicate) {
+    this.selectedItem = newSelection;
+    this.updateSelectables();
+
+    for (const changeListener of this.changeListeners) {
+      changeListener.onEdit(newSelection, oldSelection);
+    }
   }
 
   canEdit(): boolean {
     return this.model && this.authorizationManagerService.canEditModel(this.model);
   }
 
-  selectionEdited(oldSelection: Class | Predicate | null, newSelection: Class | Predicate) {
-    this.updateSelectables();
+  selectionDeleted(selection: Class|Predicate) {
 
-    for (const changeListener of this.changeListeners) {
-      changeListener.onEdit(newSelection, oldSelection);
-    }
-
-    if (!oldSelection && newSelection) {
-      this.selectResource(newSelection);
-    }
-  }
-
-  selectionDeleted(selection: Class | Predicate) {
     removeMatching(this.classes, item => matchesIdentity(item, selection));
     removeMatching(this.attributes, item => matchesIdentity(item, selection));
     removeMatching(this.associations, item => matchesIdentity(item, selection));
@@ -245,10 +326,9 @@ export class ModelPageComponent implements ModelPageActions, HelpProvider, Model
     for (const changeListener of this.changeListeners) {
       changeListener.onDelete(selection);
     }
-    this.select({});
   }
 
-  public addEntity(type: ClassType | KnownPredicateType) {
+  public addEntity(type: ClassType|KnownPredicateType) {
     if (type === 'class' || type === 'shape') {
       if (this.model.isOfType('profile')) {
         // profiles can create multiple shapes of single class so exists exclusion is not wanted
@@ -269,138 +349,6 @@ export class ModelPageComponent implements ModelPageActions, HelpProvider, Model
     }
   }
 
-  selectNewlyCreatedOrAssignedEntity<T extends Class | Predicate>(entity: T) {
-
-    this.loadingResource = undefined;
-    this.loadingResourcePromise = undefined;
-
-    if (!entity.unsaved) {
-      this.updateSelectables();
-      this.selectResource(entity);
-
-      for (const changeListener of this.changeListeners) {
-        changeListener.onAssign(entity);
-      }
-    } else {
-      this.resource = entity;
-    }
-  }
-
-  createClass(conceptCreation: EntityCreation) {
-    this.classService.newClass(this.model, conceptCreation.entity.label, conceptCreation.conceptId, this.languageService.getModelLanguage(this.model))
-      .then(klass => this.selectNewlyCreatedOrAssignedEntity(klass));
-  }
-
-  createShape(classOrExternal: Class | ExternalEntity, external: boolean) {
-    this.classService.newShape(classOrExternal, this.model, external, this.languageService.getModelLanguage(this.model))
-      .then(shape => {
-        if (shape.properties.length > 0) {
-          return this.$q.all([this.$q.when(shape), this.addPropertiesFromClassModal.open(shape, external ? 'external class' : 'scope class', this.model)]);
-        } else {
-          return this.$q.when([shape, shape.properties]);
-        }
-      })
-      .then(([shape, properties]: [Class, Property[]]) => {
-        shape.properties = properties;
-        this.selectNewlyCreatedOrAssignedEntity(shape);
-      });
-  }
-
-  copyShape(shape: Class) {
-    if (!this.model.isOfType('profile')) {
-      throw new Error('Shapes can be copied only to profile');
-    }
-
-    const copiedShape = shape.copy(this.model);
-    this.selectNewlyCreatedOrAssignedEntity(copiedShape);
-  }
-
-  assignClassToModel(klass: Class) {
-    return this.classService.assignClassToModel(klass.id, this.model)
-      .then(() => this.selectNewlyCreatedOrAssignedEntity(klass));
-  }
-
-  createPredicate(conceptCreation: EntityCreation, type: KnownPredicateType) {
-    return this.predicateService.newPredicate(this.model, conceptCreation.entity.label, conceptCreation.conceptId, type, this.languageService.getModelLanguage(this.model))
-      .then(predicate => this.selectNewlyCreatedOrAssignedEntity(predicate));
-  }
-
-  assignPredicateToModel(predicate: Predicate) {
-    return this.predicateService.assignPredicateToModel(predicate.id, this.model)
-      .then(() => this.selectNewlyCreatedOrAssignedEntity(predicate));
-  }
-
-  selectResource(item: WithIdAndType) {
-    // Here we (or sub components) initiate a selection change. The actual change happens through the routing stuff.
-
-    if (item) {
-      this.select({ resourceCurie: item.id.curie });
-    } else {
-      this.select({});
-    }
-  }
-
-  private obeySelectionChange(modelChanged: boolean, resourceCurie?: string, propertyId?: string) {
-    // Here we obey the instructions received from routing (through parent components), i.e., actually perform the change.
-
-    const selectionChanged = !areEqual((this.resource && this.resource.id.curie), resourceCurie);
-    const resourceNotFoundHandler = () => this.notificationModal.openResourceNotFound(this.model);
-    this.propertyId = propertyId; // NOTE: This does not cause loading, so we may just set the new value. (Even though it may not yet be found.)
-
-    if (modelChanged || selectionChanged) {
-      const promises: IPromise<any>[] = [];
-      promises.push(this.resourceCurieToId(resourceCurie).then(idWithTypeOrUndefined => {
-        if (idWithTypeOrUndefined) {
-          return this.fetchResource(idWithTypeOrUndefined);
-        } else {
-          return this.$q.resolve(undefined);
-        }
-      }).then(value => {
-        this.resource = value;
-      }));
-      if (modelChanged) {
-        promises.push(this.updateSelectables());
-      }
-      this.$q.all(promises).then(() => this.updateLocation())
-        .catch(err => {
-          console.log('Selection change failed: ' + err);
-          resourceNotFoundHandler();
-        });
-    }
-  }
-
-  private resourceCurieToId(resourceCurie?: string): IPromise<WithIdAndType | undefined> {
-    if (this.model) {
-      if (resourceCurie) {
-        const resourceUri = new Uri(resourceCurie, this.model.context);
-        const startsWithCapital = /^([A-Z]).*/.test(resourceUri.name);
-        const selectionType: SelectionType = startsWithCapital ? 'class' : 'predicate';
-
-        if (resourceUri.resolves()) {
-          return this.$q.resolve({
-            id: resourceUri,
-            selectionType
-          });
-        } else {
-          const prefix = resourceCurie.split(':')[0];
-          return this.modelService.getModelByPrefix(prefix).then(model => ({
-            id: new Uri(resourceCurie, model.context),
-            selectionType
-          }));
-        }
-      } else if (this.model.rootClass) {
-        return this.$q.resolve({ id: this.model.rootClass, selectionType: 'class' as SelectionType });
-      }
-    }
-    return this.$q.resolve(undefined);
-  }
-
-  private updateLocation() {
-    if (this.model) {
-      this.locationService.atModel(this.model, this.resource ? this.resource : null);
-    }
-  }
-
   private addClass(exclusion: Exclusion<AbstractClass>) {
 
     const isProfile = this.model.isOfType('profile');
@@ -418,7 +366,7 @@ export class ModelPageComponent implements ModelPageActions, HelpProvider, Model
 
     // CURRENT FEATURE: Search class modal
     const searchClassModal = () => this.searchClassModal.open(this.model, exclusion, textForSelection);
-
+    
     // NEW FEATURE: Search class table view modal, not complete yet. (Jira issue: YTI-546)
     // Uncomment this and comment class search modal above if you want to test, but DO NOT COMMIT this until YTI-546 is done.
     // const searchClassModal = () => this.searchClassTableModal.open(this.model, exclusion, textForSelection);
@@ -456,10 +404,10 @@ export class ModelPageComponent implements ModelPageActions, HelpProvider, Model
     );
   }
 
-  private createOrAssignEntity<T extends Class | Predicate>(modal: () => IPromise<ExternalEntity | EntityCreation | T>,
-                                                            fromExternalEntity: (external: ExternalEntity) => void,
-                                                            fromConcept: (concept: EntityCreation) => void,
-                                                            fromEntity: (entity: T) => void) {
+  private createOrAssignEntity<T extends Class|Predicate>(modal: () => IPromise<ExternalEntity|EntityCreation|T>,
+                                                          fromExternalEntity: (external: ExternalEntity) => void,
+                                                          fromConcept: (concept: EntityCreation) => void,
+                                                          fromEntity: (entity: T) => void) {
 
     this.askPermissionWhenEditing(() => {
       modal().then(result => {
@@ -468,69 +416,187 @@ export class ModelPageComponent implements ModelPageActions, HelpProvider, Model
         } else if (result instanceof ExternalEntity) {
           fromExternalEntity(result);
         } else {
-          fromEntity(<T>result);
+          fromEntity(<T> result);
         }
       }, modalCancelHandler);
     });
   }
 
+  selectNewlyCreatedOrAssignedEntity<T extends Class|Predicate>(entity: T) {
+
+    this.updateSelection(entity);
+
+    if (!entity.unsaved) {
+      this.updateSelectables();
+
+      for (const changeListener of this.changeListeners) {
+        changeListener.onAssign(entity);
+      }
+    }
+  }
+
+  createClass(conceptCreation: EntityCreation) {
+    this.classService.newClass(this.model, conceptCreation.entity.label, conceptCreation.conceptId, this.languageService.getModelLanguage(this.model))
+      .then(klass => this.selectNewlyCreatedOrAssignedEntity(klass));
+  }
+
+  createShape(classOrExternal: Class|ExternalEntity, external: boolean) {
+
+    this.classService.newShape(classOrExternal, this.model, external, this.languageService.getModelLanguage(this.model))
+      .then(shape => {
+        if (shape.properties.length > 0) {
+          return this.$q.all([this.$q.when(shape), this.addPropertiesFromClassModal.open(shape, external ? 'external class' : 'scope class', this.model)]);
+        } else {
+          return this.$q.when([shape, shape.properties]);
+        }
+      })
+      .then(([shape, properties]: [Class, Property[]]) => {
+        shape.properties = properties;
+        this.selectNewlyCreatedOrAssignedEntity(shape);
+      });
+  }
+
+  copyShape(shape: Class) {
+
+    if (!this.model.isOfType('profile')) {
+      throw new Error('Shapes can be copied only to profile');
+    }
+
+    const copiedShape = shape.copy(this.model);
+    this.selectNewlyCreatedOrAssignedEntity(copiedShape);
+  }
+
+  assignClassToModel(klass: Class) {
+    return this.classService.assignClassToModel(klass.id, this.model)
+      .then(() => this.selectNewlyCreatedOrAssignedEntity(klass));
+  }
+
+  createPredicate(conceptCreation: EntityCreation, type: KnownPredicateType) {
+    return this.predicateService.newPredicate(this.model, conceptCreation.entity.label, conceptCreation.conceptId, type, this.languageService.getModelLanguage(this.model))
+      .then(predicate => this.selectNewlyCreatedOrAssignedEntity(predicate));
+  }
+
+  assignPredicateToModel(predicate: Predicate) {
+    return this.predicateService.assignPredicateToModel(predicate.id, this.model)
+      .then(() => this.selectNewlyCreatedOrAssignedEntity(predicate));
+  }
+
   private findEditingViews() {
-    return this.parent.editingViews();
+    return this.views.filter(view => view.isEditing());
+  }
+
+  private confirmThenCancelEditing(editingViews: View[], callback: () => void) {
+    this.confirmationModal.openEditInProgress().then(() => {
+      editingViews.forEach(view => view.cancelEditing());
+      callback();
+    }, modalCancelHandler);
+  }
+
+  private ifEditing(synchronousCallback: () => void, confirmedCallback: () => void) {
+    const editingViews = this.findEditingViews();
+
+    if (editingViews.length > 0) {
+      synchronousCallback();
+      this.confirmThenCancelEditing(editingViews, confirmedCallback);
+    }
   }
 
   private askPermissionWhenEditing(callback: () => void) {
     const editingViews = this.findEditingViews();
+
     if (editingViews.length > 0) {
-      this.confirmationModal.openEditInProgress().then(() => {
-        editingViews.forEach(view => view.cancelEditing());
-        callback();
-      }, modalCancelHandler);
+      this.confirmThenCancelEditing(editingViews, callback);
     } else {
       callback();
     }
   }
 
-  // TODO remove retrying when data is coherent
-  private fetchResource(resourceIdAndType: WithIdAndType, isRetry: boolean = false): IPromise<Class | Predicate> {
+  private selectRouteOrDefault(routeData: RouteData): IPromise<any> {
 
-    if (matchesIdentity(this.loadingResource, resourceIdAndType) && this.loadingResourcePromise) {
-      return this.loadingResourcePromise;
+    const that = this;
+
+    function rootClassSelection(): WithIdAndType|null {
+      return that.model.rootClass ? { id: that.model.rootClass, selectionType: 'class' } : null;
     }
 
-    if (matchesIdentity(resourceIdAndType, this.resource) && this.resource) {
-      this.loadingResource = undefined;
-      this.loadingResourcePromise = undefined;
-      return this.$q.resolve(this.resource);
-    }
+    function getRouteSelection(): IPromise<WithIdAndType|null> {
 
-    // set selected item also here for showing selection before entity actually is loaded
-    this.loadingResource = resourceIdAndType;
+      if (routeData.resourceCurie) {
+        const resourceUri = new Uri(routeData.resourceCurie, that.model.context);
+        const startsWithCapital = /^([A-Z]).*/.test(resourceUri.name);
+        const selectionType: SelectionType = startsWithCapital ? 'class' : 'predicate';
 
-    return this.doFetchResource(resourceIdAndType)
-      .catch(reason => {
-        if (!isRetry) {
-          return this.fetchResource({
-            id: resourceIdAndType.id,
-            selectionType: resourceIdAndType.selectionType === 'class' ? 'predicate' : 'class'
-          }, true);
+        if (resourceUri.resolves()) {
+          return that.$q.resolve({
+            id: resourceUri,
+            selectionType
+          });
         } else {
-          return this.$q.reject('resource not found');
+          const prefix = routeData.resourceCurie.split(':')[0];
+          return that.modelService.getModelByPrefix(prefix).then(model => {
+            return {
+              id: new Uri(routeData.resourceCurie, model.context),
+              selectionType
+            };
+          });
         }
-      }).finally(() => {
-        this.loadingResource = undefined;
-        this.loadingResourcePromise = undefined;
+      } else {
+        return that.$q.when(null);
+      }
+    }
+
+    return getRouteSelection()
+      .then(selectionFromRoute => {
+        const selection = selectionFromRoute || rootClassSelection();
+        return this.selectByTypeAndId(selection);
       });
   }
 
-  private doFetchResource(resourceIdAndType: WithIdAndType): IPromise<Class | Predicate> {
-    return resourceIdAndType.selectionType === 'class'
-      ? this.classService.getClass(resourceIdAndType.id, this.model)
-      : this.predicateService.getPredicate(resourceIdAndType.id, this.model);
+  // TODO remove retrying when data is coherent
+  private selectByTypeAndId(selection: WithIdAndType|null, isRetry: boolean = false): IPromise<any> {
+
+    // set selected item also here for showing selection before entity actually is loaded
+    this.selectedItem = selection;
+    const selectionChanged = !matchesIdentity(this.selection, selection);
+
+    if (selection) {
+      if (selectionChanged) {
+        return this.fetchEntityByTypeAndId(selection)
+          .then(entity => {
+            if (!entity && !isRetry) {
+              return this.selectByTypeAndId({
+                id: selection.id,
+                selectionType: selection.selectionType === 'class' ? 'predicate' : 'class'
+              }, true);
+            } else {
+              if (!entity) {
+                return this.$q.reject('resource not found');
+              } else {
+                return this.updateSelection(entity);
+              }
+            }
+          });
+      } else {
+        return this.$q.resolve();
+      }
+    } else {
+      return this.$q.when(this.updateSelection(null));
+    }
+  }
+
+  private fetchEntityByTypeAndId(selection: WithIdAndType): IPromise<Class|Predicate> {
+    if (!this.selection || !matchesIdentity(this.selection, selection)) {
+      return selection.selectionType === 'class'
+        ? this.classService.getClass(selection.id, this.model)
+        : this.predicateService.getPredicate(selection.id, this.model);
+    } else {
+      return this.$q.when(this.selection);
+    }
   }
 
   private alignTabWithSelection() {
 
-    const tabType = this.resource instanceof Predicate ? this.resource.normalizedType : 'class';
+    const tabType = this.selection instanceof Predicate ? this.selection.normalizedType : 'class';
 
     for (let i = 0; i < this.tabs.length; i++) {
       if (this.tabs[i].type === tabType) {
@@ -538,6 +604,16 @@ export class ModelPageComponent implements ModelPageActions, HelpProvider, Model
         break;
       }
     }
+  }
+
+  private updateSelection(selection: Class|Predicate|null) {
+    this.selectedItem = selection;
+    this.selection = selection;
+  }
+
+  private updateModelByPrefix(prefix: string) {
+    return this.modelService.getModelByPrefix(prefix)
+      .then(model => this.model = model);
   }
 
   private updateSelectables(): IPromise<any> {
@@ -557,8 +633,6 @@ export class ModelPageComponent implements ModelPageActions, HelpProvider, Model
             this.namespacesInUse.add(resource.definedBy!.id.uri);
           }
         }
-
-        this.updateNamespaces(this.namespacesInUse);
       });
   }
 
@@ -577,6 +651,7 @@ export class ModelPageComponent implements ModelPageActions, HelpProvider, Model
           .filter(predicate => predicate.isOfType('attribute'))
           .map(attribute => new SelectableItem(attribute, this))
           .value();
+
         this.associations = _.chain(predicates)
           .filter(predicate => predicate.isOfType('association'))
           .map(association => new SelectableItem(association, this))
@@ -584,13 +659,33 @@ export class ModelPageComponent implements ModelPageActions, HelpProvider, Model
         this.sortPredicates();
       });
   }
+}
 
-  private setHelps() {
-    this.helps = this.model ? this.modelPageHelpService.getHelps(this.model.normalizedType, this.model.prefix, this.languageService.UILanguage) : [];
-  }
 
-  private localizerProvider(): Localizer {
-    return this.languageService.createLocalizer(this.model);
+class RouteData {
+
+  existingModelPrefix: string;
+  resourceCurie: string;
+  propertyId: string;
+
+  constructor(params: any) {
+    this.existingModelPrefix = params.prefix;
+
+    if (params.resource) {
+      const split = params.resource.split(':');
+
+      if (split.length === 1) {
+        this.resourceCurie = params.prefix + ':' + params.resource;
+      } else if (split.length === 2) {
+        this.resourceCurie = params.resource;
+      } else {
+        throw new Error('Unsupported resource format: ' + params.resource);
+      }
+
+      if (params.property) {
+        this.propertyId = params.property;
+      }
+    }
   }
 }
 
@@ -600,7 +695,7 @@ class Tab {
   glyphIconClass: any;
   addNew: () => void;
 
-  constructor(public type: ClassType | KnownPredicateType, public items: () => SelectableItem[], modelController: ModelPageComponent) {
+  constructor(public type: ClassType|KnownPredicateType, public items: () => SelectableItem[], modelController: ModelPageComponent) {
     this.addLabel = 'Add ' + type;
     this.glyphIconClass = glyphIconClassForType([type]);
     this.addNew = () => modelController.addEntity(type);
@@ -613,12 +708,12 @@ interface WithIdAndType {
   selectionType: SelectionType;
 }
 
-function matchesIdentity(lhs: WithIdAndType | null | undefined, rhs: WithIdAndType | null | undefined) {
+function matchesIdentity(lhs: WithIdAndType|null|undefined, rhs: WithIdAndType|null|undefined) {
   return areEqual(lhs, rhs, (l, r) => l.selectionType === r.selectionType && l.id.equals(r.id));
 }
 
 function setOverlaps(items: SelectableItem[]) {
-  let previous: SelectableItem | undefined;
+  let previous: SelectableItem|undefined;
   for (const item of items) {
     if (previous && previous.rawLabel === item.rawLabel) {
       previous.hasOverlap = true;
@@ -634,7 +729,7 @@ class SelectableItem implements WithDefinedBy {
 
   hasOverlap = false;
 
-  constructor(public item: ClassListItem | PredicateListItem, private modelController: ModelPageComponent) {
+  constructor(public item: ClassListItem|PredicateListItem, private modelController: ModelPageComponent) {
   }
 
   get id(): Uri {
@@ -657,7 +752,7 @@ class SelectableItem implements WithDefinedBy {
     return this.item.selectionType;
   }
 
-  matchesIdentity(obj: WithIdAndType | null | undefined) {
+  matchesIdentity(obj: WithIdAndType|null|undefined) {
     return matchesIdentity(this.item, obj);
   }
 }

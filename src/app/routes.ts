@@ -48,7 +48,7 @@ export function routeConfig($routeProvider: angular.route.IRouteProvider) {
       }
     })
     .when('/model/:prefix/:resource?/:property?', {
-      template: '<model-main></model-main>',
+      template: '<model-page></model-page>',
       reloadOnSearch: false
     })
     .otherwise({

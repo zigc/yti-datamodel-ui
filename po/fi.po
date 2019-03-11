@@ -389,18 +389,6 @@ msgstr "poista valinta"
 msgid "Edit reference data"
 msgstr "Muokkaa koodistoa"
 
-msgid "Datamodel definition"
-msgstr "Tietomääritykset"
-
-msgid "Datamodel details"
-msgstr "Tietomallin tiedot"
-
-msgid "Information domain"
-msgstr "Tietoalue"
-
-msgid "Organization"
-msgstr "Organisaatio"
-
 msgid "Show model details"
 msgstr "Näytä tietomallin tiedot"
 
@@ -906,7 +894,7 @@ msgid "Search for class"
 msgstr "Etsi luokkaa"
 
 msgid "Search for class info"
-msgstr "Etsi luokan tietoja"
+msgstr ""
 
 msgid "Search for concept"
 msgstr "Etsi käsitettä"
@@ -2227,3 +2215,4 @@ msgstr "Attribuutti"
 
 msgid "owl:ObjectProperty"
 msgstr "Assosiaatio"
+

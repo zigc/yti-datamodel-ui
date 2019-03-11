@@ -1,4 +1,5 @@
 import { Model } from 'app/entities/model';
+import { ModelControllerService } from './modelControllerService';
 import { LegacyComponent } from 'app/utils/angular';
 import { EditableForm } from 'app/components/form/editableEntityController';
 
@@ -6,7 +7,7 @@ import { EditableForm } from 'app/components/form/editableEntityController';
   bindings: {
     id: '=',
     model: '=',
-    namespacesInUse: '<'
+    modelController: '='
   },
   require: {
     form: '?^form'
@@ -16,14 +17,19 @@ import { EditableForm } from 'app/components/form/editableEntityController';
 export class ModelFormComponent {
 
   model: Model;
-  namespacesInUse?: Set<string>;
+  modelController: ModelControllerService;
+
   form: EditableForm;
+
+  isEditing() {
+    return this.form && this.form.editing;
+  }
 
   get allowProfiles() {
     return this.model.isOfType('profile');
   }
 
-  isEditing() {
-    return this.form && this.form.editing;
+  namespacesInUse() {
+    return this.modelController && this.modelController.namespacesInUse;
   }
 }

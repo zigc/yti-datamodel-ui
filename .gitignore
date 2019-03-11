@@ -5,7 +5,6 @@ npm-debug.log*
 rev-manifest.json
 typings/*
 **/.DS_Store
-po/*.mo
 
 # Idea user related configs
 .idea
