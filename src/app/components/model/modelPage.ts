@@ -354,7 +354,7 @@ export class ModelPageComponent implements ModelPageActions, HelpProvider, Model
     const isProfile = this.model.isOfType('profile');
     const textForSelection = (klass: Optional<Class>) => {
       if (isProfile) {
-        if (klass && klass.isOfType('shape')) {
+        if (klass && klass instanceof Class && klass.isOfType('shape')) {
           return 'Copy shape';
         } else {
           return 'Specialize class';

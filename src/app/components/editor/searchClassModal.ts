@@ -29,7 +29,7 @@ export class SearchClassModal {
                     exclude: Exclusion<AbstractClass>,
                     defaultToCurrentModel: boolean,
                     onlySelection: boolean,
-                    textForSelection: (klass: Optional<Class>) => string) {
+                    textForSelection: (klass: Optional<Class | ExternalEntity>) => string) {
 
     return this.$uibModal.open({
       template: require('./searchClassModal.html'),
@@ -49,7 +49,7 @@ export class SearchClassModal {
 
   open(model: Model,
        exclude: Exclusion<AbstractClass>,
-       textForSelection: (klass: Optional<Class>) => string): IPromise<ExternalEntity|EntityCreation|Class> {
+       textForSelection: (klass: Optional<Class | ExternalEntity>) => string): IPromise<ExternalEntity|EntityCreation|Class> {
 
     return this.openModal(model, exclude, false, false, textForSelection);
   }
@@ -57,7 +57,7 @@ export class SearchClassModal {
   openWithOnlySelection(model: Model,
                         defaultToCurrentModel: boolean,
                         exclude: Exclusion<AbstractClass>,
-                        textForSelection: (klass: Optional<Class>) => string = defaultTextForSelection): IPromise<Class> {
+                        textForSelection: (klass: Optional<Class | ExternalEntity>) => string = defaultTextForSelection): IPromise<Class> {
 
     return this.openModal(model, exclude, defaultToCurrentModel, true, textForSelection);
   }
@@ -102,7 +102,7 @@ class SearchClassController implements SearchController<ClassListItem> {
               public exclude: Exclusion<AbstractClass>,
               public defaultToCurrentModel: boolean,
               public onlySelection: boolean,
-              public textForSelection: (klass: Optional<Class>) => string,
+              public textForSelection: (klass: Optional<Class | ExternalEntity>) => string,
               private searchConceptModal: SearchConceptModal,
               private gettextCatalog: GettextCatalog) {
     'ngInject';
