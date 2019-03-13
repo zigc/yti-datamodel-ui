@@ -1,7 +1,5 @@
 import * as angular from 'angular';
-import { ICompileProvider, ILocationProvider, ILogProvider, animate, auto } from 'angular';
-import IInjectorService = auto.IInjectorService;
-import IAnimateProvider = animate.IAnimateProvider;
+import { animate, auto, ICompileProvider, ILocationProvider, ILogProvider } from 'angular';
 import { ITooltipProvider } from 'angular-ui-bootstrap';
 import { routeConfig } from './routes';
 import { module as commonModule } from './components/common';
@@ -24,7 +22,10 @@ import { YtiCommonModule } from 'yti-common-ui';
 import { AUTHENTICATED_USER_ENDPOINT } from 'yti-common-ui/services/user.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {
-  MissingTranslationHandler, MissingTranslationHandlerParams, TranslateLoader, TranslateModule,
+  MissingTranslationHandler,
+  MissingTranslationHandlerParams,
+  TranslateLoader,
+  TranslateModule,
   TranslateService
 } from '@ngx-translate/core';
 import { of } from 'rxjs';
@@ -51,11 +52,13 @@ import {
   confirmationModalProvider,
   locationServiceProvider,
   modelServiceProvider,
-  notificationModalFactory, notificationModalProvider,
+  notificationModalProvider,
   routeServiceProvider,
   scopeProvider
 } from './ajs-upgraded-providers';
 import { ExportDirective, ModelLanguageChooserDirective, ModelPageDirective, ModelViewDirective } from './ajs-upgraded-components';
+import IInjectorService = auto.IInjectorService;
+import IAnimateProvider = animate.IAnimateProvider;
 
 require('angular-gettext');
 require('checklist-model');
@@ -163,7 +166,8 @@ export function localizerFactory(languageService: LanguageService): AngularLocal
       useFactory: languageServiceFactory,
       deps: ['$injector']
     },
-    { provide: LOCALIZER,
+    {
+      provide: LOCALIZER,
       useFactory: localizerFactory,
       deps: [LanguageService]
     },
@@ -207,15 +211,15 @@ const mod = angular.module('iow-ui', [
   helpModule.name
 ]);
 
-mod.directive('appMenu', downgradeComponent({component: MenuComponent}));
+mod.directive('appMenu', downgradeComponent({ component: MenuComponent }));
 mod.directive('appFooter', downgradeComponent({
   component: FooterComponent,
   inputs: ['title'],
   outputs: ['informationClick']
 }));
 
-mod.directive('ajaxLoadingIndicator', downgradeComponent({component: AjaxLoadingIndicatorComponent}));
-mod.directive('ajaxLoadingIndicatorSmall', downgradeComponent({component: AjaxLoadingIndicatorSmallComponent}));
+mod.directive('ajaxLoadingIndicator', downgradeComponent({ component: AjaxLoadingIndicatorComponent }));
+mod.directive('ajaxLoadingIndicatorSmall', downgradeComponent({ component: AjaxLoadingIndicatorSmallComponent }));
 mod.directive('appDropdown', downgradeComponent({
   component: DropdownComponent,
   inputs: ['options', 'showNullOption', 'placement']
@@ -259,7 +263,7 @@ mod.config(($locationProvider: ILocationProvider,
   $animateProvider.classNameFilter(/ng-animate-enabled/);
 
   $uibTooltipProvider.options({ appendToBody: true });
-  $uibTooltipProvider.setTriggers({'mouseenter': 'mouseleave click'});
+  $uibTooltipProvider.setTriggers({ 'mouseenter': 'mouseleave click' });
 });
 
 
