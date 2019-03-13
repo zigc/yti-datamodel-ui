@@ -6,9 +6,17 @@ export interface View {
   cancelEditing(): void;
 }
 
-export interface ModelControllerService {
-  namespacesInUse: Set<string>;
+export interface EditorContainer {
   registerView(view: View): void;
+  deregisterView(view: View): void;
+  editingViews(): View[];
+}
+
+export interface EditingGuard {
+  attemptRouteChange(delay: () => void, proceed: () => void): void;
+}
+
+export interface ModelControllerService {
   selectionEdited(oldSelection: Class|Predicate|null, newSelection: Class|Predicate): void;
   selectionDeleted(selection: Class|Predicate): void;
 }

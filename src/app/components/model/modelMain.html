@@ -1,0 +1,57 @@
+<div class="content-box">
+  <div *ngIf="!model">
+    <app-ajax-loading-indicator></app-ajax-loading-indicator>
+    <div class="bottom-hack-border"></div>
+    <div class="bottom-hack-padding"></div>
+  </div>
+  <div *ngIf="model">
+    <div class="header">
+      <div class="row">
+        <div class="nameButtonRow col-12">
+          <h2><span class="mr-4">{{model!.label | translateValue}}</span></h2>
+          <model-language-chooser class="nameButtonRowButton" [context]="model"></model-language-chooser>
+          <export-component class="ml-2 nameButtonRowButton" [entity]="model" [context]="model"></export-component>
+        </div>
+      </div>
+      <div class="row">
+        <div class="informationRow col-12">
+          <app-status class="status" [status]="model!.status"></app-status>
+          <span class="inRowTitle"><span translate>Information domain</span>:</span>
+          <span class="information-domains">
+            <span class="badge badge-light" *ngFor="let domain of model!.classifications">
+              {{domain.label | translateValue:true}}
+            </span>
+          </span>
+          <span class="inRowTitle"><span translate>Organization</span>:</span>
+          <ul class="organizations dot-separated-list">
+            <li class="organization" *ngFor="let contributor of model!.contributors">
+              {{contributor.label | translateValue:true}}
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="row">
+        <div class="descriptionRow col-12">
+          <app-expandable-text [text]="model!.comment | translateValue:true" [rows]="3"></app-expandable-text>
+        </div>
+      </div>
+    </div>
+    <ngb-tabset #tabs (tabChange)="onTabChange($event)">
+      <ngb-tab id="dataTab" [title]="'Datamodel definition' | translate">
+        <ng-template ngbTabContent>
+          <model-page [parent]="editorContainer" [currentSelection]="currentModelAndSelection"
+                      (select)="onSubSelection($event)" (updateNamespaces)="onNamespacesChange($event)"></model-page>
+        </ng-template>
+      </ngb-tab>
+      <ngb-tab id="modelDetailsTab" [title]="'Datamodel details' | translate">
+        <ng-template ngbTabContent>
+          <model-view [parent]="editorContainer" [model]="model" [id]="'model'"
+                      (deleted)="onModelDeleted($event)" (updated)="onModelUpdated($event)"
+                      [namespacesInUse]="namespacesInUse"></model-view>
+          <div class="bottom-hack-border"></div>
+          <div class="bottom-hack-padding"></div>
+        </ng-template>
+      </ngb-tab>
+    </ngb-tabset>
+  </div>
+</div>

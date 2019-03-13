@@ -46,6 +46,16 @@ import { UseContextInputComponent } from './components/form/use-context-input.co
 import { HttpClientModule } from '@angular/common/http';
 import { apiEndpointWithName } from 'app/services/config';
 import { ExpandableTextComponent } from 'yti-common-ui/components/expandable-text.component';
+import { ModelMainComponent } from './components/model/modelMain';
+import {
+  confirmationModalProvider,
+  locationServiceProvider,
+  modelServiceProvider,
+  notificationModalFactory, notificationModalProvider,
+  routeServiceProvider,
+  scopeProvider
+} from './ajs-upgraded-providers';
+import { ExportDirective, ModelLanguageChooserDirective, ModelPageDirective, ModelViewDirective } from './ajs-upgraded-components';
 
 require('angular-gettext');
 require('checklist-model');
@@ -99,6 +109,14 @@ export function createMissingTranslationHandler(): MissingTranslationHandler {
   };
 }
 
+export function languageServiceFactory(injector: IInjectorService): LanguageService {
+  return injector.get<LanguageService>('languageService');
+}
+
+export function localizerFactory(languageService: LanguageService): AngularLocalizer {
+  return new DefaultAngularLocalizer(languageService);
+}
+
 @NgModule({
   imports: [
     BrowserModule,
@@ -118,7 +136,12 @@ export function createMissingTranslationHandler(): MissingTranslationHandler {
   ],
   declarations: [
     UseContextDropdownComponent,
-    UseContextInputComponent
+    UseContextInputComponent,
+    ModelMainComponent,
+    ModelPageDirective,
+    ModelViewDirective,
+    ModelLanguageChooserDirective,
+    ExportDirective
   ],
   entryComponents: [
     FooterComponent,
@@ -130,23 +153,26 @@ export function createMissingTranslationHandler(): MissingTranslationHandler {
     ExpandableTextComponent,
     StatusComponent,
     UseContextDropdownComponent,
-    UseContextInputComponent
+    UseContextInputComponent,
+    ModelMainComponent
   ],
   providers: [
     { provide: AUTHENTICATED_USER_ENDPOINT, useFactory: resolveAuthenticatedUserEndpoint },
     {
       provide: LanguageService,
-      useFactory(injector: IInjectorService): AngularLocalizer {
-        return new DefaultAngularLocalizer(injector.get<LanguageService>('languageService'));
-      },
+      useFactory: languageServiceFactory,
       deps: ['$injector']
     },
     { provide: LOCALIZER,
-      useFactory(languageService: LanguageService): AngularLocalizer {
-        return new DefaultAngularLocalizer(languageService);
-      },
+      useFactory: localizerFactory,
       deps: [LanguageService]
-    }
+    },
+    scopeProvider,
+    routeServiceProvider,
+    locationServiceProvider,
+    modelServiceProvider,
+    notificationModalProvider,
+    confirmationModalProvider
   ]
 })
 export class AppModule {

@@ -7,7 +7,7 @@ import { ErrorModal } from 'app/components/form/errorModal';
 import { Association, Attribute } from 'app/entities/predicate';
 import { Model } from 'app/entities/model';
 import { LanguageContext } from 'app/types/language';
-import { ModelControllerService } from 'app/components/model/modelControllerService';
+import { EditorContainer, ModelControllerService } from 'app/components/model/modelControllerService';
 import { AuthorizationManagerService } from 'app/services/authorizationManagerService';
 import { LegacyComponent } from 'app/utils/angular';
 
@@ -16,7 +16,8 @@ import { LegacyComponent } from 'app/utils/angular';
     id: '@',
     predicate: '=',
     model: '=',
-    modelController: '=',
+    modelController: '<',
+    parent: '<',
     width: '='
   },
   template: require('./predicateView.html')
@@ -26,6 +27,7 @@ export class PredicateViewComponent extends EditableEntityController<Association
   predicate: Association|Attribute;
   model: Model;
   modelController: ModelControllerService;
+  parent: EditorContainer;
 
   constructor($scope: EditableScope,
               $log: ILogService,
@@ -39,7 +41,11 @@ export class PredicateViewComponent extends EditableEntityController<Association
   }
 
   $onInit() {
-    this.modelController.registerView(this);
+    this.parent.registerView(this);
+  }
+
+  $onDestroy() {
+    this.parent.deregisterView(this);
   }
 
   create(entity: Association|Attribute) {
