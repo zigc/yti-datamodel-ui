@@ -15,7 +15,7 @@ import { ImpersonationService } from 'app/services/impersonationService';
 import { ConfigService } from 'app/services/configService';
 import { Config } from 'app/entities/config';
 
-const logo = require('../../../assets/logo.svg');
+//const logo = require('../../../assets/logo.svg');
 
 @LegacyComponent({
   bindings: {
@@ -27,7 +27,7 @@ export class NavigationBarComponent {
 
   helpProvider: HelpProvider|null;
 
-  logo = logo;
+  //logo = logo;
 
   availableLanguages = [
     { code: 'fi' as UILanguage, name: 'Suomeksi (FI)' },
