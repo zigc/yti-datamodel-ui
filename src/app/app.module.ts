@@ -14,7 +14,7 @@ import { module as filterModule } from './components/filter';
 import { module as componentsModule } from './components';
 import { module as servicesModule } from './services';
 import { module as helpModule } from './help';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, Title } from '@angular/platform-browser';
 import { downgradeComponent, downgradeInjectable, UpgradeModule } from '@angular/upgrade/static';
 import { NgModule, NgZone } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -176,7 +176,8 @@ export function localizerFactory(languageService: LanguageService): AngularLocal
     locationServiceProvider,
     modelServiceProvider,
     notificationModalProvider,
-    confirmationModalProvider
+    confirmationModalProvider,
+    Title
   ]
 })
 export class AppModule {
@@ -245,6 +246,7 @@ mod.factory('translateService', downgradeInjectable(TranslateService));
 mod.factory('loginModal', downgradeInjectable(LoginModalService));
 mod.factory('localizationStrings', () => localizationStrings);
 mod.factory('zone', downgradeInjectable(NgZone));
+mod.factory('titleService', downgradeInjectable(Title));
 
 mod.config(routeConfig);
 

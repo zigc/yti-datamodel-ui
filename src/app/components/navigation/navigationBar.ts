@@ -82,6 +82,10 @@ export class NavigationBarComponent {
     return this.config && this.config.codeListUrl;
   }
 
+  get environmentIdentifier() {
+    return this.config ? this.config.getEnvironmentIdentifier('postfix') : '';
+  }
+
   fakeUser(userEmail: string) {
     this.userService.updateLoggedInUser(userEmail);
   }
@@ -100,10 +104,6 @@ export class NavigationBarComponent {
 
   get noMenuItemsAvailable() {
     return !this.userService.isLoggedIn();
-  }
-
-  get environmentIdentifier() {
-    return this.config ? this.config.env !== 'prod' ? ' - ' + this.config.env.toUpperCase() : '' : '';
   }
 
   isLoggedIn() {
