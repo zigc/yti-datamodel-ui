@@ -173,8 +173,8 @@ export class ModelPageComponent implements ModelPageActions, HelpProvider, Model
     this.subscriptions.push(this.currentSelection.subscribe(newModelAndSelection => {
       if (newModelAndSelection.model) {
         const modelChanged = !this.model || this.model.prefix !== newModelAndSelection.model.prefix;
+        this.model = newModelAndSelection.model;
         if (modelChanged) {
-          this.model = newModelAndSelection.model;
           this.setHelps();
         }
         this.obeySelectionChange(modelChanged, newModelAndSelection.resourceCurie, newModelAndSelection.propertyId);

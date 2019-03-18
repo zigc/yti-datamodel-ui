@@ -109,6 +109,7 @@ export class ModelMainComponent implements OnDestroy, OnInit, EditorContainer, E
   onModelUpdated(model: Model) {
     if (model.prefix === (this.model && this.model!.prefix)) {
       this.model = model;
+      this.currentModelAndSelection.next(this.currentModelAndSelection.value.copyWithUpdatedModel(model));
     } else {
       console.error('Got model updated alert for model "' + model.prefix + '" although current model is "' + this.model ? this.model!.prefix : 'undefined' + '"');
     }

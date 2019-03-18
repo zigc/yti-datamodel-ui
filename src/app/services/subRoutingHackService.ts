@@ -192,4 +192,15 @@ export class ModelAndSelection {
   toString(): string {
     return this.model ? this.model.prefix + (this.resourceCurie ? '/' + this.resourceCurie + (this.propertyId ? '/' + this.propertyId : '') : '') : '';
   }
+
+  copyWithUpdatedModel(updatedModel: Model): ModelAndSelection {
+    if (!this.model || updatedModel.prefix !== this.model.prefix) {
+      throw Error(`Updated model prefix "${updatedModel.prefix}" does not match existing one "${this.model ? this.model.prefix : 'undefined'}".`);
+    }
+    const ret = new ModelAndSelection();
+    ret.model = updatedModel;
+    ret.resourceCurie = this.resourceCurie;
+    ret.propertyId = this.propertyId;
+    return ret;
+  }
 }
