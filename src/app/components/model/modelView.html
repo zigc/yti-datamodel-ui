@@ -2,9 +2,10 @@
   <form name="form" class="editable-form">
     <fieldset ng-if="$ctrl.model" ng-disabled="$ctrl.persisting">
       <div class="main-editable-content">
-        <editable-entity-buttons context="$ctrl.model" editable-controller="$ctrl">
+        <editable-entity-buttons context="$ctrl.model" editable-controller="$ctrl" id-prefix="'model_edit_buttons_'">
           <app-status [status]="$ctrl.model.status"></app-status>
-          <history model="$ctrl.model" resource="$ctrl.model" ng-hide="$ctrl.isEditing()"></history>
+          <history button-id="'model_edit_buttons_history'" model="$ctrl.model" resource="$ctrl.model"
+                   ng-hide="$ctrl.isEditing()"></history>
         </editable-entity-buttons>
 
         <model-form id="$ctrl.id" model="$ctrl.editableInEdit" namespaces-in-use="$ctrl.namespacesInUse"></model-form>

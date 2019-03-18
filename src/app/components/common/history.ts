@@ -7,10 +7,11 @@ import { LegacyComponent } from 'app/utils/angular';
 @LegacyComponent({
   bindings: {
     model: '=',
-    resource: '='
+    resource: '=',
+    buttonId: '<'
   },
   template: `
-      <button type="button" class="btn btn-secondary-action pull-right" ng-click="$ctrl.openHistory()">
+      <button type="button" class="btn btn-secondary-action pull-right" ng-click="$ctrl.openHistory()" ng-attr-id="{{$ctrl.buttonId}}">
         <span translate>Show history</span>
       </button>
   `
@@ -19,6 +20,7 @@ export class HistoryComponent {
 
   model: Model;
   resource: Class|Predicate|Model;
+  buttonId?: string;
 
   constructor(private historyModal: HistoryModal) {
     'ngInject';
