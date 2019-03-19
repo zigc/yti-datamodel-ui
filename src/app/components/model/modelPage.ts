@@ -31,11 +31,6 @@ import { Model } from '../../entities/model';
 import { ExternalEntity } from '../../entities/externalEntity';
 import { NotificationModal } from '../../components/common/notificationModal';
 import { removeMatching } from 'yti-common-ui/utils/array';
-import { ApplicationComponent } from '../../components/application';
-import { HelpProvider } from '../../components/common/helpProvider';
-import { InteractiveHelp } from '../../help/contract';
-import { ModelPageHelpService } from '../../help/providers/modelPageHelpService';
-import { InteractiveHelpService } from '../../help/services/interactiveHelpService';
 import { EditorContainer, ModelControllerService } from './modelControllerService';
 import { AuthorizationManagerService } from '../../services/authorizationManagerService';
 import { ModelAndSelection } from '../../services/subRoutingHackService';
@@ -65,12 +60,9 @@ export interface ModelPageActions extends ChangeNotifier<Class | Predicate> {
     updateNamespaces: '&',
     parent: '<'
   },
-  require: {
-    application: '^application'
-  },
   template: require('./modelPage.html')
 })
-export class ModelPageComponent implements ModelPageActions, HelpProvider, ModelControllerService {
+export class ModelPageComponent implements ModelPageActions, ModelControllerService {
 
   currentSelection: BehaviorSubject<ModelAndSelection>;
   select: (selection: { resourceCurie?: string, propertyId?: string }) => void;
@@ -99,8 +91,6 @@ export class ModelPageComponent implements ModelPageActions, HelpProvider, Model
     new Tab('attribute', () => this.attributes, this),
     new Tab('association', () => this.associations, this)
   ];
-  helps: InteractiveHelp[] = [];
-  application: ApplicationComponent;
 
   constructor($scope: IScope,
               $location: ILocationService,
@@ -116,12 +106,8 @@ export class ModelPageComponent implements ModelPageActions, HelpProvider, Model
               private notificationModal: NotificationModal,
               private addPropertiesFromClassModal: AddPropertiesFromClassModal,
               public languageService: LanguageService,
-              interactiveHelpService: InteractiveHelpService,
-              private modelPageHelpService: ModelPageHelpService,
               private authorizationManagerService: AuthorizationManagerService) {
     'ngInject';
-
-    $scope.$watch(() => this.languageService.UILanguage, () => this.setHelps());
 
     $scope.$watch(() => this.model && this.languageService.getModelLanguage(this.model), () => {
       if (this.model) {
@@ -174,9 +160,6 @@ export class ModelPageComponent implements ModelPageActions, HelpProvider, Model
       if (newModelAndSelection.model) {
         const modelChanged = !this.model || this.model.prefix !== newModelAndSelection.model.prefix;
         this.model = newModelAndSelection.model;
-        if (modelChanged) {
-          this.setHelps();
-        }
         this.obeySelectionChange(modelChanged, newModelAndSelection.resourceCurie, newModelAndSelection.propertyId);
       } else {
         // NOTE: This component will be destroyed instantaneously, and currently this.model is not optional. So let us do nothing.
@@ -186,10 +169,6 @@ export class ModelPageComponent implements ModelPageActions, HelpProvider, Model
 
   $onDestroy() {
     this.subscriptions.forEach(s => s.unsubscribe());
-  }
-
-  $postLink() {
-    this.application.registerHelpProvider(this);
   }
 
   addListener(listener: ChangeListener<Class | Predicate>) {
@@ -583,10 +562,6 @@ export class ModelPageComponent implements ModelPageActions, HelpProvider, Model
           .value();
         this.sortPredicates();
       });
-  }
-
-  private setHelps() {
-    this.helps = this.model ? this.modelPageHelpService.getHelps(this.model.normalizedType, this.model.prefix, this.languageService.UILanguage) : [];
   }
 
   private localizerProvider(): Localizer {

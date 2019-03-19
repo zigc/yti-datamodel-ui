@@ -6,6 +6,8 @@ import { LegacyComponent, modalCancelHandler, nextUrl } from 'app/utils/angular'
 import { HelpProvider } from './common/helpProvider';
 import { LocationService } from 'app/services/locationService';
 import { ConfigService } from 'app/services/configService';
+import { HelpService } from '../help/providers/helpService';
+import { Subscription } from 'rxjs';
 
 @LegacyComponent({
   template: require('./application.html'),
@@ -15,7 +17,9 @@ export class ApplicationComponent {
   applicationInitialized: boolean;
   showFooter: boolean;
   showGoogleAnalytics: boolean;
-  helpProvider: HelpProvider|null;
+  helpProvider?: HelpProvider;
+
+  private subscriptions: Subscription[] = [];
 
   constructor($scope: IScope,
               private $location: ILocationService,
@@ -23,11 +27,13 @@ export class ApplicationComponent {
               userService: UserService,
               confirmationModal: ConfirmationModal,
               private locationService: LocationService,
-              configService: ConfigService) {
+              configService: ConfigService,
+              helpService: HelpService) {
 
     'ngInject';
 
-    userService.loggedIn$.subscribe(() => this.applicationInitialized = true);
+    this.subscriptions.push(helpService.helpProvider.subscribe(provider => this.helpProvider = provider));
+    this.subscriptions.push(userService.loggedIn$.subscribe(() => this.applicationInitialized = true));
 
     $scope.$watch(() => $location.path(), path => {
       this.showFooter = !path.startsWith('/model');
@@ -52,19 +58,14 @@ export class ApplicationComponent {
         }, modalCancelHandler);
       }
     });
+  }
 
-    $scope.$on('$routeChangeSuccess', () => {
-      // reset help provider since every route is not guaranteed to register provider
-      this.helpProvider = null;
-    });
+  $onDestroy() {
+    this.subscriptions.forEach(s => s.unsubscribe());
   }
 
   get location() {
     return this.locationService.location;
-  }
-
-  registerHelpProvider(helpProvider: HelpProvider) {
-    this.helpProvider = helpProvider;
   }
 
   navigateToInformation() {

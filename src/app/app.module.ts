@@ -1,5 +1,5 @@
 import * as angular from 'angular';
-import { animate, auto, ICompileProvider, ILocationProvider, ILogProvider } from 'angular';
+import { animate, ICompileProvider, ILocationProvider, ILogProvider } from 'angular';
 import { ITooltipProvider } from 'angular-ui-bootstrap';
 import { routeConfig } from './routes';
 import { module as commonModule } from './components/common';
@@ -18,7 +18,7 @@ import { BrowserModule, Title } from '@angular/platform-browser';
 import { downgradeComponent, downgradeInjectable, UpgradeModule } from '@angular/upgrade/static';
 import { NgModule, NgZone } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { YtiCommonModule } from 'yti-common-ui';
+import { LOCALIZER, YtiCommonModule } from 'yti-common-ui';
 import { AUTHENTICATED_USER_ENDPOINT } from 'yti-common-ui/services/user.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {
@@ -33,9 +33,6 @@ import { availableUILanguages } from './types/language';
 
 import { LoginModalService } from 'yti-common-ui/components/login-modal.component';
 import { FooterComponent } from 'yti-common-ui/components/footer.component';
-import { LOCALIZER } from 'yti-common-ui/pipes/translate-value.pipe';
-import { Localizer as AngularLocalizer } from 'yti-common-ui/types/localization';
-import { DefaultAngularLocalizer, LanguageService } from './services/languageService';
 import { MenuComponent } from 'yti-common-ui/components/menu.component';
 import { AjaxLoadingIndicatorComponent } from 'yti-common-ui/components/ajax-loading-indicator.component';
 import { AjaxLoadingIndicatorSmallComponent } from 'yti-common-ui/components/ajax-loading-indicator-small.component';
@@ -50,14 +47,18 @@ import { ExpandableTextComponent } from 'yti-common-ui/components/expandable-tex
 import { ModelMainComponent } from './components/model/modelMain';
 import {
   confirmationModalProvider,
+  languageServiceProvider,
   locationServiceProvider,
+  modelPageHelpServiceProvider,
   modelServiceProvider,
   notificationModalProvider,
   routeServiceProvider,
   scopeProvider
 } from './ajs-upgraded-providers';
 import { ExportDirective, ModelLanguageChooserDirective, ModelPageDirective, ModelViewDirective } from './ajs-upgraded-components';
-import IInjectorService = auto.IInjectorService;
+import { DefaultAngularLocalizer, LanguageService } from './services/languageService';
+import { Localizer as AngularLocalizer } from 'yti-common-ui/types/localization';
+import { HelpService } from './help/providers/helpService';
 import IAnimateProvider = animate.IAnimateProvider;
 
 require('angular-gettext');
@@ -112,10 +113,6 @@ export function createMissingTranslationHandler(): MissingTranslationHandler {
   };
 }
 
-export function languageServiceFactory(injector: IInjectorService): LanguageService {
-  return injector.get<LanguageService>('languageService');
-}
-
 export function localizerFactory(languageService: LanguageService): AngularLocalizer {
   return new DefaultAngularLocalizer(languageService);
 }
@@ -161,23 +158,17 @@ export function localizerFactory(languageService: LanguageService): AngularLocal
   ],
   providers: [
     { provide: AUTHENTICATED_USER_ENDPOINT, useFactory: resolveAuthenticatedUserEndpoint },
-    {
-      provide: LanguageService,
-      useFactory: languageServiceFactory,
-      deps: ['$injector']
-    },
-    {
-      provide: LOCALIZER,
-      useFactory: localizerFactory,
-      deps: [LanguageService]
-    },
+    { provide: LOCALIZER, useFactory: localizerFactory, deps: [LanguageService] },
+    languageServiceProvider,
     scopeProvider,
     routeServiceProvider,
     locationServiceProvider,
     modelServiceProvider,
     notificationModalProvider,
     confirmationModalProvider,
-    Title
+    modelPageHelpServiceProvider,
+    Title,
+    HelpService
   ]
 })
 export class AppModule {
@@ -247,6 +238,7 @@ mod.factory('loginModal', downgradeInjectable(LoginModalService));
 mod.factory('localizationStrings', () => localizationStrings);
 mod.factory('zone', downgradeInjectable(NgZone));
 mod.factory('titleService', downgradeInjectable(Title));
+mod.factory('helpService', downgradeInjectable(HelpService));
 
 mod.config(routeConfig);
 

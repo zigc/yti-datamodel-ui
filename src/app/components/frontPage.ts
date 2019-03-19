@@ -12,7 +12,7 @@ import { ClassificationService } from '../services/classificationService';
 import { Classification } from '../entities/classification';
 import { Url } from '../entities/uri';
 import { comparingLocalizable } from '../utils/comparator';
-import { BehaviorSubject, combineLatest, Subscription, Observable, ObservableInput } from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable, ObservableInput, Subscription } from 'rxjs';
 import { fromIPromise } from '../utils/observable';
 import { anyMatching } from 'yti-common-ui/utils/array';
 import { matches } from 'yti-common-ui/utils/string';
@@ -25,8 +25,9 @@ import { Organization } from '../entities/organization';
 import { labelNameToResourceIdIdentifier } from 'yti-common-ui/utils/resource';
 import { tap } from 'rxjs/operators';
 import { InteractiveHelp } from '../help/contract';
-import { getInformationDomainSvgIcon, getDataModelingMaterialIcon } from 'yti-common-ui/utils/icons';
-import { Status, allStatuses } from 'yti-common-ui/entities/status';
+import { getDataModelingMaterialIcon, getInformationDomainSvgIcon } from 'yti-common-ui/utils/icons';
+import { allStatuses, Status } from 'yti-common-ui/entities/status';
+import { HelpService } from '../help/providers/helpService';
 
 // XXX: fixes problem with type definition having strongly typed parameters ending with 6
 function myCombineLatest<T, T2, T3, T4, T5, T6, T7>(v1: ObservableInput<T>,
@@ -56,10 +57,10 @@ export class FrontPageComponent implements HelpProvider {
   statuses: FilterOptions<Status>;
 
   search$ = new BehaviorSubject('');
-  classification$ = new BehaviorSubject<Classification|null>(null);
-  modelType$ = new BehaviorSubject<KnownModelType|null>(null);
-  organization$ = new BehaviorSubject<Organization|null>(null);
-  status$ = new BehaviorSubject<Status|null>(null);
+  classification$ = new BehaviorSubject<Classification | null>(null);
+  modelType$ = new BehaviorSubject<KnownModelType | null>(null);
+  organization$ = new BehaviorSubject<Organization | null>(null);
+  status$ = new BehaviorSubject<Status | null>(null);
 
   classifications: { node: Classification, count: number }[];
   filteredModels: ModelListItem[] = [];
@@ -80,7 +81,8 @@ export class FrontPageComponent implements HelpProvider {
               private frontPageHelpService: FrontPageHelpService,
               classificationService: ClassificationService,
               organizationService: OrganizationService,
-              private authorizationManagerService: AuthorizationManagerService) {
+              private authorizationManagerService: AuthorizationManagerService,
+              private helpService: HelpService) {
 
     'ngInject';
 
@@ -123,19 +125,19 @@ export class FrontPageComponent implements HelpProvider {
       return !search || anyMatching(Object.values(model.label), value => matches(value, search));
     }
 
-    function classificationMatches(classification: Classification|null, model: ModelListItem) {
+    function classificationMatches(classification: Classification | null, model: ModelListItem) {
       return !classification || anyMatching(model.classifications, c => c.id.equals(classification.id));
     }
 
-    function typeMatches(type: KnownModelType|null, model: ModelListItem) {
+    function typeMatches(type: KnownModelType | null, model: ModelListItem) {
       return !type || model.normalizedType === type;
     }
 
-    function organizationMatches(org: Organization|null, model: ModelListItem) {
+    function organizationMatches(org: Organization | null, model: ModelListItem) {
       return !org || anyMatching(model.contributors, modelOrg => modelOrg.id.equals(org.id));
     }
 
-    function statusMatches(status: Status|null, model: ModelListItem) {
+    function statusMatches(status: Status | null, model: ModelListItem) {
       return !status || model.status === status;
     }
 
@@ -153,7 +155,7 @@ export class FrontPageComponent implements HelpProvider {
           matchingModels.filter(model => classificationMatches(classification, model)).length;
 
         this.classifications = classifications.map(c => ({ node: c, count: modelCount(c) })).filter(c => c.count > 0);
-        this.classifications.sort(comparingLocalizable<{ node: Classification, count: number }>(localizer, c => c.node.label));        
+        this.classifications.sort(comparingLocalizable<{ node: Classification, count: number }>(localizer, c => c.node.label));
       }));
 
     this.subscriptionsToClean.push(myCombineLatest(models$, this.search$, this.classification$, this.modelType$, this.organization$, this.status$, languageService.language$)
@@ -172,16 +174,6 @@ export class FrontPageComponent implements HelpProvider {
       }));
   }
 
-  $onInit() {
-    this.applicationCtrl.registerHelpProvider(this);
-  }
-
-  $onDestroy() {
-    for (const subscription of this.subscriptionsToClean) {
-      subscription.unsubscribe();
-    }
-  }
-
   get loading() {
     return !this.modelsLoaded || this.classifications == null || this.modelTypes == null || this.organizations == null;
   }
@@ -192,6 +184,17 @@ export class FrontPageComponent implements HelpProvider {
 
   set search(value: string) {
     this.search$.next(value);
+  }
+
+  $onInit() {
+    this.helpService.registerProvider(this);
+  }
+
+  $onDestroy() {
+    this.helpService.unregisterProvider(this);
+    for (const subscription of this.subscriptionsToClean) {
+      subscription.unsubscribe();
+    }
   }
 
   isClassificationSelected(classification: Classification) {
@@ -228,7 +231,7 @@ export class FrontPageComponent implements HelpProvider {
     this.$location.search({ type });
   }
 
-  private go(withIowUrl: {iowUrl(): Url|null}) {
+  private go(withIowUrl: { iowUrl(): Url | null }) {
 
     const url = withIowUrl.iowUrl();
 

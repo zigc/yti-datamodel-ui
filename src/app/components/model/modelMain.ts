@@ -9,6 +9,11 @@ import { NotificationModal } from '../common/notificationModal';
 import { EditingGuard, EditorContainer, View } from './modelControllerService';
 import { ConfirmationModal } from '../common/confirmationModal';
 import { modalCancelHandler } from '../../utils/angular';
+import { LanguageService } from '../../services/languageService';
+import { InteractiveHelp } from '../../help/contract';
+import { HelpProvider } from '../common/helpProvider';
+import { ModelPageHelpService } from '../../help/providers/modelPageHelpService';
+import { HelpService } from '../../help/providers/helpService';
 
 @Component({
   selector: 'app-model-main',
@@ -18,7 +23,7 @@ import { modalCancelHandler } from '../../utils/angular';
     SubRoutingHackService
   ]
 })
-export class ModelMainComponent implements OnDestroy, OnInit, EditorContainer, EditingGuard {
+export class ModelMainComponent implements OnDestroy, OnInit, EditorContainer, EditingGuard, HelpProvider {
   @ViewChild('tabs') tabs: NgbTabset;
 
   model?: Model;
@@ -26,18 +31,26 @@ export class ModelMainComponent implements OnDestroy, OnInit, EditorContainer, E
   currentModelAndSelection = new BehaviorSubject<ModelAndSelection>(new ModelAndSelection());
   editorContainer: EditorContainer;
   namespacesInUse: Set<string> = new Set<string>();
+  helps: InteractiveHelp[];
   private registeredEditingViews: View[] = [];
   private modelService: ModelService;
   private subscriptions: Subscription[] = [];
 
   constructor(private subRoutingService: SubRoutingHackService, modelServiceWrapper: ModelServiceWrapper,
-              private notificationModal: NotificationModal, private confirmationModal: ConfirmationModal) {
+              private notificationModal: NotificationModal, private confirmationModal: ConfirmationModal,
+              private languageService: LanguageService, private modelPageHelpService: ModelPageHelpService,
+              private helpService: HelpService) {
     this.modelService = modelServiceWrapper.modelService;
     this.editorContainer = this;
   }
 
   ngOnInit(): void {
+    this.helpService.registerProvider(this);
     this.subRoutingService.setGuard(this);
+
+    this.subscriptions.push(this.languageService.language$.subscribe(uiLanguage => {
+      this.setHelps();
+    }));
 
     this.subscriptions.push(this.subRoutingService.currentSelection.subscribe(selection => {
       if (selection.modelPrefix) {
@@ -67,6 +80,7 @@ export class ModelMainComponent implements OnDestroy, OnInit, EditorContainer, E
                 const newModelAndSelection = ModelAndSelection.fromModelAndRoute(model, newestSelection);
                 if (!oldModelAndSelection.equals(newModelAndSelection)) {
                   this.currentModelAndSelection.next(newModelAndSelection);
+                  this.setHelps();
                 }
               } else {
                 // Really weird, on the brink of "cannot happen", as this.loadingModelPrefix should match selection subject quite closely.
@@ -91,6 +105,7 @@ export class ModelMainComponent implements OnDestroy, OnInit, EditorContainer, E
   }
 
   ngOnDestroy(): void {
+    this.helpService.unregisterProvider(this);
     this.subRoutingService.unsetGuard(this);
     this.subscriptions.forEach(s => s.unsubscribe());
   }
@@ -157,5 +172,9 @@ export class ModelMainComponent implements OnDestroy, OnInit, EditorContainer, E
         proceed();
       }, modalCancelHandler);
     }
+  }
+
+  private setHelps() {
+    this.helps = this.model ? this.modelPageHelpService.getHelps(this.model.normalizedType, this.model.prefix, this.languageService.UILanguage) : [];
   }
 }

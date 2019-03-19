@@ -1,8 +1,10 @@
-import { ILocationService, IRootScopeService, IScope, route } from 'angular';
-import IInjectorService = angular.auto.IInjectorService;
+import { ILocationService, IRootScopeService, route } from 'angular';
 import { ModelService } from './services/modelService';
 import { NotificationModal } from './components/common/notificationModal';
 import { ConfirmationModal } from './components/common/confirmationModal';
+import { LanguageService } from './services/languageService';
+import { ModelPageHelpService } from './help/providers/modelPageHelpService';
+import IInjectorService = angular.auto.IInjectorService;
 
 // NOTE: In normal case the "wrappers" should not be needed, but I could not figure out the way to make it work with the interfaces.
 
@@ -88,5 +90,25 @@ export function confirmationModalFactory(i: IInjectorService) {
 export const confirmationModalProvider = {
   provide: ConfirmationModal,
   useFactory: confirmationModalFactory,
+  deps: ['$injector']
+}
+
+export function languageServiceFactory(i: IInjectorService) {
+  return i.get('languageService');
+}
+
+export const languageServiceProvider = {
+  provide: LanguageService,
+  useFactory: languageServiceFactory,
+  deps: ['$injector']
+}
+
+export function modelPageHelpServiceFactory(i: IInjectorService) {
+  return i.get('modelPageHelpService');
+}
+
+export const modelPageHelpServiceProvider = {
+  provide: ModelPageHelpService,
+  useFactory: modelPageHelpServiceFactory,
   deps: ['$injector']
 }

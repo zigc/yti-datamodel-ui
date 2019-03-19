@@ -1,7 +1,7 @@
 import { Directive, ElementRef, EventEmitter, Injector, Input, Output } from '@angular/core';
 import { UpgradeComponent } from '@angular/upgrade/static';
 import { Model } from './entities/model';
-import { EditorContainer, ModelControllerService } from './components/model/modelControllerService';
+import { EditorContainer } from './components/model/modelControllerService';
 import { LanguageContext } from './types/language';
 import { ModelAndSelection } from './services/subRoutingHackService';
 import { BehaviorSubject } from 'rxjs';
@@ -53,7 +53,7 @@ export class ModelLanguageChooserDirective extends UpgradeComponent {
   selector: 'export-component'
 })
 export class ExportDirective extends UpgradeComponent {
-  @Input() entity: Model|Class|Predicate;
+  @Input() entity: Model | Class | Predicate;
   @Input() context: LanguageContext;
 
   constructor(elementRef: ElementRef, injector: Injector) {
