@@ -12,7 +12,7 @@ function isReference(model: Model, resource: WithDefinedBy): boolean {
 }
 
 function isRemovableStatus(status: Status|null): boolean {
-  return status === 'SUGGESTED' || status === 'DRAFT' || status === null;
+  return status === 'SUGGESTED' || status === 'DRAFT' || status === 'INCOMPLETE' || status === null;
 }
 
 export class AuthorizationManagerService {
