@@ -127,7 +127,7 @@ export class Class extends AbstractClass implements VisualizationClass {
   }
 
   get inUnstableState(): boolean {
-    return this.status === 'DRAFT' || this.status === 'SUGGESTED';
+    return this.status === 'INCOMPLETE' || this.status === 'DRAFT' || this.status === 'SUGGESTED';
   }
 
   addProperty(property: Property): void {
@@ -431,7 +431,7 @@ export class Property extends GraphNode {
   }
 
   get inUnstableState(): boolean {
-    return this.status === 'DRAFT' || this.status === 'SUGGESTED';
+    return this.status === 'INCOMPLETE' || this.status === 'DRAFT' || this.status === 'SUGGESTED';
   }
 
   get normalizedPredicateType(): PredicateType|null {

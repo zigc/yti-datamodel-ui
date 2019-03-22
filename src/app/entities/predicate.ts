@@ -99,7 +99,7 @@ export class Predicate extends AbstractPredicate {
   }
 
   get inUnstableState(): boolean {
-    return this.status === 'DRAFT' || this.status === 'SUGGESTED';
+    return this.status === 'INCOMPLETE' || this.status === 'DRAFT' || this.status === 'SUGGESTED';
   }
 
   serializationValues(_inline: boolean, clone: boolean): {} {
