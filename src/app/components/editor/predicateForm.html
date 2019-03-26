@@ -3,6 +3,7 @@
     <h4 class="pull-left">{{$ctrl.predicate.normalizedType + ' information' | capitalize | translate}}</h4>
 
     <button ng-if="$ctrl.isEditing() && !$ctrl.predicate.unsaved"
+            id="predicate_change_type"
             type="button"
             class="btn btn-link pull-right"
             style="margin-left: 5px"
