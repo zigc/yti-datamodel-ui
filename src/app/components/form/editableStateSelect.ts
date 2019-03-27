@@ -15,7 +15,7 @@ import { LegacyComponent } from 'app/utils/angular';
       
         <label translate>Status</label>
       
-        <iow-select ng-if="$ctrl.isEditing()" id="{{$ctrl.id}}" options="state in $ctrl.getStates()" ng-model="$ctrl.state">
+        <iow-select ng-if="$ctrl.isEditing()" id="{{$ctrl.id}}" id-prefix="$ctrl.id" options="state in $ctrl.getStates()" ng-model="$ctrl.state">
           <span>{{state | translate}}</span>
         </iow-select>
 
