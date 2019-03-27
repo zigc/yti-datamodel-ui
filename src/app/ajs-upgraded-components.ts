@@ -14,7 +14,7 @@ import { Predicate } from './entities/predicate';
 export class ModelPageDirective extends UpgradeComponent {
   @Input() parent: EditorContainer;
   @Input() currentSelection: BehaviorSubject<ModelAndSelection>;
-  @Output() select: EventEmitter<{ resourceCurie?: string, propertyId?: string }>;
+  @Output() makeSelection: EventEmitter<{ resourceCurie?: string, propertyId?: string }>;
   @Output() updateNamespaces: EventEmitter<Set<string>>;
 
   constructor(elementRef: ElementRef, injector: Injector) {

@@ -56,7 +56,7 @@ export interface ModelPageActions extends ChangeNotifier<Class | Predicate> {
 @LegacyComponent({
   bindings: {
     currentSelection: '<',
-    select: '&',
+    makeSelection: '&',
     updateNamespaces: '&',
     parent: '<'
   },
@@ -65,7 +65,7 @@ export interface ModelPageActions extends ChangeNotifier<Class | Predicate> {
 export class ModelPageComponent implements ModelPageActions, ModelControllerService {
 
   currentSelection: BehaviorSubject<ModelAndSelection>;
-  select: (selection: { resourceCurie?: string, propertyId?: string }) => void;
+  makeSelection: (selection: { resourceCurie?: string, propertyId?: string }) => void;
   updateNamespaces: (namespacesInUse: Set<string>) => void;
   parent: EditorContainer;
   subscriptions: Subscription[] = [];
@@ -118,7 +118,7 @@ export class ModelPageComponent implements ModelPageActions, ModelControllerServ
     $scope.$watch(() => this.propertyId, (newId: string, oldId: string) => {
       const current = this.currentSelection.getValue();
       if (oldId === current.propertyId && oldId !== newId) {
-        this.select({ resourceCurie: current.resourceCurie, propertyId: newId });
+        this.makeSelection({ resourceCurie: current.resourceCurie, propertyId: newId });
       }
     });
 
@@ -224,7 +224,7 @@ export class ModelPageComponent implements ModelPageActions, ModelControllerServ
     for (const changeListener of this.changeListeners) {
       changeListener.onDelete(selection);
     }
-    this.select({});
+    this.makeSelection({});
   }
 
   public addEntity(type: ClassType | KnownPredicateType) {
@@ -313,9 +313,9 @@ export class ModelPageComponent implements ModelPageActions, ModelControllerServ
     // Here we (or sub components) initiate a selection change. The actual change happens through the routing stuff.
 
     if (item) {
-      this.select({ resourceCurie: item.id.curie });
+      this.makeSelection({ resourceCurie: item.id.curie });
     } else {
-      this.select({});
+      this.makeSelection({});
     }
   }
 

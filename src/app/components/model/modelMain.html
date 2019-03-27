@@ -40,7 +40,7 @@
       <ngb-tab id="dataTab" [title]="'Datamodel definition' | translate">
         <ng-template ngbTabContent>
           <model-page [parent]="editorContainer" [currentSelection]="currentModelAndSelection"
-                      (select)="onSubSelection($event)" (updateNamespaces)="onNamespacesChange($event)"></model-page>
+                      (makeSelection)="onSubSelection($event)" (updateNamespaces)="onNamespacesChange($event)"></model-page>
         </ng-template>
       </ngb-tab>
       <ngb-tab id="modelDetailsTab" [title]="'Datamodel details' | translate">
