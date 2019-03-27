@@ -116,9 +116,17 @@ export class ModelPageComponent implements ModelPageActions, ModelControllerServ
     });
 
     $scope.$watch(() => this.propertyId, (newId: string, oldId: string) => {
-      const current = this.currentSelection.getValue();
-      if (oldId === current.propertyId && oldId !== newId) {
-        this.makeSelection({ resourceCurie: current.resourceCurie, propertyId: newId });
+      // Cope with situation where there is an entity under creation, but the currentSelection still has old values.
+      if (this.resource && this.resource.id) {
+        const current = this.currentSelection.getValue();
+        let curieMatches = false;
+        try {
+          curieMatches = this.resource.id.curie === current.resourceCurie;
+        } catch(error) {}
+
+        if (curieMatches && oldId === current.propertyId && oldId !== newId) {
+          this.makeSelection({ resourceCurie: current.resourceCurie, propertyId: newId });
+        }
       }
     });
 
