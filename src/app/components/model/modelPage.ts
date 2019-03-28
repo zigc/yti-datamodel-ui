@@ -517,13 +517,17 @@ export class ModelPageComponent implements ModelPageActions, ModelControllerServ
 
   private alignTabWithSelection() {
 
-    const tabType = this.resource instanceof Predicate ? this.resource.normalizedType : 'class';
+    if (this.resource) {
+      const tabType = this.resource instanceof Predicate ? this.resource.normalizedType : 'class';
 
-    for (let i = 0; i < this.tabs.length; i++) {
-      if (this.tabs[i].type === tabType) {
-        this.activeTab = i;
-        break;
+      for (let i = 0; i < this.tabs.length; i++) {
+        if (this.tabs[i].type === tabType) {
+          this.activeTab = i;
+          break;
+        }
       }
+    } else {
+      // do not change tab after, e.g., deletion
     }
   }
 

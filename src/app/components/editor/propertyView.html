@@ -1,7 +1,7 @@
 <div ng-if="$ctrl.isOpen()">
   <div class="row">
     <div class="col-md-12">
-        <app-status class="mb-2" [status]="$ctrl.model.status"></app-status>
+        <app-status class="mb-2" [status]="$ctrl.property.status"></app-status>
 
         <button ng-if="$ctrl.isEditing()"
                 type="button"
