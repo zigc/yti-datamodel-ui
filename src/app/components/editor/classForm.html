@@ -99,6 +99,16 @@
 
 <hr />
 
+<div class="range-input">
+  <editable data-title="Min properties" context="$ctrl.model">
+    <input id="minProperties" placeholder="0" min-input max="$ctrl.class.maxProperties" class="form-control" type="number" ng-model="$ctrl.class.minProperties" />
+  </editable>
+
+  <editable data-title="Max properties" context="$ctrl.model">
+    <input id="maxProperties" placeholder="*" max-input min="$ctrl.class.minProperties" class="form-control" type="number" ng-model="$ctrl.class.maxProperties" />
+  </editable>
+</div>
+
 <h4 translate>Additional information</h4>
 
 <div class="row">

@@ -2131,11 +2131,23 @@ msgid "Pattern info"
 msgstr ""
 "Säännöllinen lauseke jota voidaan käyttää ominaisuuden arvojen validointiin"
 
+msgid "Min properties"
+msgstr "Ominaisuuksien vähimmäismäärä"
+
+msgid "Min properties info"
+msgstr "Luokan attribuuttien tai assosiaatioiden vähimmäismäärä. HUOM! Toimii vain JSON skeemoissa."
+
 msgid "Min count"
 msgstr "Vähimmäismäärä"
 
 msgid "Min count info"
 msgstr "Sallittujen arvojen minimimäärä"
+
+msgid "Max properties"
+msgstr "Ominaisuuksien enimmäismäärä"
+
+msgid "Max properties info"
+msgstr "Luokan attribuuttien tai assosiaatioiden enimmäismäärä. HUOM! Toimii vain JSON skeemoissa."
 
 msgid "Max count"
 msgstr "Enimmäismäärä"
