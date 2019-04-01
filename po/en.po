@@ -2099,11 +2099,23 @@ msgstr "Regular expression"
 msgid "Pattern info"
 msgstr "Regular expression that can be used to validate the property values"
 
+msgid "Min properties"
+msgstr ""
+
+msgid "Min properties info"
+msgstr "Minumum number of class properties. Works only with JSON schemas!"
+
 msgid "Min count"
 msgstr ""
 
 msgid "Min count info"
 msgstr "Minimum count of the properties"
+
+msgid "Max properties"
+msgstr ""
+
+msgid "Max properties info"
+msgstr "Maximum number of class properties. Works only with JSON schemas!"
 
 msgid "Max count"
 msgstr ""

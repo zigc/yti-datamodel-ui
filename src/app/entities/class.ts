@@ -96,7 +96,9 @@ export class Class extends AbstractClass implements VisualizationClass {
         (constraint: Constraint) => constraint.items.length > 0 || hasLocalization(constraint.comment)) },
     version:           { name: 'identifier',      serializer: optional(identitySerializer<Urn>()) },
     editorialNote:     { name: 'editorialNote',   serializer: localizableSerializer },
-    createdAt:         { name: 'created',         serializer: optional(dateSerializer) }
+    createdAt:         { name: 'created',         serializer: optional(dateSerializer) },
+    minProperties:           { name: 'minProperties',             serializer: optional(identitySerializer<number>()) },
+    maxProperties:           { name: 'maxProperties',             serializer: optional(identitySerializer<number>()) }
   };
 
   subClassOf: Uri|null;
@@ -109,7 +111,8 @@ export class Class extends AbstractClass implements VisualizationClass {
   version: Urn;
   editorialNote: Localizable;
   createdAt: Moment|null;
-
+  minProperties: number|null;
+  maxProperties: number|null;
   resolved = true;
   unsaved = false;
   external = false;
