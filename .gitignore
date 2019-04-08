@@ -6,6 +6,7 @@ rev-manifest.json
 typings/*
 **/.DS_Store
 po/*.mo
+dist
 
 # Idea user related configs
 .idea
