@@ -1987,7 +1987,7 @@ msgid "Range"
 msgstr ""
 
 msgid "Range info"
-msgstr "Value range of the property"
+msgstr "Property range (or datatype) is chosen from list of interoperable XSD datatypes"
 
 msgid "Specialized from class"
 msgstr ""

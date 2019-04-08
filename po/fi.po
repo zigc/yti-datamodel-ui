@@ -2012,10 +2012,10 @@ msgid "Superproperty info"
 msgstr "Yleistettävissä oleva ominaisuus, joka on semantiikaltaan laajempi"
 
 msgid "Range"
-msgstr "Arvoalue"
+msgstr "Tietotyyppi"
 
 msgid "Range info"
-msgstr "Ominaisuuden arvoalue"
+msgstr "Attribuutin tietotyyppi on valittava yhteensopivien XSD tietotyyppien joukosta"
 
 msgid "Specialized from class"
 msgstr "Tarkennettu luokasta"
