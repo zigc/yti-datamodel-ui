@@ -1741,7 +1741,10 @@ msgid "Match to content"
 msgstr ""
 
 msgid "Unique label"
-msgstr ""
+msgstr "Unique localized value"
+
+msgid "Unique label info"
+msgstr "Defines if only one localized value is allowed for each language. This can be used for example to define cardinaly of two with unique localized values"
 
 msgid "All organizations"
 msgstr ""

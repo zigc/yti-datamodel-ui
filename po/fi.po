@@ -1762,7 +1762,10 @@ msgid "Match to content"
 msgstr "Hae sisällöstä"
 
 msgid "Unique label"
-msgstr "Yksilöllinen nimi"
+msgstr "Yksi arvo kieltä kohti"
+
+msgid "Unique label info"
+msgstr "Määrittelee onko vain yksi kieliversioitu arvo sallittu yhtä kieltä kohden. Tämän avulla voidaan määritellä esimerkiksi Enimmäismäärä 2 siten että vain erikieliset arvot ovat sallittuja"
 
 msgid "All organizations"
 msgstr "Kaikki organisaatiot"
