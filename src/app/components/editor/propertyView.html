@@ -135,7 +135,10 @@
   <h4 translate ng-show="$ctrl.isEditing() || $ctrl.property.hasTechnicalMetadata()">Technical metadata</h4>
 
   <div class="row">
-      <div class="col-md-3">
+      <div class="col-md-6">
+          <editable data-title="Resource identifier" context="$ctrl.model" ng-if="$ctrl.property.isAttribute()">
+              <input id="{{$ctrl.property.internalId + 'resourceIdentifier'}}" type="checkbox" ng-model="$ctrl.property.resourceIdentifier" restrict-duplicates="$ctrl.otherPropertyResourceIdentifiers"/>
+          </editable>
           <editable data-title="XML Wrapper" context="$ctrl.model" ng-if="$ctrl.property.isAssociation()">
               <input id="{{$ctrl.property.internalId + 'xmlWrapper'}}" type="checkbox" ng-model="$ctrl.property.xmlWrapper"/>
           </editable>
@@ -143,23 +146,13 @@
               <input id="{{$ctrl.property.internalId + 'xmlAttribute'}}" type="checkbox" ng-model="$ctrl.property.xmlAttribute"/>
           </editable>
       </div>
-  </div>
-
-  <div class="row">
-    <div class="col-md-3">
-      <editable data-title="Resource identifier" context="$ctrl.model">
-        <input id="{{$ctrl.property.internalId + 'resourceIdentifier'}}" type="checkbox" ng-model="$ctrl.property.resourceIdentifier" restrict-duplicates="$ctrl.otherPropertyResourceIdentifiers"/>
-      </editable>
-    </div>
-    <div class="col-md-3">
+    <div class="col-md-6">
+        <editable data-title="Read-only" context="$ctrl.model" ng-if="$ctrl.property.isAttribute()">
+            <input id="{{$ctrl.property.internalId + 'readOnlyValue'}}" type="checkbox" ng-model="$ctrl.property.readOnlyValue"/>
+          </editable>
         <editable data-title="Deactivated" context="$ctrl.model">
           <input id="{{$ctrl.property.internalId + 'deactivated'}}" type="checkbox" ng-model="$ctrl.property.deactivated"/>
         </editable>
-    </div>
-    <div class="col-md-3">
-          <editable data-title="Read-only" context="$ctrl.model" ng-if="$ctrl.property.isAttribute()">
-            <input id="{{$ctrl.property.internalId + 'readOnlyValue'}}" type="checkbox" ng-model="$ctrl.property.readOnlyValue"/>
-          </editable>
       </div>
   </div>
 
