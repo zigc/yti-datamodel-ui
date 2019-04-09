@@ -401,12 +401,6 @@ msgstr "Tietoalue"
 msgid "Organization"
 msgstr "Organisaatio"
 
-msgid "Show model details"
-msgstr "Näytä tietomallin tiedot"
-
-msgid "Hide model details"
-msgstr "Piilota tietomallin tiedot"
-
 msgid "Browse reference data codes"
 msgstr "Selaa koodistoa"
 
@@ -1029,6 +1023,9 @@ msgstr ""
 "Täältä voit lisätä luokalle uuden attribuutin jonka arvoalue perustuu "
 "tietotyyppiin tai assosiaation jolla viitataan toiseen luokkaan"
 
+msgid "Created at"
+msgstr "Luotu"
+
 msgid "not found in the concept database"
 msgstr "ei löydy sanastosta"
 
@@ -1094,6 +1091,12 @@ msgstr "Ehdotus"
 
 msgid "Hide"
 msgstr "Piilota"
+
+msgid "Show model details"
+msgstr "Näytä tietomallin tiedot"
+
+msgid "Hide model details"
+msgstr "Piilota tietomallin tiedot"
 
 msgid "Front page"
 msgstr "Etusivu"
@@ -1467,9 +1470,6 @@ msgstr "Käyttäjätunnus"
 msgid "User name"
 msgstr "Nimi"
 
-msgid "Created at"
-msgstr "Luotu"
-
 msgid "Define concept for the class"
 msgstr "Määrittele käsite luokalle"
 
@@ -1764,9 +1764,6 @@ msgstr "Hae sisällöstä"
 msgid "Unique label"
 msgstr "Yksi arvo kieltä kohden"
 
-msgid "Unique label info"
-msgstr "Määrittelee onko vain yksi kieliversioitu arvo sallittu yhtä kieltä kohden. Tämän avulla voidaan määritellä esimerkiksi Enimmäismäärä 2 siten että vain erikieliset arvot ovat sallittuja"
-
 msgid "All organizations"
 msgstr "Kaikki organisaatiot"
 
@@ -1887,6 +1884,22 @@ msgstr "Koodiston URI"
 msgid "Reference data URI info"
 msgstr ""
 "Koodiston URI tunniste on pysyvä ja yksilöivä viittaus koodiston sijaintiin"
+
+msgid "Max properties"
+msgstr "Ominaisuuksien enimmäismäärä"
+
+msgid "Max properties info"
+msgstr ""
+"Luokan attribuuttien tai assosiaatioiden enimmäismäärä. HUOM! Toimii vain "
+"JSON skeemoissa."
+
+msgid "Min properties"
+msgstr "Ominaisuuksien vähimmäismäärä"
+
+msgid "Min properties info"
+msgstr ""
+"Luokan attribuuttien tai assosiaatioiden vähimmäismäärä. HUOM! Toimii vain "
+"JSON skeemoissa."
 
 msgid "Group label"
 msgstr "Ryhmän nimi"
@@ -2018,7 +2031,9 @@ msgid "Range"
 msgstr "Tietotyyppi"
 
 msgid "Range info"
-msgstr "Attribuutin tietotyyppi on valittava yhteensopivien XSD tietotyyppien joukosta"
+msgstr ""
+"Attribuutin tietotyyppi on valittava yhteensopivien XSD tietotyyppien "
+"joukosta"
 
 msgid "Specialized from class"
 msgstr "Tarkennettu luokasta"
@@ -2134,23 +2149,11 @@ msgid "Pattern info"
 msgstr ""
 "Säännöllinen lauseke jota voidaan käyttää ominaisuuden arvojen validointiin"
 
-msgid "Min properties"
-msgstr "Ominaisuuksien vähimmäismäärä"
-
-msgid "Min properties info"
-msgstr "Luokan attribuuttien tai assosiaatioiden vähimmäismäärä. HUOM! Toimii vain JSON skeemoissa."
-
 msgid "Min count"
 msgstr "Vähimmäismäärä"
 
 msgid "Min count info"
 msgstr "Sallittujen arvojen minimimäärä"
-
-msgid "Max properties"
-msgstr "Ominaisuuksien enimmäismäärä"
-
-msgid "Max properties info"
-msgstr "Luokan attribuuttien tai assosiaatioiden enimmäismäärä. HUOM! Toimii vain JSON skeemoissa."
 
 msgid "Max count"
 msgstr "Enimmäismäärä"
@@ -2181,6 +2184,19 @@ msgstr "XML Attribuutti"
 
 msgid "XML Attribute info"
 msgstr "Muodosta ominaisuudesta XML Elementin attribuutti XML skeemassa"
+
+msgid "Deactivated"
+msgstr "Deaktivoitu"
+
+msgid "Deactivated info"
+msgstr ""
+"Deaktivoitua resurssia ei käytetä skeemojen generoinnissa tai validoinnissa"
+
+msgid "Unique label info"
+msgstr ""
+"Määrittelee onko vain yksi kieliversioitu arvo sallittu yhtä kieltä kohden. "
+"Tämän avulla voidaan määritellä esimerkiksi Enimmäismäärä 2 siten että vain "
+"erikieliset arvot ovat sallittuja"
 
 msgid "Homepage"
 msgstr "Linkki"

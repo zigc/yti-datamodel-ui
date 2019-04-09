@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2019-02-08 17:27+0200\n"
+"PO-Revision-Date: 2019-04-09 10:59+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -409,12 +409,6 @@ msgstr "Information pool"
 #| msgid "association"
 msgid "Organization"
 msgstr "Association"
-
-msgid "Show model details"
-msgstr ""
-
-msgid "Hide model details"
-msgstr ""
 
 msgid "Browse reference data codes"
 msgstr ""
@@ -1011,6 +1005,9 @@ msgstr "Terminology"
 msgid "You can add new attribute or association to the Class from here"
 msgstr ""
 
+msgid "Created at"
+msgstr ""
+
 msgid "not found in the concept database"
 msgstr ""
 
@@ -1075,6 +1072,12 @@ msgid "Suggestion"
 msgstr ""
 
 msgid "Hide"
+msgstr ""
+
+msgid "Show model details"
+msgstr ""
+
+msgid "Hide model details"
 msgstr ""
 
 msgid "Front page"
@@ -1447,9 +1450,6 @@ msgstr ""
 msgid "User name"
 msgstr ""
 
-msgid "Created at"
-msgstr ""
-
 msgid "Define concept for the class"
 msgstr ""
 
@@ -1743,9 +1743,6 @@ msgstr ""
 msgid "Unique label"
 msgstr "Unique localized value"
 
-msgid "Unique label info"
-msgstr "Defines if only one localized value is allowed for each language. This can be used for example to define cardinaly of two with unique localized values"
-
 msgid "All organizations"
 msgstr ""
 
@@ -1863,6 +1860,18 @@ msgstr ""
 
 msgid "Reference data URI info"
 msgstr ""
+
+msgid "Max properties"
+msgstr ""
+
+msgid "Max properties info"
+msgstr "Maximum number of class properties. Works only with JSON schemas!"
+
+msgid "Min properties"
+msgstr ""
+
+msgid "Min properties info"
+msgstr "Minumum number of class properties. Works only with JSON schemas!"
 
 msgid "Group label"
 msgstr ""
@@ -1990,7 +1999,9 @@ msgid "Range"
 msgstr ""
 
 msgid "Range info"
-msgstr "Property range (or datatype) is chosen from list of interoperable XSD datatypes"
+msgstr ""
+"Property range (or datatype) is chosen from list of interoperable XSD "
+"datatypes"
 
 msgid "Specialized from class"
 msgstr ""
@@ -2102,23 +2113,11 @@ msgstr "Regular expression"
 msgid "Pattern info"
 msgstr "Regular expression that can be used to validate the property values"
 
-msgid "Min properties"
-msgstr ""
-
-msgid "Min properties info"
-msgstr "Minumum number of class properties. Works only with JSON schemas!"
-
 msgid "Min count"
 msgstr ""
 
 msgid "Min count info"
 msgstr "Minimum count of the properties"
-
-msgid "Max properties"
-msgstr ""
-
-msgid "Max properties info"
-msgstr "Maximum number of class properties. Works only with JSON schemas!"
 
 msgid "Max count"
 msgstr ""
@@ -2150,6 +2149,17 @@ msgstr "XML Attribute"
 
 msgid "XML Attribute info"
 msgstr "Serialize as XML Element Attribute in XML Schema"
+
+msgid "Deactivated"
+msgstr ""
+
+msgid "Deactivated info"
+msgstr "Deactivated resource is not used in schema generation or validation"
+
+msgid "Unique label info"
+msgstr ""
+"Defines if only one localized value is allowed for each language. This can "
+"be used for example to define cardinaly of two with unique localized values"
 
 msgid "Homepage"
 msgstr "Link"

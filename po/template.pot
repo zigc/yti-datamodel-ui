@@ -934,6 +934,9 @@ msgstr ""
 msgid "You can add new attribute or association to the Class from here"
 msgstr ""
 
+msgid "Created at"
+msgstr ""
+
 msgid "not found in the concept database"
 msgstr ""
 
@@ -998,6 +1001,12 @@ msgid "Suggestion"
 msgstr ""
 
 msgid "Hide"
+msgstr ""
+
+msgid "Show model details"
+msgstr ""
+
+msgid "Hide model details"
 msgstr ""
 
 msgid "Front page"
@@ -1339,9 +1348,6 @@ msgid "User login"
 msgstr ""
 
 msgid "User name"
-msgstr ""
-
-msgid "Created at"
 msgstr ""
 
 msgid "Define concept for the class"
@@ -1748,6 +1754,18 @@ msgstr ""
 msgid "Reference data URI info"
 msgstr ""
 
+msgid "Max properties"
+msgstr ""
+
+msgid "Max properties info"
+msgstr ""
+
+msgid "Min properties"
+msgstr ""
+
+msgid "Min properties info"
+msgstr ""
+
 msgid "Group label"
 msgstr ""
 
@@ -2013,6 +2031,15 @@ msgid "XML Attribute"
 msgstr ""
 
 msgid "XML Attribute info"
+msgstr ""
+
+msgid "Deactivated"
+msgstr ""
+
+msgid "Deactivated info"
+msgstr ""
+
+msgid "Unique label info"
 msgstr ""
 
 msgid "Homepage"

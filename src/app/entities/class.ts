@@ -41,7 +41,7 @@ export abstract class AbstractClass extends GraphNode {
     comment:    { name: 'description',     serializer: localizableSerializer },
     definedBy:  { name: 'isDefinedBy', serializer: normalizingDefinedBySerializer },
     status:     { name: 'versionInfo',     serializer: optional(identitySerializer<Status>()) },
-    modifiedAt: { name: 'modified',        serializer: optional(dateSerializer) },
+    modifiedAt: { name: 'modified',        serializer: optional(dateSerializer) }
   };
 
   id: Uri;
@@ -98,7 +98,8 @@ export class Class extends AbstractClass implements VisualizationClass {
     editorialNote:     { name: 'editorialNote',   serializer: localizableSerializer },
     createdAt:         { name: 'created',         serializer: optional(dateSerializer) },
     minProperties:           { name: 'minProperties',             serializer: optional(identitySerializer<number>()) },
-    maxProperties:           { name: 'maxProperties',             serializer: optional(identitySerializer<number>()) }
+    maxProperties:           { name: 'maxProperties',             serializer: optional(identitySerializer<number>()) },
+    deactivated:{ name: 'deactivated',           serializer: booleanSerializer }
   };
 
   subClassOf: Uri|null;
@@ -116,6 +117,7 @@ export class Class extends AbstractClass implements VisualizationClass {
   resolved = true;
   unsaved = false;
   external = false;
+  deactivated: boolean;
 
   constructor(graph: any, context: any, frame: any) {
     super(graph, context, frame);
@@ -342,7 +344,8 @@ export class Property extends GraphNode {
     predicateType:      { name: 'type',                 serializer: optional(propertyTypeSerializer) },
     xmlWrapper:         { name: 'isXmlWrapper',         serializer: booleanSerializer },
     xmlAttribute:       { name: 'isXmlAttribute',       serializer: booleanSerializer },
-    readOnlyValue:      { name: 'readOnlyValue',        serializer: booleanSerializer }
+    readOnlyValue:      { name: 'readOnlyValue',        serializer: booleanSerializer },
+    deactivated:         { name: 'deactivated',           serializer: booleanSerializer }
   };
 
   internalId: Uri;
@@ -373,6 +376,7 @@ export class Property extends GraphNode {
   xmlWrapper: boolean;
   xmlAttribute: boolean;
   readOnlyValue: boolean;
+  deactivated: boolean;
 
   predicateType: KnownPredicateType|null = null;
 
@@ -418,7 +422,8 @@ export class Property extends GraphNode {
     return this.resourceIdentifier
       || this.xmlWrapper
       || this.xmlAttribute
-      || this.readOnlyValue;
+      || this.readOnlyValue
+      || this.deactivated;
   }
 
   hasAssociationTarget() {

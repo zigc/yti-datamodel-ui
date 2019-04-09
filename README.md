@@ -30,7 +30,12 @@ To load example data to a custom host and/or port
 
 ## Updating translation file
 
-npm run create-translations
+Add localization keys to [translation templates](https://github.com/VRK-YTI/yti-datamodel-ui/tree/master/src/app/translations)
+
+Update pot file:
+`npm run create-translations`
+
+Add new keys and translations by using poedit "Update from pot file".
 
 ## Build
 

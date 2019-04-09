@@ -33,6 +33,10 @@
       <input id="localName" class="form-control" type="text" string-input="identifier" ng-trim="false" ng-model="$ctrl.class.localName" />
     </editable>
 
+    <editable data-title="Deactivated" context="$ctrl.model">
+        <input id="{{$ctrl.class.deactivated}}" type="checkbox" ng-model="$ctrl.class.deactivated"/>
+    </editable>
+
   </div>
   <div class="col-md-6">
     <editable-state-select ng-if="!$ctrl.class.unsaved" id="classState" state="$ctrl.class.status" model="$ctrl.model"></editable-state-select>
