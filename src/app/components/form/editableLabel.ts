@@ -15,7 +15,7 @@ import { LegacyComponent } from 'app/utils/angular';
     form: '?^form'
   },
   template: `
-      <label>{{$ctrl.title | translate}} 
+      <label ng-attr-for="{{$ctrl.forId}}">{{$ctrl.title | translate}} 
          <span ng-show="$ctrl.infoText" class="fas fa-info-circle info" uib-tooltip="{{$ctrl.infoText}}"></span>
          <span ng-show="$ctrl.required && $ctrl.isEditing()" class="fas fa-asterisk" uib-tooltip="{{'Required' | translate}}"></span>
       </label>
@@ -37,14 +37,6 @@ export class EditableLabelComponent {
   }
 
   $onInit() {
-
-    const labelElement = this.$element.find('label');
-    this.$scope.$watch(() => this.inputId, inputId => {
-      if (inputId) {
-        labelElement.attr('for', inputId);
-      }
-    });
-
     const key = this.title + ' info';
 
     this.$scope.$watch(() => this.languageService.UILanguage, () => {
@@ -55,5 +47,12 @@ export class EditableLabelComponent {
 
   isEditing() {
     return this.form && this.form.editing;
+  }
+
+  get forId() : string | undefined {
+    if (this.isEditing() && this.inputId) {
+      return this.inputId;
+    }
+    return undefined;
   }
 }
