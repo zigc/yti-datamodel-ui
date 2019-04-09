@@ -136,14 +136,12 @@
 
   <div class="row">
       <div class="col-md-3">
-          <editable data-title="XML Wrapper" context="$ctrl.model" ng-if="$ctrl.property.isAttribute()">
+          <editable data-title="XML Wrapper" context="$ctrl.model" ng-if="$ctrl.property.isAssociation()">
               <input id="{{$ctrl.property.internalId + 'xmlWrapper'}}" type="checkbox" ng-model="$ctrl.property.xmlWrapper"/>
-            </editable>
-      </div>
-      <div class="col-md-3">
+          </editable>
           <editable data-title="XML Attribute" context="$ctrl.model" ng-if="$ctrl.property.isAttribute()">
               <input id="{{$ctrl.property.internalId + 'xmlAttribute'}}" type="checkbox" ng-model="$ctrl.property.xmlAttribute"/>
-            </editable>
+          </editable>
       </div>
   </div>
 
