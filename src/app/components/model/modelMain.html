@@ -10,7 +10,7 @@
         <div class="nameButtonRow col-12">
           <h2><span class="mr-4">{{model!.label | translateValue}}</span></h2>
           <model-language-chooser class="nameButtonRowButton" [context]="model"></model-language-chooser>
-          <export-component class="ml-2 nameButtonRowButton" [entity]="model" [context]="model"></export-component>
+          <export-component class="ml-2 nameButtonRowButton" [idPrefix]="'model'" [entity]="model" [context]="model"></export-component>
         </div>
       </div>
       <div class="row">

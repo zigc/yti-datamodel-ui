@@ -55,6 +55,7 @@ export class ModelLanguageChooserDirective extends UpgradeComponent {
 export class ExportDirective extends UpgradeComponent {
   @Input() entity: Model | Class | Predicate;
   @Input() context: LanguageContext;
+  @Input() idPrefix: string;
 
   constructor(elementRef: ElementRef, injector: Injector) {
     super('export', elementRef, injector);

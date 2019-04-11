@@ -3,7 +3,7 @@
     <div ng-if="$ctrl.predicate && $ctrl.model">
       <selection-view id-prefix="'predicate_'" model="$ctrl.model" editable-controller="$ctrl">
         <selection-buttons>
-          <export ng-hide="$ctrl.isEditing()" entity="$ctrl.predicate" context="$ctrl.model"></export>
+          <export ng-hide="$ctrl.isEditing()"  idPrefix="predicate" entity="$ctrl.predicate" context="$ctrl.model"></export>
           <history button-id="'predicate_edit_buttons_history'" model="$ctrl.model" resource="$ctrl.predicate"
                    ng-hide="$ctrl.isEditing()"></history>
           <app-status [status]="$ctrl.predicate.status"></app-status>
