@@ -80,7 +80,8 @@
                on-reorder="$ctrl.onPropertyReorder">
        <accordion-group id="{{$ctrl.id + '_property_' + $ctrl.formLabelNameToIdName(property.label)}}" ng-repeat="property in $ctrl.properties track by property.internalId" identifier="property.internalId.uuid">
         <accordion-heading>
-          <div drag-sortable-item>
+          <div id="{{property.internalId + 'header'}}" data-property-id="{{property.internalId}}"
+               class="{{'property_no_' + property.index + '_header'}}" drag-sortable-item>
             <h5>
               <a ng-class="{collapsed: !isOpen()}" href>
                 <span class="accordion-icon" ng-class="property.glyphIconClass"></span>
