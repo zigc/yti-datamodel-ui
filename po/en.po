@@ -2218,3 +2218,6 @@ msgstr "Attribute"
 
 msgid "owl:ObjectProperty"
 msgstr "Association"
+
+msgid "API path"
+msgstr ""

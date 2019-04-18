@@ -33,6 +33,10 @@
       <input id="localName" class="form-control" type="text" string-input="identifier" ng-trim="false" ng-model="$ctrl.class.localName" />
     </editable>
 
+    <editable data-title="API path" context="$ctrl.model">
+      <input id="absolutePath" class="form-control" type="text" ng-model="$ctrl.class.absolutePath" />
+    </editable>
+
     <editable data-title="Deactivated" context="$ctrl.model">
         <input id="deactivated" type="checkbox" ng-model="$ctrl.class.deactivated"/>
     </editable>
