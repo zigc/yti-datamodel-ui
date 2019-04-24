@@ -199,6 +199,9 @@ msgstr ""
 msgid "Technical metadata"
 msgstr ""
 
+msgid "Property pairs"
+msgstr ""
+
 msgid "Reusable predicate"
 msgstr ""
 
@@ -1679,7 +1682,7 @@ msgstr ""
 msgid "Search"
 msgstr ""
 
-msgid "Superproperty"
+msgid "Specialized from class"
 msgstr ""
 
 msgid "Editorial note"
@@ -1880,7 +1883,7 @@ msgstr ""
 msgid "Superattribute info"
 msgstr ""
 
-msgid "Definition info"
+msgid "Superproperty"
 msgstr ""
 
 msgid "Superproperty info"
@@ -1892,7 +1895,7 @@ msgstr ""
 msgid "Range info"
 msgstr ""
 
-msgid "Specialized from class"
+msgid "Definition info"
 msgstr ""
 
 msgid "Specialized from class info"
@@ -2040,6 +2043,30 @@ msgid "Deactivated info"
 msgstr ""
 
 msgid "Unique label info"
+msgstr ""
+
+msgid "Equals"
+msgstr ""
+
+msgid "Equals info"
+msgstr ""
+
+msgid "Disjoint"
+msgstr ""
+
+msgid "Disjoint info"
+msgstr ""
+
+msgid "Less than"
+msgstr ""
+
+msgid "Less than info"
+msgstr ""
+
+msgid "Less than or equals"
+msgstr ""
+
+msgid "Less than or equals info"
 msgstr ""
 
 msgid "Homepage"

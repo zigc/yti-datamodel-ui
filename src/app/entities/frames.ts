@@ -96,6 +96,10 @@ const propertyContext = Object.assign({}, coreContext, predicateContext, referen
   description: { '@id': 'http://www.w3.org/ns/shacl#description', '@container': '@language' },
   readOnlyValue: {'@id': 'http://schema.org/readonlyValue'},
   deactivated: {'@id': 'http://www.w3.org/ns/shacl#deactivated'},
+  equals: {'@id': 'http://www.w3.org/ns/shacl#equals', '@type': '@id' },
+  disjoint: {'@id': 'http://www.w3.org/ns/shacl#disjoint', '@type': '@id' },
+  lessThan: {'@id': 'http://www.w3.org/ns/shacl#lessThan', '@type': '@id' },
+  lessThanOrEquals: {'@id': 'http://www.w3.org/ns/shacl#lessThanOrEquals', '@type': '@id' }
 });
 
 const classContext = Object.assign({}, coreContext, propertyContext, conceptContext, {
@@ -202,7 +206,27 @@ export function usageFrame(data: any) {
 export function propertyFrame(data: any) {
   return frame(data, propertyContext, {
     '@type': 'sh:PropertyShape',
-    path: {}
+    path: {},
+    equals: {
+      '@omitDefault': true,
+      '@default': [],
+      '@embed': false
+    },
+    disjoint: {
+      '@omitDefault': true,
+      '@default': [],
+      '@embed': false
+    },
+    lessThan: {
+      '@omitDefault': true,
+      '@default': [],
+      '@embed': false
+    },
+    lessThanOrEquals: {
+      '@omitDefault': true,
+      '@default': [],
+      '@embed': false
+    }
   });
 }
 
