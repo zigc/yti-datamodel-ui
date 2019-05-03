@@ -1335,6 +1335,9 @@ msgstr ""
 msgid "application/schema+json"
 msgstr ""
 
+msgid "application/vnd.oai.openapi+json"
+msgstr ""
+
 msgid "framed ld+json"
 msgstr ""
 

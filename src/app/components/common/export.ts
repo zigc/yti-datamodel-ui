@@ -14,7 +14,8 @@ const exportOptions = [
   { type: 'application/rdf+xml', extension: 'rdf' },
   { type: 'application/xml', extension: 'xml' },
   { type: 'application/schema+json', extension: 'json' },
-  { type: 'application/ld+json+context', extension: 'json' }
+  { type: 'application/ld+json+context', extension: 'json' },
+  { type: 'application/vnd+oai+openapi+json', extension: 'json' }
 ];
 
 const UTF8_BOM = '\ufeff';
