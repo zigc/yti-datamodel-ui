@@ -31,13 +31,13 @@ import { HelpService } from '../help/providers/helpService';
 
 // XXX: fixes problem with type definition having strongly typed parameters ending with 6
 function myCombineLatest<T, T2, T3, T4, T5, T6, T7, T8>(v1: ObservableInput<T>,
-                                                    v2: ObservableInput<T2>,
-                                                    v3: ObservableInput<T3>,
-                                                    v4: ObservableInput<T4>,
-                                                    v5: ObservableInput<T5>,
-                                                    v6: ObservableInput<T6>,
-                                                    v7: ObservableInput<T7>,
-                                                    v8: ObservableInput<T8>): Observable<[T, T2, T3, T4, T5, T6, T7, T8]> {
+                                                        v2: ObservableInput<T2>,
+                                                        v3: ObservableInput<T3>,
+                                                        v4: ObservableInput<T4>,
+                                                        v5: ObservableInput<T5>,
+                                                        v6: ObservableInput<T6>,
+                                                        v7: ObservableInput<T7>,
+                                                        v8: ObservableInput<T8>): Observable<[T, T2, T3, T4, T5, T6, T7, T8]> {
   return combineLatest(v1, v2, v3, v4, v5, v6, v7, v8);
 }
 
@@ -104,7 +104,7 @@ export class FrontPageComponent implements HelpProvider {
       }
     });
 
-    this.useContexts = [null, ...profileUseContexts].map( type => {
+    this.useContexts = [null, ...profileUseContexts].map(type => {
       return {
         value: type as UseContext,
         name: () => gettextCatalog.getString(type ? type : 'All use contexts'),
@@ -144,7 +144,7 @@ export class FrontPageComponent implements HelpProvider {
       return !type || model.normalizedType === type;
     }
 
-    function useContextMatches(uc : UseContext | null, model: ModelListItem) {
+    function useContextMatches(uc: UseContext | null, model: ModelListItem) {
       return !uc || model.useContext === uc;
     }
 
