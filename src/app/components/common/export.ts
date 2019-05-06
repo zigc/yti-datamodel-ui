@@ -12,10 +12,10 @@ const exportOptions = [
   { type: 'application/ld+json', extension: 'json' },
   { type: 'text/turtle', extension: 'ttl' },
   { type: 'application/rdf+xml', extension: 'rdf' },
-  { type: 'application/xml', extension: 'xml' },
-  { type: 'application/schema+json', extension: 'json' },
+  { type: 'application/xml', extension: 'xml', validType: [Model,Class] },
+  { type: 'application/schema+json', extension: 'json', validType: [Model,Class] },
   { type: 'application/ld+json+context', extension: 'json' },
-  { type: 'application/vnd+oai+openapi+json', extension: 'json' }
+  { type: 'application/vnd+oai+openapi+json', extension: 'json', validTypes: [Model,Class] }
 ];
 
 const UTF8_BOM = '\ufeff';
@@ -24,6 +24,15 @@ type EntityType = Model | Class | Predicate;
 
 function formatFileName(entity: EntityType, extension: string) {
   return `${entity.id.uri.substr('http://'.length)}-${moment().format('YYYY-MM-DD')}.${extension}`;
+}
+
+function isValidType(entity: EntityType, typeArray: any[]){
+  for(let type of typeArray) {
+    if(entity instanceof type) {
+      return true;
+    }
+  }
+  return false;
 }
 
 @LegacyComponent({
@@ -59,7 +68,8 @@ export class ExportComponent {
 
     this.$scope.$watchGroup([() => this.entity, () => this.languageService.getModelLanguage(this.context)], ([entity, lang]) => {
       const hrefBase = entity instanceof Model ? apiEndpointWithName('exportModel') : apiEndpointWithName('exportResource');
-      this.downloads = exportOptions.map(option => {
+
+      this.downloads = exportOptions.filter(option => option.validTypes==null || (option.validTypes!=null && isValidType(entity,option.validTypes))).map(option => {
         const href = `${hrefBase}?graph=${encodeURIComponent(entity.id.uri)}&content-type=${encodeURIComponent(option.type)}&lang=${lang}`;
 
         return {
