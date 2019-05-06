@@ -1023,9 +1023,6 @@ msgstr ""
 "Täältä voit lisätä luokalle uuden attribuutin jonka arvoalue perustuu "
 "tietotyyppiin tai assosiaation jolla viitataan toiseen luokkaan"
 
-msgid "Created at"
-msgstr "Luotu"
-
 msgid "not found in the concept database"
 msgstr "ei löydy sanastosta"
 
@@ -1473,6 +1470,9 @@ msgstr "Käyttäjätunnus"
 msgid "User name"
 msgstr "Nimi"
 
+msgid "Created at"
+msgstr "Luotu"
+
 msgid "Define concept for the class"
 msgstr "Määrittele käsite luokalle"
 
@@ -1805,6 +1805,12 @@ msgstr "Tietosisältö"
 
 msgid "Search"
 msgstr "Etsi"
+
+msgid "All model types"
+msgstr "Kaikki tietomallityypit"
+
+msgid "All use contexts"
+msgstr "Kaikki sisältötyypit"
 
 msgid "Superproperty"
 msgstr "Yläkäsite"

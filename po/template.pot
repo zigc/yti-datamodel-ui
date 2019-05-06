@@ -934,9 +934,6 @@ msgstr ""
 msgid "You can add new attribute or association to the Class from here"
 msgstr ""
 
-msgid "Created at"
-msgstr ""
-
 msgid "not found in the concept database"
 msgstr ""
 
@@ -1353,6 +1350,9 @@ msgstr ""
 msgid "User name"
 msgstr ""
 
+msgid "Created at"
+msgstr ""
+
 msgid "Define concept for the class"
 msgstr ""
 
@@ -1680,6 +1680,12 @@ msgid "InformationDescription"
 msgstr ""
 
 msgid "Search"
+msgstr ""
+
+msgid "All model types"
+msgstr ""
+
+msgid "All use contexts"
 msgstr ""
 
 msgid "Superproperty"
