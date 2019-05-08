@@ -1435,6 +1435,9 @@ msgstr "JSON-LD Context"
 msgid "application/schema+json"
 msgstr "JSON Schema"
 
+msgid "application/vnd+oai+openapi+json"
+msgstr "Open API 3.0.2"
+
 msgid "framed ld+json"
 msgstr "Framed JSON-LD"
 
@@ -2218,3 +2221,6 @@ msgstr "Attribute"
 
 msgid "owl:ObjectProperty"
 msgstr "Association"
+
+msgid "API path"
+msgstr ""
