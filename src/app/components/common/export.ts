@@ -7,16 +7,16 @@ import { Predicate } from 'app/entities/predicate';
 import { LanguageContext } from 'app/types/language';
 import { apiEndpointWithName } from 'app/services/config';
 import { LegacyComponent } from 'app/utils/angular';
-import {GraphNode} from "../../entities/graphNode";
+import { GraphNode } from "../../entities/graphNode";
 
 const exportOptions = [
   { type: 'application/ld+json', extension: 'json' },
   { type: 'text/turtle', extension: 'ttl' },
   { type: 'application/rdf+xml', extension: 'rdf' },
-  { type: 'application/xml', extension: 'xml', validTypes: [Model,Class] },
-  { type: 'application/schema+json', extension: 'json', validTypes: [Model,Class] },
+  { type: 'application/xml', extension: 'xml', validTypes: [Model, Class] },
+  { type: 'application/schema+json', extension: 'json', validTypes: [Model, Class] },
   { type: 'application/ld+json+context', extension: 'json' },
-  { type: 'application/vnd+oai+openapi+json', extension: 'json', validTypes: [Model,Class] }
+  { type: 'application/vnd+oai+openapi+json', extension: 'json', validTypes: [Model, Class] }
 ];
 
 const UTF8_BOM = '\ufeff';
@@ -27,9 +27,9 @@ function formatFileName(entity: EntityType, extension: string) {
   return `${entity.id.uri.substr('http://'.length)}-${moment().format('YYYY-MM-DD')}.${extension}`;
 }
 
-function isValidType(entity: EntityType, typeArray: (typeof GraphNode)[]){
-  for(let type of typeArray) {
-    if(entity instanceof type) {
+function isValidType(entity: EntityType, typeArray: (typeof GraphNode)[]) {
+  for (let type of typeArray) {
+    if (entity instanceof type) {
       return true;
     }
   }
