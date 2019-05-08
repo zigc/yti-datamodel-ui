@@ -70,7 +70,7 @@ export class ExportComponent {
     this.$scope.$watchGroup([() => this.entity, () => this.languageService.getModelLanguage(this.context)], ([entity, lang]) => {
       const hrefBase = entity instanceof Model ? apiEndpointWithName('exportModel') : apiEndpointWithName('exportResource');
 
-      this.downloads = exportOptions.filter(option => option.validTypes==null || (option.validTypes!=null && isValidType(entity,option.validTypes))).map(option => {
+      this.downloads = exportOptions.filter(option => !option.validTypes || isValidType(entity, option.validTypes)).map(option => {
         const href = `${hrefBase}?graph=${encodeURIComponent(entity.id.uri)}&content-type=${encodeURIComponent(option.type)}&lang=${lang}`;
 
         return {
