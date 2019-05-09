@@ -14,7 +14,6 @@ export class ApplicationComponent {
 
   applicationInitialized: boolean;
   showFooter: boolean;
-  showGoogleAnalytics: boolean;
 
   private subscriptions: Subscription[] = [];
 
@@ -32,10 +31,6 @@ export class ApplicationComponent {
 
     $scope.$watch(() => $location.path(), path => {
       this.showFooter = !path.startsWith('/model');
-    });
-
-    configService.getConfig().then(config => {
-      this.showGoogleAnalytics = !config.dev;
     });
 
     $scope.$on('$locationChangeStart', (event, next) => {
