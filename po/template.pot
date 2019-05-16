@@ -958,7 +958,7 @@ msgstr ""
 msgid "You can add new attribute or association to the Class from here"
 msgstr ""
 
-msgid "Add properties from scope class"
+msgid "Add properties from super class"
 msgstr ""
 
 msgid "not found in the concept database"
@@ -1359,7 +1359,7 @@ msgstr ""
 msgid "application/schema+json"
 msgstr ""
 
-msgid "application/vnd.oai.openapi+json"
+msgid "application/vnd+oai+openapi+json"
 msgstr ""
 
 msgid "framed ld+json"
@@ -1389,10 +1389,10 @@ msgstr ""
 msgid "Add properties from class"
 msgstr ""
 
-msgid "Add properties from super class"
+msgid "Define concept for the class"
 msgstr ""
 
-msgid "Define concept for the class"
+msgid "Add properties from scope class"
 msgstr ""
 
 msgid "Add properties from profile class"

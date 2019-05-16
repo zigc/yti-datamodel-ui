@@ -2,20 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-<<<<<<< HEAD
-"PO-Revision-Date: 2018-12-21 16:59+0200\n"
-=======
-"PO-Revision-Date: 2019-04-09 10:59+0300\n"
->>>>>>> master
+"PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.1\n"
-"X-Poedit-Basepath: .\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 2.2.2\n"
 
 msgid "Copied"
 msgstr ""
@@ -1033,11 +1027,7 @@ msgstr "Terminology"
 msgid "You can add new attribute or association to the Class from here"
 msgstr ""
 
-<<<<<<< HEAD
-msgid "Add properties from scope class"
-=======
-msgid "Created at"
->>>>>>> master
+msgid "Add properties from super class"
 msgstr ""
 
 msgid "not found in the concept database"
@@ -1485,11 +1475,7 @@ msgstr ""
 msgid "User name"
 msgstr ""
 
-<<<<<<< HEAD
 msgid "Created at"
-=======
-msgid "Define concept for the class"
->>>>>>> master
 msgstr ""
 
 msgid "Member groups"
@@ -1501,11 +1487,13 @@ msgstr ""
 msgid "Add properties from class"
 msgstr ""
 
-msgid "Add properties from super class"
-msgstr ""
-
 msgid "Define concept for the class"
 msgstr ""
+
+#, fuzzy
+#| msgid "Copy properties from class"
+msgid "Add properties from scope class"
+msgstr "Copy attributes or associations from class"
 
 msgid "Add properties from profile class"
 msgstr ""
@@ -1847,6 +1835,12 @@ msgstr ""
 
 msgid "standard"
 msgstr "International recommendation"
+
+msgid "All model types"
+msgstr ""
+
+msgid "All use contexts"
+msgstr ""
 
 msgid "Superproperty"
 msgstr ""
@@ -2284,6 +2278,3 @@ msgstr "Attribute"
 
 msgid "owl:ObjectProperty"
 msgstr "Association"
-
-msgid "API path"
-msgstr ""
