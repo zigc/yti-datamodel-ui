@@ -94,7 +94,7 @@ msgstr ""
 msgid "Reference data information"
 msgstr ""
 
-msgid "Controlled vocabularies"
+msgid "Terminologies"
 msgstr ""
 
 msgid "Add vocabulary"
@@ -388,10 +388,16 @@ msgstr ""
 msgid "Edit reference data"
 msgstr ""
 
-msgid "Show model details"
+msgid "Datamodel definition"
 msgstr ""
 
-msgid "Hide model details"
+msgid "Datamodel details"
+msgstr ""
+
+msgid "Information domain"
+msgstr ""
+
+msgid "Organization"
 msgstr ""
 
 msgid "Browse reference data codes"
@@ -451,7 +457,7 @@ msgstr ""
 msgid "User details"
 msgstr ""
 
-msgid "Suomi.fi Controlled Vocabularies"
+msgid "Suomi.fi Terminologies"
 msgstr ""
 
 msgid "Suomi.fi Reference Data"
@@ -1021,6 +1027,12 @@ msgstr ""
 msgid "Hide"
 msgstr ""
 
+msgid "Show model details"
+msgstr ""
+
+msgid "Hide model details"
+msgstr ""
+
 msgid "Front page"
 msgstr ""
 
@@ -1345,6 +1357,9 @@ msgid "application/ld+json+context"
 msgstr ""
 
 msgid "application/schema+json"
+msgstr ""
+
+msgid "application/vnd.oai.openapi+json"
 msgstr ""
 
 msgid "framed ld+json"
@@ -1718,6 +1733,12 @@ msgstr ""
 msgid "standard"
 msgstr ""
 
+msgid "All model types"
+msgstr ""
+
+msgid "All use contexts"
+msgstr ""
+
 msgid "Superproperty"
 msgstr ""
 
@@ -1791,6 +1812,18 @@ msgid "Reference data URI"
 msgstr ""
 
 msgid "Reference data URI info"
+msgstr ""
+
+msgid "Max properties"
+msgstr ""
+
+msgid "Max properties info"
+msgstr ""
+
+msgid "Min properties"
+msgstr ""
+
+msgid "Min properties info"
 msgstr ""
 
 msgid "Group label"
@@ -2058,6 +2091,15 @@ msgid "XML Attribute"
 msgstr ""
 
 msgid "XML Attribute info"
+msgstr ""
+
+msgid "Deactivated"
+msgstr ""
+
+msgid "Deactivated info"
+msgstr ""
+
+msgid "Unique label info"
 msgstr ""
 
 msgid "Homepage"

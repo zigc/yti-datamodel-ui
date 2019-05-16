@@ -29,7 +29,8 @@ interface SelectionScope extends IScope {
 @LegacyComponent({
   bindings: {
     ngModel: '=',
-    options: '@'
+    options: '@',
+    idPrefix: '<'
   },
   transclude: true,
   template: `
@@ -37,7 +38,7 @@ interface SelectionScope extends IScope {
         <div class="btn btn-dropdown dropdown-toggle" tabindex="0" iow-select-input>
           <iow-selection-transclude></iow-selection-transclude>       
         </div>
-        <input-popup ctrl="$ctrl"><iow-selectable-item-transclude></iow-selectable-item-transclude></input-popup>
+        <input-popup id-prefix="$ctrl.idPrefix" ctrl="$ctrl"><iow-selectable-item-transclude></iow-selectable-item-transclude></input-popup>
       </div>
   `
 })

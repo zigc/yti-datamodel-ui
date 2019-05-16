@@ -1,10 +1,11 @@
 <form name="form" class="editable-form">
   <fieldset ng-disabled="$ctrl.persisting">
     <div ng-if="$ctrl.predicate && $ctrl.model">
-      <selection-view model="$ctrl.model" editable-controller="$ctrl">
+      <selection-view id-prefix="'predicate_'" model="$ctrl.model" editable-controller="$ctrl">
         <selection-buttons>
-          <export ng-hide="$ctrl.isEditing()" entity="$ctrl.predicate" context="$ctrl.model"></export>
-          <history model="$ctrl.model" resource="$ctrl.predicate" ng-hide="$ctrl.isEditing()"></history>
+          <export ng-hide="$ctrl.isEditing()"  id-prefix="'predicate'" entity="$ctrl.predicate" context="$ctrl.model"></export>
+          <history button-id="'predicate_edit_buttons_history'" model="$ctrl.model" resource="$ctrl.predicate"
+                   ng-hide="$ctrl.isEditing()"></history>
           <app-status [status]="$ctrl.predicate.status"></app-status>
         </selection-buttons>
 

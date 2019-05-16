@@ -1,6 +1,6 @@
 <div uib-dropdown class="pull-right" ng-hide="$ctrl.isEditing()">
 
-  <button class="btn btn-action dropdown-toggle" uib-dropdown-toggle>
+  <button ng-attr-id="{{$ctrl.getId('dropdown')}}" class="btn btn-action dropdown-toggle" uib-dropdown-toggle>
     <span translate>Export</span>
   </button>
 
@@ -8,6 +8,7 @@
     <div class="dropdown-header">{{'Show' | translate | uppercase}}</div>
 
     <a ng-repeat="download in $ctrl.downloads track by download.name"
+       ng-attr-id="{{$ctrl.getId('show_' + download.name)}}"
        class="dropdown-item"
        target="_blank"
        ng-href="{{download.hrefRaw}}"
@@ -20,6 +21,7 @@
     <div class="dropdown-header">{{'Download' | translate | uppercase}}</div>
 
     <a ng-repeat="download in $ctrl.downloads track by download.name"
+       ng-attr-id="{{$ctrl.getId('download_' + download.name)}}"
        class="dropdown-item"
        target="_self"
        download="{{download.filename}}"

@@ -6,6 +6,8 @@ interface PrefixInputScope extends IScope {
   model: Model;
   activeNamespace: ImportedNamespace;
   allowTechnical: boolean;
+  reservedPrefixes?: string[];
+  reservedPrefixesGetter?: () => string[];
 }
 
 export const PrefixInputDirective: IDirectiveFactory = () => {
@@ -13,7 +15,9 @@ export const PrefixInputDirective: IDirectiveFactory = () => {
     scope: {
       model: '=?',
       activeNamespace: '=?',
-      allowTechnical: '=?'
+      allowTechnical: '=?',
+      reservedPrefixes: '=?',
+      reservedPrefixesGetter: '=?'
     },
     restrict: 'A',
     require: 'ngModel',
@@ -25,6 +29,11 @@ export const PrefixInputDirective: IDirectiveFactory = () => {
         const model = $scope.model;
         const activeNamespace = $scope.activeNamespace;
         const allowTechnical = $scope.allowTechnical;
+        const reservedPrefixes: string[] = $scope.reservedPrefixes || ($scope.reservedPrefixesGetter ? $scope.reservedPrefixesGetter() : []);
+
+        if (reservedPrefixes.includes(prefix)) {
+          return false;
+        }
 
         if (!model) {
           return true;

@@ -81,8 +81,7 @@ export class EditableMultipleUriSelectComponent {
     'ngInject';
   }
 
-  $onOnit() {
-
+  $onInit() {
     const modelProvider = () => this.model;
     this.datasource = this.type === 'class' ? this.classService.getClassesForModelDataSource(modelProvider)
                                             : this.predicateService.getPredicatesForModelDataSource(modelProvider);

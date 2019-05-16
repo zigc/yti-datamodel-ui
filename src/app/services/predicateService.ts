@@ -191,7 +191,7 @@ export class DefaultPredicateService implements PredicateService {
   }
 
   changePredicateType(predicate: Attribute|Association, newType: KnownPredicateType, model: Model) {
-    return this.newPredicate(model, '', requireDefined(predicate.subject).id, newType, 'fi')
+    return this.newPredicate(model, '', predicate.subject ? predicate.subject.id : null, newType, 'fi')
       .then(changedPredicate => {
         changedPredicate.id = predicate.id;
         changedPredicate.label = predicate.label;

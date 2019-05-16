@@ -1,6 +1,7 @@
 <div class="top-actions">
 
   <button type="button"
+          ng-attr-id="{{$ctrl.id('cancel')}}"
           class="btn btn-link pull-right cancel"
           ng-click="$ctrl.ctrl.cancelEditing()"
           ng-show="$ctrl.ctrl.isEditing()">
@@ -8,6 +9,7 @@
   </button>
 
   <button type="button"
+          ng-attr-id="{{$ctrl.id('save')}}"
           class="btn btn-action pull-right save"
           ng-click="$ctrl.ctrl.saveEdited()"
           ng-show="$ctrl.ctrl.isEditing()"
@@ -16,6 +18,7 @@
   </button>
 
   <button type="button"
+          ng-attr-id="{{$ctrl.id('edit')}}"
           class="btn btn-action pull-right edit"
           ng-click="$ctrl.ctrl.edit()"
           ng-show="$ctrl.ctrl.canEdit()">
@@ -23,6 +26,7 @@
   </button>
 
   <button type="button"
+          ng-attr-id="{{$ctrl.id('remove')}}"
           class="btn btn-link pull-right remove"
           ng-click="$ctrl.ctrl.removeEdited()"
           ng-show="$ctrl.ctrl.canRemove()">

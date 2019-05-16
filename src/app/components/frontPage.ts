@@ -12,12 +12,12 @@ import { ClassificationService } from '../services/classificationService';
 import { Classification } from '../entities/classification';
 import { Url } from '../entities/uri';
 import { comparingLocalizable } from '../utils/comparator';
-import { BehaviorSubject, combineLatest, Subscription, Observable, ObservableInput } from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable, ObservableInput, Subscription } from 'rxjs';
 import { fromIPromise } from '../utils/observable';
 import { anyMatching } from 'yti-common-ui/utils/array';
 import { matches } from 'yti-common-ui/utils/string';
 import { FilterOptions } from 'yti-common-ui/components/filter-dropdown.component';
-import { KnownModelType } from '../types/entity';
+import { KnownModelType, profileUseContexts, UseContext } from '../types/entity';
 import { gettextCatalog as GettextCatalog } from 'angular-gettext';
 import { OrganizationService } from '../services/organizationService';
 import { AuthorizationManagerService } from '../services/authorizationManagerService';
@@ -25,18 +25,20 @@ import { Organization } from '../entities/organization';
 import { labelNameToResourceIdIdentifier } from 'yti-common-ui/utils/resource';
 import { tap } from 'rxjs/operators';
 import { InteractiveHelp } from '../help/contract';
-import { getInformationDomainSvgIcon, getDataModelingMaterialIcon } from 'yti-common-ui/utils/icons';
-import { Status, allStatuses } from 'yti-common-ui/entities/status';
+import { getDataModelingMaterialIcon, getInformationDomainSvgIcon } from 'yti-common-ui/utils/icons';
+import { allStatuses, Status } from 'yti-common-ui/entities/status';
+import { HelpService } from '../help/providers/helpService';
 
 // XXX: fixes problem with type definition having strongly typed parameters ending with 6
-function myCombineLatest<T, T2, T3, T4, T5, T6, T7>(v1: ObservableInput<T>,
-                                                    v2: ObservableInput<T2>,
-                                                    v3: ObservableInput<T3>,
-                                                    v4: ObservableInput<T4>,
-                                                    v5: ObservableInput<T5>,
-                                                    v6: ObservableInput<T6>,
-                                                    v7: ObservableInput<T7>): Observable<[T, T2, T3, T4, T5, T6, T7]> {
-  return combineLatest(v1, v2, v3, v4, v5, v6, v7);
+function myCombineLatest<T, T2, T3, T4, T5, T6, T7, T8>(v1: ObservableInput<T>,
+                                                        v2: ObservableInput<T2>,
+                                                        v3: ObservableInput<T3>,
+                                                        v4: ObservableInput<T4>,
+                                                        v5: ObservableInput<T5>,
+                                                        v6: ObservableInput<T6>,
+                                                        v7: ObservableInput<T7>,
+                                                        v8: ObservableInput<T8>): Observable<[T, T2, T3, T4, T5, T6, T7, T8]> {
+  return combineLatest(v1, v2, v3, v4, v5, v6, v7, v8);
 }
 
 @LegacyComponent({
@@ -52,14 +54,16 @@ export class FrontPageComponent implements HelpProvider {
   helps: InteractiveHelp[] = [];
 
   modelTypes: FilterOptions<KnownModelType>;
+  useContexts: FilterOptions<UseContext>;
   organizations: FilterOptions<Organization>;
   statuses: FilterOptions<Status>;
 
   search$ = new BehaviorSubject('');
-  classification$ = new BehaviorSubject<Classification|null>(null);
-  modelType$ = new BehaviorSubject<KnownModelType|null>(null);
-  organization$ = new BehaviorSubject<Organization|null>(null);
-  status$ = new BehaviorSubject<Status|null>(null);
+  classification$ = new BehaviorSubject<Classification | null>(null);
+  modelType$ = new BehaviorSubject<KnownModelType | null>(null);
+  useContext$ = new BehaviorSubject<UseContext | null>(null);
+  organization$ = new BehaviorSubject<Organization | null>(null);
+  status$ = new BehaviorSubject<Status | null>(null);
 
   classifications: { node: Classification, count: number }[];
   filteredModels: ModelListItem[] = [];
@@ -67,7 +71,6 @@ export class FrontPageComponent implements HelpProvider {
   subscriptionsToClean: Subscription[] = [];
   modelsLoaded = false;
 
-  fullDescription: { [key: string]: boolean } = {};
   modelTypeIconDef = getDataModelingMaterialIcon;
   informationDomainIconSrc = getInformationDomainSvgIcon;
 
@@ -81,7 +84,8 @@ export class FrontPageComponent implements HelpProvider {
               private frontPageHelpService: FrontPageHelpService,
               classificationService: ClassificationService,
               organizationService: OrganizationService,
-              private authorizationManagerService: AuthorizationManagerService) {
+              private authorizationManagerService: AuthorizationManagerService,
+              private helpService: HelpService) {
 
     'ngInject';
 
@@ -95,7 +99,15 @@ export class FrontPageComponent implements HelpProvider {
     this.modelTypes = [null, 'library', 'profile'].map(type => {
       return {
         value: type as KnownModelType,
-        name: () => gettextCatalog.getString(type ? type : 'All types'),
+        name: () => gettextCatalog.getString(type ? type : 'All model types'),
+        idIdentifier: () => type ? type : 'all_selected'
+      }
+    });
+
+    this.useContexts = [null, ...profileUseContexts].map(type => {
+      return {
+        value: type as UseContext,
+        name: () => gettextCatalog.getString(type ? type : 'All use contexts'),
         idIdentifier: () => type ? type : 'all_selected'
       }
     });
@@ -124,28 +136,33 @@ export class FrontPageComponent implements HelpProvider {
       return !search || anyMatching(Object.values(model.label), value => matches(value, search));
     }
 
-    function classificationMatches(classification: Classification|null, model: ModelListItem) {
+    function classificationMatches(classification: Classification | null, model: ModelListItem) {
       return !classification || anyMatching(model.classifications, c => c.id.equals(classification.id));
     }
 
-    function typeMatches(type: KnownModelType|null, model: ModelListItem) {
+    function typeMatches(type: KnownModelType | null, model: ModelListItem) {
       return !type || model.normalizedType === type;
     }
 
-    function organizationMatches(org: Organization|null, model: ModelListItem) {
+    function useContextMatches(uc: UseContext | null, model: ModelListItem) {
+      return !uc || model.useContext === uc;
+    }
+
+    function organizationMatches(org: Organization | null, model: ModelListItem) {
       return !org || anyMatching(model.contributors, modelOrg => modelOrg.id.equals(org.id));
     }
 
-    function statusMatches(status: Status|null, model: ModelListItem) {
+    function statusMatches(status: Status | null, model: ModelListItem) {
       return !status || model.status === status;
     }
 
-    this.subscriptionsToClean.push(myCombineLatest(classifications$, models$, this.search$, this.modelType$, this.organization$, this.status$, languageService.language$)
-      .subscribe(([classifications, models, search, modelType, org, status]) => {
+    this.subscriptionsToClean.push(myCombineLatest(classifications$, models$, this.search$, this.modelType$, this.useContext$, this.organization$, this.status$, languageService.language$)
+      .subscribe(([classifications, models, search, modelType, useContext, org, status]) => {
 
         const matchingModels = models.filter(model =>
           searchMatches(search, model) &&
           typeMatches(modelType, model) &&
+          useContextMatches(useContext, model) &&
           organizationMatches(org, model) &&
           statusMatches(status, model)
         );
@@ -154,15 +171,16 @@ export class FrontPageComponent implements HelpProvider {
           matchingModels.filter(model => classificationMatches(classification, model)).length;
 
         this.classifications = classifications.map(c => ({ node: c, count: modelCount(c) })).filter(c => c.count > 0);
-        this.classifications.sort(comparingLocalizable<{ node: Classification, count: number }>(localizer, c => c.node.label));        
+        this.classifications.sort(comparingLocalizable<{ node: Classification, count: number }>(localizer, c => c.node.label));
       }));
 
-    this.subscriptionsToClean.push(myCombineLatest(models$, this.search$, this.classification$, this.modelType$, this.organization$, this.status$, languageService.language$)
-      .subscribe(([models, search, classification, modelType, org, status]) => {
+    this.subscriptionsToClean.push(myCombineLatest(models$, this.search$, this.classification$, this.modelType$, this.useContext$, this.organization$, this.status$, languageService.language$)
+      .subscribe(([models, search, classification, modelType, useContext, org, status]) => {
 
         this.filteredModels = models.filter(model =>
           searchMatches(search, model) &&
           classificationMatches(classification, model) &&
+          useContextMatches(useContext, model) &&
           typeMatches(modelType, model) &&
           organizationMatches(org, model) &&
           statusMatches(status, model)
@@ -171,16 +189,6 @@ export class FrontPageComponent implements HelpProvider {
         this.filteredModels.sort(comparingLocalizable<ModelListItem>(localizer, m => m.label));
         this.filteredModels.map(filteredModel => filteredModel.classifications.sort(comparingLocalizable<Classification>(localizer, c => c.label)));
       }));
-  }
-
-  $onInit() {
-    this.applicationCtrl.registerHelpProvider(this);
-  }
-
-  $onDestroy() {
-    for (const subscription of this.subscriptionsToClean) {
-      subscription.unsubscribe();
-    }
   }
 
   get loading() {
@@ -193,6 +201,17 @@ export class FrontPageComponent implements HelpProvider {
 
   set search(value: string) {
     this.search$.next(value);
+  }
+
+  $onInit() {
+    this.helpService.registerProvider(this);
+  }
+
+  $onDestroy() {
+    this.helpService.unregisterProvider(this);
+    for (const subscription of this.subscriptionsToClean) {
+      subscription.unsubscribe();
+    }
   }
 
   isClassificationSelected(classification: Classification) {
@@ -229,15 +248,7 @@ export class FrontPageComponent implements HelpProvider {
     this.$location.search({ type });
   }
 
-  toggleFullDescription(id: string) {
-    if (this.fullDescription[id]) {
-      delete this.fullDescription[id];
-    } else {
-      this.fullDescription[id] = true;
-    }
-  }
-
-  private go(withIowUrl: {iowUrl(): Url|null}) {
+  private go(withIowUrl: { iowUrl(): Url | null }) {
 
     const url = withIowUrl.iowUrl();
 

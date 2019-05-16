@@ -7,35 +7,48 @@ import { Predicate } from 'app/entities/predicate';
 import { LanguageContext } from 'app/types/language';
 import { apiEndpointWithName } from 'app/services/config';
 import { LegacyComponent } from 'app/utils/angular';
+import { GraphNode } from "../../entities/graphNode";
 
 const exportOptions = [
-  {type: 'application/ld+json', extension: 'json'},
-  {type: 'text/turtle', extension: 'ttl'},
-  {type: 'application/rdf+xml', extension: 'rdf'},
-  {type: 'application/xml', extension: 'xml'},
-  {type: 'application/schema+json', extension: 'json'},
-  {type: 'application/ld+json+context', extension: 'json'}
+  { type: 'application/ld+json', extension: 'json' },
+  { type: 'text/turtle', extension: 'ttl' },
+  { type: 'application/rdf+xml', extension: 'rdf' },
+  { type: 'application/xml', extension: 'xml', validTypes: [Model, Class] },
+  { type: 'application/schema+json', extension: 'json', validTypes: [Model, Class] },
+  { type: 'application/ld+json+context', extension: 'json' },
+  { type: 'application/vnd+oai+openapi+json', extension: 'json', validTypes: [Model, Class] }
 ];
 
 const UTF8_BOM = '\ufeff';
 
-type EntityType = Model|Class|Predicate;
+type EntityType = Model | Class | Predicate;
 
 function formatFileName(entity: EntityType, extension: string) {
   return `${entity.id.uri.substr('http://'.length)}-${moment().format('YYYY-MM-DD')}.${extension}`;
 }
 
+function isValidType(entity: EntityType, typeArray: (typeof GraphNode)[]) {
+  for (let type of typeArray) {
+    if (entity instanceof type) {
+      return true;
+    }
+  }
+  return false;
+}
+
 @LegacyComponent({
   bindings: {
-    entity: '=',
-    context: '='
+    entity: '<',
+    context: '<',
+    idPrefix: '<'
   },
   template: require('./export.html')
 })
 export class ExportComponent {
 
-  entity: Model|Class|Predicate;
+  entity: Model | Class | Predicate;
   context: LanguageContext;
+  idPrefix?: string;
 
   downloads: { name: string, filename: string, href: string, hrefRaw: string, onClick?: () => void }[];
 
@@ -43,6 +56,8 @@ export class ExportComponent {
   framedUrlObjectRaw: string;
   frameUrlObject: string;
   frameUrlObjectRaw: string;
+
+  private idCleanerExpression = /[^a-zA-Z0-9_-]/g;
 
   constructor(private $scope: IScope,
               private $window: IWindowService,
@@ -54,7 +69,8 @@ export class ExportComponent {
 
     this.$scope.$watchGroup([() => this.entity, () => this.languageService.getModelLanguage(this.context)], ([entity, lang]) => {
       const hrefBase = entity instanceof Model ? apiEndpointWithName('exportModel') : apiEndpointWithName('exportResource');
-      this.downloads = exportOptions.map(option => {
+
+      this.downloads = exportOptions.filter(option => !option.validTypes || isValidType(entity, option.validTypes)).map(option => {
         const href = `${hrefBase}?graph=${encodeURIComponent(entity.id.uri)}&content-type=${encodeURIComponent(option.type)}&lang=${lang}`;
 
         return {
@@ -66,9 +82,9 @@ export class ExportComponent {
       });
 
       if (Modernizr.bloburls) {
-        const framedDataAsString = JSON.stringify({'@graph': entity.graph, '@context': entity.context}, null, 2);
-        const framedDataBlob = new Blob([UTF8_BOM, framedDataAsString], {type: 'application/ld+json;charset=utf-8'});
-        const framedDataBlobRaw = new Blob([UTF8_BOM, framedDataAsString], {type: 'text/plain;charset=utf-8'});
+        const framedDataAsString = JSON.stringify({ '@graph': entity.graph, '@context': entity.context }, null, 2);
+        const framedDataBlob = new Blob([UTF8_BOM, framedDataAsString], { type: 'application/ld+json;charset=utf-8' });
+        const framedDataBlobRaw = new Blob([UTF8_BOM, framedDataAsString], { type: 'text/plain;charset=utf-8' });
 
         if (this.framedUrlObject) {
           this.$window.URL.revokeObjectURL(this.framedUrlObject);
@@ -91,8 +107,8 @@ export class ExportComponent {
 
         if (this.entity.frame) {
           const frameAsString = JSON.stringify(this.entity.frame, null, 2);
-          const frameBlob = new Blob([UTF8_BOM, frameAsString], {type: 'application/json;charset=utf-8'});
-          const frameBlobRaw = new Blob([UTF8_BOM, frameAsString], {type: 'text/plain;charset=utf-8'});
+          const frameBlob = new Blob([UTF8_BOM, frameAsString], { type: 'application/json;charset=utf-8' });
+          const frameBlobRaw = new Blob([UTF8_BOM, frameAsString], { type: 'text/plain;charset=utf-8' });
 
           this.frameUrlObject = this.$window.URL.createObjectURL(frameBlob);
           this.frameUrlObjectRaw = this.$window.URL.createObjectURL(frameBlobRaw);
@@ -123,5 +139,12 @@ export class ExportComponent {
         });
       }
     });
+  }
+
+  getId(thing: string): string | undefined {
+    if (this.idPrefix) {
+      return this.idPrefix + '_export_' + thing.replace(this.idCleanerExpression, '_');
+    }
+    return undefined;
   }
 }

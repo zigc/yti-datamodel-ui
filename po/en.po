@@ -2,14 +2,18 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
+<<<<<<< HEAD
 "PO-Revision-Date: 2018-12-21 16:59+0200\n"
+=======
+"PO-Revision-Date: 2019-04-09 10:59+0300\n"
+>>>>>>> master
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2\n"
+"X-Generator: Poedit 2.2.1\n"
 "X-Poedit-Basepath: .\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
@@ -103,7 +107,7 @@ msgstr ""
 msgid "Reference data information"
 msgstr ""
 
-msgid "Controlled vocabularies"
+msgid "Terminologies"
 msgstr ""
 
 msgid "Add vocabulary"
@@ -414,11 +418,25 @@ msgstr ""
 msgid "Edit reference data"
 msgstr ""
 
-msgid "Show model details"
+#, fuzzy
+#| msgid "Add model description"
+msgid "Datamodel definition"
+msgstr ""
+"Add domain specific Core Vocabulary or application specific Application "
+"Profile"
+
+msgid "Datamodel details"
 msgstr ""
 
-msgid "Hide model details"
-msgstr ""
+#, fuzzy
+#| msgid "InformationPool"
+msgid "Information domain"
+msgstr "Information pool"
+
+#, fuzzy
+#| msgid "association"
+msgid "Organization"
+msgstr "Association"
 
 msgid "Browse reference data codes"
 msgstr ""
@@ -477,7 +495,7 @@ msgstr ""
 msgid "User details"
 msgstr ""
 
-msgid "Suomi.fi Controlled Vocabularies"
+msgid "Suomi.fi Terminologies"
 msgstr ""
 
 msgid "Suomi.fi Reference Data"
@@ -1015,7 +1033,11 @@ msgstr "Terminology"
 msgid "You can add new attribute or association to the Class from here"
 msgstr ""
 
+<<<<<<< HEAD
 msgid "Add properties from scope class"
+=======
+msgid "Created at"
+>>>>>>> master
 msgstr ""
 
 msgid "not found in the concept database"
@@ -1082,6 +1104,12 @@ msgid "Suggestion"
 msgstr ""
 
 msgid "Hide"
+msgstr ""
+
+msgid "Show model details"
+msgstr ""
+
+msgid "Hide model details"
 msgstr ""
 
 msgid "Front page"
@@ -1439,6 +1467,9 @@ msgstr "JSON-LD Context"
 msgid "application/schema+json"
 msgstr "JSON Schema"
 
+msgid "application/vnd+oai+openapi+json"
+msgstr "Open API 3.0.2"
+
 msgid "framed ld+json"
 msgstr "Framed JSON-LD"
 
@@ -1454,7 +1485,11 @@ msgstr ""
 msgid "User name"
 msgstr ""
 
+<<<<<<< HEAD
 msgid "Created at"
+=======
+msgid "Define concept for the class"
+>>>>>>> master
 msgstr ""
 
 msgid "Member groups"
@@ -1769,7 +1804,7 @@ msgid "Match to content"
 msgstr ""
 
 msgid "Unique label"
-msgstr ""
+msgstr "Unique localized value"
 
 msgid "All organizations"
 msgstr ""
@@ -1891,6 +1926,18 @@ msgstr ""
 
 msgid "Reference data URI info"
 msgstr ""
+
+msgid "Max properties"
+msgstr ""
+
+msgid "Max properties info"
+msgstr "Maximum number of class properties. Works only with JSON schemas!"
+
+msgid "Min properties"
+msgstr ""
+
+msgid "Min properties info"
+msgstr "Minumum number of class properties. Works only with JSON schemas!"
 
 msgid "Group label"
 msgstr ""
@@ -2018,7 +2065,9 @@ msgid "Range"
 msgstr ""
 
 msgid "Range info"
-msgstr "Value range of the property"
+msgstr ""
+"Property range (or datatype) is chosen from list of interoperable XSD "
+"datatypes"
 
 msgid "Specialized from class"
 msgstr ""
@@ -2167,6 +2216,17 @@ msgstr "XML Attribute"
 msgid "XML Attribute info"
 msgstr "Serialize as XML Element Attribute in XML Schema"
 
+msgid "Deactivated"
+msgstr ""
+
+msgid "Deactivated info"
+msgstr "Deactivated resource is not used in schema generation or validation"
+
+msgid "Unique label info"
+msgstr ""
+"Defines if only one localized value is allowed for each language. This can "
+"be used for example to define cardinaly of two with unique localized values"
+
 msgid "Homepage"
 msgstr "Link"
 
@@ -2225,125 +2285,5 @@ msgstr "Attribute"
 msgid "owl:ObjectProperty"
 msgstr "Association"
 
-#~ msgid "Classification"
-#~ msgstr "Domain"
-
-#~ msgid "Diipadaa"
-#~ msgstr ""
-#~ "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod "
-#~ "tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim "
-#~ "veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea "
-#~ "commodo consequat. Duis aute irure dolor in reprehenderit in voluptate "
-#~ "velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint "
-#~ "occaecat cupidatat non proident, sunt in culpa qui officia deserunt "
-#~ "mollit anim id est laborum."
-
-#~ msgid "Search for tuotetaan"
-#~ msgstr "Search for produces"
-
-#~ msgid "Search for tuotetaan concept"
-#~ msgstr "Search for produces term"
-
-#~ msgid "Select palvelu"
-#~ msgstr "Select Public Service"
-
-#~ msgid "Select tuote"
-#~ msgstr "Select Product"
-
-#~ msgid "Search for palvelu info"
-#~ msgstr "Lets search for a class about a service"
-
-#~ msgid "Search for nimi info"
-#~ msgstr "Lets add name Property to the Class"
-
-#~ msgid "Search for tuotetaan info"
-#~ msgstr "Lets add new association to Product class"
-
-#~ msgid "Search for tuotetaan concept info"
-#~ msgstr "Search for the Product term in the existing terminologies"
-
-#~ msgid "Search for tuotetaan predicate"
-#~ msgstr "Search for is produced by association"
-
-#~ msgid "Select palvelu info"
-#~ msgstr "Select search results from the list"
-
-#~ msgid "Select nimi info"
-#~ msgstr "Name was found from the model and can be selected from the list"
-
-#~ msgid "Select tuote info"
-#~ msgstr "Lets add new Product class"
-
-#~ msgid "Select association target info"
-#~ msgstr "You can create new association from here"
-
-#~ msgid "Association is here info"
-#~ msgstr ""
-#~ "New association consists for permanent URI identifer, name, description "
-#~ "and range definitions."
-
-#~ msgid "Palvelu"
-#~ msgstr "Service"
-
-#~ msgid "Testikirjasto"
-#~ msgstr "Test model"
-
-#~ msgid "Palveluprofiili"
-#~ msgstr "Serviceprofile"
-
-#~ msgid "Tuote"
-#~ msgstr "Product"
-
-#~ msgid "Asia joka tuotetaan"
-#~ msgstr "Thing that is being produced"
-
-#~ msgid "Nimi"
-#~ msgstr "Name"
-
-#~ msgid "Tuotetaan"
-#~ msgstr "Is produced"
-
-#~ msgid "Tuotetaan palvelussa"
-#~ msgstr "Is produced in service"
-
-#~ msgid "tapahtumaketju joka toteuttaa jotain"
-#~ msgstr "event that produces something"
-
-#~ msgid "Create new info"
-#~ msgstr ""
-#~ "This is all that is required for creating a new model. Prefix will be "
-#~ "used to create namespace in the workbech domain. Alternatively you could "
-#~ "use the Namespace redirection to use other domain as the namespace. "
-
-#~ msgid "Localname description"
-#~ msgstr "Can be used in schemas or other local applications"
-
-#~ msgid "Interoperability method"
-#~ msgstr "Interoperability and understandability"
-
-#~ msgid "IOW"
-#~ msgstr "Interoperability descriptions"
-
-#~ msgid "Vocabulary filter"
-#~ msgstr "Terminology filter"
-
-#~ msgid "Search for tuote"
-#~ msgstr "Search for Product"
-
-#~ msgid "Search for tuote info"
-#~ msgstr "Lets add new Class about some Product"
-
-#~ msgid "Write code"
-#~ msgstr "Write code…"
-
-#~ msgid "Id"
-#~ msgstr "Identifier"
-
-#~ msgid "Is defined by"
-#~ msgstr "Library"
-
-#~ msgid "xsd:HTML"
-#~ msgstr "HTML"
-
-#~ msgid "xsd:XMLLiteral"
-#~ msgstr "XML"
+msgid "API path"
+msgstr ""

@@ -696,7 +696,7 @@ export class ClassVisualizationComponent implements ChangeListener<Class|Predica
   }
 
   onClassClick(classId: string): void {
-    this.modelPageActions.select({ id: new Uri(classId, {}), selectionType: 'class' });
+    this.modelPageActions.selectResource({ id: new Uri(classId, this.model.context), selectionType: 'class' });
   }
 
   onClassHover(classId: string, coordinate: Coordinate): void {

@@ -7,7 +7,8 @@
   </div>
 
   <div class="component-content">
-    <editable-entity-buttons context="$ctrl.model" editable-controller="$ctrl.editableController">
+    <editable-entity-buttons id-prefix="$ctrl.id('edit_buttons_')" context="$ctrl.model"
+                             editable-controller="$ctrl.editableController">
       <div ng-transclude="buttons"></div>
     </editable-entity-buttons>
 

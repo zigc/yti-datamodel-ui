@@ -14,20 +14,17 @@ import { LegacyComponent, modalCancelHandler } from 'app/utils/angular';
 import { ImpersonationService } from 'app/services/impersonationService';
 import { ConfigService } from 'app/services/configService';
 import { Config } from 'app/entities/config';
+import { HelpService } from '../../help/providers/helpService';
+import { Subscription } from 'rxjs';
 
-const logo = require('../../../assets/logo.svg');
+//const logo = require('../../../assets/logo.svg');
 
 @LegacyComponent({
-  bindings: {
-    helpProvider: '<'
-  },
   template: require('./navigationBar.html')
 })
 export class NavigationBarComponent {
 
-  helpProvider: HelpProvider|null;
-
-  logo = logo;
+  //logo = logo;
 
   availableLanguages = [
     { code: 'fi' as UILanguage, name: 'Suomeksi (FI)' },
@@ -35,10 +32,12 @@ export class NavigationBarComponent {
     { code: 'en' as UILanguage, name: 'In English (EN)' }
   ];
 
-  helps: InteractiveHelp[];
+  helpProvider?: HelpProvider;
 
   fakeableUsers: { email: string, firstName: string, lastName: string }[] = [];
   config: Config;
+
+  private subscriptions: Subscription[] = [];
 
   constructor($scope: IScope,
               $route: angular.route.IRouteService,
@@ -47,27 +46,31 @@ export class NavigationBarComponent {
               private userService: UserService,
               impersonationService: ImpersonationService,
               private loginModal: LoginModalService,
+              helpService: HelpService,
               private interactiveHelpService: InteractiveHelpService,
               private helpSelectionModal: HelpSelectionModal,
               configService: ConfigService) {
     'ngInject';
+
     impersonationService.getFakeableUsers()
       .then(users => this.fakeableUsers = users);
 
-    const helps = () => this.helpProvider && this.helpProvider.helps || [];
+    this.subscriptions.push(helpService.helpProvider.subscribe(provider => this.helpProvider = provider));
 
-    $scope.$watchCollection(helps, h => {
-      this.helps = h;
-
+    // TODO: The following, was under watching 'helps' source before refactoring
+/*
       if ($route.current && $route.current!.params.hasOwnProperty('help')) {
         this.startHelp().then(() => {}, _err => {
           $location.search('help', null as any);
         });
       }
-    });
-
+*/
     configService.getConfig()
       .then(config => this.config = config);
+  }
+
+  $onDestroy() {
+    this.subscriptions.forEach(s => s.unsubscribe());
   }
 
   get groupManagementUrl() {
@@ -82,8 +85,8 @@ export class NavigationBarComponent {
     return this.config && this.config.codeListUrl;
   }
 
-  fakeUser(userEmail: string) {
-    this.userService.updateLoggedInUser(userEmail);
+  get environmentIdentifier() {
+    return this.config ? this.config.getEnvironmentIdentifier('postfix') : '';
   }
 
   get language(): UILanguage {
@@ -102,8 +105,15 @@ export class NavigationBarComponent {
     return !this.userService.isLoggedIn();
   }
 
-  get environmentIdentifier() {
-    return this.config ? this.config.env !== 'prod' ? ' - ' + this.config.env.toUpperCase() : '' : '';
+  get helps(): InteractiveHelp[] {
+    if (this.helpProvider) {
+      return this.helpProvider.helps;
+    }
+    return [];
+  }
+
+  fakeUser(userEmail: string) {
+    this.userService.updateLoggedInUser(userEmail);
   }
 
   isLoggedIn() {

@@ -1,7 +1,5 @@
 import * as angular from 'angular';
-import { ICompileProvider, ILocationProvider, ILogProvider, animate, auto } from 'angular';
-import IInjectorService = auto.IInjectorService;
-import IAnimateProvider = animate.IAnimateProvider;
+import { animate, ICompileProvider, ILocationProvider, ILogProvider } from 'angular';
 import { ITooltipProvider } from 'angular-ui-bootstrap';
 import { routeConfig } from './routes';
 import { module as commonModule } from './components/common';
@@ -16,15 +14,18 @@ import { module as filterModule } from './components/filter';
 import { module as componentsModule } from './components';
 import { module as servicesModule } from './services';
 import { module as helpModule } from './help';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, Title } from '@angular/platform-browser';
 import { downgradeComponent, downgradeInjectable, UpgradeModule } from '@angular/upgrade/static';
 import { NgModule, NgZone } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { YtiCommonModule } from 'yti-common-ui';
+import { LOCALIZER, YtiCommonModule } from 'yti-common-ui';
 import { AUTHENTICATED_USER_ENDPOINT } from 'yti-common-ui/services/user.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {
-  MissingTranslationHandler, MissingTranslationHandlerParams, TranslateLoader, TranslateModule,
+  MissingTranslationHandler,
+  MissingTranslationHandlerParams,
+  TranslateLoader,
+  TranslateModule,
   TranslateService
 } from '@ngx-translate/core';
 import { of } from 'rxjs';
@@ -32,9 +33,6 @@ import { availableUILanguages } from './types/language';
 
 import { LoginModalService } from 'yti-common-ui/components/login-modal.component';
 import { FooterComponent } from 'yti-common-ui/components/footer.component';
-import { LOCALIZER } from 'yti-common-ui/pipes/translate-value.pipe';
-import { Localizer as AngularLocalizer } from 'yti-common-ui/types/localization';
-import { DefaultAngularLocalizer, LanguageService } from './services/languageService';
 import { MenuComponent } from 'yti-common-ui/components/menu.component';
 import { AjaxLoadingIndicatorComponent } from 'yti-common-ui/components/ajax-loading-indicator.component';
 import { AjaxLoadingIndicatorSmallComponent } from 'yti-common-ui/components/ajax-loading-indicator-small.component';
@@ -45,6 +43,23 @@ import { UseContextDropdownComponent } from './components/model/use-context-drop
 import { UseContextInputComponent } from './components/form/use-context-input.component';
 import { HttpClientModule } from '@angular/common/http';
 import { apiEndpointWithName } from 'app/services/config';
+import { ExpandableTextComponent } from 'yti-common-ui/components/expandable-text.component';
+import { ModelMainComponent } from './components/model/modelMain';
+import {
+  confirmationModalProvider,
+  languageServiceProvider,
+  locationServiceProvider,
+  modelPageHelpServiceProvider,
+  modelServiceProvider,
+  notificationModalProvider,
+  routeServiceProvider,
+  scopeProvider
+} from './ajs-upgraded-providers';
+import { ExportDirective, ModelLanguageChooserDirective, ModelPageDirective, ModelViewDirective } from './ajs-upgraded-components';
+import { DefaultAngularLocalizer, LanguageService } from './services/languageService';
+import { Localizer as AngularLocalizer } from 'yti-common-ui/types/localization';
+import { HelpService } from './help/providers/helpService';
+import IAnimateProvider = animate.IAnimateProvider;
 
 require('angular-gettext');
 require('checklist-model');
@@ -98,6 +113,10 @@ export function createMissingTranslationHandler(): MissingTranslationHandler {
   };
 }
 
+export function localizerFactory(languageService: LanguageService): AngularLocalizer {
+  return new DefaultAngularLocalizer(languageService);
+}
+
 @NgModule({
   imports: [
     BrowserModule,
@@ -117,7 +136,12 @@ export function createMissingTranslationHandler(): MissingTranslationHandler {
   ],
   declarations: [
     UseContextDropdownComponent,
-    UseContextInputComponent
+    UseContextInputComponent,
+    ModelMainComponent,
+    ModelPageDirective,
+    ModelViewDirective,
+    ModelLanguageChooserDirective,
+    ExportDirective
   ],
   entryComponents: [
     FooterComponent,
@@ -126,25 +150,25 @@ export function createMissingTranslationHandler(): MissingTranslationHandler {
     AjaxLoadingIndicatorSmallComponent,
     DropdownComponent,
     FilterDropdownComponent,
+    ExpandableTextComponent,
     StatusComponent,
     UseContextDropdownComponent,
-    UseContextInputComponent
+    UseContextInputComponent,
+    ModelMainComponent
   ],
   providers: [
     { provide: AUTHENTICATED_USER_ENDPOINT, useFactory: resolveAuthenticatedUserEndpoint },
-    {
-      provide: LanguageService,
-      useFactory(injector: IInjectorService): AngularLocalizer {
-        return new DefaultAngularLocalizer(injector.get<LanguageService>('languageService'));
-      },
-      deps: ['$injector']
-    },
-    { provide: LOCALIZER,
-      useFactory(languageService: LanguageService): AngularLocalizer {
-        return new DefaultAngularLocalizer(languageService);
-      },
-      deps: [LanguageService]
-    }
+    { provide: LOCALIZER, useFactory: localizerFactory, deps: [LanguageService] },
+    languageServiceProvider,
+    scopeProvider,
+    routeServiceProvider,
+    locationServiceProvider,
+    modelServiceProvider,
+    notificationModalProvider,
+    confirmationModalProvider,
+    modelPageHelpServiceProvider,
+    Title,
+    HelpService
   ]
 })
 export class AppModule {
@@ -179,18 +203,22 @@ const mod = angular.module('iow-ui', [
   helpModule.name
 ]);
 
-mod.directive('appMenu', downgradeComponent({component: MenuComponent}));
+mod.directive('appMenu', downgradeComponent({ component: MenuComponent }));
 mod.directive('appFooter', downgradeComponent({
   component: FooterComponent,
   inputs: ['title'],
   outputs: ['informationClick']
 }));
 
-mod.directive('ajaxLoadingIndicator', downgradeComponent({component: AjaxLoadingIndicatorComponent}));
-mod.directive('ajaxLoadingIndicatorSmall', downgradeComponent({component: AjaxLoadingIndicatorSmallComponent}));
+mod.directive('ajaxLoadingIndicator', downgradeComponent({ component: AjaxLoadingIndicatorComponent }));
+mod.directive('ajaxLoadingIndicatorSmall', downgradeComponent({ component: AjaxLoadingIndicatorSmallComponent }));
 mod.directive('appDropdown', downgradeComponent({
   component: DropdownComponent,
   inputs: ['options', 'showNullOption', 'placement']
+}));
+mod.directive('appExpandableText', downgradeComponent({
+  component: ExpandableTextComponent,
+  inputs: ['text', 'rows']
 }));
 mod.directive('appFilterDropdown', downgradeComponent({
   component: FilterDropdownComponent,
@@ -209,6 +237,8 @@ mod.factory('translateService', downgradeInjectable(TranslateService));
 mod.factory('loginModal', downgradeInjectable(LoginModalService));
 mod.factory('localizationStrings', () => localizationStrings);
 mod.factory('zone', downgradeInjectable(NgZone));
+mod.factory('titleService', downgradeInjectable(Title));
+mod.factory('helpService', downgradeInjectable(HelpService));
 
 mod.config(routeConfig);
 
@@ -227,7 +257,7 @@ mod.config(($locationProvider: ILocationProvider,
   $animateProvider.classNameFilter(/ng-animate-enabled/);
 
   $uibTooltipProvider.options({ appendToBody: true });
-  $uibTooltipProvider.setTriggers({'mouseenter': 'mouseleave click'});
+  $uibTooltipProvider.setTriggers({ 'mouseenter': 'mouseleave click' });
 });
 
 

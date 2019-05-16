@@ -11,9 +11,11 @@ import { EditableForm } from '../../components/form/editableEntityController';
 import { Uri } from '../../entities/uri';
 
 interface WithImportedNamespaces {
-  id: Uri|null;
+  id: Uri | null;
   importedNamespaces: ImportedNamespace[];
+
   addImportedNamespace(namespace: ImportedNamespace): void;
+
   removeImportedNamespace(namespace: ImportedNamespace): void;
 }
 
@@ -22,7 +24,8 @@ interface WithImportedNamespaces {
     value: '=',
     context: '=',
     allowProfiles: '=',
-    namespacesInUse: '='
+    namespacesInUse: '=',
+    modelPrefix: '<'
   },
   require: {
     form: '?^form'
@@ -42,7 +45,8 @@ export class ImportedNamespacesViewComponent {
   value: WithImportedNamespaces;
   allowProfiles: boolean;
   context: LanguageContext;
-  namespacesInUse: Set<string>;
+  namespacesInUse?: Set<string>;
+  modelPrefix: string;
 
   descriptor: ImportedNamespaceTableDescriptor;
   expanded = false;
@@ -58,7 +62,8 @@ export class ImportedNamespacesViewComponent {
 
   $onInit() {
     this.$scope.$watch(() => this.value, value => {
-      this.descriptor = new ImportedNamespaceTableDescriptor(this.addEditNamespaceModal, value, this.context, this.languageService, this.namespacesInUse);
+      this.descriptor = new ImportedNamespaceTableDescriptor(this.addEditNamespaceModal, value, () => this.modelPrefix,
+        this.context, this.languageService, this.namespacesInUse);
     });
   }
 
@@ -78,12 +83,14 @@ export class ImportedNamespacesViewComponent {
     };
 
     const namespaceOfThisModel = this.value.id ? this.value.id.uri : '';
-    
+
     const profileExclude = (ns: ImportedNamespace) => (!this.allowProfiles && ns.isOfType('profile')) ? 'Cannot import profile' : null;
     const thisModelExclude = (ns: ImportedNamespace) => (namespaceOfThisModel === ns.id.uri) ? 'Cannot import namespace of this model' : null;
     const exclude = combineExclusions(existsExclude, profileExclude, thisModelExclude);
 
-    this.searchNamespaceModal.open(this.context, exclude)
+    const reservedPrefixes: string[] = [this.modelPrefix, ...this.value.importedNamespaces.map(ns => ns.prefix)];
+
+    this.searchNamespaceModal.open(this.context, reservedPrefixes, exclude)
       .then((ns: ImportedNamespace) => {
         this.value.addImportedNamespace(ns);
         this.expanded = true;
@@ -95,9 +102,10 @@ class ImportedNamespaceTableDescriptor extends TableDescriptor<ImportedNamespace
 
   constructor(private addEditNamespaceModal: AddEditNamespaceModal,
               private value: WithImportedNamespaces,
+              private modelPrefix: () => string,
               private context: LanguageContext,
               private languageService: LanguageService,
-              private namespacesInUse: Set<string>) {
+              private namespacesInUse?: Set<string>) {
     super();
   }
 
@@ -118,7 +126,8 @@ class ImportedNamespaceTableDescriptor extends TableDescriptor<ImportedNamespace
   }
 
   edit(ns: ImportedNamespace) {
-    this.addEditNamespaceModal.openEdit(this.context, ns, this.languageService.getModelLanguage(this.context));
+    const reservedPrefixes: string[] = [this.modelPrefix(), ...this.value.importedNamespaces.map(ns => ns.prefix).filter(prefix => ns.prefix !== prefix)];
+    this.addEditNamespaceModal.openEdit(this.context, ns, this.languageService.getModelLanguage(this.context), reservedPrefixes);
   }
 
   remove(ns: ImportedNamespace) {
@@ -130,6 +139,9 @@ class ImportedNamespaceTableDescriptor extends TableDescriptor<ImportedNamespace
   }
 
   canRemove(ns: ImportedNamespace): boolean {
-    return !this.namespacesInUse.has(ns.id.uri);
+    if (this.namespacesInUse) {
+      return !this.namespacesInUse.has(ns.id.uri);
+    }
+    return false;
   }
 }

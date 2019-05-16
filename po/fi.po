@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2\n"
+"X-Generator: Poedit 2.2.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "Copied"
@@ -102,7 +102,7 @@ msgstr "Tekniset nimiavaruudet"
 msgid "Reference data information"
 msgstr "Koodiston tiedot"
 
-msgid "Controlled vocabularies"
+msgid "Terminologies"
 msgstr "Käytetyt sanastot"
 
 msgid "Add vocabulary"
@@ -383,7 +383,7 @@ msgid "Filter with information domain"
 msgstr "Rajaa tietoalueella"
 
 msgid "Filter results"
-msgstr "Suodata hakutuloksia"
+msgstr "Rajaa hakutuloksia"
 
 msgid "result"
 msgstr "hakutulos"
@@ -413,11 +413,17 @@ msgstr "poista valinta"
 msgid "Edit reference data"
 msgstr "Muokkaa koodistoa"
 
-msgid "Show model details"
-msgstr "Näytä tietomallin tiedot"
+msgid "Datamodel definition"
+msgstr "Tietomääritykset"
 
-msgid "Hide model details"
-msgstr "Piilota tietomallin tiedot"
+msgid "Datamodel details"
+msgstr "Tietomallin tiedot"
+
+msgid "Information domain"
+msgstr "Tietoalue"
+
+msgid "Organization"
+msgstr "Organisaatio"
 
 msgid "Browse reference data codes"
 msgstr "Selaa koodistoa"
@@ -476,7 +482,7 @@ msgstr "KIRJAUDU ULOS"
 msgid "User details"
 msgstr "Käyttäjätiedot"
 
-msgid "Suomi.fi Controlled Vocabularies"
+msgid "Suomi.fi Terminologies"
 msgstr "Suomi.fi-sanastot"
 
 msgid "Suomi.fi Reference Data"
@@ -918,7 +924,7 @@ msgid "Search for class"
 msgstr "Etsi luokkaa"
 
 msgid "Search for class info"
-msgstr ""
+msgstr "Etsi luokan tietoja"
 
 msgid "Search for concept"
 msgstr "Etsi käsitettä"
@@ -1109,6 +1115,12 @@ msgstr "Ehdotus"
 
 msgid "Hide"
 msgstr "Piilota"
+
+msgid "Show model details"
+msgstr "Näytä tietomallin tiedot"
+
+msgid "Hide model details"
+msgstr "Piilota tietomallin tiedot"
 
 msgid "Front page"
 msgstr "Etusivu"
@@ -1467,6 +1479,9 @@ msgstr "JSON-LD Context"
 msgid "application/schema+json"
 msgstr "JSON Schema"
 
+msgid "application/vnd+oai+openapi+json"
+msgstr "Open API 3.0.2"
+
 msgid "framed ld+json"
 msgstr "Framed JSON-LD"
 
@@ -1798,7 +1813,7 @@ msgid "Match to content"
 msgstr "Hae sisällöstä"
 
 msgid "Unique label"
-msgstr "Yksilöllinen nimi"
+msgstr "Yksi arvo kieltä kohden"
 
 msgid "All organizations"
 msgstr "Kaikki organisaatiot"
@@ -1839,8 +1854,11 @@ msgstr "Tietosisältö"
 msgid "Search"
 msgstr "Etsi"
 
-msgid "standard"
-msgstr "Kansainvälinen suositus"
+msgid "All model types"
+msgstr "Kaikki tietomallityypit"
+
+msgid "All use contexts"
+msgstr "Kaikki sisältötyypit"
 
 msgid "Superproperty"
 msgstr "Yläkäsite"
@@ -1923,6 +1941,22 @@ msgstr "Koodiston URI"
 msgid "Reference data URI info"
 msgstr ""
 "Koodiston URI tunniste on pysyvä ja yksilöivä viittaus koodiston sijaintiin"
+
+msgid "Max properties"
+msgstr "Ominaisuuksien enimmäismäärä"
+
+msgid "Max properties info"
+msgstr ""
+"Luokan attribuuttien tai assosiaatioiden enimmäismäärä. HUOM! Toimii vain "
+"JSON skeemoissa."
+
+msgid "Min properties"
+msgstr "Ominaisuuksien vähimmäismäärä"
+
+msgid "Min properties info"
+msgstr ""
+"Luokan attribuuttien tai assosiaatioiden vähimmäismäärä. HUOM! Toimii vain "
+"JSON skeemoissa."
 
 msgid "Group label"
 msgstr "Ryhmän nimi"
@@ -2051,10 +2085,12 @@ msgid "Superproperty info"
 msgstr "Yleistettävissä oleva ominaisuus, joka on semantiikaltaan laajempi"
 
 msgid "Range"
-msgstr "Arvoalue"
+msgstr "Tietotyyppi"
 
 msgid "Range info"
-msgstr "Ominaisuuden arvoalue"
+msgstr ""
+"Attribuutin tietotyyppi on valittava yhteensopivien XSD tietotyyppien "
+"joukosta"
 
 msgid "Specialized from class"
 msgstr "Tarkennettu luokasta"
@@ -2206,6 +2242,19 @@ msgstr "XML Attribuutti"
 msgid "XML Attribute info"
 msgstr "Muodosta ominaisuudesta XML Elementin attribuutti XML skeemassa"
 
+msgid "Deactivated"
+msgstr "Deaktivoitu"
+
+msgid "Deactivated info"
+msgstr ""
+"Deaktivoitua resurssia ei käytetä skeemojen generoinnissa tai validoinnissa"
+
+msgid "Unique label info"
+msgstr ""
+"Määrittelee onko vain yksi kieliversioitu arvo sallittu yhtä kieltä kohden. "
+"Tämän avulla voidaan määritellä esimerkiksi Enimmäismäärä 2 siten että vain "
+"erikieliset arvot ovat sallittuja"
+
 msgid "Homepage"
 msgstr "Linkki"
 
@@ -2267,509 +2316,5 @@ msgstr "Attribuutti"
 msgid "owl:ObjectProperty"
 msgstr "Assosiaatio"
 
-#~ msgid "Choose action"
-#~ msgstr "Valitse toiminto"
-
-#~ msgid "Delete property"
-#~ msgstr "Poista ominaisuus"
-
-#~ msgid "Select classification"
-#~ msgstr "Valitse luokitus"
-
-#~ msgid "Classification"
-#~ msgstr "Tietoalue"
-
-#~ msgid "models"
-#~ msgstr "tietomallia"
-
-#~ msgid "Class description info"
-#~ msgstr "Luokan tietosisällön kuvaus"
-
-#~ msgid "Diipadaa"
-#~ msgstr ""
-#~ "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod "
-#~ "tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim "
-#~ "veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea "
-#~ "commodo consequat. Duis aute irure dolor in reprehenderit in voluptate "
-#~ "velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint "
-#~ "occaecat cupidatat non proident, sunt in culpa qui officia deserunt "
-#~ "mollit anim id est laborum."
-
-#~ msgid "Select group"
-#~ msgstr "Valitse ryhmä"
-
-#~ msgid ""
-#~ "Group is a categorization of interoperability descriptions to different "
-#~ "fields and domains"
-#~ msgstr "Ryhmä luokittelee yhteentoimivuuden kuvaukset toimialoittain"
-
-#~ msgid "Modify class description"
-#~ msgstr ""
-#~ "Luokkaa voidaan muokata, kuten tarkentaa määritelmiä tai lisätä uusia "
-#~ "ominaisuuksia"
-
-#~ msgid "Search for palvelu"
-#~ msgstr "Etsi palvelu luokkaa"
-
-#~ msgid "Search for tuote concept"
-#~ msgstr "Hae termiä Tuote"
-
-#~ msgid "Search for nimi"
-#~ msgstr "Etsi nimi attribuuttia"
-
-#~ msgid "Search for tuotetaan"
-#~ msgstr "Etsi tuotetaan assosiaatiota"
-
-#~ msgid "Search for tuotetaan concept"
-#~ msgstr "Hae tuotetaan termiä"
-
-#~ msgid "Select jhs"
-#~ msgstr "Valitse julkishallinnon tietokomponenttikirjasto"
-
-#~ msgid "Select palvelu"
-#~ msgstr "Valitse palvelu"
-
-#~ msgid "Select tuote"
-#~ msgstr "Valitse tuote"
-
-#~ msgid "Search for palvelu info"
-#~ msgstr ""
-#~ "Tässä esimerkissä lisätään Palvelu-luokka jota haetaan "
-#~ "uudelleenkäytettävistä määrittelyistä"
-
-#~ msgid "Search for nimi info"
-#~ msgstr "Haetaan olemassaolevia ominaisuuksia"
-
-#~ msgid "Search for tuotetaan info"
-#~ msgstr "Haetaan olemassaolevista määrittelyistä tuotetaan assosiaatiota"
-
-#~ msgid "Search for tuotetaan concept info"
-#~ msgstr ""
-#~ "Uutta ominaisuutta muodostaessa käytettyjä termejä ja määritelmiä haetaan "
-#~ "sanastosta"
-
-#~ msgid "Search for tuotetaan predicate"
-#~ msgstr "Hae tuotetaan assosiaatiota"
-
-#~ msgid "Search for tuotetaan predicate info"
-#~ msgstr ""
-#~ "Tässä esimerkissä halutaan lisätä tuotetaan assosiaatio Palvelun ja "
-#~ "Tuotteen välille"
-
-#~ msgid "Select palvelu info"
-#~ msgstr "Valitaan uudelleenkäytettävä tietomääritys"
-
-#~ msgid "Select nimi info"
-#~ msgstr "Valitaan uudelleenkäytettävä tietomääritys"
-
-#~ msgid "Select tuote info"
-#~ msgstr "Valitaan uudelleenkäytettävä tietomääritys"
-
-#~ msgid "Select association target info"
-#~ msgstr "Assosiaation kohteella tarkoitetaan luokkaa johon halutaan viitata"
-
-#~ msgid "Help is open"
-#~ msgstr "Ohje on avattuna"
-
-#~ msgid "Are you sure that you want to close help?"
-#~ msgstr "Oletko varma, että haluat sulkea ohjeen?"
-
-#~ msgid "Association is here info"
-#~ msgstr ""
-#~ "Assosiaation tiedoissa määritellään pysyvä URI unniste, nimi, määritelmä "
-#~ "ja yleinen kohde"
-
-#~ msgid "Label can be changed"
-#~ msgstr "Nimeä voidaan muuttaa"
-
-#~ msgid "Testikirjasto"
-#~ msgstr "Testikirjasto"
-
-#~ msgid "Create new info"
-#~ msgstr ""
-#~ "Uutta mallia muodostettaessa tietomallin nimiavaruus muodostetaan "
-#~ "automaattisesti Etuliitteestä ja välineistön verkko-osoitteesta. "
-#~ "Vaihtoehtoisesti nimiavaruuden voi määritellä myös käyttämällä "
-#~ "nimiavaruuden uudelleenohjausta, jolloin nimiavaruutena voi käyttää mitä "
-#~ "tahansa verkko-osoitetta joka voidaan uudelleenohjata osoittamaan "
-#~ "välineistöön."
-
-#~ msgid "Localname description"
-#~ msgstr "Voidaan käyttää skeemoissa tai muissa paikallisissta toteutuksissa"
-
-#~ msgid "Group"
-#~ msgstr "Ryhmä"
-
-#~ msgid "Reference data server"
-#~ msgstr "Koodistopalvelin"
-
-#~ msgid "Search or create predicate info"
-#~ msgstr ""
-#~ "Hae ensin tarvitsemaasi attribuuttia tai assosiaatiota yhteentoimivuuden "
-#~ "kuvauksista. Jos et löydä tarpeisiisi sopivaa, voit luoda uuden "
-#~ "ominaisuuden."
-
-#~ msgid "Browse vocabulary"
-#~ msgstr "Selaa sanastoa"
-
-#~ msgid "Cancel edit"
-#~ msgstr "Peruuta muokkaus"
-
-#~ msgid "Class search info"
-#~ msgstr "Hae tarvitsemaasi luokkaa yhteentoimivuuden kuvauksista."
-
-#~ msgid "Class search or create info"
-#~ msgstr ""
-#~ "Hae ensin tarvitsemaasi luokkaa yhteentoimivuuden kuvauksista. Jos et "
-#~ "löydä tarpeisiisi sopivaa, voit luoda uuden luokan."
-
-#~ msgid "Concept search info"
-#~ msgstr ""
-#~ "Hae ensin tarvitsemaasi käsitettä sanastoista. Jos et löydä tarpeisiisi "
-#~ "sopivaa, voit luoda uuden käsite-ehdotuksen."
-
-#~ msgid "Concept state"
-#~ msgstr "Käsitteen tila"
-
-#~ msgid "search concept"
-#~ msgstr "Hae käsitettä"
-
-#~ msgid "Visualization"
-#~ msgstr "Visualisointi"
-
-#~ msgid "Vocabulary filter"
-#~ msgstr "Sanasto"
-
-#~ msgid "Browse"
-#~ msgstr "Selaa"
-
-#~ msgid "Application profiles"
-#~ msgstr "Soveltamisprofiilit"
-
-#~ msgid "Ask for group rights"
-#~ msgstr "Pyydä käyttöoikeuksia ryhmään"
-
-#~ msgid "Backend"
-#~ msgstr "Taustajärjestelmä"
-
-#~ msgid "Contact info"
-#~ msgstr "Yhteystiedot"
-
-#~ msgid "CSC - IT Center for Science Ltd"
-#~ msgstr "CSC - Tieteen tietotekniikan keskus Oy"
-
-#~ msgid "Database"
-#~ msgstr "Tietokanta"
-
-#~ msgid "eDuuni information"
-#~ msgstr ""
-#~ "Palveluun kirjaudutaan eDuuni-tunnuksilla. Kirjautumista vaaditaan jos "
-#~ "haluat muokata palvelun sisältöä."
-
-#~ msgid "Frontend"
-#~ msgstr "Käyttöliittymä"
-
-#~ msgid "Interoperability method"
-#~ msgstr "Yhteentoimivuutta ja ymmärrettävyyttä"
-
-#~ msgid "IOW"
-#~ msgstr "Yhteentoimivuuden kuvaukset"
-
-#~ msgid "licensed under the"
-#~ msgstr "lisenssillä"
-
-#~ msgid "Login"
-#~ msgstr "Kirjaudu"
-
-#~ msgid "Login information"
-#~ msgstr ""
-#~ "Alla olevalla painikkeella ohjaudut eDuuni-palvelun kirjautumiseen. Palaa "
-#~ "sen jälkeen takaisin palveluun."
-
-#~ msgid "Logout"
-#~ msgstr "Kirjaudu ulos"
-
-#~ msgid "No models yet"
-#~ msgstr "Ei vielä yhtään tietokomponenttikirjastoa"
-
-#~ msgid "No profiles yet"
-#~ msgstr "Ei vielä yhtään soveltamisprofiilia"
-
-#~ msgid "Register"
-#~ msgstr "Luo tunnukset"
-
-#~ msgid "Source code"
-#~ msgstr "Lähdekoodi"
-
-#~ msgid "Version"
-#~ msgstr "Versio"
-
-#~ msgid "Permanent identifier"
-#~ msgstr "Pysyvä tunniste"
-
-#~ msgid "Permanent identifier info"
-#~ msgstr ""
-#~ "Pysyvillä ja yksilöivä tunniste joka yksilöidään valitun nimiavaruuden "
-#~ "avulla"
-
-#~ msgid "Suggested in"
-#~ msgstr "Ehdotettu kirjastossa"
-
-#~ msgid "Assign class predicate to library"
-#~ msgstr "Lisää luokka kirjastoon"
-
-#~ msgid "Specialize class predicate to profile"
-#~ msgstr "Erikoista luokka soveltamisprofiiliin"
-
-#~ msgid "Search for tuote"
-#~ msgstr "Etsi tuote luokkaa"
-
-#~ msgid "Search for tuote info"
-#~ msgstr "Haetaan määrittelyistä Tuote luokkaa"
-
-#~ msgid "Select properties"
-#~ msgstr "Valitse haluamasi ominaisuudet"
-
-#~ msgid "You will be redirected to front page"
-#~ msgstr "Sinut uudelleenohjataan etusivulle"
-
-#~ msgid "Copy reusable to library"
-#~ msgstr "Kopioi ominaisuus kirjastoon"
-
-#~ msgid "Copy reusable to profile"
-#~ msgstr "Kopioi ominaisuus soveltamisprofiiliin"
-
-#~ msgid "Copy '{{text}}' to clipboard"
-#~ msgstr "Kopioi ‘{{text}}' leikepöydälle"
-
-#~ msgid "Copy '{text}' to clipboard"
-#~ msgstr "Kopioi ‘{text}’ leikepöydälle"
-
-#~ msgid "Copy to clipboard"
-#~ msgstr "Kopioi leikepöydälle"
-
-#~ msgid "Are you sure that you want to cancel edit?"
-#~ msgstr "Oletko varma, että haluat keskeyttää muokkauksen?"
-
-#~ msgid "Choose broader concept"
-#~ msgstr "valitse laajempi käsite"
-
-#~ msgid "Choose subject"
-#~ msgstr "valitse käsite"
-
-#~ msgid "Invalid uri error"
-#~ msgstr "Syöte ei ole URI"
-
-#~ msgid "Search nameespaces"
-#~ msgstr "Hae nimiavaruuksia"
-
-#~ msgid "Write code"
-#~ msgstr "Kirjoita koodi…"
-
-#~ msgid "Edit concepts"
-#~ msgstr "Muokkaa käsitteitä"
-
-#~ msgid "Delete relation"
-#~ msgstr "Poista resurssi"
-
-#~ msgid "No relations yet"
-#~ msgstr "Ei linkkejä"
-
-#~ msgid "Delete reference"
-#~ msgstr "Poista sanasto"
-
-#~ msgid "No references yet"
-#~ msgstr "Ei sanastoja"
-
-#~ msgid "Delete require"
-#~ msgstr "Poista nimiavaruus"
-
-#~ msgid "language"
-#~ msgstr "kieli"
-
-#~ msgid "Id"
-#~ msgstr "Tunniste"
-
-#~ msgid "Is defined by"
-#~ msgstr "Kirjasto"
-
-#~ msgid "Type"
-#~ msgstr "Tyyppi"
-
-#~ msgid "Property identifier"
-#~ msgstr "Ominaisuuden tunniste"
-
-#~ msgid "Namespace is not required"
-#~ msgstr "Nimiavaruutta ei ole lisätty riippuvuudeksi"
-
-#~ msgid "Search associations"
-#~ msgstr "Hae assosiaatioita"
-
-#~ msgid "Search attributes"
-#~ msgstr "Hae attribuutteja"
-
-#~ msgid "Search attributes and associations"
-#~ msgstr "Hae attribuutteja ja assosiaatitoita"
-
-#~ msgid "Search classes"
-#~ msgstr "Hae luokkia"
-
-#~ msgid "Reference"
-#~ msgstr "Sanasto"
-
-#~ msgid "Chosen concept"
-#~ msgstr "Valittu käsite"
-
-#~ msgid "Concepts can't be searched because there are no vocabularies"
-#~ msgstr "Käsitteitä ei voida hakea koska sanastoja ei ole määritelty"
-
-#~ msgid "No requires yet"
-#~ msgstr "Ei nimiavaruuksia"
-
-#~ msgid "Generalize class"
-#~ msgstr "Nosta luokka kirjastoon"
-
-#~ msgid "text/ld+json+context"
-#~ msgstr "JSON-LD Context"
-
-#~ msgid "xsd:HTML"
-#~ msgstr "HTML"
-
-#~ msgid "xsd:XMLLiteral"
-#~ msgstr "XML"
-
-#~ msgid "New model creation"
-#~ msgstr "Uuden tietokomponenttikirjaston luonti"
-
-#~ msgid "Invalid curie error"
-#~ msgstr "Virheellinen tunniste"
-
-#~ msgid "Comment"
-#~ msgstr "Määritelmä"
-
-#~ msgid "Constraint comment"
-#~ msgstr "Loogisen rajoitteen kuvaus"
-
-#~ msgid "Model label"
-#~ msgstr "Tietokomponenttikirjaston nimi"
-
-#~ msgid "Delete association from this model"
-#~ msgstr "Poista assosiaatio tästä kirjastosta"
-
-#~ msgid "Delete attribute from this model"
-#~ msgstr "Poista attribuutti tästä kirjastosta"
-
-#~ msgid "Delete class from this model"
-#~ msgstr "Poista luokka tästä kirjastosta"
-
-#~ msgid "Delete model"
-#~ msgstr "Poista tietokomponenttikirjasto"
-
-#~ msgid "Delete shape from this model"
-#~ msgstr "Poista tarkennettu luokka tästä kirjastosta"
-
-#~ msgid "Show already added"
-#~ msgstr "Näytä jo lisätyt"
-
-#~ msgid "Choose shape"
-#~ msgstr "Valitse tarkennettu luokka"
-
-#~ msgid "download"
-#~ msgstr "tallenna"
-
-#~ msgid "Code licensed under the"
-#~ msgstr "lisenssi"
-
-#~ msgid "Iow info"
-#~ msgstr "Tietoja palvelusta"
-
-#~ msgid "Save failed"
-#~ msgstr "Tallentaminen epäonnistui"
-
-#~ msgid "Use require"
-#~ msgstr "Käytä nimiavaruutta"
-
-#~ msgid "Use scheme"
-#~ msgstr "Käytä sanastoa"
-
-#~ msgid "Create and use predicate"
-#~ msgstr "Luo ominaisuus ja käytä"
-
-#~ msgid "search predicate"
-#~ msgstr "Hae ominaisuutta…"
-
-#~ msgid "Use predicate"
-#~ msgstr "Käytä ominaisuutta"
-
-#~ msgid "Requires"
-#~ msgstr "Nimiavaruudet"
-
-#~ msgid "Preferred namespace"
-#~ msgstr "Suositeltu nimiavaruus"
-
-#~ msgid "Preferred prefix"
-#~ msgstr "Suositeltu etuliite"
-
-#~ msgid "Following items are depending on the deleted item"
-#~ msgstr "Seuraavat asiat riippuvat poistettavasta "
-
-#~ msgid "Define concept for the new predicate"
-#~ msgstr "Määrittele käsite uudelle ominaisuudelle"
-
-#~ msgid "Define concept for the predicate"
-#~ msgstr "Määrittele käsite ominaisuudelle"
-
-#~ msgid "Delete predicate"
-#~ msgstr "Poista ominaisuus"
-
-#~ msgid "What?"
-#~ msgstr "Mitä?"
-
-#~ msgid "Where?"
-#~ msgstr "Missä?"
-
-#~ msgid "Who?"
-#~ msgstr "Kuka?"
-
-#~ msgid "IOW header"
-#~ msgstr "Otsikko tähän"
-
-#~ msgid "Associations"
-#~ msgstr "Assosiaatiot"
-
-#~ msgid "Attributes"
-#~ msgstr "Attribuutit"
-
-#~ msgid "Classes"
-#~ msgstr "Luokat"
-
-#~ msgid "Data language"
-#~ msgstr "Sisällön kieli"
-
-#~ msgid "UI language"
-#~ msgstr "Käyttöliittymän kieli"
-
-#~ msgid "create new property"
-#~ msgstr "ja luo uusi ominaisuus"
-
-#~ msgid "Datatype"
-#~ msgstr "Tyyppi"
-
-#~ msgid "eDuuni tietoa"
-#~ msgstr ""
-#~ "Palveluun kirjaudutaan eDuuni-tunnuksilla. Kirjautumista vaaditaan jos "
-#~ "haluat muokata palvelun sisältöä."
-
-#~ msgid "Kirjaudu"
-#~ msgstr "Kirjaudu"
-
-#~ msgid "Kirjautuminen"
-#~ msgstr "Kirjautuminen"
-
-#~ msgid "kirjautuminen tietoa"
-#~ msgstr ""
-#~ "Alla olevalla painikkeella ohjaudut eDuuni-palvelun kirjautumiseen. Palaa "
-#~ "sen jälkeen takaisin palveluun."
-
-#~ msgid "Luo tunnukset"
-#~ msgstr "Luo tunnukset"
+msgid "API path"
+msgstr "API polku"

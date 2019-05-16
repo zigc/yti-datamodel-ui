@@ -20,12 +20,14 @@ interface InputPopupScope extends IScope {
 @LegacyComponent({
   transclude: true,
   bindings: {
-    ctrl: '<'
+    ctrl: '<',
+    idPrefix: '<'
   },
   template: `
         <div ng-if-body="$ctrl.ctrl.show" class="input-popup show">
           <ul class="dropdown-menu" ng-style="$ctrl.popupStyle">
             <a ng-repeat="item in $ctrl.ctrl.popupItems"
+                ng-attr-id="{{$ctrl.id(item)}}"
                 class="dropdown-item"
                 ng-class="{ active: $ctrl.ctrl.isSelected($index) }" 
                 ng-mouseenter="$ctrl.ctrl.setSelection($index)" 
@@ -41,6 +43,9 @@ export class InputPopupComponent<T> {
 
   ctrl: InputWithPopupController<T>;
   popupStyle: { top: string|number, left: string|number, width: string|number, position: string };
+  idPrefix?: string;
+
+  private idCleanerExpression = /[^a-zA-Z0-9_-]/g;
 
   constructor(private $scope: InputPopupScope,
               private $window: IWindowService,
@@ -87,6 +92,29 @@ export class InputPopupComponent<T> {
       window.removeEventListener('resize', setPopupStyleToElement);
     });
   }
+
+  id(item: any): string | undefined {
+    if (item && this.idPrefix) {
+      if (typeof item === 'string') {
+        return this.idPrefix + '_' + this.cleanIdPart(item);
+      } else if (item.id && typeof item.id === 'string') {
+        return this.idPrefix + '_' + this.cleanIdPart(item.id);
+      }
+    }
+    return undefined;
+  }
+
+  private cleanIdPart(value: string): string {
+    return value.replace(this.idCleanerExpression, '_');
+  }
+
+  /*
+  // Testing to make robot usage easier
+  onClick(index: number, event?: JQueryEventObject) {
+    this.ctrl.setSelection(index);
+    this.ctrl.selectSelection(event);
+  }
+  */
 }
 
 interface SelectItemScope extends IRepeatScope, InputPopupScope {

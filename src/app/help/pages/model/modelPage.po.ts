@@ -1,10 +1,17 @@
-import { createClickNextCondition, createModifyingClickNextCondition, createNavigatingClickNextCondition, createScrollWithDefault, createStory, Story, scrollToTop } from 'app/help/contract';
+import {
+  createClickNextCondition,
+  createModifyingClickNextCondition,
+  createNavigatingClickNextCondition,
+  createScrollWithDefault,
+  createStory,
+  scrollToTop,
+  Story
+} from 'app/help/contract';
 import { child, modelPanelElement } from 'app/help/utils/selector';
 import { KnownModelType, KnownPredicateType } from 'app/types/entity';
 import { classIdAndNameFromHelpData } from 'app/help/utils/id';
 import * as SearchClassModal from './modal/searchClassModal.po';
 import * as AddPropertiesFromClass from './modal/addPropertiesFromClassModal.po';
-import * as ModelView from './modelView.po';
 import * as ClassView from './classView.po';
 import * as ClassForm from './classForm.po';
 import { Localizable } from 'yti-common-ui/types/localization';
@@ -13,7 +20,7 @@ import { ClassDetails } from 'app/services/entityLoader';
 
 export function openModelDetails(type: KnownModelType) {
 
-  const openModelDetailsElement = child(ModelView.element, '#show_model_details_button');
+  const openModelDetailsElement = () => jQuery('#modelDetailsTab');
 
   return createStory({
 
@@ -42,12 +49,12 @@ export function openAddResource(type: 'class' | KnownPredicateType) {
 
 export function selectClass(prefix: string, klass: ClassDetails, lang: Language) {
 
-  const { id, name } = classIdAndNameFromHelpData({prefix, details: klass}, lang);
-  const selectClassElement = child(modelPanelElement, `li#${CSS.escape(id + '_tabset_link' )}`);
+  const { id, name } = classIdAndNameFromHelpData({ prefix, details: klass }, lang);
+  const selectClassElement = child(modelPanelElement, `li#${CSS.escape(id + '_tabset_link')}`);
 
   return createStory({
     title: { key: 'Select class', context: { name: name.toLowerCase() } },
-    content: { key: 'Select class description', context: { name: name.toLowerCase()} },
+    content: { key: 'Select class description', context: { name: name.toLowerCase() } },
     scroll: createScrollWithDefault(modelPanelElement),
     popover: { element: selectClassElement, position: 'right-down' },
     focus: { element: selectClassElement },

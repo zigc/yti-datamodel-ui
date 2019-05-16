@@ -96,7 +96,11 @@ export class Class extends AbstractClass implements VisualizationClass {
         (constraint: Constraint) => constraint.items.length > 0 || hasLocalization(constraint.comment)) },
     version:           { name: 'identifier',      serializer: optional(identitySerializer<Urn>()) },
     editorialNote:     { name: 'editorialNote',   serializer: localizableSerializer },
-    createdAt:         { name: 'created',         serializer: optional(dateSerializer) }
+    createdAt:         { name: 'created',         serializer: optional(dateSerializer) },
+    minProperties:           { name: 'minProperties',             serializer: optional(identitySerializer<number>()) },
+    maxProperties:           { name: 'maxProperties',             serializer: optional(identitySerializer<number>()) },
+    deactivated:{ name: 'deactivated',           serializer: booleanSerializer },
+    absolutePath:         { name: 'absolutePath',       serializer: optional(stringSerializer) }
   };
 
   subClassOf: Uri|null;
@@ -109,10 +113,13 @@ export class Class extends AbstractClass implements VisualizationClass {
   version: Urn;
   editorialNote: Localizable;
   createdAt: Moment|null;
-
+  minProperties: number|null;
+  maxProperties: number|null;
   resolved = true;
   unsaved = false;
   external = false;
+  deactivated: boolean;
+  absolutePath: string|null;  
 
   constructor(graph: any, context: any, frame: any) {
     super(graph, context, frame);
@@ -127,7 +134,7 @@ export class Class extends AbstractClass implements VisualizationClass {
   }
 
   get inUnstableState(): boolean {
-    return this.status === 'DRAFT' || this.status === 'SUGGESTED';
+    return this.status === 'INCOMPLETE' || this.status === 'DRAFT' || this.status === 'SUGGESTED';
   }
 
   addProperty(property: Property): void {
@@ -339,7 +346,8 @@ export class Property extends GraphNode {
     predicateType:      { name: 'type',                 serializer: optional(propertyTypeSerializer) },
     xmlWrapper:         { name: 'isXmlWrapper',         serializer: booleanSerializer },
     xmlAttribute:       { name: 'isXmlAttribute',       serializer: booleanSerializer },
-    readOnlyValue:      { name: 'readOnlyValue',        serializer: booleanSerializer }
+    readOnlyValue:      { name: 'readOnlyValue',        serializer: booleanSerializer },
+    deactivated:         { name: 'deactivated',           serializer: booleanSerializer }
   };
 
   internalId: Uri;
@@ -370,6 +378,7 @@ export class Property extends GraphNode {
   xmlWrapper: boolean;
   xmlAttribute: boolean;
   readOnlyValue: boolean;
+  deactivated: boolean;
 
   predicateType: KnownPredicateType|null = null;
 
@@ -415,7 +424,8 @@ export class Property extends GraphNode {
     return this.resourceIdentifier
       || this.xmlWrapper
       || this.xmlAttribute
-      || this.readOnlyValue;
+      || this.readOnlyValue
+      || this.deactivated;
   }
 
   hasAssociationTarget() {
@@ -431,7 +441,7 @@ export class Property extends GraphNode {
   }
 
   get inUnstableState(): boolean {
-    return this.status === 'DRAFT' || this.status === 'SUGGESTED';
+    return this.status === 'INCOMPLETE' || this.status === 'DRAFT' || this.status === 'SUGGESTED';
   }
 
   get normalizedPredicateType(): PredicateType|null {

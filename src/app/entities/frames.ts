@@ -94,7 +94,8 @@ const propertyContext = Object.assign({}, coreContext, predicateContext, referen
   isXmlAttribute: { '@id': 'http://uri.suomi.fi/datamodel/ns/iow#isXmlAttribute' },
   name: { '@id': 'http://www.w3.org/ns/shacl#name', '@container': '@language' },
   description: { '@id': 'http://www.w3.org/ns/shacl#description', '@container': '@language' },
-  readOnlyValue: {'@id': 'http://schema.org/readonlyValue'}
+  readOnlyValue: {'@id': 'http://schema.org/readonlyValue'},
+  deactivated: {'@id': 'http://www.w3.org/ns/shacl#deactivated'}
 });
 
 const classContext = Object.assign({}, coreContext, propertyContext, conceptContext, {
@@ -109,6 +110,10 @@ const classContext = Object.assign({}, coreContext, propertyContext, conceptCont
   notCond: { '@id': 'http://www.w3.org/ns/shacl#not', '@container': '@list' },
   name: { '@id': 'http://www.w3.org/ns/shacl#name', '@container': '@language' },
   description: { '@id': 'http://www.w3.org/ns/shacl#description', '@container': '@language' },
+  minProperties: { '@id': 'http://uri.suomi.fi/datamodel/ns/iow#minProperties' },
+  maxProperties: { '@id': 'http://uri.suomi.fi/datamodel/ns/iow#maxProperties' },
+  deactivated: {'@id': 'http://www.w3.org/ns/shacl#deactivated'},
+  absolutePath: {'@id':'http://www.w3.org/2011/http#absolutePath'},
   subject
 });
 

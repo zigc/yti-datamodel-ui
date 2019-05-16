@@ -1,5 +1,5 @@
 <ng-container ng-show="$ctrl.applicationInitialized">
-  <navigation-bar help-provider="$ctrl.helpProvider"></navigation-bar>
+  <navigation-bar></navigation-bar>
   <div class="container-fluid" ng-class="{ 'without-footer': !$ctrl.showFooter }">
     <breadcrumb></breadcrumb>
     <div ng-view></div>
@@ -8,5 +8,4 @@
   <app-footer [title]="'Data Vocabularies' | translate"
               (information-click)="$ctrl.navigateToInformation()"
               ng-if="$ctrl.showFooter"></app-footer>
-  <google-analytics ng-if="$ctrl.showGoogleAnalytics"></google-analytics>
 </ng-container>

@@ -33,6 +33,14 @@
       <input id="localName" class="form-control" type="text" string-input="identifier" ng-trim="false" ng-model="$ctrl.class.localName" />
     </editable>
 
+    <editable data-title="API path" context="$ctrl.model">
+      <input id="absolutePath" class="form-control" type="text" ng-model="$ctrl.class.absolutePath" />
+    </editable>
+
+    <editable data-title="Deactivated" context="$ctrl.model">
+        <input id="deactivated" type="checkbox" ng-model="$ctrl.class.deactivated"/>
+    </editable>
+
   </div>
   <div class="col-md-6">
     <editable-state-select ng-if="!$ctrl.class.unsaved" id="classState" state="$ctrl.class.status" model="$ctrl.model"></editable-state-select>
@@ -72,7 +80,8 @@
                on-reorder="$ctrl.onPropertyReorder">
        <accordion-group id="{{$ctrl.id + '_property_' + $ctrl.formLabelNameToIdName(property.label)}}" ng-repeat="property in $ctrl.properties track by property.internalId" identifier="property.internalId.uuid">
         <accordion-heading>
-          <div drag-sortable-item>
+          <div id="{{property.internalId + 'header'}}" data-property-id="{{property.internalId}}"
+               class="{{'property_no_' + property.index + '_header'}}" drag-sortable-item>
             <h5>
               <a ng-class="{collapsed: !isOpen()}" href>
                 <span class="accordion-icon" ng-class="property.glyphIconClass"></span>
@@ -98,6 +107,16 @@
 </div>
 
 <hr />
+
+<div class="range-input">
+  <editable data-title="Min properties" context="$ctrl.model">
+    <input id="minProperties" placeholder="0" min-input max="$ctrl.class.maxProperties" class="form-control" type="number" ng-model="$ctrl.class.minProperties" />
+  </editable>
+
+  <editable data-title="Max properties" context="$ctrl.model">
+    <input id="maxProperties" placeholder="*" max-input min="$ctrl.class.minProperties" class="form-control" type="number" ng-model="$ctrl.class.maxProperties" />
+  </editable>
+</div>
 
 <h4 translate>Additional information</h4>
 

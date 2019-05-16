@@ -19,7 +19,7 @@ export class SearchNamespaceModal {
     'ngInject';
   }
 
-  open(context: LanguageContext, exclude: Exclusion<ImportedNamespace> = noExclude): IPromise<ImportedNamespace> {
+  open(context: LanguageContext, reservedPrefixes: string[], exclude: Exclusion<ImportedNamespace> = noExclude): IPromise<ImportedNamespace> {
     return this.$uibModal.open({
       template: require('./searchNamespaceModal.html'),
       size: 'md',
@@ -28,7 +28,8 @@ export class SearchNamespaceModal {
       backdrop: true,
       resolve: {
         exclude: () => exclude,
-        context: () => context
+        context: () => context,
+        reservedPrefixes: () => reservedPrefixes
       }
     }).result;
   }
@@ -49,6 +50,7 @@ class SearchNamespaceController implements SearchController<ImportedNamespace> {
               private $uibModalInstance: IModalServiceInstance,
               public exclude: Exclusion<ImportedNamespace>,
               private context: LanguageContext,
+              private reservedPrefixes: string[],
               modelService: ModelService,
               private languageService: LanguageService,
               private addEditNamespaceModal: AddEditNamespaceModal) {
@@ -103,7 +105,7 @@ class SearchNamespaceController implements SearchController<ImportedNamespace> {
 
     const language = this.languageService.getModelLanguage(this.context);
 
-    this.addEditNamespaceModal.openAdd(this.context, language)
+    this.addEditNamespaceModal.openAdd(this.context, language, this.reservedPrefixes)
       .then(ns => this.$uibModalInstance.close(ns), modalCancelHandler);
   }
 
