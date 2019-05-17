@@ -20,7 +20,7 @@
 
     <div class="col-md-6">
       <editable data-title="Class {{$ctrl.property.normalizedPredicateType}} label" context="$ctrl.model">
-        <input id="{{$ctrl.property.internalId + 'label'}}" class="form-control" type="text" restrict-duplicates="$ctrl.otherPropertyLabels" localized-input="label" context="$ctrl.model" ng-model="$ctrl.property.label" />
+        <input id="{{$ctrl.property.internalId + 'label'}}" class="form-control" type="text" localized-input="label" context="$ctrl.model" ng-model="$ctrl.property.label" />
       </editable>
 
       <editable-range-select ng-if="$ctrl.property.isAttribute()"
