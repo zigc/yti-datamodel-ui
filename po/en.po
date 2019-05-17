@@ -2,11 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-<<<<<<< HEAD
-"PO-Revision-Date: \n"
-=======
-"PO-Revision-Date: 2019-05-17 12:23+0300\n"
->>>>>>> master
+"PO-Revision-Date: 2019-05-17 13:01+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -14,11 +10,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.2.2\n"
-<<<<<<< HEAD
-=======
 "X-Poedit-Basepath: .\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
->>>>>>> master
 
 msgid "Copied"
 msgstr ""
@@ -1842,12 +1835,9 @@ msgstr "Information description"
 msgid "Search"
 msgstr ""
 
-<<<<<<< HEAD
 msgid "standard"
 msgstr "International recommendation"
 
-=======
->>>>>>> master
 msgid "All model types"
 msgstr ""
 

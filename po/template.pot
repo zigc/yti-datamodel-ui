@@ -958,11 +958,7 @@ msgstr ""
 msgid "You can add new attribute or association to the Class from here"
 msgstr ""
 
-<<<<<<< HEAD
 msgid "Add properties from super class"
-=======
-msgid "Created at"
->>>>>>> master
 msgstr ""
 
 msgid "not found in the concept database"
@@ -1381,11 +1377,7 @@ msgstr ""
 msgid "User name"
 msgstr ""
 
-<<<<<<< HEAD
 msgid "Created at"
-=======
-msgid "Define concept for the class"
->>>>>>> master
 msgstr ""
 
 msgid "Member groups"
