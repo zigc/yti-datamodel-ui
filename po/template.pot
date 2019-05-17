@@ -934,6 +934,9 @@ msgstr ""
 msgid "You can add new attribute or association to the Class from here"
 msgstr ""
 
+msgid "Created at"
+msgstr ""
+
 msgid "not found in the concept database"
 msgstr ""
 
@@ -1332,7 +1335,7 @@ msgstr ""
 msgid "application/schema+json"
 msgstr ""
 
-msgid "application/vnd.oai.openapi+json"
+msgid "application/vnd+oai+openapi+json"
 msgstr ""
 
 msgid "framed ld+json"
@@ -1348,9 +1351,6 @@ msgid "User login"
 msgstr ""
 
 msgid "User name"
-msgstr ""
-
-msgid "Created at"
 msgstr ""
 
 msgid "Define concept for the class"

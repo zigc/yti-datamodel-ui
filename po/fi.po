@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.1\n"
+"X-Generator: Poedit 2.2.2\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "Copied"
@@ -1023,6 +1023,9 @@ msgstr ""
 "Täältä voit lisätä luokalle uuden attribuutin jonka arvoalue perustuu "
 "tietotyyppiin tai assosiaation jolla viitataan toiseen luokkaan"
 
+msgid "Created at"
+msgstr "Luotu"
+
 msgid "not found in the concept database"
 msgstr "ei löydy sanastosta"
 
@@ -1469,9 +1472,6 @@ msgstr "Käyttäjätunnus"
 
 msgid "User name"
 msgstr "Nimi"
-
-msgid "Created at"
-msgstr "Luotu"
 
 msgid "Define concept for the class"
 msgstr "Määrittele käsite luokalle"
@@ -2268,5 +2268,5 @@ msgstr "Attribuutti"
 msgid "owl:ObjectProperty"
 msgstr "Assosiaatio"
 
-msgid "API path"
-msgstr "API polku"
+#~ msgid "API path"
+#~ msgstr "API polku"
