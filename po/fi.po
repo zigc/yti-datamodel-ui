@@ -1047,8 +1047,13 @@ msgstr ""
 "Täältä voit lisätä luokalle uuden attribuutin jonka arvoalue perustuu "
 "tietotyyppiin tai assosiaation jolla viitataan toiseen luokkaan"
 
+<<<<<<< HEAD
 msgid "Add properties from super class"
 msgstr "Lisää ominaisuudet yläluokasta"
+=======
+msgid "Created at"
+msgstr "Luotu"
+>>>>>>> master
 
 msgid "not found in the concept database"
 msgstr "ei löydy sanastosta"
@@ -1497,8 +1502,13 @@ msgstr "Käyttäjätunnus"
 msgid "User name"
 msgstr "Nimi"
 
+<<<<<<< HEAD
 msgid "Created at"
 msgstr "Luotu"
+=======
+msgid "Define concept for the class"
+msgstr "Määrittele käsite luokalle"
+>>>>>>> master
 
 msgid "Member groups"
 msgstr "Käyttäjänä ryhmissä"
