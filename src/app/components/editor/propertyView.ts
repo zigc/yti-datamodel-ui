@@ -1,13 +1,13 @@
 import { IScope } from 'angular';
 import { ClassFormComponent } from './classForm';
-import { Uri } from 'app/entities/uri';
-import { LanguageService } from 'app/services/languageService';
+import { Uri } from '../../entities/uri';
+import { LanguageService } from '../../services/languageService';
 import { allMatching, anyMatching } from 'yti-common-ui/utils/array';
-import { hasLocalization } from 'app/utils/language';
-import { Class, Property } from 'app/entities/class';
-import { Model } from 'app/entities/model';
-import { Predicate } from 'app/entities/predicate';
-import { LegacyComponent } from 'app/utils/angular';
+import { hasLocalization } from '../../utils/language';
+import { Class, Property } from '../../entities/class';
+import { Model } from '../../entities/model';
+import { Predicate } from '../../entities/predicate';
+import { LegacyComponent } from '../../utils/angular';
 
 @LegacyComponent({
   bindings: {
@@ -81,6 +81,10 @@ export class PropertyViewComponent {
 
   get otherPropertyLabels() {
     return this.otherProperties.map(property => property.label);
+  }
+
+  get otherAttributeLabels() {
+    return this.property.normalizedPredicateType === 'attribute' ?  this.otherProperties.filter(property => property.normalizedPredicateType === 'attribute').map(property => property.label) : [];
   }
 
   get otherPropertyIdentifiers() {
