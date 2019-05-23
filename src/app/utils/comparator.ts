@@ -1,9 +1,8 @@
 import { Moment } from 'moment';
 import { Optional, isDefined } from 'yti-common-ui/utils/object';
-import { ChainableComparator, makeChainable, optional, property } from 'yti-common-ui/utils/comparator';
+import { ChainableComparator, makeChainable, optional, property, stringComparatorIgnoringCase, Comparator, primitiveComparator } from 'yti-common-ui/utils/comparator';
 import { Localizer } from '../types/language';
 import { Localizable } from 'yti-common-ui/types/localization';
-import { Comparator, primitiveComparator } from 'yti-common-ui/utils/comparator';
 
 export function comparingDate<T>(propertyExtractor: (item: T) => Optional<Moment>): ChainableComparator<T> {
   return makeChainable(property(propertyExtractor, optional(dateComparator)));
@@ -13,7 +12,7 @@ export function comparingDateAllowNull<T>(propertyExtractor: (item: T) => Option
 }
 
 export function comparingLocalizable<T>(localizer: Localizer, propertyExtractor: (item: T) => Optional<Localizable>): ChainableComparator<T> {
-  return makeChainable(property(propertyExtractor, optional(localized(localizer))));
+  return makeChainable(property(propertyExtractor, optional(localized(localizer, stringComparatorIgnoringCase))));
 }
 
 function localized<T extends Localizable>(localizer: Localizer, localizedComparator: Comparator<string> = primitiveComparator): Comparator<T> {
