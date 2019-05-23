@@ -7,7 +7,7 @@ import { Predicate } from 'app/entities/predicate';
 import { LanguageContext } from 'app/types/language';
 import { apiEndpointWithName } from 'app/services/config';
 import { LegacyComponent } from 'app/utils/angular';
-import { GraphNode } from "../../entities/graphNode";
+import { GraphNode } from '../../entities/graphNode';
 
 const exportOptions = [
   { type: 'application/ld+json', extension: 'json' },
@@ -28,7 +28,7 @@ function formatFileName(entity: EntityType, extension: string) {
 }
 
 function isValidType(entity: EntityType, typeArray: (typeof GraphNode)[]) {
-  for (let type of typeArray) {
+  for (const type of typeArray) {
     if (entity instanceof type) {
       return true;
     }
