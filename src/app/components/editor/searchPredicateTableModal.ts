@@ -11,7 +11,7 @@ import { Exclusion } from '../../utils/exclusion';
 import { SearchFilter, SearchController } from '../../types/filter';
 import { PredicateListItem, AbstractPredicate, Predicate } from '../../entities/predicate';
 import { Model } from '../../entities/model';
-import { KnownPredicateType, DefinedByType } from '../../types/entity';
+import { KnownPredicateType, DefinedByType, SortBy } from '../../types/entity';
 import { filterAndSortSearchResults, defaultLabelComparator } from '../../components/filter/util';
 import { ignoreModalClose } from 'yti-common-ui/utils/modal';
 import { Value, DisplayItemFactory } from '../form/displayItemFactory';
@@ -78,6 +78,8 @@ class SearchPredicateTableController implements SearchController<PredicateListIt
   modelTypes: DefinedByType[];
   showModelType: DefinedByType|null;
 
+  sortBy: SortBy<PredicateListItem>;
+
   private localizer: Localizer;
 
   contentMatchers = [
@@ -109,6 +111,12 @@ class SearchPredicateTableController implements SearchController<PredicateListIt
     this.typeSelectable = !type;
 
     this.modelTypes = ['library', 'profile'];
+
+    this.sortBy = {    
+      name: 'name',
+      comparator: defaultLabelComparator(this.localizer, this.filterExclude),
+      descOrder: false
+    };
 
     const sortInfoDomains = () => {
       this.infoDomains.sort(comparingLocalizable<Classification>(this.localizer, infoDomain => infoDomain.label));
@@ -149,7 +157,12 @@ class SearchPredicateTableController implements SearchController<PredicateListIt
     $scope.$watch(() => this.showInfoDomain, ifChanged<Classification|null>(() => this.search()));
     $scope.$watch(() => this.showModelType, ifChanged<DefinedByType|null>(() => this.search()));
     $scope.$watch(() => this.showStatus, ifChanged<Status|null>(() => this.search()));
-    $scope.$watch(() => languageService.getModelLanguage(model), ifChanged<Language>(() => sortInfoDomains()));
+    $scope.$watch(() => this.sortBy.name, ifChanged<string>(() => this.search()));
+    $scope.$watch(() => this.sortBy.descOrder, ifChanged<Boolean>(() => this.search()));    
+    $scope.$watch(() => languageService.getModelLanguage(model), ifChanged<Language>(() => {
+      sortInfoDomains();
+      this.search();
+    }));   
     
   }
 
@@ -171,7 +184,7 @@ class SearchPredicateTableController implements SearchController<PredicateListIt
 
   search() {
     this.searchResults = [
-      ...filterAndSortSearchResults(this.predicates, this.searchText, this.contentExtractors, this.searchFilters, defaultLabelComparator(this.localizer, this.filterExclude))
+      ...filterAndSortSearchResults(this.predicates, this.searchText, this.contentExtractors, this.searchFilters, this.sortBy.comparator)
     ];
   }
 

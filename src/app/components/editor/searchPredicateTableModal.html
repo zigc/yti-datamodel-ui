@@ -88,10 +88,34 @@
             <table ng-if="!$ctrl.loadingResults" class="table" width="100%">
               <thead>
               <tr>
-                <th style="width: 20%" translate>Name</th>
-                <th style="width: 20%" translate>Model</th>
-                <th style="width: 45%" translate>Description</th>
-                <th style="width: 10%" translate>Modified at</th>
+                <th style="width: 20%">
+                  <sort-by-column-header header-text="'Name'"
+                                         column-name="'name'"
+                                         model="$ctrl.model"
+                                         sort-by="$ctrl.sortBy"
+                                         filter-exclude="$ctrl.filterExclude"></sort-by-column-header>
+                </th>
+                <th style="width: 20%">
+                  <sort-by-column-header header-text="'Model'"
+                                         column-name="'model'"
+                                         model="$ctrl.model"
+                                         sort-by="$ctrl.sortBy"
+                                         filter-exclude="$ctrl.filterExclude"></sort-by-column-header>
+                </th>
+                <th style="width: 45%">
+                  <sort-by-column-header header-text="'Description'"
+                                         column-name="'description'"
+                                         model="$ctrl.model"
+                                         sort-by="$ctrl.sortBy"
+                                         filter-exclude="$ctrl.filterExclude"></sort-by-column-header>
+                </th>
+                <th style="width: 10%">
+                  <sort-by-column-header header-text="'Modified at'"
+                                         column-name="'modifiedAt'"
+                                         model="$ctrl.model"
+                                         sort-by="$ctrl.sortBy"
+                                         filter-exclude="$ctrl.filterExclude"></sort-by-column-header>
+                </th>
                 <th style="width: 5%"></th>
               </tr>
               </thead>

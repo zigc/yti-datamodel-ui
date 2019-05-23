@@ -9,7 +9,7 @@ import { SearchFilter, SearchController } from '../../types/filter';
 import { AbstractClass, Class, ClassListItem } from '../../entities/class';
 import { Model } from '../../entities/model';
 import { ExternalEntity } from '../../entities/externalEntity';
-import { filterAndSortSearchResults, defaultLabelComparator, defaultDefinedByLabelComparator, defaultCommentComparator } from '../../components/filter/util';
+import { filterAndSortSearchResults, defaultLabelComparator } from '../../components/filter/util';
 import { Optional, requireDefined } from 'yti-common-ui/utils/object';
 import { ignoreModalClose } from 'yti-common-ui/utils/modal';
 import { DisplayItemFactory, Value } from '../form/displayItemFactory';
@@ -19,12 +19,11 @@ import { Classification } from '../../entities/classification';
 import { ClassificationService } from '../../services/classificationService';
 import { contains } from 'yti-common-ui/utils/array';
 import { ModelService } from '../../services/modelService';
-import { comparingLocalizable, comparingDateAllowNull } from '../../utils/comparator';
+import { comparingLocalizable } from '../../utils/comparator';
 import { Language } from '../../types/language';
-import { DefinedByType, SortBy, SortByTableColumn } from '../../types/entity';
+import { DefinedByType, SortBy } from '../../types/entity';
 import { gettextCatalog as GettextCatalog } from 'angular-gettext';
 import { infoDomainMatches } from '../../utils/entity';
-import { reversed } from 'yti-common-ui/utils/comparator';
 
 export const noExclude = (_item: AbstractClass) => null;
 export const defaultTextForSelection = (_klass: Class) => 'Use class';
@@ -100,7 +99,7 @@ class SearchClassTableController implements SearchController<ClassListItem> {
   // undefined means not fetched, null means does not exist
   externalClass: Class|null|undefined;
 
-  sortBy: SortBy;
+  sortBy: SortBy<ClassListItem>;
 
   private localizer: Localizer;
 
@@ -219,40 +218,6 @@ class SearchClassTableController implements SearchController<ClassListItem> {
     this.searchResults = [
        ...filterAndSortSearchResults(this.classes, this.searchText, this.contentExtractors, this.searchFilters, this.sortBy.comparator)
     ];
-  }
-
-  setSortBy(sortByColumn: SortByTableColumn) {
- 
-    if (this.sortBy.name === sortByColumn) {
-      this.sortBy.descOrder = !this.sortBy.descOrder;      
-    } else {
-      this.sortBy.name = sortByColumn;
-      this.sortBy.descOrder = false;
-    }
-        
-    if (sortByColumn === 'name') {
-      this.sortBy.comparator = defaultLabelComparator(this.localizer, this.filterExclude);
-    } else if (sortByColumn === 'model') {
-      this.sortBy.comparator = defaultDefinedByLabelComparator(this.localizer, this.filterExclude);
-    } else if (sortByColumn === 'description') {
-      this.sortBy.comparator = defaultCommentComparator(this.localizer, this.filterExclude);
-    } else if (sortByColumn === 'modifiedAt') {
-      this.sortBy.comparator = comparingDateAllowNull(item => item.item.modifiedAt);
-    }
-
-    this.sortBy.comparator = this.sortBy.descOrder ? reversed(this.sortBy.comparator) : this.sortBy.comparator;
-  }
-
-  isSortBySelected(sortByColumn: SortByTableColumn) {
-    return this.sortBy.name === sortByColumn;
-  }
-
-  sortUp(sortByColumn: SortByTableColumn) {
-    return this.sortBy.name === sortByColumn && this.sortBy.descOrder;
-  }
-
-  sortDown(sortByColumn: SortByTableColumn) {
-    return this.sortBy.name === sortByColumn && !this.sortBy.descOrder;
   }
 
   canAddNew() {

@@ -4,7 +4,8 @@ import { Localizable } from 'yti-common-ui/types/localization';
 import { DefinedBy } from '../entities/definedBy';
 import { ChainableComparator } from 'yti-common-ui/utils/comparator';
 import { TextAnalysis } from './filter';
-import { AbstractClass } from '../entities/class';
+import { ClassListItem } from '../entities/class';
+import { PredicateListItem } from '../entities/predicate';
 
 export type Type = ModelType
                  | ClassType
@@ -122,8 +123,10 @@ export type SortByTableColumn = 'name'
                               | 'description'
                               | 'modifiedAt';
 
-export interface SortBy {
+export interface SortBy<T> {
   name: SortByTableColumn;
-  comparator: ChainableComparator<TextAnalysis<AbstractClass>>;
+  comparator: ChainableComparator<TextAnalysis<T>>;
   descOrder: boolean;
-}                            
+}
+
+export type ListItem = ClassListItem | PredicateListItem;

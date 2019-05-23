@@ -14,6 +14,7 @@ import { EditableEntityButtonsComponent } from './editableEntityButtons';
 import { CodeValueInputAutocompleteComponent } from './codeValueInputAutocomplete';
 import { ModelLanguageChooserComponent } from './modelLanguageChooser';
 import { ErrorPanelComponent } from './errorPanel';
+import { SortByColumnHeaderComponent } from './sortByColumnHeader';
 import { CodeValueInputDirective } from './codeValueInput';
 import { ExcludeValidatorDirective } from './excludeValidator';
 import { StringInputDirective } from './stringInput';
@@ -50,6 +51,7 @@ mod.component('editableStateSelect', componentDeclaration(EditableStateSelectCom
 mod.component('errorPanel', componentDeclaration(ErrorPanelComponent));
 mod.component('editableTable', componentDeclaration(EditableTableComponent));
 mod.component('iowSelect', componentDeclaration(IowSelectComponent));
+mod.component('sortByColumnHeader', componentDeclaration(SortByColumnHeaderComponent));
 mod.directive('iowSelectInput', IowSelectInputDirective);
 mod.directive('iowSelectionTransclude', IowSelectSelectionTranscludeDirective);
 mod.directive('iowSelectableItemTransclude', IowSelectSelectableItemTranscludeDirective);
