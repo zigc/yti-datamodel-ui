@@ -1,10 +1,21 @@
 # alpine version should match the version in .nvmrc as closely as possible
-FROM node:8.11.4-alpine
+FROM node:8.11.4-alpine as builder
 
-ARG env
+ARG NPMRC
 
 # Install git
 RUN apk add --update git
+
+WORKDIR /tmp
+ADD package.json /tmp/package.json
+ADD yarn.lock /tmp/yarn.lock
+ADD types /tmp/types
+RUN echo "$NPMRC" > .npmrc && yarn install && rm -f .npmrc
+
+# Build the dist dir containing the static files
+RUN ["npm", "run", "build", "--", "--prod",  "--output-hashing=all"]
+
+FROM node:8.11.4-alpine
 
 # Install nginx
 RUN apk add --update nginx && \
@@ -18,23 +29,10 @@ RUN ln -sf /dev/stdout /var/log/nginx/access.log && \
 # Add nginx config
 ADD nginx.conf /etc/nginx/nginx.conf
 
-# Use changes to package.json to force Docker not to use the cache
-# when we change our application's dependencies:
-ADD package.json /tmp/package.json
-ADD yarn.lock /tmp/yarn.lock
-ADD types /tmp/types
-WORKDIR /tmp
-RUN ["yarn", "install"]
-
-# Add the project files (works with .dockerignore to exclude node_modules, dist)
-ADD . /app
+WORKDIR /app
 
 # Copy possibly cached node_modules to app dir
-RUN ["cp", "-a", "/tmp/node_modules", "/app/"]
-
-# Build the dist dir containing the static files
-WORKDIR /app
-RUN ["npm", "run", "build", "--", "--prod",  "--output-hashing=all"]
+COPY --from=builder /tmp/dist ./dist
 
 # Start web server and expose http
 EXPOSE 80
