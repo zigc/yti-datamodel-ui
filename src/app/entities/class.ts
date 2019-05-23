@@ -99,7 +99,7 @@ export class Class extends AbstractClass implements VisualizationClass {
     createdAt:         { name: 'created',         serializer: optional(dateSerializer) },
     minProperties:           { name: 'minProperties',             serializer: optional(identitySerializer<number>()) },
     maxProperties:           { name: 'maxProperties',             serializer: optional(identitySerializer<number>()) },
-    deactivated:{ name: 'deactivated',           serializer: booleanSerializer },
+    deactivated: { name: 'deactivated',           serializer: booleanSerializer },
     absolutePath:         { name: 'absolutePath',       serializer: optional(stringSerializer) }
   };
 

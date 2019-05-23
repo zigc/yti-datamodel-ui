@@ -113,7 +113,7 @@ const classContext = Object.assign({}, coreContext, propertyContext, conceptCont
   minProperties: { '@id': 'http://uri.suomi.fi/datamodel/ns/iow#minProperties' },
   maxProperties: { '@id': 'http://uri.suomi.fi/datamodel/ns/iow#maxProperties' },
   deactivated: {'@id': 'http://www.w3.org/ns/shacl#deactivated'},
-  absolutePath: {'@id':'http://www.w3.org/2011/http#absolutePath'},
+  absolutePath: {'@id': 'http://www.w3.org/2011/http#absolutePath'},
   subject
 });
 
