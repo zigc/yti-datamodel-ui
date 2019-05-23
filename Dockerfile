@@ -6,10 +6,8 @@ ARG NPMRC
 # Install git
 RUN apk add --update git
 
+ADD . /tmp
 WORKDIR /tmp
-ADD package.json /tmp/package.json
-ADD yarn.lock /tmp/yarn.lock
-ADD types /tmp/types
 RUN echo "$NPMRC" > .npmrc && yarn install && rm -f .npmrc
 
 # Build the dist dir containing the static files
