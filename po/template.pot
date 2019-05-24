@@ -1688,7 +1688,7 @@ msgstr ""
 msgid "All use contexts"
 msgstr ""
 
-msgid "Superproperty"
+msgid "Superproperty info"
 msgstr ""
 
 msgid "Editorial note"
@@ -1889,10 +1889,10 @@ msgstr ""
 msgid "Superattribute info"
 msgstr ""
 
-msgid "Definition info"
+msgid "Superproperty"
 msgstr ""
 
-msgid "Superproperty info"
+msgid "Definition info"
 msgstr ""
 
 msgid "Range"
@@ -2100,6 +2100,12 @@ msgid "Read-only"
 msgstr ""
 
 msgid "Read-only info"
+msgstr ""
+
+msgid "API path"
+msgstr ""
+
+msgid "API path info"
 msgstr ""
 
 msgid "owl:DatatypeProperty"

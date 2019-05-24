@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2019-05-17 12:23+0300\n"
+"PO-Revision-Date: 2019-05-24 13:15+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.2\n"
+"X-Generator: Poedit 2.2.3\n"
 "X-Poedit-Basepath: .\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
@@ -1791,7 +1791,7 @@ msgstr ""
 msgid "All use contexts"
 msgstr ""
 
-msgid "Superproperty"
+msgid "Superproperty info"
 msgstr ""
 
 msgid "Editorial note"
@@ -1998,11 +1998,11 @@ msgstr ""
 msgid "Superattribute info"
 msgstr ""
 
+msgid "Superproperty"
+msgstr ""
+
 msgid "Definition info"
 msgstr "Definition of the concept"
-
-msgid "Superproperty info"
-msgstr ""
 
 msgid "Range"
 msgstr ""
@@ -2221,6 +2221,12 @@ msgstr "Read-only"
 
 msgid "Read-only info"
 msgstr "Defines attribute that cannot be changed after the initialization"
+
+msgid "API path"
+msgstr ""
+
+msgid "API path info"
+msgstr ""
 
 msgid "owl:DatatypeProperty"
 msgstr "Attribute"
