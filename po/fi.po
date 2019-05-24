@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.2\n"
+"X-Generator: Poedit 2.2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "Copied"
@@ -1863,8 +1863,8 @@ msgstr "Kaikki tietomallityypit"
 msgid "All use contexts"
 msgstr "Kaikki sisältötyypit"
 
-msgid "Superproperty"
-msgstr "Yläkäsite"
+msgid "Superproperty info"
+msgstr "Yleistettävissä oleva ominaisuus, joka on semantiikaltaan laajempi"
 
 msgid "Editorial note"
 msgstr "Muokkaajan kommentti"
@@ -2081,11 +2081,11 @@ msgstr "Yläattribuutti"
 msgid "Superattribute info"
 msgstr "Yleistettävissä oleva attribuutti, joka on semantiikaltaan laajempi"
 
+msgid "Superproperty"
+msgstr "Yläkäsite"
+
 msgid "Definition info"
 msgstr "Käsitteen määritelmä"
-
-msgid "Superproperty info"
-msgstr "Yleistettävissä oleva ominaisuus, joka on semantiikaltaan laajempi"
 
 msgid "Range"
 msgstr "Tietotyyppi"
@@ -2313,11 +2313,14 @@ msgstr "Vain luku"
 msgid "Read-only info"
 msgstr "Attribuutti jonka arvoa ei alustuksen jälkeen saa enää muokata"
 
+msgid "API path"
+msgstr "API polku"
+
+msgid "API path info"
+msgstr ""
+
 msgid "owl:DatatypeProperty"
 msgstr "Attribuutti"
 
 msgid "owl:ObjectProperty"
 msgstr "Assosiaatio"
-
-#~ msgid "API path"
-#~ msgstr "API polku"
