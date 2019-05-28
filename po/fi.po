@@ -228,17 +228,8 @@ msgstr "Luo luokka ulkoisesta URI-tunnisteesta"
 msgid "Search existing class"
 msgstr "Hae olemassaolevaa luokkaa"
 
-msgid "Name"
-msgstr "Nimi"
-
-msgid "Model"
-msgstr "Tietomalli"
-
-msgid "Description"
-msgstr "Kuvaus"
-
-msgid "Modified at"
-msgstr "Muokattu"
+msgid "Show class information"
+msgstr "Näytä luokan tiedot"
 
 msgid "Copy class"
 msgstr "Kopioi luokka"
@@ -490,6 +481,9 @@ msgstr "Suomi.fi-koodistot"
 
 msgid "User right management"
 msgstr "Oikeuksienhallinta"
+
+msgid "Name"
+msgstr "Nimi"
 
 msgid "Email"
 msgstr "Sähköposti"
@@ -791,6 +785,9 @@ msgstr "Sisällöntuottajat näkyvät täällä"
 msgid "Definition"
 msgstr "Määritelmä"
 
+msgid "Description"
+msgstr "Kuvaus"
+
 msgid "Description info"
 msgstr "Tietosisällön kuvaus"
 
@@ -1047,8 +1044,8 @@ msgstr ""
 "Täältä voit lisätä luokalle uuden attribuutin jonka arvoalue perustuu "
 "tietotyyppiin tai assosiaation jolla viitataan toiseen luokkaan"
 
-msgid "Add properties from super class"
-msgstr "Lisää ominaisuudet yläluokasta"
+msgid "Add properties from scope class"
+msgstr "Lisää ominaisuudet tarkennettavasta luokasta"
 
 msgid "not found in the concept database"
 msgstr "ei löydy sanastosta"
@@ -1500,6 +1497,9 @@ msgstr "Nimi"
 msgid "Created at"
 msgstr "Luotu"
 
+msgid "Modified at"
+msgstr "Muokattu"
+
 msgid "Member groups"
 msgstr "Käyttäjänä ryhmissä"
 
@@ -1509,11 +1509,11 @@ msgstr "Pääkäyttäjänä ryhmissä"
 msgid "Add properties from class"
 msgstr "Lisää ominaisuudet luokasta"
 
+msgid "Add properties from super class"
+msgstr "Lisää ominaisuudet yläluokasta"
+
 msgid "Define concept for the class"
 msgstr "Määrittele käsite luokalle"
-
-msgid "Add properties from scope class"
-msgstr "Lisää ominaisuudet tarkennettavasta luokasta"
 
 msgid "Add properties from profile class"
 msgstr "Lisää ominaisuudet nostettavaan luokkaan"
@@ -1862,6 +1862,9 @@ msgstr "Kaikki tietomallityypit"
 
 msgid "All use contexts"
 msgstr "Kaikki sisältötyypit"
+
+msgid "Model"
+msgstr "Tietomalli"
 
 msgid "Superproperty info"
 msgstr "Yleistettävissä oleva ominaisuus, joka on semantiikaltaan laajempi"

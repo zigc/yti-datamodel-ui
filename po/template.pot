@@ -220,16 +220,7 @@ msgstr ""
 msgid "Search existing class"
 msgstr ""
 
-msgid "Name"
-msgstr ""
-
-msgid "Model"
-msgstr ""
-
-msgid "Description"
-msgstr ""
-
-msgid "Modified at"
+msgid "Show class information"
 msgstr ""
 
 msgid "Copy class"
@@ -464,6 +455,9 @@ msgid "Suomi.fi Reference Data"
 msgstr ""
 
 msgid "User right management"
+msgstr ""
+
+msgid "Name"
 msgstr ""
 
 msgid "Email"
@@ -739,6 +733,9 @@ msgstr ""
 msgid "Definition"
 msgstr ""
 
+msgid "Description"
+msgstr ""
+
 msgid "Description info"
 msgstr ""
 
@@ -958,7 +955,7 @@ msgstr ""
 msgid "You can add new attribute or association to the Class from here"
 msgstr ""
 
-msgid "Add properties from super class"
+msgid "Add properties from scope class"
 msgstr ""
 
 msgid "not found in the concept database"
@@ -1380,6 +1377,9 @@ msgstr ""
 msgid "Created at"
 msgstr ""
 
+msgid "Modified at"
+msgstr ""
+
 msgid "Member groups"
 msgstr ""
 
@@ -1389,10 +1389,10 @@ msgstr ""
 msgid "Add properties from class"
 msgstr ""
 
-msgid "Define concept for the class"
+msgid "Add properties from super class"
 msgstr ""
 
-msgid "Add properties from scope class"
+msgid "Define concept for the class"
 msgstr ""
 
 msgid "Add properties from profile class"
@@ -1737,6 +1737,9 @@ msgid "All model types"
 msgstr ""
 
 msgid "All use contexts"
+msgstr ""
+
+msgid "Model"
 msgstr ""
 
 msgid "Superproperty info"

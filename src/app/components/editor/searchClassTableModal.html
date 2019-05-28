@@ -103,7 +103,7 @@
 
       <h4 class="mt-4" translate>Search existing class</h4>
     </div>
-
+        
     <div class="row full-height">
 
       <div class="col-md-12">
@@ -197,27 +197,36 @@
                     {{$ctrl.showItemValue(searchResult.modifiedAt)}}
                   </td>
                   <td>
-                    <div class="pull-right" ng-if="$ctrl.showActions(searchResult)" uib-dropdown>                      
+                    <div class="pull-right" uib-dropdown>                      
                       <button id="{{'class_' + searchResult.id + '_actions_button'}}" class="btn btn-language dropdown-toggle" uib-dropdown-toggle>
                         <span>...</span>
                       </button>
                   
                       <div uib-dropdown-menu class="dropdown-menu-right" aria-labelledby="{{'class_' + searchResult.id + '_actions_button'}}">
+                        <button id="{{'show_class_info_' + searchResult.id + '_button'}}"
+                                class="dropdown-item"
+                                ng-click="$ctrl.showClassInfo()"
+                                translate>
+                          Show class information
+                        </button>
                         <button id="{{'copy_class_' + searchResult.id + '_button'}}"
                                 class="dropdown-item"
                                 ng-click="$ctrl.copyClass(searchResult)"
+                                ng-if="$ctrl.showActions(searchResult)"
                                 translate>
                           Copy class
                         </button>
                         <button id="{{'create_sub_class_' + searchResult.id + '_button'}}"
                                 class="dropdown-item"
                                 ng-click="$ctrl.createSubClass(searchResult)"
+                                ng-if="$ctrl.showActions(searchResult)"
                                 translate>
                           Create sub class
                         </button>
                         <button id="{{'create_super_class_' + searchResult.id + '_button'}}"
                                 class="dropdown-item"
                                 ng-click="$ctrl.createSuperClass(searchResult)"
+                                ng-if="$ctrl.showActions(searchResult)"
                                 translate>
                           Create super class
                         </button>

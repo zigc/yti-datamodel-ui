@@ -14,7 +14,7 @@ import { Optional, requireDefined } from 'yti-common-ui/utils/object';
 import { ignoreModalClose } from 'yti-common-ui/utils/modal';
 import { DisplayItemFactory, Value } from '../form/displayItemFactory';
 import { Status, selectableStatuses } from 'yti-common-ui/entities/status';
-import { ifChanged } from '../../utils/angular';
+import { ifChanged, modalCancelHandler } from '../../utils/angular';
 import { Classification } from '../../entities/classification';
 import { ClassificationService } from '../../services/classificationService';
 import { contains } from 'yti-common-ui/utils/array';
@@ -24,6 +24,7 @@ import { Language } from '../../types/language';
 import { DefinedByType, SortBy } from '../../types/entity';
 import { gettextCatalog as GettextCatalog } from 'angular-gettext';
 import { infoDomainMatches } from '../../utils/entity';
+import { ShowClassInfoModal } from './showClassInfoModal';
 
 export const noExclude = (_item: AbstractClass) => null;
 export const defaultTextForSelection = (_klass: Class) => 'Use class';
@@ -127,6 +128,7 @@ class SearchClassTableController implements SearchController<ClassListItem> {
               private displayItemFactory: DisplayItemFactory,
               private gettextCatalog: GettextCatalog,
               classificationService: ClassificationService,
+              protected showClassInfoModal: ShowClassInfoModal,
               modelService: ModelService) {
     'ngInject';
     this.localizer = languageService.createLocalizer(model);
@@ -317,6 +319,11 @@ class SearchClassTableController implements SearchController<ClassListItem> {
 
   showActions(item: AbstractClass) {    
     return !this.onlySelection && !item.isOfType('shape') && !item.definedBy.isOfType('standard');
+  }
+
+  showClassInfo() {
+    return this.showClassInfoModal.open(this.model, this.selection, this.isSelectionExternalEntity())
+      .then(null, modalCancelHandler);
   }
 
   copyClass(item: AbstractClass) {

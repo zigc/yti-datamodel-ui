@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2019-05-24 13:15+0300\n"
+"PO-Revision-Date: 2019-05-28 09:33+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -229,17 +229,10 @@ msgstr ""
 msgid "Search existing class"
 msgstr ""
 
-msgid "Name"
-msgstr ""
-
-msgid "Model"
-msgstr ""
-
-msgid "Description"
-msgstr ""
-
-msgid "Modified at"
-msgstr ""
+#, fuzzy
+#| msgid "Search for class info"
+msgid "Show class information"
+msgstr "Search {{name}} from classes"
 
 msgid "Copy class"
 msgstr ""
@@ -498,6 +491,9 @@ msgid "Suomi.fi Reference Data"
 msgstr ""
 
 msgid "User right management"
+msgstr ""
+
+msgid "Name"
 msgstr ""
 
 msgid "Email"
@@ -780,6 +776,9 @@ msgstr ""
 msgid "Definition"
 msgstr ""
 
+msgid "Description"
+msgstr ""
+
 msgid "Description info"
 msgstr "Description of a resource"
 
@@ -1029,8 +1028,10 @@ msgstr "Terminology"
 msgid "You can add new attribute or association to the Class from here"
 msgstr ""
 
-msgid "Add properties from super class"
-msgstr ""
+#, fuzzy
+#| msgid "Copy properties from class"
+msgid "Add properties from scope class"
+msgstr "Copy attributes or associations from class"
 
 msgid "not found in the concept database"
 msgstr ""
@@ -1480,6 +1481,9 @@ msgstr ""
 msgid "Created at"
 msgstr ""
 
+msgid "Modified at"
+msgstr ""
+
 msgid "Member groups"
 msgstr ""
 
@@ -1489,13 +1493,11 @@ msgstr ""
 msgid "Add properties from class"
 msgstr ""
 
-msgid "Define concept for the class"
+msgid "Add properties from super class"
 msgstr ""
 
-#, fuzzy
-#| msgid "Copy properties from class"
-msgid "Add properties from scope class"
-msgstr "Copy attributes or associations from class"
+msgid "Define concept for the class"
+msgstr ""
 
 msgid "Add properties from profile class"
 msgstr ""
@@ -1842,6 +1844,9 @@ msgid "All model types"
 msgstr ""
 
 msgid "All use contexts"
+msgstr ""
+
+msgid "Model"
 msgstr ""
 
 msgid "Superproperty info"
