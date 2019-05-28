@@ -322,8 +322,7 @@ class SearchClassTableController implements SearchController<ClassListItem> {
   }
 
   showClassInfo() {
-    return this.showClassInfoModal.open(this.model, this.selection, this.isSelectionExternalEntity())
-      .then(null, modalCancelHandler);
+    return this.showClassInfoModal.open(this.model, this.selection).then(null, modalCancelHandler);
   }
 
   copyClass(item: AbstractClass) {

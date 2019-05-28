@@ -10,7 +10,7 @@ export class ShowClassInfoModal {
     'ngInject';
   }
 
-  open(model: Model, selection: Class | ExternalEntity, isSelectionExternalEntity: boolean): IPromise<void> {
+  open(model: Model, selection: Class | ExternalEntity): IPromise<void> {
     return this.$uibModal.open({
       template: require('./showClassInfoModal.html'),
       size: 'lg',
@@ -19,8 +19,7 @@ export class ShowClassInfoModal {
       backdrop: true,
       resolve: {
         model: () => model,
-        selection: () => selection,
-        isSelectionExternalEntity: () => isSelectionExternalEntity
+        selection: () => selection
       }
     }).result;
   }
@@ -29,8 +28,7 @@ export class ShowClassInfoModal {
 class ShowClassInfoModalController {
   
   constructor(public model: Model,
-              public selection: Class | ExternalEntity,
-              public isSelectionExternalEntity: boolean) {
+              public selection: Class | ExternalEntity) {
     'ngInject';
   }
 }
