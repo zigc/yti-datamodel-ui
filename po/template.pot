@@ -955,7 +955,7 @@ msgstr ""
 msgid "You can add new attribute or association to the Class from here"
 msgstr ""
 
-msgid "Add properties from scope class"
+msgid "Add properties from profile class"
 msgstr ""
 
 msgid "not found in the concept database"
@@ -1392,10 +1392,10 @@ msgstr ""
 msgid "Add properties from super class"
 msgstr ""
 
-msgid "Define concept for the class"
+msgid "Add properties from scope class"
 msgstr ""
 
-msgid "Add properties from profile class"
+msgid "Define concept for the class"
 msgstr ""
 
 msgid "Add properties from external class"
@@ -1489,6 +1489,12 @@ msgid "Create super attribute"
 msgstr ""
 
 msgid "Create super association"
+msgstr ""
+
+msgid "Show attribute information"
+msgstr ""
+
+msgid "Show association information"
 msgstr ""
 
 msgid "by referencing external uri"

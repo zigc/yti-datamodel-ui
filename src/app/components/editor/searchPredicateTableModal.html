@@ -166,6 +166,13 @@
                       </button>
                   
                       <div uib-dropdown-menu class="dropdown-menu-right" aria-labelledby="{{'predicate_' + searchResult.id + '_actions_button'}}">
+                        <ajax-loading-indicator-small ng-if="!$ctrl.isSelectionPredicate()"></ajax-loading-indicator-small>
+                        <button id="{{'show_predicate_info_' + searchResult.id + '_button'}}"
+                                class="dropdown-item"
+                                ng-click="$ctrl.showPredicateInfo()"
+                                ng-if="$ctrl.isSelectionPredicate()">
+                          {{('Show ' + $ctrl.type + ' information') | translate}}
+                        </button>
                         <button id="{{'copy_predicate_' + searchResult.id + '_button'}}"
                                 class="dropdown-item"
                                 ng-click="$ctrl.copyPredicate(searchResult)">

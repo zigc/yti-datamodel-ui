@@ -1044,8 +1044,8 @@ msgstr ""
 "Täältä voit lisätä luokalle uuden attribuutin jonka arvoalue perustuu "
 "tietotyyppiin tai assosiaation jolla viitataan toiseen luokkaan"
 
-msgid "Add properties from scope class"
-msgstr "Lisää ominaisuudet tarkennettavasta luokasta"
+msgid "Add properties from profile class"
+msgstr "Lisää ominaisuudet nostettavaan luokkaan"
 
 msgid "not found in the concept database"
 msgstr "ei löydy sanastosta"
@@ -1512,11 +1512,11 @@ msgstr "Lisää ominaisuudet luokasta"
 msgid "Add properties from super class"
 msgstr "Lisää ominaisuudet yläluokasta"
 
+msgid "Add properties from scope class"
+msgstr "Lisää ominaisuudet tarkennettavasta luokasta"
+
 msgid "Define concept for the class"
 msgstr "Määrittele käsite luokalle"
-
-msgid "Add properties from profile class"
-msgstr "Lisää ominaisuudet nostettavaan luokkaan"
 
 msgid "Add properties from external class"
 msgstr "Lisää ominaisuudet ulkoisesta luokasta"
@@ -1610,6 +1610,12 @@ msgstr "Luo yläattribuutti"
 
 msgid "Create super association"
 msgstr "Luo yläassosiaatio"
+
+msgid "Show attribute information"
+msgstr "Näytä attribuutin tiedot"
+
+msgid "Show association information"
+msgstr "Näytä assosiaation tiedot"
 
 msgid "by referencing external uri"
 msgstr "viittaamalla ulkoiseen tunnisteeseen"

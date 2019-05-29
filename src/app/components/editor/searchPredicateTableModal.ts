@@ -15,13 +15,14 @@ import { KnownPredicateType, DefinedByType, SortBy } from '../../types/entity';
 import { filterAndSortSearchResults, defaultLabelComparator } from '../../components/filter/util';
 import { ignoreModalClose } from 'yti-common-ui/utils/modal';
 import { Value, DisplayItemFactory } from '../form/displayItemFactory';
-import { ifChanged } from '../../utils/angular';
+import { ifChanged, modalCancelHandler } from '../../utils/angular';
 import { Classification } from '../../entities/classification';
 import { comparingLocalizable } from '../../utils/comparator';
 import { ClassificationService } from '../../services/classificationService';
 import { ModelService } from '../../services/modelService';
 import { Status, selectableStatuses } from 'yti-common-ui/entities/status';
 import { Language } from '../../types/language';
+import { ShowPredicateInfoModal } from './showPredicateInfoModal';
 
 const noExclude = (_item: PredicateListItem) => null;
 
@@ -104,6 +105,7 @@ class SearchPredicateTableController implements SearchController<PredicateListIt
               private gettextCatalog: GettextCatalog,
               private displayItemFactory: DisplayItemFactory,
               classificationService: ClassificationService,
+              protected showPredicateInfoModal: ShowPredicateInfoModal,
               modelService: ModelService) {
     'ngInject';
     this.localizer = languageService.createLocalizer(model);
@@ -266,6 +268,10 @@ class SearchPredicateTableController implements SearchController<PredicateListIt
 
   generateSearchResultID(item: AbstractPredicate): string {
     return `${item.id.toString()}${'_search_predicate_link'}`;
+  }
+
+  showPredicateInfo() {
+    return this.showPredicateInfoModal.open(this.model, this.selection).then(null, modalCancelHandler);
   }
 
   copyPredicate(item: AbstractPredicate) {

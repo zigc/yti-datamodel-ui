@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2019-05-28 09:33+0300\n"
+"PO-Revision-Date: 2019-05-29 12:25+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -229,10 +229,8 @@ msgstr ""
 msgid "Search existing class"
 msgstr ""
 
-#, fuzzy
-#| msgid "Search for class info"
 msgid "Show class information"
-msgstr "Search {{name}} from classes"
+msgstr ""
 
 msgid "Copy class"
 msgstr ""
@@ -1028,10 +1026,8 @@ msgstr "Terminology"
 msgid "You can add new attribute or association to the Class from here"
 msgstr ""
 
-#, fuzzy
-#| msgid "Copy properties from class"
-msgid "Add properties from scope class"
-msgstr "Copy attributes or associations from class"
+msgid "Add properties from profile class"
+msgstr ""
 
 msgid "not found in the concept database"
 msgstr ""
@@ -1496,10 +1492,12 @@ msgstr ""
 msgid "Add properties from super class"
 msgstr ""
 
-msgid "Define concept for the class"
-msgstr ""
+#, fuzzy
+#| msgid "Copy properties from class"
+msgid "Add properties from scope class"
+msgstr "Copy attributes or associations from class"
 
-msgid "Add properties from profile class"
+msgid "Define concept for the class"
 msgstr ""
 
 msgid "Add properties from external class"
@@ -1593,6 +1591,12 @@ msgid "Create super attribute"
 msgstr ""
 
 msgid "Create super association"
+msgstr ""
+
+msgid "Show attribute information"
+msgstr ""
+
+msgid "Show association information"
 msgstr ""
 
 msgid "by referencing external uri"
