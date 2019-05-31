@@ -71,6 +71,57 @@ export class LanguageService {
     return translate(data, this.getModelLanguage(context), context ? context.language : availableUILanguages);
   }
 
+  translateToGivenLanguage(localizable: Localizable, languageToUse: string|null): string {
+    
+    if (!localizable || !languageToUse) {
+      return '';
+    }
+
+    const primaryLocalization = localizable[languageToUse];
+
+    if (primaryLocalization) {
+      return primaryLocalization;
+    } else {
+
+      const fallbackValue = this.checkForFallbackLanguages(localizable);
+
+      if (fallbackValue != null) {
+        return fallbackValue;
+      }
+
+      for (const [language, value] of Object.entries(localizable)) {
+        if (value) {
+          return `${value} (${language})`;
+        }
+      }
+
+      return '';
+    }
+  }
+
+  checkForFallbackLanguages(localizable: Localizable): string | null {
+
+    const fallbackLanguages: string[] = ['en', 'fi', 'sv'];
+
+    for (const language of fallbackLanguages) {
+      if (this.hasLocalizationForLanguage(localizable, language)) {
+        return this.fallbackLocalization(localizable, language);
+      }
+    }
+
+    return null;
+  }
+
+  hasLocalizationForLanguage(localizable: Localizable, language: string) {
+    const value: string = localizable[language];
+    return value != null && value !== '';
+  }
+
+  fallbackLocalization(localizable: Localizable, language: string) {
+    const value: string = localizable[language];
+    return `${value} (${language})`;
+  }
+
   createLocalizer(context?: LanguageContext) {
     return new DefaultAngularJSLocalizer(this, context);
   }
@@ -92,6 +143,10 @@ export class DefaultAngularLocalizer implements AngularLocalizer {
   translate(localizable: Localizable, useUILanguage?: boolean): string {
     // FIXME datamodel ui doesn't have concept of ui language boolean but language context
     return this.languageService.translate(localizable);
+  }
+
+  translateToGivenLanguage(localizable: Localizable, languageToUse: string|null): string {    
+    return this.languageService.translateToGivenLanguage(localizable, languageToUse);
   }
 }
 
