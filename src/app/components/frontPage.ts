@@ -26,7 +26,7 @@ import { labelNameToResourceIdIdentifier } from 'yti-common-ui/utils/resource';
 import { tap } from 'rxjs/operators';
 import { InteractiveHelp } from '../help/contract';
 import { getDataModelingMaterialIcon, getInformationDomainSvgIcon } from 'yti-common-ui/utils/icons';
-import { allStatuses, Status } from 'yti-common-ui/entities/status';
+import { selectableStatuses, Status } from 'yti-common-ui/entities/status';
 import { HelpService } from '../help/providers/helpService';
 
 // XXX: fixes problem with type definition having strongly typed parameters ending with 6
@@ -123,7 +123,7 @@ export class FrontPageComponent implements HelpProvider {
       });
     });
 
-    this.statuses = [null, ...allStatuses].map(status => ({
+    this.statuses = [null, ...selectableStatuses].map(status => ({
       value: status,
       name: () => gettextCatalog.getString(status ? status : 'All statuses'),
       idIdentifier: () => status ? status : 'all_selected'
