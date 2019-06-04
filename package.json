@@ -42,7 +42,7 @@
     "css.escape": "1.5.1",
     "fast-levenshtein": "^2.0.6",
     "jointjs": "1.0.3",
-    "jquery": "3.1.0",
+    "jquery": "3.4.1",
     "jquery-mousewheel": "3.1.13",
     "jsonld": "0.4.12",
     "lodash": "4.17.5",
@@ -56,7 +56,7 @@
     "uri-js": "4.2.2",
     "uuid": "3.0.1",
     "webcola": "3.3.8",
-    "yti-common-ui": "https://github.com/VRK-YTI/yti-common-ui.git/#b89a049982edce5e0844ac0324abf310b940ae78",
+    "yti-common-ui": "https://github.com/VRK-YTI/yti-common-ui.git/#486703211d72a2e4859a693381c68d0db0b73002",
     "zone.js": "~0.8.26"
   },
   "devDependencies": {
@@ -86,7 +86,6 @@
     "@types/node": "~8.9.4",
     "@types/uuid": "2.0.29",
     "@types/webpack-env": "^1.13.6",
-    "ngx-clipboard": "^11.1.9",
     "codelyzer": "~4.2.1",
     "http-status-to-description": "0.0.1",
     "imports-loader": "0.6.5",
@@ -98,6 +97,7 @@
     "karma-jasmine": "~1.1.1",
     "karma-jasmine-html-reporter": "^0.2.2",
     "ng-annotate-patched": "^1.7.0",
+    "ngx-clipboard": "^11.1.9",
     "po-loader": "0.3.1",
     "po2json": "0.4.5",
     "protractor": "~5.4.0",

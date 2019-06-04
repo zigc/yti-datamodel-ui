@@ -6,11 +6,11 @@ import { isDifferentUrl, nextUrl } from '../utils/angular';
 import { Model } from '../entities/model';
 import { EditingGuard } from '../components/model/modelControllerService';
 
-type RouteParams = {
+interface RouteParams {
   prefix: string;
   resource?: string;
   property?: string;
-};
+}
 
 @Injectable()
 export class SubRoutingHackService implements OnDestroy {

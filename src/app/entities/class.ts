@@ -99,7 +99,8 @@ export class Class extends AbstractClass implements VisualizationClass {
     createdAt:         { name: 'created',         serializer: optional(dateSerializer) },
     minProperties:           { name: 'minProperties',             serializer: optional(identitySerializer<number>()) },
     maxProperties:           { name: 'maxProperties',             serializer: optional(identitySerializer<number>()) },
-    deactivated:{ name: 'deactivated',           serializer: booleanSerializer }
+    deactivated: { name: 'deactivated',           serializer: booleanSerializer },
+    absolutePath:         { name: 'absolutePath',       serializer: optional(stringSerializer) }
   };
 
   subClassOf: Uri|null;
@@ -118,6 +119,7 @@ export class Class extends AbstractClass implements VisualizationClass {
   unsaved = false;
   external = false;
   deactivated: boolean;
+  absolutePath: string|null;  
 
   constructor(graph: any, context: any, frame: any) {
     super(graph, context, frame);

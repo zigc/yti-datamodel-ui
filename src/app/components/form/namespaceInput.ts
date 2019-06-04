@@ -1,6 +1,6 @@
 import { IAttributes, IDirectiveFactory, INgModelController, IScope } from 'angular';
-import { isValidNamespace, isValidUrl } from './validators';
-import { ImportedNamespace, Model, NamespaceType } from 'app/entities/model';
+import { isValidNamespaceUrlOrUrn } from './validators';
+import { ImportedNamespace, Model, NamespaceType } from '../../entities/model';
 
 interface NamespaceInputScope extends IScope {
   model: Model;
@@ -19,8 +19,7 @@ export const NamespaceInputDirective: IDirectiveFactory = () => {
     require: 'ngModel',
     link($scope: NamespaceInputScope, _element: JQuery, _attributes: IAttributes, ngModel: INgModelController) {
 
-      ngModel.$validators['namespace'] = isValidNamespace;
-      ngModel.$validators['url'] = isValidUrl;
+      ngModel.$validators['namespaceUrlOrUrn'] = isValidNamespaceUrlOrUrn;
       ngModel.$validators['existingId'] = (ns: string) => {
 
         const model = $scope.model;

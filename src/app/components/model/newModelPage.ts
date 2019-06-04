@@ -1,4 +1,4 @@
-import { ILocationService } from 'angular';
+import { ILocationService, IScope } from 'angular';
 import { ModelService } from 'app/services/modelService';
 import { Uri } from 'app/entities/uri';
 import { Language, LanguageContext } from 'app/types/language';
@@ -31,6 +31,7 @@ export class NewModelPageComponent {
   vocabularies: Vocabulary[] = [];
   referenceDatas: ReferenceData[] = [];
   importedNamespaces: ImportedNamespace[] = [];
+  importedPrefixes: () => string[];
   links: Link[] = [];
 
   languages: Language[] = ['fi', 'en'];
@@ -47,11 +48,19 @@ export class NewModelPageComponent {
 
   namespacesInUse = new Set<string>();
 
-  constructor(private $location: ILocationService,
+  constructor($scope: IScope,
+              private $location: ILocationService,
               private modelService: ModelService,
               private locationService: LocationService,
               private errorModal: ErrorModal) {
     'ngInject';
+
+    this.importedPrefixes = () => {
+      if (this.importedNamespaces) {
+        return this.importedNamespaces.map(ns => ns.prefix);
+      }
+      return [];
+    }
   }
 
   $onInit() {

@@ -1,11 +1,11 @@
-import { IScope, IPromise } from 'angular';
+import { IPromise, IScope } from 'angular';
 import { IModalService, IModalServiceInstance } from 'angular-ui-bootstrap';
 import { ModelService } from 'app/services/modelService';
 import { Language, LanguageContext } from 'app/types/language';
 import { isDefined } from 'yti-common-ui/utils/object';
 import { ImportedNamespace } from 'app/entities/model';
 
-const technicalNamespaces = {
+const technicalNamespaces: { [prefix: string]: string } = {
   dcap: 'http://purl.org/ws-mmi-dc/terms/',
   schema: 'http://schema.org/',
   void: 'http://rdfs.org/ns/void#',
@@ -31,13 +31,38 @@ const technicalNamespaces = {
   ts: 'http://www.w3.org/2003/06/sw-vocab-status/ns#'
 };
 
+const forbiddenPrefixes: string[] = ['xsd', 'iow', 'text', 'sh', 'afn', 'schema', 'dcap', 'termed', 'abstract', 'and', 'andCond', 'class',
+  'classIn', 'codeLists', 'comment', 'contributor', 'constraint', 'context', 'created', 'creator', 'datatype', 'defaultValue', 'definition',
+  'description', 'editorialNote', 'equivalentClass', 'equivalentProperty', 'example', 'first', 'graph', 'hasPart', 'hasValue', 'homepage',
+  'id', 'identifier', 'imports', 'inScheme', 'inValues', 'isDefinedBy', 'isPartOf', 'isResourceIdentifier', 'isXmlAttribute',
+  'isXmlWrapper', 'last', 'label', 'language', 'languageIn', 'localName', 'maxCount', 'maxLength', 'memberOf', 'minCount', 'name', 'node',
+  'nodeKind', 'not', 'notCond', 'or', 'orCond', 'path', 'pattern', 'pointXY', 'preferredXMLNamespaceName', 'preferredXMLNamespacePrefix',
+  'prefLabel', 'property', 'predicate', 'range', 'readOnlyValue', 'references', 'relations', 'requires', 'rootResource', 'rest', 'stem',
+  'subClassOf', 'subject', 'subPropertyOf', 'targetClass', 'title', 'type', 'uniqueLang', 'useContext', 'uri', 'versionInfo', 'vertexXY',
+  'xor'].filter(prefix => !technicalNamespaces[prefix]);
+
 export class AddEditNamespaceModal {
 
   constructor(private $uibModal: IModalService) {
     'ngInject';
   }
 
-  private open(context: LanguageContext, language: Language, namespaceToEdit: ImportedNamespace|null): IPromise<ImportedNamespace> {
+  openAdd(context: LanguageContext, language: Language, reservedPrefixes?: string[]): IPromise<ImportedNamespace> {
+    return this.open(context, language, null, this.concatPrefixes(reservedPrefixes));
+  }
+
+  openEdit(context: LanguageContext, require: ImportedNamespace, language: Language, reservedPrefixes?: string[]): IPromise<ImportedNamespace> {
+    return this.open(context, language, require, this.concatPrefixes(reservedPrefixes));
+  }
+
+  private concatPrefixes(reservedPrefixes?: string[]): string[] {
+    if (reservedPrefixes) {
+      return [...reservedPrefixes, ...forbiddenPrefixes];
+    }
+    return forbiddenPrefixes;
+  }
+
+  private open(context: LanguageContext, language: Language, namespaceToEdit: ImportedNamespace | null, reservedPrefixes: string[]): IPromise<ImportedNamespace> {
     return this.$uibModal.open({
       template: require('./addEditNamespaceModal.html'),
       size: 'sm',
@@ -47,17 +72,10 @@ export class AddEditNamespaceModal {
       resolve: {
         context: () => context,
         language: () => language,
-        namespaceToEdit: () => namespaceToEdit
+        namespaceToEdit: () => namespaceToEdit,
+        reservedPrefixes: () => reservedPrefixes
       }
     }).result;
-  }
-
-  openAdd(context: LanguageContext, language: Language): IPromise<ImportedNamespace> {
-    return this.open(context, language, null);
-  }
-
-  openEdit(context: LanguageContext, require: ImportedNamespace, language: Language): IPromise<ImportedNamespace> {
-    return this.open(context, language, require);
   }
 }
 
@@ -70,14 +88,15 @@ class AddEditNamespaceController {
   submitError: string;
   edit: boolean;
 
-  namespaceBeforeForced: string|null = null;
-  prefixBeforeForced: string|null = null;
+  namespaceBeforeForced: string | null = null;
+  prefixBeforeForced: string | null = null;
 
   constructor(private $uibModalInstance: IModalServiceInstance,
               $scope: IScope,
               public context: LanguageContext,
               private language: Language,
-              private namespaceToEdit: ImportedNamespace|null,
+              private namespaceToEdit: ImportedNamespace | null,
+              public reservedPrefixes: string[],
               private modelService: ModelService) {
     'ngInject';
     this.edit = !!namespaceToEdit;
@@ -169,6 +188,10 @@ class AddEditNamespaceController {
     }
   }
 
+  cancel() {
+    this.$uibModalInstance.dismiss('cancel');
+  }
+
   // XXX: API should return as technical and shouldn't need mangling
   private mangleAsTechnicalIfNecessary(ns: ImportedNamespace) {
 
@@ -179,9 +202,5 @@ class AddEditNamespaceController {
     }
 
     return ns;
-  }
-
-  cancel() {
-    this.$uibModalInstance.dismiss('cancel');
   }
 }

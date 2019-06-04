@@ -42,7 +42,11 @@
           <editable-multiple-language-select data-title="Model languages" id="modelLanguage" ng-model="$ctrl.languages" required="true"></editable-multiple-language-select>
 
           <editable data-title="Prefix" context="$ctrl.context">
-            <input id="modelPrefix" class="form-control" type="text" prefix-input ng-model="$ctrl.prefix" autocomplete="off" required />
+            <input id="modelPrefix" class="form-control" type="text" prefix-input
+                   reserved-prefixes-getter="$ctrl.importedPrefixes"
+                   ng-model="$ctrl.prefix"
+                   autocomplete="off"
+                   required />
           </editable>
 
           <app-use-context-input ng-model="$ctrl.useContext" [editing]="true" [model-type]="$ctrl.type"></app-use-context-input>
@@ -57,7 +61,8 @@
           <imported-namespaces-view value="$ctrl"
                                     context="$ctrl.context"
                                     allow-profiles="$ctrl.allowProfiles"
-                                    namespaces-in-Use="$ctrl.namespacesInUse"></imported-namespaces-view>
+                                    namespaces-in-Use="$ctrl.namespacesInUse"
+                                    model-prefix="$ctrl.prefix || ''"></imported-namespaces-view>
           <links-view value="$ctrl" context="$ctrl.context"></links-view>
         </div>
       </div>

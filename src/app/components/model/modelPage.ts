@@ -122,7 +122,7 @@ export class ModelPageComponent implements ModelPageActions, ModelControllerServ
         let curieMatches = false;
         try {
           curieMatches = this.resource.id.curie === current.resourceCurie;
-        } catch(error) {}
+        } catch (error) {}
 
         if (curieMatches && oldId === current.propertyId && oldId !== newId) {
           this.makeSelection({ resourceCurie: current.resourceCurie, propertyId: newId });

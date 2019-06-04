@@ -62,13 +62,15 @@ export class ModelListItem extends AbstractModel {
     comment:         { name: 'comment',     serializer: localizableSerializer },
     status:          { name: 'versionInfo', serializer: identitySerializer<Status>() },
     classifications: { name: 'isPartOf',    serializer: entityAwareList(entity(() => Classification)) },
-    contributors:    { name: 'contributor', serializer: entityAwareList(entity(() => Organization)) }
+    contributors:    { name: 'contributor', serializer: entityAwareList(entity(() => Organization)) },
+    useContext:      { name: 'useContext',   serializer: valueOrDefault(identitySerializer<UseContext>(), 'InformationDescription') }
   };
 
   comment: Localizable;
   status: Status;
   classifications: Classification[];
   contributors: Organization[];
+  useContext: UseContext;
 
   constructor(graph: any, context: any, frame: any) {
     super(graph, context, frame);

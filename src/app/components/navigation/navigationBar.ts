@@ -17,14 +17,14 @@ import { Config } from 'app/entities/config';
 import { HelpService } from '../../help/providers/helpService';
 import { Subscription } from 'rxjs';
 
-//const logo = require('../../../assets/logo.svg');
+// const logo = require('../../../assets/logo.svg');
 
 @LegacyComponent({
   template: require('./navigationBar.html')
 })
 export class NavigationBarComponent {
 
-  //logo = logo;
+  // logo = logo;
 
   availableLanguages = [
     { code: 'fi' as UILanguage, name: 'Suomeksi (FI)' },

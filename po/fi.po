@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.1\n"
+"X-Generator: Poedit 2.2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "Copied"
@@ -266,6 +266,11 @@ msgstr "Virheellinen URI muoto"
 
 msgid "Invalid namespace error"
 msgstr "Nimiavaruuden täytyy päättyä ‘#’ tai ‘/‘ -merkkeihin"
+
+msgid "Invalid namespace url urn error"
+msgstr ""
+"Nimiavaruuden täytyy olla URL ja päättyä ‘#’ tai ‘/‘ -merkkeihin tai olla "
+"URN-muotoinen"
 
 msgid "Invalid id error"
 msgstr "Virheellinen tunniste"
@@ -1458,6 +1463,9 @@ msgstr "JSON-LD Context"
 msgid "application/schema+json"
 msgstr "JSON Schema"
 
+msgid "application/vnd+oai+openapi+json"
+msgstr "Open API 3.0.2"
+
 msgid "framed ld+json"
 msgstr "Framed JSON-LD"
 
@@ -1806,8 +1814,14 @@ msgstr "Tietosisältö"
 msgid "Search"
 msgstr "Etsi"
 
-msgid "Specialized from class"
-msgstr "Tarkennettu luokasta"
+msgid "All model types"
+msgstr "Kaikki tietomallityypit"
+
+msgid "All use contexts"
+msgstr "Kaikki sisältötyypit"
+
+msgid "Specialized from class info"
+msgstr "Luokka jota soveltamisprofiilissa on tarkennettu"
 
 msgid "Editorial note"
 msgstr "Muokkaajan kommentti"
@@ -2038,11 +2052,11 @@ msgstr ""
 "Attribuutin tietotyyppi on valittava yhteensopivien XSD tietotyyppien "
 "joukosta"
 
+msgid "Specialized from class"
+msgstr "Tarkennettu luokasta"
+
 msgid "Definition info"
 msgstr "Käsitteen määritelmä"
-
-msgid "Specialized from class info"
-msgstr "Luokka jota soveltamisprofiilissa on tarkennettu"
 
 msgid "Example"
 msgstr "Esimerkki"
@@ -2216,7 +2230,6 @@ msgstr "Ominaisuus jonka arvo täytyy olla eri kuin tämän ominaisuuden arvo"
 msgid "Less than"
 msgstr "Pienempi kuin"
 
-#| msgid "Less than min error"
 msgid "Less than info"
 msgstr "Ominaisuus jonka arvo täytyy olla eri kuin tämän ominaisuuden arvo"
 
@@ -2282,6 +2295,12 @@ msgstr "Vain luku"
 
 msgid "Read-only info"
 msgstr "Attribuutti jonka arvoa ei alustuksen jälkeen saa enää muokata"
+
+msgid "API path"
+msgstr "API polku"
+
+msgid "API path info"
+msgstr ""
 
 msgid "owl:DatatypeProperty"
 msgstr "Attribuutti"

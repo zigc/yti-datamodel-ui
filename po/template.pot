@@ -259,6 +259,9 @@ msgstr ""
 msgid "Invalid namespace error"
 msgstr ""
 
+msgid "Invalid namespace url urn error"
+msgstr ""
+
 msgid "Invalid id error"
 msgstr ""
 
@@ -1338,6 +1341,9 @@ msgstr ""
 msgid "application/schema+json"
 msgstr ""
 
+msgid "application/vnd+oai+openapi+json"
+msgstr ""
+
 msgid "framed ld+json"
 msgstr ""
 
@@ -1682,7 +1688,13 @@ msgstr ""
 msgid "Search"
 msgstr ""
 
-msgid "Specialized from class"
+msgid "All model types"
+msgstr ""
+
+msgid "All use contexts"
+msgstr ""
+
+msgid "Specialized from class info"
 msgstr ""
 
 msgid "Editorial note"
@@ -1895,10 +1907,10 @@ msgstr ""
 msgid "Range info"
 msgstr ""
 
-msgid "Definition info"
+msgid "Specialized from class"
 msgstr ""
 
-msgid "Specialized from class info"
+msgid "Definition info"
 msgstr ""
 
 msgid "Example"
@@ -2118,6 +2130,12 @@ msgid "Read-only"
 msgstr ""
 
 msgid "Read-only info"
+msgstr ""
+
+msgid "API path"
+msgstr ""
+
+msgid "API path info"
 msgstr ""
 
 msgid "owl:DatatypeProperty"
