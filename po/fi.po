@@ -279,6 +279,11 @@ msgstr "Virheellinen URI muoto"
 msgid "Invalid namespace error"
 msgstr "Nimiavaruuden täytyy päättyä ‘#’ tai ‘/‘ -merkkeihin"
 
+msgid "Invalid namespace url urn error"
+msgstr ""
+"Nimiavaruuden täytyy olla URL ja päättyä ‘#’ tai ‘/‘ -merkkeihin tai olla "
+"URN-muotoinen"
+
 msgid "Invalid id error"
 msgstr "Virheellinen tunniste"
 
