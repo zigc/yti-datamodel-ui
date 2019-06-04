@@ -256,6 +256,9 @@ msgstr ""
 msgid "Invalid namespace error"
 msgstr ""
 
+msgid "Invalid namespace url urn error"
+msgstr ""
+
 msgid "Invalid id error"
 msgstr ""
 

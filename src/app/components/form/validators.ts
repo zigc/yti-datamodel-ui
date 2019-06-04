@@ -66,6 +66,10 @@ export function isValidUrl(url: string|Uri): boolean {
   }
 }
 
+export function isValidNamespaceUrlOrUrn(str: string|Uri) {
+  return isValidNamespace(str) && isValidUrl(str) || isValidUrn(str.toString());
+}
+
 export function isValidUri(uri: string|Uri, toleratedErrors: string[] = []): boolean {
   if (!uri) {
     return true;
@@ -116,6 +120,7 @@ export const isValidYear = createMomentValidator('YYYY');
 export const isValidMonth = createMomentValidator('MM');
 export const isValidDay = createMomentValidator('DD');
 export const isValidHex = createRegexValidator(/^[0-9A-Fa-f]+$/);
+export const isValidUrn = createRegexValidator(/^urn:[a-z0-9][a-z0-9-]{0,31}:[a-z0-9()+,\-.:=@;$_!*'%/?#]+/);
 
 export function resolveValidator(dataType: DataType): ValidatorWithFormat<string> {
   switch (dataType) {
