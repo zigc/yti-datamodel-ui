@@ -265,6 +265,9 @@ msgstr ""
 msgid "Existing id error"
 msgstr ""
 
+msgid "Existing or reserved id error"
+msgstr ""
+
 msgid "Required error"
 msgstr ""
 

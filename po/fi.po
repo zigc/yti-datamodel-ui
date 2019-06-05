@@ -275,6 +275,9 @@ msgstr "Virheellinen tunniste"
 msgid "Existing id error"
 msgstr "Tunniste on jo käytössä"
 
+msgid "Existing or reserved id error"
+msgstr "Tunniste on jo käytössä tai on varattu"
+
 msgid "Required error"
 msgstr "Pakollinen kenttä"
 

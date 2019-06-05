@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2019-06-04 12:04+0300\n"
+"PO-Revision-Date: 2019-06-05 12:28+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -272,6 +272,9 @@ msgid "Invalid id error"
 msgstr ""
 
 msgid "Existing id error"
+msgstr ""
+
+msgid "Existing or reserved id error"
 msgstr ""
 
 msgid "Required error"

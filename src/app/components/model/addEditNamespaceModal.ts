@@ -39,7 +39,7 @@ const forbiddenPrefixes: string[] = ['xsd', 'iow', 'text', 'sh', 'afn', 'schema'
   'nodeKind', 'not', 'notCond', 'or', 'orCond', 'path', 'pattern', 'pointXY', 'preferredXMLNamespaceName', 'preferredXMLNamespacePrefix',
   'prefLabel', 'property', 'predicate', 'range', 'readOnlyValue', 'references', 'relations', 'requires', 'rootResource', 'rest', 'stem',
   'subClassOf', 'subject', 'subPropertyOf', 'targetClass', 'title', 'type', 'uniqueLang', 'useContext', 'uri', 'versionInfo', 'vertexXY',
-  'xor'].filter(prefix => !technicalNamespaces[prefix]);
+  'xor', 'urn', 'http', 'https'].filter(prefix => !technicalNamespaces[prefix]);
 
 export class AddEditNamespaceModal {
 
