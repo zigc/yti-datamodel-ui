@@ -298,6 +298,7 @@ export class ImportedNamespace extends GraphNode implements Namespace {
   static importedNamespaceMappings = {
     id:         { name: '@id',                         serializer: uriSerializer },
     label:      { name: 'label',                       serializer: localizableSerializer },
+    type:       { name: '@type',                       serializer: typeSerializer },
     _prefix:    { name: 'preferredXMLNamespacePrefix', serializer: stringSerializer },
     _namespace: { name: 'preferredXMLNamespaceName',   serializer: identitySerializer<Url>() }
   };
