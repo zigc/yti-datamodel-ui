@@ -159,6 +159,10 @@ class AddEditNamespaceController {
     return this.edit ? 'Edit namespace' : 'Import namespace';
   }
 
+  get confirmButtonID() {
+    return this.edit ? 'edit_namespace_confirm_button' : 'add_new_namespace_confirm_button';
+  }
+
   labelModifiable() {
     return !this.edit || this.namespaceToEdit!.labelModifiable;
   }
