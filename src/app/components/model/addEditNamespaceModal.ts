@@ -48,12 +48,12 @@ export class AddEditNamespaceModal {
     'ngInject';
   }
 
-  openAdd(context: LanguageContext, language: Language, reservedPrefixes?: string[]): IPromise<ImportedNamespace> {
-    return this.open(context, language, null, this.concatPrefixes(reservedPrefixes));
+  openAdd(context: LanguageContext, language: Language, reservedPrefixes?: string[], usedNamespaces: string[] = []): IPromise<ImportedNamespace> {
+    return this.open(context, language, null, this.concatPrefixes(reservedPrefixes), usedNamespaces);
   }
 
-  openEdit(context: LanguageContext, require: ImportedNamespace, language: Language, reservedPrefixes?: string[]): IPromise<ImportedNamespace> {
-    return this.open(context, language, require, this.concatPrefixes(reservedPrefixes));
+  openEdit(context: LanguageContext, require: ImportedNamespace, language: Language, reservedPrefixes?: string[], usedNamespaces: string[] = []): IPromise<ImportedNamespace> {
+    return this.open(context, language, require, this.concatPrefixes(reservedPrefixes), usedNamespaces);
   }
 
   private concatPrefixes(reservedPrefixes?: string[]): string[] {
@@ -63,7 +63,7 @@ export class AddEditNamespaceModal {
     return forbiddenPrefixes;
   }
 
-  private open(context: LanguageContext, language: Language, namespaceToEdit: ImportedNamespace | null, reservedPrefixes: string[]): IPromise<ImportedNamespace> {
+  private open(context: LanguageContext, language: Language, namespaceToEdit: ImportedNamespace | null, reservedPrefixes: string[], usedNamespaces: string[]): IPromise<ImportedNamespace> {
     return this.$uibModal.open({
       template: require('./addEditNamespaceModal.html'),
       size: 'sm',
@@ -74,7 +74,8 @@ export class AddEditNamespaceModal {
         context: () => context,
         language: () => language,
         namespaceToEdit: () => namespaceToEdit,
-        reservedPrefixes: () => reservedPrefixes
+        reservedPrefixes: () => reservedPrefixes,
+        usedNamespaces: () => usedNamespaces
       }
     }).result;
   }
@@ -98,6 +99,7 @@ class AddEditNamespaceController {
               private language: Language,
               private namespaceToEdit: ImportedNamespace | null,
               public reservedPrefixes: string[],
+              public usedNamespaces: string[],
               private modelService: ModelService) {
     'ngInject';
     this.edit = !!namespaceToEdit;
