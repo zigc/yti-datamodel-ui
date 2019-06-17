@@ -53,9 +53,10 @@ export class IndexSearchService {
 
   searchModels(request: ModelSearchRequest): Observable<ModelSearchResponse> {
     const headers = { 'Content-Type': 'application/json' };
-    return this.http.post<ModelSearchResponse>(apiEndpointWithName('searchModels'), JSON.stringify(request), { headers })
+    return this.http.post<ModelSearchResponse>(apiEndpointWithName('searchModels'), JSON.stringify(request), { headers });
+/*
+      // NOTE: Now that the API returns correctly typed deep hit lists the following is unnecessary. Remove when feature is tested. 
       .pipe(map(result => {
-        // TODO: Remove map thing when the result lists are correctly typed in the API responses
         if (result.deepHits) {
           Object.keys(result.deepHits).forEach(id => {
             const hitList = result.deepHits[id];
@@ -79,6 +80,7 @@ export class IndexSearchService {
         }
         return result;
       }));
+*/
   }
 
   searchResources(request: ResourceSearchRequest): Observable<ResourceSearchResponse> {
