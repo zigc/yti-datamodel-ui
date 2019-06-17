@@ -60,7 +60,7 @@ export class IndexSearchService {
           Object.keys(result.deepHits).forEach(id => {
             const hitList = result.deepHits[id];
             if (hitList.length === 1 && !hitList[0].type && hitList[0].topHits.length) {
-              const totalResults = hitList[0].totalHitCount;
+              const totalResults = hitList[0].totalHitCount > hitList[0].topHits.length ? hitList[0].totalHitCount : 0;
               const tmp: { [type: string]: IndexResource[] } = {};
               hitList[0].topHits.forEach(res => {
                 let arr = tmp[res.type];
