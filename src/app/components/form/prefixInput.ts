@@ -24,7 +24,7 @@ export const PrefixInputDirective: IDirectiveFactory = () => {
     link($scope: PrefixInputScope, _element: JQuery, _attributes: IAttributes, ngModel: INgModelController) {
       ngModel.$validators['prefix'] = isValidPrefix;
       ngModel.$validators['length'] = isValidPrefixLength;
-      ngModel.$validators['existingId'] = (prefix: string) => {
+      ngModel.$validators['existingOrReservedId'] = (prefix: string) => {
 
         const model = $scope.model;
         const activeNamespace = $scope.activeNamespace;

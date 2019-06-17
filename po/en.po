@@ -2,7 +2,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
+<<<<<<< HEAD
 "PO-Revision-Date: 2019-06-04 13:23+0300\n"
+=======
+"PO-Revision-Date: 2019-06-17 10:13+0300\n"
+>>>>>>> master
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -289,6 +293,9 @@ msgstr ""
 msgid "Existing id error"
 msgstr ""
 
+msgid "Existing or reserved id error"
+msgstr ""
+
 msgid "Required error"
 msgstr "Required"
 
@@ -352,6 +359,12 @@ msgstr ""
 "upkeeping the model. Type is either core vocabulary or application profile. "
 "Status is for the governance status of the model."
 
+msgid " hit"
+msgstr ""
+
+msgid "Total results"
+msgstr ""
+
 msgid "Add model"
 msgstr ""
 
@@ -374,6 +387,12 @@ msgstr ""
 msgid "Search model"
 msgstr ""
 
+msgid "Extend search"
+msgstr ""
+
+msgid "to content"
+msgstr ""
+
 msgid "Filter with information domain"
 msgstr ""
 
@@ -384,6 +403,9 @@ msgid "result"
 msgstr ""
 
 msgid "results"
+msgstr ""
+
+msgid "Search results"
 msgstr ""
 
 msgid "Maintenance content"
@@ -408,25 +430,17 @@ msgstr ""
 msgid "Edit reference data"
 msgstr ""
 
-#, fuzzy
-#| msgid "Add model description"
 msgid "Datamodel definition"
 msgstr ""
-"Add domain specific Core Vocabulary or application specific Application "
-"Profile"
 
 msgid "Datamodel details"
 msgstr ""
 
-#, fuzzy
-#| msgid "InformationPool"
 msgid "Information domain"
-msgstr "Information pool"
+msgstr ""
 
-#, fuzzy
-#| msgid "association"
 msgid "Organization"
-msgstr "Association"
+msgstr ""
 
 msgid "Browse reference data codes"
 msgstr ""
@@ -1029,7 +1043,11 @@ msgstr "Terminology"
 msgid "You can add new attribute or association to the Class from here"
 msgstr ""
 
+<<<<<<< HEAD
 msgid "Add properties from profile class"
+=======
+msgid "Member groups"
+>>>>>>> master
 msgstr ""
 
 msgid "not found in the concept database"
@@ -1478,12 +1496,15 @@ msgid "User name"
 msgstr ""
 
 msgid "Created at"
+<<<<<<< HEAD
 msgstr ""
 
 msgid "Modified at"
+=======
+>>>>>>> master
 msgstr ""
 
-msgid "Member groups"
+msgid "Define concept for the class"
 msgstr ""
 
 msgid "Admin groups"
@@ -1853,8 +1874,22 @@ msgstr ""
 msgid "All use contexts"
 msgstr ""
 
+<<<<<<< HEAD
 msgid "Model"
 msgstr ""
+=======
+msgid "Deep class hit"
+msgstr "Classes"
+
+msgid "Deep shape hit"
+msgstr "Shapes"
+
+msgid "Deep attribute hit"
+msgstr "Attributes"
+
+msgid "Deep association hit"
+msgstr "Associations"
+>>>>>>> master
 
 msgid "Superproperty info"
 msgstr ""

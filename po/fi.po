@@ -290,6 +290,9 @@ msgstr "Virheellinen tunniste"
 msgid "Existing id error"
 msgstr "Tunniste on jo käytössä"
 
+msgid "Existing or reserved id error"
+msgstr "Tunniste on jo käytössä tai on varattu"
+
 msgid "Required error"
 msgstr "Pakollinen kenttä"
 
@@ -355,6 +358,12 @@ msgstr ""
 "voi olla tietokomponenttikirjasto tai soveltamisprofiili. Tila tarkoittaa "
 "tietomallin hallinnan tilaa."
 
+msgid " hit"
+msgstr ""
+
+msgid "Total results"
+msgstr "Osumia yhteensä"
+
 msgid "Add model"
 msgstr "Lisää tietomalli"
 
@@ -375,6 +384,12 @@ msgstr ""
 msgid "Search model"
 msgstr "Hae tietomallia"
 
+msgid "Extend search"
+msgstr "Kohdista haku myös"
+
+msgid "to content"
+msgstr "sisältöihin"
+
 msgid "Filter with information domain"
 msgstr "Rajaa tietoalueella"
 
@@ -386,6 +401,9 @@ msgstr "hakutulos"
 
 msgid "results"
 msgstr "hakutulosta"
+
+msgid "Search results"
+msgstr "Hakutulokset"
 
 msgid "Maintenance content"
 msgstr ""
@@ -1049,8 +1067,13 @@ msgstr ""
 "Täältä voit lisätä luokalle uuden attribuutin jonka arvoalue perustuu "
 "tietotyyppiin tai assosiaation jolla viitataan toiseen luokkaan"
 
+<<<<<<< HEAD
 msgid "Add properties from profile class"
 msgstr "Lisää ominaisuudet nostettavaan luokkaan"
+=======
+msgid "Member groups"
+msgstr "Käyttäjänä ryhmissä"
+>>>>>>> master
 
 msgid "not found in the concept database"
 msgstr "ei löydy sanastosta"
@@ -1502,11 +1525,13 @@ msgstr "Nimi"
 msgid "Created at"
 msgstr "Luotu"
 
+<<<<<<< HEAD
 msgid "Modified at"
 msgstr "Muokattu"
-
-msgid "Member groups"
-msgstr "Käyttäjänä ryhmissä"
+=======
+msgid "Define concept for the class"
+msgstr "Määrittele käsite luokalle"
+>>>>>>> master
 
 msgid "Admin groups"
 msgstr "Pääkäyttäjänä ryhmissä"
@@ -1874,8 +1899,22 @@ msgstr "Kaikki tietomallityypit"
 msgid "All use contexts"
 msgstr "Kaikki sisältötyypit"
 
+<<<<<<< HEAD
 msgid "Model"
 msgstr "Tietomalli"
+=======
+msgid "Deep class hit"
+msgstr "Luokat"
+
+msgid "Deep shape hit"
+msgstr "Tarkennetut luokat"
+
+msgid "Deep attribute hit"
+msgstr "Attribuutit"
+
+msgid "Deep association hit"
+msgstr "Assosiaatiot"
+>>>>>>> master
 
 msgid "Superproperty info"
 msgstr "Yleistettävissä oleva ominaisuus, joka on semantiikaltaan laajempi"

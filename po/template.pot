@@ -280,6 +280,9 @@ msgstr ""
 msgid "Existing id error"
 msgstr ""
 
+msgid "Existing or reserved id error"
+msgstr ""
+
 msgid "Required error"
 msgstr ""
 
@@ -334,6 +337,12 @@ msgstr ""
 msgid "INFO_TEXT_FRONTPAGE_FILTER_RESULTS"
 msgstr ""
 
+msgid " hit"
+msgstr ""
+
+msgid "Total results"
+msgstr ""
+
 msgid "Add model"
 msgstr ""
 
@@ -349,6 +358,12 @@ msgstr ""
 msgid "Search model"
 msgstr ""
 
+msgid "Extend search"
+msgstr ""
+
+msgid "to content"
+msgstr ""
+
 msgid "Filter with information domain"
 msgstr ""
 
@@ -359,6 +374,9 @@ msgid "result"
 msgstr ""
 
 msgid "results"
+msgstr ""
+
+msgid "Search results"
 msgstr ""
 
 msgid "Maintenance content"
@@ -958,7 +976,11 @@ msgstr ""
 msgid "You can add new attribute or association to the Class from here"
 msgstr ""
 
+<<<<<<< HEAD
 msgid "Add properties from profile class"
+=======
+msgid "Member groups"
+>>>>>>> master
 msgstr ""
 
 msgid "not found in the concept database"
@@ -1378,12 +1400,15 @@ msgid "User name"
 msgstr ""
 
 msgid "Created at"
+<<<<<<< HEAD
 msgstr ""
 
 msgid "Modified at"
+=======
+>>>>>>> master
 msgstr ""
 
-msgid "Member groups"
+msgid "Define concept for the class"
 msgstr ""
 
 msgid "Admin groups"
@@ -1748,7 +1773,20 @@ msgstr ""
 msgid "All use contexts"
 msgstr ""
 
+<<<<<<< HEAD
 msgid "Model"
+=======
+msgid "Deep class hit"
+msgstr ""
+
+msgid "Deep shape hit"
+msgstr ""
+
+msgid "Deep attribute hit"
+msgstr ""
+
+msgid "Deep association hit"
+>>>>>>> master
 msgstr ""
 
 msgid "Superproperty info"

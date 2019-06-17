@@ -91,7 +91,7 @@ export function normalizeGroupType(types: Type[]): GroupType|null {
 }
 
 export function modelUrl(prefix: string): RelativeUrl {
-  return `/model/${prefix}` + '/';
+  return `/model/${prefix}/`;
 }
 
 export function resourceUrl(modelPrefix: string, resource: Uri|string) {

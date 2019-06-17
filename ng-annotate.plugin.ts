@@ -1,7 +1,7 @@
 // inspired by https://github.com/jeffling/ng-annotate-webpack-plugin/
 
 const ngAnnotate = require('ng-annotate-patched');
-const SourceMapSource = require('webpack-core/lib/SourceMapSource');
+const SourceMapSource = require('webpack-sources/lib/SourceMapSource');
 
 export class NgAnnotatePlugin {
 

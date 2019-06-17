@@ -60,6 +60,7 @@ import { DefaultAngularLocalizer, LanguageService } from './services/languageSer
 import { Localizer as AngularLocalizer } from 'yti-common-ui/types/localization';
 import { HelpService } from './help/providers/helpService';
 import IAnimateProvider = animate.IAnimateProvider;
+import { IndexSearchService } from './services/indexSearchService';
 
 require('angular-gettext');
 require('checklist-model');
@@ -168,7 +169,8 @@ export function localizerFactory(languageService: LanguageService): AngularLocal
     confirmationModalProvider,
     modelPageHelpServiceProvider,
     Title,
-    HelpService
+    HelpService,
+    IndexSearchService
   ]
 })
 export class AppModule {
@@ -239,6 +241,7 @@ mod.factory('localizationStrings', () => localizationStrings);
 mod.factory('zone', downgradeInjectable(NgZone));
 mod.factory('titleService', downgradeInjectable(Title));
 mod.factory('helpService', downgradeInjectable(HelpService));
+mod.factory('indexSearchService', downgradeInjectable(IndexSearchService));
 
 mod.config(routeConfig);
 
