@@ -976,11 +976,7 @@ msgstr ""
 msgid "You can add new attribute or association to the Class from here"
 msgstr ""
 
-<<<<<<< HEAD
-msgid "Add properties from profile class"
-=======
-msgid "Member groups"
->>>>>>> master
+msgid "Do you want to add following properties from class?"
 msgstr ""
 
 msgid "not found in the concept database"
@@ -1400,15 +1396,12 @@ msgid "User name"
 msgstr ""
 
 msgid "Created at"
-<<<<<<< HEAD
 msgstr ""
 
 msgid "Modified at"
-=======
->>>>>>> master
 msgstr ""
 
-msgid "Define concept for the class"
+msgid "Member groups"
 msgstr ""
 
 msgid "Admin groups"
@@ -1423,13 +1416,13 @@ msgstr ""
 msgid "Add properties from scope class"
 msgstr ""
 
-msgid "Define concept for the class"
+msgid "Add properties from profile class"
 msgstr ""
 
 msgid "Add properties from external class"
 msgstr ""
 
-msgid "Do you want to add following properties from class?"
+msgid "Define concept for the class"
 msgstr ""
 
 msgid "Do you want to add following properties from super class?"
@@ -1773,9 +1766,9 @@ msgstr ""
 msgid "All use contexts"
 msgstr ""
 
-<<<<<<< HEAD
 msgid "Model"
-=======
+msgstr ""
+
 msgid "Deep class hit"
 msgstr ""
 
@@ -1786,7 +1779,6 @@ msgid "Deep attribute hit"
 msgstr ""
 
 msgid "Deep association hit"
->>>>>>> master
 msgstr ""
 
 msgid "Superproperty info"
