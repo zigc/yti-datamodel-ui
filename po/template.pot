@@ -460,6 +460,9 @@ msgstr ""
 msgid "Suomi.fi Reference Data"
 msgstr ""
 
+msgid "Suomi.fi Comments"
+msgstr ""
+
 msgid "User right management"
 msgstr ""
 

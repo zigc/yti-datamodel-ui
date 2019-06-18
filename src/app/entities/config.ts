@@ -5,6 +5,7 @@ export class Config {
   constructor(public groupManagementUrl: string,
               public terminologyUrl: string,
               public codeListUrl: string,
+              public commentsUrl: string,
               public dev: boolean,
               public env: string) {
   }
