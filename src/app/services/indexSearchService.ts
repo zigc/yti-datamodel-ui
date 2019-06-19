@@ -29,14 +29,14 @@ export type ModelSearchResponse = {
 }
 
 export type ResourceSearchRequest = {
-  query: string;
+  query?: string;
   type: string;
-  isDefinedBy: string;
-  sortLang: string;
-  sortField: string;
-  sortOrder: string;
+  isDefinedBy?: string;
+  sortLang?: string;
+  sortField?: string;
+  sortOrder?: string;
   pageSize: string;
-  pageFrom: string;
+  pageFrom?: string;
 }
 
 export type ResourceSearchResponse = {
