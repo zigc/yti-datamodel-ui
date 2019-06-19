@@ -85,6 +85,10 @@ export class NavigationBarComponent {
     return this.config && this.config.codeListUrl;
   }
 
+  get commentsUrl() {
+    return this.config && this.config.commentsUrl;
+  }
+
   get environmentIdentifier() {
     return this.config ? this.config.getEnvironmentIdentifier('postfix') : '';
   }

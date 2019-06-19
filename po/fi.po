@@ -502,6 +502,9 @@ msgstr "Suomi.fi-sanastot"
 msgid "Suomi.fi Reference Data"
 msgstr "Suomi.fi-koodistot"
 
+msgid "Suomi.fi Comments"
+msgstr "Suomi.fi-kommentit"
+
 msgid "User right management"
 msgstr "Oikeuksienhallinta"
 

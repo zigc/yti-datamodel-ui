@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2019-06-18 09:13+0300\n"
+"PO-Revision-Date: 2019-06-19 16:41+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -499,6 +499,9 @@ msgid "Suomi.fi Terminologies"
 msgstr ""
 
 msgid "Suomi.fi Reference Data"
+msgstr ""
+
+msgid "Suomi.fi Comments"
 msgstr ""
 
 msgid "User right management"
