@@ -54,33 +54,6 @@ export class IndexSearchService {
   searchModels(request: ModelSearchRequest): Observable<ModelSearchResponse> {
     const headers = { 'Content-Type': 'application/json' };
     return this.http.post<ModelSearchResponse>(apiEndpointWithName('searchModels'), JSON.stringify(request), { headers });
-/*
-      // NOTE: Now that the API returns correctly typed deep hit lists the following is unnecessary. Remove when feature is tested. 
-      .pipe(map(result => {
-        if (result.deepHits) {
-          Object.keys(result.deepHits).forEach(id => {
-            const hitList = result.deepHits[id];
-            if (hitList.length === 1 && !hitList[0].type && hitList[0].topHits.length) {
-              const totalResults = hitList[0].totalHitCount > hitList[0].topHits.length ? hitList[0].totalHitCount : 0;
-              const tmp: { [type: string]: IndexResource[] } = {};
-              hitList[0].topHits.forEach(res => {
-                let arr = tmp[res.type];
-                if (!arr) {
-                  arr = [];
-                  tmp[res.type] = arr;
-                }
-                arr.push(res);
-              });
-              const types = Object.keys(tmp);
-              const newHitLists: DeepSearchResourceHitList[] = [];
-              result.deepHits[id] = newHitLists;
-              types.forEach(t => newHitLists.push({type: t as ClassType | KnownPredicateType, totalHitCount: totalResults, topHits: tmp[t]}));
-            }
-          });
-        }
-        return result;
-      }));
-*/
   }
 
   searchResources(request: ResourceSearchRequest): Observable<ResourceSearchResponse> {

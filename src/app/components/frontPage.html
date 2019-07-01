@@ -24,6 +24,7 @@
       <div class="input-group input-group-lg input-group-search">
         <input id="front_page_search_input"
                class="form-control"
+               ng-class="{'is-invalid': $ctrl.modelsSearchError}"
                type="text"
                ng-model="$ctrl.search"
                placeholder="{{'Search term (model name)' | translate}}"/>

@@ -29,6 +29,7 @@ import { HelpService } from '../help/providers/helpService';
 import { DeepSearchResourceHitList, IndexSearchService, ModelSearchResponse } from '../services/indexSearchService';
 import { getInternalModelUrl, getInternalResourceUrl, IndexModel, IndexResource } from '../entities/index/indexEntities';
 import { Localizable } from 'yti-common-ui/types/localization';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @LegacyComponent({
   template: require('./frontPage.html'),
@@ -66,6 +67,7 @@ export class FrontPageComponent implements HelpProvider {
 
   subscriptionsToClean: Subscription[] = [];
   modelsLoaded = false;
+  modelsSearchError = false;
 
   modelTypeIconDef = getDataModelingMaterialIcon;
   informationDomainIconSrc = getInformationDomainSvgIcon;
@@ -239,11 +241,21 @@ export class FrontPageComponent implements HelpProvider {
         pageSize: 1000,
         pageFrom: 0
       }).subscribe(resp => {
+        this.modelsSearchError = false;
         this.modelsLoaded = true;
         if (resp.totalHitCount != resp.models.length) {
           console.error(`Model search did not return all results. Got ${resp.models.length} (start: ${resp.pageFrom}, total hits: ${resp.totalHitCount})`);
         }
         this.modelResults$.next(resp);
+      }, err => {
+        if (err instanceof HttpErrorResponse && err.status >= 400 && err.status < 500) {
+          this.modelsSearchError = true;
+          this.modelResults$.next({
+            totalHitCount: 0, pageSize: 0, pageFrom: 0, models: [], deepHits: {}
+          });
+        } else {
+          console.error('Model search failed: ' + JSON.stringify(err));
+        }
       });
     }));
   }
