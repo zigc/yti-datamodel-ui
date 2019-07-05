@@ -30,6 +30,7 @@ import { DeepSearchResourceHitList, IndexSearchService, ModelSearchResponse } fr
 import { getInternalModelUrl, getInternalResourceUrl, IndexModel, IndexResource } from '../entities/index/indexEntities';
 import { Localizable } from 'yti-common-ui/types/localization';
 import { HttpErrorResponse } from '@angular/common/http';
+import { UserService } from '../services/userService';
 
 @LegacyComponent({
   template: require('./frontPage.html'),
@@ -72,6 +73,8 @@ export class FrontPageComponent implements HelpProvider {
   modelTypeIconDef = getDataModelingMaterialIcon;
   informationDomainIconSrc = getInformationDomainSvgIcon;
 
+  userName$ = new BehaviorSubject<string|undefined>(undefined);
+
   constructor($scope: IScope,
               private gettextCatalog: GettextCatalog,
               private $location: ILocationService,
@@ -84,9 +87,14 @@ export class FrontPageComponent implements HelpProvider {
               private organizationService: OrganizationService,
               private authorizationManagerService: AuthorizationManagerService,
               private helpService: HelpService,
-              private indexSearchService: IndexSearchService) {
+              private indexSearchService: IndexSearchService,
+              private userService: UserService) {
 
     'ngInject';
+
+    $scope.$watch(() => userService.user && userService.user.name, val => {
+      this.userName$.next(val ? val : undefined);
+    });
 
     $scope.$watch(() => languageService.UILanguage, lang => {
       this.helps = frontPageHelpService.getHelps(lang);
@@ -231,9 +239,9 @@ export class FrontPageComponent implements HelpProvider {
     const initialSearchText$: Observable<string> = this.search$.pipe(take(1));
     const debouncedSearchText$: Observable<string> = this.search$.pipe(skip(1), debounceTime(500));
     const combinedSearchText$: Observable<string> = concat(initialSearchText$, debouncedSearchText$);
-    const searchConditions$: Observable<[string, string, boolean]> = combineLatest(combinedSearchText$, this.languageService.language$, this.searchResources$);
+    const searchConditions$: Observable<[string, string, boolean, string|undefined]> = combineLatest(combinedSearchText$, this.languageService.language$, this.searchResources$, this.userName$);
 
-    this.subscriptionsToClean.push(searchConditions$.subscribe(([text, language, searchResources]) => {
+    this.subscriptionsToClean.push(searchConditions$.subscribe(([text, language, searchResources, _userName]) => {
       this.indexSearchService.searchModels({
         query: text || undefined,
         searchResources: searchResources,
