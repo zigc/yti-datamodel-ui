@@ -64,17 +64,30 @@ export const IdInputDirective: IDirectiveFactory = ($q: IQService,
       };
 
       modelController.$validators['id'] = value => {
-        if (attributes.idInput === 'class') {
-          return value && isValidClassIdentifier(value.name, attributes.idInput);
-        } else if (attributes.idInput === 'predicate') {
-          return value && isValidPredicateIdentifier(value.name, attributes.idInput);
-        } else {
-          return value && isValidIdentifier(value.name, attributes.idInput);
+        if (value) {
+          try {
+            const name = value.name;
+            if (attributes.idInput === 'class') {
+              return isValidClassIdentifier(name, attributes.idInput);
+            } else if (attributes.idInput === 'predicate') {
+              return isValidPredicateIdentifier(name, attributes.idInput);
+            } else {
+              return isValidIdentifier(name, attributes.idInput);
+            }
+          } catch (e) {
+            // probably value.name getter failed
+          }
         }
+        return false;
       };
 
       modelController.$validators['length'] = value => {
-        return value && isValidLabelLength(value.name);
+        try {
+          return value && isValidLabelLength(value.name);
+        } catch(e) {
+          // probably value.name getter failed
+        }
+        return true; // NOTE: length error is probably not the one needed here
       };
     }
   };
