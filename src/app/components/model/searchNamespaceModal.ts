@@ -1,15 +1,15 @@
 import { IPromise, IScope } from 'angular';
 import { IModalService, IModalServiceInstance } from 'angular-ui-bootstrap';
-import { LanguageService } from 'app/services/languageService';
-import { ModelService } from 'app/services/modelService';
+import { LanguageService } from '../../services/languageService';
+import { ModelService } from '../../services/modelService';
 import { AddEditNamespaceModal } from './addEditNamespaceModal';
 import { comparingPrimitive } from 'yti-common-ui/utils/comparator';
-import { LanguageContext } from 'app/types/language';
-import { Exclusion } from 'app/utils/exclusion';
-import { SearchController, SearchFilter, TextAnalysis } from 'app/types/filter';
-import { ifChanged, modalCancelHandler } from 'app/utils/angular';
-import { ImportedNamespace } from 'app/entities/model';
-import { filterAndSortSearchResults } from 'app/components/filter/util';
+import { LanguageContext } from '../../types/language';
+import { Exclusion } from '../../utils/exclusion';
+import { SearchController, SearchFilter, TextAnalysis } from '../../types/filter';
+import { ifChanged, modalCancelHandler } from '../../utils/angular';
+import { ImportedNamespace } from '../../entities/model';
+import { filterAndSortSearchResults } from '../../components/filter/util';
 
 const noExclude = (_ns: ImportedNamespace) => null;
 
@@ -19,7 +19,7 @@ export class SearchNamespaceModal {
     'ngInject';
   }
 
-  open(context: LanguageContext, reservedPrefixes: string[], exclude: Exclusion<ImportedNamespace> = noExclude): IPromise<ImportedNamespace> {
+  open(context: LanguageContext, reservedPrefixes: string[], usedNamespaces: string[], exclude: Exclusion<ImportedNamespace> = noExclude): IPromise<ImportedNamespace> {
     return this.$uibModal.open({
       template: require('./searchNamespaceModal.html'),
       size: 'md',
@@ -29,7 +29,8 @@ export class SearchNamespaceModal {
       resolve: {
         exclude: () => exclude,
         context: () => context,
-        reservedPrefixes: () => reservedPrefixes
+        reservedPrefixes: () => reservedPrefixes,
+        usedNamespaces: () => usedNamespaces
       }
     }).result;
   }
@@ -51,6 +52,7 @@ class SearchNamespaceController implements SearchController<ImportedNamespace> {
               public exclude: Exclusion<ImportedNamespace>,
               private context: LanguageContext,
               private reservedPrefixes: string[],
+              private usedNamespaces: string[],
               modelService: ModelService,
               private languageService: LanguageService,
               private addEditNamespaceModal: AddEditNamespaceModal) {
@@ -105,7 +107,7 @@ class SearchNamespaceController implements SearchController<ImportedNamespace> {
 
     const language = this.languageService.getModelLanguage(this.context);
 
-    this.addEditNamespaceModal.openAdd(this.context, language, this.reservedPrefixes)
+    this.addEditNamespaceModal.openAdd(this.context, language, this.reservedPrefixes, this.usedNamespaces)
       .then(ns => this.$uibModalInstance.close(ns), modalCancelHandler);
   }
 

@@ -1,3 +1,4 @@
+import * as jQuery from 'jquery';
 import { IowClassElement, ShadowClass } from './diagram';
 import * as joint from 'jointjs';
 import { ClassInteractionListener, Coordinate } from 'app/types/visualization';
@@ -38,7 +39,7 @@ export class PaperHolder implements Cleanable {
       const newElement = jQuery(document.createElement('div'));
       this.element.append(newElement);
 
-      let newPaper: joint.dia.Paper|null = null;
+      let newPaper: joint.dia.Paper | null = null;
 
       this.zone.runOutsideAngular(() => {
         newPaper = createPaper(newElement, new joint.dia.Graph);
@@ -87,8 +88,8 @@ function registerHandlers(paper: joint.dia.Paper, listener: ClassInteractionList
 
   const paperElement = paper.$el;
   let movingElementOrVertex = false;
-  let drag: {x: number, y: number}|null;
-  let mouse: {x: number, y: number};
+  let drag: { x: number, y: number } | null;
+  let mouse: { x: number, y: number };
   let showMenu: Optional<string>;
 
   const startDragHandler = () => drag = mouse;
@@ -100,7 +101,7 @@ function registerHandlers(paper: joint.dia.Paper, listener: ClassInteractionList
 
   const dragMoveHandler = (event: MouseEvent) => {
 
-    mouse = { x: event.pageX, y: event.pageY};
+    mouse = { x: event.pageX, y: event.pageY };
 
     if (drag) {
       event.preventDefault();

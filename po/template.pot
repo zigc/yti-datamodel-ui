@@ -268,6 +268,9 @@ msgstr ""
 msgid "Existing id error"
 msgstr ""
 
+msgid "Existing or reserved id error"
+msgstr ""
+
 msgid "Required error"
 msgstr ""
 
@@ -313,13 +316,19 @@ msgstr ""
 msgid "INFO_TEXT_FRONTPAGE_SEARCH"
 msgstr ""
 
-msgid "Search term (model name)"
+msgid "Search term"
 msgstr ""
 
 msgid "INFO_TEXT_FRONTPAGE_FILTER_W_CLASSIFICATION"
 msgstr ""
 
 msgid "INFO_TEXT_FRONTPAGE_FILTER_RESULTS"
+msgstr ""
+
+msgid " hit"
+msgstr ""
+
+msgid "Total results"
 msgstr ""
 
 msgid "Add model"
@@ -337,6 +346,12 @@ msgstr ""
 msgid "Search model"
 msgstr ""
 
+msgid "Extend search"
+msgstr ""
+
+msgid "to content"
+msgstr ""
+
 msgid "Filter with information domain"
 msgstr ""
 
@@ -347,6 +362,9 @@ msgid "result"
 msgstr ""
 
 msgid "results"
+msgstr ""
+
+msgid "Search results"
 msgstr ""
 
 msgid "Maintenance content"
@@ -443,6 +461,9 @@ msgid "Suomi.fi Terminologies"
 msgstr ""
 
 msgid "Suomi.fi Reference Data"
+msgstr ""
+
+msgid "Suomi.fi Comments"
 msgstr ""
 
 msgid "User right management"
@@ -940,7 +961,7 @@ msgstr ""
 msgid "You can add new attribute or association to the Class from here"
 msgstr ""
 
-msgid "Created at"
+msgid "Member groups"
 msgstr ""
 
 msgid "not found in the concept database"
@@ -1081,9 +1102,7 @@ msgstr ""
 msgid "Edit in progress"
 msgstr ""
 
-msgid ""
-"Are you sure that you want to continue? By continuing unsaved changes will "
-"be lost."
+msgid "Are you sure that you want to continue? By continuing unsaved changes will be lost."
 msgstr ""
 
 msgid "Dialog is open"
@@ -1359,10 +1378,10 @@ msgstr ""
 msgid "User name"
 msgstr ""
 
-msgid "Define concept for the class"
+msgid "Created at"
 msgstr ""
 
-msgid "Member groups"
+msgid "Define concept for the class"
 msgstr ""
 
 msgid "Admin groups"
@@ -1593,9 +1612,7 @@ msgstr ""
 msgid "Predicate in use"
 msgstr ""
 
-msgid ""
-"Predicate type cannot be changed because it is already used by following "
-"resources"
+msgid "Predicate type cannot be changed because it is already used by following resources"
 msgstr ""
 
 msgid "Convert to association"
@@ -1692,6 +1709,18 @@ msgid "All model types"
 msgstr ""
 
 msgid "All use contexts"
+msgstr ""
+
+msgid "Deep class hit"
+msgstr ""
+
+msgid "Deep shape hit"
+msgstr ""
+
+msgid "Deep attribute hit"
+msgstr ""
+
+msgid "Deep association hit"
 msgstr ""
 
 msgid "Specialized from class info"

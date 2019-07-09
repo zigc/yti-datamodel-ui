@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2019-06-04 15:41+0300\n"
+"PO-Revision-Date: 2019-07-09 13:13+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -277,6 +277,9 @@ msgstr ""
 msgid "Existing id error"
 msgstr ""
 
+msgid "Existing or reserved id error"
+msgstr ""
+
 msgid "Required error"
 msgstr "Required"
 
@@ -324,8 +327,8 @@ msgstr ""
 "The names of the models are searched as a default. You may search with more "
 "options by clicking \"Advanced search\" link."
 
-msgid "Search term (model name)"
-msgstr "Search for model"
+msgid "Search term"
+msgstr ""
 
 msgid "INFO_TEXT_FRONTPAGE_FILTER_W_CLASSIFICATION"
 msgstr ""
@@ -339,6 +342,12 @@ msgstr ""
 "information. Organization is for the organization that is responsible for "
 "upkeeping the model. Type is either core vocabulary or application profile. "
 "Status is for the governance status of the model."
+
+msgid " hit"
+msgstr ""
+
+msgid "Total results"
+msgstr ""
 
 msgid "Add model"
 msgstr ""
@@ -362,6 +371,12 @@ msgstr ""
 msgid "Search model"
 msgstr ""
 
+msgid "Extend search"
+msgstr ""
+
+msgid "to content"
+msgstr ""
+
 msgid "Filter with information domain"
 msgstr ""
 
@@ -372,6 +387,9 @@ msgid "result"
 msgstr ""
 
 msgid "results"
+msgstr ""
+
+msgid "Search results"
 msgstr ""
 
 msgid "Maintenance content"
@@ -469,6 +487,9 @@ msgid "Suomi.fi Terminologies"
 msgstr ""
 
 msgid "Suomi.fi Reference Data"
+msgstr ""
+
+msgid "Suomi.fi Comments"
 msgstr ""
 
 msgid "User right management"
@@ -1003,7 +1024,7 @@ msgstr "Terminology"
 msgid "You can add new attribute or association to the Class from here"
 msgstr ""
 
-msgid "Created at"
+msgid "Member groups"
 msgstr ""
 
 msgid "not found in the concept database"
@@ -1451,10 +1472,10 @@ msgstr ""
 msgid "User name"
 msgstr ""
 
-msgid "Define concept for the class"
+msgid "Created at"
 msgstr ""
 
-msgid "Member groups"
+msgid "Define concept for the class"
 msgstr ""
 
 msgid "Admin groups"
@@ -1788,6 +1809,18 @@ msgstr ""
 
 msgid "All use contexts"
 msgstr ""
+
+msgid "Deep class hit"
+msgstr "Classes"
+
+msgid "Deep shape hit"
+msgstr "Shapes"
+
+msgid "Deep attribute hit"
+msgstr "Attributes"
+
+msgid "Deep association hit"
+msgstr "Associations"
 
 msgid "Specialized from class info"
 msgstr "Reference to the Class of the Shape"

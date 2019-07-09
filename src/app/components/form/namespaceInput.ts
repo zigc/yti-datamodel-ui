@@ -6,6 +6,7 @@ interface NamespaceInputScope extends IScope {
   model: Model;
   activeNamespace: ImportedNamespace;
   allowTechnical: boolean;
+  usedNamespaces?: string[];
 }
 
 export const NamespaceInputDirective: IDirectiveFactory = () => {
@@ -13,7 +14,8 @@ export const NamespaceInputDirective: IDirectiveFactory = () => {
     scope: {
       model: '=?',
       activeNamespace: '=?',
-      allowTechnical: '=?'
+      allowTechnical: '=?',
+      usedNamespaces: '=?'
     },
     restrict: 'A',
     require: 'ngModel',
@@ -25,10 +27,15 @@ export const NamespaceInputDirective: IDirectiveFactory = () => {
         const model = $scope.model;
         const activeNamespace = $scope.activeNamespace;
         const allowTechnical = $scope.allowTechnical;
+        const usedNamespaces: string[] = $scope.usedNamespaces ? $scope.usedNamespaces : [];
+
+        if (usedNamespaces.includes(ns)) {
+          return false;
+        }
 
         if (!model) {
           return true;
-        } else {
+        } else {     
           for (const modelNamespace of model.getNamespaces()) {
             if (modelNamespace.url === ns) {
 

@@ -1,3 +1,4 @@
 import * as angular from 'angular';
 
-export const module = angular.module('iow.components', ['iow.services']);
+// TODO: Remove angular-sanitize when front page is upgraded to Angular X.
+export const module = angular.module('iow.components', ['iow.services', require('angular-sanitize')]);

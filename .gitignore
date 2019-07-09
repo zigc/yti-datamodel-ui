@@ -8,6 +8,9 @@ typings/*
 po/*.mo
 dist
 
+# SonarQube
+.scannerwork
+
 # Idea user related configs
 .idea
 .idea/workspace.xml

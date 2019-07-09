@@ -33,6 +33,7 @@ export interface PredicateService {
   copyPredicate(predicate: Predicate|Uri, type: KnownPredicateType, model: Model): IPromise<Predicate>;
   getExternalPredicate(externalId: Uri, model: Model): IPromise<Predicate|null>;
   getExternalPredicatesForModel(model: Model): IPromise<PredicateListItem[]>;
+  clearCachedPredicates(modelId: string): void;
 }
 
 export class DefaultPredicateService implements PredicateService {
@@ -126,6 +127,10 @@ export class DefaultPredicateService implements PredicateService {
     };
     return this.$http.delete(apiEndpointWithName('predicate'), {params: requestParams})
       .then(() => this.modelPredicatesCache.delete(model.id.uri));
+  }
+
+  clearCachedPredicates(modelId: string): void {
+    this.modelPredicatesCache.delete(modelId);
   }
 
   assignPredicateToModel(predicateId: Uri, model: Model): IPromise<any> {

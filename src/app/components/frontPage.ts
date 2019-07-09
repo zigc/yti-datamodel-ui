@@ -7,15 +7,13 @@ import { HelpProvider } from './common/helpProvider';
 import { FrontPageHelpService } from '../help/providers/frontPageHelpService';
 import { LegacyComponent, modalCancelHandler } from '../utils/angular';
 import { ModelService } from '../services/modelService';
-import { ModelListItem } from '../entities/model';
 import { ClassificationService } from '../services/classificationService';
 import { Classification } from '../entities/classification';
 import { Url } from '../entities/uri';
 import { comparingLocalizable } from '../utils/comparator';
-import { BehaviorSubject, combineLatest, Observable, ObservableInput, Subscription } from 'rxjs';
+import { BehaviorSubject, combineLatest, concat, Observable, Subscription } from 'rxjs';
 import { fromIPromise } from '../utils/observable';
 import { anyMatching } from 'yti-common-ui/utils/array';
-import { matches } from 'yti-common-ui/utils/string';
 import { FilterOptions } from 'yti-common-ui/components/filter-dropdown.component';
 import { KnownModelType, profileUseContexts, UseContext } from '../types/entity';
 import { gettextCatalog as GettextCatalog } from 'angular-gettext';
@@ -23,23 +21,17 @@ import { OrganizationService } from '../services/organizationService';
 import { AuthorizationManagerService } from '../services/authorizationManagerService';
 import { Organization } from '../entities/organization';
 import { labelNameToResourceIdIdentifier } from 'yti-common-ui/utils/resource';
-import { tap } from 'rxjs/operators';
+import { debounceTime, skip, take } from 'rxjs/operators';
 import { InteractiveHelp } from '../help/contract';
 import { getDataModelingMaterialIcon, getInformationDomainSvgIcon } from 'yti-common-ui/utils/icons';
 import { selectableStatuses, Status } from 'yti-common-ui/entities/status';
 import { HelpService } from '../help/providers/helpService';
-
-// XXX: fixes problem with type definition having strongly typed parameters ending with 6
-function myCombineLatest<T, T2, T3, T4, T5, T6, T7, T8>(v1: ObservableInput<T>,
-                                                        v2: ObservableInput<T2>,
-                                                        v3: ObservableInput<T3>,
-                                                        v4: ObservableInput<T4>,
-                                                        v5: ObservableInput<T5>,
-                                                        v6: ObservableInput<T6>,
-                                                        v7: ObservableInput<T7>,
-                                                        v8: ObservableInput<T8>): Observable<[T, T2, T3, T4, T5, T6, T7, T8]> {
-  return combineLatest(v1, v2, v3, v4, v5, v6, v7, v8);
-}
+import { DeepSearchResourceHitList, IndexSearchService, ModelSearchResponse } from '../services/indexSearchService';
+import { getInternalModelUrl, getInternalResourceUrl, IndexModel, IndexResource } from '../entities/index/indexEntities';
+import { Localizable } from 'yti-common-ui/types/localization';
+import { HttpErrorResponse } from '@angular/common/http';
+import { UserService } from '../services/userService';
+import { User } from '../entities/user';
 
 @LegacyComponent({
   template: require('./frontPage.html'),
@@ -55,42 +47,49 @@ export class FrontPageComponent implements HelpProvider {
 
   modelTypes: FilterOptions<KnownModelType>;
   useContexts: FilterOptions<UseContext>;
-  organizations: FilterOptions<Organization>;
   statuses: FilterOptions<Status>;
+  organizations: FilterOptions<Organization> | undefined;
+  organizationMap: { [id: string]: Organization } = {};
+  informationDomains: { node: Classification, count: number }[] | undefined;
+  informationDomainMap: { [id: string]: Classification } = {};
 
   search$ = new BehaviorSubject('');
-  classification$ = new BehaviorSubject<Classification | null>(null);
+  searchResources$ = new BehaviorSubject(true);
+  informationDomain$ = new BehaviorSubject<Classification | null>(null);
   modelType$ = new BehaviorSubject<KnownModelType | null>(null);
   useContext$ = new BehaviorSubject<UseContext | null>(null);
   organization$ = new BehaviorSubject<Organization | null>(null);
   status$ = new BehaviorSubject<Status | null>(null);
 
-  classifications: { node: Classification, count: number }[];
-  filteredModels: ModelListItem[] = [];
+  modelResults$ = new BehaviorSubject<ModelSearchResponse>({
+    totalHitCount: 0, pageSize: 0, pageFrom: 0, models: [], deepHits: {}
+  });
+  filteredModels: IndexModel[] = [];
+  filteredDeepHits: { [domainId: string]: DeepSearchResourceHitList[] };
 
   subscriptionsToClean: Subscription[] = [];
   modelsLoaded = false;
+  modelsSearchError = false;
 
   modelTypeIconDef = getDataModelingMaterialIcon;
   informationDomainIconSrc = getInformationDomainSvgIcon;
 
   constructor($scope: IScope,
+              private gettextCatalog: GettextCatalog,
               private $location: ILocationService,
-              locationService: LocationService,
-              modelService: ModelService,
-              languageService: LanguageService,
-              gettextCatalog: GettextCatalog,
+              private locationService: LocationService,
+              private modelService: ModelService,
+              private languageService: LanguageService,
               private advancedSearchModal: AdvancedSearchModal,
               private frontPageHelpService: FrontPageHelpService,
-              classificationService: ClassificationService,
-              organizationService: OrganizationService,
+              private classificationService: ClassificationService,
+              private organizationService: OrganizationService,
               private authorizationManagerService: AuthorizationManagerService,
-              private helpService: HelpService) {
+              private helpService: HelpService,
+              private indexSearchService: IndexSearchService,
+              private userService: UserService) {
 
     'ngInject';
-
-    locationService.atFrontPage();
-    const localizer = languageService.createLocalizer();
 
     $scope.$watch(() => languageService.UILanguage, lang => {
       this.helps = frontPageHelpService.getHelps(lang);
@@ -112,87 +111,15 @@ export class FrontPageComponent implements HelpProvider {
       }
     });
 
-    organizationService.getOrganizations().then(organizations => {
-
-      this.organizations = [null, ...organizations].map(org => {
-        return {
-          value: org,
-          name: () => org ? languageService.translate(org.label) : gettextCatalog.getString('All organizations'),
-          idIdentifier: () => org ? labelNameToResourceIdIdentifier(languageService.translate(org.label)) : 'all_selected'
-        }
-      });
-    });
-
     this.statuses = [null, ...selectableStatuses].map(status => ({
       value: status,
       name: () => gettextCatalog.getString(status ? status : 'All statuses'),
       idIdentifier: () => status ? status : 'all_selected'
     }));
-
-    const models$ = fromIPromise(modelService.getModels()).pipe(tap(() => this.modelsLoaded = true));
-    const classifications$ = fromIPromise(classificationService.getClassifications());
-
-    function searchMatches(search: string, model: ModelListItem) {
-      return !search || anyMatching(Object.values(model.label), value => matches(value, search));
-    }
-
-    function classificationMatches(classification: Classification | null, model: ModelListItem) {
-      return !classification || anyMatching(model.classifications, c => c.id.equals(classification.id));
-    }
-
-    function typeMatches(type: KnownModelType | null, model: ModelListItem) {
-      return !type || model.normalizedType === type;
-    }
-
-    function useContextMatches(uc: UseContext | null, model: ModelListItem) {
-      return !uc || model.useContext === uc;
-    }
-
-    function organizationMatches(org: Organization | null, model: ModelListItem) {
-      return !org || anyMatching(model.contributors, modelOrg => modelOrg.id.equals(org.id));
-    }
-
-    function statusMatches(status: Status | null, model: ModelListItem) {
-      return !status || model.status === status;
-    }
-
-    this.subscriptionsToClean.push(myCombineLatest(classifications$, models$, this.search$, this.modelType$, this.useContext$, this.organization$, this.status$, languageService.language$)
-      .subscribe(([classifications, models, search, modelType, useContext, org, status]) => {
-
-        const matchingModels = models.filter(model =>
-          searchMatches(search, model) &&
-          typeMatches(modelType, model) &&
-          useContextMatches(useContext, model) &&
-          organizationMatches(org, model) &&
-          statusMatches(status, model)
-        );
-
-        const modelCount = (classification: Classification) =>
-          matchingModels.filter(model => classificationMatches(classification, model)).length;
-
-        this.classifications = classifications.map(c => ({ node: c, count: modelCount(c) })).filter(c => c.count > 0);
-        this.classifications.sort(comparingLocalizable<{ node: Classification, count: number }>(localizer, c => c.node.label));
-      }));
-
-    this.subscriptionsToClean.push(myCombineLatest(models$, this.search$, this.classification$, this.modelType$, this.useContext$, this.organization$, this.status$, languageService.language$)
-      .subscribe(([models, search, classification, modelType, useContext, org, status]) => {
-
-        this.filteredModels = models.filter(model =>
-          searchMatches(search, model) &&
-          classificationMatches(classification, model) &&
-          useContextMatches(useContext, model) &&
-          typeMatches(modelType, model) &&
-          organizationMatches(org, model) &&
-          statusMatches(status, model)
-        );
-
-        this.filteredModels.sort(comparingLocalizable<ModelListItem>(localizer, m => m.label));
-        this.filteredModels.map(filteredModel => filteredModel.classifications.sort(comparingLocalizable<Classification>(localizer, c => c.label)));
-      }));
   }
 
   get loading() {
-    return !this.modelsLoaded || this.classifications == null || this.modelTypes == null || this.organizations == null;
+    return !this.modelsLoaded || !this.informationDomains || !this.organizations;
   }
 
   get search() {
@@ -203,8 +130,34 @@ export class FrontPageComponent implements HelpProvider {
     this.search$.next(value);
   }
 
+  get searchResources() {
+    return this.searchResources$.getValue();
+  }
+
+  set searchResources(value: boolean) {
+    this.searchResources$.next(value);
+  }
+
   $onInit() {
+    this.locationService.atFrontPage();
     this.helpService.registerProvider(this);
+
+    const informationDomains$ = fromIPromise(this.classificationService.getClassifications());
+    const organizations$ = fromIPromise(this.organizationService.getOrganizations());
+
+    this.subscriptionsToClean.push(combineLatest(informationDomains$, organizations$).subscribe(([informationDomains, organizations]) => {
+      this.organizations = [null, ...organizations].map(org => {
+        return {
+          value: org,
+          name: () => org ? this.languageService.translate(org.label) : this.gettextCatalog.getString('All organizations'),
+          idIdentifier: () => org ? labelNameToResourceIdIdentifier(this.languageService.translate(org.label)) : 'all_selected'
+        }
+      });
+      organizations.map(org => this.organizationMap[org.id.toString()] = org);
+      informationDomains.forEach(domain => this.informationDomainMap[domain.identifier] = domain);
+      this.subscribeModels();
+      this.filterModels(informationDomains);
+    }));
   }
 
   $onDestroy() {
@@ -214,16 +167,20 @@ export class FrontPageComponent implements HelpProvider {
     }
   }
 
-  isClassificationSelected(classification: Classification) {
-    return this.classification$.getValue() === classification;
+  isInformationDomainSelected(domain: Classification) {
+    return this.informationDomain$.getValue() === domain;
   }
 
-  toggleClassification(classification: Classification) {
-    this.classification$.next(this.isClassificationSelected(classification) ? null : classification);
+  toggleInformationDomain(domain: Classification) {
+    this.informationDomain$.next(this.isInformationDomainSelected(domain) ? null : domain);
   }
 
-  selectModel(model: ModelListItem) {
-    this.go(model);
+  selectModel(model: IndexModel) {
+    this.$location.url(getInternalModelUrl(model));
+  }
+
+  selectResource(model: IndexModel, resource: IndexResource) {
+    this.$location.url(getInternalResourceUrl(model, resource));
   }
 
   openAdvancedSearch() {
@@ -248,12 +205,127 @@ export class FrontPageComponent implements HelpProvider {
     this.$location.search({ type });
   }
 
+  informationDomainLabel(id: string): Localizable {
+    const domain: Classification | undefined = this.informationDomainMap[id];
+    if (domain) {
+      return domain.label;
+    }
+    return { en: 'Domain not found' };
+  }
+
+  organizationLabel(id: string): Localizable {
+    const org: Organization | undefined = this.organizationMap["urn:uuid:" + id];
+    if (org) {
+      return org.label;
+    }
+    return { en: 'Organization not found' };
+  }
+
+  allLanguagesLabel(label: Localizable): string | undefined {
+    const exp = /<\/?b>/g;
+    const keys = Object.keys(label);
+    if (keys.length) {
+      return keys.map(key => label[key].replace(exp, '') + ' (' + key + ')').join('\n');
+    }
+    return undefined;
+  }
+
+  private subscribeModels(): void {
+    const initialSearchText$: Observable<string> = this.search$.pipe(take(1));
+    const debouncedSearchText$: Observable<string> = this.search$.pipe(skip(1), debounceTime(500));
+    const combinedSearchText$: Observable<string> = concat(initialSearchText$, debouncedSearchText$);
+    const searchConditions$: Observable<[string, string, boolean, User]> = combineLatest(combinedSearchText$, this.languageService.language$, this.searchResources$, this.userService.user$);
+
+    this.subscriptionsToClean.push(searchConditions$.subscribe(([text, language, searchResources, _user]) => {
+      this.indexSearchService.searchModels({
+        query: text || undefined,
+        searchResources: searchResources,
+        sortLang: language,
+        pageSize: 1000,
+        pageFrom: 0
+      }).subscribe(resp => {
+        this.modelsSearchError = false;
+        this.modelsLoaded = true;
+        if (resp.totalHitCount != resp.models.length) {
+          console.error(`Model search did not return all results. Got ${resp.models.length} (start: ${resp.pageFrom}, total hits: ${resp.totalHitCount})`);
+        }
+        this.modelResults$.next(resp);
+      }, err => {
+        if (err instanceof HttpErrorResponse && err.status >= 400 && err.status < 500) {
+          this.modelsSearchError = true;
+          this.modelResults$.next({
+            totalHitCount: 0, pageSize: 0, pageFrom: 0, models: [], deepHits: {}
+          });
+        } else {
+          console.error('Model search failed: ' + JSON.stringify(err));
+        }
+      });
+    }));
+  }
+
+  private filterModels(informationDomains: Classification[]): void {
+    const localizer = this.languageService.createLocalizer();
+
+    this.subscriptionsToClean.push(combineLatest(combineLatest(this.modelResults$, this.languageService.language$),
+      combineLatest(this.search$, this.informationDomain$, this.modelType$, this.useContext$, this.organization$, this.status$))
+      .subscribe(([[modelResult, language], [search, informationDomain, modelType, useContext, org, status]]) => {
+
+        const ignoringInformationDomain = modelResult.models.filter(model =>
+          typeMatches(modelType, model) &&
+          useContextMatches(useContext, model) &&
+          organizationMatches(org, model) &&
+          statusMatches(status, model)
+        );
+
+        const modelCount: (domain: Classification) => number =
+          (domain: Classification) => ignoringInformationDomain.filter(model => informationDomainMatches(domain, model)).length;
+        this.informationDomains = informationDomains.map(domain => ({
+          node: domain,
+          count: modelCount(domain)
+        })).filter(item => item.count > 0);
+        this.informationDomains.sort(comparingLocalizable<{ node: Classification, count: number }>(localizer, item => item.node.label));
+
+        this.filteredModels = ignoringInformationDomain.filter(model => informationDomainMatches(informationDomain, model));
+        this.filteredModels.sort(comparingLocalizable<IndexModel>(localizer, m => m.label));
+        this.filteredModels.map(filteredModel => filteredModel.isPartOf.sort(comparingLocalizable<string>(localizer, id => this.informationDomainLabel(id))));
+
+        this.filteredDeepHits = {};
+        if (modelResult.deepHits && Object.keys(modelResult.deepHits).length > 0) {
+          const dhs = modelResult.deepHits;
+          this.filteredModels.forEach(model => {
+            const hit: DeepSearchResourceHitList[] | undefined = dhs[model.id];
+            if (hit) {
+              this.filteredDeepHits[model.id] = hit;
+            }
+          });
+        }
+      }));
+  }
+
   private go(withIowUrl: { iowUrl(): Url | null }) {
-
     const url = withIowUrl.iowUrl();
-
     if (url) {
       this.$location.url(url);
     }
   }
+}
+
+function informationDomainMatches(classification: Classification | null, model: IndexModel) {
+  return !classification || anyMatching(model.isPartOf, domain => classification.identifier === domain);
+}
+
+function typeMatches(type: KnownModelType | null, model: IndexModel) {
+  return !type || model.type === type;
+}
+
+function useContextMatches(uc: UseContext | null, model: IndexModel) {
+  return !uc || model.useContext === uc;
+}
+
+function organizationMatches(org: Organization | null, model: IndexModel) {
+  return !org || anyMatching(model.contributor, modelOrgId => ("urn:uuid:" + modelOrgId) === org.id.toString());
+}
+
+function statusMatches(status: Status | null, model: IndexModel) {
+  return !status || model.status === status;
 }

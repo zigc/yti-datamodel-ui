@@ -1,9 +1,9 @@
 import { IPromise, IScope } from 'angular';
 import { IModalService, IModalServiceInstance } from 'angular-ui-bootstrap';
-import { ModelService } from 'app/services/modelService';
-import { Language, LanguageContext } from 'app/types/language';
+import { ModelService } from '../../services/modelService';
+import { Language, LanguageContext } from '../../types/language';
 import { isDefined } from 'yti-common-ui/utils/object';
-import { ImportedNamespace } from 'app/entities/model';
+import { ImportedNamespace } from '../../entities/model';
 
 const technicalNamespaces: { [prefix: string]: string } = {
   dcap: 'http://purl.org/ws-mmi-dc/terms/',
@@ -28,7 +28,8 @@ const technicalNamespaces: { [prefix: string]: string } = {
   termed: 'http://termed.thl.fi/meta/',
   foaf: 'http://xmlns.com/foaf/0.1/',
   dc: 'http://purl.org/dc/elements/1.1/',
-  ts: 'http://www.w3.org/2003/06/sw-vocab-status/ns#'
+  ts: 'http://www.w3.org/2003/06/sw-vocab-status/ns#',
+  httpv: 'http://www.w3.org/2011/http#'
 };
 
 const forbiddenPrefixes: string[] = ['xsd', 'iow', 'text', 'sh', 'afn', 'schema', 'dcap', 'termed', 'abstract', 'and', 'andCond', 'class',
@@ -39,7 +40,7 @@ const forbiddenPrefixes: string[] = ['xsd', 'iow', 'text', 'sh', 'afn', 'schema'
   'nodeKind', 'not', 'notCond', 'or', 'orCond', 'path', 'pattern', 'pointXY', 'preferredXMLNamespaceName', 'preferredXMLNamespacePrefix',
   'prefLabel', 'property', 'predicate', 'range', 'readOnlyValue', 'references', 'relations', 'requires', 'rootResource', 'rest', 'stem',
   'subClassOf', 'subject', 'subPropertyOf', 'targetClass', 'title', 'type', 'uniqueLang', 'useContext', 'uri', 'versionInfo', 'vertexXY',
-  'xor'].filter(prefix => !technicalNamespaces[prefix]);
+  'xor', 'urn', 'http', 'https'].filter(prefix => !technicalNamespaces[prefix]);
 
 export class AddEditNamespaceModal {
 
@@ -47,12 +48,12 @@ export class AddEditNamespaceModal {
     'ngInject';
   }
 
-  openAdd(context: LanguageContext, language: Language, reservedPrefixes?: string[]): IPromise<ImportedNamespace> {
-    return this.open(context, language, null, this.concatPrefixes(reservedPrefixes));
+  openAdd(context: LanguageContext, language: Language, reservedPrefixes?: string[], usedNamespaces: string[] = []): IPromise<ImportedNamespace> {
+    return this.open(context, language, null, this.concatPrefixes(reservedPrefixes), usedNamespaces);
   }
 
-  openEdit(context: LanguageContext, require: ImportedNamespace, language: Language, reservedPrefixes?: string[]): IPromise<ImportedNamespace> {
-    return this.open(context, language, require, this.concatPrefixes(reservedPrefixes));
+  openEdit(context: LanguageContext, require: ImportedNamespace, language: Language, reservedPrefixes?: string[], usedNamespaces: string[] = []): IPromise<ImportedNamespace> {
+    return this.open(context, language, require, this.concatPrefixes(reservedPrefixes), usedNamespaces);
   }
 
   private concatPrefixes(reservedPrefixes?: string[]): string[] {
@@ -62,7 +63,7 @@ export class AddEditNamespaceModal {
     return forbiddenPrefixes;
   }
 
-  private open(context: LanguageContext, language: Language, namespaceToEdit: ImportedNamespace | null, reservedPrefixes: string[]): IPromise<ImportedNamespace> {
+  private open(context: LanguageContext, language: Language, namespaceToEdit: ImportedNamespace | null, reservedPrefixes: string[], usedNamespaces: string[]): IPromise<ImportedNamespace> {
     return this.$uibModal.open({
       template: require('./addEditNamespaceModal.html'),
       size: 'sm',
@@ -73,7 +74,8 @@ export class AddEditNamespaceModal {
         context: () => context,
         language: () => language,
         namespaceToEdit: () => namespaceToEdit,
-        reservedPrefixes: () => reservedPrefixes
+        reservedPrefixes: () => reservedPrefixes,
+        usedNamespaces: () => usedNamespaces
       }
     }).result;
   }
@@ -97,6 +99,7 @@ class AddEditNamespaceController {
               private language: Language,
               private namespaceToEdit: ImportedNamespace | null,
               public reservedPrefixes: string[],
+              public usedNamespaces: string[],
               private modelService: ModelService) {
     'ngInject';
     this.edit = !!namespaceToEdit;
@@ -107,50 +110,47 @@ class AddEditNamespaceController {
       this.label = namespaceToEdit.label[language];
     }
 
-    if (!this.edit) {
+    $scope.$watch(() => this.prefix, () => {
+      if (this.prefixModifiable()) {
 
-      $scope.$watch(() => this.prefix, () => {
-        if (this.prefixModifiable()) {
+        const namespaceOverrideWasOn = isDefined(this.namespaceBeforeForced);
+        let namespaceOverrideSwitchedOn = false;
 
-          const namespaceOverrideWasOn = isDefined(this.namespaceBeforeForced);
-          let namespaceOverrideSwitchedOn = false;
-
-          for (const [prefix, ns] of Object.entries(technicalNamespaces)) {
-            if (prefix === this.prefix) {
-              namespaceOverrideSwitchedOn = true;
-              this.namespaceBeforeForced = this.namespace || '';
-              this.namespace = ns;
-            }
-          }
-
-          if (namespaceOverrideWasOn && !namespaceOverrideSwitchedOn) {
-            this.namespace = this.namespaceBeforeForced!;
-            this.namespaceBeforeForced = null;
+        for (const [prefix, ns] of Object.entries(technicalNamespaces)) {
+          if (prefix === this.prefix) {
+            namespaceOverrideSwitchedOn = true;
+            this.namespaceBeforeForced = this.namespace || '';
+            this.namespace = ns;
           }
         }
-      });
 
-      $scope.$watch(() => this.namespace, () => {
-        if (this.namespaceModifiable()) {
+        if (namespaceOverrideWasOn && !namespaceOverrideSwitchedOn) {
+          this.namespace = this.namespaceBeforeForced!;
+          this.namespaceBeforeForced = null;
+        }
+      }
+    });
 
-          const prefixOverrideWasOn = isDefined(this.prefixBeforeForced);
-          let prefixOverrideSwitchedOn = false;
+    $scope.$watch(() => this.namespace, () => {
+      if (this.namespaceModifiable()) {
 
-          for (const [prefix, ns] of Object.entries(technicalNamespaces)) {
-            if (ns === this.namespace) {
-              prefixOverrideSwitchedOn = true;
-              this.prefixBeforeForced = this.prefix || '';
-              this.prefix = prefix;
-            }
-          }
+        const prefixOverrideWasOn = isDefined(this.prefixBeforeForced);
+        let prefixOverrideSwitchedOn = false;
 
-          if (prefixOverrideWasOn && !prefixOverrideSwitchedOn) {
-            this.prefix = this.prefixBeforeForced!;
-            this.prefixBeforeForced = null;
+        for (const [prefix, ns] of Object.entries(technicalNamespaces)) {
+          if (ns === this.namespace) {
+            prefixOverrideSwitchedOn = true;
+            this.prefixBeforeForced = this.prefix || '';
+            this.prefix = prefix;
           }
         }
-      });
-    }
+
+        if (prefixOverrideWasOn && !prefixOverrideSwitchedOn) {
+          this.prefix = this.prefixBeforeForced!;
+          this.prefixBeforeForced = null;
+        }
+      }
+    });
   }
 
   get confirmLabel() {
@@ -159,6 +159,10 @@ class AddEditNamespaceController {
 
   get titleLabel() {
     return this.edit ? 'Edit namespace' : 'Import namespace';
+  }
+
+  get confirmButtonID() {
+    return this.edit ? 'edit_namespace_confirm_button' : 'add_new_namespace_confirm_button';
   }
 
   labelModifiable() {
@@ -179,7 +183,7 @@ class AddEditNamespaceController {
       this.namespaceToEdit!.prefix = this.prefix;
       this.namespaceToEdit!.label[this.language] = this.label;
 
-      this.$uibModalInstance.close(this.namespaceToEdit);
+      this.$uibModalInstance.close(this.mangleAsTechnicalIfNecessary(this.namespaceToEdit!));
     } else {
       this.modelService.newNamespaceImport(this.namespace, this.prefix, this.label, this.language)
         .then(ns => {

@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 
 export interface UserService {
   user: User;
-  loggedIn$: Observable<boolean>;
+  user$: Observable<User>;
   updateLoggedInUser(fakeLoginMail?: string): void;
   isLoggedIn(): boolean;
   register(): void;

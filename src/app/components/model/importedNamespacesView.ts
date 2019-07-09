@@ -25,7 +25,8 @@ interface WithImportedNamespaces {
     context: '=',
     allowProfiles: '=',
     namespacesInUse: '=',
-    modelPrefix: '<'
+    modelPrefix: '<',
+    modelNamespace: '<'
   },
   require: {
     form: '?^form'
@@ -47,6 +48,7 @@ export class ImportedNamespacesViewComponent {
   context: LanguageContext;
   namespacesInUse?: Set<string>;
   modelPrefix: string;
+  modelNamespace: string;
 
   descriptor: ImportedNamespaceTableDescriptor;
   expanded = false;
@@ -63,7 +65,7 @@ export class ImportedNamespacesViewComponent {
   $onInit() {
     this.$scope.$watch(() => this.value, value => {
       this.descriptor = new ImportedNamespaceTableDescriptor(this.addEditNamespaceModal, value, () => this.modelPrefix,
-        this.context, this.languageService, this.namespacesInUse);
+      () => this.modelNamespace, this.context, this.languageService, this.namespacesInUse);
     });
   }
 
@@ -89,8 +91,9 @@ export class ImportedNamespacesViewComponent {
     const exclude = combineExclusions(existsExclude, profileExclude, thisModelExclude);
 
     const reservedPrefixes: string[] = [this.modelPrefix, ...this.value.importedNamespaces.map(ns => ns.prefix)];
+    const usedNamespaces: string[] = [this.modelNamespace, ...this.value.importedNamespaces.map(namespace => namespace.namespace)];
 
-    this.searchNamespaceModal.open(this.context, reservedPrefixes, exclude)
+    this.searchNamespaceModal.open(this.context, reservedPrefixes, usedNamespaces, exclude)
       .then((ns: ImportedNamespace) => {
         this.value.addImportedNamespace(ns);
         this.expanded = true;
@@ -103,6 +106,7 @@ class ImportedNamespaceTableDescriptor extends TableDescriptor<ImportedNamespace
   constructor(private addEditNamespaceModal: AddEditNamespaceModal,
               private value: WithImportedNamespaces,
               private modelPrefix: () => string,
+              private modelNamespace: () => string,
               private context: LanguageContext,
               private languageService: LanguageService,
               private namespacesInUse?: Set<string>) {
@@ -126,8 +130,9 @@ class ImportedNamespaceTableDescriptor extends TableDescriptor<ImportedNamespace
   }
 
   edit(ns: ImportedNamespace) {
-    const reservedPrefixes: string[] = [this.modelPrefix(), ...this.value.importedNamespaces.map(ns => ns.prefix).filter(prefix => ns.prefix !== prefix)];
-    this.addEditNamespaceModal.openEdit(this.context, ns, this.languageService.getModelLanguage(this.context), reservedPrefixes);
+    const reservedPrefixes: string[] = [this.modelPrefix(), ...this.value.importedNamespaces.map(namespace => namespace.prefix).filter(prefix => ns.prefix !== prefix)];
+    const usedNamespaces: string[] = [this.modelNamespace(), ...this.value.importedNamespaces.map(namespace => namespace.namespace).filter(namespace => ns.namespace !== namespace)];
+    this.addEditNamespaceModal.openEdit(this.context, ns, this.languageService.getModelLanguage(this.context), reservedPrefixes, usedNamespaces);
   }
 
   remove(ns: ImportedNamespace) {

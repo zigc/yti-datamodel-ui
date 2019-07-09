@@ -21,7 +21,12 @@ import { mapOptional, Optional, requireDefined } from 'yti-common-ui/utils/objec
 import { Class, Property } from 'app/entities/class';
 import { Predicate } from 'app/entities/predicate';
 import { Model } from 'app/entities/model';
-import { AssociationPropertyPosition, AssociationTargetPlaceholderClass, ModelPositions, VisualizationClass } from 'app/entities/visualization';
+import {
+  AssociationPropertyPosition,
+  AssociationTargetPlaceholderClass,
+  ModelPositions,
+  VisualizationClass
+} from 'app/entities/visualization';
 import { InteractiveHelpService } from 'app/help/services/interactiveHelpService';
 import * as moment from 'moment';
 import { ContextMenuTarget } from './contextMenu';
@@ -152,9 +157,9 @@ import { NgZone } from '@angular/core';
      <ajax-loading-indicator ng-if="$ctrl.loading"></ajax-loading-indicator>
   `
 })
-export class ClassVisualizationComponent implements ChangeListener<Class|Predicate>, ClassInteractionListener {
+export class ClassVisualizationComponent implements ChangeListener<Class | Predicate>, ClassInteractionListener {
 
-  selection: Class|Predicate;
+  selection: Class | Predicate;
 
   model: Model;
   modelPageActions: ModelPageActions;
@@ -177,11 +182,11 @@ export class ClassVisualizationComponent implements ChangeListener<Class|Predica
 
   refreshDimensions: () => void;
 
-  popoverDetails: VisualizationPopoverDetails|null;
+  popoverDetails: VisualizationPopoverDetails | null;
 
   localizer: Localizer;
 
-  clickType: 'left'|'right' = 'left';
+  clickType: 'left' | 'right' = 'left';
   contextMenuTarget: Optional<ContextMenuTarget>;
 
   exportOpen = false;
@@ -205,6 +210,55 @@ export class ClassVisualizationComponent implements ChangeListener<Class|Predica
               private confirmationModal: ConfirmationModal,
               private authorizationManagerService: AuthorizationManagerService) {
     'ngInject';
+  }
+
+  get selectionFocus() {
+    return this.sessionService.visualizationFocus || FocusLevel.ALL;
+  }
+
+  set selectionFocus(value: FocusLevel) {
+    this.sessionService.visualizationFocus = value;
+  }
+
+  get showName() {
+    return this.sessionService.showName || NameType.LABEL;
+  }
+
+  set showName(value: NameType) {
+    this.sessionService.showName = value;
+  }
+
+  get paper(): joint.dia.Paper {
+    return this.paperHolder.getPaper(this.model);
+  }
+
+  get graph(): joint.dia.Graph {
+    return <joint.dia.Graph>this.paper.model;
+  }
+
+  get modelPositions() {
+    return this.classVisualization && this.classVisualization.positions;
+  }
+
+  get showNameLabel() {
+    switch (this.showName) {
+      case NameType.ID:
+        return 'ID';
+      case NameType.LABEL:
+        return 'Label';
+      case NameType.LOCAL_ID:
+        return 'Local ID';
+      default:
+        throw new Error('Unsupported show name type: ' + this.showName);
+    }
+  }
+
+  private get iowCellOptions() {
+    return {
+      showCardinality: this.model.isOfType('profile'),
+      showName: this.showName,
+      localizer: this.localizer
+    };
   }
 
   $onInit() {
@@ -303,7 +357,8 @@ export class ClassVisualizationComponent implements ChangeListener<Class|Predica
   generateExports(): IPromise<Download[]> {
 
     const UTF8_BOM = '\ufeff';
-    const svgBlob = new Blob([UTF8_BOM, this.svgToString()], { type: 'image/svg+xml;charset=utf-8' });
+    const svg = this.svgToString();
+    const svgBlob = new Blob([UTF8_BOM, svg.value], { type: 'image/svg+xml;charset=utf-8' });
 
     const filenameForExtension = (extension: string) =>
       `${this.model.prefix}-visualization-${moment().format('YYYY-MM-DD')}.${extension.toLowerCase()}`;
@@ -321,12 +376,12 @@ export class ClassVisualizationComponent implements ChangeListener<Class|Predica
       };
     };
 
-    return this.svgToPng(svgBlob)
+    return this.svgToPng(svgBlob, svg.width, svg.height)
       .then(pngBlob => [createDownload(pngBlob, 'png'), createDownload(svgBlob, 'svg')],
         _err => [createDownload(svgBlob, 'svg')]);
   }
 
-  svgToPng(svgBlob: Blob): IPromise<Blob> {
+  svgToPng(svgBlob: Blob, svgWidth: number, svgHeight: number): IPromise<Blob> {
 
     const deferred = this.$q.defer<Blob>();
     const canvas = this.canvas;
@@ -334,16 +389,19 @@ export class ClassVisualizationComponent implements ChangeListener<Class|Predica
     img.crossOrigin = 'anonymous';
     const svgURL = this.$window.URL.createObjectURL(svgBlob);
 
-    const ctx = canvas.getContext('2d')!;
-    ctx.fillStyle = 'white';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-
     img.onload = () => {
 
       // Timeout hack for IE which incorrectly calls onload even when loading isn't actually ready
       setTimeout(() => {
+        const width: number = img.width ? img.width : (svgWidth ? svgWidth : 1024);
+        const height: number = img.height ? img.height : (svgHeight ? svgHeight : 1024);
+        canvas.width = width;
+        canvas.height = height;
 
-        ctx.drawImage(img, 0, 0);
+        const ctx = canvas.getContext('2d')!;
+        ctx.fillStyle = 'white';
+        ctx.fillRect(0, 0, width, height);
+        ctx.drawImage(img, 0, 0, width, height);
         this.$window.URL.revokeObjectURL(svgURL);
 
         try {
@@ -355,7 +413,7 @@ export class ClassVisualizationComponent implements ChangeListener<Class|Predica
             }
           }, 'image/png');
         } catch (e) {
-          console.log('Cannot export PNG');
+          console.log('Cannot export PNG: ' + e);
           deferred.reject(e);
         }
       });
@@ -366,38 +424,16 @@ export class ClassVisualizationComponent implements ChangeListener<Class|Predica
     return deferred.promise;
   }
 
-  svgToString() {
+  svgToString(): { value: string; width: number; height: number; } {
     // brutal way to inject styles to the document but creating new dom hierarchy seems to be impossible to get to work with IE
-    return new XMLSerializer().serializeToString(this.svg())
+    const svg : SVGElement = this.svg();
+    const value: string = new XMLSerializer().serializeToString(svg)
       .replace('</svg>', '<style>' + require('!raw-loader!sass-loader!../../../styles/classVisualizationSvgExport.scss') + '</style></svg>');
-  }
-
-  get selectionFocus() {
-    return this.sessionService.visualizationFocus || FocusLevel.ALL;
-  }
-
-  set selectionFocus(value: FocusLevel) {
-    this.sessionService.visualizationFocus = value;
-  }
-
-  get showName() {
-    return this.sessionService.showName || NameType.LABEL;
-  }
-
-  set showName(value: NameType) {
-    this.sessionService.showName = value;
-  }
-
-  get paper(): joint.dia.Paper {
-    return this.paperHolder.getPaper(this.model);
-  }
-
-  get graph(): joint.dia.Graph {
-    return <joint.dia.Graph> this.paper.model;
-  }
-
-  get modelPositions() {
-    return this.classVisualization && this.classVisualization.positions;
+    return {
+      value: value,
+      width: svg.clientWidth,
+      height: svg.clientHeight
+    };
   }
 
   canSave() {
@@ -485,7 +521,7 @@ export class ClassVisualizationComponent implements ChangeListener<Class|Predica
     });
   }
 
-  onDelete(item: Class|Predicate) {
+  onDelete(item: Class | Predicate) {
     this.queueWhenNotVisible(() => {
       if (item instanceof Class) {
         this.removeClass(item);
@@ -493,7 +529,7 @@ export class ClassVisualizationComponent implements ChangeListener<Class|Predica
     });
   }
 
-  onEdit(newItem: Class|Predicate, oldItem: Class|Predicate|null) {
+  onEdit(newItem: Class | Predicate, oldItem: Class | Predicate | null) {
     this.queueWhenNotVisible(() => {
       // id change can cause massive association realignment in the server
       if (oldItem && newItem.id.notEquals(oldItem.id)) {
@@ -506,7 +542,7 @@ export class ClassVisualizationComponent implements ChangeListener<Class|Predica
     });
   }
 
-  onAssign(item: Class|Predicate) {
+  onAssign(item: Class | Predicate) {
     this.queueWhenNotVisible(() => {
       if (item instanceof Class) {
         this.updateClassAndLayout(item);
@@ -538,49 +574,11 @@ export class ClassVisualizationComponent implements ChangeListener<Class|Predica
     });
   }
 
-  private updateClassAndLayout(klass: Class, oldId?: Uri|null) {
-
-    const creation = !oldId;
-    const idChanged = oldId && klass.id.notEquals(oldId);
-    const oldIdIsAssociationTarget = oldId && this.isAssociationTarget(oldId);
-
-    if (idChanged) {
-      this.modelPositions.changeClassId(oldId!, klass.id);
-    }
-
-    const addedClasses = this.addOrReplaceClass(klass);
-
-    if (idChanged) {
-      if (oldIdIsAssociationTarget) {
-        addedClasses.push(oldId!);
-        this.replaceClass(new AssociationTargetPlaceholderClass(oldId!, this.model));
-      } else {
-        this.removeClass(oldId!);
-      }
-    }
-
-    if (addedClasses.length > 0) {
-      this.loading = true;
-      this.layoutAndFocus(false, addedClasses.filter(classId => creation || klass.id.notEquals(classId)))
-        .then(() => {
-          if (oldIdIsAssociationTarget) {
-            this.adjustElementLinks([oldId!], VertexAction.Reset);
-          }
-
-          this.adjustElementLinks([klass.id], VertexAction.KeepPersistent);
-          this.loading = false;
-        });
-    } else {
-      // Delay focus because dom needs to be repainted
-      setTimeout(() => this.focusSelection(false));
-    }
-  }
-
   adjustAllLinks(vertexAction: VertexAction) {
     this.adjustElementLinks(null, vertexAction);
   }
 
-  adjustElementLinks(classIds: Uri[]|null, vertexAction: VertexAction) {
+  adjustElementLinks(classIds: Uri[] | null, vertexAction: VertexAction) {
 
     const alreadyAdjusted = new Set<string>();
 
@@ -588,7 +586,7 @@ export class ClassVisualizationComponent implements ChangeListener<Class|Predica
       for (const classId of classIds) {
         const element = this.graph.getCell(classId.toString());
         if (element instanceof joint.dia.Element) {
-          adjustElementLinks(this.paper, <joint.dia.Element> element, alreadyAdjusted, this.modelPositions, vertexAction);
+          adjustElementLinks(this.paper, <joint.dia.Element>element, alreadyAdjusted, this.modelPositions, vertexAction);
         }
       }
     } else {
@@ -618,7 +616,7 @@ export class ClassVisualizationComponent implements ChangeListener<Class|Predica
       case FocusLevel.INFINITE_DEPTH:
         return '*';
       default:
-        return (<number> this.selectionFocus).toString();
+        return (<number>this.selectionFocus).toString();
     }
   }
 
@@ -667,24 +665,11 @@ export class ClassVisualizationComponent implements ChangeListener<Class|Predica
     }
   }
 
-  get showNameLabel() {
-    switch (this.showName) {
-      case NameType.ID:
-        return 'ID';
-      case NameType.LABEL:
-        return 'Label';
-      case NameType.LOCAL_ID:
-        return 'Local ID';
-      default:
-        throw new Error('Unsupported show name type: ' + this.showName);
-    }
-  }
-
   onClassContextMenu(classId: string, coordinate: Coordinate): void {
 
     if (!this.userService.user.anonymous) {
       const klass = this.classVisualization.hasClass(classId) ? this.classVisualization.getClassById(classId)
-                                                              : new AssociationTargetPlaceholderClass(new Uri(classId, this.model.context), this.model);
+        : new AssociationTargetPlaceholderClass(new Uri(classId, this.model.context), this.model);
       this.contextMenuTarget = { coordinate, target: klass };
     }
   }
@@ -742,7 +727,61 @@ export class ClassVisualizationComponent implements ChangeListener<Class|Predica
     focusElement(this.paper, this.graph, this.findElementForSelection(), forceFitToAllContent, this.selectionFocus);
   }
 
-  private findElementForSelection(): joint.dia.Element|null {
+  isExistingClass(klass: Class | Uri) {
+    const id: Uri = klass instanceof Class ? klass.id : <Uri>klass;
+    return !!this.graph.getCell(id.uri);
+  }
+
+  isAssociationTarget(klass: Class | Uri) {
+    const id: Uri = klass instanceof Class ? klass.id : <Uri>klass;
+
+    for (const link of this.graph.getLinks()) {
+      if (link.attributes.target.id === id.uri) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  private updateClassAndLayout(klass: Class, oldId?: Uri | null) {
+
+    const creation = !oldId;
+    const idChanged = oldId && klass.id.notEquals(oldId);
+    const oldIdIsAssociationTarget = oldId && this.isAssociationTarget(oldId);
+
+    if (idChanged) {
+      this.modelPositions.changeClassId(oldId!, klass.id);
+    }
+
+    const addedClasses = this.addOrReplaceClass(klass);
+
+    if (idChanged) {
+      if (oldIdIsAssociationTarget) {
+        addedClasses.push(oldId!);
+        this.replaceClass(new AssociationTargetPlaceholderClass(oldId!, this.model));
+      } else {
+        this.removeClass(oldId!);
+      }
+    }
+
+    if (addedClasses.length > 0) {
+      this.loading = true;
+      this.layoutAndFocus(false, addedClasses.filter(classId => creation || klass.id.notEquals(classId)))
+        .then(() => {
+          if (oldIdIsAssociationTarget) {
+            this.adjustElementLinks([oldId!], VertexAction.Reset);
+          }
+
+          this.adjustElementLinks([klass.id], VertexAction.KeepPersistent);
+          this.loading = false;
+        });
+    } else {
+      // Delay focus because dom needs to be repainted
+      setTimeout(() => this.focusSelection(false));
+    }
+  }
+
+  private findElementForSelection(): joint.dia.Element | null {
 
     const classOrPredicate = this.selection;
 
@@ -752,7 +791,7 @@ export class ClassVisualizationComponent implements ChangeListener<Class|Predica
         if (cell.isLink()) {
           throw new Error('Cell must be an element');
         } else {
-          return <joint.dia.Element> cell;
+          return <joint.dia.Element>cell;
         }
       } else {
         return null;
@@ -762,14 +801,14 @@ export class ClassVisualizationComponent implements ChangeListener<Class|Predica
     }
   }
 
-  private removeClass(klass: Class|Uri) {
+  private removeClass(klass: Class | Uri) {
 
-    const id: Uri = klass instanceof Class ? klass.id : <Uri> klass;
+    const id: Uri = klass instanceof Class ? klass.id : <Uri>klass;
 
     this.classVisualization.removeClass(id.toString());
 
     // remove to be unreferenced shadow classes
-    for (const element of this.graph.getNeighbors(<joint.dia.Element> this.graph.getCell(id.uri))) {
+    for (const element of this.graph.getNeighbors(<joint.dia.Element>this.graph.getCell(id.uri))) {
       if (element instanceof ShadowClass && this.graph.getConnectedLinks(element).length === 1) {
         element.remove();
       }
@@ -871,25 +910,9 @@ export class ClassVisualizationComponent implements ChangeListener<Class|Predica
     return addedClasses;
   }
 
-  isExistingClass(klass: Class|Uri) {
-    const id: Uri = klass instanceof Class ? klass.id : <Uri> klass;
-    return !!this.graph.getCell(id.uri);
-  }
-
-  isAssociationTarget(klass: Class|Uri) {
-    const id: Uri = klass instanceof Class ? klass.id : <Uri> klass;
-
-    for (const link of this.graph.getLinks()) {
-      if (link.attributes.target.id === id.uri) {
-        return true;
-      }
-    }
-    return false;
-  }
-
   private createCells(visualization: ClassVisualization) {
 
-    const associations: {klass: VisualizationClass, property: Property}[] = [];
+    const associations: { klass: VisualizationClass, property: Property }[] = [];
     const classIds = visualization.getClassIds();
 
     const cells: joint.dia.Cell[] = [];
@@ -903,7 +926,7 @@ export class ClassVisualizationComponent implements ChangeListener<Class|Predica
             classIds.add(property.valueClass.uri);
             cells.push(this.createClassElement(this.paper, new AssociationTargetPlaceholderClass(property.valueClass, this.model)));
           }
-          associations.push({klass, property});
+          associations.push({ klass, property });
         }
       }
       const element = this.createClassElement(this.paper, klass);
@@ -918,14 +941,6 @@ export class ClassVisualizationComponent implements ChangeListener<Class|Predica
     }
 
     return cells;
-  }
-
-  private get iowCellOptions() {
-    return {
-      showCardinality: this.model.isOfType('profile'),
-      showName: this.showName,
-      localizer: this.localizer
-    };
   }
 
   private createClassElement(paper: joint.dia.Paper, klass: VisualizationClass): joint.dia.Element {
