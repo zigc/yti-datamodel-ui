@@ -22,7 +22,8 @@ type DataType = ClassListItem|PredicateListItem;
     type: '@',
     model: '=',
     id: '@',
-    title: '@'
+    title: '@',
+    customDataSource: '<'
   },
   require: {
     form: '?^form'
@@ -64,6 +65,7 @@ export class EditableMultipleUriSelectComponent {
   model: Model;
   id: string;
   title: string;
+  customDataSource: DataSource<DataType>;
 
   addUri: (uri: Uri) => void;
   datasource: DataSource<DataType>;

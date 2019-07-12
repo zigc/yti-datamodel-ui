@@ -156,23 +156,32 @@
        </div>
   </div>
 
-  <h4 ng-show="$ctrl.isEditing() || $ctrl.property.hasPropertyPairs()" translate>Property pairs</h4>
-
-  <div class="row">
-    <div class="col-md-6">
-      <editable-multiple-uri-select id="equals" type="{{$ctrl.property.normalizedPredicateType}}" ng-model="$ctrl.property.equals" model="$ctrl.model" data-title="Equals"></editable-multiple-uri-select>
-   </div>
-   <div class="col-md-6">
-    <editable-multiple-uri-select id="disjoint" type="{{$ctrl.property.normalizedPredicateType}}" ng-model="$ctrl.property.disjoint" model="$ctrl.model" data-title="Disjoint"></editable-multiple-uri-select>
-   </div>
-  </div>
-  <div class="row">
-    <div class="col-md-6">
-      <editable-multiple-uri-select id="lessThan" type="{{$ctrl.property.normalizedPredicateType}}" ng-model="$ctrl.property.lessThan" model="$ctrl.model" data-title="Less than"></editable-multiple-uri-select>
-   </div>
-   <div class="col-md-6">
-    <editable-multiple-uri-select id="lessThanOrEquals" type="{{$ctrl.property.normalizedPredicateType}}" ng-model="$ctrl.property.lessThanOrEquals" model="$ctrl.model" data-title="Less than or equals"></editable-multiple-uri-select>
-   </div>
+  <div ng-show="($ctrl.isEditing() && $ctrl.propertyPairCapable) || $ctrl.property.hasPropertyPairs()">
+    <h4 translate>Property pairs</h4>
+    <div class="row">
+      <div class="col-md-6">
+        <editable-multiple-uri-select id="equals" type="{{$ctrl.property.normalizedPredicateType}}"
+                                      custom-data-source="$ctrl.comparablePropertiesDataSource" ng-model="$ctrl.property.equals"
+                                      model="$ctrl.model" data-title="Equals"></editable-multiple-uri-select>
+      </div>
+      <div class="col-md-6">
+        <editable-multiple-uri-select id="disjoint" type="{{$ctrl.property.normalizedPredicateType}}"
+                                      custom-data-source="$ctrl.comparablePropertiesDataSource" ng-model="$ctrl.property.disjoint"
+                                      model="$ctrl.model" data-title="Disjoint"></editable-multiple-uri-select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <editable-multiple-uri-select id="lessThan" type="{{$ctrl.property.normalizedPredicateType}}"
+                                      custom-data-source="$ctrl.comparablePropertiesDataSource" ng-model="$ctrl.property.lessThan"
+                                      model="$ctrl.model" data-title="Less than"></editable-multiple-uri-select>
+      </div>
+      <div class="col-md-6">
+        <editable-multiple-uri-select id="lessThanOrEquals" type="{{$ctrl.property.normalizedPredicateType}}"
+                                      custom-data-source="$ctrl.comparablePropertiesDataSource" ng-model="$ctrl.property.lessThanOrEquals"
+                                      model="$ctrl.model" data-title="Less than or equals"></editable-multiple-uri-select>
+      </div>
+    </div>
   </div>
 
   <div ng-show="$ctrl.showAdditionalInformation || $ctrl.isEditing()">
