@@ -328,7 +328,7 @@ msgstr ""
 msgid "INFO_TEXT_FRONTPAGE_SEARCH"
 msgstr ""
 
-msgid "Search term (model name)"
+msgid "Search term"
 msgstr ""
 
 msgid "INFO_TEXT_FRONTPAGE_FILTER_W_CLASSIFICATION"

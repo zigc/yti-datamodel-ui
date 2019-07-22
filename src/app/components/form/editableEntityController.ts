@@ -8,6 +8,14 @@ import { EditableEntity } from 'app/types/entity';
 
 export interface EditableForm extends IFormController {
   editing: boolean;
+
+  // TODO: There is dirty hack in editable.ts to prevent hidden or disabled fields from participating in validation. The hack also
+  //       destroys validation of newly created entities IF those flash in non-edit mode first. Based on earlier comments it seems
+  //       that going straight to editing state may cause problems with confirmation dialogs, so here comes... another hack. I am sorry.
+  // TODO: So basically there are two pending fixes. Firstly, a real solution to validation problem, probably by (shockingly) not rendering
+  //       such fields as editable components, hidden or not! Secondly, it makes no sense to "display" resource creation forms before
+  //       going to edit mode.
+  pendingEdit?: boolean;
 }
 
 export interface EditableScope extends IScope {
@@ -16,12 +24,13 @@ export interface EditableScope extends IScope {
 
 export interface Rights {
   edit(): boolean;
+
   remove(): boolean;
 }
 
 export abstract class EditableEntityController<T extends EditableEntity> {
 
-  editableInEdit: T|null = null;
+  editableInEdit: T | null = null;
   persisting: boolean;
 
   constructor(protected $scope: EditableScope,
@@ -40,19 +49,26 @@ export abstract class EditableEntityController<T extends EditableEntity> {
   }
 
   abstract create(entity: T): IPromise<any>;
+
   abstract update(entity: T, oldEntity: T): IPromise<any>;
+
   abstract remove(entity: T): IPromise<any>;
+
   abstract rights(): Rights;
-  abstract getEditable(): T|null;
-  abstract setEditable(editable: T|null): void;
+
+  abstract getEditable(): T | null;
+
+  abstract setEditable(editable: T | null): void;
+
   abstract getContext(): LanguageContext;
 
-  select(editable: T|null) {
+  select(editable: T | null) {
     this.setEditable(editable);
-    this.editableInEdit = editable ? <T> editable.clone() : null;
+    this.editableInEdit = editable ? <T>editable.clone() : null;
 
     if (editable && editable.unsaved) {
       // XXX: prevent problems with unsaved navigation confirmation
+      this.$scope.form.pendingEdit = true;
       setTimeout(() => this.edit());
     } else {
       this.cancelEditing();
@@ -113,6 +129,7 @@ export abstract class EditableEntityController<T extends EditableEntity> {
   }
 
   edit() {
+    this.$scope.form.pendingEdit = undefined;
     this.$scope.form.editing = true;
   }
 

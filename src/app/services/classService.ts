@@ -43,6 +43,7 @@ export interface ClassService {
   getExternalClassesForModel(model: Model): IPromise<ClassListItem[]>;
   newProperty(predicateOrExternal: Predicate|ExternalEntity, type: KnownPredicateType, model: Model): IPromise<Property>;
   getInternalOrExternalClass(id: Uri, model: Model): IPromise<Class|null>;
+  clearCachedClasses(modelId: string): void;
 }
 
 export class DefaultClassService implements ClassService {
@@ -146,6 +147,10 @@ export class DefaultClassService implements ClassService {
     };
     return this.$http.post(apiEndpointWithName('class'), undefined, {params: requestParams})
       .then(() => this.modelClassesCache.delete(model.id.uri));
+  }
+
+  clearCachedClasses(modelId: string) {
+    this.modelClassesCache.delete(modelId);
   }
 
   newClass(model: Model, classLabel: string, conceptID: Uri|null, lang: Language): IPromise<Class> {

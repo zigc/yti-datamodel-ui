@@ -27,7 +27,7 @@ export class ApplicationComponent {
 
     'ngInject';
 
-    this.subscriptions.push(userService.loggedIn$.subscribe(() => this.applicationInitialized = true));
+    this.subscriptions.push(userService.user$.subscribe(() => this.applicationInitialized = true));
 
     $scope.$watch(() => $location.path(), path => {
       this.showFooter = !path.startsWith('/model');

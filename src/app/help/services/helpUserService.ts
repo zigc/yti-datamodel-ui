@@ -3,7 +3,7 @@ import { IPromise, IQService } from 'angular';
 import { ResetableService } from './resetableService';
 import { Role, UUID } from 'yti-common-ui/services/user.service';
 import { UserService } from 'app/services/userService';
-import { Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 
 // TODO fix to align with yti-common-ui UserService
 
@@ -28,7 +28,7 @@ class InteractiveHelpUser implements User {
 
 export class InteractiveHelpUserService implements UserService, ResetableService {
 
-  user = new InteractiveHelpUser();
+  private _user$ = new BehaviorSubject<User>(new InteractiveHelpUser());
 
   constructor(private $q: IQService) {
     'ngInject';
@@ -36,6 +36,14 @@ export class InteractiveHelpUserService implements UserService, ResetableService
 
   get loggedIn$(): Observable<boolean> {
     return of(true);
+  }
+
+  get user(): User {
+    return this._user$.value;
+  }
+
+  get user$(): Observable<User> {
+    return this._user$.asObservable();
   }
 
   updateLoggedInUser(fakeLoginMail?: string): void {

@@ -117,4 +117,6 @@ export class InteractiveHelpPredicateService implements PredicateService, Reseta
   predicateExists(id: Uri) {
     return this.store.getResourcesForAllModels().has(id.toString());
   }
+
+  clearCachedPredicates(modelId: string): void {}
 }

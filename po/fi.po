@@ -340,8 +340,8 @@ msgstr ""
 "Haku kohdistuu oletuksena tietomallien nimiin. Voit hakea muilla "
 "hakuehdoilla käyttämällä \"Tarkennettu haku\" -toimintoa."
 
-msgid "Search term (model name)"
-msgstr "Hakusana (tietomallin nimi)"
+msgid "Search term"
+msgstr "Hakusana"
 
 msgid "INFO_TEXT_FRONTPAGE_FILTER_W_CLASSIFICATION"
 msgstr ""

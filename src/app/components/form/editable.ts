@@ -49,11 +49,23 @@ export class EditableComponent {
     'ngInject';
   }
 
+  get value() {
+    return this.inputNgModelCtrl && this.inputNgModelCtrl.$modelValue;
+  }
+
+  get inputId() {
+    return this.input && this.input.attr('id');
+  }
+
+  get required() {
+    return !this.disable && this.input && (this.input.attr('required') || (this.inputNgModelCtrl && 'requiredLocalized' in this.inputNgModelCtrl.$validators));
+  }
+
   $onInit() {
 
     // we need to know if handler was set or not so parse ourselves instead of using scope '&'
     const clickHandler = this.$parse(this.onClick);
-    const onClick = this.onClick ? (value: Value) => clickHandler(this.$scope.$parent, {value}) : undefined;
+    const onClick = this.onClick ? (value: Value) => clickHandler(this.$scope.$parent, { value }) : undefined;
 
     this.item = this.displayItemFactory.create({
       context: () => this.context,
@@ -97,19 +109,7 @@ export class EditableComponent {
     });
   }
 
-  get value() {
-    return this.inputNgModelCtrl && this.inputNgModelCtrl.$modelValue;
-  }
-
-  get inputId() {
-    return this.input && this.input.attr('id');
-  }
-
-  get required() {
-    return !this.disable && this.input && (this.input.attr('required') || (this.inputNgModelCtrl && 'requiredLocalized' in this.inputNgModelCtrl.$validators));
-  }
-
   isEditing() {
-    return this.form && this.form.editing && !this.disable;
+    return this.form && (this.form.editing || this.form.pendingEdit) && !this.disable;
   }
 }

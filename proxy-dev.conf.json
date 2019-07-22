@@ -1,6 +1,6 @@
 {
   "/api/*": {
-    "target": "https://tietomallit-dev.suomi.fi",
+    "target": "https://tietomallit.dev.yti.cloud.vrk.fi",
     "changeOrigin": true,
     "secure": false
   }

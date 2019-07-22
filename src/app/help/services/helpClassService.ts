@@ -141,4 +141,6 @@ export class InteractiveHelpClassService implements ClassService, ResetableServi
   classExists(id: Uri) {
     return this.store.resourceExistsInAnyModel(id.toString());
   }
+
+  clearCachedClasses(modelId: string): void {}
 }

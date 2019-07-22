@@ -7,25 +7,40 @@ import { assertNever, requireDefined } from 'yti-common-ui/utils/object';
 import * as frames from 'app/entities/frames';
 import { FrameService } from './frameService';
 import { GraphData, KnownModelType } from 'app/types/entity';
-import { Model, ModelListItem, ImportedNamespace, Link } from 'app/entities/model';
+import { ImportedNamespace, Link, Model, ModelListItem } from 'app/entities/model';
 import { apiEndpointWithName } from './config';
+import { ClassService } from './classService';
+import { PredicateService } from './predicateService';
 
 export interface ModelService {
   getModels(): IPromise<ModelListItem[]>;
-  getModelByUrn(urn: Uri|Urn): IPromise<Model>;
+
+  getModelByUrn(urn: Uri | Urn): IPromise<Model>;
+
   getModelByPrefix(prefix: string): IPromise<Model>;
+
   createModel(model: Model): IPromise<any>;
+
   updateModel(model: Model): IPromise<any>;
+
   deleteModel(id: Uri): IPromise<any>;
+
   newModel(prefix: string, label: string, classifications: string[], organizations: string[], lang: Language[], type: KnownModelType, redirect?: Uri): IPromise<Model>;
+
   newLink(title: string, description: string, homepage: Uri, lang: Language): IPromise<Link>;
+
   getAllImportableNamespaces(): IPromise<ImportedNamespace[]>;
+
   newNamespaceImport(namespace: string, prefix: string, label: string, lang: Language): IPromise<ImportedNamespace>;
 }
 
 export class DefaultModelService implements ModelService {
 
-  constructor(private $http: IHttpService, private $q: IQService, private frameService: FrameService) {
+  constructor(private $http: IHttpService,
+              private $q: IQService,
+              private frameService: FrameService,
+              private defaultClassService: ClassService,
+              private defaultPredicateService: PredicateService) {
     'ngInject';
   }
 
@@ -34,7 +49,7 @@ export class DefaultModelService implements ModelService {
       .then(response => this.deserializeModelList(response.data!));
   }
 
-  getModelByUrn(urn: Uri|Urn): IPromise<Model> {
+  getModelByUrn(urn: Uri | Urn): IPromise<Model> {
     return this.$http.get<GraphData>(apiEndpointWithName('model'), { params: { id: urn.toString() } })
       .then(response => this.deserializeModelById(response.data!, urn));
   }
@@ -62,7 +77,10 @@ export class DefaultModelService implements ModelService {
   }
 
   deleteModel(id: Uri): IPromise<any> {
-    return this.$http.delete(apiEndpointWithName('model'), { params: { id: id.uri } });
+    const modelId: string = id.uri;
+    this.defaultClassService.clearCachedClasses(modelId);
+    this.defaultPredicateService.clearCachedPredicates(modelId);
+    return this.$http.delete(apiEndpointWithName('model'), { params: { id: modelId } });
   }
 
   newModel(prefix: string, label: string, classifications: string[], organizations: string[], lang: Language[], type: KnownModelType, redirect?: Uri): IPromise<Model> {
@@ -107,7 +125,7 @@ export class DefaultModelService implements ModelService {
       homepage: homepage.url
     };
 
-    const frameObject = frames.modelFrame({ '@graph': graph, '@context': {}});
+    const frameObject = frames.modelFrame({ '@graph': graph, '@context': {} });
 
     return this.$q.when(new Link(graph, {}, frameObject));
   }
@@ -118,7 +136,7 @@ export class DefaultModelService implements ModelService {
   }
 
   newNamespaceImport(namespace: string, prefix: string, label: string, lang: Language): IPromise<ImportedNamespace> {
-    return this.$http.get<GraphData>(apiEndpointWithName('modelRequirementCreator'), {params: {namespace, prefix, label, lang}})
+    return this.$http.get<GraphData>(apiEndpointWithName('modelRequirementCreator'), { params: { namespace, prefix, label, lang } })
       .then(response => this.deserializeImportedNamespace(response.data!));
   }
 
@@ -130,12 +148,12 @@ export class DefaultModelService implements ModelService {
     return this.frameService.frameAndMap(data, false, frames.modelFrame(data), () => Model).then(requireDefined);
   }
 
-  private deserializeModelById(data: GraphData, id: Uri|Urn): IPromise<Model> {
-    return this.frameService.frameAndMap(data, true, frames.modelFrame(data, {id}), () => Model).then(requireDefined);
+  private deserializeModelById(data: GraphData, id: Uri | Urn): IPromise<Model> {
+    return this.frameService.frameAndMap(data, true, frames.modelFrame(data, { id }), () => Model).then(requireDefined);
   }
 
   private deserializeModelByPrefix(data: GraphData, prefix: string): IPromise<Model> {
-    return this.frameService.frameAndMap(data, true, frames.modelFrame(data, {prefix}), () => Model).then(requireDefined);
+    return this.frameService.frameAndMap(data, true, frames.modelFrame(data, { prefix }), () => Model).then(requireDefined);
   }
 
   private deserializeImportedNamespace(data: GraphData): IPromise<ImportedNamespace> {
