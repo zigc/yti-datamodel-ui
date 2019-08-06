@@ -1,9 +1,9 @@
 import * as _ from 'lodash';
 import { requireDefined } from 'yti-common-ui/utils/object';
-import { KnownModelType, Type, UseContext } from 'app/types/entity';
-import { modelUrl, normalizeModelType, resourceUrl } from 'app/utils/entity';
+import { KnownModelType, Type, UseContext } from '../types/entity';
+import { modelUrl, normalizeModelType, resourceUrl } from '../utils/entity';
 import { Uri, Url, Urn } from './uri';
-import { Language } from 'app/types/language';
+import { Language } from '../types/language';
 import { Moment } from 'moment';
 import { containsAny, remove } from 'yti-common-ui/utils/array';
 import { DefinedBy } from './definedBy';
@@ -254,6 +254,11 @@ export class Model extends AbstractModel {
 
   linkToResource(id: Uri|null) {
     if (id && !id.isUrn()) {
+      if (typeof id.namespace === 'string') {
+        if (!id.namespace.startsWith('http')) {
+          return null
+        }
+      }
       if (this.isNamespaceKnownToBeModel(id.namespace)) {
         return resourceUrl(requireDefined(id.resolve()).prefix, id);
       } else {
