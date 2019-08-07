@@ -198,7 +198,7 @@ class SearchClassTableController implements SearchController<IndexResource> {
 
     // IDEA: Voisiko indeksihaun tulokset muuttaa ClassListItem-olioiksi?
 
-    classService.getAllClasses(model).then(appendResults_old);
+    // classService.getAllClasses(model).then(appendResults_old);
 
     // if (model.isOfType('profile')) {
     //   // TODO: Pitää miettiä miten nämä ulkoiset luokat otetaan huomioon kun haut refaktoroidaan. Niille pitää mahdollisesti tehdä omat indeksiapit. Miika tekee tiketin asiasta.
