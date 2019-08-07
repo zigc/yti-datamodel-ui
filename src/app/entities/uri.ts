@@ -127,7 +127,7 @@ export class Uri {
     const resolved = this.resolve();
 
     if (resolved) {
-      return this.context[resolved.prefix] + resolved.name;
+      return this.context[resolved.prefix].startsWith(urnPrefix) ? this.value : this.context[resolved.prefix] + resolved.name;
     } else {
       return this.value;
     }
