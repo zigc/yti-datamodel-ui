@@ -3,8 +3,8 @@
 
   <div ng-if="!$ctrl.isEditing()" class="content">
     <span ng-repeat="value in $ctrl.ngModel">
-      <span ng-if="!$ctrl.link">{{$ctrl.format(value)}}<span ng-if="!$last">, </span></span>
-      <a ng-if="$ctrl.link" ng-href="{{$ctrl.link(value)}}">{{$ctrl.format(value)}}<span ng-if="!$last">, </span></a>
+      <span ng-if="!$ctrl.showLink(value)">{{$ctrl.format(value)}}<span ng-if="!$last">, </span></span>
+      <a ng-if="$ctrl.showLink(value)" ng-href="{{$ctrl.link(value)}}">{{$ctrl.format(value)}}<span ng-if="!$last">, </span></a>
     </span>
   </div>
 

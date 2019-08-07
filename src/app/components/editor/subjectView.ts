@@ -1,17 +1,18 @@
 import { SearchConceptModal } from './searchConceptModal';
-import { Class } from 'app/entities/class';
-import { Predicate } from 'app/entities/predicate';
-import { Model } from 'app/entities/model';
-import { LegacyComponent, modalCancelHandler } from 'app/utils/angular';
-import { ConfigService } from 'app/services/configService';
-import { Config } from 'app/entities/config';
-import { EditableForm } from 'app/components/form/editableEntityController';
+import { Class } from '../../entities/class';
+import { Predicate } from '../../entities/predicate';
+import { Model } from '../../entities/model';
+import { LegacyComponent, modalCancelHandler } from '../../utils/angular';
+import { ConfigService } from '../../services/configService';
+import { Config } from '../../entities/config';
+import { EditableForm } from '../../components/form/editableEntityController';
 
 @LegacyComponent({
   bindings: {
     id: '@',
     entity: '=',
-    model: '='
+    model: '=',
+    changeConceptDisabled: '='
   },
   require: {
     form: '?^form'
@@ -24,6 +25,7 @@ export class SubjectViewComponent {
   model: Model;
   config: Config;
   form: EditableForm;
+  changeConceptDisabled: Boolean;
 
   constructor(private searchConceptModal: SearchConceptModal,
               private configService: ConfigService) {
@@ -35,6 +37,10 @@ export class SubjectViewComponent {
 
   isEditing() {
     return this.form && this.form.editing;
+  }
+
+  showChangeSubject() {
+    return this.isEditing() && !this.changeConceptDisabled;
   }
 
   get conceptLink() {

@@ -1,16 +1,16 @@
 import { IScope } from 'angular';
-import { Uri } from 'app/entities/uri';
-import { PredicateService } from 'app/services/predicateService';
+import { Uri } from '../../entities/uri';
+import { PredicateService } from '../../services/predicateService';
 import { SearchPredicateModal } from './searchPredicateModal';
-import { createDefinedByExclusion } from 'app/utils/exclusion';
+import { createDefinedByExclusion } from '../../utils/exclusion';
 import { ClassFormComponent } from './classForm';
 import { anyMatching } from 'yti-common-ui/utils/array';
 import { CopyPredicateModal } from './copyPredicateModal';
 import { requireDefined } from 'yti-common-ui/utils/object';
-import { Property } from 'app/entities/class';
-import { Model } from 'app/entities/model';
-import { Association, Attribute, Predicate } from 'app/entities/predicate';
-import { LegacyComponent, modalCancelHandler } from 'app/utils/angular';
+import { Property } from '../../entities/class';
+import { Model } from '../../entities/model';
+import { Association, Attribute, Predicate } from '../../entities/predicate';
+import { LegacyComponent, modalCancelHandler } from '../../utils/angular';
 
 @LegacyComponent({
   bindings: {
