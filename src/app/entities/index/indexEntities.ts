@@ -27,7 +27,10 @@ export type IndexModel = {
   isPartOf: string[];
 }
 
-export type IndexResource = {
+// TODO
+// Tästä pitänee tehdä class, jossa definedBy-objekti
+// Tarvitaan lista, jossa on modelien id:t ja labelit ja classificationit. Se voidaan hakea joko Model-apin tai indeksien SearchModel-apin kautta. Jälkimmäinen on nopeampi, mutta ongelmana on, ettei se palauta luokituksista kuin id:t.
+ export type IndexResource = {
   /**
    * URI, e.g., "http://uri.suomi.fi/datamodel/ns/edu#Oppiaine".
    */

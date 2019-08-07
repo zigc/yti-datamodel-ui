@@ -25,8 +25,12 @@ import { DefinedByType, SortBy } from '../../types/entity';
 import { gettextCatalog as GettextCatalog } from 'angular-gettext';
 import { infoDomainMatches } from '../../utils/entity';
 import { ShowClassInfoModal } from './showClassInfoModal';
+import { BehaviorSubject, Subscription, Observable } from 'rxjs';
+import { ResourceSearchResponse, IndexSearchService } from '../../services/indexSearchService';
+import { IndexResource } from '../../entities/index/indexEntities';
+import { Moment } from 'moment';
 
-export const noExclude = (_item: AbstractClass) => null;
+export const noExclude = (_item: IndexResource) => null;
 export const defaultTextForSelection = (_klass: Class) => 'Use class';
 
 export class SearchClassTableModal {
@@ -36,8 +40,8 @@ export class SearchClassTableModal {
   }
 
   private openModal(model: Model,
-                    exclude: Exclusion<AbstractClass>,
-                    filterExclude: Exclusion<AbstractClass>,
+                    exclude: Exclusion<IndexResource>,
+                    filterExclude: Exclusion<IndexResource>,
                     defaultToCurrentModel: boolean,
                     onlySelection: boolean,
                     textForSelection: (klass: Optional<Class>) => string) {
@@ -60,8 +64,8 @@ export class SearchClassTableModal {
   }
 
   open(model: Model,
-       exclude: Exclusion<AbstractClass>,
-       filterExclude: Exclusion<AbstractClass> = exclude,
+       exclude: Exclusion<IndexResource>,
+       filterExclude: Exclusion<IndexResource> = exclude,
        textForSelection: (klass: Optional<Class>) => string): IPromise<ExternalEntity|EntityCreation|Class> {
 
     return this.openModal(model, exclude, filterExclude, false, false, textForSelection);
@@ -69,8 +73,8 @@ export class SearchClassTableModal {
 
   openWithOnlySelection(model: Model,
                         defaultToCurrentModel: boolean,
-                        exclude: Exclusion<AbstractClass>,
-                        filterExclude: Exclusion<AbstractClass> = exclude,
+                        exclude: Exclusion<IndexResource>,
+                        filterExclude: Exclusion<IndexResource> = exclude,
                         textForSelection: (klass: Optional<Class>) => string = defaultTextForSelection): IPromise<Class> {
 
     return this.openModal(model, exclude, filterExclude, defaultToCurrentModel, true, textForSelection);
@@ -81,46 +85,63 @@ export interface SearchClassTableScope extends IScope {
   form: EditableForm;
 }
 
-class SearchClassTableController implements SearchController<ClassListItem> {
+class SearchClassTableController implements SearchController<IndexResource> {
 
   private classes: ClassListItem[] = [];
+  private indexClasses: IndexResource[] = [];
 
-  searchResults: (ClassListItem)[] = [];
+  searchResults_old: (ClassListItem)[] = [];
+  searchResults: (IndexResource)[] = [];
   selection: Class|ExternalEntity;
   searchText = '';
   cannotConfirm: string|null;
   loadingResults: boolean;
-  selectedItem: ClassListItem|null;
+  selectedItem: IndexResource|null;
   showStatus: Status|null;
   showInfoDomain: Classification|null;
   infoDomains: Classification[];
   modelTypes: DefinedByType[];
   showModelType: DefinedByType|null;
 
+  classResults$ = new BehaviorSubject<ResourceSearchResponse>({
+    totalHitCount: 0, pageSize: 0, pageFrom: 0, resources: []
+  });
+
   // undefined means not fetched, null means does not exist
   externalClass: Class|null|undefined;
 
-  sortBy: SortBy<ClassListItem>;
+  sortBy_old: SortBy<ClassListItem>;
+  sortBy: SortBy<IndexResource>;
 
   private localizer: Localizer;
 
-  contentMatchers = [
+  contentMatchers_old = [
     { name: 'Label', extractor: (klass: ClassListItem) => klass.label },
     { name: 'Description', extractor: (klass: ClassListItem) => klass.comment },
     { name: 'Identifier', extractor: (klass: ClassListItem) => klass.id.compact }
   ];
 
+  contentMatchers = [
+    { name: 'Label', extractor: (klass: IndexResource) => klass.label },
+    { name: 'Description', extractor: (klass: IndexResource) => klass.comment! },
+    { name: 'Identifier', extractor: (klass: IndexResource) => klass.id }
+  ];
+
+  contentExtractors_old = this.contentMatchers_old.map(m => m.extractor);
   contentExtractors = this.contentMatchers.map(m => m.extractor);
 
-  searchFilters: SearchFilter<ClassListItem>[] = [];
+  searchFilters_old: SearchFilter<ClassListItem>[] = [];
+  searchFilters: SearchFilter<IndexResource>[] = [];
+
+  subscriptionsToClean: Subscription[] = [];
 
   constructor(private $scope: SearchClassTableScope,
               private $uibModalInstance: IModalServiceInstance,
               private classService: ClassService,
               languageService: LanguageService,
               public model: Model,
-              public exclude: Exclusion<AbstractClass>,
-              public filterExclude: Exclusion<AbstractClass>,
+              public exclude: Exclusion<IndexResource>,
+              public filterExclude: Exclusion<IndexResource>,
               public defaultToCurrentModel: boolean,
               public onlySelection: boolean,
               public textForSelection: (klass: Optional<Class>) => string,
@@ -129,7 +150,8 @@ class SearchClassTableController implements SearchController<ClassListItem> {
               private gettextCatalog: GettextCatalog,
               classificationService: ClassificationService,
               protected showClassInfoModal: ShowClassInfoModal,
-              modelService: ModelService) {
+              modelService: ModelService,
+              private indexSearchService: IndexSearchService) {
     'ngInject';
     this.localizer = languageService.createLocalizer(model);
     this.loadingResults = true;
@@ -146,6 +168,7 @@ class SearchClassTableController implements SearchController<ClassListItem> {
       this.infoDomains.sort(comparingLocalizable<Classification>(this.localizer, infoDomain => infoDomain.label));
     }
 
+    // HUOM: Indeksihaun yhteydessä luokitusten haku toteutettu etusivulla mallien fitteröinnin yhteydessä. Siitä voi katsoa mallia sopiiko tähän.
     classificationService.getClassifications().then(infoDomains => {
 
       modelService.getModels().then(models => {
@@ -158,17 +181,49 @@ class SearchClassTableController implements SearchController<ClassListItem> {
       });
     });
 
-    const appendResults = (classes: ClassListItem[]) => {
+    const appendResults_old = (classes: ClassListItem[]) => {
+      console.log(classes);
       this.classes = this.classes.concat(classes);
       this.search();
       this.loadingResults = false;
     };
 
-    classService.getAllClasses(model).then(appendResults);
+    const appendResults = (classes: IndexResource[]) => {
+      console.log(classes);
+      this.indexClasses = this.indexClasses.concat(classes);
+      this.search();
+      this.loadingResults = false;
+    };
 
-    if (model.isOfType('profile')) {
-      classService.getExternalClassesForModel(model).then(appendResults);
-    }
+
+    // IDEA: Voisiko indeksihaun tulokset muuttaa ClassListItem-olioiksi?
+
+    classService.getAllClasses(model).then(appendResults_old);
+
+    // if (model.isOfType('profile')) {
+    //   // TODO: Pitää miettiä miten nämä ulkoiset luokat otetaan huomioon kun haut refaktoroidaan. Niille pitää mahdollisesti tehdä omat indeksiapit. Miika tekee tiketin asiasta.
+    //   classService.getExternalClassesForModel(model).then(appendResults_old);
+    // }
+
+    this.subscriptionsToClean.push( // searchConditions$.subscribe(([text, language, searchResources]) => {
+      this.indexSearchService.searchResources({
+        type: 'class',
+        pageSize: '50',
+      }).subscribe(resp => {
+        this.classResults$.next(resp);
+      }));
+
+    this.classResults$.subscribe(result => {
+      console.log(result);
+
+      // Täällä pitää hakea modelit ja verrata niiden id:eitä indexResourcen isDefinedBy:hin ja saada näin modelien labelit ja luokitukset ja tehdä siten DefinedBy-oliot IndexResourceen (sinne uusi constructor, johon ne välitetään tjsp.)
+      // modelService.getModels()
+
+      appendResults(result.resources);
+    });
+
+    // this.subscribeClasses();
+
 
     $scope.$watch(() => this.selection && this.selection.id, selectionId => {
       if (selectionId && this.selection instanceof ExternalEntity) {
@@ -181,13 +236,13 @@ class SearchClassTableController implements SearchController<ClassListItem> {
       !this.showStatus || classListItem.item.status === this.showStatus
     );
 
-    this.addFilter(classListItem =>
-      !this.showInfoDomain || contains(classListItem.item.definedBy.classifications.map(classification => classification.identifier), this.showInfoDomain.identifier)
-    );
+    // this.addFilter(classListItem =>
+    //   !this.showInfoDomain || contains(classListItem.item.definedBy.classifications.map(classification => classification.identifier), this.showInfoDomain.identifier)
+    // );
     
-    this.addFilter(classListItem =>
-      !this.showModelType || classListItem.item.definedBy.normalizedType === this.showModelType
-    );
+    // this.addFilter(classListItem =>
+    //   !this.showModelType || classListItem.item.definedBy.normalizedType === this.showModelType
+    // );
 
     $scope.$watch(() => this.showStatus, ifChanged<Status|null>(() => this.search()));
     $scope.$watch(() => this.showModelType, ifChanged<DefinedByType|null>(() => this.search()));
@@ -200,11 +255,17 @@ class SearchClassTableController implements SearchController<ClassListItem> {
     }));   
   }
 
-  get items() {
-    return this.classes;
+  $onDestroy() {
+    for (const subscription of this.subscriptionsToClean) {
+      subscription.unsubscribe();
+    }
   }
 
-  addFilter(searchFilter: SearchFilter<ClassListItem>) {
+  get items() {
+    return this.indexClasses;
+  }
+
+  addFilter(searchFilter: SearchFilter<IndexResource>) {
     this.searchFilters.push(searchFilter);
   }
 
@@ -217,8 +278,12 @@ class SearchClassTableController implements SearchController<ClassListItem> {
   }
 
   search() {
+    // this.searchResults = [
+    //    ...filterAndSortSearchResults(this.classes, this.searchText, this.contentExtractors_old, this.searchFilters_old, this.sortBy_old.comparator)
+    // ];
+
     this.searchResults = [
-       ...filterAndSortSearchResults(this.classes, this.searchText, this.contentExtractors, this.searchFilters, this.sortBy.comparator)
+       ...filterAndSortSearchResults(this.indexClasses, this.searchText, this.contentExtractors, this.searchFilters, this.sortBy.comparator)
     ];
   }
 
@@ -230,7 +295,7 @@ class SearchClassTableController implements SearchController<ClassListItem> {
     return this.canAddNew() && this.model.isOfType('profile');
   }
 
-  selectItem(item: AbstractClass) {
+  selectItem(item: IndexResource) {
 
     this.selectedItem = item;
     this.externalClass = undefined;
@@ -239,27 +304,27 @@ class SearchClassTableController implements SearchController<ClassListItem> {
 
     this.cannotConfirm = this.exclude(item);
 
-    if (this.model.isNamespaceKnownToBeNotModel(item.definedBy.id.toString())) {
-      this.classService.getExternalClass(item.id, this.model).then(result => {
-        this.selection = requireDefined(result); // TODO check if result can actually be null
-        this.cannotConfirm = this.exclude(requireDefined(result));
-      });
-    } else {
+    // if (this.model.isNamespaceKnownToBeNotModel(item.isDefinedBy.id.toString())) {
+    //   this.classService.getExternalClass(item.id, this.model).then(result => {
+    //     this.selection = requireDefined(result); // TODO check if result can actually be null
+    //     this.cannotConfirm = this.exclude(requireDefined(result));
+    //   });
+    // } else {
       this.classService.getClass(item.id, this.model).then(result => this.selection = result);
-    }
+    // }
   }
 
-  isSelected(item: AbstractClass) {
+  isSelected(item: IndexResource) {
     return this.selectedItem === item;
   }
 
-  isDisabled(item: AbstractClass) {
+  isDisabled(item: IndexResource) {
     return this.exclude(item);
   }
 
-  loadingSelection(item: ClassListItem) {
+  loadingSelection(item: IndexResource) {
     const selection = this.selection;
-    return item === this.selectedItem && (!selection || (selection instanceof Class && !item.id.equals(selection.id)));
+    return item === this.selectedItem && (!selection || (selection instanceof Class && !(item.id === selection.id.uri)));
   }
 
   isExternalClassPending() {
@@ -272,16 +337,16 @@ class SearchClassTableController implements SearchController<ClassListItem> {
     if (selection instanceof Class) {
       this.$uibModalInstance.close(this.selection);
     } else if (selection instanceof ExternalEntity) {
-      if (this.externalClass) {
-        const exclude = this.exclude(this.externalClass);
-        if (exclude) {
-          this.cannotConfirm = exclude;
-        } else {
-          this.$uibModalInstance.close(this.externalClass);
-        }
-      } else {
+      // if (this.externalClass) {
+      //   const exclude = this.exclude(this.externalClass);
+      //   if (exclude) {
+      //     this.cannotConfirm = exclude;
+      //   } else {
+      //     this.$uibModalInstance.close(this.externalClass);
+      //   }
+      // } else {
         this.$uibModalInstance.close(selection);
-      }
+      // }
     } else {
       throw new Error('Unsupported selection: ' + selection);
     }
@@ -312,32 +377,57 @@ class SearchClassTableController implements SearchController<ClassListItem> {
       value: () => value
     }).displayValue;
   }
+
+  showDateValue(value: Date) {
+
+    // FIX: miten saadaan modified-tieto Moment-muotoiseksi tai muuten siististi luettavaan muotoon?
+    // Tai sitten pitää muuttaa Date-muotoinen tieto siistiksi.
+    // KYSY: Mitä tietomuotoa apista tuleva pvm oikeasto on? Nyt ei näytä käyvän Date:en tai Moment:iin.
+
+    const isoDateFormat = 'YYYY-MM-DDTHH:mm:ssz';
+
+    // export const dateSerializer: Serializer<Moment> = createSerializer(
+    //   (data: Moment) => data.format(isoDateFormat),
+    //   (data: any) => moment(data, isoDateFormat)
+    // );
+
+    // let formatted_date = value.getFullYear() + '-' + (value.getMonth() + 1) + '-' + value.getDate() + ' ' + value.getHours() + ':' + value.getMinutes() + ':' + value.getSeconds();
+    // console.log(formatted_date);
+
+    // console.log(value.format(isoDateFormat));
+
+    return value;
+
+    // return value.format(isoDateFormat);
+
+  }
+
  
-  generateSearchResultID(item: AbstractClass): string {
+  generateSearchResultID(item: IndexResource): string {
     return `${item.id.toString()}${'_search_class_link'}`;
   }
 
-  showActions(item: AbstractClass) {    
-    return !this.onlySelection && !item.isOfType('shape') && !item.definedBy.isOfType('standard');
-  }
+  // showActions(item: IndexResource) {    
+  //   return !this.onlySelection && !item.isOfType('shape') && !item.definedBy.isOfType('standard');
+  // }
 
-  showClassInfo() {
-    return this.showClassInfoModal.open(this.model, this.selection).then(null, modalCancelHandler);
-  }
+  // showClassInfo() {
+  //   return this.showClassInfoModal.open(this.model, this.selection).then(null, modalCancelHandler);
+  // }
 
-  copyClass(item: AbstractClass) {
-    this.$uibModalInstance.close(new RelatedClass(item.id, 'prov:wasDerivedFrom'));
-  }
+  // copyClass(item: IndexResource) {
+  //   this.$uibModalInstance.close(new RelatedClass(item.id, 'prov:wasDerivedFrom'));
+  // }
   
-  createSubClass(item: AbstractClass) {
-    this.$uibModalInstance.close(new RelatedClass(item.id, 'rdfs:subClassOf'));
-  }
+  // createSubClass(item: IndexResource) {
+  //   this.$uibModalInstance.close(new RelatedClass(item.id, 'rdfs:subClassOf'));
+  // }
   
-  createSuperClass(item: AbstractClass) {
-    this.$uibModalInstance.close(new RelatedClass(item.id, 'iow:superClassOf'));
-  }
+  // createSuperClass(item: IndexResource) {
+  //   this.$uibModalInstance.close(new RelatedClass(item.id, 'iow:superClassOf'));
+  // }
 
-  itemTitle(item: AbstractClass) {
+  itemTitle(item: IndexResource) {
 
     const disabledReason = this.exclude(item);
 
@@ -347,5 +437,37 @@ class SearchClassTableController implements SearchController<ClassListItem> {
       return null;
     }
   }
+
+  private subscribeClasses(): void {
+    // const initialSearchText$: Observable<string> = this.search$.pipe(take(1));
+    // const debouncedSearchText$: Observable<string> = this.search$.pipe(skip(1), debounceTime(500));
+    // const combinedSearchText$: Observable<string> = concat(initialSearchText$, debouncedSearchText$);
+    // const searchConditions$: Observable<[string, string, boolean]> = combineLatest(combinedSearchText$, this.languageService.language$, this.searchResources$);
+
+    this.subscriptionsToClean.push( // searchConditions$.subscribe(([text, language, searchResources]) => {
+      this.indexSearchService.searchResources({
+        // query: this.searchText,
+        type: 'class',
+        // isDefinedBy: '',
+        // sortLang: '',
+        // sortField: '',
+        // sortOrder: '',
+        pageSize: '50',
+        // pageFrom: '0' // pageFrom kertoo monennestako elementistä hakutuloksia aletaan näyttämään. sitä tarvitaan sivutuksessa.
+      }).subscribe(resp => {
+        // this.modelsLoaded = true;
+        // if (resp.totalHitCount != resp.models.length) {
+        //   console.error(`Model search did not return all results. Got ${resp.models.length} (start: ${resp.pageFrom}, total hits: ${resp.totalHitCount})`);
+        // }
+        this.classResults$.next(resp);
+      }));
+
+    // }));
+
+    this.classResults$.subscribe(result => {
+      console.log(result);
+    });
+  }
+
 }
 

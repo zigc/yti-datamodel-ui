@@ -78,7 +78,8 @@ export abstract class AbstractClass extends GraphNode {
 
 export class ClassListItem extends AbstractClass {
 
-  constructor(graph: any, context: any, frame: any) {
+  // ???? Jos tähän laittaisi toisen konstruktorin tai sitten models vapaaehtoisena parametrinä?
+  constructor(graph: any, context: any, frame: any, models: any) {
     super(graph, context, frame);
   }
 }

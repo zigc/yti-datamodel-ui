@@ -1,13 +1,14 @@
-import { SearchClassType } from 'app/types/component';
-import { WithId, WithDefinedBy, WithIdAndType } from 'app/types/entity';
+import { SearchClassType } from '../types/component';
+import { WithId, WithDefinedBy, WithIdAndType } from '../types/entity';
 import { containsAny, arraysAreEqual, firstMatching } from 'yti-common-ui/utils/array';
 import { collectIds } from './entity';
-import { Uri } from 'app/entities/uri';
+import { Uri } from '../entities/uri';
 import { IPromise, IQService } from 'angular';
-import { DataSource } from 'app/components/form/dataSource';
+import { DataSource } from '../components/form/dataSource';
 import { isDefined } from 'yti-common-ui/utils/object';
-import { Model } from 'app/entities/model';
-import { ClassListItem } from 'app/entities/class';
+import { Model } from '../entities/model';
+import { ClassListItem } from '../entities/class';
+import { IndexResource } from '../entities/index/indexEntities';
 
 
 export type Exclusion<T> = (obj: T) => string|null;
@@ -82,6 +83,19 @@ export function createDefinedByExclusion(model: Model): Exclusion<WithDefinedBy>
     }
   };
 }
+export function createResourceDefinedByExclusion(model: Model): Exclusion<IndexResource> {
+
+  const modelIds = collectIds(model.importedNamespaces);
+  modelIds.add(model.id.uri);
+
+  return (item: IndexResource) => {
+    if (isDefined(item.isDefinedBy) && !modelIds.has(item.isDefinedBy)) {
+      return 'Not imported by model';
+    } else {
+      return null;
+    }
+  };
+}
 
 export function createExistsExclusion(itemIds: Set<string>): Exclusion<WithId> {
   return (item: WithId) => {
@@ -105,6 +119,24 @@ export function createClassTypeExclusion(searchClassType: SearchClassType): Excl
       return 'Classes are not allowed';
     } else if (searchClassType === SearchClassType.SpecializedClass && !klass.isSpecializedClass()) {
       return 'Non specialized classes are not allowed';
+    } else {
+      return null;
+    }
+  };
+}
+export function createResourceClassTypeExclusion(searchClassType: SearchClassType): Exclusion<IndexResource> {
+
+  const showShapes = containsAny([SearchClassType.Shape, SearchClassType.SpecializedClass], [searchClassType]);
+  const showClasses = containsAny([SearchClassType.Class, SearchClassType.SpecializedClass], [searchClassType]);
+
+  return (klass: IndexResource) => {
+    if (!showShapes && klass.type === 'shape') {
+      return 'Shapes are not allowed';
+    } else if (!showClasses && !(klass.type === 'shape')) {
+      return 'Classes are not allowed';
+    // } else if (searchClassType === SearchClassType.SpecializedClass && !klass.isSpecializedClass()) {
+    //   HUOM! Tämä pitää toteuttaa vielä niin, että tarkistetaan onko IndexResource.isDefinedBy tyyppiä 'profile'.
+    //   return 'Non specialized classes are not allowed';
     } else {
       return null;
     }

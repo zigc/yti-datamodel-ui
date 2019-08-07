@@ -54,11 +54,12 @@
 
     <div class="row mb-2">
       <div class="col-12">
-        <model-filter class="pull-left"
+        <!-- FIX THIS -->
+        <!-- <model-filter class="pull-left"
                       search-controller="$ctrl"
                       type="class"
                       model="$ctrl.model"
-                      default-show="$ctrl.defaultToCurrentModel ? $ctrl.model : null"></model-filter>
+                      default-show="$ctrl.defaultToCurrentModel ? $ctrl.model : null"></model-filter> -->
 
         <div class="pull-left mt-2 ml-2">
           <profile-filter search-controller="$ctrl"
@@ -164,16 +165,16 @@
                       <ajax-loading-indicator-small ng-if="$ctrl.loadingSelection(searchResult)"></ajax-loading-indicator-small>
                       <highlight text="searchResult.label" context="$ctrl.model" search="$ctrl.searchText"></highlight>
                     </div>
-                    <a ng-href="{{$ctrl.model.linkToResource(searchResult.id)}}" target="_blank" ng-bind-html="searchResult.id.compact | highlight: $ctrl.searchText"></a>
+                    <a ng-href="{{searchResult.id}}" target="_blank" ng-bind-html="searchResult.id | highlight: $ctrl.searchText"></a>
                     <div style="padding-top: 5px">
                       <app-status [status]="searchResult.status"></app-status>
                     </div>                  
                   </td>
-                  <td>
+                  <!-- <td>
                     <div>
                       <highlight text="searchResult.definedBy.label" context="$ctrl.model" search="$ctrl.searchText"></highlight>
                     </div>
-                    <div ng-if="searchResult.definedBy.normalizedType">
+                    <div ng-if="searchResult.isdefinedBy.normalizedType">
                       {{searchResult.definedBy.normalizedType | translate}}
                     </div>
                     <div>
@@ -183,6 +184,29 @@
                         </span>
                       </span>  
                     </div>
+                  </td>
+                  <td> -->
+                  <!-- 
+                    FIX THIS: rakenna tietomallien näyttäminen uudelleen. allaoleva vain demo, joka ei toimi oikein.
+                    Tarvitaan tietomallin label urin perusteella haettuna.
+                    Tarvitaan myös classifications, joten parempi olisi palauttaa mallin tiedot DefinedBy-olion muodossa.
+                    Voisiko searchResources api hakea sen suoraan? (Kysy Miikalta.)
+                  -->
+                  <td>
+                    <!-- FIX: Tämä toteutetaan vasta kun saadaan Tietomallin label järkevästi. 
+                    <div>
+                      <highlight text="searchResult.isDefinedBy" context="$ctrl.model" search="$ctrl.searchText"></highlight>
+                    </div> -->
+                    <div ng-if="searchResult.isDefinedBy">
+                      {{searchResult.isDefinedBy}}
+                    </div>
+                    <!-- <div>
+                      <span class="information-domains">
+                        <span class="badge badge-light" ng-repeat="infoDomain in searchResult.definedBy.classifications">
+                            {{$ctrl.showItemValue(infoDomain.label)}}
+                        </span>
+                      </span>  
+                    </div> -->
                   </td>
                   <td>
                     <highlight text="searchResult.comment" context="$ctrl.model" search="$ctrl.searchText"></highlight>
@@ -194,7 +218,7 @@
                   </td>
                   -->
                   <td>
-                    {{$ctrl.showItemValue(searchResult.modifiedAt)}}
+                    {{$ctrl.showDateValue(searchResult.modified)}}
                   </td>
                   <td>
                     <div class="pull-right" uib-dropdown>                      

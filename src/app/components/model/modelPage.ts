@@ -18,10 +18,11 @@ import { AddPropertiesFromClassModal } from '../../components/editor/addProperti
 import { LegacyComponent, modalCancelHandler } from '../../utils/angular';
 import {
   combineExclusions,
-  createClassTypeExclusion,
   createDefinedByExclusion,
   createExistsExclusion,
-  Exclusion
+  Exclusion,
+  createResourceDefinedByExclusion,
+  createResourceClassTypeExclusion
 } from '../../utils/exclusion';
 import { collectIds, glyphIconClassForType } from '../../utils/entity';
 import { areEqual, Optional } from 'yti-common-ui/utils/object';
@@ -36,6 +37,7 @@ import { AuthorizationManagerService } from '../../services/authorizationManager
 import { SearchPredicateTableModal } from '../editor/searchPredicateTableModal';
 import { ModelAndSelection } from '../../services/subRoutingHackService';
 import { BehaviorSubject, Subscription } from 'rxjs';
+import { IndexResource } from '../../entities/index/indexEntities';
 
 
 export interface ModelPageActions extends ChangeNotifier<Class | Predicate> {
@@ -244,15 +246,15 @@ export class ModelPageComponent implements ModelPageActions, ModelControllerServ
       if (this.model.isOfType('profile')) {
         // profiles can create multiple shapes of single class so exists exclusion is not wanted
         // profiles can create copy of shapes so type exclusion is not wanted
-        return this.addClass(createDefinedByExclusion(this.model), noExclude);
+        return this.addClass(createResourceDefinedByExclusion(this.model), noExclude);
       } else {
         return this.addClass(
-          combineExclusions<AbstractClass>(
-            createClassTypeExclusion(SearchClassType.Class),
-            createDefinedByExclusion(this.model),
+          combineExclusions<IndexResource>(
+            createResourceClassTypeExclusion(SearchClassType.Class),
+            createResourceDefinedByExclusion(this.model),
             createExistsExclusion(collectIds(this.classes))),
-          combineExclusions<AbstractClass>(
-            createClassTypeExclusion(SearchClassType.Class),
+          combineExclusions<IndexResource>(
+            createResourceClassTypeExclusion(SearchClassType.Class),
             createExistsExclusion(collectIds(this.classes)))
         );
       }
@@ -410,8 +412,10 @@ export class ModelPageComponent implements ModelPageActions, ModelControllerServ
     }
   }
 
-  private addClass(exclusion: Exclusion<AbstractClass>,
-                   filterExclusion: Exclusion<AbstractClass>) {
+  // private addClass(exclusion: Exclusion<AbstractClass>,
+  //                  filterExclusion: Exclusion<AbstractClass>) {
+  private addClass(exclusion: Exclusion<IndexResource>,
+                   filterExclusion: Exclusion<IndexResource>) {
 
     const isProfile = this.model.isOfType('profile');
     const textForSelection = (klass: Optional<Class>) => {

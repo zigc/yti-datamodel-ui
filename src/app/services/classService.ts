@@ -303,6 +303,7 @@ export class DefaultClassService implements ClassService {
   }
 
   private deserializeClassList(data: GraphData): IPromise<ClassListItem[]> {
+    // console.log('data', data);
     return this.frameService.frameAndMapArray(data, frames.classListFrame(data), () => ClassListItem);
   }
 
