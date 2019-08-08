@@ -1,7 +1,7 @@
 import { IModelFormatter, INgModelController, IQService, IScope } from 'angular';
-import { EditableForm } from 'app/components/form/editableEntityController';
-import { arrayAsyncValidator, arrayValidator } from 'app/components/form/validators';
-import { extendNgModelOptions, formatWithFormatters, LegacyComponent, validateWithValidators, ValidationResult } from 'app/utils/angular';
+import { EditableForm } from '../../components/form/editableEntityController';
+import { arrayAsyncValidator, arrayValidator } from '../../components/form/validators';
+import { extendNgModelOptions, formatWithFormatters, LegacyComponent, validateWithValidators, ValidationResult } from '../../utils/angular';
 import { remove } from 'yti-common-ui/utils/array';
 import { enter } from 'yti-common-ui/utils/key-code';
 import { normalizeAsId } from 'yti-common-ui/utils/resource';
@@ -184,5 +184,13 @@ export class EditableMultipleComponent<T> {
 
   normalizeValueForId(value: string): string {
     return normalizeAsId(value);
+  }
+
+  isLink(value: T): boolean {
+    return !!this.link(value);
+  }
+
+  showLink(value: T): boolean {
+    return this.link && this.isLink(value);
   }
 }
