@@ -98,9 +98,18 @@ export class EditableMultipleUriSelectComponent {
   }
 
   selectUri() {
-    const promise: IPromise<DataType> = this.type === 'class' || this.type === 'shape'
-      ? this.searchClassModal.openWithOnlySelection(this.model, false, this.createExclusion())
-      : this.searchPredicateModal.openWithOnlySelection(this.model, this.type, this.createExclusion());
+    let promise: IPromise<DataType>;
+    if (!this.customDataSource) {
+      promise = this.type === 'class' || this.type === 'shape'
+        ? this.searchClassModal.openWithOnlySelection(this.model, false, this.createExclusion())
+        : this.searchPredicateModal.openWithOnlySelection(this.model, this.type, this.createExclusion());
+    } else {
+      if (this.type === 'class' || this.type === 'shape') {
+        console.error('Custom data source for class selection dialog not yet supported');
+        return;
+      }
+      promise = this.searchPredicateModal.openWithCustomDataSource(this.model, this.type, this.customDataSource as DataSource<PredicateListItem>, this.createExclusion());
+    }
 
     promise.then(result => {
       this.ngModel.push(result.id);

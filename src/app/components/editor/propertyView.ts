@@ -45,9 +45,9 @@ export class PropertyViewComponent {
 
       const arrayOfPromises: (IPromise<Predicate>)[] = this.comparableProperties.map(prop => prop.predicate).filter(predicate => {
         if (predicate instanceof Attribute) {
-          return predicate.id.toString().toLowerCase().indexOf(search.toLowerCase()) >= 0;
+          return !search || predicate.id.toString().toLowerCase().indexOf(search.toLowerCase()) >= 0;
         } else if (predicate instanceof Uri) {
-          return predicate.toString().toLowerCase().indexOf(search.toLowerCase()) >= 0;
+          return !search || predicate.toString().toLowerCase().indexOf(search.toLowerCase()) >= 0;
         }
         return false;
       }).map(predicate => {
