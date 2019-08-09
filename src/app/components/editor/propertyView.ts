@@ -1,4 +1,4 @@
-import { IQService, IScope } from 'angular';
+import { IPromise, IQService, IScope } from 'angular';
 import { ClassFormComponent } from './classForm';
 import { Uri } from '../../entities/uri';
 import { LanguageService } from '../../services/languageService';
@@ -9,6 +9,7 @@ import { Model } from '../../entities/model';
 import { Attribute, Predicate, PredicateListItem } from '../../entities/predicate';
 import { LegacyComponent } from '../../utils/angular';
 import { DataSource } from '../form/dataSource';
+import { PredicateService } from '../../services/predicateService';
 
 @LegacyComponent({
   bindings: {
@@ -35,11 +36,35 @@ export class PropertyViewComponent {
   constructor(private $scope: IScope,
               private $element: JQuery,
               private languageService: LanguageService,
+              private predicateService: PredicateService,
               private $q: IQService) {
     'ngInject';
 
     this.comparablePropertiesDataSource = (search) => {
-      return this.$q.resolve(this.comparableProperties.map(prop => prop.predicate).filter(predicate => predicate instanceof Attribute) as Attribute[]);
+      const predicateCache: { [id: string]: IPromise<Predicate> } = {};
+
+      const arrayOfPromises: (IPromise<Predicate>)[] = this.comparableProperties.map(prop => prop.predicate).filter(predicate => {
+        if (predicate instanceof Attribute) {
+          return predicate.id.toString().toLowerCase().indexOf(search.toLowerCase()) >= 0;
+        } else if (predicate instanceof Uri) {
+          return predicate.toString().toLowerCase().indexOf(search.toLowerCase()) >= 0;
+        }
+        return false;
+      }).map(predicate => {
+        if (predicate instanceof Attribute) {
+          return this.$q.resolve(predicate as Attribute);
+        } else if (predicate instanceof Uri) {
+          const str = predicate.toString();
+          if (!predicateCache[str]) {
+            predicateCache[str] = this.predicateService.getPredicate(predicate);
+          }
+          return predicateCache[str];
+        }
+        console.error('Invalid predicate: ' + predicate);
+        return undefined;
+      }).filter(val => !!val) as IPromise<Predicate>[];
+      const promiseOfArray: IPromise<Predicate[]> = this.$q.all(arrayOfPromises);
+      return promiseOfArray.then(array => array.filter(predicate => predicate instanceof Attribute));
     }
   }
 

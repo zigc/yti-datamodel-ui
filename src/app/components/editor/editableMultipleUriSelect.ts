@@ -85,8 +85,12 @@ export class EditableMultipleUriSelectComponent {
 
   $onInit() {
     const modelProvider = () => this.model;
-    this.datasource = this.type === 'class' ? this.classService.getClassesForModelDataSource(modelProvider)
-                                            : this.predicateService.getPredicatesForModelDataSource(modelProvider);
+    if (this.customDataSource) {
+      this.datasource = this.customDataSource;
+    } else {
+      this.datasource = this.type === 'class' ? this.classService.getClassesForModelDataSource(modelProvider)
+        : this.predicateService.getPredicatesForModelDataSource(modelProvider);
+    }
   }
 
   isEditing() {
