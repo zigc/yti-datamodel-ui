@@ -41,9 +41,9 @@ export class PropertyViewComponent {
     'ngInject';
 
     this.comparablePropertiesDataSource = (search) => {
-      const predicateCache: { [id: string]: IPromise<Predicate> } = {};
+      const predicateCache: { [id: string]: IPromise<Predicate | null> } = {};
 
-      const arrayOfPromises: (IPromise<Predicate>)[] = this.comparableProperties.map(prop => prop.predicate).filter(predicate => {
+      const arrayOfPromises: (IPromise<Predicate | null>)[] = this.comparableProperties.map(prop => prop.predicate).filter(predicate => {
         if (predicate instanceof Attribute) {
           return !search || predicate.id.toString().toLowerCase().indexOf(search.toLowerCase()) >= 0;
         } else if (predicate instanceof Uri) {
@@ -56,15 +56,18 @@ export class PropertyViewComponent {
         } else if (predicate instanceof Uri) {
           const str = predicate.toString();
           if (!predicateCache[str]) {
-            predicateCache[str] = this.predicateService.getPredicate(predicate);
+            predicateCache[str] =
+              this.model.isNamespaceKnownToBeNotModel(predicate.namespace)
+                ? this.predicateService.getExternalPredicate(predicate, this.model)
+                : this.predicateService.getPredicate(predicate, this.model);
           }
           return predicateCache[str];
         }
         console.error('Invalid predicate: ' + predicate);
         return undefined;
-      }).filter(val => !!val) as IPromise<Predicate>[];
-      const promiseOfArray: IPromise<Predicate[]> = this.$q.all(arrayOfPromises);
-      return promiseOfArray.then(array => array.filter(predicate => predicate instanceof Attribute));
+      }).filter((x: IPromise<Predicate | null> | undefined): x is IPromise<Predicate | null> => !!x);
+      const promiseOfArray: IPromise<(Predicate | null)[]> = this.$q.all(arrayOfPromises);
+      return promiseOfArray.then(array => array.filter((predicate: Predicate | null): predicate is Attribute => !!predicate && predicate instanceof Attribute));
     }
   }
 
@@ -96,10 +99,11 @@ export class PropertyViewComponent {
     const self = this.property;
     if (self.normalizedPredicateType === 'attribute') {
       return this.class.properties.filter(p => {
-        // TODO: Check conditions. E.g., it might make sense to drop datatype equivalence requirement to allow saying "this 32 bit integer must be less than this 64 bit integer"
+        // NOTE: Data type equivalence requirement could be added here, but dropping it allows saying, e.g., "this 32 bit integer must be less than this 64 bit integer"
         return !self.internalId.equals(p.internalId)
           && p.normalizedPredicateType === 'attribute'
-          && self.dataType === p.dataType;
+          // && self.dataType === p.dataType
+          ;
       });
     }
     return [];

@@ -55,7 +55,7 @@ export class SearchPredicateModal {
   }
 
   openWithCustomDataSource(model: Model, type: KnownPredicateType, dataSource: DataSource<PredicateListItem>, exclude: Exclusion<AbstractPredicate> = noExclude): IPromise<Predicate> {
-    return this.openModal(model, type, dataSource, exclude, true, true);
+    return this.openModal(model, type, dataSource, exclude, true, false);
   }
 
   openWithOnlySelection(model: Model, type: KnownPredicateType, exclude: Exclusion<AbstractPredicate> = noExclude): IPromise<Predicate> {
