@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2019-07-05 13:49+0300\n"
+"PO-Revision-Date: 2019-08-12 11:46+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -46,7 +46,7 @@ msgstr ""
 msgid "All models"
 msgstr ""
 
-msgid "Show classes defined in profiles"
+msgid "Classes defined in profiles"
 msgstr ""
 
 msgid "All types"
@@ -215,6 +215,9 @@ msgid "Select class"
 msgstr ""
 
 msgid "Add class"
+msgstr ""
+
+msgid "External classes"
 msgstr ""
 
 msgid "All information domains"
@@ -1810,6 +1813,9 @@ msgid "Duplicate association target"
 msgstr ""
 
 msgid "No"
+msgstr ""
+
+msgid "Show classes defined in profiles"
 msgstr ""
 
 msgid "Match to content"

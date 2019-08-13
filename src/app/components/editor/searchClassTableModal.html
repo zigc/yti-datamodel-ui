@@ -1,7 +1,7 @@
 <form name="form" class="search-class">
 
   <div class="modal-header">
-    <h4 class="modal-title">      
+    <h4 class="modal-title">
       <span ng-show="$ctrl.onlySelection" translate>Select class</span>
       <span ng-hide="$ctrl.onlySelection" translate>Add class</span>
     </h4>
@@ -26,55 +26,68 @@
                           content-extractors="$ctrl.contentExtractors"></content-filter>
         </div>
 
+        <div class="pull-left mt-2 ml-2" ng-hide="$ctrl.onlySelection">
+          <label>
+            <input type="checkbox" ng-model="$ctrl.showProfiles">
+            {{'Classes defined in profiles' | translate}}
+          </label>
+        </div>
+
+        <div class="pull-left mt-2 ml-2" ng-if="$ctrl.isModelProfile()">
+          <label>
+            <input type="checkbox" ng-model="$ctrl.showOnlyExternalClasses">
+            {{'External classes' | translate}}
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mb-2">
+      <div class="col-12">
+
+        <model-filter class="pull-left mr-2"
+                      search-controller="$ctrl"
+                      type="class"
+                      model="$ctrl.model"
+                      default-show="$ctrl.defaultToCurrentModel ? $ctrl.model : null"></model-filter>
+
         <select id="class_information_domain_filter_dropdown"
-                class="form-control pull-left ml-2"
+                class="form-control pull-left mr-2"
                 style="width: auto"
+                ng-disabled="$ctrl.showOnlyExternalClasses"
                 ng-model="$ctrl.showInfoDomain"
                 ng-options="(infoDomain.label | translateValue: $ctrl.model) for infoDomain in $ctrl.infoDomains">
           <option value="" translate>All information domains</option>
         </select>
 
         <select id="class_model_type_filter_dropdown"
-                class="form-control pull-left ml-2"
+                class="form-control pull-left mr-2"
                 style="width: auto"
+                ng-disabled="$ctrl.showOnlyExternalClasses"
                 ng-model="$ctrl.showModelType"
                 ng-options="(modelType | translate) for modelType in $ctrl.modelTypes">
           <option value="" translate>All types</option>
-        </select>        
+        </select>
 
         <select id="class_status_filter_dropdown"
-                class="form-control pull-left ml-2"
+                class="form-control pull-left"
                 style="width: auto"
+                ng-disabled="$ctrl.showOnlyExternalClasses"
                 ng-model="$ctrl.showStatus"
                 ng-options="(status | translate) for status in $ctrl.statuses">
           <option value="" translate>All statuses</option>
         </select>
-      </div>
-    </div>
-
-    <div class="row mb-2">
-      <div class="col-12">
-        <model-filter class="pull-left"
-                      search-controller="$ctrl"
-                      type="class"
-                      model="$ctrl.model"
-                      default-show="$ctrl.defaultToCurrentModel ? $ctrl.model : null"></model-filter>
-
-        <div class="pull-left mt-2 ml-2">
-          <profile-filter search-controller="$ctrl"
-                          only-selection="$ctrl.onlySelection"></profile-filter>
-        </div>
 
         <excluded-filter search-controller="$ctrl"
                          search-text="$ctrl.searchText"
                          exclude="$ctrl.filterExclude"></excluded-filter>
       </div>
     </div>
-    
-    <div ng-if="$ctrl.isSelectionExternalEntity()">      
-      
+
+    <div ng-if="$ctrl.isSelectionExternalEntity()">
+
       <h4 class="mt-4" translate>Create shape from external URI</h4>
-      
+
       <div class="row">
         <div class="col-md-4">
 
@@ -103,7 +116,7 @@
 
       <h4 class="mt-4" translate>Search existing class</h4>
     </div>
-        
+
     <div class="row full-height">
 
       <div class="col-md-12">
@@ -167,7 +180,7 @@
                     <a ng-href="{{$ctrl.model.linkToResource(searchResult.id)}}" target="_blank" ng-bind-html="searchResult.id.compact | highlight: $ctrl.searchText"></a>
                     <div style="padding-top: 5px">
                       <app-status [status]="searchResult.status"></app-status>
-                    </div>                  
+                    </div>
                   </td>
                   <td>
                     <div>
@@ -181,12 +194,12 @@
                         <span class="badge badge-light" ng-repeat="infoDomain in searchResult.definedBy.classifications">
                             {{$ctrl.showItemValue(infoDomain.label)}}
                         </span>
-                      </span>  
+                      </span>
                     </div>
                   </td>
                   <td>
                     <highlight text="searchResult.comment" context="$ctrl.model" search="$ctrl.searchText"></highlight>
-                  </td>                  
+                  </td>
                   <!-- Showing of super class is not implemented yet. -->
                   <!--
                   <td>
@@ -197,11 +210,11 @@
                     {{$ctrl.showItemValue(searchResult.modifiedAt)}}
                   </td>
                   <td>
-                    <div class="pull-right" uib-dropdown>                      
+                    <div class="pull-right" uib-dropdown>
                       <button id="{{'class_' + searchResult.id + '_actions_button'}}" class="btn btn-language dropdown-toggle" uib-dropdown-toggle>
                         <span>...</span>
                       </button>
-                  
+
                       <div uib-dropdown-menu class="dropdown-menu-right" aria-labelledby="{{'class_' + searchResult.id + '_actions_button'}}">
                         <ajax-loading-indicator-small ng-if="!$ctrl.selection"></ajax-loading-indicator-small>
                         <button id="{{'show_class_info_' + searchResult.id + '_button'}}"
@@ -260,17 +273,17 @@
             type="button"
             class="btn btn-secondary-action"
             ng-click="$ctrl.createNewClass()"
-            ng-show="$ctrl.canAddNew()"> 
+            ng-show="$ctrl.canAddNew()">
       + <span translate>New class</span>
     </button>
-    
+
     <button id="create_shape_button"
         type="button"
         class="btn btn-secondary-action"
         ng-click="$ctrl.createNewShape()"
         ng-show="$ctrl.canAddNewShape()"
-        ng-disabled="$ctrl.isSelectionExternalEntity()"> 
-      + <span translate>Shape from URI</span>      
+        ng-disabled="$ctrl.isSelectionExternalEntity()">
+      + <span translate>Shape from URI</span>
     </button>
 
     <button id="cancel_class_table_modal_button" type="button" class="btn btn-link cancel" ng-click="$ctrl.close()" translate>Cancel</button>

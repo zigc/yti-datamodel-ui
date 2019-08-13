@@ -45,8 +45,8 @@ msgstr "Käytetyt nimiavaruudet"
 msgid "All models"
 msgstr "Kaikki tietomallit"
 
-msgid "Show classes defined in profiles"
-msgstr "Näytä profiileissa määritellyt luokat"
+msgid "Classes defined in profiles"
+msgstr "Profiilien luokat"
 
 msgid "All types"
 msgstr "Kaikki tyypit"
@@ -215,6 +215,9 @@ msgstr "Valitse luokka"
 
 msgid "Add class"
 msgstr "Lisää luokka"
+
+msgid "External classes"
+msgstr "Ulkoiset luokat"
 
 msgid "All information domains"
 msgstr "Kaikki tietoalueet"
@@ -1840,6 +1843,9 @@ msgstr "Assosiaation kohde on jo lisätty"
 
 msgid "No"
 msgstr "Ei"
+
+msgid "Show classes defined in profiles"
+msgstr "Näytä profiileissa määritellyt luokat"
 
 msgid "Match to content"
 msgstr "Hae sisällöstä"

@@ -84,6 +84,8 @@ export interface SearchClassTableScope extends IScope {
 class SearchClassTableController implements SearchController<ClassListItem> {
 
   private classes: ClassListItem[] = [];
+  private internalClasses: ClassListItem[] = [];
+  private externalClasses: ClassListItem[] = [];
 
   searchResults: (ClassListItem)[] = [];
   selection: Class|ExternalEntity;
@@ -96,6 +98,8 @@ class SearchClassTableController implements SearchController<ClassListItem> {
   infoDomains: Classification[];
   modelTypes: DefinedByType[];
   showModelType: DefinedByType|null;
+  showProfiles = false;
+  showOnlyExternalClasses = false;
 
   // undefined means not fetched, null means does not exist
   externalClass: Class|null|undefined;
@@ -136,7 +140,7 @@ class SearchClassTableController implements SearchController<ClassListItem> {
 
     this.modelTypes = ['library', 'profile', 'standard'];
 
-    this.sortBy = {    
+    this.sortBy = {
       name: 'name',
       comparator: defaultLabelComparator(this.localizer, this.filterExclude),
       descOrder: false
@@ -149,7 +153,7 @@ class SearchClassTableController implements SearchController<ClassListItem> {
     classificationService.getClassifications().then(infoDomains => {
 
       modelService.getModels().then(models => {
-        
+
         const modelCount = (infoDomain: Classification) =>
           models.filter(mod => infoDomainMatches(infoDomain, mod)).length;
 
@@ -158,16 +162,23 @@ class SearchClassTableController implements SearchController<ClassListItem> {
       });
     });
 
-    const appendResults = (classes: ClassListItem[]) => {
-      this.classes = this.classes.concat(classes);
+    const results = (classes: ClassListItem[]) => {
+      this.internalClasses = classes;
       this.search();
       this.loadingResults = false;
     };
 
-    classService.getAllClasses(model).then(appendResults);
+    const externalResults = (classes: ClassListItem[]) => {
+      this.externalClasses = classes;
+      this.search();
+      this.loadingResults = false;
+    };
+
+
+    classService.getAllClasses(model).then(results);
 
     if (model.isOfType('profile')) {
-      classService.getExternalClassesForModel(model).then(appendResults);
+      classService.getExternalClassesForModel(model).then(externalResults);
     }
 
     $scope.$watch(() => this.selection && this.selection.id, selectionId => {
@@ -184,20 +195,41 @@ class SearchClassTableController implements SearchController<ClassListItem> {
     this.addFilter(classListItem =>
       !this.showInfoDomain || contains(classListItem.item.definedBy.classifications.map(classification => classification.identifier), this.showInfoDomain.identifier)
     );
-    
+
     this.addFilter(classListItem =>
       !this.showModelType || classListItem.item.definedBy.normalizedType === this.showModelType
     );
+
+    this.addFilter(classListItem =>
+      this.showProfiles || !classListItem.item.definedBy.isOfType('profile')
+  );
 
     $scope.$watch(() => this.showStatus, ifChanged<Status|null>(() => this.search()));
     $scope.$watch(() => this.showModelType, ifChanged<DefinedByType|null>(() => this.search()));
     $scope.$watch(() => this.showInfoDomain, ifChanged<Classification|null>(() => this.search()));
     $scope.$watch(() => this.sortBy.name, ifChanged<string>(() => this.search()));
-    $scope.$watch(() => this.sortBy.descOrder, ifChanged<Boolean>(() => this.search()));    
+    $scope.$watch(() => this.sortBy.descOrder, ifChanged<Boolean>(() => this.search()));
     $scope.$watch(() => languageService.getModelLanguage(model), ifChanged<Language>(() => {
       sortInfoDomains();
       this.search();
-    }));   
+    }));
+    $scope.$watch(() => this.showOnlyExternalClasses, ifChanged<Boolean>(() => {
+      if (this.showOnlyExternalClasses) {
+        if (this.showProfiles) {
+          this.showProfiles = false;
+        }
+        this.showInfoDomain = null;
+        this.showModelType = null;
+        this.showStatus = null;
+      }
+      this.search();
+    }));
+    this.$scope.$watch(() => this.showProfiles, ifChanged<Boolean>(() => {
+      if (this.showProfiles && this.showOnlyExternalClasses) {
+        this.showOnlyExternalClasses = false;
+      }
+      this.search();
+    }));
   }
 
   get items() {
@@ -217,6 +249,12 @@ class SearchClassTableController implements SearchController<ClassListItem> {
   }
 
   search() {
+    if (this.showOnlyExternalClasses) {
+      this.classes = this.externalClasses;
+    } else {
+      this.classes = this.internalClasses;
+    }
+
     this.searchResults = [
        ...filterAndSortSearchResults(this.classes, this.searchText, this.contentExtractors, this.searchFilters, this.sortBy.comparator)
     ];
@@ -312,12 +350,12 @@ class SearchClassTableController implements SearchController<ClassListItem> {
       value: () => value
     }).displayValue;
   }
- 
+
   generateSearchResultID(item: AbstractClass): string {
     return `${item.id.toString()}${'_search_class_link'}`;
   }
 
-  showActions(item: AbstractClass) {    
+  showActions(item: AbstractClass) {
     return !this.onlySelection && !item.isOfType('shape') && !item.definedBy.isOfType('standard');
   }
 
@@ -328,11 +366,11 @@ class SearchClassTableController implements SearchController<ClassListItem> {
   copyClass(item: AbstractClass) {
     this.$uibModalInstance.close(new RelatedClass(item.id, 'prov:wasDerivedFrom'));
   }
-  
+
   createSubClass(item: AbstractClass) {
     this.$uibModalInstance.close(new RelatedClass(item.id, 'rdfs:subClassOf'));
   }
-  
+
   createSuperClass(item: AbstractClass) {
     this.$uibModalInstance.close(new RelatedClass(item.id, 'iow:superClassOf'));
   }
@@ -346,6 +384,10 @@ class SearchClassTableController implements SearchController<ClassListItem> {
     } else {
       return null;
     }
+  }
+
+  isModelProfile() {
+    return this.model.isOfType('profile');
   }
 }
 

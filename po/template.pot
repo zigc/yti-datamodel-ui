@@ -37,7 +37,7 @@ msgstr ""
 msgid "All models"
 msgstr ""
 
-msgid "Show classes defined in profiles"
+msgid "Classes defined in profiles"
 msgstr ""
 
 msgid "All types"
@@ -206,6 +206,9 @@ msgid "Select class"
 msgstr ""
 
 msgid "Add class"
+msgstr ""
+
+msgid "External classes"
 msgstr ""
 
 msgid "All information domains"
@@ -1713,6 +1716,9 @@ msgid "Duplicate association target"
 msgstr ""
 
 msgid "No"
+msgstr ""
+
+msgid "Show classes defined in profiles"
 msgstr ""
 
 msgid "Match to content"
