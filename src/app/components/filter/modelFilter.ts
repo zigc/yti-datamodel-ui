@@ -21,8 +21,8 @@ type ItemType = ClassListItem|PredicateListItem;
     defaultShow: '='
   },
   template: `
-      <select id="model" 
-              class="form-control" 
+      <select id="model"
+              class="form-control"
               style="width: auto"
               ng-model="$ctrl.showModel"
               ng-options="$ctrl.isThisModel(model)
