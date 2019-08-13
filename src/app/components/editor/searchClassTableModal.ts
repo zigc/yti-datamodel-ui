@@ -138,7 +138,7 @@ class SearchClassTableController implements SearchController<ClassListItem> {
     this.localizer = languageService.createLocalizer(model);
     this.loadingResults = true;
 
-    this.modelTypes = ['library', 'profile', 'standard'];
+    this.modelTypes = ['library', 'profile'];
 
     this.sortBy = {
       name: 'name',
