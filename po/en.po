@@ -208,6 +208,9 @@ msgstr ""
 msgid "Technical metadata"
 msgstr "Technical metadata"
 
+msgid "Property pairs"
+msgstr ""
+
 msgid "Reusable predicate"
 msgstr ""
 
@@ -1887,8 +1890,8 @@ msgstr "Attributes"
 msgid "Deep association hit"
 msgstr "Associations"
 
-msgid "Superproperty info"
-msgstr ""
+msgid "Specialized from class info"
+msgstr "Reference to the Class of the Shape"
 
 msgid "Editorial note"
 msgstr ""
@@ -2097,8 +2100,8 @@ msgstr ""
 msgid "Superproperty"
 msgstr ""
 
-msgid "Definition info"
-msgstr "Definition of the concept"
+msgid "Superproperty info"
+msgstr ""
 
 msgid "Range"
 msgstr ""
@@ -2111,8 +2114,8 @@ msgstr ""
 msgid "Specialized from class"
 msgstr ""
 
-msgid "Specialized from class info"
-msgstr "Reference to the Class of the Shape"
+msgid "Definition info"
+msgstr "Definition of the concept"
 
 msgid "Example"
 msgstr ""
@@ -2265,6 +2268,33 @@ msgid "Unique label info"
 msgstr ""
 "Defines if only one localized value is allowed for each language. This can "
 "be used for example to define cardinaly of two with unique localized values"
+
+msgid "Equals"
+msgstr ""
+
+msgid "Equals info"
+msgstr "Value of this property should be equal to values of these properties"
+
+msgid "Disjoint"
+msgstr ""
+
+msgid "Disjoint info"
+msgstr ""
+"Value of this property should be disjoint to values of these properties"
+
+msgid "Less than"
+msgstr ""
+
+msgid "Less than info"
+msgstr "Value of this property should be less than values of these properties"
+
+msgid "Less than or equals"
+msgstr ""
+
+msgid "Less than or equals info"
+msgstr ""
+"Value of this property should be less than or equal to values of these "
+"properties"
 
 msgid "Homepage"
 msgstr "Link"

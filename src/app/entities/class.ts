@@ -347,7 +347,11 @@ export class Property extends GraphNode {
     xmlWrapper:         { name: 'isXmlWrapper',         serializer: booleanSerializer },
     xmlAttribute:       { name: 'isXmlAttribute',       serializer: booleanSerializer },
     readOnlyValue:      { name: 'readOnlyValue',        serializer: booleanSerializer },
-    deactivated:         { name: 'deactivated',           serializer: booleanSerializer }
+    deactivated:        { name: 'deactivated',          serializer: booleanSerializer },
+    equals:             { name: 'equals',               serializer: entityAwareList(uriSerializer) },
+    disjoint:           { name: 'disjoint',             serializer: entityAwareList(uriSerializer) },
+    lessThan:           { name: 'lessThan',             serializer: entityAwareList(uriSerializer) },
+    lessThanOrEquals:   { name: 'lessThanOrEquals',     serializer: entityAwareList(uriSerializer) }
   };
 
   internalId: Uri;
@@ -379,6 +383,10 @@ export class Property extends GraphNode {
   xmlAttribute: boolean;
   readOnlyValue: boolean;
   deactivated: boolean;
+  equals: Uri[];
+  disjoint: Uri[];
+  lessThan: Uri[];
+  lessThanOrEquals: Uri[];
 
   predicateType: KnownPredicateType|null = null;
 
@@ -426,6 +434,13 @@ export class Property extends GraphNode {
       || this.xmlAttribute
       || this.readOnlyValue
       || this.deactivated;
+  }
+
+  hasPropertyPairs() {
+    return this.equals.length > 0
+    || this.disjoint.length > 0
+    || this.lessThan.length > 0
+    || this.lessThanOrEquals.length > 0;
   }
 
   hasAssociationTarget() {

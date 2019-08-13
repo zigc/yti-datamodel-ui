@@ -207,6 +207,9 @@ msgstr "Valinnaiset metatiedot"
 msgid "Technical metadata"
 msgstr "Tekninen metadata"
 
+msgid "Property pairs"
+msgstr "Ominaisuuden vastaavuudet"
+
 msgid "Reusable predicate"
 msgstr "Uudelleenkäytettävä ominaisuus"
 
@@ -1916,8 +1919,8 @@ msgstr "Attribuutit"
 msgid "Deep association hit"
 msgstr "Assosiaatiot"
 
-msgid "Superproperty info"
-msgstr "Yleistettävissä oleva ominaisuus, joka on semantiikaltaan laajempi"
+msgid "Specialized from class info"
+msgstr "Luokka jota soveltamisprofiilissa on tarkennettu"
 
 msgid "Editorial note"
 msgstr "Muokkaajan kommentti"
@@ -2137,8 +2140,8 @@ msgstr "Yleistettävissä oleva attribuutti, joka on semantiikaltaan laajempi"
 msgid "Superproperty"
 msgstr "Yläkäsite"
 
-msgid "Definition info"
-msgstr "Käsitteen määritelmä"
+msgid "Superproperty info"
+msgstr "Yleistettävissä oleva ominaisuus, joka on semantiikaltaan laajempi"
 
 msgid "Range"
 msgstr "Tietotyyppi"
@@ -2151,8 +2154,8 @@ msgstr ""
 msgid "Specialized from class"
 msgstr "Tarkennettu luokasta"
 
-msgid "Specialized from class info"
-msgstr "Luokka jota soveltamisprofiilissa on tarkennettu"
+msgid "Definition info"
+msgstr "Käsitteen määritelmä"
 
 msgid "Example"
 msgstr "Esimerkki"
@@ -2310,6 +2313,32 @@ msgstr ""
 "Määrittelee onko vain yksi kieliversioitu arvo sallittu yhtä kieltä kohden. "
 "Tämän avulla voidaan määritellä esimerkiksi Enimmäismäärä 2 siten että vain "
 "erikieliset arvot ovat sallittuja"
+
+msgid "Equals"
+msgstr "Yhtä kuin"
+
+msgid "Equals info"
+msgstr "Ominaisuus jonka arvo täytyy olla sama kuin tämän ominaisuuden arvo"
+
+msgid "Disjoint"
+msgstr "Eri kuin"
+
+msgid "Disjoint info"
+msgstr "Ominaisuus jonka arvo täytyy olla eri kuin tämän ominaisuuden arvo"
+
+msgid "Less than"
+msgstr "Pienempi kuin"
+
+msgid "Less than info"
+msgstr "Ominaisuus jonka arvo täytyy olla eri kuin tämän ominaisuuden arvo"
+
+msgid "Less than or equals"
+msgstr "Pienempi tai yhtä suuri kuin"
+
+msgid "Less than or equals info"
+msgstr ""
+"Ominaisuus jonka arvo täytyy olla pienempi tai yhtä suuri kuin tämän "
+"ominaisuuden arvo"
 
 msgid "Homepage"
 msgstr "Linkki"

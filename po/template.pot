@@ -199,6 +199,9 @@ msgstr ""
 msgid "Technical metadata"
 msgstr ""
 
+msgid "Property pairs"
+msgstr ""
+
 msgid "Reusable predicate"
 msgstr ""
 
@@ -1123,9 +1126,7 @@ msgstr ""
 msgid "Edit in progress"
 msgstr ""
 
-msgid ""
-"Are you sure that you want to continue? By continuing unsaved changes will "
-"be lost."
+msgid "Are you sure that you want to continue? By continuing unsaved changes will be lost."
 msgstr ""
 
 msgid "Dialog is open"
@@ -1668,9 +1669,7 @@ msgstr ""
 msgid "Predicate in use"
 msgstr ""
 
-msgid ""
-"Predicate type cannot be changed because it is already used by following "
-"resources"
+msgid "Predicate type cannot be changed because it is already used by following resources"
 msgstr ""
 
 msgid "Convert to association"
@@ -1790,7 +1789,7 @@ msgstr ""
 msgid "Deep association hit"
 msgstr ""
 
-msgid "Superproperty info"
+msgid "Specialized from class info"
 msgstr ""
 
 msgid "Editorial note"
@@ -1994,7 +1993,7 @@ msgstr ""
 msgid "Superproperty"
 msgstr ""
 
-msgid "Definition info"
+msgid "Superproperty info"
 msgstr ""
 
 msgid "Range"
@@ -2006,7 +2005,7 @@ msgstr ""
 msgid "Specialized from class"
 msgstr ""
 
-msgid "Specialized from class info"
+msgid "Definition info"
 msgstr ""
 
 msgid "Example"
@@ -2151,6 +2150,30 @@ msgid "Deactivated info"
 msgstr ""
 
 msgid "Unique label info"
+msgstr ""
+
+msgid "Equals"
+msgstr ""
+
+msgid "Equals info"
+msgstr ""
+
+msgid "Disjoint"
+msgstr ""
+
+msgid "Disjoint info"
+msgstr ""
+
+msgid "Less than"
+msgstr ""
+
+msgid "Less than info"
+msgstr ""
+
+msgid "Less than or equals"
+msgstr ""
+
+msgid "Less than or equals info"
 msgstr ""
 
 msgid "Homepage"
