@@ -18,7 +18,8 @@ type ItemType = ClassListItem|PredicateListItem;
     searchController: '=',
     type: '@',
     model: '=',
-    defaultShow: '='
+    defaultShow: '=',
+    hideThisModel: '='
   },
   template: `
       <select id="model"
@@ -39,6 +40,7 @@ export class ModelFilterComponent {
   type: 'class'|'predicate';
   model: Model;
   defaultShow: Model|DefinedBy;
+  hideThisModel: boolean;
 
   showModel: Model|DefinedBy;
   models: (Model|DefinedBy)[] = [];
@@ -67,7 +69,7 @@ export class ModelFilterComponent {
         .value()
         .sort(comparingLocalizable<DefinedBy>(localizer, definedBy => definedBy.label));
 
-      this.models = [this.model, ...definedByFromClasses];
+      this.models = this.hideThisModel ? definedByFromClasses : [this.model, ...definedByFromClasses];
     });
 
     this.searchController.addFilter((item: TextAnalysis<ItemType>) => {
