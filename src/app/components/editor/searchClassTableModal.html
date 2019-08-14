@@ -40,6 +40,10 @@
           </label>
         </div>
       </div>
+
+      <excluded-filter search-controller="$ctrl"
+                       search-text="$ctrl.searchText"
+                       exclude="$ctrl.filterExclude"></excluded-filter>
     </div>
 
     <div class="row mb-2">
@@ -78,10 +82,6 @@
                 ng-options="(status | translate) for status in $ctrl.statuses">
           <option value="" translate>All statuses</option>
         </select>
-
-        <excluded-filter search-controller="$ctrl"
-                         search-text="$ctrl.searchText"
-                         exclude="$ctrl.filterExclude"></excluded-filter>
       </div>
     </div>
 
