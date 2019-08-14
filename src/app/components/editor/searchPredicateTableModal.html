@@ -2,7 +2,7 @@
 
   <div class="modal-header">
     <h4 class="modal-title">
-      
+
       <div>
         <span>{{('Add ' + $ctrl.type) | translate}}</span>
       </div>
@@ -28,8 +28,27 @@
                           content-extractors="$ctrl.contentExtractors"></content-filter>
         </div>
 
+        <excluded-filter search-controller="$ctrl"
+                         search-text="$ctrl.searchText"
+                         exclude="$ctrl.filterExclude"></excluded-filter>
+      </div>
+    </div>
+
+    <div class="row mb-2">
+      <div class="col-12">
+        <model-filter class="pull-left mr-2"
+                      search-controller="$ctrl"
+                      type="predicate"
+                      model="$ctrl.model"></model-filter>
+
+        <type-filter class="pull-left mr-2"
+                     search-controller="$ctrl"
+                     ng-show="$ctrl.typeSelectable"
+                     label="Predicate type"
+                     default-type="$ctrl.type"></type-filter>
+
         <select id="predicate_information_domain_filter_dropdown"
-                class="form-control pull-left ml-2"
+                class="form-control pull-left mr-2"
                 style="width: auto"
                 ng-model="$ctrl.showInfoDomain"
                 ng-options="(infoDomain.label | translateValue: $ctrl.model) for infoDomain in $ctrl.infoDomains">
@@ -37,41 +56,20 @@
         </select>
 
         <select id="predicate_model_type_filter_dropdown"
-                class="form-control pull-left ml-2"
+                class="form-control pull-left mr-2"
                 style="width: auto"
                 ng-model="$ctrl.showModelType"
                 ng-options="(modelType | translate) for modelType in $ctrl.modelTypes">
           <option value="" translate>All types</option>
-        </select>        
+        </select>
 
         <select id="predicate_status_filter_dropdown"
-                class="form-control pull-left ml-2"
+                class="form-control pull-left"
                 style="width: auto"
                 ng-model="$ctrl.showStatus"
                 ng-options="(status | translate) for status in $ctrl.statuses">
           <option value="" translate>All statuses</option>
         </select>
-
-      </div>
-    </div>
-
-    <div class="row mb-2">
-      <div class="col-12">
-
-        <model-filter class="pull-left"
-                      search-controller="$ctrl"
-                      type="predicate"
-                      model="$ctrl.model"></model-filter>
-
-        <type-filter class="pull-left ml-2"
-                     search-controller="$ctrl"
-                     ng-show="$ctrl.typeSelectable"
-                     label="Predicate type"
-                     default-type="$ctrl.type"></type-filter>
-
-        <excluded-filter search-controller="$ctrl"
-                         search-text="$ctrl.searchText"
-                         exclude="$ctrl.filterExclude"></excluded-filter>
       </div>
     </div>
 
@@ -127,7 +125,7 @@
                     ng-click="$ctrl.selectItem(searchResult)"
                     title="{{$ctrl.itemTitle(searchResult)}}"
                     key-control-selection>
-                  <td>                    
+                  <td>
                     <div>
                       <i class="glyph-icon" ng-class="searchResult.glyphIconClass"></i>
                       <ajax-loading-indicator-small ng-if="$ctrl.loadingSelection(searchResult)"></ajax-loading-indicator-small>
@@ -136,7 +134,7 @@
                     <a ng-href="{{$ctrl.model.linkToResource(searchResult.id)}}" target="_blank" ng-bind-html="searchResult.id.compact | highlight: $ctrl.searchText"></a>
                     <div style="padding-top: 5px">
                       <app-status [status]="searchResult.status"></app-status>
-                    </div>                  
+                    </div>
                   </td>
                   <td>
                     <div>
@@ -150,21 +148,21 @@
                         <span class="badge badge-light" ng-repeat="infoDomain in searchResult.definedBy.classifications">
                             {{$ctrl.showItemValue(infoDomain.label)}}
                         </span>
-                      </span>  
+                      </span>
                     </div>
                   </td>
                   <td>
                     <highlight text="searchResult.comment" context="$ctrl.model" search="$ctrl.searchText"></highlight>
-                  </td>                  
+                  </td>
                   <td>
                     {{$ctrl.showItemValue(searchResult.modifiedAt)}}
                   </td>
                   <td>
-                    <div class="pull-right" uib-dropdown>                      
+                    <div class="pull-right" uib-dropdown>
                       <button id="{{'predicate_' + searchResult.id + '_actions_button'}}" class="btn btn-language dropdown-toggle" uib-dropdown-toggle>
                         <span>...</span>
                       </button>
-                  
+
                       <div uib-dropdown-menu class="dropdown-menu-right" aria-labelledby="{{'predicate_' + searchResult.id + '_actions_button'}}">
                         <ajax-loading-indicator-small ng-if="!$ctrl.isSelectionPredicate()"></ajax-loading-indicator-small>
                         <button id="{{'show_predicate_info_' + searchResult.id + '_button'}}"
