@@ -28,6 +28,16 @@
                              range="$ctrl.property.dataType">
       </editable-range-select>
 
+      <editable ng-if="$ctrl.property.isAssociation()" data-title="Value class" link="$ctrl.linkToValueClass()" context="$ctrl.model">
+          <uri-select id="{{$ctrl.property.internalId + '_valueClass'}}"
+                      type="class" uri="$ctrl.property.valueClass"
+                      mandatory="!$ctrl.property.inUnstableState"
+                      exclude-id="$ctrl.valueClassExclude"
+                      model="$ctrl.model"
+                      default-to-current-model="true">
+          </uri-select>
+        </editable>
+
       <editable data-title="Unique label" context="$ctrl.model" ng-if="$ctrl.property.dataType === 'rdf:langString'">
         <input id="{{$ctrl.property.internalId + 'permanentIdentifier'}}" type="checkbox" ng-model="$ctrl.property.uniqueLang" />
       </editable>
@@ -38,24 +48,14 @@
                                          ng-model="$ctrl.property.languageIn"
                                          required="false">
       </editable-multiple-language-select>
-
-      <editable-state-select id="{{$ctrl.property.internalId + 'state'}}" state="$ctrl.property.status" model="$ctrl.model"></editable-state-select>
+      <editable-reference-data-select model="$ctrl.model" reference-data="$ctrl.property.referenceData"></editable-reference-data-select>
     </div>
 
     <div class="col-md-6">
       <editable data-title="Description" context="$ctrl.model">
         <textarea id="{{$ctrl.property.internalId + 'comment'}}" class="form-control" localized-input context="$ctrl.model" ng-model="$ctrl.property.comment"></textarea>
       </editable>
-
-      <editable ng-if="$ctrl.property.isAssociation()" data-title="Value class" link="$ctrl.linkToValueClass()" context="$ctrl.model">
-        <uri-select id="{{$ctrl.property.internalId + '_valueClass'}}"
-                    type="class" uri="$ctrl.property.valueClass"
-                    mandatory="!$ctrl.property.inUnstableState"
-                    exclude-id="$ctrl.valueClassExclude"
-                    model="$ctrl.model"
-                    default-to-current-model="true">
-        </uri-select>
-      </editable>
+      <editable-state-select id="{{$ctrl.property.internalId + 'state'}}" state="$ctrl.property.status" model="$ctrl.model"></editable-state-select>
     </div>
   </div>
 
@@ -153,12 +153,34 @@
         <editable data-title="Deactivated" context="$ctrl.model">
           <input id="{{$ctrl.property.internalId + 'deactivated'}}" type="checkbox" ng-model="$ctrl.property.deactivated"/>
         </editable>
-      </div>
+       </div>
   </div>
 
-  <div class="row">
-    <div class="col-md-12">
-      <editable-reference-data-select model="$ctrl.model" reference-data="$ctrl.property.referenceData"></editable-reference-data-select>
+  <div ng-show="($ctrl.isEditing() && $ctrl.propertyPairCapable) || $ctrl.property.hasPropertyPairs()">
+    <h4 translate>Property pairs</h4>
+    <div class="row">
+      <div class="col-md-6">
+        <editable-multiple-uri-select id="equals" type="{{$ctrl.property.normalizedPredicateType}}"
+                                      custom-data-source="$ctrl.comparablePropertiesDataSource" ng-model="$ctrl.property.equals"
+                                      model="$ctrl.model" data-title="Equals"></editable-multiple-uri-select>
+      </div>
+      <div class="col-md-6">
+        <editable-multiple-uri-select id="disjoint" type="{{$ctrl.property.normalizedPredicateType}}"
+                                      custom-data-source="$ctrl.comparablePropertiesDataSource" ng-model="$ctrl.property.disjoint"
+                                      model="$ctrl.model" data-title="Disjoint"></editable-multiple-uri-select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <editable-multiple-uri-select id="lessThan" type="{{$ctrl.property.normalizedPredicateType}}"
+                                      custom-data-source="$ctrl.comparablePropertiesDataSource" ng-model="$ctrl.property.lessThan"
+                                      model="$ctrl.model" data-title="Less than"></editable-multiple-uri-select>
+      </div>
+      <div class="col-md-6">
+        <editable-multiple-uri-select id="lessThanOrEquals" type="{{$ctrl.property.normalizedPredicateType}}"
+                                      custom-data-source="$ctrl.comparablePropertiesDataSource" ng-model="$ctrl.property.lessThanOrEquals"
+                                      model="$ctrl.model" data-title="Less than or equals"></editable-multiple-uri-select>
+      </div>
     </div>
   </div>
 

@@ -38,7 +38,8 @@
     <div class="row mb-2">
       <div class="col-12">
 
-        <model-filter class="pull-left"
+        <model-filter ng-hide="$ctrl.customDataSource"
+                      class="pull-left"
                       search-controller="$ctrl"
                       type="predicate"
                       model="$ctrl.model"></model-filter>
