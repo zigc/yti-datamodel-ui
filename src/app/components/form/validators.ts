@@ -1,9 +1,9 @@
 import { IPromise, IQService } from 'angular';
 import * as moment from 'moment';
-import { Uri } from 'app/entities/uri';
-import { availableLanguages } from 'app/types/language';
+import { Uri } from '../../entities/uri';
+import { availableLanguages } from '../../types/language';
 import { contains } from 'yti-common-ui/utils/array';
-import { DataType } from 'app/entities/dataTypes';
+import { DataType } from '../../entities/dataTypes';
 import { parse as parseUri } from 'uri-js';
 
 export type Validator<T> = (input: T, raw?: any) =>  boolean;
@@ -36,7 +36,7 @@ export function arrayAsyncValidator<T>($q: IQService, asyncValidator: AsyncValid
   };
 }
 
-export const isValidPrefix = createRegexValidator(/^[a-z][a-z0-9]*$/);
+export const isValidPrefix = createRegexValidator(/^[a-z][a-z0-9_\-]*[a-z0-9]$/);
 export const isValidClassIdentifier = createRegexValidator(/^[A-Z][a-zA-Z0-9_\-]*$/);
 export const isValidPredicateIdentifier = createRegexValidator(/^[a-z][a-zA-Z0-9_\-]*$/);
 export const isValidIdentifier = createRegexValidator(/^[a-zA-Z_\-][a-zA-Z0-9_\-]*$/);
@@ -50,7 +50,7 @@ export function isValidModelLabelLength(_label: string): boolean {
 }
 
 export function isValidPrefixLength(prefix: string): boolean {
-  return !prefix || prefix.length <= 8;
+  return !prefix || prefix.length <= 10;
 }
 
 export function isValidNamespace(str: string|Uri): boolean {
