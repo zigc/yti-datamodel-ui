@@ -6,7 +6,7 @@ import {
 import { normalizeAsArray } from 'yti-common-ui/utils/array';
 import { GraphNode, GraphNodes } from 'app/entities/graphNode';
 
-const jsonld: any = require('jsonld');
+const jsonld: any = require('jsonld/dist/node6/lib/jsonld');
 
 export class FrameService {
 
