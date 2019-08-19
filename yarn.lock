@@ -4119,13 +4119,9 @@ lodash@3.10.1, lodash@^3.10.0, lodash@^3.8.0:
   version "3.10.1"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-3.10.1.tgz#5bf45e8e49ba4189e17d482789dfd15bd140b7b6"
 
-lodash@4.17.15:
+lodash@4.17.15, lodash@^4.0.0, lodash@^4.15.0, lodash@^4.17.10, lodash@^4.17.11, lodash@^4.17.3, lodash@^4.17.4, lodash@^4.17.5, lodash@^4.5.0, lodash@~4.17.10:
   version "4.17.15"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.15.tgz#b447f6670a0455bbfeedd11392eff330ea097548"
-
-lodash@^4.0.0, lodash@^4.15.0, lodash@^4.17.10, lodash@^4.17.11, lodash@^4.17.3, lodash@^4.17.4, lodash@^4.17.5, lodash@^4.5.0, lodash@~4.17.10:
-  version "4.17.11"
-  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.11.tgz#b39ea6229ef607ecd89e2c8df12536891cac9b8d"
 
 log4js@^0.6.31:
   version "0.6.38"
@@ -7221,9 +7217,9 @@ yn@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/yn/-/yn-2.0.0.tgz#e5adabc8acf408f6385fc76495684c88e6af689a"
 
-"yti-common-ui@https://github.com/VRK-YTI/yti-common-ui.git/#6f5f9005c2424ccea2d1364940cc8bf247eac8c4":
+"yti-common-ui@https://github.com/VRK-YTI/yti-common-ui.git/#d251e48670d6dce644c641a26fe144956cb3b550":
   version "0.0.0"
-  resolved "https://github.com/VRK-YTI/yti-common-ui.git/#6f5f9005c2424ccea2d1364940cc8bf247eac8c4"
+  resolved "https://github.com/VRK-YTI/yti-common-ui.git/#d251e48670d6dce644c641a26fe144956cb3b550"
 
 zone.js@~0.8.26:
   version "0.8.29"
