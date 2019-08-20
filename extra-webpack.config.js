@@ -17,7 +17,8 @@ const NgAnnotatePlugin = require('./ng-annotate.plugin.ts').NgAnnotatePlugin;
 module.exports = {
   resolve: {
     alias: {
-      'proxy-polyfill': path.resolve(__dirname, 'node_modules/proxy-polyfill/proxy.min.js')
+      'proxy-polyfill': path.resolve(__dirname, 'node_modules/proxy-polyfill/proxy.min.js'),
+      'jsonld': path.resolve(__dirname, 'node_modules/jsonld/dist/node6/lib/jsonld.js')
     }
   },
   plugins: [
