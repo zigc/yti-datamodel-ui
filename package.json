@@ -82,6 +82,7 @@
     "@types/jasminewd2": "~2.0.3",
     "@types/jointjs": "file:./types/jointjs",
     "@types/jquery": "1.10.31",
+    "@types/jsonld": "1.5.0",
     "@types/lodash": "4.14.121",
     "@types/modernizr": "3.2.26",
     "@types/node": "~8.9.4",

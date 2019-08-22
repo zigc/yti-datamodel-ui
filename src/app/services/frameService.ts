@@ -1,22 +1,25 @@
-import { IPromise } from 'angular';
+import { IPromise, IQService } from 'angular';
 import {
   GraphData, EntityFactory, EntityConstructor,
   EntityArrayFactory, EntityArrayConstructor
 } from 'app/types/entity';
 import { normalizeAsArray } from 'yti-common-ui/utils/array';
 import { GraphNode, GraphNodes } from 'app/entities/graphNode';
-
-const jsonld: any = require('jsonld/dist/node6/lib/jsonld');
+import { frame as jsonldFrame } from 'jsonld';
 
 export class FrameService {
+  constructor(private $q: IQService) {
+    'ngInject';
+  }
 
   private frameData(data: GraphData, frame: any): IPromise<GraphData> {
-    return jsonld.promises.frame(data, frame)
-      .then((framed: any) => framed, (err: any) => {
+    return this.$q.when(jsonldFrame(data, frame)
+      .then((framed: GraphData) => framed, (err: any) => {
         console.log('Error: ' + err.message);
         console.log('Cause: ' + err.details.cause);
         this.logDataForError(data, frame);
-      });
+        throw err;
+      }));
   }
 
   private logDataForError(data: any, frame: any, framed?: any): void {

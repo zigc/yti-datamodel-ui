@@ -67,7 +67,13 @@ export class PropertyViewComponent {
         return undefined;
       }).filter((x: IPromise<Predicate | null> | undefined): x is IPromise<Predicate | null> => !!x);
       const promiseOfArray: IPromise<(Predicate | null)[]> = this.$q.all(arrayOfPromises);
-      return promiseOfArray.then(array => array.filter((predicate: Predicate | null): predicate is Attribute => !!predicate && predicate instanceof Attribute));
+      return promiseOfArray.then(array => array.filter((predicate: Predicate | null): predicate is Attribute => {
+        const ret = !!predicate && predicate instanceof Attribute;
+        if (!ret) {
+          console.log('Rejecting attribute candidate: "' + (!!predicate ? predicate.id.toString() : 'null') + '". Loading external attribute may have failed.');
+        }
+        return ret;
+      }));
     }
   }
 
