@@ -18,7 +18,7 @@ module.exports = {
   resolve: {
     alias: {
       'proxy-polyfill': path.resolve(__dirname, 'node_modules/proxy-polyfill/proxy.min.js'),
-      'jsonld': path.resolve(__dirname, 'node_modules/jsonld/dist/node6/lib/jsonld.js')
+      // 'jsonld': path.resolve(__dirname, 'node_modules/jsonld/dist/node6/lib/jsonld.js') // NOTE: Used to force jsonld 1.6.2 "babelished" version into use
     }
   },
   plugins: [
