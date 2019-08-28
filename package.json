@@ -45,7 +45,7 @@
     "jointjs": "1.0.3",
     "jquery": "3.4.1",
     "jquery-mousewheel": "3.1.13",
-    "jsonld": "1.6.2",
+    "jsonld": "0.4.12",
     "lodash": "4.17.15",
     "material-design-icons": "^3.0.1",
     "moment": "^2.21.0",
@@ -57,7 +57,7 @@
     "uri-js": "4.2.2",
     "uuid": "3.0.1",
     "webcola": "3.3.8",
-    "yti-common-ui": "https://github.com/VRK-YTI/yti-common-ui.git/#d251e48670d6dce644c641a26fe144956cb3b550",
+    "yti-common-ui": "https://github.com/VRK-YTI/yti-common-ui.git/#af7bf224021b11282cd06a7bc6758fef940e2c3d",
     "zone.js": "~0.8.26"
   },
   "devDependencies": {
@@ -82,7 +82,6 @@
     "@types/jasminewd2": "~2.0.3",
     "@types/jointjs": "file:./types/jointjs",
     "@types/jquery": "1.10.31",
-    "@types/jsonld": "1.5.0",
     "@types/lodash": "4.14.121",
     "@types/modernizr": "3.2.26",
     "@types/node": "~8.9.4",
