@@ -1,5 +1,5 @@
 {
-  "/api/*": {
+  "/datamodel/api/v1/*": {
     "target": "https://tietomallit.dev.yti.cloud.vrk.fi",
     "changeOrigin": true,
     "secure": false
