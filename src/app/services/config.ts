@@ -1,3 +1,3 @@
 export function apiEndpointWithName(name: string) {
-  return `/api/rest/${name}`;
+  return `/datamodel/api/v1/${name}`;
 }
