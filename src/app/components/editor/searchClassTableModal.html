@@ -168,7 +168,7 @@
 
                 <tr ng-repeat="searchResult in $ctrl.searchResults"
                     id="{{$ctrl.generateSearchResultID(searchResult)}}"
-                    ng-class="['search-result', {active: $ctrl.isSelected(searchResult), disabled: $ctrl.isDisabled(searchResult)} ]"
+                    ng-class="['search-result', {active: $ctrl.isSelected(searchResult)}]"
                     ng-click="$ctrl.selectItem(searchResult)"
                     title="{{$ctrl.itemTitle(searchResult)}}"
                     key-control-selection>
@@ -211,43 +211,6 @@
                     {{$ctrl.showItemValue(searchResult.modifiedAt)}}
                   </td>
                   <td class="menu-col">
-                    <div class="pull-right" uib-dropdown>
-                      <button id="{{'class_' + searchResult.id + '_actions_button'}}" class="btn btn-language dropdown-toggle" uib-dropdown-toggle>
-                        <span>...</span>
-                      </button>
-
-                      <div uib-dropdown-menu class="dropdown-menu-right" aria-labelledby="{{'class_' + searchResult.id + '_actions_button'}}">
-                        <ajax-loading-indicator-small ng-if="!$ctrl.selection"></ajax-loading-indicator-small>
-                        <button id="{{'show_class_info_' + searchResult.id + '_button'}}"
-                                class="dropdown-item"
-                                ng-click="$ctrl.showClassInfo()"
-                                ng-if="$ctrl.selection"
-                                translate>
-                          Show class information
-                        </button>
-                        <button id="{{'copy_class_' + searchResult.id + '_button'}}"
-                                class="dropdown-item"
-                                ng-click="$ctrl.copyClass(searchResult)"
-                                ng-if="$ctrl.showActions(searchResult)"
-                                translate>
-                          Copy class
-                        </button>
-                        <button id="{{'create_sub_class_' + searchResult.id + '_button'}}"
-                                class="dropdown-item"
-                                ng-click="$ctrl.createSubClass(searchResult)"
-                                ng-if="$ctrl.showActions(searchResult)"
-                                translate>
-                          Create sub class
-                        </button>
-                        <button id="{{'create_super_class_' + searchResult.id + '_button'}}"
-                                class="dropdown-item"
-                                ng-click="$ctrl.createSuperClass(searchResult)"
-                                ng-if="$ctrl.showActions(searchResult)"
-                                translate>
-                          Create super class
-                        </button>
-                      </div>
-                    </div>
                   </td>
                 <tr>
 
@@ -286,6 +249,42 @@
         ng-disabled="$ctrl.isSelectionExternalEntity()">
       + <span translate>Shape from URI</span>
     </button>
+
+    <div class="pull-right dropup" uib-dropdown>
+      <button id="{{'class_' + $ctrl.selection.id + '_actions_button'}}" class="btn btn-language dropdown-toggle" ng-disabled="!$ctrl.selection" uib-dropdown-toggle>
+        <span translate>Actions</span>
+      </button>
+      <div uib-dropdown-menu class="dropdown-menu-right" aria-labelledby="{{'class_' + $ctrl.selection.id + '_actions_button'}}" ng-if="$ctrl.selection">
+        <button id="{{'show_class_info_' + $ctrl.selection.id + '_button'}}"
+                class="dropdown-item"
+                ng-click="$ctrl.showClassInfo($ctrl.selection)"
+                ng-if="$ctrl.selection"
+                translate>
+          Show class information
+        </button>
+        <button id="{{'copy_class_' + $ctrl.selection.id + '_button'}}"
+                class="dropdown-item"
+                ng-click="$ctrl.copyClass($ctrl.selection)"
+                ng-if="$ctrl.showActions($ctrl.selection)"
+                translate>
+          Copy class
+        </button>
+        <button id="{{'create_sub_class_' + $ctrl.selection.id + '_button'}}"
+                class="dropdown-item"
+                ng-click="$ctrl.createSubClass($ctrl.selection)"
+                ng-if="$ctrl.showActions($ctrl.selection)"
+                translate>
+          Create sub class
+        </button>
+        <button id="{{'create_super_class_' + $ctrl.selection.id + '_button'}}"
+                class="dropdown-item"
+                ng-click="$ctrl.createSuperClass($ctrl.selection)"
+                ng-if="$ctrl.showActions($ctrl.selection)"
+                translate>
+          Create super class
+        </button>
+      </div>
+    </div>
 
     <button id="cancel_class_table_modal_button" type="button" class="btn btn-link cancel" ng-click="$ctrl.close()" translate>Cancel</button>
 

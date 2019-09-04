@@ -88,7 +88,7 @@ class SearchClassTableController implements SearchController<ClassListItem> {
   private externalClasses: ClassListItem[] = [];
 
   searchResults: (ClassListItem)[] = [];
-  selection: Class|ExternalEntity;
+  selection: Class|ExternalEntity|null;
   searchText = '';
   cannotConfirm: string|null;
   loadingResults: boolean;
@@ -249,6 +249,8 @@ class SearchClassTableController implements SearchController<ClassListItem> {
   }
 
   search() {
+    this.removeSelection();
+
     if (this.showOnlyExternalClasses) {
       this.classes = this.externalClasses;
     } else {
@@ -287,12 +289,13 @@ class SearchClassTableController implements SearchController<ClassListItem> {
     }
   }
 
-  isSelected(item: AbstractClass) {
-    return this.selectedItem === item;
+  removeSelection() {
+    this.selection = null;
+    this.selectedItem = null;
   }
 
-  isDisabled(item: AbstractClass) {
-    return this.exclude(item);
+  isSelected(item: AbstractClass) {
+    return this.selectedItem === item;
   }
 
   loadingSelection(item: ClassListItem) {
@@ -356,11 +359,11 @@ class SearchClassTableController implements SearchController<ClassListItem> {
   }
 
   showActions(item: AbstractClass) {
-    return !this.onlySelection && !item.isOfType('shape') && !item.definedBy.isOfType('standard');
+    return item ? !this.onlySelection && !item.isOfType('shape') && !item.definedBy.isOfType('standard') : false;
   }
 
-  showClassInfo() {
-    return this.showClassInfoModal.open(this.model, this.selection).then(null, modalCancelHandler);
+  showClassInfo(item: Class | ExternalEntity) {
+    return this.showClassInfoModal.open(this.model, item).then(null, modalCancelHandler);
   }
 
   copyClass(item: AbstractClass) {

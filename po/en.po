@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2019-08-16 10:29+0300\n"
+"PO-Revision-Date: 2019-09-02 15:35+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -46,7 +46,7 @@ msgstr ""
 msgid "All models"
 msgstr ""
 
-msgid "Classes defined in profiles"
+msgid "Show classes defined in profiles"
 msgstr ""
 
 msgid "All types"
@@ -220,6 +220,9 @@ msgstr ""
 msgid "Add class"
 msgstr ""
 
+msgid "Classes defined in profiles"
+msgstr ""
+
 msgid "External classes"
 msgstr ""
 
@@ -235,6 +238,15 @@ msgstr ""
 msgid "Search existing class"
 msgstr ""
 
+msgid "New class"
+msgstr ""
+
+msgid "Shape from URI"
+msgstr ""
+
+msgid "Actions"
+msgstr ""
+
 msgid "Show class information"
 msgstr ""
 
@@ -245,12 +257,6 @@ msgid "Create sub class"
 msgstr ""
 
 msgid "Create super class"
-msgstr ""
-
-msgid "New class"
-msgstr ""
-
-msgid "Shape from URI"
 msgstr ""
 
 msgid " without referencing concept"
@@ -1819,9 +1825,6 @@ msgid "Duplicate association target"
 msgstr ""
 
 msgid "No"
-msgstr ""
-
-msgid "Show classes defined in profiles"
 msgstr ""
 
 msgid "Match to content"

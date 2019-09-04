@@ -37,7 +37,7 @@ msgstr ""
 msgid "All models"
 msgstr ""
 
-msgid "Classes defined in profiles"
+msgid "Show classes defined in profiles"
 msgstr ""
 
 msgid "All types"
@@ -211,6 +211,9 @@ msgstr ""
 msgid "Add class"
 msgstr ""
 
+msgid "Classes defined in profiles"
+msgstr ""
+
 msgid "External classes"
 msgstr ""
 
@@ -226,6 +229,15 @@ msgstr ""
 msgid "Search existing class"
 msgstr ""
 
+msgid "New class"
+msgstr ""
+
+msgid "Shape from URI"
+msgstr ""
+
+msgid "Actions"
+msgstr ""
+
 msgid "Show class information"
 msgstr ""
 
@@ -236,12 +248,6 @@ msgid "Create sub class"
 msgstr ""
 
 msgid "Create super class"
-msgstr ""
-
-msgid "New class"
-msgstr ""
-
-msgid "Shape from URI"
 msgstr ""
 
 msgid " without referencing concept"
@@ -1126,7 +1132,9 @@ msgstr ""
 msgid "Edit in progress"
 msgstr ""
 
-msgid "Are you sure that you want to continue? By continuing unsaved changes will be lost."
+msgid ""
+"Are you sure that you want to continue? By continuing unsaved changes will "
+"be lost."
 msgstr ""
 
 msgid "Dialog is open"
@@ -1669,7 +1677,9 @@ msgstr ""
 msgid "Predicate in use"
 msgstr ""
 
-msgid "Predicate type cannot be changed because it is already used by following resources"
+msgid ""
+"Predicate type cannot be changed because it is already used by following "
+"resources"
 msgstr ""
 
 msgid "Convert to association"
@@ -1715,9 +1725,6 @@ msgid "Duplicate association target"
 msgstr ""
 
 msgid "No"
-msgstr ""
-
-msgid "Show classes defined in profiles"
 msgstr ""
 
 msgid "Match to content"

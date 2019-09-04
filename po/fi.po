@@ -45,8 +45,8 @@ msgstr "Käytetyt nimiavaruudet"
 msgid "All models"
 msgstr "Kaikki tietomallit"
 
-msgid "Classes defined in profiles"
-msgstr "Profiilien luokat"
+msgid "Show classes defined in profiles"
+msgstr "Näytä profiileissa määritellyt luokat"
 
 msgid "All types"
 msgstr "Kaikki tyypit"
@@ -219,6 +219,9 @@ msgstr "Valitse luokka"
 msgid "Add class"
 msgstr "Lisää luokka"
 
+msgid "Classes defined in profiles"
+msgstr "Profiilien luokat"
+
 msgid "External classes"
 msgstr "Ulkoiset luokat"
 
@@ -234,6 +237,15 @@ msgstr "Luo luokka ulkoisesta URI-tunnisteesta"
 msgid "Search existing class"
 msgstr "Hae olemassaolevaa luokkaa"
 
+msgid "New class"
+msgstr "Uusi luokka"
+
+msgid "Shape from URI"
+msgstr "Tarkenna URI-tunnisteesta"
+
+msgid "Actions"
+msgstr "Toiminnot"
+
 msgid "Show class information"
 msgstr "Näytä luokan tiedot"
 
@@ -245,12 +257,6 @@ msgstr "Luo alaluokka"
 
 msgid "Create super class"
 msgstr "Luo yläluokka"
-
-msgid "New class"
-msgstr "Uusi luokka"
-
-msgid "Shape from URI"
-msgstr "Tarkenna URI-tunnisteesta"
 
 msgid " without referencing concept"
 msgstr ""
@@ -1848,9 +1854,6 @@ msgstr "Assosiaation kohde on jo lisätty"
 
 msgid "No"
 msgstr "Ei"
-
-msgid "Show classes defined in profiles"
-msgstr "Näytä profiileissa määritellyt luokat"
 
 msgid "Match to content"
 msgstr "Hae sisällöstä"
