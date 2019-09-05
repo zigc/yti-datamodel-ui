@@ -121,7 +121,7 @@
 
                 <tr ng-repeat="searchResult in $ctrl.searchResults"
                     id="{{$ctrl.generateSearchResultID(searchResult)}}"
-                    ng-class="['search-result', {active: $ctrl.isSelected(searchResult), disabled: $ctrl.isDisabled(searchResult)} ]"
+                    ng-class="['search-result', {active: $ctrl.isSelected(searchResult)}]"
                     ng-click="$ctrl.selectItem(searchResult)"
                     title="{{$ctrl.itemTitle(searchResult)}}"
                     key-control-selection>
@@ -158,36 +158,6 @@
                     {{$ctrl.showItemValue(searchResult.modifiedAt)}}
                   </td>
                   <td class="menu-col">
-                    <div class="pull-right" uib-dropdown>
-                      <button id="{{'predicate_' + searchResult.id + '_actions_button'}}" class="btn btn-language dropdown-toggle" uib-dropdown-toggle>
-                        <span>...</span>
-                      </button>
-
-                      <div uib-dropdown-menu class="dropdown-menu-right" aria-labelledby="{{'predicate_' + searchResult.id + '_actions_button'}}">
-                        <ajax-loading-indicator-small ng-if="!$ctrl.isSelectionPredicate()"></ajax-loading-indicator-small>
-                        <button id="{{'show_predicate_info_' + searchResult.id + '_button'}}"
-                                class="dropdown-item"
-                                ng-click="$ctrl.showPredicateInfo()"
-                                ng-if="$ctrl.isSelectionPredicate()">
-                          {{('Show ' + $ctrl.type + ' information') | translate}}
-                        </button>
-                        <button id="{{'copy_predicate_' + searchResult.id + '_button'}}"
-                                class="dropdown-item"
-                                ng-click="$ctrl.copyPredicate(searchResult)">
-                          {{'Copy ' + $ctrl.type | translate}}
-                        </button>
-                        <button id="{{'create_sub_predicate_' + searchResult.id + '_button'}}"
-                                class="dropdown-item"
-                                ng-click="$ctrl.createSubPredicate(searchResult)">
-                          {{'Create sub ' + $ctrl.type | translate}}
-                        </button>
-                        <button id="{{'create_super_predicate_' + searchResult.id + '_button'}}"
-                                class="dropdown-item"
-                                ng-click="$ctrl.createSuperPredicate(searchResult)">
-                          {{'Create super ' + $ctrl.type | translate}}
-                        </button>
-                      </div>
-                    </div>
                   </td>
                 <tr>
 
@@ -218,6 +188,36 @@
         ng-show="$ctrl.canAddNew()">
       + {{'New ' + $ctrl.type | translate}}
     </button>
+
+    <div class="pull-right dropup" uib-dropdown>
+      <button id="{{'predicate_' + $ctrl.selection.id + '_actions_button'}}" class="btn btn-language dropdown-toggle" ng-disabled="!$ctrl.isSelectionPredicate()" uib-dropdown-toggle>
+        <span translate>Actions</span>
+      </button>
+
+      <div uib-dropdown-menu class="dropdown-menu-right" aria-labelledby="{{'predicate_' + $ctrl.selection.id + '_actions_button'}}">
+        <button id="{{'show_predicate_info_' + $ctrl.selection.id + '_button'}}"
+                class="dropdown-item"
+                ng-click="$ctrl.showPredicateInfo($ctrl.selection)"
+                ng-if="$ctrl.isSelectionPredicate()">
+          {{('Show ' + $ctrl.type + ' information') | translate}}
+        </button>
+        <button id="{{'copy_predicate_' + $ctrl.selection.id + '_button'}}"
+                class="dropdown-item"
+                ng-click="$ctrl.copyPredicate($ctrl.selection)">
+          {{'Copy ' + $ctrl.type | translate}}
+        </button>
+        <button id="{{'create_sub_predicate_' + $ctrl.selection.id + '_button'}}"
+                class="dropdown-item"
+                ng-click="$ctrl.createSubPredicate($ctrl.selection)">
+          {{'Create sub ' + $ctrl.type | translate}}
+        </button>
+        <button id="{{'create_super_predicate_' + $ctrl.selection.id + '_button'}}"
+                class="dropdown-item"
+                ng-click="$ctrl.createSuperPredicate($ctrl.selection)">
+          {{'Create super ' + $ctrl.type | translate}}
+        </button>
+      </div>
+    </div>
 
     <button type="button" class="btn btn-link cancel" ng-click="$ctrl.close()" translate>Cancel</button>
 

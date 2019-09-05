@@ -67,12 +67,12 @@ class SearchPredicateTableController implements SearchController<PredicateListIt
   private predicates: PredicateListItem[] = [];
 
   searchResults: (PredicateListItem)[] = [];
-  selection: Predicate;
+  selection: Predicate|null;
   searchText = '';
   typeSelectable: boolean;
   cannotConfirm: string|null = null;
   loadingResults: boolean;
-  selectedItem: PredicateListItem;
+  selectedItem: PredicateListItem|null;
   showInfoDomain: Classification|null;
   infoDomains: Classification[];
   showStatus: Status|null;
@@ -114,7 +114,7 @@ class SearchPredicateTableController implements SearchController<PredicateListIt
 
     this.modelTypes = ['library', 'profile'];
 
-    this.sortBy = {    
+    this.sortBy = {
       name: 'name',
       comparator: defaultLabelComparator(this.localizer, this.filterExclude),
       descOrder: false
@@ -127,7 +127,7 @@ class SearchPredicateTableController implements SearchController<PredicateListIt
     classificationService.getClassifications().then(infoDomains => {
 
       modelService.getModels().then(models => {
-        
+
         const modelCount = (infoDomain: Classification) =>
           models.filter(mod => infoDomainMatches(infoDomain, mod)).length;
 
@@ -155,17 +155,17 @@ class SearchPredicateTableController implements SearchController<PredicateListIt
     this.addFilter(predicateListItem =>
       !this.showModelType || predicateListItem.item.definedBy.normalizedType === this.showModelType
     );
-    
+
     $scope.$watch(() => this.showInfoDomain, ifChanged<Classification|null>(() => this.search()));
     $scope.$watch(() => this.showModelType, ifChanged<DefinedByType|null>(() => this.search()));
     $scope.$watch(() => this.showStatus, ifChanged<Status|null>(() => this.search()));
     $scope.$watch(() => this.sortBy.name, ifChanged<string>(() => this.search()));
-    $scope.$watch(() => this.sortBy.descOrder, ifChanged<Boolean>(() => this.search()));    
+    $scope.$watch(() => this.sortBy.descOrder, ifChanged<Boolean>(() => this.search()));
     $scope.$watch(() => languageService.getModelLanguage(model), ifChanged<Language>(() => {
       sortInfoDomains();
       this.search();
-    }));   
-    
+    }));
+
   }
 
   addFilter(filter: SearchFilter<PredicateListItem>) {
@@ -185,6 +185,8 @@ class SearchPredicateTableController implements SearchController<PredicateListIt
   }
 
   search() {
+    this.removeSelection();
+
     this.searchResults = [
       ...filterAndSortSearchResults(this.predicates, this.searchText, this.contentExtractors, this.searchFilters, this.sortBy.comparator)
     ];
@@ -197,7 +199,12 @@ class SearchPredicateTableController implements SearchController<PredicateListIt
 
     this.cannotConfirm = this.exclude(item);
 
-    this.predicateService.getPredicate(item.id, this.model).then(result => this.selection = result);   
+    this.predicateService.getPredicate(item.id, this.model).then(result => this.selection = result);
+  }
+
+  removeSelection() {
+    this.selection = null;
+    this.selectedItem = null;
   }
 
   isSelected(item: AbstractPredicate) {
@@ -270,18 +277,18 @@ class SearchPredicateTableController implements SearchController<PredicateListIt
     return `${item.id.toString()}${'_search_predicate_link'}`;
   }
 
-  showPredicateInfo() {
-    return this.showPredicateInfoModal.open(this.model, this.selection).then(null, modalCancelHandler);
+  showPredicateInfo(item: Predicate) {
+    return this.showPredicateInfoModal.open(this.model, item).then(null, modalCancelHandler);
   }
 
   copyPredicate(item: AbstractPredicate) {
     this.$uibModalInstance.close(new RelatedPredicate(item.id, 'prov:wasDerivedFrom'));
   }
-  
+
   createSubPredicate(item: AbstractPredicate) {
     this.$uibModalInstance.close(new RelatedPredicate(item.id, 'rdfs:subPropertyOf'));
   }
-  
+
   createSuperPredicate(item: AbstractPredicate) {
     this.$uibModalInstance.close(new RelatedPredicate(item.id, 'iow:superPropertyOf'));
   }
