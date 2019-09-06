@@ -94,7 +94,8 @@
 
           <editable data-title="External URI" context="$ctrl.model" autofocus>
             <div class="input-group input-group-md">
-              <input id="externalUri" type="text" class="form-control" required uri-input="required-namespace" model="$ctrl.model" ng-model="$ctrl.selection.id" />
+              <input id="externalUri" type="text" class="form-control" required uri-input="required-namespace" model="$ctrl.model"
+                     ng-model="$ctrl.selection.id"/>
             </div>
           </editable>
 
@@ -104,7 +105,7 @@
 
           <div ng-if="$ctrl.externalClass === null">
             <editable data-title="Class label" context="$ctrl.model">
-              <input type="text" class="form-control" string-input="label" required ng-model="$ctrl.selection.label" />
+              <input type="text" class="form-control" string-input="label" required ng-model="$ctrl.selection.label"/>
             </editable>
           </div>
 
@@ -119,104 +120,17 @@
     </div>
 
     <div class="row full-height">
-
       <div class="col-md-12">
-
         <div class="content-box">
-
           <div class="search-results-table table-container">
-
             <ajax-loading-indicator ng-if="$ctrl.loadingResults"></ajax-loading-indicator>
-
-            <table ng-if="!$ctrl.loadingResults" class="table table-sm" width="100%">
-              <thead>
-                <tr>
-                  <th class="name-col">
-                    <sort-by-column-header header-text="'Name'"
-                                          column-name="'name'"
-                                          model="$ctrl.model"
-                                          sort-by="$ctrl.sortBy"
-                                          filter-exclude="$ctrl.filterExclude"></sort-by-column-header>
-                  </th>
-                  <th class="model-col">
-                    <sort-by-column-header header-text="'Model'"
-                                          column-name="'model'"
-                                          model="$ctrl.model"
-                                          sort-by="$ctrl.sortBy"
-                                          filter-exclude="$ctrl.filterExclude"></sort-by-column-header>
-                  </th>
-                  <th class="description-col">
-                    <sort-by-column-header header-text="'Description'"
-                                          column-name="'description'"
-                                          model="$ctrl.model"
-                                          sort-by="$ctrl.sortBy"
-                                          filter-exclude="$ctrl.filterExclude"></sort-by-column-header>
-                  </th>
-                  <!-- Showing of super class is not implemented yet. -->
-                  <!-- <th style="width: 20%" translate>Super class</th> -->
-                  <th class="modified-at-col">
-                    <sort-by-column-header header-text="'Modified at'"
-                                          column-name="'modifiedAt'"
-                                          model="$ctrl.model"
-                                          sort-by="$ctrl.sortBy"
-                                          filter-exclude="$ctrl.filterExclude"></sort-by-column-header>
-                  </th>
-                  <th class="menu-col"></th>
-                </tr>
-              </thead>
-              <tbody>
-
-                <tr ng-repeat="searchResult in $ctrl.searchResults"
-                    id="{{$ctrl.generateSearchResultID(searchResult)}}"
-                    ng-class="['search-result', {active: $ctrl.isSelected(searchResult)}]"
-                    ng-click="$ctrl.selectItem(searchResult)"
-                    title="{{$ctrl.itemTitle(searchResult)}}"
-                    key-control-selection>
-
-                  <td class="name-col">
-                    <div>
-                      <ajax-loading-indicator-small ng-if="$ctrl.loadingSelection(searchResult)"></ajax-loading-indicator-small>
-                      <highlight text="searchResult.label" context="$ctrl.model" search="$ctrl.searchText"></highlight>
-                    </div>
-                    <a ng-href="{{$ctrl.model.linkToResource(searchResult.id)}}" target="_blank" ng-bind-html="searchResult.id.compact | highlight: $ctrl.searchText"></a>
-                    <div style="padding-top: 5px">
-                      <app-status [status]="searchResult.status"></app-status>
-                    </div>
-                  </td>
-                  <td class="model-col">
-                    <div>
-                      <highlight text="searchResult.definedBy.label" context="$ctrl.model" search="$ctrl.searchText"></highlight>
-                    </div>
-                    <div ng-if="searchResult.definedBy.normalizedType">
-                      {{searchResult.definedBy.normalizedType | translate}}
-                    </div>
-                    <div>
-                      <span class="information-domains">
-                        <span class="badge badge-light" ng-repeat="infoDomain in searchResult.definedBy.classifications">
-                            {{$ctrl.showItemValue(infoDomain.label)}}
-                        </span>
-                      </span>
-                    </div>
-                  </td>
-                  <td class="description-col">
-                    <highlight text="searchResult.comment" context="$ctrl.model" search="$ctrl.searchText"></highlight>
-                  </td>
-                  <!-- Showing of super class is not implemented yet. -->
-                  <!--
-                  <td>
-                    {{$ctrl.model.linkToResource(searchResult.superClassOf)}}
-                  </td>
-                  -->
-                  <td class="modified-at-col">
-                    {{$ctrl.showItemValue(searchResult.modifiedAt)}}
-                  </td>
-                  <td class="menu-col">
-                  </td>
-                <tr>
-
-              </tbody>
-            </table>
-
+            <app-search-class-table-modal-content ng-if="!$ctrl.loadingResults" [sort-by]="$ctrl.sortBy" [model]="$ctrl.model"
+                                                  [filter-exclude]="$ctrl.filterExclude"
+                                                  [search-text]="$ctrl.searchText" [search-results]="$ctrl.searchResults"
+                                                  [selected-item]="$ctrl.selectedItem" [selection]="$ctrl.selection"
+                                                  (item-selected)="$ctrl.selectItem($event)"
+                                                  [exclude]="$ctrl.exclude">
+            </app-search-class-table-modal-content>
           </div>
         </div>
       </div>
@@ -242,19 +156,21 @@
     </button>
 
     <button id="create_shape_button"
-        type="button"
-        class="btn btn-secondary-action"
-        ng-click="$ctrl.createNewShape()"
-        ng-show="$ctrl.canAddNewShape()"
-        ng-disabled="$ctrl.isSelectionExternalEntity()">
+            type="button"
+            class="btn btn-secondary-action"
+            ng-click="$ctrl.createNewShape()"
+            ng-show="$ctrl.canAddNewShape()"
+            ng-disabled="$ctrl.isSelectionExternalEntity()">
       + <span translate>Shape from URI</span>
     </button>
 
     <div class="pull-right dropup" uib-dropdown>
-      <button id="{{'class_' + $ctrl.selection.id + '_actions_button'}}" class="btn btn-language dropdown-toggle" ng-disabled="!$ctrl.selection" uib-dropdown-toggle>
+      <button id="{{'class_' + $ctrl.selection.id + '_actions_button'}}" class="btn btn-language dropdown-toggle"
+              ng-disabled="!$ctrl.selection" uib-dropdown-toggle>
         <span translate>Actions</span>
       </button>
-      <div uib-dropdown-menu class="dropdown-menu-right" aria-labelledby="{{'class_' + $ctrl.selection.id + '_actions_button'}}" ng-if="$ctrl.selection">
+      <div uib-dropdown-menu class="dropdown-menu-right" aria-labelledby="{{'class_' + $ctrl.selection.id + '_actions_button'}}"
+           ng-if="$ctrl.selection">
         <button id="{{'show_class_info_' + $ctrl.selection.id + '_button'}}"
                 class="dropdown-item"
                 ng-click="$ctrl.showClassInfo($ctrl.selection)"
@@ -286,7 +202,8 @@
       </div>
     </div>
 
-    <button id="cancel_class_table_modal_button" type="button" class="btn btn-link cancel" ng-click="$ctrl.close()" translate>Cancel</button>
+    <button id="cancel_class_table_modal_button" type="button" class="btn btn-link cancel" ng-click="$ctrl.close()" translate>
+      Cancel</button>
 
     <div class="alert alert-danger" role="alert" ng-show="$ctrl.cannotConfirm">
       <span class="fas fa-exclamation-circle" aria-hidden="true"></span>

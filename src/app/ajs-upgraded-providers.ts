@@ -4,6 +4,8 @@ import { NotificationModal } from './components/common/notificationModal';
 import { ConfirmationModal } from './components/common/confirmationModal';
 import { LanguageService } from './services/languageService';
 import { ModelPageHelpService } from './help/providers/modelPageHelpService';
+import { gettextCatalog as GettextCatalog } from 'angular-gettext';
+import { DisplayItemFactory } from './components/form/displayItemFactory';
 import IInjectorService = angular.auto.IInjectorService;
 
 // NOTE: In normal case the "wrappers" should not be needed, but I could not figure out the way to make it work with the interfaces.
@@ -112,3 +114,28 @@ export const modelPageHelpServiceProvider = {
   useFactory: modelPageHelpServiceFactory,
   deps: ['$injector']
 }
+
+export class GettextCatalogWrapper {
+  constructor(public gettextCatalog: GettextCatalog) {
+  }
+}
+
+export function gettextCatalogFactory(i: IInjectorService) {
+  return new GettextCatalogWrapper(i.get('gettextCatalog'));
+}
+
+export const gettextCatalogProvider = {
+  provide: GettextCatalogWrapper,
+  useFactory: gettextCatalogFactory,
+  deps: ['$injector']
+}
+
+export function displayItemFactoryFactory(i: IInjectorService) {
+  return i.get('displayItemFactory');
+}
+
+export const displayItemFactoryProvider = {
+  provide: DisplayItemFactory,
+  useFactory: displayItemFactoryFactory,
+  deps: ['$injector']
+};

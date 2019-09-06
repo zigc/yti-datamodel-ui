@@ -7,6 +7,9 @@ import { ModelAndSelection } from './services/subRoutingHackService';
 import { BehaviorSubject } from 'rxjs';
 import { Class } from './entities/class';
 import { Predicate } from './entities/predicate';
+import { ListItem, SortBy, SortByTableColumn } from './types/entity';
+import { Exclusion } from './utils/exclusion';
+import { Localizable } from 'yti-common-ui/types/localization';
 
 @Directive({
   selector: 'model-page'
@@ -59,5 +62,33 @@ export class ExportDirective extends UpgradeComponent {
 
   constructor(elementRef: ElementRef, injector: Injector) {
     super('export', elementRef, injector);
+  }
+}
+
+@Directive({
+  selector: 'sort-by-column-header'
+})
+export class SortByColumnHeaderDirective extends UpgradeComponent {
+  @Input() headerText: string;
+  @Input() columnName: SortByTableColumn;
+  @Input() sortBy: SortBy<ListItem>;
+  @Input() filterExclude: Exclusion<ListItem>;
+  @Input() model: Model;
+
+  constructor(elementRef: ElementRef, injector: Injector) {
+      super('sortByColumnHeader', elementRef, injector);
+  }
+}
+
+@Directive({
+  selector: 'highlight'
+})
+export class HighlightDirective extends UpgradeComponent {
+  @Input() text: Localizable;
+  @Input() search: string;
+  @Input() context: LanguageContext;
+
+  constructor(elementRef: ElementRef, injector: Injector) {
+    super('highlight', elementRef, injector);
   }
 }

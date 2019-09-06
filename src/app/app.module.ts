@@ -47,6 +47,8 @@ import { ExpandableTextComponent } from 'yti-common-ui/components/expandable-tex
 import { ModelMainComponent } from './components/model/modelMain';
 import {
   confirmationModalProvider,
+  displayItemFactoryProvider,
+  gettextCatalogProvider,
   languageServiceProvider,
   locationServiceProvider,
   modelPageHelpServiceProvider,
@@ -55,12 +57,21 @@ import {
   routeServiceProvider,
   scopeProvider
 } from './ajs-upgraded-providers';
-import { ExportDirective, ModelLanguageChooserDirective, ModelPageDirective, ModelViewDirective } from './ajs-upgraded-components';
+import {
+  ExportDirective,
+  HighlightDirective,
+  ModelLanguageChooserDirective,
+  ModelPageDirective,
+  ModelViewDirective,
+  SortByColumnHeaderDirective
+} from './ajs-upgraded-components';
 import { DefaultAngularLocalizer, LanguageService } from './services/languageService';
 import { Localizer as AngularLocalizer } from 'yti-common-ui/types/localization';
 import { HelpService } from './help/providers/helpService';
-import IAnimateProvider = animate.IAnimateProvider;
 import { IndexSearchService } from './services/indexSearchService';
+import { VirtualScrollerModule } from 'ngx-virtual-scroller';
+import { SearchClassTableModalContentComponent } from './components/editor/searchClassTableModalContent';
+import IAnimateProvider = animate.IAnimateProvider;
 
 require('angular-gettext');
 require('checklist-model');
@@ -126,6 +137,7 @@ export function localizerFactory(languageService: LanguageService): AngularLocal
     HttpClientModule,
     UpgradeModule,
     YtiCommonModule,
+    VirtualScrollerModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -142,7 +154,10 @@ export function localizerFactory(languageService: LanguageService): AngularLocal
     ModelPageDirective,
     ModelViewDirective,
     ModelLanguageChooserDirective,
-    ExportDirective
+    ExportDirective,
+    SortByColumnHeaderDirective,
+    HighlightDirective,
+    SearchClassTableModalContentComponent
   ],
   entryComponents: [
     FooterComponent,
@@ -155,7 +170,8 @@ export function localizerFactory(languageService: LanguageService): AngularLocal
     StatusComponent,
     UseContextDropdownComponent,
     UseContextInputComponent,
-    ModelMainComponent
+    ModelMainComponent,
+    SearchClassTableModalContentComponent
   ],
   providers: [
     { provide: AUTHENTICATED_USER_ENDPOINT, useFactory: resolveAuthenticatedUserEndpoint },
@@ -168,6 +184,8 @@ export function localizerFactory(languageService: LanguageService): AngularLocal
     notificationModalProvider,
     confirmationModalProvider,
     modelPageHelpServiceProvider,
+    gettextCatalogProvider,
+    displayItemFactoryProvider,
     Title,
     HelpService,
     IndexSearchService
@@ -214,26 +232,12 @@ mod.directive('appFooter', downgradeComponent({
 
 mod.directive('ajaxLoadingIndicator', downgradeComponent({ component: AjaxLoadingIndicatorComponent }));
 mod.directive('ajaxLoadingIndicatorSmall', downgradeComponent({ component: AjaxLoadingIndicatorSmallComponent }));
-mod.directive('appDropdown', downgradeComponent({
-  component: DropdownComponent,
-  inputs: ['options', 'showNullOption', 'placement']
-}));
-mod.directive('appExpandableText', downgradeComponent({
-  component: ExpandableTextComponent,
-  inputs: ['text', 'rows']
-}));
-mod.directive('appFilterDropdown', downgradeComponent({
-  component: FilterDropdownComponent,
-  inputs: ['options', 'filterSubject']
-}));
-mod.directive('appStatus', downgradeComponent({
-  component: StatusComponent,
-  inputs: ['status']
-}));
-mod.directive('appUseContextInput', downgradeComponent({
-  component: UseContextInputComponent,
-  inputs: ['editing', 'modelType']
-}));
+mod.directive('appDropdown', downgradeComponent({ component: DropdownComponent }));
+mod.directive('appExpandableText', downgradeComponent({ component: ExpandableTextComponent }));
+mod.directive('appFilterDropdown', downgradeComponent({ component: FilterDropdownComponent }));
+mod.directive('appStatus', downgradeComponent({ component: StatusComponent }));
+mod.directive('appUseContextInput', downgradeComponent({ component: UseContextInputComponent }));
+mod.directive('appSearchClassTableModalContent', downgradeComponent({ component: SearchClassTableModalContentComponent }));
 
 mod.factory('translateService', downgradeInjectable(TranslateService));
 mod.factory('loginModal', downgradeInjectable(LoginModalService));

@@ -9,10 +9,11 @@ import { Exclusion } from '../../utils/exclusion';
 
 @LegacyComponent({
   bindings: {
-    headerText: '=',
-    columnName: '=',
-    sortBy: '=',
-    filterExclude: '='
+    headerText: '<',
+    columnName: '<',
+    sortBy: '<',
+    filterExclude: '<',
+    model: '<'
   },
   template: `    
     <div ng-click="$ctrl.setSortBy()">
@@ -27,7 +28,6 @@ import { Exclusion } from '../../utils/exclusion';
   `
 })
 export class SortByColumnHeaderComponent {
-
   headerText: string;
   columnName: SortByTableColumn;
   model: Model;
@@ -35,20 +35,23 @@ export class SortByColumnHeaderComponent {
   filterExclude: Exclusion<ListItem>;
 
   private localizer: Localizer;
-  
+
   constructor(private languageService: LanguageService) {
     'ngInject';
-    this.localizer = languageService.createLocalizer(this.model);
   }
 
-  setSortBy() { 
+  $onInit() {
+    this.localizer = this.languageService.createLocalizer(this.model);
+  }
+
+  setSortBy() {
     if (this.sortBy.name === this.columnName) {
-      this.sortBy.descOrder = !this.sortBy.descOrder;      
+      this.sortBy.descOrder = !this.sortBy.descOrder;
     } else {
       this.sortBy.name = this.columnName;
       this.sortBy.descOrder = false;
     }
-        
+
     if (this.columnName === 'name') {
       this.sortBy.comparator = defaultLabelComparator(this.localizer, this.filterExclude);
     } else if (this.columnName === 'model') {

@@ -1,19 +1,18 @@
 import { IPromise, IScope } from 'angular';
 import { IModalService, IModalServiceInstance } from 'angular-ui-bootstrap';
-import { SearchConceptModal, EntityCreation } from './searchConceptModal';
+import { EntityCreation, SearchConceptModal } from './searchConceptModal';
 import { ClassService, RelatedClass } from '../../services/classService';
 import { LanguageService, Localizer } from '../../services/languageService';
 import { EditableForm } from '../../components/form/editableEntityController';
 import { Exclusion } from '../../utils/exclusion';
-import { SearchFilter, SearchController } from '../../types/filter';
+import { SearchController, SearchFilter } from '../../types/filter';
 import { AbstractClass, Class, ClassListItem } from '../../entities/class';
 import { Model } from '../../entities/model';
 import { ExternalEntity } from '../../entities/externalEntity';
-import { filterAndSortSearchResults, defaultLabelComparator } from '../../components/filter/util';
+import { defaultLabelComparator, filterAndSortSearchResults } from '../../components/filter/util';
 import { Optional, requireDefined } from 'yti-common-ui/utils/object';
 import { ignoreModalClose } from 'yti-common-ui/utils/modal';
-import { DisplayItemFactory, Value } from '../form/displayItemFactory';
-import { Status, selectableStatuses } from 'yti-common-ui/entities/status';
+import { selectableStatuses, Status } from 'yti-common-ui/entities/status';
 import { ifChanged, modalCancelHandler } from '../../utils/angular';
 import { Classification } from '../../entities/classification';
 import { ClassificationService } from '../../services/classificationService';
@@ -22,7 +21,6 @@ import { ModelService } from '../../services/modelService';
 import { comparingLocalizable } from '../../utils/comparator';
 import { Language } from '../../types/language';
 import { DefinedByType, SortBy } from '../../types/entity';
-import { gettextCatalog as GettextCatalog } from 'angular-gettext';
 import { infoDomainMatches } from '../../utils/entity';
 import { ShowClassInfoModal } from './showClassInfoModal';
 
@@ -33,6 +31,23 @@ export class SearchClassTableModal {
 
   constructor(private $uibModal: IModalService) {
     'ngInject';
+  }
+
+  open(model: Model,
+       exclude: Exclusion<AbstractClass>,
+       filterExclude: Exclusion<AbstractClass> = exclude,
+       textForSelection: (klass: Optional<Class>) => string): IPromise<ExternalEntity | EntityCreation | Class> {
+
+    return this.openModal(model, exclude, filterExclude, false, false, textForSelection);
+  }
+
+  openWithOnlySelection(model: Model,
+                        defaultToCurrentModel: boolean,
+                        exclude: Exclusion<AbstractClass>,
+                        filterExclude: Exclusion<AbstractClass> = exclude,
+                        textForSelection: (klass: Optional<Class>) => string = defaultTextForSelection): IPromise<Class> {
+
+    return this.openModal(model, exclude, filterExclude, defaultToCurrentModel, true, textForSelection);
   }
 
   private openModal(model: Model,
@@ -58,23 +73,6 @@ export class SearchClassTableModal {
       }
     }).result;
   }
-
-  open(model: Model,
-       exclude: Exclusion<AbstractClass>,
-       filterExclude: Exclusion<AbstractClass> = exclude,
-       textForSelection: (klass: Optional<Class>) => string): IPromise<ExternalEntity|EntityCreation|Class> {
-
-    return this.openModal(model, exclude, filterExclude, false, false, textForSelection);
-  }
-
-  openWithOnlySelection(model: Model,
-                        defaultToCurrentModel: boolean,
-                        exclude: Exclusion<AbstractClass>,
-                        filterExclude: Exclusion<AbstractClass> = exclude,
-                        textForSelection: (klass: Optional<Class>) => string = defaultTextForSelection): IPromise<Class> {
-
-    return this.openModal(model, exclude, filterExclude, defaultToCurrentModel, true, textForSelection);
-  }
 }
 
 export interface SearchClassTableScope extends IScope {
@@ -83,40 +81,33 @@ export interface SearchClassTableScope extends IScope {
 
 class SearchClassTableController implements SearchController<ClassListItem> {
 
-  private classes: ClassListItem[] = [];
-  private internalClasses: ClassListItem[] = [];
-  private externalClasses: ClassListItem[] = [];
-
-  searchResults: (ClassListItem)[] = [];
-  selection: Class|ExternalEntity|null;
+  searchResults: ClassListItem[] = [];
+  selection: Class | ExternalEntity | null;
   searchText = '';
-  cannotConfirm: string|null;
+  cannotConfirm: string | null;
   loadingResults: boolean;
-  selectedItem: ClassListItem|null;
-  showStatus: Status|null;
-  showInfoDomain: Classification|null;
+  selectedItem: ClassListItem | null;
+  showStatus: Status | null;
+  showInfoDomain: Classification | null;
   infoDomains: Classification[];
   modelTypes: DefinedByType[];
-  showModelType: DefinedByType|null;
+  showModelType: DefinedByType | null;
   showProfiles = false;
   showOnlyExternalClasses = false;
-
   // undefined means not fetched, null means does not exist
-  externalClass: Class|null|undefined;
-
+  externalClass: Class | null | undefined;
   sortBy: SortBy<ClassListItem>;
-
-  private localizer: Localizer;
-
   contentMatchers = [
     { name: 'Label', extractor: (klass: ClassListItem) => klass.label },
     { name: 'Description', extractor: (klass: ClassListItem) => klass.comment },
     { name: 'Identifier', extractor: (klass: ClassListItem) => klass.id.compact }
   ];
-
   contentExtractors = this.contentMatchers.map(m => m.extractor);
-
   searchFilters: SearchFilter<ClassListItem>[] = [];
+  private classes: ClassListItem[] = [];
+  private internalClasses: ClassListItem[] = [];
+  private externalClasses: ClassListItem[] = [];
+  private localizer: Localizer;
 
   constructor(private $scope: SearchClassTableScope,
               private $uibModalInstance: IModalServiceInstance,
@@ -129,8 +120,6 @@ class SearchClassTableController implements SearchController<ClassListItem> {
               public onlySelection: boolean,
               public textForSelection: (klass: Optional<Class>) => string,
               private searchConceptModal: SearchConceptModal,
-              private displayItemFactory: DisplayItemFactory,
-              private gettextCatalog: GettextCatalog,
               classificationService: ClassificationService,
               protected showClassInfoModal: ShowClassInfoModal,
               modelService: ModelService) {
@@ -202,11 +191,11 @@ class SearchClassTableController implements SearchController<ClassListItem> {
 
     this.addFilter(classListItem =>
       this.showProfiles || !classListItem.item.definedBy.isOfType('profile')
-  );
+    );
 
-    $scope.$watch(() => this.showStatus, ifChanged<Status|null>(() => this.search()));
-    $scope.$watch(() => this.showModelType, ifChanged<DefinedByType|null>(() => this.search()));
-    $scope.$watch(() => this.showInfoDomain, ifChanged<Classification|null>(() => this.search()));
+    $scope.$watch(() => this.showStatus, ifChanged<Status | null>(() => this.search()));
+    $scope.$watch(() => this.showModelType, ifChanged<DefinedByType | null>(() => this.search()));
+    $scope.$watch(() => this.showInfoDomain, ifChanged<Classification | null>(() => this.search()));
     $scope.$watch(() => this.sortBy.name, ifChanged<string>(() => this.search()));
     $scope.$watch(() => this.sortBy.descOrder, ifChanged<Boolean>(() => this.search()));
     $scope.$watch(() => languageService.getModelLanguage(model), ifChanged<Language>(() => {
@@ -236,12 +225,12 @@ class SearchClassTableController implements SearchController<ClassListItem> {
     return this.classes;
   }
 
-  addFilter(searchFilter: SearchFilter<ClassListItem>) {
-    this.searchFilters.push(searchFilter);
-  }
-
   get statuses() {
     return selectableStatuses;
+  }
+
+  addFilter(searchFilter: SearchFilter<ClassListItem>) {
+    this.searchFilters.push(searchFilter);
   }
 
   isSelectionExternalEntity(): boolean {
@@ -258,7 +247,7 @@ class SearchClassTableController implements SearchController<ClassListItem> {
     }
 
     this.searchResults = [
-       ...filterAndSortSearchResults(this.classes, this.searchText, this.contentExtractors, this.searchFilters, this.sortBy.comparator)
+      ...filterAndSortSearchResults(this.classes, this.searchText, this.contentExtractors, this.searchFilters, this.sortBy.comparator)
     ];
   }
 
@@ -292,15 +281,6 @@ class SearchClassTableController implements SearchController<ClassListItem> {
   removeSelection() {
     this.selection = null;
     this.selectedItem = null;
-  }
-
-  isSelected(item: AbstractClass) {
-    return this.selectedItem === item;
-  }
-
-  loadingSelection(item: ClassListItem) {
-    const selection = this.selection;
-    return item === this.selectedItem && (!selection || (selection instanceof Class && !item.id.equals(selection.id)));
   }
 
   isExternalClassPending() {
@@ -347,17 +327,6 @@ class SearchClassTableController implements SearchController<ClassListItem> {
     this.selection = new ExternalEntity(this.localizer.language, this.searchText, 'class');
   }
 
-  showItemValue(value: Value) {
-    return this.displayItemFactory.create({
-      context: () => this.model,
-      value: () => value
-    }).displayValue;
-  }
-
-  generateSearchResultID(item: AbstractClass): string {
-    return `${item.id.toString()}${'_search_class_link'}`;
-  }
-
   showActions(item: AbstractClass) {
     return item ? !this.onlySelection && !item.isOfType('shape') && !item.definedBy.isOfType('standard') : false;
   }
@@ -376,17 +345,6 @@ class SearchClassTableController implements SearchController<ClassListItem> {
 
   createSuperClass(item: AbstractClass) {
     this.$uibModalInstance.close(new RelatedClass(item.id, 'iow:superClassOf'));
-  }
-
-  itemTitle(item: AbstractClass) {
-
-    const disabledReason = this.exclude(item);
-
-    if (!!disabledReason) {
-      return this.gettextCatalog.getString(disabledReason);
-    } else {
-      return null;
-    }
   }
 
   isModelProfile() {
