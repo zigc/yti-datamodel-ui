@@ -18,16 +18,18 @@ interface WithContributors {
 @LegacyComponent({
   bindings: {
     value: '=',
-    context: '='
+    context: '=',
+    required: '='
   },
   require: {
     form: '?^form'
   },    template: `
       <h4>
-        <span translate>Contributors</span> 
+        <span translate>Contributors</span>
         <button id="add_contributor_button" type="button" class="btn btn-link btn-xs pull-right" ng-click="$ctrl.addContributor()" ng-show="$ctrl.isEditing()">
           <span translate>Add contributor</span>
         </button>
+        <span ng-show="$ctrl.required && $ctrl.isEditing()" class="fas fa-asterisk" uib-tooltip="{{'Required' | translate}}"></span>
       </h4>
       <editable-table id="'contributors'" descriptor="$ctrl.descriptor" expanded="$ctrl.expanded"></editable-table>
   `
