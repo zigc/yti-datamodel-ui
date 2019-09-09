@@ -1,12 +1,12 @@
 import { IScope } from 'angular';
-import { LanguageService } from 'app/services/languageService';
-import { ColumnDescriptor, TableDescriptor } from 'app/components/form/editableTable';
-import { createExistsExclusion } from 'app/utils/exclusion';
+import { LanguageService } from '../../services/languageService';
+import { ColumnDescriptor, TableDescriptor } from '../../components/form/editableTable';
+import { createExistsExclusion } from '../../utils/exclusion';
 import { collectProperties } from 'yti-common-ui/utils/array';
-import { EditableForm } from 'app/components/form/editableEntityController';
-import { Classification } from 'app/entities/classification';
+import { EditableForm } from '../../components/form/editableEntityController';
+import { Classification } from '../../entities/classification';
 import { SearchClassificationModal } from './searchClassificationModal';
-import { LegacyComponent, modalCancelHandler } from 'app/utils/angular';
+import { LegacyComponent, modalCancelHandler } from '../../utils/angular';
 
 interface WithClassifications {
   classifications: Classification[];
@@ -16,17 +16,19 @@ interface WithClassifications {
 
 @LegacyComponent({
   bindings: {
-    value: '='
+    value: '=',
+    required: '='
   },
   require: {
     form: '?^form'
   },
   template: `
       <h4>
-        <span translate>Classifications</span> 
+        <span translate>Classifications</span>
         <button id="add_classification_button" type="button" class="btn btn-link btn-xs pull-right" ng-click="$ctrl.addClassification()" ng-show="$ctrl.isEditing()">
           <span translate>Add classification</span>
         </button>
+        <span ng-show="$ctrl.required && $ctrl.isEditing()" class="fas fa-asterisk" uib-tooltip="{{'Required' | translate}}"></span>
       </h4>
       <editable-table id="'classifications'" descriptor="$ctrl.descriptor" expanded="$ctrl.expanded"></editable-table>
   `
