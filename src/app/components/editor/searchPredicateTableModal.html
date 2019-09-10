@@ -158,6 +158,12 @@
                     {{$ctrl.showItemValue(searchResult.modifiedAt)}}
                   </td>
                   <td class="menu-col">
+                    <a id="{{'show_predicate_info_' + searchResult.id + '_link'}}"
+                       href="#"
+                       ng-click="$ctrl.showPredicateInfo(searchResult)"
+                       title="{{('Show ' + $ctrl.type + ' information') | translate}}">
+                      <i class="fas fa-clone glyph-icon" aria-hidden="true"></i>
+                    </a>
                   </td>
                 <tr>
 
@@ -195,12 +201,6 @@
       </button>
 
       <div uib-dropdown-menu class="dropdown-menu-right" aria-labelledby="{{'predicate_' + $ctrl.selection.id + '_actions_button'}}">
-        <button id="{{'show_predicate_info_' + $ctrl.selection.id + '_button'}}"
-                class="dropdown-item"
-                ng-click="$ctrl.showPredicateInfo($ctrl.selection)"
-                ng-if="$ctrl.isSelectionPredicate()">
-          {{('Show ' + $ctrl.type + ' information') | translate}}
-        </button>
         <button id="{{'copy_predicate_' + $ctrl.selection.id + '_button'}}"
                 class="dropdown-item"
                 ng-click="$ctrl.copyPredicate($ctrl.selection)">
