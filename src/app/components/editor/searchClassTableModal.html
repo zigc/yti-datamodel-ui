@@ -166,7 +166,7 @@
 
     <div class="pull-right dropup" uib-dropdown>
       <button id="{{'class_' + $ctrl.selection.id + '_actions_button'}}" class="btn btn-language dropdown-toggle"
-              ng-disabled="!$ctrl.selection" uib-dropdown-toggle>
+              ng-disabled="!$ctrl.showActions($ctrl.selection)" uib-dropdown-toggle>
         <span translate>Actions</span>
       </button>
       <div uib-dropdown-menu class="dropdown-menu-right" aria-labelledby="{{'class_' + $ctrl.selection.id + '_actions_button'}}"
@@ -174,21 +174,18 @@
         <button id="{{'copy_class_' + $ctrl.selection.id + '_button'}}"
                 class="dropdown-item"
                 ng-click="$ctrl.copyClass($ctrl.selection)"
-                ng-if="$ctrl.showActions($ctrl.selection)"
                 translate>
           Copy class
         </button>
         <button id="{{'create_sub_class_' + $ctrl.selection.id + '_button'}}"
                 class="dropdown-item"
                 ng-click="$ctrl.createSubClass($ctrl.selection)"
-                ng-if="$ctrl.showActions($ctrl.selection)"
                 translate>
           Create sub class
         </button>
         <button id="{{'create_super_class_' + $ctrl.selection.id + '_button'}}"
                 class="dropdown-item"
                 ng-click="$ctrl.createSuperClass($ctrl.selection)"
-                ng-if="$ctrl.showActions($ctrl.selection)"
                 translate>
           Create super class
         </button>
