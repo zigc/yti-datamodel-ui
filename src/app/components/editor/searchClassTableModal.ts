@@ -331,10 +331,6 @@ class SearchClassTableController implements SearchController<ClassListItem> {
     return item ? !this.onlySelection && !item.isOfType('shape') && !item.definedBy.isOfType('standard') : false;
   }
 
-  showClassInfo(item: Class | ExternalEntity) {
-    return this.showClassInfoModal.open(this.model, item).then(null, modalCancelHandler);
-  }
-
   copyClass(item: AbstractClass) {
     this.$uibModalInstance.close(new RelatedClass(item.id, 'prov:wasDerivedFrom'));
   }

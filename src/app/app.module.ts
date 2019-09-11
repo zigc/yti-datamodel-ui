@@ -55,7 +55,8 @@ import {
   modelServiceProvider,
   notificationModalProvider,
   routeServiceProvider,
-  scopeProvider
+  scopeProvider,
+  showClassInfoModalProvider
 } from './ajs-upgraded-providers';
 import {
   ExportDirective,
@@ -186,6 +187,7 @@ export function localizerFactory(languageService: LanguageService): AngularLocal
     modelPageHelpServiceProvider,
     gettextCatalogProvider,
     displayItemFactoryProvider,
+    showClassInfoModalProvider,
     Title,
     HelpService,
     IndexSearchService

@@ -171,13 +171,6 @@
       </button>
       <div uib-dropdown-menu class="dropdown-menu-right" aria-labelledby="{{'class_' + $ctrl.selection.id + '_actions_button'}}"
            ng-if="$ctrl.selection">
-        <button id="{{'show_class_info_' + $ctrl.selection.id + '_button'}}"
-                class="dropdown-item"
-                ng-click="$ctrl.showClassInfo($ctrl.selection)"
-                ng-if="$ctrl.selection"
-                translate>
-          Show class information
-        </button>
         <button id="{{'copy_class_' + $ctrl.selection.id + '_button'}}"
                 class="dropdown-item"
                 ng-click="$ctrl.copyClass($ctrl.selection)"

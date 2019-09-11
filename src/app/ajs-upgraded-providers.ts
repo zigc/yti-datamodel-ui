@@ -7,6 +7,7 @@ import { ModelPageHelpService } from './help/providers/modelPageHelpService';
 import { gettextCatalog as GettextCatalog } from 'angular-gettext';
 import { DisplayItemFactory } from './components/form/displayItemFactory';
 import IInjectorService = angular.auto.IInjectorService;
+import { ShowClassInfoModal } from './components/editor/showClassInfoModal';
 
 // NOTE: In normal case the "wrappers" should not be needed, but I could not figure out the way to make it work with the interfaces.
 
@@ -139,3 +140,14 @@ export const displayItemFactoryProvider = {
   useFactory: displayItemFactoryFactory,
   deps: ['$injector']
 };
+
+export function showClassInfoModalFactory(i: IInjectorService) {
+  return i.get('showClassInfoModal');
+}
+
+export const showClassInfoModalProvider = {
+  provide: ShowClassInfoModal,
+  useFactory: showClassInfoModalFactory,
+  deps: ['$injector']
+}
+

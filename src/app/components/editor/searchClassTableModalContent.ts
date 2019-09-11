@@ -6,6 +6,8 @@ import { AbstractClass, Class, ClassListItem } from '../../entities/class';
 import { GettextCatalogWrapper } from '../../ajs-upgraded-providers';
 import { ExternalEntity } from '../../entities/externalEntity';
 import { DisplayItemFactory, Value } from '../form/displayItemFactory';
+import { modalCancelHandler } from '../../utils/angular';
+import { ShowClassInfoModal } from './showClassInfoModal';
 
 @Component({
   selector: 'app-search-class-table-modal-content',
@@ -48,7 +50,7 @@ import { DisplayItemFactory, Value } from '../form/displayItemFactory';
           </thead>
           <tbody>
           <tr *ngFor="let searchResult of searchResults"
-              id="{{searchResultID(searchResult)}}"
+              [id]="searchResultID(searchResult)"
               [ngClass]="{'search-result': true, 'active': isSelected(searchResult)}"
               (click)="itemSelected.emit(searchResult)"
               title="{{itemTitle(searchResult)}}"
@@ -93,6 +95,12 @@ import { DisplayItemFactory, Value } from '../form/displayItemFactory';
                   {{showItemValue(searchResult.modifiedAt)}}
               </td>
               <td class="menu-col">
+                <a [id]="classInfoLinkID(searchResult)"
+                    href="#"
+                    (click)="showClassInfo(searchResult)"
+                    [title]="('Show class information') | translate">
+                  <i class="fas fa-clone glyph-icon" aria-hidden="true"></i>
+                </a>
               </td>
           <tr>
           </tbody>
@@ -111,7 +119,8 @@ export class SearchClassTableModalContentComponent {
   @Output() itemSelected = new EventEmitter<ClassListItem | undefined>();
 
   constructor(private gettextCatalogWrapper: GettextCatalogWrapper,
-              private displayItemFactory: DisplayItemFactory) {
+              private displayItemFactory: DisplayItemFactory,
+              protected showClassInfoModal: ShowClassInfoModal) {
   }
 
   isSelected(item?: AbstractClass): boolean {
@@ -141,5 +150,13 @@ export class SearchClassTableModalContentComponent {
       context: () => this.model,
       value: () => value
     }).displayValue;
+  }
+
+  showClassInfo(item: Class | ExternalEntity) {
+    return this.showClassInfoModal.open(this.model, item).then(null, modalCancelHandler);
+  }
+
+  classInfoLinkID(item: AbstractClass) {
+    return `show_class_info_${item.id.toString()}_link`;
   }
 }
