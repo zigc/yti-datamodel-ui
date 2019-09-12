@@ -277,8 +277,8 @@ class SearchPredicateTableController implements SearchController<PredicateListIt
     return `${item.id.toString()}${'_search_predicate_link'}`;
   }
 
-  showPredicateInfo(item: Predicate) {
-    return this.showPredicateInfoModal.open(this.model, item).then(null, modalCancelHandler);
+  showPredicateInfo() {
+    return this.showPredicateInfoModal.open(this.model, this.selection!).then(null, modalCancelHandler);
   }
 
   copyPredicate(item: AbstractPredicate) {

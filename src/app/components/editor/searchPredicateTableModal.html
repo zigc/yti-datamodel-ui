@@ -160,7 +160,8 @@
                   <td class="menu-col">
                     <a id="{{'show_predicate_info_' + searchResult.id + '_link'}}"
                        href="#"
-                       ng-click="$ctrl.showPredicateInfo(searchResult)"
+                       ng-if="$ctrl.isSelected(searchResult)"
+                       ng-click="$ctrl.showPredicateInfo()"
                        title="{{('Show ' + $ctrl.type + ' information') | translate}}">
                       <i class="fas fa-clone glyph-icon" aria-hidden="true"></i>
                     </a>
