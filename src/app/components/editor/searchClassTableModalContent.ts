@@ -97,7 +97,8 @@ import { ShowClassInfoModal } from './showClassInfoModal';
               <td class="menu-col">
                 <a [id]="classInfoLinkID(searchResult)"
                     href="#"
-                    (click)="showClassInfo(searchResult)"
+                    *ngIf="isSelected(searchResult)"
+                    (click)="showClassInfo()"
                     [title]="('Show class information') | translate">
                   <i class="fas fa-clone glyph-icon" aria-hidden="true"></i>
                 </a>
@@ -152,8 +153,8 @@ export class SearchClassTableModalContentComponent {
     }).displayValue;
   }
 
-  showClassInfo(item: Class | ExternalEntity) {
-    return this.showClassInfoModal.open(this.model, item).then(null, modalCancelHandler);
+  showClassInfo() {
+    return this.showClassInfoModal.open(this.model, this.selection!).then(null, modalCancelHandler);
   }
 
   classInfoLinkID(item: AbstractClass) {
