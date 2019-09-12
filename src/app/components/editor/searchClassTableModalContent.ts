@@ -53,7 +53,7 @@ import { ShowClassInfoModal } from './showClassInfoModal';
               [id]="searchResultID(searchResult)"
               [ngClass]="{'search-result': true, 'active': isSelected(searchResult)}"
               (click)="itemSelected.emit(searchResult)"
-              title="{{itemTitle(searchResult)}}"
+              [title]="itemTitle(searchResult)"
               key-control-selection>
 
               <td class="name-col">
@@ -137,12 +137,12 @@ export class SearchClassTableModalContentComponent {
     return `${item.id.toString()}_search_class_link`;
   }
 
-  itemTitle(item: AbstractClass): string | null {
+  itemTitle(item: AbstractClass): string {
     const disabledReason = this.exclude(item);
     if (!!disabledReason) {
       return this.gettextCatalogWrapper.gettextCatalog.getString(disabledReason);
     } else {
-      return null;
+      return '';
     }
   }
 
