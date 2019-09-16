@@ -1054,8 +1054,8 @@ msgstr ""
 "Täältä voit lisätä luokalle uuden attribuutin jonka arvoalue perustuu "
 "tietotyyppiin tai assosiaation jolla viitataan toiseen luokkaan"
 
-msgid "Member groups"
-msgstr "Käyttäjänä ryhmissä"
+msgid "Admin groups"
+msgstr "Pääkäyttäjänä ryhmissä"
 
 msgid "not found in the concept database"
 msgstr "ei löydy sanastosta"
@@ -1507,11 +1507,11 @@ msgstr "Nimi"
 msgid "Created at"
 msgstr "Luotu"
 
+msgid "Member groups"
+msgstr "Käyttäjänä ryhmissä"
+
 msgid "Define concept for the class"
 msgstr "Määrittele käsite luokalle"
-
-msgid "Admin groups"
-msgstr "Pääkäyttäjänä ryhmissä"
 
 msgid "Add properties from class"
 msgstr "Lisää ominaisuudet luokasta"
@@ -1815,6 +1815,9 @@ msgstr "Sanastotyöntekijä"
 
 msgid "CODE_LIST_EDITOR"
 msgstr "Koodistotyöntekijä"
+
+msgid "MEMBER"
+msgstr "Jäsen"
 
 msgid "Add new library"
 msgstr "Lisää uusi tietoaluekohtainen tietomalli"

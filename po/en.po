@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2019-08-16 10:29+0300\n"
+"PO-Revision-Date: 2019-09-16 11:15+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -1027,7 +1027,7 @@ msgstr "Terminology"
 msgid "You can add new attribute or association to the Class from here"
 msgstr ""
 
-msgid "Member groups"
+msgid "Admin groups"
 msgstr ""
 
 msgid "not found in the concept database"
@@ -1478,10 +1478,10 @@ msgstr ""
 msgid "Created at"
 msgstr ""
 
-msgid "Define concept for the class"
+msgid "Member groups"
 msgstr ""
 
-msgid "Admin groups"
+msgid "Define concept for the class"
 msgstr ""
 
 msgid "Add properties from class"
@@ -1785,6 +1785,9 @@ msgstr ""
 
 msgid "CODE_LIST_EDITOR"
 msgstr ""
+
+msgid "MEMBER"
+msgstr "Member"
 
 msgid "Add new library"
 msgstr "Add new Core Vocabulary"

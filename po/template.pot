@@ -961,7 +961,7 @@ msgstr ""
 msgid "You can add new attribute or association to the Class from here"
 msgstr ""
 
-msgid "Member groups"
+msgid "Admin groups"
 msgstr ""
 
 msgid "not found in the concept database"
@@ -1102,7 +1102,9 @@ msgstr ""
 msgid "Edit in progress"
 msgstr ""
 
-msgid "Are you sure that you want to continue? By continuing unsaved changes will be lost."
+msgid ""
+"Are you sure that you want to continue? By continuing unsaved changes will "
+"be lost."
 msgstr ""
 
 msgid "Dialog is open"
@@ -1381,10 +1383,10 @@ msgstr ""
 msgid "Created at"
 msgstr ""
 
-msgid "Define concept for the class"
+msgid "Member groups"
 msgstr ""
 
-msgid "Admin groups"
+msgid "Define concept for the class"
 msgstr ""
 
 msgid "Add properties from class"
@@ -1612,7 +1614,9 @@ msgstr ""
 msgid "Predicate in use"
 msgstr ""
 
-msgid "Predicate type cannot be changed because it is already used by following resources"
+msgid ""
+"Predicate type cannot be changed because it is already used by following "
+"resources"
 msgstr ""
 
 msgid "Convert to association"
@@ -1682,6 +1686,9 @@ msgid "TERMINOLOGY_EDITOR"
 msgstr ""
 
 msgid "CODE_LIST_EDITOR"
+msgstr ""
+
+msgid "MEMBER"
 msgstr ""
 
 msgid "Add new library"
