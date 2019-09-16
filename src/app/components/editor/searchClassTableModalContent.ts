@@ -58,12 +58,12 @@ import { ShowClassInfoModal } from './showClassInfoModal';
 
           <td class="name-col">
             <div>
-              <app-ajax-loading-indicator-small *ngIf="isLoadingSelection(searchResult)"></app-ajax-loading-indicator-small>
+              <app-ajax-loading-indicator-small class="pr-1" *ngIf="isLoadingSelection(searchResult)"></app-ajax-loading-indicator-small>
               <highlight [text]="searchResult.label" [context]="model" [search]="searchText"></highlight>
             </div>
             <a [href]="model.linkToResource(searchResult.id)" target="_blank"
                [innerHTML]="searchResult.id.compact | highlight: searchText"></a>
-            <div style="padding-top: 5px">
+            <div class="pt-1">
               <app-status [status]="searchResult.status"></app-status>
             </div>
           </td>
