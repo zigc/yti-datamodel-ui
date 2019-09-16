@@ -2290,7 +2290,7 @@ msgid "API path"
 msgstr ""
 
 msgid "API path info"
-msgstr ""
+msgstr "Define at least one path for some class to export valid Open API specification. Paths can include path ({}) or query (?&) parameters, for example: /org/{id}/?name&role"
 
 msgid "owl:DatatypeProperty"
 msgstr "Attribute"

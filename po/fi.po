@@ -2338,7 +2338,7 @@ msgid "API path"
 msgstr "API polku"
 
 msgid "API path info"
-msgstr ""
+msgstr "Vähintään yhdelle luokalle on määriteltävä API polku jotta Open API kuvaus voidaan tuottaa oikein. API polkuun voidaan määritellä polku- ({}) tai kyselyparametreja (?&) esimerkiksi: /org/{id}/person?name&role"
 
 msgid "owl:DatatypeProperty"
 msgstr "Attribuutti"
