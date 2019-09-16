@@ -67,17 +67,17 @@ class SearchPredicateTableController implements SearchController<PredicateListIt
   private predicates: PredicateListItem[] = [];
 
   searchResults: (PredicateListItem)[] = [];
-  selection: Predicate|null;
+  selection: Predicate | null;
   searchText = '';
   typeSelectable: boolean;
-  cannotConfirm: string|null = null;
+  cannotConfirm: string | null = null;
   loadingResults: boolean;
-  selectedItem: PredicateListItem|null;
-  showInfoDomain: Classification|null;
+  selectedItem: PredicateListItem | null;
+  showInfoDomain: Classification | null;
   infoDomains: Classification[];
   showStatus: Status|null;
   modelTypes: DefinedByType[];
-  showModelType: DefinedByType|null;
+  showModelType: DefinedByType | null;
 
   sortBy: SortBy<PredicateListItem>;
 
@@ -96,7 +96,7 @@ class SearchPredicateTableController implements SearchController<PredicateListIt
   constructor(private $scope: SearchPredicateTableScope,
               private $uibModalInstance: IModalServiceInstance,
               public model: Model,
-              public type: KnownPredicateType|null,
+              public type: KnownPredicateType | null,
               public exclude: Exclusion<PredicateListItem>,
               public filterExclude: Exclusion<PredicateListItem>,
               private predicateService: PredicateService,

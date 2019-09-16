@@ -83,94 +83,14 @@
 
             <ajax-loading-indicator ng-if="$ctrl.loadingResults"></ajax-loading-indicator>
 
-            <table ng-if="!$ctrl.loadingResults" class="table table-sm" width="100%">
-              <thead>
-                <tr>
-                  <th class="name-col">
-                    <sort-by-column-header header-text="'Name'"
-                                          column-name="'name'"
-                                          model="$ctrl.model"
-                                          sort-by="$ctrl.sortBy"
-                                          filter-exclude="$ctrl.filterExclude"></sort-by-column-header>
-                  </th>
-                  <th class="model-col">
-                    <sort-by-column-header header-text="'Model'"
-                                          column-name="'model'"
-                                          model="$ctrl.model"
-                                          sort-by="$ctrl.sortBy"
-                                          filter-exclude="$ctrl.filterExclude"></sort-by-column-header>
-                  </th>
-                  <th class="description-col">
-                    <sort-by-column-header header-text="'Description'"
-                                          column-name="'description'"
-                                          model="$ctrl.model"
-                                          sort-by="$ctrl.sortBy"
-                                          filter-exclude="$ctrl.filterExclude"></sort-by-column-header>
-                  </th>
-                  <th class="modified-at-col">
-                    <sort-by-column-header header-text="'Modified at'"
-                                          column-name="'modifiedAt'"
-                                          model="$ctrl.model"
-                                          sort-by="$ctrl.sortBy"
-                                          filter-exclude="$ctrl.filterExclude"></sort-by-column-header>
-                  </th>
-                  <th class="menu-col"></th>
-                </tr>
-              </thead>
-              <tbody>
-
-                <tr ng-repeat="searchResult in $ctrl.searchResults"
-                    id="{{$ctrl.generateSearchResultID(searchResult)}}"
-                    ng-class="['search-result', {active: $ctrl.isSelected(searchResult)}]"
-                    ng-click="$ctrl.selectItem(searchResult)"
-                    title="{{$ctrl.itemTitle(searchResult)}}"
-                    key-control-selection>
-                  <td class="name-col">
-                    <div>
-                      <i class="glyph-icon" ng-class="searchResult.glyphIconClass"></i>
-                      <ajax-loading-indicator-small ng-if="$ctrl.loadingSelection(searchResult)"></ajax-loading-indicator-small>
-                      <highlight text="searchResult.label" context="$ctrl.model" search="$ctrl.searchText"></highlight>
-                    </div>
-                    <a ng-href="{{$ctrl.model.linkToResource(searchResult.id)}}" target="_blank" ng-bind-html="searchResult.id.compact | highlight: $ctrl.searchText"></a>
-                    <div style="padding-top: 5px">
-                      <app-status [status]="searchResult.status"></app-status>
-                    </div>
-                  </td>
-                  <td class="model-col">
-                    <div>
-                      <highlight text="searchResult.definedBy.label" context="$ctrl.model" search="$ctrl.searchText"></highlight>
-                    </div>
-                    <div ng-if="searchResult.definedBy.normalizedType">
-                      {{searchResult.definedBy.normalizedType | translate}}
-                    </div>
-                    <div>
-                      <span class="information-domains">
-                        <span class="badge badge-light" ng-repeat="infoDomain in searchResult.definedBy.classifications">
-                            {{$ctrl.showItemValue(infoDomain.label)}}
-                        </span>
-                      </span>
-                    </div>
-                  </td>
-                  <td class="description-col">
-                    <highlight text="searchResult.comment" context="$ctrl.model" search="$ctrl.searchText"></highlight>
-                  </td>
-                  <td class="modified-at-col">
-                    {{$ctrl.showItemValue(searchResult.modifiedAt)}}
-                  </td>
-                  <td class="menu-col">
-                    <a id="{{'show_predicate_info_' + searchResult.id + '_link'}}"
-                       href="#"
-                       ng-if="$ctrl.isSelected(searchResult)"
-                       ng-click="$ctrl.showPredicateInfo()"
-                       title="{{('Show ' + $ctrl.type + ' information') | translate}}">
-                      <i class="fas fa-clone glyph-icon" aria-hidden="true"></i>
-                    </a>
-                  </td>
-                <tr>
-
-              </tbody>
-            </table>
-
+            <app-search-predicate-table-modal-content ng-if="!$ctrl.loadingResults" [sort-by]="$ctrl.sortBy" [model]="$ctrl.model"
+                                                  [filter-exclude]="$ctrl.filterExclude"
+                                                  [search-text]="$ctrl.searchText" [search-results]="$ctrl.searchResults"
+                                                  [selected-item]="$ctrl.selectedItem" [selection]="$ctrl.selection"
+                                                  (item-selected)="$ctrl.selectItem($event)"
+                                                  [exclude]="$ctrl.exclude"
+                                                  [type]="$ctrl.type">
+            </app-search-predicate-table-modal-content>
           </div>
         </div>
       </div>

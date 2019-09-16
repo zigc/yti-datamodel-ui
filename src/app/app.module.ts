@@ -42,7 +42,7 @@ import { DropdownComponent } from 'yti-common-ui/components/dropdown.component';
 import { UseContextDropdownComponent } from './components/model/use-context-dropdown.component';
 import { UseContextInputComponent } from './components/form/use-context-input.component';
 import { HttpClientModule } from '@angular/common/http';
-import { apiEndpointWithName } from 'app/services/config';
+import { apiEndpointWithName } from './services/config';
 import { ExpandableTextComponent } from 'yti-common-ui/components/expandable-text.component';
 import { ModelMainComponent } from './components/model/modelMain';
 import {
@@ -56,7 +56,8 @@ import {
   notificationModalProvider,
   routeServiceProvider,
   scopeProvider,
-  showClassInfoModalProvider
+  showClassInfoModalProvider,
+  showPredicateInfoModalProvider
 } from './ajs-upgraded-providers';
 import {
   ExportDirective,
@@ -72,6 +73,7 @@ import { HelpService } from './help/providers/helpService';
 import { IndexSearchService } from './services/indexSearchService';
 import { VirtualScrollerModule } from 'ngx-virtual-scroller';
 import { SearchClassTableModalContentComponent } from './components/editor/searchClassTableModalContent';
+import { SearchPredicateTableModalContentComponent } from './components/editor/searchPredicateTableModalContent';
 import IAnimateProvider = animate.IAnimateProvider;
 
 require('angular-gettext');
@@ -158,7 +160,8 @@ export function localizerFactory(languageService: LanguageService): AngularLocal
     ExportDirective,
     SortByColumnHeaderDirective,
     HighlightDirective,
-    SearchClassTableModalContentComponent
+    SearchClassTableModalContentComponent,
+    SearchPredicateTableModalContentComponent
   ],
   entryComponents: [
     FooterComponent,
@@ -172,7 +175,8 @@ export function localizerFactory(languageService: LanguageService): AngularLocal
     UseContextDropdownComponent,
     UseContextInputComponent,
     ModelMainComponent,
-    SearchClassTableModalContentComponent
+    SearchClassTableModalContentComponent,
+    SearchPredicateTableModalContentComponent
   ],
   providers: [
     { provide: AUTHENTICATED_USER_ENDPOINT, useFactory: resolveAuthenticatedUserEndpoint },
@@ -188,6 +192,7 @@ export function localizerFactory(languageService: LanguageService): AngularLocal
     gettextCatalogProvider,
     displayItemFactoryProvider,
     showClassInfoModalProvider,
+    showPredicateInfoModalProvider,
     Title,
     HelpService,
     IndexSearchService
@@ -240,6 +245,7 @@ mod.directive('appFilterDropdown', downgradeComponent({ component: FilterDropdow
 mod.directive('appStatus', downgradeComponent({ component: StatusComponent }));
 mod.directive('appUseContextInput', downgradeComponent({ component: UseContextInputComponent }));
 mod.directive('appSearchClassTableModalContent', downgradeComponent({ component: SearchClassTableModalContentComponent }));
+mod.directive('appSearchPredicateTableModalContent', downgradeComponent({ component: SearchPredicateTableModalContentComponent }));
 
 mod.factory('translateService', downgradeInjectable(TranslateService));
 mod.factory('loginModal', downgradeInjectable(LoginModalService));
