@@ -1087,6 +1087,9 @@ msgstr ""
 msgid "Do you want to add following properties from class?"
 msgstr "Haluatko lisätä seuraavat ominaisuudet luokasta?"
 
+msgid "Admin groups"
+msgstr "Pääkäyttäjänä ryhmissä"
+
 msgid "not found in the concept database"
 msgstr "ei löydy sanastosta"
 
@@ -1543,9 +1546,6 @@ msgstr "Muokattu"
 msgid "Member groups"
 msgstr "Käyttäjänä ryhmissä"
 
-msgid "Admin groups"
-msgstr "Pääkäyttäjänä ryhmissä"
-
 msgid "Add properties from class"
 msgstr "Lisää ominaisuudet luokasta"
 
@@ -1878,6 +1878,9 @@ msgstr "Sanastotyöntekijä"
 
 msgid "CODE_LIST_EDITOR"
 msgstr "Koodistotyöntekijä"
+
+msgid "MEMBER"
+msgstr "Jäsen"
 
 msgid "Add new library"
 msgstr "Lisää uusi tietoaluekohtainen tietomalli"
@@ -2404,7 +2407,7 @@ msgid "API path"
 msgstr "API polku"
 
 msgid "API path info"
-msgstr ""
+msgstr "Vähintään yhdelle luokalle on määriteltävä API polku jotta Open API kuvaus voidaan tuottaa oikein. API polkuun voidaan määritellä polku- ({}) tai kyselyparametreja (?&) esimerkiksi: /org/{id}/person?name&role"
 
 msgid "owl:DatatypeProperty"
 msgstr "Attribuutti"
