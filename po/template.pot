@@ -217,7 +217,13 @@ msgstr ""
 msgid "External classes"
 msgstr ""
 
+msgid "Include:"
+msgstr ""
+
 msgid "All information domains"
+msgstr ""
+
+msgid "All class types"
 msgstr ""
 
 msgid "All statuses"
@@ -236,9 +242,6 @@ msgid "Shape from URI"
 msgstr ""
 
 msgid "Actions"
-msgstr ""
-
-msgid "Show class information"
 msgstr ""
 
 msgid "Copy class"
@@ -991,10 +994,7 @@ msgstr ""
 msgid "You can add new attribute or association to the Class from here"
 msgstr ""
 
-msgid "Do you want to add following properties from class?"
-msgstr ""
-
-msgid "Admin groups"
+msgid "Do you want to add following properties from super class?"
 msgstr ""
 
 msgid "not found in the concept database"
@@ -1422,7 +1422,7 @@ msgstr ""
 msgid "Member groups"
 msgstr ""
 
-msgid "Define concept for the class"
+msgid "Admin groups"
 msgstr ""
 
 msgid "Add properties from class"
@@ -1440,10 +1440,10 @@ msgstr ""
 msgid "Add properties from external class"
 msgstr ""
 
-msgid "Define concept for the class"
+msgid "Do you want to add following properties from class?"
 msgstr ""
 
-msgid "Do you want to add following properties from super class?"
+msgid "Define concept for the class"
 msgstr ""
 
 msgid "Do you want to add following properties from scope class?"
@@ -1528,6 +1528,9 @@ msgid "Create super attribute"
 msgstr ""
 
 msgid "Create super association"
+msgstr ""
+
+msgid "Show class information"
 msgstr ""
 
 msgid "Show attribute information"

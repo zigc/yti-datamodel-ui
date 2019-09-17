@@ -26,6 +26,10 @@
                           content-extractors="$ctrl.contentExtractors"></content-filter>
         </div>
 
+        <div class="pull-left mt-2 ml-3">
+          <label translate>Include:</label>
+        </div>
+
         <div class="pull-left mt-2 ml-2" ng-hide="$ctrl.onlySelection">
           <label>
             <input type="checkbox" ng-model="$ctrl.showProfiles">
@@ -65,9 +69,20 @@
           <option value="" translate>All information domains</option>
         </select>
 
+        <select id="class_type_filter_dropdown"
+                class="form-control pull-left mr-2"
+                style="width: auto"
+                ng-disabled="$ctrl.showOnlyExternalClasses"
+                ng-model="$ctrl.showClassType"
+                ng-options="(classType | translate) for classType in $ctrl.classTypes">
+          <option value="" translate>All class types</option>
+        </select>
+
+        <!-- This is not in use at the moment. -->
         <select id="class_model_type_filter_dropdown"
                 class="form-control pull-left mr-2"
                 style="width: auto"
+                ng-if="false"
                 ng-disabled="$ctrl.showOnlyExternalClasses"
                 ng-model="$ctrl.showModelType"
                 ng-options="(modelType | translate) for modelType in $ctrl.modelTypes">

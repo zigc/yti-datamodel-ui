@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2019-09-16 11:15+0300\n"
+"PO-Revision-Date: 2019-09-17 11:08+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -226,7 +226,13 @@ msgstr ""
 msgid "External classes"
 msgstr ""
 
+msgid "Include:"
+msgstr ""
+
 msgid "All information domains"
+msgstr ""
+
+msgid "All class types"
 msgstr ""
 
 msgid "All statuses"
@@ -245,9 +251,6 @@ msgid "Shape from URI"
 msgstr ""
 
 msgid "Actions"
-msgstr ""
-
-msgid "Show class information"
 msgstr ""
 
 msgid "Copy class"
@@ -1057,10 +1060,7 @@ msgstr "Terminology"
 msgid "You can add new attribute or association to the Class from here"
 msgstr ""
 
-msgid "Do you want to add following properties from class?"
-msgstr ""
-
-msgid "Admin groups"
+msgid "Do you want to add following properties from super class?"
 msgstr ""
 
 msgid "not found in the concept database"
@@ -1517,7 +1517,7 @@ msgstr ""
 msgid "Member groups"
 msgstr ""
 
-msgid "Define concept for the class"
+msgid "Admin groups"
 msgstr ""
 
 msgid "Add properties from class"
@@ -1537,10 +1537,10 @@ msgstr ""
 msgid "Add properties from external class"
 msgstr ""
 
-msgid "Define concept for the class"
+msgid "Do you want to add following properties from class?"
 msgstr ""
 
-msgid "Do you want to add following properties from super class?"
+msgid "Define concept for the class"
 msgstr ""
 
 msgid "Do you want to add following properties from scope class?"
@@ -1625,6 +1625,9 @@ msgid "Create super attribute"
 msgstr ""
 
 msgid "Create super association"
+msgstr ""
+
+msgid "Show class information"
 msgstr ""
 
 msgid "Show attribute information"
@@ -2364,7 +2367,10 @@ msgid "API path"
 msgstr ""
 
 msgid "API path info"
-msgstr "Define at least one path for some class to export valid Open API specification. Paths can include path ({}) or query (?&) parameters, for example: /org/{id}/?name&role"
+msgstr ""
+"Define at least one path for some class to export valid Open API "
+"specification. Paths can include path ({}) or query (?&) parameters, for "
+"example: /org/{id}/?name&role"
 
 msgid "owl:DatatypeProperty"
 msgstr "Attribute"

@@ -13,14 +13,14 @@ import { defaultLabelComparator, filterAndSortSearchResults } from '../../compon
 import { Optional, requireDefined } from 'yti-common-ui/utils/object';
 import { ignoreModalClose } from 'yti-common-ui/utils/modal';
 import { selectableStatuses, Status } from 'yti-common-ui/entities/status';
-import { ifChanged, modalCancelHandler } from '../../utils/angular';
+import { ifChanged } from '../../utils/angular';
 import { Classification } from '../../entities/classification';
 import { ClassificationService } from '../../services/classificationService';
 import { contains } from 'yti-common-ui/utils/array';
 import { ModelService } from '../../services/modelService';
 import { comparingLocalizable } from '../../utils/comparator';
 import { Language } from '../../types/language';
-import { DefinedByType, SortBy } from '../../types/entity';
+import { DefinedByType, SortBy, ClassType } from '../../types/entity';
 import { infoDomainMatches } from '../../utils/entity';
 import { ShowClassInfoModal } from './showClassInfoModal';
 
@@ -90,7 +90,9 @@ class SearchClassTableController implements SearchController<ClassListItem> {
   showStatus: Status | null;
   showInfoDomain: Classification | null;
   infoDomains: Classification[];
+  classTypes: ClassType[];
   modelTypes: DefinedByType[];
+  showClassType: ClassType | null;
   showModelType: DefinedByType | null;
   showProfiles = false;
   showOnlyExternalClasses = false;
@@ -127,6 +129,7 @@ class SearchClassTableController implements SearchController<ClassListItem> {
     this.localizer = languageService.createLocalizer(model);
     this.loadingResults = true;
 
+    this.classTypes = ['class', 'shape'];
     this.modelTypes = ['library', 'profile'];
 
     this.sortBy = {
@@ -186,6 +189,10 @@ class SearchClassTableController implements SearchController<ClassListItem> {
     );
 
     this.addFilter(classListItem =>
+      !this.showClassType || classListItem.item.normalizedType === this.showClassType
+    );
+
+    this.addFilter(classListItem =>
       !this.showModelType || classListItem.item.definedBy.normalizedType === this.showModelType
     );
 
@@ -194,6 +201,7 @@ class SearchClassTableController implements SearchController<ClassListItem> {
     );
 
     $scope.$watch(() => this.showStatus, ifChanged<Status | null>(() => this.search()));
+    $scope.$watch(() => this.showClassType, ifChanged<ClassType | null>(() => this.search()));
     $scope.$watch(() => this.showModelType, ifChanged<DefinedByType | null>(() => this.search()));
     $scope.$watch(() => this.showInfoDomain, ifChanged<Classification | null>(() => this.search()));
     $scope.$watch(() => this.sortBy.name, ifChanged<string>(() => this.search()));
@@ -208,6 +216,7 @@ class SearchClassTableController implements SearchController<ClassListItem> {
           this.showProfiles = false;
         }
         this.showInfoDomain = null;
+        this.showClassType = null;
         this.showModelType = null;
         this.showStatus = null;
       }
