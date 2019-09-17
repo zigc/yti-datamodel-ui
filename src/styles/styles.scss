@@ -51,11 +51,6 @@ h4, .h4 {
   font-weight: bold;
 }
 
-.scrolling-full-height {
-  height: 100%;
-  overflow-y: auto;
-}
-
 .scrolling {
   overflow-y: auto;
 }
@@ -257,27 +252,6 @@ visualization-view ajax-loading-indicator {
       }
     }
   }
-
-  .search-results-table {
-    height: 100%;
-
-    .search-result {
-      border-left: $active-indicator-width solid $white;
-      cursor: pointer;
-
-      &:hover, &.active {
-        border-left: $active-indicator-width solid $primary;
-      }
-
-      &.active {
-        background-color: $gray-200;
-      }
-
-      .glyph-icon {
-        color: $primary;
-      }
-    }
-  }
 }
 
 .modal-footer {
@@ -297,70 +271,8 @@ visualization-view ajax-loading-indicator {
   }
 }
 
-.table-container {
-  height: 100rem;
-
-  table {
-    display: flex;
-    flex-flow: column;
-    height: 100%;
-    width: 100%;
-    border: 0;
-  }
-
-  table thead {
-    /* head takes the height it requires,
-    and it's not scaled when table is resized */
-    flex: 0 0 auto;
-    width: calc(100% - 1.1em);
-  }
-
-  table tbody {
-    /* body takes all the remaining available space */
-    flex: 1 1 auto;
-    display: block;
-    overflow-y: scroll;
-  }
-
-  table tbody tr {
-    width: 100%;
-  }
-
-  table thead,
-  table tbody tr {
-    display: table;
-    table-layout: fixed;
-  }
-
-  table th {
-    border-top: 0;
-  }
-
-  table td {
-    border-top: 0;
-    border-bottom: 1px solid $gray-400;
-  }
-
-  .name-col {
-    width: 20%;
-  }
-
-  .model-col {
-    width: 20%;
-  }
-
-  .description-col {
-    width: 50%;
-  }
-
-  .modified-at-col {
-    width: 8%;
-  }
-
-  .menu-col {
-    width: 2%;
-    vertical-align: top;
-  }
+.search-results-table-container {
+  height: 100%;
 }
 
 [float] {

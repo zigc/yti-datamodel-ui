@@ -1,0 +1,66 @@
+@import '~yti-common-ui/theme/variables';
+
+.scroller-main {
+  height: 100%;
+  width: 100%;
+
+  table {
+    width: 100%;
+    border: 0;
+    table-layout: fixed;
+
+    thead {
+      tr {
+        background-color: white;
+        th {
+          border-top: 0;
+        }
+      }
+    }
+
+    tbody {
+      tr.search-result {
+        border-left: $active-indicator-width solid $white;
+        cursor: pointer;
+
+        &:hover, &.active {
+          border-left: $active-indicator-width solid $primary;
+        }
+
+        &.active {
+          background-color: $gray-200;
+        }
+
+        .glyph-icon {
+          color: $primary;
+        }
+
+        td {
+          border-top: 0;
+          border-bottom: 1px solid $gray-400;
+        }
+      }
+    }
+
+    .name-col {
+      width: 20%;
+    }
+
+    .model-col {
+      width: 20%;
+    }
+
+    .description-col {
+      width: 50%;
+    }
+
+    .modified-at-col {
+      width: 8%;
+    }
+
+    .menu-col {
+      width: 2%;
+      vertical-align: top;
+    }
+  }
+}
