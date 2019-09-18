@@ -51,7 +51,7 @@ import { ShowClassInfoModal } from './showClassInfoModal';
               </tr>
               </thead>
               <tbody #container>
-              <tr *ngFor="let searchResult of scroll.viewPortItems"
+              <tr *ngFor="let searchResult of scroll.viewPortItems; trackBy: trackBy"
                   [id]="searchResultID(searchResult)"
                   [ngClass]="{'search-result': true, 'active': isSelected(searchResult)}"
                   (click)="itemSelected.emit(searchResult)"
@@ -106,7 +106,7 @@ import { ShowClassInfoModal } from './showClassInfoModal';
                           <i class="fas fa-clone glyph-icon" aria-hidden="true"></i>
                       </a>
                   </td>
-              <tr>
+              </tr>
               </tbody>
           </table>
       </virtual-scroller>
@@ -163,5 +163,9 @@ export class SearchClassTableModalContentComponent {
 
   classInfoLinkID(item: AbstractClass) {
     return `show_class_info_${item.id.toString()}_link`;
+  }
+
+  trackBy(index: number, item: ClassListItem) {
+    return item.id;
   }
 }

@@ -49,7 +49,7 @@ import { TranslateService } from '@ngx-translate/core';
               </tr>
               </thead>
               <tbody #container>
-              <tr *ngFor="let searchResult of scroll.viewPortItems"
+              <tr *ngFor="let searchResult of scroll.viewPortItems; trackBy: trackBy"
                   [id]="searchResultID(searchResult)"
                   [ngClass]="{'search-result': true, 'active': isSelected(searchResult)}"
                   (click)="itemSelected.emit(searchResult)"
@@ -77,11 +77,11 @@ import { TranslateService } from '@ngx-translate/core';
                           {{searchResult.definedBy.normalizedType | translate}}
                       </div>
                       <div>
-              <span class="information-domains">
-                <span class="badge badge-light" *ngFor="let infoDomain of searchResult.definedBy.classifications">
-                  {{showItemValue(infoDomain.label)}}
-                </span>
-              </span>
+                          <span class="information-domains">
+                              <span class="badge badge-light" *ngFor="let infoDomain of searchResult.definedBy.classifications">
+                                  {{showItemValue(infoDomain.label)}}
+                              </span>
+                          </span>
                       </div>
                   </td>
                   <td class="description-col">
@@ -99,7 +99,7 @@ import { TranslateService } from '@ngx-translate/core';
                           <i class="fas fa-clone glyph-icon" aria-hidden="true"></i>
                       </a>
                   </td>
-              <tr>
+              </tr>
               </tbody>
           </table>
       </virtual-scroller>
@@ -169,5 +169,9 @@ export class SearchPredicateTableModalContentComponent {
     styles.push('pr-1');
 
     return styles;
+  }
+
+  trackBy(index: number, item: PredicateListItem) {
+    return item.id;
   }
 }
