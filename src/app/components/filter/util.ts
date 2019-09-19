@@ -11,7 +11,11 @@ import { DefinedBy } from '../../entities/definedBy';
 const defaultSearchLimit = 100;
 
 export function applyFilters<T>(searchResults: TextAnalysis<T>[], filters: SearchFilter<T>[], limitResults = defaultSearchLimit) {
-  return limit(searchResults.filter(results => allMatching(filters, filter => filter(results))), limitResults);
+  const filtered: TextAnalysis<T>[] = searchResults.filter(results => allMatching(filters, filter => filter(results)));
+  if (limitResults > 0) {
+    return limit(filtered, limitResults);
+  }
+  return filtered;
 }
 
 
@@ -19,10 +23,11 @@ export function filterAndSortSearchResults<S>(items: S[],
                                               searchText: string,
                                               contentExtractors: ContentExtractor<S>[],
                                               filters: SearchFilter<S>[],
-                                              comparator: Comparator<TextAnalysis<S>>): S[] {
+                                              comparator: Comparator<TextAnalysis<S>>,
+                                              limitResults: number = defaultSearchLimit): S[] {
 
   const analyzedItems = items.map(item => analyze(searchText, item, contentExtractors));
-  const filteredAnalyzedItems = applyFilters(analyzedItems, filters);
+  const filteredAnalyzedItems = applyFilters(analyzedItems, filters, limitResults);
 
   filteredAnalyzedItems.sort(comparator);
 

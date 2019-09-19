@@ -188,7 +188,7 @@ class SearchPredicateTableController implements SearchController<PredicateListIt
     this.removeSelection();
 
     this.searchResults = [
-      ...filterAndSortSearchResults(this.predicates, this.searchText, this.contentExtractors, this.searchFilters, this.sortBy.comparator)
+      ...filterAndSortSearchResults(this.predicates, this.searchText, this.contentExtractors, this.searchFilters, this.sortBy.comparator, 0)
     ];
   }
 

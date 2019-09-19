@@ -256,7 +256,7 @@ class SearchClassTableController implements SearchController<ClassListItem> {
     }
 
     this.searchResults = [
-      ...filterAndSortSearchResults(this.classes, this.searchText, this.contentExtractors, this.searchFilters, this.sortBy.comparator)
+      ...filterAndSortSearchResults(this.classes, this.searchText, this.contentExtractors, this.searchFilters, this.sortBy.comparator, 0)
     ];
   }
 
