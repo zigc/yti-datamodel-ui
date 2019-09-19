@@ -8,101 +8,102 @@ import { DisplayItemFactory, Value } from '../form/displayItemFactory';
 import { modalCancelHandler } from '../../utils/angular';
 import { ShowPredicateInfoModal } from './showPredicateInfoModal';
 import { TranslateService } from '@ngx-translate/core';
+import { IPageInfo } from 'ngx-virtual-scroller';
 
 @Component({
   selector: 'app-search-predicate-table-modal-content',
   styleUrls: ['../../../styles/shared/searchTableModalContent.scss', './searchPredicateTableModalContent.scss'],
   template: `
-      <virtual-scroller #scroll class="scroller-main" [items]="searchResults" [enableUnequalChildrenSizes]="true">
-          <table class="table table-sm" width="100%">
-              <thead #header>
-              <tr>
-                  <th class="name-col">
-                      <sort-by-column-header [headerText]="'Name'"
-                                             [columnName]="'name'"
-                                             [model]="model"
-                                             [sortBy]="sortBy"
-                                             [filterExclude]="filterExclude"></sort-by-column-header>
-                  </th>
-                  <th class="model-col">
-                      <sort-by-column-header [headerText]="'Model'"
-                                             [columnName]="'model'"
-                                             [model]="model"
-                                             [sortBy]="sortBy"
-                                             [filterExclude]="filterExclude"></sort-by-column-header>
-                  </th>
-                  <th class="description-col">
-                      <sort-by-column-header [headerText]="'Description'"
-                                             [columnName]="'description'"
-                                             [model]="model"
-                                             [sortBy]="sortBy"
-                                             [filterExclude]="filterExclude"></sort-by-column-header>
-                  </th>
-                  <th class="modified-at-col">
-                      <sort-by-column-header [headerText]="'Modified at'"
-                                             [columnName]="'modifiedAt'"
-                                             [model]="model"
-                                             [sortBy]="sortBy"
-                                             [filterExclude]="filterExclude"></sort-by-column-header>
-                  </th>
-                  <th class="menu-col"></th>
-              </tr>
-              </thead>
-              <tbody #container>
-              <tr *ngFor="let searchResult of scroll.viewPortItems; trackBy: trackBy"
-                  [id]="searchResultID(searchResult)"
-                  [ngClass]="{'search-result': true, 'active': isSelected(searchResult)}"
-                  (click)="itemSelected.emit(searchResult)"
-                  [title]="itemTitle(searchResult)"
-                  key-control-selection>
+    <virtual-scroller #scroll class="scroller-main" [items]="searchResults" [enableUnequalChildrenSizes]="true" (vsEnd)="scrollEnd($event)">
+      <table class="table table-sm" width="100%">
+        <thead #header>
+        <tr>
+          <th class="name-col">
+            <sort-by-column-header [headerText]="'Name'"
+                                   [columnName]="'name'"
+                                   [model]="model"
+                                   [sortBy]="sortBy"
+                                   [filterExclude]="filterExclude"></sort-by-column-header>
+          </th>
+          <th class="model-col">
+            <sort-by-column-header [headerText]="'Model'"
+                                   [columnName]="'model'"
+                                   [model]="model"
+                                   [sortBy]="sortBy"
+                                   [filterExclude]="filterExclude"></sort-by-column-header>
+          </th>
+          <th class="description-col">
+            <sort-by-column-header [headerText]="'Description'"
+                                   [columnName]="'description'"
+                                   [model]="model"
+                                   [sortBy]="sortBy"
+                                   [filterExclude]="filterExclude"></sort-by-column-header>
+          </th>
+          <th class="modified-at-col">
+            <sort-by-column-header [headerText]="'Modified at'"
+                                   [columnName]="'modifiedAt'"
+                                   [model]="model"
+                                   [sortBy]="sortBy"
+                                   [filterExclude]="filterExclude"></sort-by-column-header>
+          </th>
+          <th class="menu-col"></th>
+        </tr>
+        </thead>
+        <tbody #container>
+        <tr *ngFor="let searchResult of scroll.viewPortItems; trackBy: trackBy"
+            [id]="searchResultID(searchResult)"
+            [ngClass]="{'search-result': true, 'active': isSelected(searchResult)}"
+            (click)="itemSelected.emit(searchResult)"
+            [title]="itemTitle(searchResult)"
+            key-control-selection>
 
-                  <td class="name-col">
-                      <div>
-                          <i class="glyph-icon" [ngClass]="glyphIconStyle(searchResult)"></i>
-                          <app-ajax-loading-indicator-small class="pr-1"
-                                                            *ngIf="isLoadingSelection(searchResult)"></app-ajax-loading-indicator-small>
-                          <highlight [text]="searchResult.label" [context]="model" [search]="searchText"></highlight>
-                      </div>
-                      <a [href]="model.linkToResource(searchResult.id)" target="_blank"
-                         [innerHTML]="searchResult.id.compact | highlight: searchText"></a>
-                      <div class="pt-1">
-                          <app-status [status]="searchResult.status"></app-status>
-                      </div>
-                  </td>
-                  <td class="model-col">
-                      <div>
-                          <highlight [text]="searchResult.definedBy.label" [context]="model" [search]="searchText"></highlight>
-                      </div>
-                      <div *ngIf="searchResult.definedBy.normalizedType">
-                          {{searchResult.definedBy.normalizedType | translate}}
-                      </div>
-                      <div>
-                          <span class="information-domains">
-                              <span class="badge badge-light" *ngFor="let infoDomain of searchResult.definedBy.classifications">
-                                  {{showItemValue(infoDomain.label)}}
-                              </span>
-                          </span>
-                      </div>
-                  </td>
-                  <td class="description-col">
-                      <highlight [text]="searchResult.comment" [context]="model" [search]="searchText"></highlight>
-                  </td>
-                  <td class="modified-at-col">
-                      {{showItemValue(searchResult.modifiedAt)}}
-                  </td>
-                  <td class="menu-col">
-                      <a [id]="predicateInfoLinkID(searchResult)"
-                         href="#"
-                         *ngIf="isSelected(searchResult)"
-                         (click)="showClassInfo()"
-                         [title]="infoLinkTitle">
-                          <i class="fas fa-clone glyph-icon" aria-hidden="true"></i>
-                      </a>
-                  </td>
-              </tr>
-              </tbody>
-          </table>
-      </virtual-scroller>
+          <td class="name-col">
+            <div>
+              <i class="glyph-icon" [ngClass]="glyphIconStyle(searchResult)"></i>
+              <app-ajax-loading-indicator-small class="pr-1"
+                                                *ngIf="isLoadingSelection(searchResult)"></app-ajax-loading-indicator-small>
+              <highlight [text]="searchResult.label" [context]="model" [search]="searchText"></highlight>
+            </div>
+            <a [href]="model.linkToResource(searchResult.id)" target="_blank"
+               [innerHTML]="searchResult.id.compact | highlight: searchText"></a>
+            <div class="pt-1">
+              <app-status [status]="searchResult.status"></app-status>
+            </div>
+          </td>
+          <td class="model-col">
+            <div>
+              <highlight [text]="searchResult.definedBy.label" [context]="model" [search]="searchText"></highlight>
+            </div>
+            <div *ngIf="searchResult.definedBy.normalizedType">
+              {{searchResult.definedBy.normalizedType | translate}}
+            </div>
+            <div>
+              <span class="information-domains">
+                <span class="badge badge-light" *ngFor="let infoDomain of searchResult.definedBy.classifications">
+                  {{showItemValue(infoDomain.label)}}
+                </span>
+              </span>
+            </div>
+          </td>
+          <td class="description-col">
+            <highlight [text]="searchResult.comment" [context]="model" [search]="searchText"></highlight>
+          </td>
+          <td class="modified-at-col">
+            {{showItemValue(searchResult.modifiedAt)}}
+          </td>
+          <td class="menu-col">
+            <a [id]="predicateInfoLinkID(searchResult)"
+               href="#"
+               *ngIf="isSelected(searchResult)"
+               (click)="showClassInfo()"
+               [title]="infoLinkTitle">
+              <i class="fas fa-clone glyph-icon" aria-hidden="true"></i>
+            </a>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </virtual-scroller>
   `
 })
 export class SearchPredicateTableModalContentComponent {
@@ -116,6 +117,7 @@ export class SearchPredicateTableModalContentComponent {
   @Input() selection?: Predicate;
   @Input() type: KnownPredicateType | null;
   @Output() itemSelected = new EventEmitter<PredicateListItem | undefined>();
+  @Output() loadMore = new EventEmitter<number>();
 
   constructor(private gettextCatalogWrapper: GettextCatalogWrapper,
               private translateService: TranslateService,
@@ -173,5 +175,11 @@ export class SearchPredicateTableModalContentComponent {
 
   trackBy(index: number, item: PredicateListItem) {
     return item.id;
+  }
+
+  scrollEnd(info: IPageInfo) {
+    if (info.endIndex === this.searchResults.length - 1) {
+      this.loadMore.emit(info.endIndex);
+    }
   }
 }
