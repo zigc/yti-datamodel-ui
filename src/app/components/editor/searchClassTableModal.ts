@@ -85,7 +85,8 @@ class SearchClassTableController implements SearchController<ClassListItem> {
   selection: Class | ExternalEntity | null;
   searchText = '';
   cannotConfirm: string | null;
-  loadingResults: boolean;
+  loadingClasses: boolean;
+  loadingExternalClasses: boolean;
   selectedItem: ClassListItem | null;
   showStatus: Status | null;
   showInfoDomain: Classification | null;
@@ -127,7 +128,8 @@ class SearchClassTableController implements SearchController<ClassListItem> {
               modelService: ModelService) {
     'ngInject';
     this.localizer = languageService.createLocalizer(model);
-    this.loadingResults = true;
+    this.loadingClasses = true;
+    this.loadingExternalClasses = true;
 
     this.classTypes = ['class', 'shape'];
     this.modelTypes = ['library', 'profile'];
@@ -157,15 +159,14 @@ class SearchClassTableController implements SearchController<ClassListItem> {
     const results = (classes: ClassListItem[]) => {
       this.internalClasses = classes;
       this.search();
-      this.loadingResults = false;
+      this.loadingClasses = false;
     };
 
     const externalResults = (classes: ClassListItem[]) => {
       this.externalClasses = classes;
       this.search();
-      this.loadingResults = false;
+      this.loadingExternalClasses = false;
     };
-
 
     classService.getAllClasses(model).then(results);
 
@@ -228,6 +229,13 @@ class SearchClassTableController implements SearchController<ClassListItem> {
       }
       this.search();
     }));
+  }
+
+  get loadingResults(): boolean {
+    if (this.showOnlyExternalClasses) {
+      return this.loadingExternalClasses;
+    }
+    return this.loadingClasses;
   }
 
   get items() {
