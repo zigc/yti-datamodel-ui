@@ -1,46 +1,17 @@
 @import '~yti-common-ui/theme/variables';
 
-.scroller-main {
+div.table-content-container {
   height: 100%;
   width: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 
   table {
     width: 100%;
     border: 0;
+    margin-bottom: 0;
     table-layout: fixed;
-
-    thead {
-      tr {
-        background-color: white;
-        th {
-          border-top: 0;
-        }
-      }
-    }
-
-    tbody {
-      tr.search-result {
-        border-left: $active-indicator-width solid $white;
-        cursor: pointer;
-
-        &:hover, &.active {
-          border-left: $active-indicator-width solid $primary;
-        }
-
-        &.active {
-          background-color: $gray-200;
-        }
-
-        .glyph-icon {
-          color: $primary;
-        }
-
-        td {
-          border-top: 0;
-          border-bottom: 1px solid $gray-400;
-        }
-      }
-    }
 
     .name-col {
       width: 20%;
@@ -61,6 +32,60 @@
     .menu-col {
       width: 2%;
       vertical-align: top;
+    }
+  }
+
+  table.header-table {
+    flex: 0 0 auto;
+
+    thead {
+      tr {
+        background-color: white;
+
+        th {
+          border-top: 0;
+          overflow: hidden;
+
+          &.menu-col {
+            border-right: 17px solid white;
+          }
+        }
+      }
+    }
+  }
+
+  .scroller-component {
+    flex: 1 1 auto;
+
+    table.content-table {
+      tbody {
+        tr.search-result {
+          border-left: $active-indicator-width solid $white;
+          cursor: pointer;
+
+          &:hover, &.active {
+            border-left: $active-indicator-width solid $primary;
+          }
+
+          &.active {
+            background-color: $gray-200;
+          }
+
+          .glyph-icon {
+            color: $primary;
+          }
+
+          td {
+            border-top: 0;
+            border-bottom: 1px solid $gray-400;
+            overflow: hidden;
+          }
+
+          &:last-of-type td {
+            border-bottom: 1px solid white;
+          }
+        }
+      }
     }
   }
 }

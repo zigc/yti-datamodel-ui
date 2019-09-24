@@ -14,9 +14,9 @@ import { IPageInfo } from 'ngx-virtual-scroller';
   selector: 'app-search-class-table-modal-content',
   styleUrls: ['../../../styles/shared/searchTableModalContent.scss', './searchClassTableModalContent.scss'],
   template: `
-    <virtual-scroller #scroll class="scroller-main" [items]="searchResults" [enableUnequalChildrenSizes]="true" (vsEnd)="scrollEnd($event)">
-      <table class="table table-sm" width="100%">
-        <thead #header>
+    <div class="table-content-container">
+      <table class="table table-sm header-table" width="100%">
+        <thead>
         <tr>
           <th class="name-col">
             <sort-by-column-header [headerText]="'Name'"
@@ -51,66 +51,71 @@ import { IPageInfo } from 'ngx-virtual-scroller';
           <th class="menu-col"></th>
         </tr>
         </thead>
-        <tbody #container>
-        <tr *ngFor="let searchResult of scroll.viewPortItems; trackBy: trackBy"
-            [id]="searchResultID(searchResult)"
-            [ngClass]="{'search-result': true, 'active': isSelected(searchResult)}"
-            (click)="itemSelected.emit(searchResult)"
-            [title]="itemTitle(searchResult)"
-            key-control-selection>
-
-          <td class="name-col">
-            <div>
-              <app-ajax-loading-indicator-small class="pr-1"
-                                                *ngIf="isLoadingSelection(searchResult)"></app-ajax-loading-indicator-small>
-              <highlight [text]="searchResult.label" [context]="model" [search]="searchText"></highlight>
-            </div>
-            <a [href]="model.linkToResource(searchResult.id)" target="_blank"
-               [innerHTML]="searchResult.id.compact | highlight: searchText"></a>
-            <div class="pt-1">
-              <app-status [status]="searchResult.status"></app-status>
-            </div>
-          </td>
-          <td class="model-col">
-            <div>
-              <highlight [text]="searchResult.definedBy.label" [context]="model" [search]="searchText"></highlight>
-            </div>
-            <div *ngIf="searchResult.definedBy.normalizedType">
-              {{searchResult.definedBy.normalizedType | translate}}
-            </div>
-            <div>
-              <span class="information-domains">
-                <span class="badge badge-light" *ngFor="let infoDomain of searchResult.definedBy.classifications">
-                  {{showItemValue(infoDomain.label)}}
-                </span>
-              </span>
-            </div>
-          </td>
-          <td class="description-col">
-            <highlight [text]="searchResult.comment" [context]="model" [search]="searchText"></highlight>
-          </td>
-          <!-- Showing of super class is not implemented yet. -->
-          <!--
-          <td>
-            {{$ctrl.model.linkToResource(searchResult.superClassOf)}}
-          </td>
-          -->
-          <td class="modified-at-col">
-            {{showItemValue(searchResult.modifiedAt)}}
-          </td>
-          <td class="menu-col">
-            <a [id]="classInfoLinkID(searchResult)"
-               href="#"
-               *ngIf="isSelected(searchResult)"
-               (click)="showClassInfo()"
-               [title]="('Show class information') | translate">
-              <i class="fas fa-clone glyph-icon" aria-hidden="true"></i>
-            </a>
-          </td>
-        </tr>
-        </tbody>
       </table>
-    </virtual-scroller>
+      <virtual-scroller #scroll class="scroller-component" [items]="searchResults" [enableUnequalChildrenSizes]="true"
+                        (vsEnd)="scrollEnd($event)">
+        <table class="table table-sm content-table" width="100%">
+          <tbody #container>
+          <tr *ngFor="let searchResult of scroll.viewPortItems; trackBy: trackBy"
+              [id]="searchResultID(searchResult)"
+              [ngClass]="{'search-result': true, 'active': isSelected(searchResult)}"
+              (click)="itemSelected.emit(searchResult)"
+              [title]="itemTitle(searchResult)"
+              key-control-selection>
+
+            <td class="name-col">
+              <div>
+                <app-ajax-loading-indicator-small class="pr-1"
+                                                  *ngIf="isLoadingSelection(searchResult)"></app-ajax-loading-indicator-small>
+                <highlight [text]="searchResult.label" [context]="model" [search]="searchText"></highlight>
+              </div>
+              <a [href]="model.linkToResource(searchResult.id)" target="_blank"
+                 [innerHTML]="searchResult.id.compact | highlight: searchText"></a>
+              <div class="pt-1">
+                <app-status [status]="searchResult.status"></app-status>
+              </div>
+            </td>
+            <td class="model-col">
+              <div>
+                <highlight [text]="searchResult.definedBy.label" [context]="model" [search]="searchText"></highlight>
+              </div>
+              <div *ngIf="searchResult.definedBy.normalizedType">
+                {{searchResult.definedBy.normalizedType | translate}}
+              </div>
+              <div>
+                <span class="information-domains">
+                  <span class="badge badge-light" *ngFor="let infoDomain of searchResult.definedBy.classifications">
+                    {{showItemValue(infoDomain.label)}}
+                  </span>
+                </span>
+              </div>
+            </td>
+            <td class="description-col">
+              <highlight [text]="searchResult.comment" [context]="model" [search]="searchText"></highlight>
+            </td>
+            <!-- Showing of super class is not implemented yet. -->
+            <!--
+            <td>
+              {{$ctrl.model.linkToResource(searchResult.superClassOf)}}
+            </td>
+            -->
+            <td class="modified-at-col">
+              {{showItemValue(searchResult.modifiedAt)}}
+            </td>
+            <td class="menu-col">
+              <a [id]="classInfoLinkID(searchResult)"
+                 href="#"
+                 *ngIf="isSelected(searchResult)"
+                 (click)="showClassInfo()"
+                 [title]="('Show class information') | translate">
+                <i class="fas fa-clone glyph-icon" aria-hidden="true"></i>
+              </a>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </virtual-scroller>
+    </div>
   `
 })
 export class SearchClassTableModalContentComponent {
