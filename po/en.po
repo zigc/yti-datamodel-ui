@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2019-09-17 11:08+0300\n"
+"PO-Revision-Date: 2019-09-24 11:02+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -260,6 +260,9 @@ msgid "Create sub class"
 msgstr ""
 
 msgid "Create super class"
+msgstr ""
+
+msgid "Add namespace to model"
 msgstr ""
 
 msgid " without referencing concept"

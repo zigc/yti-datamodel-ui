@@ -4,7 +4,7 @@ import { EntityCreation, SearchConceptModal } from './searchConceptModal';
 import { ClassService, RelatedClass } from '../../services/classService';
 import { LanguageService, Localizer } from '../../services/languageService';
 import { EditableForm } from '../../components/form/editableEntityController';
-import { Exclusion } from '../../utils/exclusion';
+import { Exclusion, createDefinedByExclusion, combineExclusions, createClassTypeExclusion, createExistsExclusion } from '../../utils/exclusion';
 import { SearchController, SearchFilter } from '../../types/filter';
 import { AbstractClass, Class, ClassListItem } from '../../entities/class';
 import { Model } from '../../entities/model';
@@ -23,6 +23,7 @@ import { Language } from '../../types/language';
 import { DefinedByType, SortBy, ClassType } from '../../types/entity';
 import { infoDomainMatches } from '../../utils/entity';
 import { ShowClassInfoModal } from './showClassInfoModal';
+import { SearchClassType } from '../../types/component';
 
 export const noExclude = (_item: AbstractClass) => null;
 export const defaultTextForSelection = (_klass: Class) => 'Use class';
@@ -36,9 +37,10 @@ export class SearchClassTableModal {
   open(model: Model,
        exclude: Exclusion<AbstractClass>,
        filterExclude: Exclusion<AbstractClass> = exclude,
-       textForSelection: (klass: Optional<Class>) => string): IPromise<ExternalEntity | EntityCreation | Class> {
+       textForSelection: (klass: Optional<Class>) => string,
+       classesAssignedToModel: Set<string>): IPromise<ExternalEntity | EntityCreation | Class> {
 
-    return this.openModal(model, exclude, filterExclude, false, false, textForSelection);
+    return this.openModal(model, exclude, filterExclude, false, false, textForSelection, classesAssignedToModel);
   }
 
   openWithOnlySelection(model: Model,
@@ -55,7 +57,8 @@ export class SearchClassTableModal {
                     filterExclude: Exclusion<AbstractClass>,
                     defaultToCurrentModel: boolean,
                     onlySelection: boolean,
-                    textForSelection: (klass: Optional<Class>) => string) {
+                    textForSelection: (klass: Optional<Class>) => string,
+                    classesAssignedToModel?: Set<string>) {
 
     return this.$uibModal.open({
       template: require('./searchClassTableModal.html'),
@@ -69,7 +72,8 @@ export class SearchClassTableModal {
         filterExclude: () => filterExclude,
         defaultToCurrentModel: () => defaultToCurrentModel,
         onlySelection: () => onlySelection,
-        textForSelection: () => textForSelection
+        textForSelection: () => textForSelection,
+        classesAssignedToModel: () => classesAssignedToModel
       }
     }).result;
   }
@@ -122,10 +126,11 @@ class SearchClassTableController implements SearchController<ClassListItem> {
               public defaultToCurrentModel: boolean,
               public onlySelection: boolean,
               public textForSelection: (klass: Optional<Class>) => string,
+              public classesAssignedToModel: Set<string>,
               private searchConceptModal: SearchConceptModal,
               classificationService: ClassificationService,
               protected showClassInfoModal: ShowClassInfoModal,
-              modelService: ModelService) {
+              private modelService: ModelService) {
     'ngInject';
     this.localizer = languageService.createLocalizer(model);
     this.loadingClasses = true;
@@ -360,8 +365,33 @@ class SearchClassTableController implements SearchController<ClassListItem> {
     this.$uibModalInstance.close(new RelatedClass(item.id, 'iow:superClassOf'));
   }
 
+  addNamespaceToModel(item: AbstractClass) {
+
+    this.modelService.newModelRequirement(this.model, item.id.uri).then(response => {
+
+      this.modelService.getModelByPrefix(this.model.prefix).then(model => {
+        this.model.importedNamespaces = model.importedNamespaces;
+
+        if (item.normalizedType === 'class' || item.normalizedType === 'shape') {
+          if (this.model.isOfType('profile')) {
+            // profiles can create multiple shapes of single class so exists exclusion is not wanted
+            // profiles can create copy of shapes so type exclusion is not wanted
+            this.exclude = createDefinedByExclusion(this.model);
+          } else {
+            this.exclude = combineExclusions<AbstractClass>(
+              createClassTypeExclusion(SearchClassType.Class),
+              createDefinedByExclusion(this.model),
+              createExistsExclusion(this.classesAssignedToModel));
+          }
+        }
+
+        this.cannotConfirm = this.exclude(item);
+        this.selectItem(item);
+      });
+    });
+  }
+
   isModelProfile() {
     return this.model.isOfType('profile');
   }
 }
-

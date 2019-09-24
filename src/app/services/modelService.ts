@@ -1,13 +1,13 @@
 import { IHttpService, IPromise, IQService } from 'angular';
 import * as moment from 'moment';
 import { upperCaseFirst } from 'change-case';
-import { Uri, Urn } from 'app/entities/uri';
-import { Language } from 'app/types/language';
+import { Uri, Urn } from '../entities/uri';
+import { Language } from '../types/language';
 import { assertNever, requireDefined } from 'yti-common-ui/utils/object';
-import * as frames from 'app/entities/frames';
+import * as frames from '../entities/frames';
 import { FrameService } from './frameService';
-import { GraphData, KnownModelType } from 'app/types/entity';
-import { ImportedNamespace, Link, Model, ModelListItem } from 'app/entities/model';
+import { GraphData, KnownModelType } from '../types/entity';
+import { ImportedNamespace, Link, Model, ModelListItem } from '../entities/model';
 import { apiEndpointWithName } from './config';
 import { ClassService } from './classService';
 import { PredicateService } from './predicateService';
@@ -26,6 +26,8 @@ export interface ModelService {
   deleteModel(id: Uri): IPromise<any>;
 
   newModel(prefix: string, label: string, classifications: string[], organizations: string[], lang: Language[], type: KnownModelType, redirect?: Uri): IPromise<Model>;
+
+  newModelRequirement(model: Model, resourceUri: string): IPromise<any>;
 
   newLink(title: string, description: string, homepage: Uri, lang: Language): IPromise<Link>;
 
@@ -111,6 +113,13 @@ export class DefaultModelService implements ModelService {
       .then((model: Model) => {
         model.unsaved = true;
         return model;
+      });
+  }
+
+  newModelRequirement(model: Model, resourceUri: string): IPromise<any> {
+    return this.$http.put<{ identifier: Urn }>(apiEndpointWithName('newModelRequirement'), model.serialize(), { params: { model: model.id.uri, resource: resourceUri} })
+      .then(response => {
+        // TODO: Handling of the returned model
       });
   }
 

@@ -261,6 +261,9 @@ msgstr "Luo alaluokka"
 msgid "Create super class"
 msgstr "Luo yläluokka"
 
+msgid "Add namespace to model"
+msgstr "Lisää tietomalli riippuvuudeksi"
+
 msgid " without referencing concept"
 msgstr ""
 

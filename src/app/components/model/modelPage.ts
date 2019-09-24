@@ -426,11 +426,11 @@ export class ModelPageComponent implements ModelPageActions, ModelControllerServ
       }
     };
 
-    // CURRENT FEATURE: Search class modal
+    // OLD FEATURE: Search class modal
     // const searchClassModal = () => this.searchClassModal.open(this.model, exclusion, textForSelection);
-    
-    // NEW FEATURE: Search class table view modal, not complete yet. - eJira issue: YTI-304 (old Jira: YTI-546)
-    const searchClassModal = () => this.searchClassTableModal.open(this.model, exclusion, filterExclusion, textForSelection);
+
+    // CURRENT FEATURE: Search class table view modal - eJira issue: YTI-304 (old Jira: YTI-546)
+    const searchClassModal = () => this.searchClassTableModal.open(this.model, exclusion, filterExclusion, textForSelection, collectIds(this.classes));
 
     this.createOrAssignEntity(
       () => searchClassModal(),
@@ -462,10 +462,10 @@ export class ModelPageComponent implements ModelPageActions, ModelControllerServ
 
   private addPredicate(type: KnownPredicateType, exclusion: Exclusion<AbstractPredicate>, filterExclusion: Exclusion<AbstractPredicate>) {
 
-    // CURRENT FEATURE: Search predicate modal
+    // OLD FEATURE: Search predicate modal
     // const searchPredicateModal = () => this.searchPredicateModal.openAddPredicate(this.model, type, exclusion);
-    
-    // NEW FEATURE: Search predicate table modal
+
+    // CURRENT FEATURE: Search predicate table view modal
     const searchPredicateModal = () => this.searchPredicateTableModal.openAddPredicate(this.model, type, exclusion, filterExclusion);
 
     this.createOrAssignEntity(

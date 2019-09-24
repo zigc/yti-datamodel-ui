@@ -253,6 +253,9 @@ msgstr ""
 msgid "Create super class"
 msgstr ""
 
+msgid "Add namespace to model"
+msgstr ""
+
 msgid " without referencing concept"
 msgstr ""
 

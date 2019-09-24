@@ -83,6 +83,10 @@ export class InteractiveHelpModelService implements ModelService, ResetableServi
     });
   }
 
+  newModelRequirement(model: Model, resourceUri: string): IPromise<any> {
+    throw new Error('newModelRequirement is not yet supported operation in help');
+  }
+
   newLink(title: string, description: string, homepage: Uri, lang: Language): IPromise<Link> {
     throw new Error('newLink is not yet supported operation in help');
   }
