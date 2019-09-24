@@ -371,6 +371,7 @@ class SearchClassTableController implements SearchController<ClassListItem> {
 
       this.modelService.getModelByPrefix(this.model.prefix).then(model => {
         this.model.importedNamespaces = model.importedNamespaces;
+        this.model.context = model.context;
 
         if (item.normalizedType === 'class' || item.normalizedType === 'shape') {
           if (this.model.isOfType('profile')) {
