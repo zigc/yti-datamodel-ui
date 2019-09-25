@@ -466,7 +466,7 @@ export class ModelPageComponent implements ModelPageActions, ModelControllerServ
     // const searchPredicateModal = () => this.searchPredicateModal.openAddPredicate(this.model, type, exclusion);
 
     // CURRENT FEATURE: Search predicate table view modal
-    const searchPredicateModal = () => this.searchPredicateTableModal.openAddPredicate(this.model, type, exclusion, filterExclusion);
+    const searchPredicateModal = () => this.searchPredicateTableModal.openAddPredicate(this.model, type, exclusion, filterExclusion, collectIds([this.attributes, this.associations]));
 
     this.createOrAssignEntity(
       () => searchPredicateModal(),

@@ -146,5 +146,13 @@
       <span class="fas fa-exclamation-circle" aria-hidden="true"></span>
       <span>{{$ctrl.cannotConfirm | translate}}</span>
     </div>
+
+    <button id="add_namespace_to_model_button"
+            class="btn btn-secondary-action"
+            ng-click="$ctrl.addNamespaceToModel($ctrl.selectedItem)"
+            ng-show="$ctrl.cannotConfirm"
+            translate>
+      Add namespace to model
+    </button>
   </div>
 </form>

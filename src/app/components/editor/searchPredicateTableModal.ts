@@ -7,7 +7,7 @@ import { LanguageService, Localizer } from '../../services/languageService';
 import { EditableForm } from '../../components/form/editableEntityController';
 import { infoDomainMatches } from '../../utils/entity';
 import { contains } from 'yti-common-ui/utils/array';
-import { Exclusion } from '../../utils/exclusion';
+import { Exclusion, combineExclusions, createExistsExclusion, createDefinedByExclusion } from '../../utils/exclusion';
 import { SearchFilter, SearchController } from '../../types/filter';
 import { PredicateListItem, AbstractPredicate, Predicate } from '../../entities/predicate';
 import { Model } from '../../entities/model';
@@ -33,9 +33,10 @@ export class SearchPredicateTableModal {
   }
 
   private openModal(model: Model,
-                    type: KnownPredicateType|null,
+                    type: KnownPredicateType | null,
                     exclude: Exclusion<AbstractPredicate>,
-                    filterExclude: Exclusion<AbstractPredicate>) {
+                    filterExclude: Exclusion<AbstractPredicate>,
+                    predicatesAssignedToModel: Set<string>) {
     return this.$uibModal.open({
       template: require('./searchPredicateTableModal.html'),
       size: 'xl',
@@ -46,7 +47,8 @@ export class SearchPredicateTableModal {
         model: () => model,
         type: () => type,
         exclude: () => exclude,
-        filterExclude: () => filterExclude
+        filterExclude: () => filterExclude,
+        predicatesAssignedToModel: () => predicatesAssignedToModel
       }
     }).result;
   }
@@ -54,8 +56,9 @@ export class SearchPredicateTableModal {
   openAddPredicate(model: Model,
                    type: KnownPredicateType,
                    exclude: Exclusion<AbstractPredicate> = noExclude,
-                   filterExclude: Exclusion<AbstractPredicate> = exclude): IPromise<EntityCreation|Predicate> {
-    return this.openModal(model, type, exclude, filterExclude);
+                   filterExclude: Exclusion<AbstractPredicate> = exclude,
+                   predicatesAssignedToModel: Set<string>): IPromise<EntityCreation | Predicate> {
+    return this.openModal(model, type, exclude, filterExclude, predicatesAssignedToModel);
   }
 }
 
@@ -99,6 +102,7 @@ class SearchPredicateTableController implements SearchController<PredicateListIt
               public type: KnownPredicateType | null,
               public exclude: Exclusion<PredicateListItem>,
               public filterExclude: Exclusion<PredicateListItem>,
+              public predicatesAssignedToModel: Set<string>,
               private predicateService: PredicateService,
               languageService: LanguageService,
               private searchConceptModal: SearchConceptModal,
@@ -106,7 +110,7 @@ class SearchPredicateTableController implements SearchController<PredicateListIt
               private displayItemFactory: DisplayItemFactory,
               classificationService: ClassificationService,
               protected showPredicateInfoModal: ShowPredicateInfoModal,
-              modelService: ModelService) {
+              private modelService: ModelService) {
     'ngInject';
     this.localizer = languageService.createLocalizer(model);
     this.loadingResults = true;
@@ -302,5 +306,23 @@ class SearchPredicateTableController implements SearchController<PredicateListIt
     } else {
       return null;
     }
+  }
+
+  addNamespaceToModel(item: AbstractPredicate) {
+
+    this.modelService.newModelRequirement(this.model, item.id.uri).then(response => {
+
+      this.modelService.getModelByPrefix(this.model.prefix).then(model => {
+        this.model.importedNamespaces = model.importedNamespaces;
+        this.model.context = model.context;
+
+        this.exclude = combineExclusions<AbstractPredicate>(
+          createExistsExclusion(this.predicatesAssignedToModel),
+          createDefinedByExclusion(this.model));
+
+        this.cannotConfirm = this.exclude(item);
+        this.selectItem(item);
+      });
+    });
   }
 }
