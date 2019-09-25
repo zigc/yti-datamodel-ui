@@ -31,7 +31,7 @@ export const PrefixInputDirective: IDirectiveFactory = () => {
         const allowTechnical = $scope.allowTechnical;
         const reservedPrefixes: string[] = $scope.reservedPrefixes || ($scope.reservedPrefixesGetter ? $scope.reservedPrefixesGetter() : []);
 
-        if (reservedPrefixes.includes(prefix)) {
+        if (reservedPrefixes.includes(prefix) && prefix !== '') {
           return false;
         }
 
