@@ -20,7 +20,7 @@
     <span class="fas fa-info-circle info" uib-tooltip="{{'INFO_TEXT_FRONTPAGE_SEARCH' | translate}}"></span>
   </div>
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-6 mb-3">
       <div class="input-group input-group-lg input-group-search">
         <input id="front_page_search_input"
                class="form-control"
@@ -30,15 +30,10 @@
                placeholder="{{'Search term' | translate}}"/>
       </div>
     </div>
-    <div class="col-md-6 align-self-center d-flex align-items-center extend-search-selections">
+    <div class="col-md-6 mb-3 align-self-center d-flex align-items-center extend-search-selections">
       <span translate>Extend search</span>:
       <input class="ml-3" id="search_resources_checkbox" type="checkbox" ng-model="$ctrl.searchResources"/>
       <label class="ml-1" for="search_resources_checkbox" translate>to content</label>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-6 mb-3">
-      <a id="advanced_search_link" href="#" ng-click="$ctrl.openAdvancedSearch()" translate>Advanced search</a>
     </div>
   </div>
 

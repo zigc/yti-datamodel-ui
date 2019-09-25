@@ -1,7 +1,6 @@
 import { ILocationService, IScope } from 'angular';
 import { LocationService } from '../services/locationService';
 import { LanguageService } from '../services/languageService';
-import { AdvancedSearchModal } from './advancedSearchModal';
 import { ApplicationComponent } from './application';
 import { HelpProvider } from './common/helpProvider';
 import { FrontPageHelpService } from '../help/providers/frontPageHelpService';
@@ -80,7 +79,6 @@ export class FrontPageComponent implements HelpProvider {
               private locationService: LocationService,
               private modelService: ModelService,
               private languageService: LanguageService,
-              private advancedSearchModal: AdvancedSearchModal,
               private frontPageHelpService: FrontPageHelpService,
               private classificationService: ClassificationService,
               private organizationService: OrganizationService,
@@ -181,11 +179,6 @@ export class FrontPageComponent implements HelpProvider {
 
   selectResource(model: IndexModel, resource: IndexResource) {
     this.$location.url(getInternalResourceUrl(model, resource));
-  }
-
-  openAdvancedSearch() {
-    this.advancedSearchModal.open()
-      .then(searchResult => this.go(searchResult), modalCancelHandler);
   }
 
   canAddModel() {

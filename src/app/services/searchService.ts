@@ -17,17 +17,6 @@ export class SearchService {
       .then(response => this.deserializeSearch(response.data!));
   }
 
-  searchAnything(search: string, language?: Language): IPromise<SearchResult[]> {
-    return this.$http.get<GraphData>(apiEndpointWithName('search'), {
-        params: {
-          graph: 'default',
-          search,
-          lang: language
-        }
-      })
-      .then(response => this.deserializeSearch(response.data!));
-  }
-
   private deserializeSearch(data: GraphData): IPromise<SearchResult[]> {
     return this.frameService.frameAndMapArray(data, searchResultFrame(data), () => SearchResult);
   }
