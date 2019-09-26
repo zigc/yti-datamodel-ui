@@ -349,8 +349,8 @@ class SearchClassTableController implements SearchController<ClassListItem> {
     this.selection = new ExternalEntity(this.localizer.language, this.searchText, 'class');
   }
 
-  showActions(item: AbstractClass) {
-    return item ? !this.onlySelection && !item.isOfType('shape') && !item.definedBy.isOfType('standard') : false;
+  showActions(item: Class | ExternalEntity | null) {
+    return item && item instanceof Class ? !this.onlySelection && !item.isOfType('shape') && !item.definedBy.isOfType('standard') : false;
   }
 
   copyClass(item: AbstractClass) {
