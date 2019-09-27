@@ -123,12 +123,6 @@ msgstr "seuraava"
 msgid "close"
 msgstr "sulje"
 
-msgid "Advanced search"
-msgstr "Tarkennettu haku"
-
-msgid "No search results"
-msgstr "Ei hakutuloksia"
-
 msgid "Data Vocabularies"
 msgstr "Tietomallit"
 
@@ -500,6 +494,9 @@ msgstr "Käytä valintaa"
 
 msgid "Search vocabularies"
 msgstr "Hae sanastoja"
+
+msgid "No search results"
+msgstr "Ei hakutuloksia"
 
 msgid "Start help"
 msgstr "Aloita ohje"
@@ -1936,8 +1933,8 @@ msgstr "Attribuutit"
 msgid "Deep association hit"
 msgstr "Assosiaatiot"
 
-msgid "Specialized from class info"
-msgstr "Luokka jota soveltamisprofiilissa on tarkennettu"
+msgid "Example"
+msgstr "Esimerkki"
 
 msgid "Editorial note"
 msgstr "Muokkaajan kommentti"
@@ -2171,11 +2168,11 @@ msgstr ""
 msgid "Specialized from class"
 msgstr "Tarkennettu luokasta"
 
+msgid "Specialized from class info"
+msgstr "Luokka jota soveltamisprofiilissa on tarkennettu"
+
 msgid "Definition info"
 msgstr "Käsitteen määritelmä"
-
-msgid "Example"
-msgstr "Esimerkki"
 
 msgid "Example info"
 msgstr "Esimerkkiarvo ominaisuudelle"
@@ -2421,8 +2418,20 @@ msgstr ""
 "voidaan tuottaa oikein. API polkuun voidaan määritellä polku- ({}) tai "
 "kyselyparametreja (?&) esimerkiksi: /org/{id}/person?name&role"
 
+msgid "Contact label"
+msgstr "Yhteydenotto"
+
+msgid "Contact label info"
+msgstr ""
+"Tietomallin palautekanavan kuvaus. Älä käytä henkilökohtaista "
+"sähköpostiosoitetta. Suositeltava muoto esimerkiksi: \"Tietomallityöryhmän "
+"ylläpito: yllapito@example.org\""
+
 msgid "owl:DatatypeProperty"
 msgstr "Attribuutti"
 
 msgid "owl:ObjectProperty"
 msgstr "Assosiaatio"
+
+#~ msgid "Advanced search"
+#~ msgstr "Tarkennettu haku"

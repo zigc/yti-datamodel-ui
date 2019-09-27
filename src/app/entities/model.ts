@@ -94,7 +94,8 @@ export class Model extends AbstractModel {
     language:           { name: 'language',     serializer: list<Language>(languageSerializer, ['fi', 'en']) },
     modifiedAt:         { name: 'modified',     serializer: optional(dateSerializer) },
     createdAt:          { name: 'created',      serializer: optional(dateSerializer) },
-    useContext:         { name: 'useContext',   serializer: valueOrDefault(identitySerializer<UseContext>(), 'InformationDescription') }
+    useContext:         { name: 'useContext',   serializer: valueOrDefault(identitySerializer<UseContext>(), 'InformationDescription') },
+    contact:            { name: 'contact',      serializer: localizableSerializer }
   };
 
   comment: Localizable;
@@ -112,6 +113,7 @@ export class Model extends AbstractModel {
   modifiedAt: Moment|null;
   createdAt: Moment|null;
   useContext: UseContext;
+  contact: Localizable;
 
   constructor(graph: any, context: any, frame: any) {
     super(graph, context, frame);

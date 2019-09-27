@@ -115,12 +115,6 @@ msgstr ""
 msgid "close"
 msgstr ""
 
-msgid "Advanced search"
-msgstr ""
-
-msgid "No search results"
-msgstr ""
-
 msgid "Data Vocabularies"
 msgstr ""
 
@@ -470,6 +464,9 @@ msgid "Use selection"
 msgstr ""
 
 msgid "Search vocabularies"
+msgstr ""
+
+msgid "No search results"
 msgstr ""
 
 msgid "Start help"
@@ -1808,7 +1805,7 @@ msgstr ""
 msgid "Deep association hit"
 msgstr ""
 
-msgid "Specialized from class info"
+msgid "Example"
 msgstr ""
 
 msgid "Editorial note"
@@ -2024,10 +2021,10 @@ msgstr ""
 msgid "Specialized from class"
 msgstr ""
 
-msgid "Definition info"
+msgid "Specialized from class info"
 msgstr ""
 
-msgid "Example"
+msgid "Definition info"
 msgstr ""
 
 msgid "Example info"
@@ -2250,6 +2247,12 @@ msgid "API path"
 msgstr ""
 
 msgid "API path info"
+msgstr ""
+
+msgid "Contact label"
+msgstr ""
+
+msgid "Contact label info"
 msgstr ""
 
 msgid "owl:DatatypeProperty"

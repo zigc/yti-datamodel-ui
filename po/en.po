@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2019-09-24 11:02+0300\n"
+"PO-Revision-Date: 2019-09-27 13:55+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -122,12 +122,6 @@ msgid "next"
 msgstr ""
 
 msgid "close"
-msgstr ""
-
-msgid "Advanced search"
-msgstr ""
-
-msgid "No search results"
 msgstr ""
 
 msgid "Data Vocabularies"
@@ -499,6 +493,9 @@ msgid "Use selection"
 msgstr ""
 
 msgid "Search vocabularies"
+msgstr ""
+
+msgid "No search results"
 msgstr ""
 
 msgid "Start help"
@@ -1908,8 +1905,8 @@ msgstr "Attributes"
 msgid "Deep association hit"
 msgstr "Associations"
 
-msgid "Specialized from class info"
-msgstr "Reference to the Class of the Shape"
+msgid "Example"
+msgstr ""
 
 msgid "Editorial note"
 msgstr ""
@@ -2132,11 +2129,11 @@ msgstr ""
 msgid "Specialized from class"
 msgstr ""
 
+msgid "Specialized from class info"
+msgstr "Reference to the Class of the Shape"
+
 msgid "Definition info"
 msgstr "Definition of the concept"
-
-msgid "Example"
-msgstr ""
 
 msgid "Example info"
 msgstr "Example value for the property"
@@ -2374,6 +2371,14 @@ msgstr ""
 "Define at least one path for some class to export valid Open API "
 "specification. Paths can include path ({}) or query (?&) parameters, for "
 "example: /org/{id}/?name&role"
+
+msgid "Contact label"
+msgstr "Contact"
+
+msgid "Contact label info"
+msgstr ""
+"Description for the feedback channel. Do not use personal email addresses. "
+"Preferred form for example: \"Data modeling group: maintain@example.org\""
 
 msgid "owl:DatatypeProperty"
 msgstr "Attribute"
