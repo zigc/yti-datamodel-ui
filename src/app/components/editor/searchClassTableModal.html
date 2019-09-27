@@ -10,8 +10,8 @@
     <a><i id="close_class_table_modal_button" ng-click="$dismiss('cancel')" class="fas fa-times"></i></a>
   </div>
 
-  <div class="modal-body full-height-table">
-    <div class="row mb-2">
+  <div class="modal-body modal-body-min-40x90">
+    <div class="row mb-2 flex-shrink-0">
       <div class="col-12">
 
         <text-filter class="pull-left"
@@ -50,7 +50,7 @@
                        exclude="$ctrl.filterExclude"></excluded-filter>
     </div>
 
-    <div class="row mb-2">
+    <div class="row mb-2 flex-shrink-0">
       <div class="col-12">
 
         <model-filter class="pull-left mr-2"
@@ -100,7 +100,7 @@
       </div>
     </div>
 
-    <div ng-if="$ctrl.isSelectionExternalEntity()">
+    <div class="flex-shrink-0" ng-if="$ctrl.isSelectionExternalEntity()">
 
       <h4 class="mt-4" translate>Create shape from external URI</h4>
 
@@ -134,21 +134,15 @@
       <h4 class="mt-4" translate>Search existing class</h4>
     </div>
 
-    <div class="row full-height">
-      <div class="col-md-12">
-        <div class="content-box">
-          <div class="search-results-table-container">
-            <ajax-loading-indicator ng-if="$ctrl.loadingResults"></ajax-loading-indicator>
-            <app-search-class-table-modal-content ng-if="!$ctrl.loadingResults" [sort-by]="$ctrl.sortBy" [model]="$ctrl.model"
-                                                  [filter-exclude]="$ctrl.filterExclude"
-                                                  [search-text]="$ctrl.searchText" [search-results]="$ctrl.searchResults"
-                                                  [selected-item]="$ctrl.selectedItem" [selection]="$ctrl.selection"
-                                                  (item-selected)="$ctrl.selectItem($event)"
-                                                  [exclude]="$ctrl.exclude">
-            </app-search-class-table-modal-content>
-          </div>
-        </div>
-      </div>
+    <div class="content-box search-results-table-container">
+      <ajax-loading-indicator ng-if="$ctrl.loadingResults"></ajax-loading-indicator>
+      <app-search-class-table-modal-content ng-if="!$ctrl.loadingResults" [sort-by]="$ctrl.sortBy" [model]="$ctrl.model"
+                                            [filter-exclude]="$ctrl.filterExclude"
+                                            [search-text]="$ctrl.searchText" [search-results]="$ctrl.searchResults"
+                                            [selected-item]="$ctrl.selectedItem" [selection]="$ctrl.selection"
+                                            (item-selected)="$ctrl.selectItem($event)"
+                                            [exclude]="$ctrl.exclude">
+      </app-search-class-table-modal-content>
     </div>
   </div>
 

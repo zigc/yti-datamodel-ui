@@ -40,6 +40,7 @@ export class SearchPredicateTableModal {
     return this.$uibModal.open({
       template: require('./searchPredicateTableModal.html'),
       size: 'xl',
+      windowClass: 'modal-full-height',
       controller: SearchPredicateTableController,
       controllerAs: '$ctrl',
       backdrop: true,

@@ -12,8 +12,8 @@
     <a><i ng-click="$dismiss('cancel')" class="fas fa-times"></i></a>
   </div>
 
-  <div class="modal-body full-height-table">
-    <div class="row mb-2">
+  <div class="modal-body modal-body-min-40x90">
+    <div class="row mb-2 flex-shrink-0">
       <div class="col-12">
 
         <text-filter class="pull-left"
@@ -34,7 +34,7 @@
       </div>
     </div>
 
-    <div class="row mb-2">
+    <div class="row mb-2 flex-shrink-0">
       <div class="col-12">
         <model-filter class="pull-left mr-2"
                       search-controller="$ctrl"
@@ -73,29 +73,17 @@
       </div>
     </div>
 
-    <div class="row full-height">
-
-      <div class="col-md-12">
-
-        <div class="content-box">
-
-          <div class="search-results-table-container">
-
-            <ajax-loading-indicator ng-if="$ctrl.loadingResults"></ajax-loading-indicator>
-
-            <app-search-predicate-table-modal-content ng-if="!$ctrl.loadingResults" [sort-by]="$ctrl.sortBy" [model]="$ctrl.model"
-                                                  [filter-exclude]="$ctrl.filterExclude"
-                                                  [search-text]="$ctrl.searchText" [search-results]="$ctrl.searchResults"
-                                                  [selected-item]="$ctrl.selectedItem" [selection]="$ctrl.selection"
-                                                  (item-selected)="$ctrl.selectItem($event)"
-                                                  [exclude]="$ctrl.exclude"
-                                                  [type]="$ctrl.type">
-            </app-search-predicate-table-modal-content>
-          </div>
-        </div>
-      </div>
+    <div class="content-box search-results-table-container">
+      <ajax-loading-indicator ng-if="$ctrl.loadingResults"></ajax-loading-indicator>
+      <app-search-predicate-table-modal-content ng-if="!$ctrl.loadingResults" [sort-by]="$ctrl.sortBy" [model]="$ctrl.model"
+                                                [filter-exclude]="$ctrl.filterExclude"
+                                                [search-text]="$ctrl.searchText" [search-results]="$ctrl.searchResults"
+                                                [selected-item]="$ctrl.selectedItem" [selection]="$ctrl.selection"
+                                                (item-selected)="$ctrl.selectItem($event)"
+                                                [exclude]="$ctrl.exclude"
+                                                [type]="$ctrl.type">
+      </app-search-predicate-table-modal-content>
     </div>
-
   </div>
 
   <div class="modal-footer">
@@ -109,15 +97,16 @@
     </button>
 
     <button id="create_predicate_button"
-        type="button"
-        class="btn btn-secondary-action"
-        ng-click="$ctrl.createNew($ctrl.type)"
-        ng-show="$ctrl.canAddNew()">
+            type="button"
+            class="btn btn-secondary-action"
+            ng-click="$ctrl.createNew($ctrl.type)"
+            ng-show="$ctrl.canAddNew()">
       + {{'New ' + $ctrl.type | translate}}
     </button>
 
     <div class="pull-right dropup" uib-dropdown>
-      <button id="{{'predicate_' + $ctrl.selection.id + '_actions_button'}}" class="btn btn-language dropdown-toggle" ng-disabled="!$ctrl.isSelectionPredicate()" uib-dropdown-toggle>
+      <button id="{{'predicate_' + $ctrl.selection.id + '_actions_button'}}" class="btn btn-language dropdown-toggle"
+              ng-disabled="!$ctrl.isSelectionPredicate()" uib-dropdown-toggle>
         <span translate>Actions</span>
       </button>
 

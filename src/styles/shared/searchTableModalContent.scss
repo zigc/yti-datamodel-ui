@@ -1,14 +1,11 @@
 @import '~yti-common-ui/theme/variables';
 
 div.table-content-container {
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
   display: flex;
   flex-direction: column;
+  height: 100%;
 
   table {
-    width: 100%;
     border: 0;
     margin-bottom: 0;
     table-layout: fixed;

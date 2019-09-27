@@ -63,6 +63,7 @@ export class SearchClassTableModal {
     return this.$uibModal.open({
       template: require('./searchClassTableModal.html'),
       size: 'xl',
+      windowClass: 'modal-full-height',
       controller: SearchClassTableController,
       controllerAs: '$ctrl',
       backdrop: true,

@@ -15,7 +15,7 @@ import { IPageInfo } from 'ngx-virtual-scroller';
   styleUrls: ['../../../styles/shared/searchTableModalContent.scss', './searchPredicateTableModalContent.scss'],
   template: `
     <div class="table-content-container">
-      <table class="table table-sm header-table" width="100%">
+      <table class="table table-sm header-table">
         <thead>
         <tr>
           <th class="name-col">
@@ -52,7 +52,7 @@ import { IPageInfo } from 'ngx-virtual-scroller';
       </table>
       <virtual-scroller #scroll class="scroller-component" [items]="searchResults" [enableUnequalChildrenSizes]="true"
                         (vsEnd)="scrollEnd($event)" [useMarginInsteadOfTranslate]="true">
-        <table class="table table-sm content-table" width="100%">
+        <table class="table table-sm content-table">
           <tbody #container>
           <tr *ngFor="let searchResult of scroll.viewPortItems; trackBy: trackBy"
               [id]="searchResultID(searchResult)"
