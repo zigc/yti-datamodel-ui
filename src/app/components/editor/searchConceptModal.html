@@ -105,11 +105,13 @@
   <div class="modal-footer">
 
     <button type="button"
+            id="searchConceptModalConfirmButton"
             class="btn btn-action confirm"
             ng-click="$ctrl.confirm()"
             ng-disabled="!$ctrl.selection || form.$invalid || form.$pending">{{$ctrl.buttonTitle | translate}}</button>
 
     <button type="button"
+            id="searchConceptModalCancelButton"
             class="btn btn-link cancel"
             ng-click="$ctrl.close()" translate>Cancel</button>
   </div>
