@@ -53,6 +53,7 @@ div.table-content-container {
 
   .scroller-component {
     flex: 1 1 auto;
+    overflow-y: scroll;
 
     table.content-table {
       tbody {
