@@ -127,7 +127,8 @@
 
   <div class="modal-footer">
 
-    <button type="button"
+    <button id="confirm_predicate_button"
+            type="button"
             class="btn btn-action confirm"
             ng-click="$ctrl.confirm()"
             ng-disabled="!$ctrl.selection || $ctrl.cannotConfirm || (form.editing && (form.$invalid || form.$pending)) || $ctrl.isExternalPredicatePending()">
@@ -135,7 +136,7 @@
       : (!$ctrl.typeSelectable ? 'Use ' + $ctrl.type : 'Use selection')) | translate}}
     </button>
 
-    <button type="button" class="btn btn-link cancel" ng-click="$ctrl.close()" translate>Cancel</button>
+    <button id="cancel_predicate_button" type="button" class="btn btn-link cancel" ng-click="$ctrl.close()" translate>Cancel</button>
 
     <div class="alert alert-danger" role="alert" ng-show="$ctrl.cannotConfirm">
       <span class="fas fa-exclamation-circle" aria-hidden="true"></span>
