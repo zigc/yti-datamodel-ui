@@ -231,6 +231,12 @@ visualization-view ajax-loading-indicator {
     margin: 0;
     min-height: 0px;
     height: 0px; // for IE
+    overflow-x: auto;
+
+    // Hack to fix virtual scrolled table width when window is so small then "min width" kicks in.
+    .table-content-container .scroller-component .scrollable-content {
+      max-width: none;
+    }
   }
 
   .search-results, form {
@@ -245,11 +251,6 @@ visualization-view ajax-loading-indicator {
         color: $primary;
       }
     }
-  }
-
-  &.modal-body-min-40x90 {
-    min-width: 900px;
-    min-height: 400px;
   }
 }
 
@@ -999,4 +1000,11 @@ body.visualization-maximized {
 
 .primary-color-item {
   color: $primary;
+}
+
+.limit-select-widths select {
+  max-width: 17rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

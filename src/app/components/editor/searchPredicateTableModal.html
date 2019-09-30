@@ -12,7 +12,7 @@
     <a><i ng-click="$dismiss('cancel')" class="fas fa-times"></i></a>
   </div>
 
-  <div class="modal-body modal-body-min-40x90">
+  <div class="modal-body" style="min-height: 400px;">
     <div class="row mb-2 flex-shrink-0">
       <div class="col-12">
 
@@ -34,21 +34,21 @@
       </div>
     </div>
 
-    <div class="row mb-2 flex-shrink-0">
-      <div class="col-12">
-        <model-filter class="pull-left mr-2"
+    <div class="row flex-shrink-0">
+      <div class="col-12 limit-select-widths">
+        <model-filter class="pull-left mr-2 mb-2"
                       search-controller="$ctrl"
                       type="predicate"
                       model="$ctrl.model"></model-filter>
 
-        <type-filter class="pull-left mr-2"
+        <type-filter class="pull-left mr-2 mb-2"
                      search-controller="$ctrl"
                      ng-show="$ctrl.typeSelectable"
                      label="Predicate type"
                      default-type="$ctrl.type"></type-filter>
 
         <select id="predicate_information_domain_filter_dropdown"
-                class="form-control pull-left mr-2"
+                class="form-control pull-left mr-2 mb-2"
                 style="width: auto"
                 ng-model="$ctrl.showInfoDomain"
                 ng-options="(infoDomain.label | translateValue: $ctrl.model) for infoDomain in $ctrl.infoDomains">
@@ -56,7 +56,7 @@
         </select>
 
         <select id="predicate_model_type_filter_dropdown"
-                class="form-control pull-left mr-2"
+                class="form-control pull-left mr-2 mb-2"
                 style="width: auto"
                 ng-model="$ctrl.showModelType"
                 ng-options="(modelType | translate) for modelType in $ctrl.modelTypes">
@@ -64,7 +64,7 @@
         </select>
 
         <select id="predicate_status_filter_dropdown"
-                class="form-control pull-left"
+                class="form-control pull-left mb-2"
                 style="width: auto"
                 ng-model="$ctrl.showStatus"
                 ng-options="(status | translate) for status in $ctrl.statuses">

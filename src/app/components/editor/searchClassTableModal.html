@@ -10,7 +10,7 @@
     <a><i id="close_class_table_modal_button" ng-click="$dismiss('cancel')" class="fas fa-times"></i></a>
   </div>
 
-  <div class="modal-body modal-body-min-40x90">
+  <div class="modal-body" style="min-height: 400px;">
     <div class="row mb-2 flex-shrink-0">
       <div class="col-12">
 
@@ -50,10 +50,10 @@
                        exclude="$ctrl.filterExclude"></excluded-filter>
     </div>
 
-    <div class="row mb-2 flex-shrink-0">
-      <div class="col-12">
+    <div class="row flex-shrink-0">
+      <div class="col-12 limit-select-widths">
 
-        <model-filter class="pull-left mr-2"
+        <model-filter class="pull-left mr-2 mb-2"
                       search-controller="$ctrl"
                       type="class"
                       model="$ctrl.model"
@@ -61,7 +61,7 @@
                       hide-this-model='$ctrl.showOnlyExternalClasses'></model-filter>
 
         <select id="class_information_domain_filter_dropdown"
-                class="form-control pull-left mr-2"
+                class="form-control pull-left mr-2 mb-2"
                 style="width: auto"
                 ng-disabled="$ctrl.showOnlyExternalClasses"
                 ng-model="$ctrl.showInfoDomain"
@@ -70,7 +70,7 @@
         </select>
 
         <select id="class_type_filter_dropdown"
-                class="form-control pull-left mr-2"
+                class="form-control pull-left mr-2 mb-2"
                 style="width: auto"
                 ng-disabled="$ctrl.showOnlyExternalClasses"
                 ng-model="$ctrl.showClassType"
@@ -80,7 +80,7 @@
 
         <!-- This is not in use at the moment. -->
         <select id="class_model_type_filter_dropdown"
-                class="form-control pull-left mr-2"
+                class="form-control pull-left mr-2 mb-2"
                 style="width: auto"
                 ng-if="false"
                 ng-disabled="$ctrl.showOnlyExternalClasses"
@@ -90,7 +90,7 @@
         </select>
 
         <select id="class_status_filter_dropdown"
-                class="form-control pull-left"
+                class="form-control pull-left mb-2"
                 style="width: auto"
                 ng-disabled="$ctrl.showOnlyExternalClasses"
                 ng-model="$ctrl.showStatus"
