@@ -41,7 +41,7 @@ import { IPageInfo } from 'ngx-virtual-scroller';
           </th>
           <!-- Showing of super class is not implemented yet. -->
           <!-- <th style="width: 20%" translate>Super class</th> -->
-          <th class="modified-at-col">
+          <th *ngIf="!showOnlyExternalClasses" class="modified-at-col">
             <sort-by-column-header [headerText]="'Modified at'"
                                    [columnName]="'modifiedAt'"
                                    [model]="model"
@@ -99,7 +99,7 @@ import { IPageInfo } from 'ngx-virtual-scroller';
               {{$ctrl.model.linkToResource(searchResult.superClassOf)}}
             </td>
             -->
-            <td class="modified-at-col">
+            <td *ngIf="!showOnlyExternalClasses" class="modified-at-col">
               {{showItemValue(searchResult.modifiedAt)}}
             </td>
             <td class="menu-col">
@@ -127,6 +127,7 @@ export class SearchClassTableModalContentComponent {
   @Input() exclude: Exclusion<AbstractClass>;
   @Input() selectedItem?: ClassListItem;
   @Input() selection?: Class | ExternalEntity;
+  @Input() showOnlyExternalClasses: boolean;
   @Output() itemSelected = new EventEmitter<ClassListItem | undefined>();
   @Output() loadMore = new EventEmitter<number>();
 
