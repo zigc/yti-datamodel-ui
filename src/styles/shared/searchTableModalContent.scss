@@ -21,7 +21,6 @@ div.table-content-container {
     }
 
     .description-col {
-      width: 50%;
     }
 
     .modified-at-col {
@@ -29,27 +28,37 @@ div.table-content-container {
     }
 
     .menu-col {
-      width: 2%;
+      width: 25px;
       vertical-align: top;
     }
   }
 
-  table.header-table {
-    flex: 0 0 auto;
+  .header-table-container {
+    display: flex;
+    border-bottom: 2px solid $gray-400;
 
-    thead {
-      tr {
-        background-color: white;
+    table.header-table {
+      flex: 0 1 auto;
 
-        th {
-          border-top: 0;
-          overflow: hidden;
+      thead {
+        tr {
+          background-color: white;
 
-          &.menu-col {
-            border-right: 17px solid white;
+          th {
+            border-top: 0;
+            border-bottom: 0;
+            overflow: hidden;
+
+            button {
+              padding-left: 0px;
+            }
           }
         }
       }
+    }
+
+    .header-table-padding {
+      flex: 0 0 17px;
     }
   }
 

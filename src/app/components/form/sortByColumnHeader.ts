@@ -19,7 +19,8 @@ import { Exclusion } from '../../utils/exclusion';
     <div ng-click="$ctrl.setSortBy()">
       <button id="{{'sort_by_' + $ctrl.columnName + '_button'}}"
               type="button"
-              ng-class="['btn btn-link', {'sort-by-selected': $ctrl.isSortBySelected()}]">
+              class="btn btn-link pl-0"
+              ng-class="{'sort-by-selected': $ctrl.isSortBySelected()}">
         {{$ctrl.headerText | translate}}
       </button>
       <i id="{{'sort_up_' + $ctrl.columnName + '_icon'}}" class="fas fa-sort-up primary-color-item" ng-if="$ctrl.sortUp()"></i>

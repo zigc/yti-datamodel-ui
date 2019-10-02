@@ -15,41 +15,44 @@ import { IPageInfo } from 'ngx-virtual-scroller';
   styleUrls: ['../../../styles/shared/searchTableModalContent.scss', './searchPredicateTableModalContent.scss'],
   template: `
     <div class="table-content-container">
-      <table class="table table-sm header-table">
-        <thead>
-        <tr>
-          <th class="name-col">
-            <sort-by-column-header [headerText]="'Name'"
-                                   [columnName]="'name'"
-                                   [model]="model"
-                                   [sortBy]="sortBy"
-                                   [filterExclude]="filterExclude"></sort-by-column-header>
-          </th>
-          <th class="model-col">
-            <sort-by-column-header [headerText]="'Model'"
-                                   [columnName]="'model'"
-                                   [model]="model"
-                                   [sortBy]="sortBy"
-                                   [filterExclude]="filterExclude"></sort-by-column-header>
-          </th>
-          <th class="description-col">
-            <sort-by-column-header [headerText]="'Description'"
-                                   [columnName]="'description'"
-                                   [model]="model"
-                                   [sortBy]="sortBy"
-                                   [filterExclude]="filterExclude"></sort-by-column-header>
-          </th>
-          <th class="modified-at-col">
-            <sort-by-column-header [headerText]="'Modified at'"
-                                   [columnName]="'modifiedAt'"
-                                   [model]="model"
-                                   [sortBy]="sortBy"
-                                   [filterExclude]="filterExclude"></sort-by-column-header>
-          </th>
-          <th class="menu-col"></th>
-        </tr>
-        </thead>
-      </table>
+      <div class="header-table-container">
+        <table class="table table-sm header-table">
+          <thead>
+          <tr>
+            <th class="name-col">
+              <sort-by-column-header [headerText]="'Name'"
+                                     [columnName]="'name'"
+                                     [model]="model"
+                                     [sortBy]="sortBy"
+                                     [filterExclude]="filterExclude"></sort-by-column-header>
+            </th>
+            <th class="model-col">
+              <sort-by-column-header [headerText]="'Model'"
+                                     [columnName]="'model'"
+                                     [model]="model"
+                                     [sortBy]="sortBy"
+                                     [filterExclude]="filterExclude"></sort-by-column-header>
+            </th>
+            <th class="description-col">
+              <sort-by-column-header [headerText]="'Description'"
+                                     [columnName]="'description'"
+                                     [model]="model"
+                                     [sortBy]="sortBy"
+                                     [filterExclude]="filterExclude"></sort-by-column-header>
+            </th>
+            <th class="modified-at-col">
+              <sort-by-column-header [headerText]="'Modified at'"
+                                     [columnName]="'modifiedAt'"
+                                     [model]="model"
+                                     [sortBy]="sortBy"
+                                     [filterExclude]="filterExclude"></sort-by-column-header>
+            </th>
+            <th class="menu-col"></th>
+          </tr>
+          </thead>
+        </table>
+        <div class="header-table-padding"></div>
+      </div>
       <virtual-scroller #scroll class="scroller-component" [items]="searchResults" [enableUnequalChildrenSizes]="true"
                         (vsEnd)="scrollEnd($event)" [useMarginInsteadOfTranslate]="true">
         <table class="table table-sm content-table">
