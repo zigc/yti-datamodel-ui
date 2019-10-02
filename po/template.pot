@@ -34,6 +34,9 @@ msgstr ""
 msgid "Imported namespaces"
 msgstr ""
 
+msgid "Defined by this model"
+msgstr ""
+
 msgid "All models"
 msgstr ""
 
