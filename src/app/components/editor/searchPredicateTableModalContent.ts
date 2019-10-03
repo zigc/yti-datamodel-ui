@@ -47,7 +47,7 @@ import { IPageInfo } from 'ngx-virtual-scroller';
                                      [sortBy]="sortBy"
                                      [filterExclude]="filterExclude"></sort-by-column-header>
             </th>
-            <th class="menu-col"></th>
+            <th class="info-col"></th>
           </tr>
           </thead>
         </table>
@@ -98,7 +98,7 @@ import { IPageInfo } from 'ngx-virtual-scroller';
             <td class="modified-at-col">
               {{showItemValue(searchResult.modifiedAt)}}
             </td>
-            <td class="menu-col">
+            <td class="info-col">
               <a [id]="predicateInfoLinkID(searchResult)"
                  href="#"
                  *ngIf="isSelected(searchResult)"
