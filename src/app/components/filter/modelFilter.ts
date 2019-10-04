@@ -17,7 +17,7 @@ type ModelOptionType = 'definedByThis' | 'importedNamespaces';
 
 interface ModelOption {
   id: Uri;
-  type: ModelOptionType;
+  optionType: ModelOptionType;
 }
 
 @LegacyComponent({
@@ -65,8 +65,8 @@ export class ModelFilterComponent {
 
     const localizer = this.languageService.createLocalizer(this.model);
 
-    this.importedNamespacesOption = { id: this.model.id, type: 'importedNamespaces' };
-    this.definedByThisOption = { id: this.model.id, type: 'definedByThis' };
+    this.importedNamespacesOption = { id: this.model.id, optionType: 'importedNamespaces' };
+    this.definedByThisOption = { id: this.model.id, optionType: 'definedByThis' };
 
     this.showModel = this.defaultShowOption;
 
@@ -104,11 +104,11 @@ export class ModelFilterComponent {
   }
 
   isDefinedByThisOption(item: DefinedBy|ModelOption) {
-    return !(item instanceof DefinedBy) && item.type === 'definedByThis';
+    return !(item instanceof DefinedBy) && item.optionType === 'definedByThis';
   }
 
   isImportedNamespacesOption(item: DefinedBy|ModelOption) {
-    return !(item instanceof DefinedBy) && item.type === 'importedNamespaces';
+    return !(item instanceof DefinedBy) && item.optionType === 'importedNamespaces';
   }
 
   get defaultShowOption() {
