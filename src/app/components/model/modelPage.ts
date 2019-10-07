@@ -7,7 +7,7 @@ import { ModelService } from '../../services/modelService';
 import { PredicateService, RelatedPredicate } from '../../services/predicateService';
 import { ConfirmationModal } from '../../components/common/confirmationModal';
 import { SearchClassModal } from '../../components/editor/searchClassModal';
-import { SearchClassTableModal, noExclude } from '../../components/editor/searchClassTableModal';
+import { SearchClassTableModal, noClassExclude } from '../../components/editor/searchClassTableModal';
 import { SearchPredicateModal } from '../../components/editor/searchPredicateModal';
 import { EntityCreation } from '../../components/editor/searchConceptModal';
 import { ClassType, KnownPredicateType, SelectionType, WithDefinedBy } from '../../types/entity';
@@ -33,7 +33,7 @@ import { NotificationModal } from '../../components/common/notificationModal';
 import { removeMatching } from 'yti-common-ui/utils/array';
 import { EditorContainer, ModelControllerService } from './modelControllerService';
 import { AuthorizationManagerService } from '../../services/authorizationManagerService';
-import { SearchPredicateTableModal } from '../editor/searchPredicateTableModal';
+import { SearchPredicateTableModal, noPredicateExclude } from '../editor/searchPredicateTableModal';
 import { ModelAndSelection } from '../../services/subRoutingHackService';
 import { BehaviorSubject, Subscription } from 'rxjs';
 
@@ -244,16 +244,14 @@ export class ModelPageComponent implements ModelPageActions, ModelControllerServ
       if (this.model.isOfType('profile')) {
         // profiles can create multiple shapes of single class so exists exclusion is not wanted
         // profiles can create copy of shapes so type exclusion is not wanted
-        return this.addClass(createDefinedByExclusion(this.model), noExclude);
+        return this.addClass(createDefinedByExclusion(this.model), noClassExclude);
       } else {
         return this.addClass(
           combineExclusions<AbstractClass>(
             createClassTypeExclusion(SearchClassType.Class),
             createDefinedByExclusion(this.model),
             createExistsExclusion(collectIds(this.classes))),
-          combineExclusions<AbstractClass>(
-            createClassTypeExclusion(SearchClassType.Class),
-            createExistsExclusion(collectIds(this.classes)))
+          createClassTypeExclusion(SearchClassType.Class)
         );
       }
     } else {
@@ -262,7 +260,7 @@ export class ModelPageComponent implements ModelPageActions, ModelControllerServ
         combineExclusions<AbstractPredicate>(
           createExistsExclusion(collectIds([this.attributes, this.associations])),
           createDefinedByExclusion(this.model)),
-        createExistsExclusion(collectIds([this.attributes, this.associations]))
+        noPredicateExclude
       );
     }
   }

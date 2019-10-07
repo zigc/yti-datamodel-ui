@@ -25,7 +25,7 @@ import { infoDomainMatches } from '../../utils/entity';
 import { ShowClassInfoModal } from './showClassInfoModal';
 import { SearchClassType } from '../../types/component';
 
-export const noExclude = (_item: AbstractClass) => null;
+export const noClassExclude = (_item: AbstractClass) => null;
 export const defaultTextForSelection = (_klass: Class) => 'Use class';
 
 export class SearchClassTableModal {

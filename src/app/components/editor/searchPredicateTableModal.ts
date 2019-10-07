@@ -24,7 +24,7 @@ import { Status, selectableStatuses } from 'yti-common-ui/entities/status';
 import { Language } from '../../types/language';
 import { ShowPredicateInfoModal } from './showPredicateInfoModal';
 
-const noExclude = (_item: PredicateListItem) => null;
+export const noPredicateExclude = (_item: PredicateListItem) => null;
 
 export class SearchPredicateTableModal {
 
@@ -56,7 +56,7 @@ export class SearchPredicateTableModal {
 
   openAddPredicate(model: Model,
                    type: KnownPredicateType,
-                   exclude: Exclusion<AbstractPredicate> = noExclude,
+                   exclude: Exclusion<AbstractPredicate> = noPredicateExclude,
                    filterExclude: Exclusion<AbstractPredicate> = exclude,
                    predicatesAssignedToModel: Set<string>): IPromise<EntityCreation | Predicate> {
     return this.openModal(model, type, exclude, filterExclude, predicatesAssignedToModel);
