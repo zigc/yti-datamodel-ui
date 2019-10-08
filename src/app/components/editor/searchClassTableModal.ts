@@ -304,6 +304,7 @@ class SearchClassTableController implements SearchController<ClassListItem> {
   removeSelection() {
     this.selection = null;
     this.selectedItem = null;
+    this.cannotConfirm = null;
   }
 
   isExternalClassPending() {

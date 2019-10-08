@@ -210,6 +210,7 @@ class SearchPredicateTableController implements SearchController<PredicateListIt
   removeSelection() {
     this.selection = null;
     this.selectedItem = null;
+    this.cannotConfirm = null;
   }
 
   isSelected(item: AbstractPredicate) {
