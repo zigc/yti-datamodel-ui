@@ -17,7 +17,7 @@
                      placeholder="'search namespace'"></text-filter>
 
         <model-language-chooser class="pull-right"
-                                context="$ctrl.model"></model-language-chooser>
+                                context="$ctrl.context"></model-language-chooser>
       </div>
     </div>
 
@@ -55,7 +55,7 @@
                             on-select="$ctrl.selectItem(item)">
 
             <span class="title">
-              <highlight text="searchResult.label" context="$ctrl.model" search="$ctrl.searchText"></highlight>
+              <highlight text="searchResult.label" context="$ctrl.context" search="$ctrl.searchText"></highlight>
             </span>
 
               <span class="body">
