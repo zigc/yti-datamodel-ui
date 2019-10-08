@@ -326,4 +326,10 @@ class SearchPredicateTableController implements SearchController<PredicateListIt
       });
     });
   }
+
+  notDefinedByThisModel(item: AbstractPredicate) {
+    const definedByExclude = createDefinedByExclusion(this.model);
+
+    return item && !!this.exclude(item) ? this.exclude(item) === definedByExclude(item) : false;
+  }
 }

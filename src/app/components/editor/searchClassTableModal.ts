@@ -396,4 +396,10 @@ class SearchClassTableController implements SearchController<ClassListItem> {
   isModelProfile() {
     return this.model.isOfType('profile');
   }
+
+  notDefinedByThisModel(item: AbstractClass) {
+    const definedByExclude = createDefinedByExclusion(this.model);
+
+    return item && !!this.exclude(item) ? this.exclude(item) === definedByExclude(item) : false;
+  }
 }

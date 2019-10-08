@@ -205,7 +205,7 @@
     <button id="add_namespace_to_model_button"
             class="btn btn-secondary-action"
             ng-click="$ctrl.addNamespaceToModel($ctrl.selectedItem)"
-            ng-show="$ctrl.cannotConfirm"
+            ng-show="$ctrl.notDefinedByThisModel($ctrl.selectedItem)"
             translate>
       Add namespace to model
     </button>
