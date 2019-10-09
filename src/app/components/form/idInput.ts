@@ -84,7 +84,7 @@ export const IdInputDirective: IDirectiveFactory = ($q: IQService,
       modelController.$validators['length'] = value => {
         try {
           return value && isValidLabelLength(value.name);
-        } catch(e) {
+        } catch (e) {
           // probably value.name getter failed
         }
         return true; // NOTE: length error is probably not the one needed here

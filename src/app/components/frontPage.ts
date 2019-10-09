@@ -207,7 +207,7 @@ export class FrontPageComponent implements HelpProvider {
   }
 
   organizationLabel(id: string): Localizable {
-    const org: Organization | undefined = this.organizationMap["urn:uuid:" + id];
+    const org: Organization | undefined = this.organizationMap['urn:uuid:' + id];
     if (org) {
       return org.label;
     }
@@ -316,7 +316,7 @@ function useContextMatches(uc: UseContext | null, model: IndexModel) {
 }
 
 function organizationMatches(org: Organization | null, model: IndexModel) {
-  return !org || anyMatching(model.contributor, modelOrgId => ("urn:uuid:" + modelOrgId) === org.id.toString());
+  return !org || anyMatching(model.contributor, modelOrgId => ('urn:uuid:' + modelOrgId) === org.id.toString());
 }
 
 function statusMatches(status: Status | null, model: IndexModel) {
