@@ -47,7 +47,7 @@ div.table-content-container {
           th {
             border-top: 0;
             border-bottom: 0;
-            overflow: hidden;
+            white-space: nowrap;
 
             button {
               padding-left: 0px;
