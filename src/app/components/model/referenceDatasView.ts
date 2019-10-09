@@ -10,6 +10,7 @@ import { ReferenceData } from 'app/entities/referenceData';
 import { LegacyComponent, modalCancelHandler } from 'app/utils/angular';
 import { LanguageContext } from 'app/types/language';
 import { EditableForm } from 'app/components/form/editableEntityController';
+import { TranslateService } from '@ngx-translate/core';
 
 interface WithReferenceDatas {
   referenceDatas: ReferenceData[];
@@ -27,7 +28,7 @@ interface WithReferenceDatas {
   },
   template: `
       <h4>
-        <span translate>Reference data</span> 
+        <span translate>Reference data</span>
         <button id="add_reference_data_button" type="button" class="btn btn-link btn-xs pull-right" ng-click="$ctrl.addReferenceData()" ng-show="$ctrl.isEditing()">
           <span translate>Add reference data</span>
         </button>
@@ -49,13 +50,14 @@ export class ReferenceDatasViewComponent {
               private searchReferenceDataModal: SearchReferenceDataModal,
               private editReferenceDataModal: EditReferenceDataModal,
               private viewReferenceDataModal: ViewReferenceDataModal,
-              private languageService: LanguageService) {
+              private languageService: LanguageService,
+              private translateService: TranslateService) {
     'ngInject';
   }
 
   $onInit() {
     this.$scope.$watch(() => this.value, value => {
-      this.descriptor = new ReferenceDataTableDescriptor(value, this.context, this.editReferenceDataModal, this.viewReferenceDataModal, this.languageService);
+      this.descriptor = new ReferenceDataTableDescriptor(value, this.context, this.editReferenceDataModal, this.viewReferenceDataModal, this.languageService, this.translateService);
     });
   }
 
@@ -83,7 +85,8 @@ class ReferenceDataTableDescriptor extends TableDescriptor<ReferenceData> {
               public context: LanguageContext,
               private editReferenceDataModal: EditReferenceDataModal,
               private viewReferenceDataModal: ViewReferenceDataModal,
-              private languageService: LanguageService) {
+              private languageService: LanguageService,
+              private translateService: TranslateService) {
     super();
     this.localizer = this.languageService.createLocalizer(this.context);
   }
@@ -100,7 +103,8 @@ class ReferenceDataTableDescriptor extends TableDescriptor<ReferenceData> {
 
     return [
       { headerName: 'Reference data name', nameExtractor: referenceData => this.localizer.translate(referenceData.title), onClick: clickHandler },
-      { headerName: 'Description', nameExtractor: referenceData => this.localizer.translate(referenceData.description) }
+      { headerName: 'Description', nameExtractor: referenceData => this.localizer.translate(referenceData.description) },
+      { headerName: 'Status', nameExtractor: referenceData => this.translateService.instant(referenceData.status) }
     ];
   }
 
