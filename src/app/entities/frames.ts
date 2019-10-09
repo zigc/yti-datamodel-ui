@@ -31,10 +31,6 @@ const coreContext = {
 };
 
 const vocabularyContext = Object.assign({}, coreContext, {
-  graph: { '@id' : 'http://termed.thl.fi/meta/graph' },
-  id: { '@id' : 'http://termed.thl.fi/meta/id' },
-  type: { '@id' : 'http://termed.thl.fi/meta/type' },
-  uri: { '@id' : 'http://termed.thl.fi/meta/uri' },
   description
 });
 

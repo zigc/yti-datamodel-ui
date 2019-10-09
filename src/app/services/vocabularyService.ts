@@ -12,8 +12,11 @@ import { requireDefined } from 'yti-common-ui/utils/object';
 
 export interface VocabularyService {
   getAllVocabularies(): IPromise<Vocabulary[]>;
+
   searchConcepts(searchText: string, vocabulary?: Vocabulary): IPromise<Concept[]>;
+
   createConceptSuggestion(vocabulary: Vocabulary, label: string, comment: string, lang: Language, model: Model): IPromise<Uri>;
+
   getConcept(id: Uri): IPromise<Concept>;
 }
 
@@ -33,11 +36,11 @@ export class DefaultVocabularyService implements VocabularyService {
 
     const params: any = {
       // XXX: api wants search strings as lower case otherwise it finds nothing
-      term: (searchText ? searchText.toLowerCase() : '') + '*'
+      term: (searchText ? searchText.toLowerCase() : '')
     };
 
     if (vocabulary) {
-      params.graphId = vocabulary.vocabularyGraph;
+      params.terminologyUri = vocabulary.id.uri
     }
 
     return this.$http.get<GraphData>(apiEndpointWithName('conceptSearch'), { params })
@@ -47,17 +50,19 @@ export class DefaultVocabularyService implements VocabularyService {
   createConceptSuggestion(vocabulary: Vocabulary, label: string, definition: string, lang: Language, model: Model): IPromise<Uri> {
     return this.$http.put<{ identifier: string }>(apiEndpointWithName('conceptSuggestion'), null, {
       params: {
-        graphUUID: vocabulary.vocabularyGraph,
+        terminologyUri: vocabulary.id,
         label: upperCaseFirst(label),
         comment: definition,
         lang,
-        modelID: model.id.uri
-      }})
+      }
+    })
       .then(response => new Uri(response.data!.identifier, {}));
   }
 
   getConcept(id: Uri): IPromise<Concept> {
-    return this.$http.get<GraphData>(apiEndpointWithName('concept'), {params: {id: id.isUuid() ? id.uuid : id.uri}})
+    return this.$http.get<GraphData>(apiEndpointWithName('concept'), {
+      params: { uri: id.uri }
+    })
       .then(response => this.deserializeConcept(response.data!, id.uri));
   }
 

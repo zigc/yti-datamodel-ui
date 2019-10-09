@@ -19,7 +19,7 @@ function normalizeAsId(resourceName: string) {
 }
 
 export function vocabularyIdFromPrefix(prefix: string) {
-  return `${terminologyNamespace}${prefix}/terminological-vocabulary-1`;
+  return `${terminologyNamespace}${prefix}/`;
 }
 
 export function conceptIdFromPrefixAndIndex(prefix: string, index: number) {

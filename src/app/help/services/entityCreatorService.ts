@@ -46,10 +46,6 @@ const terminologyContext = {
   definition : { '@id' : 'http://www.w3.org/2004/02/skos/core#definition' },
   description : { '@id' : 'http://purl.org/dc/terms/description' },
   inScheme : { '@id' : 'http://www.w3.org/2004/02/skos/core#inScheme', '@type' : '@id' },
-  id : { '@id' : 'http://termed.thl.fi/meta/id' },
-  graph : { '@id' : 'http://termed.thl.fi/meta/graph' },
-  type : { '@id' : 'http://termed.thl.fi/meta/type' },
-  uri : { '@id' : 'http://termed.thl.fi/meta/uri' },
 };
 
 export interface ImportedExternalNamespaceDetails {
@@ -461,10 +457,7 @@ export class EntityCreatorService {
     const graph = {
       '@id': id,
       '@type': 'skos:ConceptScheme',
-      graph: Uri.randomUUID().toString(),
-      id: Uri.randomUUID().toString(),
       type: 'TerminologicalVocabulary',
-      uri: id,
       prefLabel: { ...details.label },
       description: { ...details.description }
     };
@@ -475,15 +468,12 @@ export class EntityCreatorService {
   createConcept(details: ConceptDetails): IPromise<Concept> {
 
     const vocabularyId = details.vocabulary.id.uri;
-    const vocabularyNamespace = vocabularyId.substr(0, vocabularyId.indexOf('terminological-vocabulary-'));
-    const id = vocabularyNamespace + 'concept-' + details.index;
+    const id = vocabularyId + 'concept-' + details.index;
 
     const graph = {
       '@id': id,
       '@type': 'skos:Concept',
       inScheme: details.vocabulary.serialize(true, false),
-      id: Uri.randomUUID().toString(),
-      graph: details.vocabulary.vocabularyGraph,
       definition: { ...details.definition },
       prefLabel: { ...details.label }
     };
