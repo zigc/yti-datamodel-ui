@@ -1,4 +1,4 @@
-import { localizableSerializer, stringSerializer } from './serializer/serializer';
+import { identitySerializer, localizableSerializer, optional, stringSerializer } from './serializer/serializer';
 import { Uri } from './uri';
 import { glyphIconClassForType } from 'app/utils/entity';
 import { init, serialize } from './mapping';
@@ -6,11 +6,13 @@ import { GraphNode } from './graphNode';
 import { entity, entityAwareOptional, uriSerializer } from 'app/entities/serializer/entitySerializer';
 import { ConceptType } from 'app/types/entity';
 import { Localizable } from 'yti-common-ui/types/localization';
+import { Status } from 'yti-common-ui/entities/status';
 
 export class Vocabulary extends GraphNode {
 
   static vocabularyMappings = {
     id:              { name: '@id',         serializer: uriSerializer },
+    status:         { name: 'versionInfo',       serializer: optional(identitySerializer<Status>()) },
     title:           { name: 'prefLabel',   serializer: localizableSerializer },
     description:     { name: 'description', serializer: localizableSerializer }
   };
@@ -18,6 +20,7 @@ export class Vocabulary extends GraphNode {
   id: Uri;
   title: Localizable;
   description: Localizable;
+  status: Status|null;
 
   constructor(graph: any, context: any, frame: any) {
     super(graph, context, frame);
@@ -29,6 +32,7 @@ export class Concept extends GraphNode {
 
   static conceptMappings = {
     id:             { name: '@id',               serializer: uriSerializer },
+    status:         { name: 'versionInfo',       serializer: optional(identitySerializer<Status>()) },
     label:          { name: 'prefLabel',         serializer: localizableSerializer },
     definition:     { name: 'definition',        serializer: localizableSerializer },
     vocabulary:     { name: 'inScheme',          serializer: entityAwareOptional(entity(() => ConceptVocabulary)) } // TODO should be mandatory
@@ -38,6 +42,7 @@ export class Concept extends GraphNode {
   label: Localizable;
   definition: Localizable;
   vocabulary: ConceptVocabulary;
+  status: Status|null;
 
   constructor(graph: any, context: any, frame: any) {
     super(graph, context, frame);
