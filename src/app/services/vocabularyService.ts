@@ -48,7 +48,7 @@ export class DefaultVocabularyService implements VocabularyService {
   }
 
   createConceptSuggestion(vocabulary: Vocabulary, label: string, definition: string, lang: Language, model: Model): IPromise<Uri> {
-    return this.$http.put<{ identifier: string }>(apiEndpointWithName('conceptSuggestion'), null, {
+    return this.$http.put<{ uri: string }>(apiEndpointWithName('conceptSuggestion'), null, {
       params: {
         terminologyUri: vocabulary.id.uri,
         label: upperCaseFirst(label),
@@ -56,7 +56,7 @@ export class DefaultVocabularyService implements VocabularyService {
         lang,
       }
     })
-      .then(response => new Uri(response.data!.identifier, {}));
+      .then(response => new Uri(response.data!.uri, {}));
   }
 
   getConcept(id: Uri): IPromise<Concept> {
