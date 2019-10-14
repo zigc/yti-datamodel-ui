@@ -1,4 +1,4 @@
-import { identitySerializer, localizableSerializer, optional, stringSerializer } from './serializer/serializer';
+import { dateSerializer, identitySerializer, localizableSerializer, optional, stringSerializer } from './serializer/serializer';
 import { Uri } from './uri';
 import { glyphIconClassForType } from 'app/utils/entity';
 import { init, serialize } from './mapping';
@@ -7,20 +7,23 @@ import { entity, entityAwareOptional, uriSerializer } from 'app/entities/seriali
 import { ConceptType } from 'app/types/entity';
 import { Localizable } from 'yti-common-ui/types/localization';
 import { Status } from 'yti-common-ui/entities/status';
+import { Moment } from 'moment';
 
 export class Vocabulary extends GraphNode {
 
   static vocabularyMappings = {
     id:              { name: '@id',         serializer: uriSerializer },
-    status:         { name: 'versionInfo',       serializer: optional(identitySerializer<Status>()) },
+    status:          { name: 'versionInfo', serializer: optional(identitySerializer<Status>()) },
     title:           { name: 'prefLabel',   serializer: localizableSerializer },
-    description:     { name: 'description', serializer: localizableSerializer }
+    description:     { name: 'description', serializer: localizableSerializer },
+    modifiedAt:      { name: 'modified',    serializer: optional(dateSerializer) }
   };
 
   id: Uri;
   title: Localizable;
   description: Localizable;
   status: Status|null;
+  modifiedAt: Moment|null;
 
   constructor(graph: any, context: any, frame: any) {
     super(graph, context, frame);
@@ -35,6 +38,7 @@ export class Concept extends GraphNode {
     status:         { name: 'versionInfo',       serializer: optional(identitySerializer<Status>()) },
     label:          { name: 'prefLabel',         serializer: localizableSerializer },
     definition:     { name: 'definition',        serializer: localizableSerializer },
+    modifiedAt:      { name: 'modified',    serializer: optional(dateSerializer) },
     vocabulary:     { name: 'inScheme',          serializer: entityAwareOptional(entity(() => ConceptVocabulary)) } // TODO should be mandatory
   };
 
@@ -43,6 +47,7 @@ export class Concept extends GraphNode {
   definition: Localizable;
   vocabulary: ConceptVocabulary;
   status: Status|null;
+  modifiedAt: Moment|null;
 
   constructor(graph: any, context: any, frame: any) {
     super(graph, context, frame);
