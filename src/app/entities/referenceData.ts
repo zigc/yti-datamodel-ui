@@ -2,7 +2,7 @@ import { Uri } from './uri';
 import { init, serialize } from './mapping';
 import { GraphNode } from './graphNode';
 import { uriSerializer, entityAwareList, entity } from './serializer/entitySerializer';
-import { optional, stringSerializer, localizableSerializer } from './serializer/serializer';
+import { optional, stringSerializer, localizableSerializer, identitySerializer } from './serializer/serializer';
 import { Localizable } from 'yti-common-ui/types/localization';
 import { Status } from 'yti-common-ui/entities/status';
 
@@ -51,7 +51,7 @@ export class ReferenceData extends GraphNode {
     creator:     { name: 'creator',     serializer: optional(stringSerializer) },
     identifier:  { name: 'identifier',  serializer: optional(stringSerializer) },
     groups:      { name: 'isPartOf',    serializer: entityAwareList(entity(() => ReferenceDataGroup))},
-    status:      { name: 'status',      serializer: stringSerializer }
+    status:      { name: 'status',      serializer: optional(identitySerializer<Status>()) }
   };
 
   id: Uri;
@@ -60,7 +60,7 @@ export class ReferenceData extends GraphNode {
   creator: string|null;
   identifier: string|null;
   groups: ReferenceDataGroup[];
-  status: Status;
+  status: Status|null;
 
   constructor(graph: any, context: any, frame: any) {
     super(graph, context, frame);

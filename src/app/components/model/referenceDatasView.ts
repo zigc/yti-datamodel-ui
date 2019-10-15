@@ -104,7 +104,7 @@ class ReferenceDataTableDescriptor extends TableDescriptor<ReferenceData> {
     return [
       { headerName: 'Reference data name', nameExtractor: referenceData => this.localizer.translate(referenceData.title), onClick: clickHandler },
       { headerName: 'Description', nameExtractor: referenceData => this.localizer.translate(referenceData.description) },
-      { headerName: 'Status', nameExtractor: referenceData => this.translateService.instant(referenceData.status) }
+      { headerName: 'Status', nameExtractor: referenceData => referenceData.status ? this.translateService.instant(referenceData.status) : '' }
     ];
   }
 
