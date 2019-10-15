@@ -86,11 +86,9 @@ export const localizableSerializer: Serializer<Localizable> = createSerializer(
   }
 );
 
-const isoDateFormat = 'YYYY-MM-DDTHH:mm:ssz';
-
 export const dateSerializer: Serializer<Moment> = createSerializer(
-  (data: Moment) => data.format(isoDateFormat),
-  (data: any) => moment(data, isoDateFormat)
+  (data: Moment) => moment(data, moment.ISO_8601),
+  (data: any) => moment(data, moment.ISO_8601)
 );
 
 export const coordinateSerializer: Serializer<Coordinate> = createSerializer(

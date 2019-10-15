@@ -66,7 +66,7 @@ export class DefaultModelService implements ModelService {
       .then(response => {
         model.unsaved = false;
         model.version = response.data!.identifier;
-        model.createdAt = moment();
+        model.createdAt = moment().utc();
       });
   }
 
@@ -74,7 +74,7 @@ export class DefaultModelService implements ModelService {
     return this.$http.post<{ identifier: Urn }>(apiEndpointWithName('model'), model.serialize(), { params: { id: model.id.uri } })
       .then(response => {
         model.version = response.data!.identifier;
-        model.modifiedAt = moment();
+        model.modifiedAt = moment().utc();
       });
   }
 

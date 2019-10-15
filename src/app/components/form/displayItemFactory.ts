@@ -32,7 +32,7 @@ export class DisplayItem {
     const value = this.value;
 
     if (isMoment(value)) {
-      return value.format(this.gettextCatalog.getString('date format'));
+      return value.local().format(this.gettextCatalog.getString('date format'));
     } else if (value instanceof Uri) {
       return value.compact;
     }  else if (isLocalizable(value)) {

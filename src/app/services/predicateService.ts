@@ -106,7 +106,7 @@ export class DefaultPredicateService implements PredicateService {
         this.modelPredicatesCache.delete(predicate.definedBy.id.uri);
         predicate.unsaved = false;
         predicate.version = response.data!.identifier;
-        predicate.createdAt = moment();
+        predicate.createdAt = moment().utc();
       });
   }
 
@@ -121,7 +121,7 @@ export class DefaultPredicateService implements PredicateService {
     return this.$http.post<{ identifier: Urn }>(apiEndpointWithName('predicate'), predicate.serialize(), {params: requestParams})
       .then(response => {
         predicate.version = response.data!.identifier;
-        predicate.modifiedAt = moment();
+        predicate.modifiedAt = moment().utc();
       })
       .then(() => this.modelPredicatesCache.delete(predicate.definedBy.id.uri));
   }
@@ -228,7 +228,7 @@ export class DefaultPredicateService implements PredicateService {
         : new Association(graph, frame['@context'], frame);
 
       newPredicate.unsaved = true;
-      newPredicate.createdAt = moment();
+      newPredicate.createdAt = moment().utc();
 
       return newPredicate;
     }

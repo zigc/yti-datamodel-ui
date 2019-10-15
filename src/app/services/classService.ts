@@ -111,7 +111,7 @@ export class DefaultClassService implements ClassService {
         this.modelClassesCache.delete(requireDefined(klass.definedBy).id.uri);
         klass.unsaved = false;
         klass.version = response.data!.identifier;
-        klass.createdAt = moment();
+        klass.createdAt = moment().utc();
       });
   }
 
@@ -127,7 +127,7 @@ export class DefaultClassService implements ClassService {
       .then(response => {
         this.modelClassesCache.delete(requireDefined(klass.definedBy).id.uri);
         klass.version = response.data!.identifier;
-        klass.modifiedAt = moment();
+        klass.modifiedAt = moment().utc();
       });
   }
 
