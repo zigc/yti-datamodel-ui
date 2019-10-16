@@ -15,7 +15,7 @@ export class Vocabulary extends GraphNode {
     id:              { name: '@id',         serializer: uriSerializer },
     status:          { name: 'versionInfo', serializer: optional(identitySerializer<Status>()) },
     title:           { name: 'prefLabel',   serializer: localizableSerializer },
-    description:     { name: 'description', serializer: localizableSerializer },
+    description:     { name: 'definition', serializer: localizableSerializer },
     modifiedAt:      { name: 'modified',    serializer: optional(dateSerializer) }
   };
 
