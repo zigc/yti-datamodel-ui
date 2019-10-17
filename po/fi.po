@@ -1388,7 +1388,7 @@ msgid "search attribute or association"
 msgstr "Hae attribuuttia tai assosiaatiota"
 
 msgid "search class"
-msgstr "Hae luokkaa"
+msgstr "Kirjoita luokan nimi"
 
 msgid "search descriptions"
 msgstr "Etsi yhteensopivuuden kuvauksista"
@@ -1409,13 +1409,13 @@ msgid "Select attribute"
 msgstr "Valitse attribuutti"
 
 msgid "search attribute"
-msgstr "Hae attribuuttia"
+msgstr "Kirjoita attribuutin nimi"
 
 msgid "Select association"
 msgstr "Valitse assosiaatio"
 
 msgid "search association"
-msgstr "Hae assosiaatiota"
+msgstr "Kirjoita assosiaation nimi"
 
 msgid "Use attribute"
 msgstr "Käytä attribuuttia"

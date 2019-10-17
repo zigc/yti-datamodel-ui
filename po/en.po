@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2019-10-17 09:57+0300\n"
+"PO-Revision-Date: 2019-10-17 16:46+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -1359,7 +1359,7 @@ msgid "search attribute or association"
 msgstr "Search attribute or association…"
 
 msgid "search class"
-msgstr "Search class…"
+msgstr "Write class name"
 
 msgid "search descriptions"
 msgstr ""
@@ -1380,13 +1380,13 @@ msgid "Select attribute"
 msgstr ""
 
 msgid "search attribute"
-msgstr "Search attribute…"
+msgstr "Write attribute name"
 
 msgid "Select association"
 msgstr ""
 
 msgid "search association"
-msgstr "Search association…"
+msgstr "Write association name"
 
 msgid "Use attribute"
 msgstr ""
