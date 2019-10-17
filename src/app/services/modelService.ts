@@ -67,6 +67,7 @@ export class DefaultModelService implements ModelService {
         model.unsaved = false;
         model.version = response.data!.identifier;
         model.createdAt = moment().utc();
+        model.modifiedAt = moment().utc();
       });
   }
 

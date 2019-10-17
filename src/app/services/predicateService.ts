@@ -107,6 +107,7 @@ export class DefaultPredicateService implements PredicateService {
         predicate.unsaved = false;
         predicate.version = response.data!.identifier;
         predicate.createdAt = moment().utc();
+        predicate.modifiedAt = moment().utc();
       });
   }
 
@@ -229,6 +230,7 @@ export class DefaultPredicateService implements PredicateService {
 
       newPredicate.unsaved = true;
       newPredicate.createdAt = moment().utc();
+      newPredicate.modifiedAt = moment().utc();
 
       return newPredicate;
     }
