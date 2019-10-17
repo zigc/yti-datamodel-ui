@@ -112,6 +112,7 @@ export class DefaultClassService implements ClassService {
         klass.unsaved = false;
         klass.version = response.data!.identifier;
         klass.createdAt = moment().utc();
+        klass.modifiedAt = moment().utc();
       });
   }
 
