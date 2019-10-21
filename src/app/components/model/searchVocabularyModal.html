@@ -17,14 +17,26 @@
                      content-extractors="$ctrl.contentExtractors"
                      placeholder="'search vocabulary'"></text-filter>
 
+        <div class="pull-left mt-2 ml-2">
+          <content-filter search-controller="$ctrl" content-matchers="$ctrl.contentMatchers" content-extractors="$ctrl.contentExtractors"></content-filter>
+        </div>
+
         <model-language-chooser class="pull-right" context="$ctrl.context"></model-language-chooser>
       </div>
     </div>
 
     <div class="row mb-2">
       <div class="col-12">
+
+        <select id="vocabulary_status_filter_dropdown"
+                class="form-control pull-left"
+                style="width: auto"
+                ng-model="$ctrl.showStatus"
+                ng-options="(status | translate) for status in $ctrl.statuses">
+          <option value="" translate>All statuses</option>
+        </select>
+
         <excluded-filter search-controller="$ctrl" search-text="$ctrl.searchText" exclude="$ctrl.exclude"></excluded-filter>
-        <content-filter search-controller="$ctrl" content-matchers="$ctrl.contentMatchers" content-extractors="$ctrl.contentExtractors"></content-filter>
       </div>
     </div>
 
@@ -41,9 +53,10 @@
 
             <span class="title">
               <highlight text="searchResult.title" context="$ctrl.context" search="$ctrl.searchText"></highlight>
+              <app-status class="pull-right" [status]="searchResult.status"></app-status>
             </span>
 
-              <span class="body">
+            <span class="body">
               <highlight text="searchResult.description" context="$ctrl.context" search="$ctrl.searchText"></highlight>
             </span>
 

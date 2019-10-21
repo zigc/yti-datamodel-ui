@@ -15,6 +15,7 @@ import { ClassType, KnownPredicateType } from 'app/types/entity';
 import { VocabularyService } from 'app/services/vocabularyService';
 import { filterAndSortSearchResults, defaultLabelComparator } from 'app/components/filter/util';
 import { Uri } from 'app/entities/uri';
+import { Status, allStatuses } from 'yti-common-ui/entities/status';
 
 const limitQueryResults = 1000;
 
@@ -108,6 +109,7 @@ class SearchConceptController implements SearchController<Concept> {
   loadingResults: boolean;
   selectedItem: Concept|AddNewConcept|AddWithoutConcept;
   vocabularies: Vocabulary[];
+  showStatus: Status | null;
   private localizer: Localizer;
 
   contentExtractors = [ (concept: Concept) => concept.label ];
@@ -137,9 +139,14 @@ class SearchConceptController implements SearchController<Concept> {
     this.vocabularies.sort(this.vocabularyComparator);
     this.loadingResults = false;
 
+    this.addFilter(vocabulary =>
+      !this.showStatus || vocabulary.item.status === this.showStatus
+    );
+
     $scope.$watch(() => this.searchText, () => this.query(this.searchText).then(() => this.search()));
     $scope.$watch(() => this.selectedVocabulary, ifChanged(() => this.query(this.searchText).then(() => this.search())));
     $scope.$watch(() => this.localizer.language, ifChanged(() => this.query(this.searchText).then(() => this.search())));
+    $scope.$watch(() => this.showStatus, ifChanged<Status|null>(() => this.search()));
   }
 
   addFilter(filter: SearchFilter<Concept>) {
@@ -152,6 +159,10 @@ class SearchConceptController implements SearchController<Concept> {
 
   get vocabularyComparator() {
     return comparingLocalizable<Vocabulary>(this.localizer, vocabulary => vocabulary.title);
+  }
+
+  get statuses() {
+    return allStatuses;
   }
 
   isSelectionConcept() {

@@ -171,14 +171,14 @@ msgstr "Määrittele luokan ominaisuuden tyyppi"
 msgid "Choose"
 msgstr "valitse"
 
-msgid "Additional information"
-msgstr "Lisätiedot"
-
 msgid "Add property"
 msgstr "Lisää attribuutti tai assosiaatio"
 
 msgid "No properties yet"
 msgstr "Ei vielä yhtään ominaisuutta"
+
+msgid "Additional information"
+msgstr "Lisätiedot"
 
 msgid "Logical constraints"
 msgstr "Loogiset rajoitteet"
@@ -1090,8 +1090,8 @@ msgstr ""
 "Täältä voit lisätä luokalle uuden attribuutin jonka arvoalue perustuu "
 "tietotyyppiin tai assosiaation jolla viitataan toiseen luokkaan"
 
-msgid "Do you want to add following properties from super class?"
-msgstr "Haluatko lisätä seuraavat ominaisuudet yläluokasta?"
+msgid "Do you want to add following properties from scope class?"
+msgstr "Haluatko lisätä seuraavat ominaisuudet tarkennettavasta luokasta?"
 
 msgid "not found in the concept database"
 msgstr "ei löydy sanastosta"
@@ -1570,11 +1570,11 @@ msgstr "Lisää ominaisuudet ulkoisesta luokasta"
 msgid "Do you want to add following properties from class?"
 msgstr "Haluatko lisätä seuraavat ominaisuudet luokasta?"
 
+msgid "Do you want to add following properties from super class?"
+msgstr "Haluatko lisätä seuraavat ominaisuudet yläluokasta?"
+
 msgid "Define concept for the class"
 msgstr "Määrittele käsite luokalle"
-
-msgid "Do you want to add following properties from scope class?"
-msgstr "Haluatko lisätä seuraavat ominaisuudet tarkennettavasta luokasta?"
 
 msgid "Do you want to add following properties from profile class?"
 msgstr "Haluatko lisätä seuraavat ominaisuudet nostettavaan luokkaan?"
@@ -1935,6 +1935,9 @@ msgstr "Attribuutit"
 
 msgid "Deep association hit"
 msgstr "Assosiaatiot"
+
+msgid "Concept status"
+msgstr "Käsitteen tila"
 
 msgid "Example"
 msgstr "Esimerkki"

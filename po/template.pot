@@ -163,13 +163,13 @@ msgstr ""
 msgid "Choose"
 msgstr ""
 
-msgid "Additional information"
-msgstr ""
-
 msgid "Add property"
 msgstr ""
 
 msgid "No properties yet"
+msgstr ""
+
+msgid "Additional information"
 msgstr ""
 
 msgid "Logical constraints"
@@ -997,7 +997,7 @@ msgstr ""
 msgid "You can add new attribute or association to the Class from here"
 msgstr ""
 
-msgid "Do you want to add following properties from super class?"
+msgid "Do you want to add following properties from scope class?"
 msgstr ""
 
 msgid "not found in the concept database"
@@ -1446,10 +1446,10 @@ msgstr ""
 msgid "Do you want to add following properties from class?"
 msgstr ""
 
-msgid "Define concept for the class"
+msgid "Do you want to add following properties from super class?"
 msgstr ""
 
-msgid "Do you want to add following properties from scope class?"
+msgid "Define concept for the class"
 msgstr ""
 
 msgid "Do you want to add following properties from profile class?"
@@ -1806,6 +1806,9 @@ msgid "Deep attribute hit"
 msgstr ""
 
 msgid "Deep association hit"
+msgstr ""
+
+msgid "Concept status"
 msgstr ""
 
 msgid "Example"

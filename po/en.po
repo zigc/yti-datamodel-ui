@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2019-10-17 16:46+0300\n"
+"PO-Revision-Date: 2019-10-21 12:13+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -172,13 +172,13 @@ msgstr ""
 msgid "Choose"
 msgstr ""
 
-msgid "Additional information"
-msgstr ""
-
 msgid "Add property"
 msgstr "Add attribute or association"
 
 msgid "No properties yet"
+msgstr ""
+
+msgid "Additional information"
 msgstr ""
 
 msgid "Logical constraints"
@@ -1063,7 +1063,7 @@ msgstr "Terminology"
 msgid "You can add new attribute or association to the Class from here"
 msgstr ""
 
-msgid "Do you want to add following properties from super class?"
+msgid "Do you want to add following properties from scope class?"
 msgstr ""
 
 msgid "not found in the concept database"
@@ -1543,10 +1543,10 @@ msgstr ""
 msgid "Do you want to add following properties from class?"
 msgstr ""
 
-msgid "Define concept for the class"
+msgid "Do you want to add following properties from super class?"
 msgstr ""
 
-msgid "Do you want to add following properties from scope class?"
+msgid "Define concept for the class"
 msgstr ""
 
 msgid "Do you want to add following properties from profile class?"
@@ -1907,6 +1907,9 @@ msgstr "Attributes"
 
 msgid "Deep association hit"
 msgstr "Associations"
+
+msgid "Concept status"
+msgstr ""
 
 msgid "Example"
 msgstr ""

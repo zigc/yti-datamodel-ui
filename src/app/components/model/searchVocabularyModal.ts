@@ -1,4 +1,4 @@
-import { IPromise } from 'angular';
+import { IPromise, IScope } from 'angular';
 import { IModalService, IModalServiceInstance } from 'angular-ui-bootstrap';
 import { comparingLocalizable } from 'app/utils/comparator';
 import { comparingPrimitive } from 'yti-common-ui/utils/comparator';
@@ -9,6 +9,8 @@ import { Vocabulary } from 'app/entities/vocabulary';
 import { LanguageContext } from 'app/types/language';
 import { VocabularyService } from 'app/services/vocabularyService';
 import { filterAndSortSearchResults, defaultTitleComparator } from 'app/components/filter/util';
+import { selectableStatuses, Status } from 'yti-common-ui/entities/status';
+import { ifChanged } from 'app/utils/angular';
 
 const noExclude = (_vocabulary: Vocabulary) => null;
 
@@ -39,6 +41,7 @@ class SearchVocabularyController implements SearchController<Vocabulary> {
   vocabularies: Vocabulary[] = [];
   searchText = '';
   loadingResults: boolean;
+  showStatus: Status | null;
   private localizer: Localizer;
 
   contentMatchers = [
@@ -50,7 +53,8 @@ class SearchVocabularyController implements SearchController<Vocabulary> {
 
   private searchFilters: SearchFilter<Vocabulary>[] = [];
 
-  constructor(private $uibModalInstance: IModalServiceInstance,
+  constructor($scope: IScope,
+              private $uibModalInstance: IModalServiceInstance,
               public exclude: Exclusion<Vocabulary>,
               vocabularyService: VocabularyService,
               languageService: LanguageService,
@@ -69,6 +73,12 @@ class SearchVocabularyController implements SearchController<Vocabulary> {
       this.search();
       this.loadingResults = false;
     });
+
+    this.addFilter(vocabulary =>
+      !this.showStatus || vocabulary.item.status === this.showStatus
+    );
+
+    $scope.$watch(() => this.showStatus, ifChanged<Status|null>(() => this.search()));
   }
 
   addFilter(filter: SearchFilter<Vocabulary>) {
@@ -77,6 +87,10 @@ class SearchVocabularyController implements SearchController<Vocabulary> {
 
   get items() {
     return this.vocabularies;
+  }
+
+  get statuses() {
+    return selectableStatuses;
   }
 
   search() {

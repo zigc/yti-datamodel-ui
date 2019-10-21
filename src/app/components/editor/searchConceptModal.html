@@ -26,12 +26,20 @@
     <div class="row mb-2">
       <div class="col-12">
         <select id="vocabulary"
-                class="form-control"
+                class="form-control pull-left"
                 style="width: auto"
                 ng-model="$ctrl.selectedVocabulary"
                 ignore-dirty
                 ng-options="(vocabulary.title | translateValue: $ctrl.model) for vocabulary in $ctrl.vocabularies">
           <option value="" translate>All vocabularies</option>
+        </select>
+
+        <select id="concept_status_filter_dropdown"
+                class="form-control ml-2 pull-left "
+                style="width: auto"
+                ng-model="$ctrl.showStatus"
+                ng-options="(status | translate) for status in $ctrl.statuses">
+          <option value="" translate>All statuses</option>
         </select>
       </div>
     </div>
@@ -50,8 +58,9 @@
                             edit-in-progress="$ctrl.editInProgress">
 
               <span class="title">
-                <ajax-loading-indicator-small ng-if="$ctrl.loadingSelection(searchResult)"></ajax-loading-indicator-small>
                 <highlight text="searchResult.label" context="$ctrl.model" search="$ctrl.searchText"></highlight>
+                <app-status class="pull-right" [status]="searchResult.status"></app-status>
+                <ajax-loading-indicator-small ng-if="$ctrl.loadingSelection(searchResult)"></ajax-loading-indicator-small>
               </span>
 
               <div class="origin">

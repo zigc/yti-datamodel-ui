@@ -8,6 +8,7 @@ import { Vocabulary } from 'app/entities/vocabulary';
 import { LegacyComponent, modalCancelHandler } from 'app/utils/angular';
 import { LanguageContext } from 'app/types/language';
 import { EditableForm } from 'app/components/form/editableEntityController';
+import { TranslateService } from '@ngx-translate/core';
 
 interface WithVocabularies {
   vocabularies: Vocabulary[];
@@ -25,7 +26,7 @@ interface WithVocabularies {
   },
   template: `
       <h4>
-        <span translate>Terminologies</span> 
+        <span translate>Terminologies</span>
         <button id="add_vocabulary_button" type="button" class="btn btn-link btn-xs pull-right" ng-click="$ctrl.addVocabulary()" ng-show="$ctrl.isEditing()">
           <span translate>Add vocabulary</span>
         </button>
@@ -45,13 +46,14 @@ export class VocabulariesViewComponent {
 
   constructor(private $scope: IScope,
               private searchVocabularyModal: SearchVocabularyModal,
-              private languageService: LanguageService) {
+              private languageService: LanguageService,
+              private translateService: TranslateService) {
     'ngInject';
   }
 
   $onInit() {
     this.$scope.$watch(() => this.value, value => {
-      this.descriptor = new VocabularyTableDescriptor(value, this.context, this.languageService);
+      this.descriptor = new VocabularyTableDescriptor(value, this.context, this.languageService, this.translateService);
     });
   }
 
@@ -73,13 +75,14 @@ export class VocabulariesViewComponent {
 
 class VocabularyTableDescriptor extends TableDescriptor<Vocabulary> {
 
-  constructor(private value: WithVocabularies, private context: LanguageContext, private languageService: LanguageService) {
+  constructor(private value: WithVocabularies, private context: LanguageContext, private languageService: LanguageService, private translateService: TranslateService) {
     super();
   }
 
   columnDescriptors(): ColumnDescriptor<Vocabulary>[] {
     return [
-      { headerName: 'Vocabulary name', nameExtractor: vocabulary => this.languageService.translate(vocabulary.title, this.context)}
+      { headerName: 'Vocabulary name', nameExtractor: vocabulary => this.languageService.translate(vocabulary.title, this.context)},
+      { headerName: 'Status', nameExtractor: vocabulary => vocabulary.status ? this.translateService.instant(vocabulary.status) : '' }
     ];
   }
 
