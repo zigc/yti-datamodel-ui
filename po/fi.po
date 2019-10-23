@@ -1939,6 +1939,9 @@ msgstr "Assosiaatiot"
 msgid "Concept status"
 msgstr "Käsitteen tila"
 
+msgid "Concept modified at"
+msgstr "Käsitettä muokattu"
+
 msgid "Example"
 msgstr "Esimerkki"
 

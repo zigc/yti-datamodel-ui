@@ -34,14 +34,17 @@
         </div>
 
         <div class="row">
-          <div class="col-md-6">
-              <non-editable data-title="Concept status" value="$ctrl.entity.subject.status" value-as-localization-key="true"
-                            context="$ctrl.model"></non-editable>
+          <div class="col-md-4">
+            <non-editable data-title="Concept status" value="$ctrl.entity.subject.status" value-as-localization-key="true"
+                          context="$ctrl.model"></non-editable>
           </div>
-          <div class="col-md-6">
-              <non-editable-vocabulary vocabulary="$ctrl.entity.subject.vocabulary"
-                                       context="$ctrl.model"
-                                       link="$ctrl.conceptLink"></non-editable-vocabulary>
+          <div class="col-md-4">
+            <non-editable-vocabulary vocabulary="$ctrl.entity.subject.vocabulary"
+                                     context="$ctrl.model"
+                                     link="$ctrl.conceptLink"></non-editable-vocabulary>
+          </div>
+          <div class="col-md-4">
+            <non-editable data-title="Concept modified at" value="$ctrl.entity.subject.modifiedAt" context="$ctrl.model"></non-editable>
           </div>
         </div>
     </div>

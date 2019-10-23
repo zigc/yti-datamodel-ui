@@ -9,6 +9,7 @@ import { LegacyComponent, modalCancelHandler } from 'app/utils/angular';
 import { LanguageContext } from 'app/types/language';
 import { EditableForm } from 'app/components/form/editableEntityController';
 import { TranslateService } from '@ngx-translate/core';
+import { DisplayItemFactory, Value } from 'app/components/form/displayItemFactory';
 
 interface WithVocabularies {
   vocabularies: Vocabulary[];
@@ -47,13 +48,14 @@ export class VocabulariesViewComponent {
   constructor(private $scope: IScope,
               private searchVocabularyModal: SearchVocabularyModal,
               private languageService: LanguageService,
-              private translateService: TranslateService) {
+              private translateService: TranslateService,
+              private displayItemFactory: DisplayItemFactory) {
     'ngInject';
   }
 
   $onInit() {
     this.$scope.$watch(() => this.value, value => {
-      this.descriptor = new VocabularyTableDescriptor(value, this.context, this.languageService, this.translateService);
+      this.descriptor = new VocabularyTableDescriptor(value, this.context, this.languageService, this.translateService, this.displayItemFactory);
     });
   }
 
@@ -75,14 +77,15 @@ export class VocabulariesViewComponent {
 
 class VocabularyTableDescriptor extends TableDescriptor<Vocabulary> {
 
-  constructor(private value: WithVocabularies, private context: LanguageContext, private languageService: LanguageService, private translateService: TranslateService) {
+  constructor(private value: WithVocabularies, private context: LanguageContext, private languageService: LanguageService, private translateService: TranslateService, private displayItemFactory: DisplayItemFactory) {
     super();
   }
 
   columnDescriptors(): ColumnDescriptor<Vocabulary>[] {
     return [
       { headerName: 'Vocabulary name', nameExtractor: vocabulary => this.languageService.translate(vocabulary.title, this.context)},
-      { headerName: 'Status', nameExtractor: vocabulary => vocabulary.status ? this.translateService.instant(vocabulary.status) : '' }
+      { headerName: 'Status', nameExtractor: vocabulary => vocabulary.status ? this.translateService.instant(vocabulary.status) : '' },
+      { headerName: 'Modified at', nameExtractor: vocabulary => vocabulary.modifiedAt ? this.showItemValue(vocabulary.modifiedAt) : '' }
     ];
   }
 
@@ -104,5 +107,12 @@ class VocabularyTableDescriptor extends TableDescriptor<Vocabulary> {
 
   orderBy(vocabulary: Vocabulary): any {
     return vocabulary.id;
+  }
+
+  showItemValue(value: Value): string {
+    return this.displayItemFactory.create({
+      context: () => this.context,
+      value: () => value
+    }).displayValue;
   }
 }

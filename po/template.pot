@@ -1811,6 +1811,9 @@ msgstr ""
 msgid "Concept status"
 msgstr ""
 
+msgid "Concept modified at"
+msgstr ""
+
 msgid "Example"
 msgstr ""
 
