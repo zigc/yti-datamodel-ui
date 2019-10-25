@@ -5,7 +5,6 @@ import { createExistsExclusion } from 'app/utils/exclusion';
 import { collectIds } from 'app/utils/entity';
 import { SearchReferenceDataModal } from './searchReferenceDataModal';
 import { EditReferenceDataModal } from './editReferenceDataModal';
-import { ViewReferenceDataModal } from './viewReferenceDataModal';
 import { ReferenceData } from 'app/entities/referenceData';
 import { LegacyComponent, modalCancelHandler } from 'app/utils/angular';
 import { LanguageContext } from 'app/types/language';
@@ -49,7 +48,6 @@ export class ReferenceDatasViewComponent {
   constructor(private $scope: IScope,
               private searchReferenceDataModal: SearchReferenceDataModal,
               private editReferenceDataModal: EditReferenceDataModal,
-              private viewReferenceDataModal: ViewReferenceDataModal,
               private languageService: LanguageService,
               private translateService: TranslateService) {
     'ngInject';
@@ -57,7 +55,7 @@ export class ReferenceDatasViewComponent {
 
   $onInit() {
     this.$scope.$watch(() => this.value, value => {
-      this.descriptor = new ReferenceDataTableDescriptor(value, this.context, this.editReferenceDataModal, this.viewReferenceDataModal, this.languageService, this.translateService);
+      this.descriptor = new ReferenceDataTableDescriptor(value, this.context, this.editReferenceDataModal, this.languageService, this.translateService);
     });
   }
 
@@ -84,7 +82,6 @@ class ReferenceDataTableDescriptor extends TableDescriptor<ReferenceData> {
   constructor(private value: WithReferenceDatas,
               public context: LanguageContext,
               private editReferenceDataModal: EditReferenceDataModal,
-              private viewReferenceDataModal: ViewReferenceDataModal,
               private languageService: LanguageService,
               private translateService: TranslateService) {
     super();
@@ -93,17 +90,8 @@ class ReferenceDataTableDescriptor extends TableDescriptor<ReferenceData> {
 
   columnDescriptors(): ColumnDescriptor<ReferenceData>[] {
 
-    const clickHandler = (value: ReferenceData) => {
-      if (value.isExternal()) {
-        window.open(value.id.uri, '_blank');
-      } else {
-        this.viewReferenceDataModal.open(value, this.context);
-      }
-    };
-
     return [
-      { headerName: 'Reference data name', nameExtractor: referenceData => this.localizer.translate(referenceData.title), onClick: clickHandler },
-      { headerName: 'Description', nameExtractor: referenceData => this.localizer.translate(referenceData.description) },
+      { headerName: 'Reference data name', nameExtractor: referenceData => this.localizer.translate(referenceData.title), hrefExtractor: referenceData => referenceData.id.uri },
       { headerName: 'Status', nameExtractor: referenceData => referenceData.status ? this.translateService.instant(referenceData.status) : '' }
     ];
   }
