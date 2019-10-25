@@ -100,7 +100,6 @@ class SearchClassTableController implements SearchController<ClassListItem> {
   modelTypes: DefinedByType[];
   showClassType: ClassType | null;
   showModelType: DefinedByType | null;
-  showProfiles = false;
   showOnlyExternalClasses = false;
   // undefined means not fetched, null means does not exist
   externalClass: Class | null | undefined;
@@ -139,6 +138,7 @@ class SearchClassTableController implements SearchController<ClassListItem> {
 
     this.classTypes = ['class', 'shape'];
     this.modelTypes = ['library', 'profile'];
+    this.showModelType = 'library';
 
     this.sortBy = {
       name: 'name',
@@ -203,10 +203,6 @@ class SearchClassTableController implements SearchController<ClassListItem> {
       !this.showModelType || classListItem.item.definedBy.normalizedType === this.showModelType
     );
 
-    this.addFilter(classListItem =>
-      this.showProfiles || !classListItem.item.definedBy.isOfType('profile')
-    );
-
     $scope.$watch(() => this.showStatus, ifChanged<Status | null>(() => this.search()));
     $scope.$watch(() => this.showClassType, ifChanged<ClassType | null>(() => this.search()));
     $scope.$watch(() => this.showModelType, ifChanged<DefinedByType | null>(() => this.search()));
@@ -219,20 +215,12 @@ class SearchClassTableController implements SearchController<ClassListItem> {
     }));
     $scope.$watch(() => this.showOnlyExternalClasses, ifChanged<Boolean>(() => {
       if (this.showOnlyExternalClasses) {
-        if (this.showProfiles) {
-          this.showProfiles = false;
-        }
         this.showInfoDomain = null;
         this.showClassType = null;
         this.showModelType = null;
         this.showStatus = null;
       }
-      this.search();
-    }));
-    this.$scope.$watch(() => this.showProfiles, ifChanged<Boolean>(() => {
-      if (this.showProfiles && this.showOnlyExternalClasses) {
-        this.showOnlyExternalClasses = false;
-      }
+
       this.search();
     }));
   }

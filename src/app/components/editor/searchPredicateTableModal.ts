@@ -118,6 +118,7 @@ class SearchPredicateTableController implements SearchController<PredicateListIt
     this.typeSelectable = !type;
 
     this.modelTypes = ['library', 'profile'];
+    this.showModelType = 'library';
 
     this.sortBy = {
       name: 'name',

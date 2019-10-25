@@ -26,10 +26,6 @@
 
         <div class="search-row-target-selection" ng-hide="$ctrl.onlySelection && !$ctrl.isModelProfile()">
           <label translate>Include:</label>
-          <label ng-hide="$ctrl.onlySelection">
-            <input type="checkbox" ng-model="$ctrl.showProfiles">
-            {{'Classes defined in profiles' | translate}}
-          </label>
           <label ng-if="$ctrl.isModelProfile()">
             <input type="checkbox" ng-model="$ctrl.showOnlyExternalClasses">
             {{'External classes' | translate}}
@@ -61,6 +57,15 @@
           <option value="" translate>All information domains</option>
         </select>
 
+        <select id="class_model_type_filter_dropdown"
+                class="form-control pull-left mr-2 mb-2"
+                style="width: auto"
+                ng-disabled="$ctrl.showOnlyExternalClasses"
+                ng-model="$ctrl.showModelType"
+                ng-options="(modelType | translate) for modelType in $ctrl.modelTypes">
+          <option value="" translate>All types</option>
+        </select>
+
         <select id="class_type_filter_dropdown"
                 class="form-control pull-left mr-2 mb-2"
                 style="width: auto"
@@ -68,17 +73,6 @@
                 ng-model="$ctrl.showClassType"
                 ng-options="(classType | translate) for classType in $ctrl.classTypes">
           <option value="" translate>All class types</option>
-        </select>
-
-        <!-- This is not in use at the moment. -->
-        <select id="class_model_type_filter_dropdown"
-                class="form-control pull-left mr-2 mb-2"
-                style="width: auto"
-                ng-if="false"
-                ng-disabled="$ctrl.showOnlyExternalClasses"
-                ng-model="$ctrl.showModelType"
-                ng-options="(modelType | translate) for modelType in $ctrl.modelTypes">
-          <option value="" translate>All types</option>
         </select>
 
         <select id="class_status_filter_dropdown"
