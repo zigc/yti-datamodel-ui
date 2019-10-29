@@ -46,7 +46,8 @@
                       type="class"
                       model="$ctrl.model"
                       default-show="$ctrl.defaultToCurrentModel ? 'definedByThis' : null"
-                      hide-this-model='$ctrl.showOnlyExternalClasses'></model-filter>
+                      hide-this-model='$ctrl.showOnlyExternalClasses'
+                      model-type='$ctrl.showModelType'></model-filter>
 
         <select id="class_information_domain_filter_dropdown"
                 class="form-control pull-left mr-2 mb-2"

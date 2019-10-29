@@ -11,6 +11,7 @@ import { PredicateListItem } from '../../entities/predicate';
 import { Model } from '../../entities/model';
 import { DefinedBy } from '../../entities/definedBy';
 import { Uri } from '../../entities/uri';
+import { DefinedByType } from '../../types/entity';
 
 type ItemType = ClassListItem | PredicateListItem;
 type ModelOptionType = 'definedByThis' | 'importedNamespaces';
@@ -26,7 +27,8 @@ interface ModelOption {
     type: '@',
     model: '=',
     defaultShow: '=',
-    hideThisModel: '='
+    hideThisModel: '=',
+    modelType: '='
   },
   template: `
       <select id="model"
@@ -50,10 +52,10 @@ export class ModelFilterComponent {
   hideThisModel: boolean;
 
   showModel: Model | DefinedBy | ModelOption;
-  models: (Model | DefinedBy)[] = [];
   modelOptions: (ModelOption | DefinedBy)[] = [];
   importedNamespacesOption: ModelOption;
   definedByThisOption: ModelOption;
+  modelType: DefinedByType | null;
   private currentModelImportedNamespaceIds: Set<string> = new Set<string>();
 
   constructor(private $scope: IScope,
@@ -62,8 +64,6 @@ export class ModelFilterComponent {
   }
 
   $onInit() {
-
-    const localizer = this.languageService.createLocalizer(this.model);
 
     this.importedNamespacesOption = { id: this.model.id, optionType: 'importedNamespaces' };
     this.definedByThisOption = { id: this.model.id, optionType: 'definedByThis' };
@@ -75,32 +75,37 @@ export class ModelFilterComponent {
       this.searchController.search();
     });
 
-    this.$scope.$watch(() => this.searchController.items, items => {
-      const definedByFromClasses = _.chain(items)
-        .map(item => item.definedBy!)
-        .uniqBy(definedBy => definedBy.id.toString())
-        .value()
-        .sort(comparingLocalizable<DefinedBy>(localizer, definedBy => definedBy.label));
-
-      this.models = this.hideThisModel ? definedByFromClasses : [this.model, ...definedByFromClasses];
-      this.modelOptions = this.hideThisModel ? definedByFromClasses
-                                             : [this.importedNamespacesOption, this.definedByThisOption, ...definedByFromClasses];
-    });
+    this.$scope.$watch(() => this.searchController.items, items => this.filterModelOptions(items, this.modelType));
+    this.$scope.$watch(() => this.modelType, modelType => this.filterModelOptions(this.searchController.items, modelType));
 
     this.searchController.addFilter((item: TextAnalysis<ItemType>) => {
-        if (!this.showModel) {
-          return true;
-        } else if (this.isImportedNamespacesOption(this.showModel)) {
-          return this.currentModelImportedNamespaceIds.has(item.item.definedBy.id.toString());
-        } else {
-          return isDefined(item.item.definedBy) && item.item.definedBy.id.equals(this.showModel.id);
-        }
+      if (!this.showModel) {
+        return true;
+      } else if (this.isImportedNamespacesOption(this.showModel)) {
+        return this.currentModelImportedNamespaceIds.has(item.item.definedBy.id.toString());
+      } else {
+        return isDefined(item.item.definedBy) && item.item.definedBy.id.equals(this.showModel.id);
       }
-    );
+    });
 
     this.$scope.$watch(() => this.showModel, ifChanged(() => {
       return this.searchController.search();
     }));
+  }
+
+  filterModelOptions(items: ItemType[], modelType: DefinedByType | null) {
+    const localizer = this.languageService.createLocalizer(this.model);
+
+    const definedByFromClasses = _.chain(items)
+      .map(item => item.definedBy!)
+      .uniqBy(definedBy => definedBy.id.toString())
+      .value()
+      .sort(comparingLocalizable<DefinedBy>(localizer, definedBy => definedBy.label));
+
+    const definedByFilteredByType = definedByFromClasses.filter(model =>  modelType ? model.isOfType(modelType) : true);
+
+    this.modelOptions = this.hideThisModel ? definedByFilteredByType
+                                           : [this.importedNamespacesOption, this.definedByThisOption, ...definedByFilteredByType];
   }
 
   isDefinedByThisOption(item: DefinedBy|ModelOption) {
