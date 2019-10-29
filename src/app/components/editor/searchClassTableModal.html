@@ -24,9 +24,9 @@
                         content-matchers="$ctrl.contentMatchers"
                         content-extractors="$ctrl.contentExtractors"></content-filter>
 
-        <div class="search-row-target-selection" ng-hide="$ctrl.onlySelection && !$ctrl.isModelProfile()">
+        <div class="search-row-target-selection" ng-hide="!$ctrl.isModelProfile() || $ctrl.onlySelection && !$ctrl.isModelProfile()">
           <label translate>Include:</label>
-          <label ng-if="$ctrl.isModelProfile()">
+          <label>
             <input type="checkbox" ng-model="$ctrl.showOnlyExternalClasses">
             {{'External classes' | translate}}
           </label>
