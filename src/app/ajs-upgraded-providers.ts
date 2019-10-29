@@ -6,9 +6,13 @@ import { LanguageService } from './services/languageService';
 import { ModelPageHelpService } from './help/providers/modelPageHelpService';
 import { gettextCatalog as GettextCatalog } from 'angular-gettext';
 import { DisplayItemFactory } from './components/form/displayItemFactory';
-import IInjectorService = angular.auto.IInjectorService;
 import { ShowClassInfoModal } from './components/editor/showClassInfoModal';
 import { ShowPredicateInfoModal } from './components/editor/showPredicateInfoModal';
+import { OrganizationService } from './services/organizationService';
+import { UserRoleService } from './services/userRoleService';
+import { ConfigService } from './services/configService';
+import IInjectorService = angular.auto.IInjectorService;
+import { LocationService } from './services/locationService';
 
 // NOTE: In normal case the "wrappers" should not be needed, but I could not figure out the way to make it work with the interfaces.
 
@@ -57,7 +61,7 @@ export const routeServiceProvider = {
   provide: RouteServiceWrapper,
   useFactory: routeServiceFactory,
   deps: ['$injector']
-}
+};
 
 
 export class ScopeWrapper {
@@ -73,7 +77,7 @@ export const scopeProvider = {
   provide: ScopeWrapper,
   useFactory: scopeFactory,
   deps: ['$injector']
-}
+};
 
 
 export function notificationModalFactory(i: IInjectorService) {
@@ -84,7 +88,7 @@ export const notificationModalProvider = {
   provide: NotificationModal,
   useFactory: notificationModalFactory,
   deps: ['$injector']
-}
+};
 
 
 export function confirmationModalFactory(i: IInjectorService) {
@@ -95,7 +99,7 @@ export const confirmationModalProvider = {
   provide: ConfirmationModal,
   useFactory: confirmationModalFactory,
   deps: ['$injector']
-}
+};
 
 export function languageServiceFactory(i: IInjectorService) {
   return i.get('languageService');
@@ -105,7 +109,7 @@ export const languageServiceProvider = {
   provide: LanguageService,
   useFactory: languageServiceFactory,
   deps: ['$injector']
-}
+};
 
 export function modelPageHelpServiceFactory(i: IInjectorService) {
   return i.get('modelPageHelpService');
@@ -115,7 +119,7 @@ export const modelPageHelpServiceProvider = {
   provide: ModelPageHelpService,
   useFactory: modelPageHelpServiceFactory,
   deps: ['$injector']
-}
+};
 
 export class GettextCatalogWrapper {
   constructor(public gettextCatalog: GettextCatalog) {
@@ -130,7 +134,7 @@ export const gettextCatalogProvider = {
   provide: GettextCatalogWrapper,
   useFactory: gettextCatalogFactory,
   deps: ['$injector']
-}
+};
 
 export function displayItemFactoryFactory(i: IInjectorService) {
   return i.get('displayItemFactory');
@@ -150,7 +154,7 @@ export const showClassInfoModalProvider = {
   provide: ShowClassInfoModal,
   useFactory: showClassInfoModalFactory,
   deps: ['$injector']
-}
+};
 
 export function showPredicateInfoModalFactory(i: IInjectorService) {
   return i.get('showPredicateInfoModal');
@@ -160,4 +164,68 @@ export const showPredicateInfoModalProvider = {
   provide: ShowPredicateInfoModal,
   useFactory: showPredicateInfoModalFactory,
   deps: ['$injector']
+};
+
+
+export class OrganizationServiceWrapper {
+  constructor(public organizationService: OrganizationService) {
+  }
 }
+
+export function organizationServiceFactory(i: IInjectorService) {
+  return new OrganizationServiceWrapper(i.get('organizationService'))
+}
+
+export const organizationServiceProvider = {
+  provide: OrganizationServiceWrapper,
+  useFactory: organizationServiceFactory,
+  deps: ['$injector']
+};
+
+
+export class UserRoleServiceWrapper {
+  constructor(public userRoleService: UserRoleService) {
+  }
+}
+
+export function userRoleServiceFactory(i: IInjectorService) {
+  return new UserRoleServiceWrapper(i.get('userRoleService'))
+}
+
+export const userRoleServiceProvider = {
+  provide: UserRoleServiceWrapper,
+  useFactory: userRoleServiceFactory,
+  deps: ['$injector']
+};
+
+
+export class ConfigServiceWrapper {
+  constructor(public configService: ConfigService) {
+  }
+}
+
+export function configServiceFactory(i: IInjectorService) {
+  return new ConfigServiceWrapper(i.get('configService'))
+}
+
+export const configServiceProvider = {
+  provide: ConfigServiceWrapper,
+  useFactory: configServiceFactory,
+  deps: ['$injector']
+};
+
+
+export class DatamodelLocationServiceWrapper {
+  constructor(public locationService: LocationService) {
+  }
+}
+
+export function datamodelLocationServiceFactory(i: IInjectorService) {
+  return new DatamodelLocationServiceWrapper(i.get('locationService'));
+}
+
+export const datamodelLocationServiceProvider = {
+  provide: DatamodelLocationServiceWrapper,
+  useFactory: datamodelLocationServiceFactory,
+  deps: ['$injector']
+};

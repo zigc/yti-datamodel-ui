@@ -1,0 +1,25 @@
+<div uib-dropdown class="pull-right" ng-show="$ctrl.showMenu">
+
+  <button id="model_action_menu" class="btn btn-action dropdown-toggle" uib-dropdown-toggle>
+    <span translate>Choose action</span>
+  </button>
+
+  <div class="dropdown-menu-right" uib-dropdown-menu>
+
+    <button id="add_subscription_button"
+            ng-show="$ctrl.canAddSubscription"
+            class="dropdown-item"
+            type="button"
+            ng-click="$ctrl.addSubscription()"
+            translate>Add email subscription</button>
+
+    <button id="remove_subscription_button"
+            ng-show="$ctrl.canRemoveSubscription"
+            class="dropdown-item"
+            type="button"
+            ng-click="$ctrl.removeSubscription()"
+            translate>Remove email subscription</button>
+
+  </div>
+
+</div>

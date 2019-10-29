@@ -142,6 +142,15 @@ msgstr ""
 msgid "Historical versions"
 msgstr ""
 
+msgid "Choose action"
+msgstr ""
+
+msgid "Add email subscription"
+msgstr ""
+
+msgid "Remove email subscription"
+msgstr ""
+
 msgid "No referrers"
 msgstr ""
 
@@ -206,9 +215,6 @@ msgid "Select class"
 msgstr ""
 
 msgid "Add class"
-msgstr ""
-
-msgid "Classes defined in profiles"
 msgstr ""
 
 msgid "External classes"
@@ -415,6 +421,9 @@ msgstr ""
 msgid "Edit reference data"
 msgstr ""
 
+msgid "You will receive an email notification when this resource changes."
+msgstr ""
+
 msgid "Datamodel definition"
 msgstr ""
 
@@ -520,10 +529,39 @@ msgstr ""
 msgid "Send"
 msgstr ""
 
-msgid "xsd:long error"
+msgid ""
+"You have subscribed to be notified via email when the following resources "
+"change. To remove the subscription, click the icon next to the resource."
+msgstr ""
+
+msgid "Email notifications"
+msgstr ""
+
+msgid "Daily"
+msgstr ""
+
+msgid "Code list resources"
+msgstr ""
+
+msgid "Terminology resources"
+msgstr ""
+
+msgid "Datamodel resources"
+msgstr ""
+
+msgid "Comments resources"
+msgstr ""
+
+msgid "INFORMATION"
+msgstr ""
+
+msgid "SUBSCRIPTIONS"
 msgstr ""
 
 msgid "xsd:string"
+msgstr ""
+
+msgid "xsd:string error"
 msgstr ""
 
 msgid "rdfs:Literal"
@@ -577,7 +615,7 @@ msgstr ""
 msgid "xsd:long"
 msgstr ""
 
-msgid "xsd:string error"
+msgid "xsd:long error"
 msgstr ""
 
 msgid "xsd:int"
@@ -634,7 +672,7 @@ msgstr ""
 msgid "xsd:base64Binary error"
 msgstr ""
 
-msgid "Guide through specializing a class"
+msgid "Add class description"
 msgstr ""
 
 msgid "Add classification info"
@@ -808,7 +846,7 @@ msgstr ""
 msgid "Guide through requiring a namespace"
 msgstr ""
 
-msgid "Add class description"
+msgid "Guide through specializing a class"
 msgstr ""
 
 msgid "Imported namespaces are here"
@@ -997,10 +1035,10 @@ msgstr ""
 msgid "You can add new attribute or association to the Class from here"
 msgstr ""
 
-msgid "Do you want to add following properties from scope class?"
+msgid "not found in the concept database"
 msgstr ""
 
-msgid "not found in the concept database"
+msgid "Define concept for the class"
 msgstr ""
 
 msgid "Define concept for the new class"
@@ -1449,7 +1487,7 @@ msgstr ""
 msgid "Do you want to add following properties from super class?"
 msgstr ""
 
-msgid "Define concept for the class"
+msgid "Do you want to add following properties from scope class?"
 msgstr ""
 
 msgid "Do you want to add following properties from profile class?"
@@ -1814,7 +1852,25 @@ msgstr ""
 msgid "Concept modified at"
 msgstr ""
 
-msgid "Example"
+msgid "ADD EMAIL SUBSCRIPTION TO RESOURCE REGARDING CHANGES?"
+msgstr ""
+
+msgid "REMOVE EMAIL SUBSCRIPTION TO RESOURCE?"
+msgstr ""
+
+msgid "ARE YOU SURE YOU WANT TO ENABLE THE NOTIFICATION EMAIL SUBSCRIPTION?"
+msgstr ""
+
+msgid "ARE YOU SURE YOU WANT TO DISABLE THE NOTIFICATION EMAIL SUBSCRIPTION?"
+msgstr ""
+
+msgid "Adding subscription failed."
+msgstr ""
+
+msgid "Subscription deletion failed."
+msgstr ""
+
+msgid "Definition info"
 msgstr ""
 
 msgid "Editorial note"
@@ -2033,7 +2089,7 @@ msgstr ""
 msgid "Specialized from class info"
 msgstr ""
 
-msgid "Definition info"
+msgid "Example"
 msgstr ""
 
 msgid "Example info"

@@ -15,7 +15,7 @@ export function routeConfig($routeProvider: angular.route.IRouteProvider) {
       template: '<information-about-service-page></information-about-service-page>'
     })
     .when('/user', {
-      template: '<user-page></user-page>'
+      template: '<app-user-details></app-user-details>'
     })
     .when('/group', {
       template: '<group-page group-id="groupId"></group-page>',

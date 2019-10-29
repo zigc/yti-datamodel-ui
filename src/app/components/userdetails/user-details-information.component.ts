@@ -1,17 +1,18 @@
-import { ILocationService, IScope } from 'angular';
-import { UserService } from 'app/services/userService';
-import { LocationService } from 'app/services/locationService';
-import { Role, User } from 'yti-common-ui/services/user.service';
-import { Organization } from 'app/entities/organization';
-import { index } from 'yti-common-ui/utils/array';
-import { comparingLocalizable } from 'app/utils/comparator';
-import { LanguageService } from 'app/services/languageService';
-import { OrganizationService } from 'app/services/organizationService';
-import { Options } from 'yti-common-ui/components/dropdown.component';
+import { Component, OnDestroy } from '@angular/core';
+import { Role, UserService } from 'yti-common-ui/services/user.service';
+import { Subscription } from 'rxjs';
+import { Organization } from '../../entities/organization';
+import { LanguageService } from '../../services/languageService';
 import { combineSets, hasAny } from 'yti-common-ui/utils/set';
-import { gettextCatalog as GettextCatalog } from 'angular-gettext';
-import { UserRoleService } from 'app/services/userRoleService';
-import { LegacyComponent } from 'app/utils/angular';
+import { Options } from 'yti-common-ui/components/dropdown.component';
+import { comparingLocalizable } from '../../utils/comparator';
+import { index } from 'yti-common-ui/utils/array';
+import {
+  GettextCatalogWrapper,
+  LocationServiceWrapper,
+  OrganizationServiceWrapper,
+  UserRoleServiceWrapper
+} from '../../ajs-upgraded-providers';
 
 interface UserOrganizationRoles {
   organization?: Organization;
@@ -19,10 +20,13 @@ interface UserOrganizationRoles {
   requests: Role[];
 }
 
-@LegacyComponent({
-  template: require('./userPage.html')
+@Component({
+  selector: 'app-user-details-information',
+  templateUrl: './user-details-information.component.html',
 })
-export class UserPageComponent {
+export class UserDetailsInformationComponent implements OnDestroy {
+
+  private subscriptionToClean: Subscription[] = [];
 
   userOrganizations: UserOrganizationRoles[];
   organizationOptions: Options<Organization>;
@@ -31,40 +35,40 @@ export class UserPageComponent {
   selectedOrganization: Organization | null = null;
   requestsInOrganizations = new Map<string, Set<Role>>();
 
-  constructor($scope: IScope,
-              $location: ILocationService,
+  constructor(private locationServiceWrapper: LocationServiceWrapper,
               private userService: UserService,
-              locationService: LocationService,
-              organizationService: OrganizationService,
-              private gettextCatalog: GettextCatalog,
               private languageService: LanguageService,
-              private userRoleService: UserRoleService) {
-    'ngInject';
-    locationService.atUser();
+              private userRoleServiceWrapper: UserRoleServiceWrapper,
+              private organizationServiceWrapper: OrganizationServiceWrapper,
+              private gettextCatalogWrapper: GettextCatalogWrapper) {
 
-    $scope.$watch(() => userService.user, user => {
-      if (user.anonymous) {
-        $location.url('/');
+    this.subscriptionToClean.push(this.userService.loggedIn$.subscribe(loggedIn => {
+      if (!loggedIn) {
+        locationServiceWrapper.locationService.url('/');
       }
-    });
+    }));
 
-    userService.updateLoggedInUser();
-
-    organizationService.getOrganizations().then(organizations => {
+    this.organizationServiceWrapper.organizationService.getOrganizations().then(organizations => {
       this.allOrganizations = organizations;
       this.allOrganizationsById = index(organizations, org => org.id.uuid);
       this.reloadUserOrganizations();
       this.reloadOrganizationOptions();
+      this.refreshRequests();
     });
-
-    this.refreshRequests();
   }
 
-  get user(): User {
-    return this.userService.user as User;
+  ngOnDestroy() {
+
+    this.subscriptionToClean.forEach(s => s.unsubscribe());
+  }
+
+  get user() {
+
+    return this.userService.user;
   }
 
   get loading() {
+
     return !this.allOrganizations || !this.requestsInOrganizations;
   }
 
@@ -107,7 +111,7 @@ export class UserPageComponent {
       return {
         value: org,
         name: () => org ? this.languageService.translate(org.label)
-          : this.gettextCatalog.getString('Choose organization')
+                        : this.gettextCatalogWrapper.gettextCatalog.getString('Choose organization')
       };
     });
   }
@@ -118,7 +122,7 @@ export class UserPageComponent {
       throw new Error('No organization selected for request');
     }
 
-    this.userRoleService.sendUserRequest(this.selectedOrganization.id)
+    this.userRoleServiceWrapper.userRoleService.sendUserRequest(this.selectedOrganization.id)
       .then(() => this.refreshRequests());
   }
 
@@ -126,7 +130,7 @@ export class UserPageComponent {
 
     this.selectedOrganization = null;
 
-    this.userRoleService.getUserRequests().then(userRequests => {
+    this.userRoleServiceWrapper.userRoleService.getUserRequests().then(userRequests => {
 
       this.requestsInOrganizations.clear();
 

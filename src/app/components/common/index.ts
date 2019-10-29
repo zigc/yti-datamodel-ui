@@ -29,6 +29,7 @@ import { NgIfBodyDirective } from './ngIfBody';
 
 import { componentDeclaration, directiveDeclaration } from 'app/utils/angular';
 import { module as mod } from './module';
+import { ModelActionMenuComponent } from './modelActionMenu';
 export { module } from './module'
 
 mod.component('accordion', componentDeclaration(AccordionComponent));
@@ -38,6 +39,7 @@ mod.component('accordionChevron', componentDeclaration(AccordionChevronComponent
 mod.component('buttonWithOptions', componentDeclaration(ButtonWithOptionsComponent));
 mod.component('clipboard', componentDeclaration(ClipboardComponent));
 mod.component('export', componentDeclaration(ExportComponent));
+mod.component('modelActionMenu', componentDeclaration(ModelActionMenuComponent));
 mod.directive('float', directiveDeclaration(FloatDirective));
 mod.component('highlight', componentDeclaration(HighlightComponent));
 mod.filter('highlight', HighlightFilter);

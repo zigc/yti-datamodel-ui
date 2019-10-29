@@ -150,6 +150,15 @@ msgstr "Lataa"
 msgid "Historical versions"
 msgstr "Historialliset versiot"
 
+msgid "Choose action"
+msgstr "Valitse toiminto"
+
+msgid "Add email subscription"
+msgstr "Tilaa sähköposti-ilmoitukset"
+
+msgid "Remove email subscription"
+msgstr "Poista sähköposti-ilmoitukset"
+
 msgid "No referrers"
 msgstr "Ei viittauksia"
 
@@ -215,9 +224,6 @@ msgstr "Valitse luokka"
 
 msgid "Add class"
 msgstr "Lisää luokka"
-
-msgid "Classes defined in profiles"
-msgstr "Profiilien luokat"
 
 msgid "External classes"
 msgstr "Ulkoiset luokat"
@@ -444,6 +450,9 @@ msgstr "poista valinta"
 msgid "Edit reference data"
 msgstr "Muokkaa koodistoa"
 
+msgid "You will receive an email notification when this resource changes."
+msgstr "Sinulle lähetetään sähköpostia, kun tähän aineistoon tulee muutoksia."
+
 msgid "Datamodel definition"
 msgstr "Tietomääritykset"
 
@@ -549,11 +558,42 @@ msgstr "Lähetä käyttöoikeuspyyntö"
 msgid "Send"
 msgstr "Lähetä"
 
-msgid "xsd:long error"
-msgstr "Virheellinen kokonaisluku"
+msgid ""
+"You have subscribed to be notified via email when the following resources "
+"change. To remove the subscription, click the icon next to the resource."
+msgstr ""
+"Olet tilannut seuraavien aineistojen muutoksista ilmoitukset sähköpostiisi. "
+"Poistaaksesi ilmoituksen, paina aineiston vieressä olevaa ikonia."
+
+msgid "Email notifications"
+msgstr "Sähköposti-ilmoitukset"
+
+msgid "Daily"
+msgstr "Joka päivä"
+
+msgid "Code list resources"
+msgstr "Koodistoaineistot"
+
+msgid "Terminology resources"
+msgstr "Sanastoaineistot"
+
+msgid "Datamodel resources"
+msgstr "Tietomalliaineistot"
+
+msgid "Comments resources"
+msgstr "Kommenttien aineistot"
+
+msgid "INFORMATION"
+msgstr "TIEDOT"
+
+msgid "SUBSCRIPTIONS"
+msgstr "TILAUKSET"
 
 msgid "xsd:string"
 msgstr "Teksti"
+
+msgid "xsd:string error"
+msgstr "Virheellinen teksti"
 
 msgid "rdfs:Literal"
 msgstr "Literaali"
@@ -606,8 +646,8 @@ msgstr "Virheellinen kokonaisluku"
 msgid "xsd:long"
 msgstr "Kokonaisluku (64bit)"
 
-msgid "xsd:string error"
-msgstr "Virheellinen teksti"
+msgid "xsd:long error"
+msgstr "Virheellinen kokonaisluku"
 
 msgid "xsd:int"
 msgstr "Kokonaisluku (32bit)"
@@ -663,8 +703,8 @@ msgstr "Base64 binääri"
 msgid "xsd:base64Binary error"
 msgstr "Virheellinen Base64 binääri"
 
-msgid "Guide through specializing a class"
-msgstr "Luokan erikoistamisen ohjeistus"
+msgid "Add class description"
+msgstr "Voit lisätä uuden luokan täältä"
 
 msgid "Add classification info"
 msgstr "Tietoalueet luokittelevat tietomallit eri hallinnon aloille"
@@ -872,8 +912,8 @@ msgstr ""
 msgid "Guide through requiring a namespace"
 msgstr "Nimiavaruuden lisäämisen ohjeistus"
 
-msgid "Add class description"
-msgstr "Voit lisätä uuden luokan täältä"
+msgid "Guide through specializing a class"
+msgstr "Luokan erikoistamisen ohjeistus"
 
 msgid "Imported namespaces are here"
 msgstr "Lisätyt nimiavaruudet näkyvät täällä"
@@ -1090,11 +1130,11 @@ msgstr ""
 "Täältä voit lisätä luokalle uuden attribuutin jonka arvoalue perustuu "
 "tietotyyppiin tai assosiaation jolla viitataan toiseen luokkaan"
 
-msgid "Do you want to add following properties from scope class?"
-msgstr "Haluatko lisätä seuraavat ominaisuudet tarkennettavasta luokasta?"
-
 msgid "not found in the concept database"
 msgstr "ei löydy sanastosta"
+
+msgid "Define concept for the class"
+msgstr "Määrittele käsite luokalle"
 
 msgid "Define concept for the new class"
 msgstr "Määrittele käsite uudelle luokalle"
@@ -1573,8 +1613,8 @@ msgstr "Haluatko lisätä seuraavat ominaisuudet luokasta?"
 msgid "Do you want to add following properties from super class?"
 msgstr "Haluatko lisätä seuraavat ominaisuudet yläluokasta?"
 
-msgid "Define concept for the class"
-msgstr "Määrittele käsite luokalle"
+msgid "Do you want to add following properties from scope class?"
+msgstr "Haluatko lisätä seuraavat ominaisuudet tarkennettavasta luokasta?"
 
 msgid "Do you want to add following properties from profile class?"
 msgstr "Haluatko lisätä seuraavat ominaisuudet nostettavaan luokkaan?"
@@ -1942,8 +1982,30 @@ msgstr "Käsitteen tila"
 msgid "Concept modified at"
 msgstr "Käsitettä muokattu"
 
-msgid "Example"
-msgstr "Esimerkki"
+msgid "ADD EMAIL SUBSCRIPTION TO RESOURCE REGARDING CHANGES?"
+msgstr "TILAA SÄHKÖPOSTI-ILMOITUKSET AINEISTON MUUTOKSISTA?"
+
+msgid "REMOVE EMAIL SUBSCRIPTION TO RESOURCE?"
+msgstr "POISTETAANKO SÄHKÖPOSTI-TILAUS AINEISTOSTA?"
+
+msgid "ARE YOU SURE YOU WANT TO ENABLE THE NOTIFICATION EMAIL SUBSCRIPTION?"
+msgstr ""
+"OLETKO VARMA, ETTÄ HALUAT KYTKEÄ SÄHKÖPOSTIEN VASTAANOTTOON LIITTYVÄN "
+"ASETUKSEN PÄÄLLE?"
+
+msgid "ARE YOU SURE YOU WANT TO DISABLE THE NOTIFICATION EMAIL SUBSCRIPTION?"
+msgstr ""
+"OLETKO VARMA, ETTÄ HALUAT KYTKEÄ SÄHKÖPOSTIEN VASTAANOTTOON LIITTYVÄN "
+"ASETUKSEN POIS PÄÄLTÄ?"
+
+msgid "Adding subscription failed."
+msgstr "Ilmoitusten tilaus epäonnistui."
+
+msgid "Subscription deletion failed."
+msgstr "Ilmoitusten poisto epäonnistui."
+
+msgid "Definition info"
+msgstr "Käsitteen määritelmä"
 
 msgid "Editorial note"
 msgstr "Muokkaajan kommentti"
@@ -2180,8 +2242,8 @@ msgstr "Tarkennettu luokasta"
 msgid "Specialized from class info"
 msgstr "Luokka jota soveltamisprofiilissa on tarkennettu"
 
-msgid "Definition info"
-msgstr "Käsitteen määritelmä"
+msgid "Example"
+msgstr "Esimerkki"
 
 msgid "Example info"
 msgstr "Esimerkkiarvo ominaisuudelle"
@@ -2441,6 +2503,9 @@ msgstr "Attribuutti"
 
 msgid "owl:ObjectProperty"
 msgstr "Assosiaatio"
+
+#~ msgid "Classes defined in profiles"
+#~ msgstr "Profiilien luokat"
 
 #~ msgid "Advanced search"
 #~ msgstr "Tarkennettu haku"

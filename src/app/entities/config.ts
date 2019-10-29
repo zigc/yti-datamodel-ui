@@ -6,6 +6,7 @@ export class Config {
               public terminologyUrl: string,
               public codeListUrl: string,
               public commentsUrl: string,
+              public messagingEnabled: boolean,
               public dev: boolean,
               public env: string) {
   }
@@ -22,6 +23,10 @@ export class Config {
     }
   }
 
+  get isMessagingEnabled(): boolean {
+    return this.messagingEnabled;
+  }
+
   getEnvironmentIdentifier(style?: 'prefix' | 'postfix'): string {
     if (this.env !== 'prod') {
       const identifier = this.env.toUpperCase();
@@ -34,5 +39,13 @@ export class Config {
       }
     }
     return '';
+  }
+
+  getUriWithEnv(uri: string): string | null {
+
+    if (uri && this.env !== 'prod') {
+      return uri + '?env=' + this.env;
+    }
+    return uri ? uri : null;
   }
 }

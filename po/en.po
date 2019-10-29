@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2019-10-22 16:29+0300\n"
+"PO-Revision-Date: 2019-10-29 13:20+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -151,6 +151,15 @@ msgstr ""
 msgid "Historical versions"
 msgstr ""
 
+msgid "Choose action"
+msgstr ""
+
+msgid "Add email subscription"
+msgstr ""
+
+msgid "Remove email subscription"
+msgstr ""
+
 msgid "No referrers"
 msgstr ""
 
@@ -215,9 +224,6 @@ msgid "Select class"
 msgstr ""
 
 msgid "Add class"
-msgstr ""
-
-msgid "Classes defined in profiles"
 msgstr ""
 
 msgid "External classes"
@@ -444,6 +450,9 @@ msgstr ""
 msgid "Edit reference data"
 msgstr ""
 
+msgid "You will receive an email notification when this resource changes."
+msgstr ""
+
 msgid "Datamodel definition"
 msgstr ""
 
@@ -549,11 +558,40 @@ msgstr ""
 msgid "Send"
 msgstr ""
 
-msgid "xsd:long error"
-msgstr "Invalid integer"
+msgid ""
+"You have subscribed to be notified via email when the following resources "
+"change. To remove the subscription, click the icon next to the resource."
+msgstr ""
+
+msgid "Email notifications"
+msgstr ""
+
+msgid "Daily"
+msgstr ""
+
+msgid "Code list resources"
+msgstr ""
+
+msgid "Terminology resources"
+msgstr ""
+
+msgid "Datamodel resources"
+msgstr ""
+
+msgid "Comments resources"
+msgstr ""
+
+msgid "INFORMATION"
+msgstr ""
+
+msgid "SUBSCRIPTIONS"
+msgstr ""
 
 msgid "xsd:string"
 msgstr "Text"
+
+msgid "xsd:string error"
+msgstr "Invalid text"
 
 msgid "rdfs:Literal"
 msgstr "Literal"
@@ -606,8 +644,8 @@ msgstr "Invalid integer"
 msgid "xsd:long"
 msgstr "Integer (64bit)"
 
-msgid "xsd:string error"
-msgstr "Invalid text"
+msgid "xsd:long error"
+msgstr "Invalid integer"
 
 msgid "xsd:int"
 msgstr "Integer (32bit)"
@@ -663,8 +701,8 @@ msgstr "Base64 binary"
 msgid "xsd:base64Binary error"
 msgstr "Invalid Base64 binary"
 
-msgid "Guide through specializing a class"
-msgstr ""
+msgid "Add class description"
+msgstr "Add new class from here"
 
 msgid "Add classification info"
 msgstr "Information domain classifies data models to certain use context"
@@ -854,8 +892,8 @@ msgstr ""
 msgid "Guide through requiring a namespace"
 msgstr ""
 
-msgid "Add class description"
-msgstr "Add new class from here"
+msgid "Guide through specializing a class"
+msgstr ""
 
 msgid "Imported namespaces are here"
 msgstr ""
@@ -1063,10 +1101,10 @@ msgstr "Terminology"
 msgid "You can add new attribute or association to the Class from here"
 msgstr ""
 
-msgid "Do you want to add following properties from scope class?"
+msgid "not found in the concept database"
 msgstr ""
 
-msgid "not found in the concept database"
+msgid "Define concept for the class"
 msgstr ""
 
 msgid "Define concept for the new class"
@@ -1529,10 +1567,8 @@ msgstr ""
 msgid "Add properties from super class"
 msgstr ""
 
-#, fuzzy
-#| msgid "Copy properties from class"
 msgid "Add properties from scope class"
-msgstr "Copy attributes or associations from class"
+msgstr ""
 
 msgid "Add properties from profile class"
 msgstr ""
@@ -1546,7 +1582,7 @@ msgstr ""
 msgid "Do you want to add following properties from super class?"
 msgstr ""
 
-msgid "Define concept for the class"
+msgid "Do you want to add following properties from scope class?"
 msgstr ""
 
 msgid "Do you want to add following properties from profile class?"
@@ -1914,8 +1950,26 @@ msgstr ""
 msgid "Concept modified at"
 msgstr ""
 
-msgid "Example"
+msgid "ADD EMAIL SUBSCRIPTION TO RESOURCE REGARDING CHANGES?"
 msgstr ""
+
+msgid "REMOVE EMAIL SUBSCRIPTION TO RESOURCE?"
+msgstr ""
+
+msgid "ARE YOU SURE YOU WANT TO ENABLE THE NOTIFICATION EMAIL SUBSCRIPTION?"
+msgstr ""
+
+msgid "ARE YOU SURE YOU WANT TO DISABLE THE NOTIFICATION EMAIL SUBSCRIPTION?"
+msgstr ""
+
+msgid "Adding subscription failed."
+msgstr ""
+
+msgid "Subscription deletion failed."
+msgstr ""
+
+msgid "Definition info"
+msgstr "Definition of the concept"
 
 msgid "Editorial note"
 msgstr ""
@@ -2141,8 +2195,8 @@ msgstr ""
 msgid "Specialized from class info"
 msgstr "Reference to the Class of the Shape"
 
-msgid "Definition info"
-msgstr "Definition of the concept"
+msgid "Example"
+msgstr ""
 
 msgid "Example info"
 msgstr "Example value for the property"

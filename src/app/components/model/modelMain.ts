@@ -3,7 +3,7 @@ import { NgbTabChangeEvent, NgbTabset } from '@ng-bootstrap/ng-bootstrap';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { ModelAndSelection, SubRoutingHackService } from '../../services/subRoutingHackService';
 import { ModelService } from '../../services/modelService';
-import { ModelServiceWrapper } from '../../ajs-upgraded-providers';
+import { ConfigServiceWrapper, ModelServiceWrapper } from '../../ajs-upgraded-providers';
 import { Model } from '../../entities/model';
 import { NotificationModal } from '../common/notificationModal';
 import { EditingGuard, EditorContainer, View } from './modelControllerService';
@@ -14,6 +14,9 @@ import { InteractiveHelp } from '../../help/contract';
 import { HelpProvider } from '../common/helpProvider';
 import { ModelPageHelpService } from '../../help/providers/modelPageHelpService';
 import { HelpService } from '../../help/providers/helpService';
+import { Config } from '../../entities/config';
+import { MessagingService } from '../../services/messaging-service';
+import { UserService } from 'yti-common-ui/services/user.service';
 
 @Component({
   selector: 'app-model-main',
@@ -35,11 +38,18 @@ export class ModelMainComponent implements OnDestroy, OnInit, EditorContainer, E
   private registeredEditingViews: View[] = [];
   private modelService: ModelService;
   private subscriptions: Subscription[] = [];
+  config: Config;
+  isMessagingEnabled: boolean;
+  isLoggedIn: boolean;
+  hasSubscription: boolean;
 
   constructor(private subRoutingService: SubRoutingHackService, modelServiceWrapper: ModelServiceWrapper,
               private notificationModal: NotificationModal, private confirmationModal: ConfirmationModal,
               private languageService: LanguageService, private modelPageHelpService: ModelPageHelpService,
-              private helpService: HelpService) {
+              private helpService: HelpService,
+              private configServiceWrapper: ConfigServiceWrapper,
+              private messagingService: MessagingService,
+              private userService: UserService) {
     this.modelService = modelServiceWrapper.modelService;
     this.editorContainer = this;
   }
@@ -47,6 +57,14 @@ export class ModelMainComponent implements OnDestroy, OnInit, EditorContainer, E
   ngOnInit(): void {
     this.helpService.registerProvider(this);
     this.subRoutingService.setGuard(this);
+
+    this.configServiceWrapper.configService.getConfig().then(config => {
+      this.config = config;
+      this.isMessagingEnabled = config.isMessagingEnabled;
+      this.getSubscription();
+    });
+
+    this.isLoggedIn = this.userService.isLoggedIn();
 
     this.subscriptions.push(this.languageService.language$.subscribe(uiLanguage => {
       this.setHelps();
@@ -137,6 +155,23 @@ export class ModelMainComponent implements OnDestroy, OnInit, EditorContainer, E
   onSubSelection(selection: { resourceCurie?: string, propertyId?: string }) {
     if (this.model) {
       this.subRoutingService.navigateTo(this.model.prefix, selection.resourceCurie, selection.propertyId);
+    }
+  }
+
+  getSubscription() {
+    if (this.model) {
+      const uri: string = this.model.namespace.toString();
+      if (this.config.messagingEnabled && !this.userService.user.anonymous) {
+        this.messagingService.getSubscription(uri).subscribe(resource => {
+          if (resource) {
+            this.hasSubscription = true;
+          } else {
+            this.hasSubscription = false;
+          }
+        });
+      }
+    } else {
+       this.hasSubscription = false;
     }
   }
 

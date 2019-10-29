@@ -59,7 +59,8 @@
     "uuid": "3.0.1",
     "webcola": "3.3.8",
     "yti-common-ui": "https://github.com/VRK-YTI/yti-common-ui.git/#37a7d81485101b34fe99466f16c1fd360f98429b",
-    "zone.js": "~0.8.26"
+    "zone.js": "~0.8.26",
+    "simple-line-icons": "^2.4.1"
   },
   "devDependencies": {
     "@angular-builders/custom-webpack": "^2.4.0",

@@ -9,8 +9,19 @@
       <div class="row">
         <div class="nameButtonRow col-12">
           <h2><span class="mr-4">{{model!.label | translateValue}}</span></h2>
+          <div class="nameButtonRowButton subscription">
+            <span class="subscription-icon icon-bell"
+               ngbTooltip="{{ 'You will receive an email notification when this resource changes.' | translate }}"></span>
+          </div>
           <model-language-chooser class="nameButtonRowButton" [context]="model"></model-language-chooser>
           <export-component class="ml-2 nameButtonRowButton" [idPrefix]="'model'" [entity]="model" [context]="model"></export-component>
+          <model-action-menu class="ml-2 nameButtonRowButton"
+                             [isMessagingEnabled]="isMessagingEnabled"
+                             [hasSubscription]="hasSubscription"
+                             [isLoggedIn]="isLoggedIn"
+                             [entity]="model"
+                             [context]="model">
+          </model-action-menu>
         </div>
       </div>
       <div class="row">

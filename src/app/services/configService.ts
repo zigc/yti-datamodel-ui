@@ -7,6 +7,7 @@ interface ConfigType {
   conceptsFrontend: string;
   codesFrontend: string;
   commentsFrontend: string;
+  messagingEnabled: boolean;
   dev: boolean;
   env: string;
 }
@@ -22,7 +23,7 @@ export class ConfigService {
     return this.$http.get<ConfigType>(apiEndpointWithName('config'))
       .then(response => {
         const data = response.data!;
-        return new Config(data.groupsFrontend, data.conceptsFrontend, data.codesFrontend, data.commentsFrontend, data.dev, data.env);
+        return new Config(data.groupsFrontend, data.conceptsFrontend, data.codesFrontend, data.commentsFrontend, data.messagingEnabled, data.dev, data.env);
       });
   }
 }

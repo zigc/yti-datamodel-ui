@@ -8,7 +8,6 @@ import { module as visualizationModule } from './components/visualization';
 import { module as formModule } from './components/form';
 import { module as modelModule } from './components/model';
 import { module as navigationModule } from './components/navigation';
-import { module as userModule } from './components/user';
 import { module as informationModule } from './components/information';
 import { module as filterModule } from './components/filter';
 import { module as componentsModule } from './components';
@@ -46,7 +45,8 @@ import { apiEndpointWithName } from './services/config';
 import { ExpandableTextComponent } from 'yti-common-ui/components/expandable-text.component';
 import { ModelMainComponent } from './components/model/modelMain';
 import {
-  confirmationModalProvider,
+  configServiceProvider,
+  confirmationModalProvider, datamodelLocationServiceProvider,
   displayItemFactoryProvider,
   gettextCatalogProvider,
   languageServiceProvider,
@@ -54,14 +54,16 @@ import {
   modelPageHelpServiceProvider,
   modelServiceProvider,
   notificationModalProvider,
+  organizationServiceProvider,
   routeServiceProvider,
   scopeProvider,
   showClassInfoModalProvider,
-  showPredicateInfoModalProvider
+  showPredicateInfoModalProvider,
+  userRoleServiceProvider
 } from './ajs-upgraded-providers';
 import {
   ExportDirective,
-  HighlightDirective,
+  HighlightDirective, ModelActionMenuDirective,
   ModelLanguageChooserDirective,
   ModelPageDirective,
   ModelViewDirective,
@@ -74,7 +76,12 @@ import { IndexSearchService } from './services/indexSearchService';
 import { VirtualScrollerModule } from 'ngx-virtual-scroller';
 import { SearchClassTableModalContentComponent } from './components/editor/searchClassTableModalContent';
 import { SearchPredicateTableModalContentComponent } from './components/editor/searchPredicateTableModalContent';
+import { MessagingService } from './services/messaging-service';
+import { UserDetailsSubscriptionsComponent } from './components/userdetails/user-details-subscriptions.component';
+import { UserDetailsInformationComponent } from './components/userdetails/user-details-information.component';
+import { UserDetailsComponent } from './components/userdetails/user-details.component';
 import IAnimateProvider = animate.IAnimateProvider;
+import { ConfirmationModalService } from 'yti-common-ui/components/confirmation-modal.component';
 
 require('angular-gettext');
 require('checklist-model');
@@ -158,10 +165,14 @@ export function localizerFactory(languageService: LanguageService): AngularLocal
     ModelViewDirective,
     ModelLanguageChooserDirective,
     ExportDirective,
+    ModelActionMenuDirective,
     SortByColumnHeaderDirective,
     HighlightDirective,
     SearchClassTableModalContentComponent,
-    SearchPredicateTableModalContentComponent
+    SearchPredicateTableModalContentComponent,
+    UserDetailsComponent,
+    UserDetailsInformationComponent,
+    UserDetailsSubscriptionsComponent
   ],
   entryComponents: [
     FooterComponent,
@@ -176,7 +187,10 @@ export function localizerFactory(languageService: LanguageService): AngularLocal
     UseContextInputComponent,
     ModelMainComponent,
     SearchClassTableModalContentComponent,
-    SearchPredicateTableModalContentComponent
+    SearchPredicateTableModalContentComponent,
+    UserDetailsComponent,
+    UserDetailsInformationComponent,
+    UserDetailsSubscriptionsComponent
   ],
   providers: [
     { provide: AUTHENTICATED_USER_ENDPOINT, useFactory: resolveAuthenticatedUserEndpoint },
@@ -193,9 +207,14 @@ export function localizerFactory(languageService: LanguageService): AngularLocal
     displayItemFactoryProvider,
     showClassInfoModalProvider,
     showPredicateInfoModalProvider,
+    organizationServiceProvider,
+    userRoleServiceProvider,
+    configServiceProvider,
+    datamodelLocationServiceProvider,
     Title,
     HelpService,
-    IndexSearchService
+    IndexSearchService,
+    MessagingService
   ]
 })
 export class AppModule {
@@ -222,7 +241,6 @@ const mod = angular.module('iow-ui', [
   formModule.name,
   modelModule.name,
   navigationModule.name,
-  userModule.name,
   informationModule.name,
   filterModule.name,
   componentsModule.name,
@@ -245,7 +263,9 @@ mod.directive('appFilterDropdown', downgradeComponent({ component: FilterDropdow
 mod.directive('appStatus', downgradeComponent({ component: StatusComponent }));
 mod.directive('appUseContextInput', downgradeComponent({ component: UseContextInputComponent }));
 mod.directive('appSearchClassTableModalContent', downgradeComponent({ component: SearchClassTableModalContentComponent }));
-mod.directive('appSearchPredicateTableModalContent', downgradeComponent({ component: SearchPredicateTableModalContentComponent }));
+mod.directive('appUserDetails', downgradeComponent({ component: UserDetailsComponent }));
+mod.directive('appUserDetailsInformation', downgradeComponent({ component: UserDetailsInformationComponent }));
+mod.directive('appUserDetailsSubscriptions', downgradeComponent({ component: UserDetailsSubscriptionsComponent }));
 
 mod.factory('translateService', downgradeInjectable(TranslateService));
 mod.factory('loginModal', downgradeInjectable(LoginModalService));
@@ -254,6 +274,8 @@ mod.factory('zone', downgradeInjectable(NgZone));
 mod.factory('titleService', downgradeInjectable(Title));
 mod.factory('helpService', downgradeInjectable(HelpService));
 mod.factory('indexSearchService', downgradeInjectable(IndexSearchService));
+mod.factory('messagingService', downgradeInjectable(MessagingService));
+mod.factory('confirmationModalService', downgradeInjectable(ConfirmationModalService));
 
 mod.config(routeConfig);
 

@@ -66,6 +66,21 @@ export class ExportDirective extends UpgradeComponent {
 }
 
 @Directive({
+  selector: 'model-action-menu'
+})
+export class ModelActionMenuDirective extends UpgradeComponent {
+  @Input() isMessagingEnabled: boolean;
+  @Input() isLoggedIn: boolean;
+  @Input() hasSubscription: boolean;
+  @Input() entity: Model;
+  @Input() context: LanguageContext;
+
+  constructor(elementRef: ElementRef, injector: Injector) {
+    super('modelActionMenu', elementRef, injector);
+  }
+}
+
+@Directive({
   selector: 'sort-by-column-header'
 })
 export class SortByColumnHeaderDirective extends UpgradeComponent {
