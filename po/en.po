@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2019-10-29 13:20+0200\n"
+"PO-Revision-Date: 2019-10-29 15:30+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -450,6 +450,11 @@ msgstr ""
 msgid "Edit reference data"
 msgstr ""
 
+msgid ""
+"Please note that the content of this field is public. Don't use personal "
+"contact information!"
+msgstr ""
+
 msgid "You will receive an email notification when this resource changes."
 msgstr ""
 
@@ -587,11 +592,11 @@ msgstr ""
 msgid "SUBSCRIPTIONS"
 msgstr ""
 
+msgid "xsd:long error"
+msgstr "Invalid integer"
+
 msgid "xsd:string"
 msgstr "Text"
-
-msgid "xsd:string error"
-msgstr "Invalid text"
 
 msgid "rdfs:Literal"
 msgstr "Literal"
@@ -644,8 +649,8 @@ msgstr "Invalid integer"
 msgid "xsd:long"
 msgstr "Integer (64bit)"
 
-msgid "xsd:long error"
-msgstr "Invalid integer"
+msgid "xsd:string error"
+msgstr "Invalid text"
 
 msgid "xsd:int"
 msgstr "Integer (32bit)"
@@ -701,8 +706,8 @@ msgstr "Base64 binary"
 msgid "xsd:base64Binary error"
 msgstr "Invalid Base64 binary"
 
-msgid "Add class description"
-msgstr "Add new class from here"
+msgid "Guide through specializing a class"
+msgstr ""
 
 msgid "Add classification info"
 msgstr "Information domain classifies data models to certain use context"
@@ -892,8 +897,8 @@ msgstr ""
 msgid "Guide through requiring a namespace"
 msgstr ""
 
-msgid "Guide through specializing a class"
-msgstr ""
+msgid "Add class description"
+msgstr "Add new class from here"
 
 msgid "Imported namespaces are here"
 msgstr ""
@@ -1101,10 +1106,10 @@ msgstr "Terminology"
 msgid "You can add new attribute or association to the Class from here"
 msgstr ""
 
-msgid "not found in the concept database"
+msgid "Shapes are not allowed"
 msgstr ""
 
-msgid "Define concept for the class"
+msgid "not found in the concept database"
 msgstr ""
 
 msgid "Define concept for the new class"
@@ -1597,7 +1602,7 @@ msgstr ""
 msgid "Cannot import profile"
 msgstr ""
 
-msgid "Shapes are not allowed"
+msgid "Define concept for the class"
 msgstr ""
 
 msgid "Classes are not allowed"
@@ -1968,8 +1973,8 @@ msgstr ""
 msgid "Subscription deletion failed."
 msgstr ""
 
-msgid "Definition info"
-msgstr "Definition of the concept"
+msgid "Example"
+msgstr ""
 
 msgid "Editorial note"
 msgstr ""
@@ -2195,8 +2200,8 @@ msgstr ""
 msgid "Specialized from class info"
 msgstr "Reference to the Class of the Shape"
 
-msgid "Example"
-msgstr ""
+msgid "Definition info"
+msgstr "Definition of the concept"
 
 msgid "Example info"
 msgstr "Example value for the property"
@@ -2439,9 +2444,7 @@ msgid "Contact label"
 msgstr "Contact"
 
 msgid "Contact label info"
-msgstr ""
-"Description for the feedback channel. Do not use personal email addresses. "
-"Preferred form for example: \"Data modeling group: maintain@example.org\""
+msgstr "Feedback channel for datamodel, e.g. email address."
 
 msgid "owl:DatatypeProperty"
 msgstr "Attribute"

@@ -450,6 +450,13 @@ msgstr "poista valinta"
 msgid "Edit reference data"
 msgstr "Muokkaa koodistoa"
 
+msgid ""
+"Please note that the content of this field is public. Don't use personal "
+"contact information!"
+msgstr ""
+"Huomaathan, että tämän kentän sisältö on julkista. Älä käytä "
+"henkilökohtaisia yhteystietoja!"
+
 msgid "You will receive an email notification when this resource changes."
 msgstr "Sinulle lähetetään sähköpostia, kun tähän aineistoon tulee muutoksia."
 
@@ -589,11 +596,11 @@ msgstr "TIEDOT"
 msgid "SUBSCRIPTIONS"
 msgstr "TILAUKSET"
 
+msgid "xsd:long error"
+msgstr "Virheellinen kokonaisluku"
+
 msgid "xsd:string"
 msgstr "Teksti"
-
-msgid "xsd:string error"
-msgstr "Virheellinen teksti"
 
 msgid "rdfs:Literal"
 msgstr "Literaali"
@@ -646,8 +653,8 @@ msgstr "Virheellinen kokonaisluku"
 msgid "xsd:long"
 msgstr "Kokonaisluku (64bit)"
 
-msgid "xsd:long error"
-msgstr "Virheellinen kokonaisluku"
+msgid "xsd:string error"
+msgstr "Virheellinen teksti"
 
 msgid "xsd:int"
 msgstr "Kokonaisluku (32bit)"
@@ -703,8 +710,8 @@ msgstr "Base64 binääri"
 msgid "xsd:base64Binary error"
 msgstr "Virheellinen Base64 binääri"
 
-msgid "Add class description"
-msgstr "Voit lisätä uuden luokan täältä"
+msgid "Guide through specializing a class"
+msgstr "Luokan erikoistamisen ohjeistus"
 
 msgid "Add classification info"
 msgstr "Tietoalueet luokittelevat tietomallit eri hallinnon aloille"
@@ -912,8 +919,8 @@ msgstr ""
 msgid "Guide through requiring a namespace"
 msgstr "Nimiavaruuden lisäämisen ohjeistus"
 
-msgid "Guide through specializing a class"
-msgstr "Luokan erikoistamisen ohjeistus"
+msgid "Add class description"
+msgstr "Voit lisätä uuden luokan täältä"
 
 msgid "Imported namespaces are here"
 msgstr "Lisätyt nimiavaruudet näkyvät täällä"
@@ -1130,11 +1137,11 @@ msgstr ""
 "Täältä voit lisätä luokalle uuden attribuutin jonka arvoalue perustuu "
 "tietotyyppiin tai assosiaation jolla viitataan toiseen luokkaan"
 
+msgid "Shapes are not allowed"
+msgstr "Erikoistettuja luokkia ei saa valita"
+
 msgid "not found in the concept database"
 msgstr "ei löydy sanastosta"
-
-msgid "Define concept for the class"
-msgstr "Määrittele käsite luokalle"
 
 msgid "Define concept for the new class"
 msgstr "Määrittele käsite uudelle luokalle"
@@ -1628,8 +1635,8 @@ msgstr "Ei ole lisätty nimiavaruudeksi"
 msgid "Cannot import profile"
 msgstr "Soveltamisprofiili ei voi olla nimiavaruutena"
 
-msgid "Shapes are not allowed"
-msgstr "Erikoistettuja luokkia ei saa valita"
+msgid "Define concept for the class"
+msgstr "Määrittele käsite luokalle"
 
 msgid "Classes are not allowed"
 msgstr "Erikoistamattomia luokkia ei saa valita"
@@ -2004,8 +2011,8 @@ msgstr "Ilmoitusten tilaus epäonnistui."
 msgid "Subscription deletion failed."
 msgstr "Ilmoitusten poisto epäonnistui."
 
-msgid "Definition info"
-msgstr "Käsitteen määritelmä"
+msgid "Example"
+msgstr "Esimerkki"
 
 msgid "Editorial note"
 msgstr "Muokkaajan kommentti"
@@ -2242,8 +2249,8 @@ msgstr "Tarkennettu luokasta"
 msgid "Specialized from class info"
 msgstr "Luokka jota soveltamisprofiilissa on tarkennettu"
 
-msgid "Example"
-msgstr "Esimerkki"
+msgid "Definition info"
+msgstr "Käsitteen määritelmä"
 
 msgid "Example info"
 msgstr "Esimerkkiarvo ominaisuudelle"
@@ -2493,10 +2500,7 @@ msgid "Contact label"
 msgstr "Yhteydenotto"
 
 msgid "Contact label info"
-msgstr ""
-"Tietomallin palautekanavan kuvaus. Älä käytä henkilökohtaista "
-"sähköpostiosoitetta. Suositeltava muoto esimerkiksi: \"Tietomallityöryhmän "
-"ylläpito: yllapito@example.org\""
+msgstr "Palautekanava tietomallille, esim. sähköpostiosoite."
 
 msgid "owl:DatatypeProperty"
 msgstr "Attribuutti"

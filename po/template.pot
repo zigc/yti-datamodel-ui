@@ -421,6 +421,11 @@ msgstr ""
 msgid "Edit reference data"
 msgstr ""
 
+msgid ""
+"Please note that the content of this field is public. Don't use personal "
+"contact information!"
+msgstr ""
+
 msgid "You will receive an email notification when this resource changes."
 msgstr ""
 
@@ -558,10 +563,10 @@ msgstr ""
 msgid "SUBSCRIPTIONS"
 msgstr ""
 
-msgid "xsd:string"
+msgid "xsd:long error"
 msgstr ""
 
-msgid "xsd:string error"
+msgid "xsd:string"
 msgstr ""
 
 msgid "rdfs:Literal"
@@ -615,7 +620,7 @@ msgstr ""
 msgid "xsd:long"
 msgstr ""
 
-msgid "xsd:long error"
+msgid "xsd:string error"
 msgstr ""
 
 msgid "xsd:int"
@@ -672,7 +677,7 @@ msgstr ""
 msgid "xsd:base64Binary error"
 msgstr ""
 
-msgid "Add class description"
+msgid "Guide through specializing a class"
 msgstr ""
 
 msgid "Add classification info"
@@ -846,7 +851,7 @@ msgstr ""
 msgid "Guide through requiring a namespace"
 msgstr ""
 
-msgid "Guide through specializing a class"
+msgid "Add class description"
 msgstr ""
 
 msgid "Imported namespaces are here"
@@ -1035,10 +1040,10 @@ msgstr ""
 msgid "You can add new attribute or association to the Class from here"
 msgstr ""
 
-msgid "not found in the concept database"
+msgid "Shapes are not allowed"
 msgstr ""
 
-msgid "Define concept for the class"
+msgid "not found in the concept database"
 msgstr ""
 
 msgid "Define concept for the new class"
@@ -1502,7 +1507,7 @@ msgstr ""
 msgid "Cannot import profile"
 msgstr ""
 
-msgid "Shapes are not allowed"
+msgid "Define concept for the class"
 msgstr ""
 
 msgid "Classes are not allowed"
@@ -1870,7 +1875,7 @@ msgstr ""
 msgid "Subscription deletion failed."
 msgstr ""
 
-msgid "Definition info"
+msgid "Example"
 msgstr ""
 
 msgid "Editorial note"
@@ -2089,7 +2094,7 @@ msgstr ""
 msgid "Specialized from class info"
 msgstr ""
 
-msgid "Example"
+msgid "Definition info"
 msgstr ""
 
 msgid "Example info"
