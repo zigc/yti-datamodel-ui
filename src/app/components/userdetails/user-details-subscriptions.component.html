@@ -27,7 +27,8 @@
     </dt>
     <dd>
       <div *ngFor="let resource of messagingResources.get(APPLICATION_CODELIST)">
-        <a href="{{ getUriWithEnv(resource.uri) }}" target="_blank"><span>{{ resource.getDisplayName(languageService, true) }}</span></a>
+        <a href="{{ getUriWithEnv(resource.uri) }}"
+           target="_blank"><span>{{ resource.getDisplayName(languageService.createLocalizer()) }}</span></a>
         <button [id]="'remove_' + resource.uri + '_ref_button'"
                 type="button"
                 class="icon icon-trash"
@@ -43,7 +44,8 @@
     </dt>
     <dd>
       <div *ngFor="let resource of messagingResources.get(APPLICATION_TERMINOLOGY)">
-        <a href="{{ getUriWithEnv(resource.uri) }}" target="_blank"><span>{{ resource.getDisplayName(languageService, true) }}</span></a>
+        <a href="{{ getUriWithEnv(resource.uri) }}"
+           target="_blank"><span>{{ resource.getDisplayName(languageService.createLocalizer()) }}</span></a>
         <button [id]="'remove_' + resource.uri + '_ref_button'"
                 type="button"
                 class="icon icon-trash"
@@ -59,7 +61,8 @@
     </dt>
     <dd>
       <div *ngFor="let resource of messagingResources.get(APPLICATION_DATAMODEL)">
-        <a href="{{ getUriWithEnv(resource.uri) }}" target="_blank"><span>{{ resource.getDisplayName(languageService, true) }}</span></a>
+        <a href="{{ getUriWithEnv(resource.uri) }}"
+           target="_blank"><span>{{ resource.getDisplayName(languageService.createLocalizer()) }}</span></a>
         <button [id]="'remove_' + resource.uri + '_ref_button'"
                 type="button"
                 class="icon icon-trash"
@@ -75,7 +78,8 @@
     </dt>
     <dd>
       <div *ngFor="let resource of messagingResources.get(APPLICATION_COMMENTS)">
-        <a href="{{ getCommentsUriWithEnv(resource.uri) }}" target="_blank"><span>{{ resource.getDisplayName(languageService, true) }}</span></a>
+        <a href="{{ getCommentsUriWithEnv(resource.uri) }}"
+           target="_blank"><span>{{ resource.getDisplayName(languageService.createLocalizer()) }}</span></a>
         <button [id]="'remove_' + resource.uri + '_ref_button'"
                 type="button"
                 class="icon icon-trash"

@@ -1,5 +1,6 @@
-import { Localizable, Localizer } from 'yti-common-ui/types/localization';
+import { Localizable } from 'yti-common-ui/types/localization';
 import { MessagingResourceType } from '../services/messaging-api-schema';
+import { DefaultAngularJSLocalizer } from '../services/languageService';
 
 export class MessagingResource {
 
@@ -24,8 +25,8 @@ export class MessagingResource {
     };
   }
 
-  getDisplayName(localizer: Localizer, useUILanguage: boolean = false): string {
-    const displayName = localizer.translate(this.prefLabel, useUILanguage);
+  getDisplayName(localizer: DefaultAngularJSLocalizer): string {
+    const displayName = localizer.translate(this.prefLabel);
     return displayName ? displayName : this.uri;
   }
 
