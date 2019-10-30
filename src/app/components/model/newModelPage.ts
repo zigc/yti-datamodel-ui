@@ -13,6 +13,7 @@ import { ReferenceData } from 'app/entities/referenceData';
 import { ImportedNamespace, Link } from 'app/entities/model';
 import { LegacyComponent } from 'app/utils/angular';
 import { EditableForm } from 'app/components/form/editableEntityController';
+import { Localizable } from 'yti-common-ui/types/localization';
 
 @LegacyComponent({
   bindings: {
@@ -25,6 +26,7 @@ export class NewModelPageComponent {
   prefix: string;
   label: string;
   comment: string;
+  contact: Localizable;
 
   classifications: Classification[] = [];
   contributors:  Organization[] = [];
@@ -139,6 +141,7 @@ export class NewModelPageComponent {
         // XXX: should comment go to model creator api?
         model.comment = { [this.languages[0]]: this.comment };
         model.useContext = this.useContext;
+        model.contact = this.contact;
         this.vocabularies.forEach(v => model.addVocabulary(v));
         this.referenceDatas.forEach(r => model.addReferenceData(r));
         this.importedNamespaces.forEach(ns => model.addImportedNamespace(ns));

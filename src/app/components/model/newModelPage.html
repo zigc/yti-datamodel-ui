@@ -51,6 +51,10 @@
 
           <app-use-context-input ng-model="$ctrl.useContext" [editing]="true" [model-type]="$ctrl.type"></app-use-context-input>
 
+          <editable data-title="Contact label" context="$ctrl.context">
+            <p translate>Please note that the content of this field is public. Don't use personal contact information!</p>
+            <textarea id="modelContact" class="form-control" localized-input autocomplete="off" ng-model="$ctrl.contact"></textarea>
+          </editable>
         </div>
 
         <div class="col-lg-6 offset-lg-1">
