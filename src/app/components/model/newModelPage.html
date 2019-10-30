@@ -32,11 +32,11 @@
         <div class="col-lg-5">
 
           <editable data-title="{{$ctrl.type + ' label' | capitalize}}" context="$ctrl.context" autofocus>
-            <input id="modelLabel" class="form-control" type="text" autocomplete="off" required ng-model="$ctrl.label" />
+            <input id="modelLabel" class="form-control" localized-input type="text" autocomplete="off" required ng-model="$ctrl.label" />
           </editable>
 
           <editable data-title="Description" context="$ctrl.context">
-            <textarea id="modelComment" class="form-control" autocomplete="off" ng-model="$ctrl.comment"></textarea>
+            <textarea id="modelComment" class="form-control" localized-input autocomplete="off" ng-model="$ctrl.comment"></textarea>
           </editable>
 
           <editable-multiple-language-select data-title="Model languages" id="modelLanguage" ng-model="$ctrl.languages" required="true"></editable-multiple-language-select>

@@ -24,8 +24,8 @@ import { Localizable } from 'yti-common-ui/types/localization';
 export class NewModelPageComponent {
 
   prefix: string;
-  label: string;
-  comment: string;
+  label: Localizable;
+  comment: Localizable;
   contact: Localizable;
 
   classifications: Classification[] = [];
@@ -136,10 +136,13 @@ export class NewModelPageComponent {
     const orgIds = this.contributors.map(o => o.id.uuid);
     const classificationIds = this.classifications.map(c => c.identifier);
 
-    this.modelService.newModel(this.prefix, this.label, classificationIds, orgIds, this.languages, this.type)
+    // NOTE:
+    // The label parameter in this.modelService.newModel(...) is passed as an empty string because the model creator api doesn't accept localizable label.
+    // The empty label of the created model object will be overwritten with localizable object this.label that comes from the form.
+    this.modelService.newModel(this.prefix, '', classificationIds, orgIds, this.languages, this.type)
       .then(model => {
-        // XXX: should comment go to model creator api?
-        model.comment = { [this.languages[0]]: this.comment };
+        model.label = this.label;
+        model.comment = this.comment;
         model.useContext = this.useContext;
         model.contact = this.contact;
         this.vocabularies.forEach(v => model.addVocabulary(v));
