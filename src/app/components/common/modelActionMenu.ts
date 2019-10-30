@@ -50,7 +50,7 @@ export class ModelActionMenuComponent {
 
   get canSubscribe(): boolean {
 
-    return this.isMessagingEnabled && !this.isLoggedIn;
+    return this.isMessagingEnabled && this.isLoggedIn;
   }
 
   get canAddSubscription(): boolean {
