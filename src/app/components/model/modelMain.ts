@@ -58,12 +58,6 @@ export class ModelMainComponent implements OnDestroy, OnInit, EditorContainer, E
     this.helpService.registerProvider(this);
     this.subRoutingService.setGuard(this);
 
-    this.configServiceWrapper.configService.getConfig().then(config => {
-      this.config = config;
-      this.isMessagingEnabled = config.isMessagingEnabled;
-      this.getSubscription();
-    });
-
     this.isLoggedIn = this.userService.isLoggedIn();
 
     this.subscriptions.push(this.languageService.language$.subscribe(uiLanguage => {
@@ -81,13 +75,11 @@ export class ModelMainComponent implements OnDestroy, OnInit, EditorContainer, E
           }
         } else {
           this.loadingModelPrefix = selection.modelPrefix;
-
           // TODO: Is this "clear while waiting" a good thing to do? Would it be better to hold onto the old one until loading succeeds?
           this.model = undefined;
           if (this.currentModelAndSelection.getValue().model) {
             this.currentModelAndSelection.next(new ModelAndSelection());
           }
-
           this.modelService.getModelByPrefix(selection.modelPrefix).then(model => {
             if (this.loadingModelPrefix === model.prefix) {
               this.loadingModelPrefix = undefined;
@@ -119,6 +111,7 @@ export class ModelMainComponent implements OnDestroy, OnInit, EditorContainer, E
           this.currentModelAndSelection.next(new ModelAndSelection());
         }
       }
+      this.getConfigAndSubscription();
     }));
   }
 
@@ -156,6 +149,14 @@ export class ModelMainComponent implements OnDestroy, OnInit, EditorContainer, E
     if (this.model) {
       this.subRoutingService.navigateTo(this.model.prefix, selection.resourceCurie, selection.propertyId);
     }
+  }
+
+  getConfigAndSubscription() {
+    this.configServiceWrapper.configService.getConfig().then(config => {
+      this.config = config;
+      this.isMessagingEnabled = config.isMessagingEnabled;
+      this.getSubscription();
+    });
   }
 
   getSubscription() {
