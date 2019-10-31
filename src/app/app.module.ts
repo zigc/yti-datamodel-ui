@@ -263,6 +263,7 @@ mod.directive('appFilterDropdown', downgradeComponent({ component: FilterDropdow
 mod.directive('appStatus', downgradeComponent({ component: StatusComponent }));
 mod.directive('appUseContextInput', downgradeComponent({ component: UseContextInputComponent }));
 mod.directive('appSearchClassTableModalContent', downgradeComponent({ component: SearchClassTableModalContentComponent }));
+mod.directive('appSearchPredicateTableModalContent', downgradeComponent({ component: SearchPredicateTableModalContentComponent }));
 mod.directive('appUserDetails', downgradeComponent({ component: UserDetailsComponent }));
 mod.directive('appUserDetailsInformation', downgradeComponent({ component: UserDetailsInformationComponent }));
 mod.directive('appUserDetailsSubscriptions', downgradeComponent({ component: UserDetailsSubscriptionsComponent }));
