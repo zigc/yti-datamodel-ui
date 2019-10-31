@@ -8,6 +8,7 @@ import { ConfirmationModalService } from 'yti-common-ui/components/confirmation-
 import { ignoreModalClose } from 'yti-common-ui/utils/modal';
 import { ErrorModal } from '../form/errorModal';
 import { Config } from '../../entities/config';
+import { Url } from '../../entities/uri';
 
 @LegacyComponent({
   bindings: {
@@ -66,7 +67,7 @@ export class ModelActionMenuComponent {
 
   addSubscription() {
 
-    const uri = this.entity.namespace.toString();
+    const uri: string = this.stripHashTagFromEndOfUrl(this.entity.namespace);
     const type = this.entity.normalizedType;
     if (uri) {
       this.confirmationModalService.open('ADD EMAIL SUBSCRIPTION TO RESOURCE REGARDING CHANGES?', undefined, '')
@@ -85,7 +86,7 @@ export class ModelActionMenuComponent {
 
   removeSubscription() {
 
-    const uri = this.entity.namespace.toString();
+    const uri: string = this.stripHashTagFromEndOfUrl(this.entity.namespace);
     if (uri) {
       this.confirmationModalService.open('REMOVE EMAIL SUBSCRIPTION TO RESOURCE?', undefined, '')
         .then(() => {
@@ -99,6 +100,16 @@ export class ModelActionMenuComponent {
           });
         }, ignoreModalClose);
     }
+  }
+
+  stripHashTagFromEndOfUrl(url: Url): string {
+
+    const uri = url.toString();
+
+    if (uri.endsWith('#')) {
+      return uri.substr(0, uri.length - 1);
+    }
+    return uri.toString();
   }
 
 }

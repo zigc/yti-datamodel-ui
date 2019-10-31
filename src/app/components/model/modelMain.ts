@@ -17,6 +17,7 @@ import { HelpService } from '../../help/providers/helpService';
 import { Config } from '../../entities/config';
 import { MessagingService } from '../../services/messaging-service';
 import { UserService } from 'yti-common-ui/services/user.service';
+import { Url } from '../../entities/uri';
 
 @Component({
   selector: 'app-model-main',
@@ -161,7 +162,7 @@ export class ModelMainComponent implements OnDestroy, OnInit, EditorContainer, E
 
   getSubscription() {
     if (this.model) {
-      const uri: string = this.model.namespace.toString();
+      const uri: string = this.stripHashTagFromEndOfUrl(this.model.namespace);
       if (this.config.messagingEnabled && !this.userService.user.anonymous) {
         this.messagingService.getSubscription(uri).subscribe(resource => {
           if (resource) {
@@ -174,6 +175,16 @@ export class ModelMainComponent implements OnDestroy, OnInit, EditorContainer, E
     } else {
        this.hasSubscription = false;
     }
+  }
+
+  stripHashTagFromEndOfUrl(url: Url): string {
+
+    const uri = url.toString();
+
+    if (uri.endsWith('#')) {
+      return uri.substr(0, uri.length - 1);
+    }
+    return uri.toString();
   }
 
   // TODO: Getting these from ModelPageComponent makes no sense, except for the historical reasons. Maybe the
