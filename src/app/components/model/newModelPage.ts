@@ -13,7 +13,6 @@ import { ReferenceData } from 'app/entities/referenceData';
 import { ImportedNamespace, Link } from 'app/entities/model';
 import { LegacyComponent } from 'app/utils/angular';
 import { EditableForm } from 'app/components/form/editableEntityController';
-import { Localizable } from 'yti-common-ui/types/localization';
 
 @LegacyComponent({
   bindings: {
@@ -24,9 +23,9 @@ import { Localizable } from 'yti-common-ui/types/localization';
 export class NewModelPageComponent {
 
   prefix: string;
-  label: Localizable;
-  comment: Localizable;
-  contact: Localizable;
+  label: string;
+  comment: string;
+  contact: string;
 
   classifications: Classification[] = [];
   contributors:  Organization[] = [];
@@ -136,15 +135,12 @@ export class NewModelPageComponent {
     const orgIds = this.contributors.map(o => o.id.uuid);
     const classificationIds = this.classifications.map(c => c.identifier);
 
-    // NOTE:
-    // The label parameter in this.modelService.newModel(...) is passed as an empty string because the model creator api doesn't accept localizable label.
-    // The empty label of the created model object will be overwritten with localizable object this.label that comes from the form.
-    this.modelService.newModel(this.prefix, '', classificationIds, orgIds, this.languages, this.type)
+    this.modelService.newModel(this.prefix, this.label, classificationIds, orgIds, this.languages, this.type)
       .then(model => {
-        model.label = this.label;
-        model.comment = this.comment;
+        // XXX: should comment or contact go to model creator api?
+        model.comment = { [this.languages[0]]: this.comment };
         model.useContext = this.useContext;
-        model.contact = this.contact;
+        model.contact = { [this.languages[0]]: this.contact };
         this.vocabularies.forEach(v => model.addVocabulary(v));
         this.referenceDatas.forEach(r => model.addReferenceData(r));
         this.importedNamespaces.forEach(ns => model.addImportedNamespace(ns));
