@@ -579,7 +579,7 @@ msgid "Email notifications"
 msgstr "Sähköposti-ilmoitukset"
 
 msgid "Daily"
-msgstr "Joka päivä"
+msgstr "Päivittäin"
 
 msgid "Code list resources"
 msgstr "Koodistoaineistot"
@@ -1999,7 +1999,7 @@ msgid "ADD EMAIL SUBSCRIPTION TO RESOURCE REGARDING CHANGES?"
 msgstr "TILAA SÄHKÖPOSTI-ILMOITUKSET AINEISTON MUUTOKSISTA?"
 
 msgid "REMOVE EMAIL SUBSCRIPTION TO RESOURCE?"
-msgstr "POISTETAANKO SÄHKÖPOSTI-TILAUS AINEISTOSTA?"
+msgstr "POISTETAANKO SÄHKÖPOSTITILAUS AINEISTOSTA?"
 
 msgid "ARE YOU SURE YOU WANT TO ENABLE THE NOTIFICATION EMAIL SUBSCRIPTION?"
 msgstr ""
