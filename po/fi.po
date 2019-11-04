@@ -178,7 +178,7 @@ msgid "Define type for class property"
 msgstr "Määrittele luokan ominaisuuden tyyppi"
 
 msgid "Choose"
-msgstr "valitse"
+msgstr "Valitse"
 
 msgid "Add property"
 msgstr "Lisää attribuutti tai assosiaatio"
@@ -193,7 +193,7 @@ msgid "Logical constraints"
 msgstr "Loogiset rajoitteet"
 
 msgid "Choose class"
-msgstr "valitse luokka"
+msgstr "Valitse luokka"
 
 msgid "Not defined"
 msgstr "Ei määritelty"
@@ -282,8 +282,11 @@ msgstr "Valitse attribuutti tai assosiaatio"
 msgid "Add attribute or association"
 msgstr "Lisää attribuutti tai assosiaatio"
 
-msgid "Change concept"
-msgstr "Vaihda käsite"
+msgid "INFO_TEXT_SUBJECT_VIEW_SELECT_CONCEPT"
+msgstr "Valitse käsite sanastosta."
+
+msgid "Select concept"
+msgstr "Valitse käsite"
 
 msgid "No concept defined"
 msgstr "Käsitettä ei ole määritelty"
@@ -442,7 +445,7 @@ msgid "Not selected"
 msgstr "Ei valittu"
 
 msgid "Choose root class"
-msgstr "valitse juurisolmu"
+msgstr "Valitse juurisolmu"
 
 msgid "Clear selection"
 msgstr "poista valinta"
@@ -1346,10 +1349,10 @@ msgid "Association list"
 msgstr "Assosiaatiot"
 
 msgid "Choose attribute"
-msgstr "valitse attribuutti"
+msgstr "Valitse attribuutti"
 
 msgid "Choose association"
-msgstr "valitse assosiaatio"
+msgstr "Valitse assosiaatio"
 
 msgid "What is description?"
 msgstr "Mitä ovat yhteentoimivuuden kuvaukset?"
@@ -1768,7 +1771,7 @@ msgid "Create new reference data"
 msgstr "Luo uusi koodisto"
 
 msgid "Choose reference data"
-msgstr "valitse koodisto"
+msgstr "Valitse koodisto"
 
 msgid "Write reference data code"
 msgstr "Kirjoita koodi…"
@@ -1851,8 +1854,11 @@ msgstr "Kopioi attribuutti soveltamisprofiiliin"
 msgid "Defined in vocabularies"
 msgstr "Määritelty sanastoissa"
 
+msgid "Change concept"
+msgstr "Vaihda käsite"
+
 msgid "Choose concept"
-msgstr "valitse käsite"
+msgstr "Valitse käsite"
 
 msgid "Submit error"
 msgstr "Toiminnossa tapahtui virhe"

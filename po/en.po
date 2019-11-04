@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2019-10-29 15:30+0200\n"
+"PO-Revision-Date: 2019-11-04 10:57+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -283,8 +283,13 @@ msgstr ""
 msgid "Add attribute or association"
 msgstr ""
 
-msgid "Change concept"
-msgstr ""
+msgid "INFO_TEXT_SUBJECT_VIEW_SELECT_CONCEPT"
+msgstr "Select concept from terminology."
+
+#, fuzzy
+#| msgid "Search for concept"
+msgid "Select concept"
+msgstr "Search for {{name}}"
 
 msgid "No concept defined"
 msgstr ""
@@ -1816,6 +1821,9 @@ msgid "Copy reusable attribute to profile"
 msgstr ""
 
 msgid "Defined in vocabularies"
+msgstr ""
+
+msgid "Change concept"
 msgstr ""
 
 msgid "Choose concept"

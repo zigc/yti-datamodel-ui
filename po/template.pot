@@ -274,7 +274,10 @@ msgstr ""
 msgid "Add attribute or association"
 msgstr ""
 
-msgid "Change concept"
+msgid "INFO_TEXT_SUBJECT_VIEW_SELECT_CONCEPT"
+msgstr ""
+
+msgid "Select concept"
 msgstr ""
 
 msgid "No concept defined"
@@ -1718,6 +1721,9 @@ msgid "Copy reusable attribute to profile"
 msgstr ""
 
 msgid "Defined in vocabularies"
+msgstr ""
+
+msgid "Change concept"
 msgstr ""
 
 msgid "Choose concept"

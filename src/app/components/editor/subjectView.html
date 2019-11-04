@@ -1,14 +1,16 @@
 
-<div class="row">
-  <div class="col-12">
-    <button ng-if="$ctrl.showChangeSubject()"
-            id="{{$ctrl.id + '_change_concept_button'}}"
-            type="button"
-            class="btn btn-link pull-right"
-            ng-disabled="!$ctrl.entity.inUnstableState"
-            ng-click="$ctrl.changeSubject()">
-      <span translate>Change concept</span>
-    </button>
+<div class="row" ng-if="$ctrl.showChangeSubject()">
+  <div class="col-12 ">
+    <div class="pull-right">
+      <button id="{{$ctrl.id + '_change_concept_button'}}"
+              type="button"
+              class="btn btn-link pr-0"
+              ng-disabled="!$ctrl.entity.inUnstableState"
+              ng-click="$ctrl.changeSubject()">
+        <span translate>Select concept</span>
+      </button>
+      <span class="fas fa-info-circle info" uib-tooltip="{{'INFO_TEXT_SUBJECT_VIEW_SELECT_CONCEPT' | translate}}"></span>
+    </div>
   </div>
 </div>
 
