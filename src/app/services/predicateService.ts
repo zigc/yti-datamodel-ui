@@ -197,7 +197,7 @@ export class DefaultPredicateService implements PredicateService {
   }
 
   changePredicateType(predicate: Attribute|Association, newType: KnownPredicateType, model: Model) {
-    return this.newPredicate(model, '', predicate.subject ? predicate.subject.id : null, newType, 'fi')
+    return this.newPredicate(model, '', null, newType, 'fi')
       .then(changedPredicate => {
         changedPredicate.id = predicate.id;
         changedPredicate.label = predicate.label;
@@ -207,6 +207,7 @@ export class DefaultPredicateService implements PredicateService {
         changedPredicate.editorialNote = predicate.editorialNote;
         changedPredicate.status = predicate.status;
         changedPredicate.unsaved = predicate.unsaved;
+        changedPredicate.subject = predicate.subject;
         return changedPredicate;
       });
   }
