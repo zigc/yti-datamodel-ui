@@ -2,6 +2,7 @@
 
   <div class="component-header">
     <h3>
+      <i class="glyph-icon" ng-class="$ctrl.editableController.getEditable().glyphIconClass"></i>
       <span>{{$ctrl.editableController.getEditable() | translateLabel: $ctrl.model}}</span>
     </h3>
   </div>

@@ -68,6 +68,7 @@ import { IPageInfo } from 'ngx-virtual-scroller';
 
             <td class="name-col">
               <div>
+                <i class="glyph-icon" [ngClass]="glyphIconStyle(searchResult)"></i>
                 <app-ajax-loading-indicator-small class="pr-1"
                                                   *ngIf="isLoadingSelection(searchResult)"></app-ajax-loading-indicator-small>
                 <highlight [text]="searchResult.label" [context]="model" [search]="searchText"></highlight>
@@ -174,6 +175,13 @@ export class SearchClassTableModalContentComponent {
 
   classInfoLinkID(item: AbstractClass) {
     return `show_class_info_${item.id.toString()}_link`;
+  }
+
+  glyphIconStyle(item: ClassListItem) {
+    const styles = Array.from(item.glyphIconClass);
+    styles.push('pr-1');
+
+    return styles;
   }
 
   trackBy(index: number, item: ClassListItem) {
