@@ -9,6 +9,7 @@ import { ignoreModalClose } from 'yti-common-ui/utils/modal';
 import { ErrorModal } from '../form/errorModal';
 import { Config } from '../../entities/config';
 import { Url } from '../../entities/uri';
+import { UserService } from '../../services/userService';
 
 @LegacyComponent({
   bindings: {
@@ -26,7 +27,6 @@ export class ModelActionMenuComponent {
   context: LanguageContext;
   hasSubscription: boolean;
   isMessagingEnabled: boolean;
-  isLoggedIn: boolean;
   uri: string;
   config: Config;
 
@@ -35,7 +35,8 @@ export class ModelActionMenuComponent {
               private languageService: LanguageService,
               private confirmationModalService: ConfirmationModalService,
               private messagingService: MessagingService,
-              private errorModal: ErrorModal) {
+              private errorModal: ErrorModal,
+              private userService: UserService) {
     'ngInject';
   }
 
@@ -51,7 +52,7 @@ export class ModelActionMenuComponent {
 
   get canSubscribe(): boolean {
 
-    return this.isMessagingEnabled && this.isLoggedIn;
+    return this.isMessagingEnabled && this.userService.isLoggedIn();
   }
 
   get canAddSubscription(): boolean {
