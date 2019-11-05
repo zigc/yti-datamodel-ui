@@ -70,7 +70,6 @@ export class ExportDirective extends UpgradeComponent {
 })
 export class ModelActionMenuDirective extends UpgradeComponent {
   @Input() isMessagingEnabled: boolean;
-  @Input() isLoggedIn: boolean;
   @Input() hasSubscription: boolean;
   @Input() entity: Model;
   @Input() context: LanguageContext;
