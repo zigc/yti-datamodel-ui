@@ -992,7 +992,14 @@ $input-select: 80px;
 
 ajax-loading-indicator-small {
   float: right;
-  padding-right: 10px
+  padding-right: 10px;
+
+  &.autocomplete-pending-indicator {
+    position: absolute;
+    right: 0px;
+    top: 5px;
+    z-index: 100;
+  }
 }
 
 .top-actions {

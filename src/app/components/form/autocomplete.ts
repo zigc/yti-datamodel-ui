@@ -18,6 +18,7 @@ import { limit } from 'yti-common-ui/utils/array';
   },
   transclude: true,
   template: `
+      <div style="position: relative;"><ajax-loading-indicator-small ng-if="$ctrl.pendingShow" class="autocomplete-pending-indicator"></ajax-loading-indicator-small></div>
       <ng-transclude></ng-transclude>
       <input-popup ctrl="$ctrl"><span class="content">{{::$ctrl.format(match)}}</span></input-popup>
   `
@@ -30,7 +31,7 @@ export class AutocompleteComponent<T> implements InputWithPopupController<T> {
   valueExtractor: (item: T) => any;
   excludeProvider?: () => (item: T) => string;
 
-  inputFormatter: IModelFormatter|IModelFormatter[];
+  inputFormatter: IModelFormatter | IModelFormatter[];
   applyValue: (value: string) => void;
 
   popupItems: T[] = [];
@@ -41,7 +42,9 @@ export class AutocompleteComponent<T> implements InputWithPopupController<T> {
 
   maxMatches: number;
 
-  private keyEventHandlers: {[key: number]: () => void|boolean} = {
+  private pendingShow = false;
+
+  private keyEventHandlers: { [key: number]: () => void | boolean } = {
     [arrowDown]: () => this.moveSelection(1),
     [arrowUp]: () => this.moveSelection(-1),
     [pageDown]: () => this.moveSelection(10),
@@ -56,6 +59,10 @@ export class AutocompleteComponent<T> implements InputWithPopupController<T> {
               private $element: JQuery,
               private $document: JQuery) {
     'ngInject';
+  }
+
+  get show() {
+    return this.popupItems.length > 0;
   }
 
   $postLink() {
@@ -75,6 +82,7 @@ export class AutocompleteComponent<T> implements InputWithPopupController<T> {
       const autocomplete = jQuery(event.target).closest('autocomplete');
 
       if (autocomplete[0] !== this.$element[0]) {
+        this.pendingShow = false;
         this.$scope.$apply(() => this.clear());
         this.$document.off('click', blurClickHandler);
       }
@@ -121,10 +129,6 @@ export class AutocompleteComponent<T> implements InputWithPopupController<T> {
     }
   }
 
-  private moveSelection(offset: number) {
-    this.setSelection(Math.max(Math.min(this.selectedSelectionIndex + offset, this.popupItems.length - 1), -1));
-  }
-
   setSelection(index: number) {
     this.selectedSelectionIndex = index;
   }
@@ -162,15 +166,21 @@ export class AutocompleteComponent<T> implements InputWithPopupController<T> {
   }
 
   autocomplete(search: string) {
+    this.pendingShow = true;
     this.$q.when(this.datasource(search)).then(data => {
+      if (this.pendingShow) {
+        this.pendingShow = false;
 
-      const exclude = this.excludeProvider && this.excludeProvider();
-      const included = data.filter(item => !exclude || !exclude(item));
+        const exclude = this.excludeProvider && this.excludeProvider();
+        const included = data.filter(item => !exclude || !exclude(item));
 
-      if (search) {
-        this.setMatches(included.filter(item => this.match(search, item)), true);
+        if (search) {
+          this.setMatches(included.filter(item => this.match(search, item)), true);
+        } else {
+          this.setMatches(included, false);
+        }
       } else {
-        this.setMatches(included, false);
+        this.clear();
       }
     });
   }
@@ -182,7 +192,7 @@ export class AutocompleteComponent<T> implements InputWithPopupController<T> {
   setMatches(dataMatches: T[], selectFirst: boolean) {
     this.selectedSelectionIndex = selectFirst ? 0 : -1;
     const maxMatches = this.maxMatches || 500;
-    this.popupItems = maxMatches > 0 ?  limit(dataMatches, maxMatches) : dataMatches;
+    this.popupItems = maxMatches > 0 ? limit(dataMatches, maxMatches) : dataMatches;
   }
 
   selectSelection(): boolean {
@@ -198,7 +208,7 @@ export class AutocompleteComponent<T> implements InputWithPopupController<T> {
     return !!value;
   }
 
-  get show() {
-    return this.popupItems.length > 0;
+  private moveSelection(offset: number) {
+    this.setSelection(Math.max(Math.min(this.selectedSelectionIndex + offset, this.popupItems.length - 1), -1));
   }
 }
