@@ -69,7 +69,7 @@ export class ModelActionMenuComponent {
 
     const uri: string = this.stripHashTagFromEndOfUrl(this.entity.namespace);
     const type = this.entity.normalizedType;
-    if (uri) {
+    if (uri && type) {
       this.confirmationModalService.open('ADD EMAIL SUBSCRIPTION TO RESOURCE REGARDING CHANGES?', undefined, '')
         .then(() => {
           this.messagingService.addSubscription(uri, type).subscribe(success => {

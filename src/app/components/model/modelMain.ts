@@ -42,7 +42,7 @@ export class ModelMainComponent implements OnDestroy, OnInit, EditorContainer, E
   config: Config;
   isMessagingEnabled: boolean;
   isLoggedIn: boolean;
-  hasSubscription: boolean;
+  hasSubscription: boolean | undefined;
 
   constructor(private subRoutingService: SubRoutingHackService, modelServiceWrapper: ModelServiceWrapper,
               private notificationModal: NotificationModal, private confirmationModal: ConfirmationModal,
@@ -156,22 +156,22 @@ export class ModelMainComponent implements OnDestroy, OnInit, EditorContainer, E
     this.configServiceWrapper.configService.getConfig().then(config => {
       this.config = config;
       this.isMessagingEnabled = config.isMessagingEnabled;
-      this.getSubscription();
+      if (this.isMessagingEnabled && !this.userService.user.anonymous) {
+        this.getSubscription();
+      }
     });
   }
 
   getSubscription() {
-    if (this.model) {
+    if (this.model && this.hasSubscription === undefined && this.model.namespace) {
       const uri: string = this.stripHashTagFromEndOfUrl(this.model.namespace);
-      if (this.config.messagingEnabled && !this.userService.user.anonymous) {
-        this.messagingService.getSubscription(uri).subscribe(resource => {
-          if (resource) {
-            this.hasSubscription = true;
-          } else {
-            this.hasSubscription = false;
-          }
-        });
-      }
+      this.messagingService.getSubscription(uri).subscribe(resource => {
+        if (resource) {
+          this.hasSubscription = true;
+        } else {
+          this.hasSubscription = false;
+        }
+      });
     } else {
        this.hasSubscription = false;
     }
