@@ -11,7 +11,7 @@
           <h2><span class="mr-4">{{model!.label | translateValue}}</span></h2>
           <div *ngIf="hasSubscription" class="nameButtonRowButton subscription">
             <span class="subscription-icon icon-bell"
-               ngbTooltip="{{ 'You will receive an email notification when this resource changes.' | translate }}"></span>
+                  ngbTooltip="{{ 'You will receive an email notification when this resource changes.' | translate }}"></span>
           </div>
           <model-language-chooser class="nameButtonRowButton" [context]="model"></model-language-chooser>
           <export-component class="ml-2 nameButtonRowButton" [idPrefix]="'model'" [entity]="model" [context]="model"></export-component>
@@ -19,7 +19,8 @@
                              [isMessagingEnabled]="isMessagingEnabled"
                              [hasSubscription]="hasSubscription"
                              [entity]="model"
-                             [context]="model">
+                             [context]="model"
+                             (changeHasSubscription)="changeHasSubscription($event)">
           </model-action-menu>
         </div>
       </div>

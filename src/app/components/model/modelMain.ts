@@ -42,7 +42,7 @@ export class ModelMainComponent implements OnDestroy, OnInit, EditorContainer, E
   config: Config;
   isMessagingEnabled: boolean;
   isLoggedIn: boolean;
-  hasSubscription: boolean | undefined = undefined;
+  hasSubscription: boolean | undefined = undefined;
 
   constructor(private subRoutingService: SubRoutingHackService, modelServiceWrapper: ModelServiceWrapper,
               private notificationModal: NotificationModal, private confirmationModal: ConfirmationModal,
@@ -162,6 +162,10 @@ export class ModelMainComponent implements OnDestroy, OnInit, EditorContainer, E
     });
   }
 
+  changeHasSubscription(enabled: boolean) {
+    this.hasSubscription = enabled;
+  }
+
   getSubscription() {
     if (this.model && this.hasSubscription === undefined && this.model.namespace) {
       const uri: string = this.stripHashTagFromEndOfUrl(this.model.namespace);
@@ -173,7 +177,7 @@ export class ModelMainComponent implements OnDestroy, OnInit, EditorContainer, E
         }
       });
     } else {
-       this.hasSubscription = false;
+      this.hasSubscription = false;
     }
   }
 

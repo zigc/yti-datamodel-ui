@@ -73,6 +73,7 @@ export class ModelActionMenuDirective extends UpgradeComponent {
   @Input() hasSubscription: boolean;
   @Input() entity: Model;
   @Input() context: LanguageContext;
+  @Output() changeHasSubscription: EventEmitter<boolean>;
 
   constructor(elementRef: ElementRef, injector: Injector) {
     super('modelActionMenu', elementRef, injector);

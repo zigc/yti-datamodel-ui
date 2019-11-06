@@ -14,10 +14,10 @@ import { UserService } from '../../services/userService';
 @LegacyComponent({
   bindings: {
     isMessagingEnabled: '<',
-    isAnonymous: '<',
     hasSubscription: '<',
+    changeHasSubscription: '&',
     entity: '<',
-    context: '<'
+    context: '<',
   },
   template: require('./modelActionMenu.html')
 })
@@ -29,6 +29,7 @@ export class ModelActionMenuComponent {
   isMessagingEnabled: boolean;
   uri: string;
   config: Config;
+  changeHasSubscription: (enabled: boolean) => void;
 
   constructor(private $scope: IScope,
               private $window: IWindowService,
@@ -75,9 +76,9 @@ export class ModelActionMenuComponent {
         .then(() => {
           this.messagingService.addSubscription(uri, type).subscribe(success => {
             if (success) {
-              this.hasSubscription = true;
+              this.changeHasSubscription(true);
             } else {
-              this.hasSubscription = false;
+              this.changeHasSubscription(false);
               this.errorModal.openSubmitError('Adding subscription failed.');
             }
           });
@@ -93,9 +94,9 @@ export class ModelActionMenuComponent {
         .then(() => {
           this.messagingService.deleteSubscription(uri).subscribe(success => {
             if (success) {
-              this.hasSubscription = false;
+              this.changeHasSubscription(false);
             } else {
-              this.hasSubscription = true;
+              this.changeHasSubscription(true);
               this.errorModal.openSubmitError('Subscription deletion failed.');
             }
           });
