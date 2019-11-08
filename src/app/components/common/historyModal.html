@@ -21,6 +21,7 @@
     <div class="selectable-items" style="height: 100%">
       <ul style="height: 100%; overflow-y: auto">
         <li ng-repeat="version in $ctrl.versions track by version.id"
+            id="{{version.id}}"
             ng-class="{'selection': $ctrl.isSelected(version)}"
             ng-click="$ctrl.select(version)">
           {{version.createdAt | localizedDate}}
