@@ -3,6 +3,7 @@ import { LanguageService } from 'app/services/languageService';
 import { Language, LanguageContext } from 'app/types/language';
 import { Localizable } from 'yti-common-ui/types/localization';
 import { LegacyComponent } from 'app/utils/angular';
+import { makeSimpleSearchRegexp } from 'yti-common-ui/utils/search';
 
 @LegacyComponent({
   bindings: {
@@ -32,7 +33,6 @@ export class HighlightComponent {
   }
 
   formatText() {
-
     if (!this.text) {
       return '';
     }
@@ -54,7 +54,7 @@ export class HighlightComponent {
     }
   }
 
-  findSecondaryLanguageMatch(regex: RegExp): { language: Language, startIndex: number, endIndex: number }|null {
+  findSecondaryLanguageMatch(regex: RegExp): { language: Language, startIndex: number, endIndex: number } | null {
 
     for (const [language, text] of Object.entries(this.text)) {
 
@@ -106,21 +106,15 @@ function applyHighlight(text: string, search: string): string {
   if (!text || !search || search.length === 0) {
     return text;
   } else {
-    return text.replace(createRegex(search), '<span class="highlight">$1</span>');
+    return text.replace(createRegex(search), '<span class="highlight">$&</span>');
   }
 }
 
 let cachedRegex: { search: string, value: RegExp };
 
 function createRegex(search: string) {
-
   if (!cachedRegex || cachedRegex.search !== search) {
-    cachedRegex = { search, value: new RegExp('(' + sanitizeRegex(search) + ')', 'gi') };
+    cachedRegex = { search, value: makeSimpleSearchRegexp(search, true) };
   }
-
   return cachedRegex.value;
-}
-
-function sanitizeRegex(term: string) {
-  return term && term.toString().replace(/[\\\^$*+?.()|{}\[\]]/g, '\\$&');
 }
