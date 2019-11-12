@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { ListItem, SortBy } from '../../types/entity';
 import { Exclusion } from '../../utils/exclusion';
 import { Model } from '../../entities/model';
@@ -9,6 +9,7 @@ import { DisplayItemFactory, Value } from '../form/displayItemFactory';
 import { modalCancelHandler } from '../../utils/angular';
 import { ShowClassInfoModal } from './showClassInfoModal';
 import { IPageInfo } from 'ngx-virtual-scroller';
+import { makeSimpleSearchRegexp } from 'yti-common-ui/utils/search';
 
 @Component({
   selector: 'app-search-class-table-modal-content',
@@ -74,7 +75,7 @@ import { IPageInfo } from 'ngx-virtual-scroller';
                 <highlight [text]="searchResult.label" [context]="model" [search]="searchText"></highlight>
               </div>
               <a [href]="model.linkToResource(searchResult.id)" target="_blank"
-                 [innerHTML]="searchResult.id.compact | highlight: searchText"></a>
+                 [innerHTML]="searchResult.id.compact | highlight: simpleSearchRegexp"></a>
               <div class="pt-1">
                 <app-status [status]="searchResult.status"></app-status>
               </div>
@@ -122,7 +123,7 @@ import { IPageInfo } from 'ngx-virtual-scroller';
     </div>
   `
 })
-export class SearchClassTableModalContentComponent {
+export class SearchClassTableModalContentComponent implements OnChanges {
   @Input() sortBy: SortBy<ListItem>;
   @Input() filterExclude: Exclusion<ListItem>;
   @Input() model: Model;
@@ -135,9 +136,22 @@ export class SearchClassTableModalContentComponent {
   @Output() itemSelected = new EventEmitter<ClassListItem | undefined>();
   @Output() loadMore = new EventEmitter<number>();
 
+  simpleSearchRegexp?: RegExp;
+
   constructor(private gettextCatalogWrapper: GettextCatalogWrapper,
               private displayItemFactory: DisplayItemFactory,
               protected showClassInfoModal: ShowClassInfoModal) {
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    const searchChange = changes['searchText'];
+    if (searchChange) {
+      if (searchChange.currentValue && typeof searchChange.currentValue === 'string') {
+        this.simpleSearchRegexp = makeSimpleSearchRegexp(searchChange.currentValue, true);
+      } else {
+        this.simpleSearchRegexp = undefined;
+      }
+    }
   }
 
   isSelected(item?: AbstractClass): boolean {

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
 import { KnownPredicateType, ListItem, SortBy } from '../../types/entity';
 import { Exclusion } from '../../utils/exclusion';
 import { Model } from '../../entities/model';
@@ -9,6 +9,7 @@ import { modalCancelHandler } from '../../utils/angular';
 import { ShowPredicateInfoModal } from './showPredicateInfoModal';
 import { TranslateService } from '@ngx-translate/core';
 import { IPageInfo } from 'ngx-virtual-scroller';
+import { makeSimpleSearchRegexp } from 'yti-common-ui/utils/search';
 
 @Component({
   selector: 'app-search-predicate-table-modal-content',
@@ -72,7 +73,7 @@ import { IPageInfo } from 'ngx-virtual-scroller';
                 <highlight [text]="searchResult.label" [context]="model" [search]="searchText"></highlight>
               </div>
               <a [href]="model.linkToResource(searchResult.id)" target="_blank"
-                 [innerHTML]="searchResult.id.compact | highlight: searchText"></a>
+                 [innerHTML]="searchResult.id.compact | highlight: simpleSearchRegexp"></a>
               <div class="pt-1">
                 <app-status [status]="searchResult.status"></app-status>
               </div>
@@ -127,6 +128,8 @@ export class SearchPredicateTableModalContentComponent {
   @Output() itemSelected = new EventEmitter<PredicateListItem | undefined>();
   @Output() loadMore = new EventEmitter<number>();
 
+  simpleSearchRegexp?: RegExp;
+
   constructor(private gettextCatalogWrapper: GettextCatalogWrapper,
               private translateService: TranslateService,
               private displayItemFactory: DisplayItemFactory,
@@ -135,6 +138,18 @@ export class SearchPredicateTableModalContentComponent {
 
   get infoLinkTitle() {
     return this.translateService.instant(`Show ${this.type} information`);
+  }
+
+
+  ngOnChanges(changes: SimpleChanges): void {
+    const searchChange = changes['searchText'];
+    if (searchChange) {
+      if (searchChange.currentValue && typeof searchChange.currentValue === 'string') {
+        this.simpleSearchRegexp = makeSimpleSearchRegexp(searchChange.currentValue);
+      } else {
+        this.simpleSearchRegexp = undefined;
+      }
+    }
   }
 
   isSelected(item?: AbstractPredicate): boolean {
