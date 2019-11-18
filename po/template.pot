@@ -1881,6 +1881,9 @@ msgstr ""
 msgid "Subscription deletion failed."
 msgstr ""
 
+msgid "INFO_TEXT_EMAIL_SUBSCRIPTIONS"
+msgstr ""
+
 msgid "Example"
 msgstr ""
 

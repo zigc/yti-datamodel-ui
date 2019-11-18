@@ -2017,6 +2017,12 @@ msgstr "Ilmoitusten tilaus epäonnistui."
 msgid "Subscription deletion failed."
 msgstr "Ilmoitusten poisto epäonnistui."
 
+msgid "INFO_TEXT_EMAIL_SUBSCRIPTIONS"
+msgstr ""
+"Tällä toiminnolla valitaan, onko ilmoitustoiminto aktiivinen. Ottamalla "
+"rastin pois kohdasta “Päivittäin” voit kytkeä kaikki ilmoitukset pois päältä "
+"kerralla. Palauttamalla rastin ilmoitukset aktivoituvat jälleen."
+
 msgid "Example"
 msgstr "Esimerkki"
 
