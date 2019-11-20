@@ -177,6 +177,12 @@ export class ModelPageComponent implements ModelPageActions, ModelControllerServ
         // NOTE: This component will be destroyed instantaneously, and currently this.model is not optional. So let us do nothing.
       }
     }));
+
+    this.subscriptions.push(this.modelService.contentExpired$.subscribe(modelId => {
+      if (this.model.id.uri === modelId) {
+        this.updateSelection();
+      }
+     }));
   }
 
   $onDestroy() {
@@ -588,6 +594,31 @@ export class ModelPageComponent implements ModelPageActions, ModelControllerServ
 
         this.updateNamespaces(this.namespacesInUse);
       });
+  }
+
+  private updateSelection() {
+    if (this.resource) {
+
+      if (this.resource instanceof Class) {
+
+        this.classService.getClass(this.resource.id, this.model)
+        .then(resource => {
+          if (this.resource instanceof Class && resource instanceof Class) {
+            this.resource.status = resource.status;
+            this.resource.properties = resource.properties;
+          }
+          console.log('resource class', resource);
+        });
+      } else {
+        this.predicateService.getPredicate(this.resource.id, this.model)
+        .then(resource => {
+          if (this.resource instanceof Predicate && resource instanceof Predicate) {
+            this.resource.status = resource.status;
+          }
+          console.log('resource predicate', resource);
+        });
+      }
+    }
   }
 
   private updateClasses(): IPromise<any> {

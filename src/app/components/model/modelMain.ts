@@ -214,6 +214,10 @@ export class ModelMainComponent implements OnDestroy, OnInit, EditorContainer, E
     return this.registeredEditingViews.filter(view => view.isEditing())
   }
 
+  editing(): boolean {
+    return this.editingViews().length > 0;
+  }
+
   attemptRouteChange(delay: () => void, proceed: () => void): void {
     const editing = this.editingViews();
     if (editing.length) {

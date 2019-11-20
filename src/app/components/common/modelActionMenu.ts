@@ -10,6 +10,7 @@ import { ErrorModal } from '../form/errorModal';
 import { Config } from '../../entities/config';
 import { Url } from '../../entities/uri';
 import { UserService } from '../../services/userService';
+import { MassMigrateDatamodelResourceStatusesModalService } from 'app/components/model/mass-migrate-datamodel-resource-statuses-modal.component';
 
 @LegacyComponent({
   bindings: {
@@ -18,6 +19,7 @@ import { UserService } from '../../services/userService';
     changeHasSubscription: '&',
     entity: '<',
     context: '<',
+    editing: '<'
   },
   template: require('./modelActionMenu.html')
 })
@@ -25,6 +27,7 @@ export class ModelActionMenuComponent {
 
   entity: Model;
   context: LanguageContext;
+  editing: boolean;
   hasSubscription: boolean;
   isMessagingEnabled: boolean;
   uri: string;
@@ -37,7 +40,8 @@ export class ModelActionMenuComponent {
               private confirmationModalService: ConfirmationModalService,
               private messagingService: MessagingService,
               private errorModal: ErrorModal,
-              private userService: UserService) {
+              private userService: UserService,
+              private massMigrateDatamodelResourceStatusesModalService: MassMigrateDatamodelResourceStatusesModalService) {
     'ngInject';
   }
 
@@ -114,4 +118,7 @@ export class ModelActionMenuComponent {
     return uri.toString();
   }
 
+  massMigrateDatamodelStatuses() {
+    this.massMigrateDatamodelResourceStatusesModalService.open(this.entity);
+  }
 }

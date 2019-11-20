@@ -82,6 +82,10 @@ import { UserDetailsInformationComponent } from './components/userdetails/user-d
 import { UserDetailsComponent } from './components/userdetails/user-details.component';
 import IAnimateProvider = animate.IAnimateProvider;
 import { ConfirmationModalService } from 'yti-common-ui/components/confirmation-modal.component';
+import { MassMigrateDatamodelResourceStatusesModalComponent } from './components/model/mass-migrate-datamodel-resource-statuses-modal.component';
+import { MassMigrateDatamodelResourceStatusesModalService } from './components/model/mass-migrate-datamodel-resource-statuses-modal.component';
+import { ModalService } from 'yti-common-ui/services/modal.service';
+import { AlertModalService } from 'yti-common-ui/components/alert-modal.component';
 
 require('angular-gettext');
 require('checklist-model');
@@ -172,7 +176,8 @@ export function localizerFactory(languageService: LanguageService): AngularLocal
     SearchPredicateTableModalContentComponent,
     UserDetailsComponent,
     UserDetailsInformationComponent,
-    UserDetailsSubscriptionsComponent
+    UserDetailsSubscriptionsComponent,
+    MassMigrateDatamodelResourceStatusesModalComponent
   ],
   entryComponents: [
     FooterComponent,
@@ -190,7 +195,8 @@ export function localizerFactory(languageService: LanguageService): AngularLocal
     SearchPredicateTableModalContentComponent,
     UserDetailsComponent,
     UserDetailsInformationComponent,
-    UserDetailsSubscriptionsComponent
+    UserDetailsSubscriptionsComponent,
+    MassMigrateDatamodelResourceStatusesModalComponent
   ],
   providers: [
     { provide: AUTHENTICATED_USER_ENDPOINT, useFactory: resolveAuthenticatedUserEndpoint },
@@ -214,7 +220,10 @@ export function localizerFactory(languageService: LanguageService): AngularLocal
     Title,
     HelpService,
     IndexSearchService,
-    MessagingService
+    MessagingService,
+    MassMigrateDatamodelResourceStatusesModalService,
+    ModalService,
+    AlertModalService
   ]
 })
 export class AppModule {
@@ -267,6 +276,7 @@ mod.directive('appSearchPredicateTableModalContent', downgradeComponent({ compon
 mod.directive('appUserDetails', downgradeComponent({ component: UserDetailsComponent }));
 mod.directive('appUserDetailsInformation', downgradeComponent({ component: UserDetailsInformationComponent }));
 mod.directive('appUserDetailsSubscriptions', downgradeComponent({ component: UserDetailsSubscriptionsComponent }));
+mod.directive('appMassMigrateDatamodelResourceStatusesModalComponent', downgradeComponent({ component: MassMigrateDatamodelResourceStatusesModalComponent }));
 
 mod.factory('translateService', downgradeInjectable(TranslateService));
 mod.factory('loginModal', downgradeInjectable(LoginModalService));
@@ -277,6 +287,9 @@ mod.factory('helpService', downgradeInjectable(HelpService));
 mod.factory('indexSearchService', downgradeInjectable(IndexSearchService));
 mod.factory('messagingService', downgradeInjectable(MessagingService));
 mod.factory('confirmationModalService', downgradeInjectable(ConfirmationModalService));
+mod.factory('massMigrateDatamodelResourceStatusesModalService', downgradeInjectable(MassMigrateDatamodelResourceStatusesModalService));
+mod.factory('modalService', downgradeInjectable(ModalService));
+mod.factory('alertModalService', downgradeInjectable(AlertModalService));
 
 mod.config(routeConfig);
 
