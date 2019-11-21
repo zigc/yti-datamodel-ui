@@ -599,7 +599,7 @@ export class ModelPageComponent implements ModelPageActions, ModelControllerServ
   private updateSelection() {
     if (this.resource) {
 
-      if (this.resource instanceof Class) {
+      if (this.resource.selectionType === 'class') {
 
         this.classService.getClass(this.resource.id, this.model)
         .then(resource => {
@@ -607,7 +607,6 @@ export class ModelPageComponent implements ModelPageActions, ModelControllerServ
             this.resource.status = resource.status;
             this.resource.properties = resource.properties;
           }
-          console.log('resource class', resource);
         });
       } else {
         this.predicateService.getPredicate(this.resource.id, this.model)
@@ -615,7 +614,6 @@ export class ModelPageComponent implements ModelPageActions, ModelControllerServ
           if (this.resource instanceof Predicate && resource instanceof Predicate) {
             this.resource.status = resource.status;
           }
-          console.log('resource predicate', resource);
         });
       }
     }

@@ -45,6 +45,8 @@ export class ClassViewComponent extends EditableEntityController<Class> {
 
   $onInit() {
     this.parent.registerView(this);
+
+    this.$scope.$watch(() => this.getEditable().properties, props => this.select(this.getEditable()));
   }
 
   $onDestroy() {
