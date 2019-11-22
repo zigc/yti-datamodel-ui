@@ -21,10 +21,10 @@
             translate>Remove email subscription</button>
 
     <button id="mass_migrate_datamodel_statuses_button"
+            ng-show="$ctrl.showMassMigrateDatamodelStatuses"
             class="dropdown-item"
             type="button"
             ng-click="$ctrl.massMigrateDatamodelStatuses()"
-            ng-hide="$ctrl.editing"
             translate>Update datamodel's resources' statuses</button>
 
   </div>

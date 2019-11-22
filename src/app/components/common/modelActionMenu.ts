@@ -11,6 +11,7 @@ import { Config } from '../../entities/config';
 import { Url } from '../../entities/uri';
 import { UserService } from '../../services/userService';
 import { MassMigrateDatamodelResourceStatusesModalService } from 'app/components/model/mass-migrate-datamodel-resource-statuses-modal.component';
+import { AuthorizationManagerService } from 'app/services/authorizationManagerService';
 
 @LegacyComponent({
   bindings: {
@@ -41,6 +42,7 @@ export class ModelActionMenuComponent {
               private messagingService: MessagingService,
               private errorModal: ErrorModal,
               private userService: UserService,
+              private authorizationManagerService: AuthorizationManagerService,
               private massMigrateDatamodelResourceStatusesModalService: MassMigrateDatamodelResourceStatusesModalService) {
     'ngInject';
   }
@@ -68,6 +70,16 @@ export class ModelActionMenuComponent {
   get canRemoveSubscription(): boolean {
 
     return this.canSubscribe && this.hasSubscription;
+  }
+
+  get canMassMigrateDatamodelStatuses(): boolean {
+
+    return this.authorizationManagerService.canEditModel(this.entity);
+  }
+
+  get showMassMigrateDatamodelStatuses(): boolean {
+
+    return this.canMassMigrateDatamodelStatuses && !this.editing;
   }
 
 
