@@ -1,5 +1,5 @@
 {
-  "/datamodel/api/v1/*": {
+  "/datamodel-api/api/v1/*": {
     "target": "http://localhost:8084",
     "secure": false
   },
