@@ -54,13 +54,13 @@
     "please-wait": "0.0.5",
     "proxy-polyfill": "0.3.0",
     "rxjs": "~6.3.3",
+    "simple-line-icons": "^2.4.1",
     "ui-bootstrap4": "^3.0.0",
     "uri-js": "4.2.2",
     "uuid": "3.0.1",
     "webcola": "3.3.8",
-    "yti-common-ui": "https://github.com/VRK-YTI/yti-common-ui.git/#73ff2caf640d954c060937d4cc1745d14645b2c4",
-    "zone.js": "~0.8.26",
-    "simple-line-icons": "^2.4.1"
+    "yti-common-ui": "https://github.com/VRK-YTI/yti-common-ui.git/#0284d040790873b03336c1e6e167939a65772a5a",
+    "zone.js": "~0.8.26"
   },
   "devDependencies": {
     "@angular-builders/custom-webpack": "^2.4.0",
