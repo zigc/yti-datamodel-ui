@@ -363,8 +363,8 @@ msgstr "Ei tunnettu koodiston arvo"
 
 msgid "INFO_TEXT_FRONTPAGE_SEARCH"
 msgstr ""
-"Haku kohdistuu oletuksena tietomallien nimiin. Voit hakea muilla "
-"hakuehdoilla käyttämällä \"Tarkennettu haku\" -toimintoa."
+"Haku kohdistuu oletuksena tietomallien nimiin. Voit hakea myös sisällöistä "
+"käyttämällä \"Kohdista haku myös\" -toimintoa."
 
 msgid "Search term"
 msgstr "Hakusana"
