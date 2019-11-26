@@ -59,7 +59,7 @@
     "uri-js": "4.2.2",
     "uuid": "3.0.1",
     "webcola": "3.3.8",
-    "yti-common-ui": "https://github.com/VRK-YTI/yti-common-ui.git/#0284d040790873b03336c1e6e167939a65772a5a",
+    "yti-common-ui": "https://github.com/VRK-YTI/yti-common-ui.git/#1e1e768d386dc699ea6e0dda7671ab8e59623658",
     "zone.js": "~0.8.26"
   },
   "devDependencies": {

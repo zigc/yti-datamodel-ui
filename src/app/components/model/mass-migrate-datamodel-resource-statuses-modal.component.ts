@@ -76,6 +76,7 @@ export class MassMigrateDatamodelResourceStatusesModalComponent implements OnIni
 
       this.modelService.changeStatuses(this.model, this.fromStatus$.value!, this.toStatus$.value!).then(result => {
         modalRef.message = this.translateService.instant('Statuses changed.');
+        modalRef.showOkButton = true;
         this.modal.close(false);
       }, error => {
         this.uploading = false;
