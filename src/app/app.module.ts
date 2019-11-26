@@ -86,6 +86,7 @@ import { MassMigrateDatamodelResourceStatusesModalComponent } from './components
 import { MassMigrateDatamodelResourceStatusesModalService } from './components/model/mass-migrate-datamodel-resource-statuses-modal.component';
 import { ModalService } from 'yti-common-ui/services/modal.service';
 import { AlertModalService } from 'yti-common-ui/components/alert-modal.component';
+import { DatamodelConfirmationModalService } from './services/confirmation-modal.service';
 
 require('angular-gettext');
 require('checklist-model');
@@ -223,7 +224,8 @@ export function localizerFactory(languageService: LanguageService): AngularLocal
     MessagingService,
     MassMigrateDatamodelResourceStatusesModalService,
     ModalService,
-    AlertModalService
+    AlertModalService,
+    DatamodelConfirmationModalService
   ]
 })
 export class AppModule {
@@ -290,6 +292,7 @@ mod.factory('confirmationModalService', downgradeInjectable(ConfirmationModalSer
 mod.factory('massMigrateDatamodelResourceStatusesModalService', downgradeInjectable(MassMigrateDatamodelResourceStatusesModalService));
 mod.factory('modalService', downgradeInjectable(ModalService));
 mod.factory('alertModalService', downgradeInjectable(AlertModalService));
+mod.factory('datamodelConfirmationModalService', downgradeInjectable(DatamodelConfirmationModalService));
 
 mod.config(routeConfig);
 
