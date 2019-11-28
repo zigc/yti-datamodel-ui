@@ -324,7 +324,7 @@ msgid "Existing or reserved id error"
 msgstr "Tunniste on jo käytössä tai on varattu"
 
 msgid "Required error"
-msgstr "Pakollinen kenttä"
+msgstr "Pakollinen syöte"
 
 msgid "Required localized error"
 msgstr "Täytyy olla määritelty vähintään yhdellä kielellä"
