@@ -44,7 +44,11 @@ export class SubjectViewComponent {
   }
 
   get conceptLink() {
-    return this.config && this.config.conceptUrl(this.entity.subject);
+    return this.entity.subject ? this.entity.subject.id.uri : '';
+  }
+
+  get vocabularyLink() {
+    return this.entity.subject ? this.entity.subject.vocabulary.id.uri : '';
   }
 
   changeSubject() {

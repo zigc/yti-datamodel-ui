@@ -25,7 +25,12 @@
 
         <h5>
           <i class="fas fa-lightbulb"></i>
-          <span>{{$ctrl.entity.subject | translateLabel: $ctrl.model}}</span>
+          <span>
+            <a ng-href="{{$ctrl.conceptLink}}">
+              {{$ctrl.entity.subject | translateLabel: $ctrl.model}}
+              <i class="fas fa-external-link-alt x-small-item"></i>
+            </a>
+          </span>
         </h5>
 
         <div class="row">
@@ -39,7 +44,7 @@
           <div class="col-md-6">
             <non-editable-vocabulary vocabulary="$ctrl.entity.subject.vocabulary"
                                      context="$ctrl.model"
-                                     link="$ctrl.conceptLink"></non-editable-vocabulary>
+                                     link="$ctrl.vocabularyLink"></non-editable-vocabulary>
           </div>
           <div class="col-md-3">
             <non-editable data-title="Concept status" value="$ctrl.entity.subject.status" value-as-localization-key="true"
