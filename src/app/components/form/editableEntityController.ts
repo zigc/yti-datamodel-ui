@@ -5,6 +5,8 @@ import { isModalCancel } from 'app/utils/angular';
 import { ErrorModal } from './errorModal';
 import { LanguageContext } from 'app/types/language';
 import { EditableEntity } from 'app/types/entity';
+import { DatamodelConfirmationModalService } from 'app/services/confirmation-modal.service';
+import { ignoreModalClose } from 'yti-common-ui/utils/modal';
 
 export interface EditableForm extends IFormController {
   editing: boolean;
@@ -37,7 +39,8 @@ export abstract class EditableEntityController<T extends EditableEntity> {
               private $log: ILogService,
               protected deleteConfirmationModal: DeleteConfirmationModal,
               private errorModal: ErrorModal,
-              protected userService: UserService) {
+              protected userService: UserService,
+              private datamodelConfirmationModalService?: DatamodelConfirmationModalService) {
 
     $scope.$watch(() => userService.isLoggedIn(), (isLoggedIn, wasLoggedIn) => {
       if (!isLoggedIn && wasLoggedIn) {
@@ -62,6 +65,8 @@ export abstract class EditableEntityController<T extends EditableEntity> {
 
   abstract getContext(): LanguageContext;
 
+  abstract confirmChangeToRestrictedStatus(entity: T, oldEntity: T): boolean;
+
   select(editable: T | null) {
     this.setEditable(editable);
     this.editableInEdit = editable ? <T>editable.clone() : null;
@@ -76,20 +81,32 @@ export abstract class EditableEntityController<T extends EditableEntity> {
   }
 
   saveEdited() {
+
     const editable = this.getEditable();
     const editableInEdit = this.editableInEdit;
-    this.persisting = true;
-    (editable!.unsaved ? this.create(editableInEdit!) : this.update(editableInEdit!, editable!))
-      .then(() => {
-        this.select(editableInEdit);
-        this.persisting = false;
-      }, (err: any) => {
-        if (err) {
-          this.$log.error(err);
-          this.errorModal.openSubmitError((err.data && err.data.errorMessage) || 'Unexpected error');
-        }
-        this.persisting = false;
-      });
+
+    const save = () => {
+      this.persisting = true;
+
+      (editable!.unsaved ? this.create(editableInEdit!) : this.update(editableInEdit!, editable!))
+        .then(() => {
+          this.select(editableInEdit);
+          this.persisting = false;
+        }, (err: any) => {
+          if (err) {
+            this.$log.error(err);
+            this.errorModal.openSubmitError((err.data && err.data.errorMessage) || 'Unexpected error');
+          }
+          this.persisting = false;
+        });
+    };
+
+    if (this.confirmChangeToRestrictedStatus(editableInEdit!, editable!) && this.datamodelConfirmationModalService) {
+      this.datamodelConfirmationModalService.openChangeToRestrictedStatus().then(() => save(), ignoreModalClose);
+    } else {
+      save();
+    }
+
   }
 
   openDeleteConfirmationModal(): IPromise<void> {

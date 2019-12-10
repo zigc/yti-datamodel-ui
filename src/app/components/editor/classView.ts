@@ -11,6 +11,7 @@ import { Model } from 'app/entities/model';
 import { LanguageContext } from 'app/types/language';
 import { EditorContainer, ModelControllerService } from 'app/components/model/modelControllerService';
 import { AuthorizationManagerService } from 'app/services/authorizationManagerService';
+import { changeToRestrictedStatus } from 'yti-common-ui/entities/status';
 
 @LegacyComponent({
   bindings: {
@@ -105,5 +106,9 @@ export class ClassViewComponent extends EditableEntityController<Class> {
 
   getContext(): LanguageContext {
     return this.model;
+  }
+
+  confirmChangeToRestrictedStatus(entity: Class, oldEntity: Class) {
+    return entity.status && oldEntity.status ? changeToRestrictedStatus(oldEntity.status, entity.status) : false;
   }
 }

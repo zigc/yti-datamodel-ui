@@ -9,6 +9,11 @@ import { LanguageContext } from 'app/types/language';
 import { EditorContainer } from './modelControllerService';
 import { AuthorizationManagerService } from 'app/services/authorizationManagerService';
 import { LegacyComponent } from 'app/utils/angular';
+import { AlertModalService } from 'yti-common-ui/components/alert-modal.component';
+import { TranslateService } from '@ngx-translate/core';
+import { changeToRestrictedStatus, Status } from 'yti-common-ui/entities/status';
+import { DatamodelConfirmationModalService } from 'app/services/confirmation-modal.service';
+import { ErrorModalService } from 'yti-common-ui/components/error-modal.component';
 
 @LegacyComponent({
   bindings: {
@@ -28,16 +33,22 @@ export class ModelViewComponent extends EditableEntityController<Model> {
   deleted: (model: Model) => void;
   updated: (model: Model) => void;
   namespacesInUse: Set<string>;
+  statusChanged = false; // TÄMÄ EI VIELÄ TEE MITÄÄN
+  changeResourceStatusesToo = false;
 
   constructor($scope: EditableScope,
               $log: ILogService,
               private modelService: ModelService,
               deleteConfirmationModal: DeleteConfirmationModal,
+              datamodelConfirmationModalService: DatamodelConfirmationModalService,
+              private errorModalService: ErrorModalService,
               errorModal: ErrorModal,
               userService: UserService,
-              private authorizationManagerService: AuthorizationManagerService) {
+              private authorizationManagerService: AuthorizationManagerService,
+              private alertModalService: AlertModalService,
+              private translateService: TranslateService) {
     'ngInject';
-    super($scope, $log, deleteConfirmationModal, errorModal, userService);
+    super($scope, $log, deleteConfirmationModal, errorModal, userService, datamodelConfirmationModalService);
   }
 
   $onInit() {
@@ -53,7 +64,20 @@ export class ModelViewComponent extends EditableEntityController<Model> {
   }
 
   update(model: Model, _oldEntity: Model) {
-    return this.modelService.updateModel(model).then(() => this.updated(model));
+    const oldStatus = _oldEntity.status;
+    const newStatus = model.status;
+
+    const updateModel = () => {
+      return this.modelService.updateModel(model).then(() => this.updated(model));
+    };
+
+    if (this.changeResourceStatusesToo) {
+      return this.changeResourceStatuses(model, oldStatus, newStatus).then(() => {
+        return updateModel();
+      });
+    } else {
+      return updateModel();
+    }
   }
 
   remove(model: Model): IPromise<any> {
@@ -77,5 +101,21 @@ export class ModelViewComponent extends EditableEntityController<Model> {
 
   getContext(): LanguageContext {
     return this.model;
+  }
+
+  changeResourceStatuses(model: Model, oldStatus: Status, newStatus: Status) {
+    const modalRef = this.alertModalService.open('Please wait. This could take a while...');
+
+    return this.modelService.changeStatuses(model, oldStatus, newStatus).then(result => {
+      modalRef.message = this.translateService.instant('Statuses changed.');
+      modalRef.showOkButton = true;
+    }, error => {
+      this.errorModalService.openSubmitError(error);
+      modalRef.cancel();
+    });
+  }
+
+  confirmChangeToRestrictedStatus(model: Model, _oldEntity: Model) {
+    return changeToRestrictedStatus(_oldEntity.status, model.status);
   }
 }

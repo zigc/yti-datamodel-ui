@@ -10,6 +10,7 @@ import { LanguageContext } from 'app/types/language';
 import { EditorContainer, ModelControllerService } from 'app/components/model/modelControllerService';
 import { AuthorizationManagerService } from 'app/services/authorizationManagerService';
 import { LegacyComponent } from 'app/utils/angular';
+import { changeToRestrictedStatus } from 'yti-common-ui/entities/status';
 
 @LegacyComponent({
   bindings: {
@@ -91,5 +92,9 @@ export class PredicateViewComponent extends EditableEntityController<Association
 
   getContext(): LanguageContext {
     return this.model;
+  }
+
+  confirmChangeToRestrictedStatus(entity: Association|Attribute, oldEntity: Association|Attribute) {
+    return entity.status && oldEntity.status ? changeToRestrictedStatus(oldEntity.status, entity.status) : false;
   }
 }

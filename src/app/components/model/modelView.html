@@ -8,7 +8,7 @@
                    ng-hide="$ctrl.isEditing()"></history>
         </editable-entity-buttons>
 
-        <model-form id="$ctrl.id" model="$ctrl.editableInEdit" namespaces-in-use="$ctrl.namespacesInUse"></model-form>
+        <model-form id="$ctrl.id" model="$ctrl.editableInEdit" namespaces-in-use="$ctrl.namespacesInUse" status-changed="$ctrl.statusChanged" change-resource-statuses-too="$ctrl.changeResourceStatusesToo"></model-form>
       </div>
     </fieldset>
   </form>

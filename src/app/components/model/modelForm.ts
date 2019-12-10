@@ -6,7 +6,9 @@ import { EditableForm } from 'app/components/form/editableEntityController';
   bindings: {
     id: '=',
     model: '=',
-    namespacesInUse: '<'
+    namespacesInUse: '<',
+    statusChanged: '=',
+    changeResourceStatusesToo: '='
   },
   require: {
     form: '?^form'
@@ -18,6 +20,8 @@ export class ModelFormComponent {
   model: Model;
   namespacesInUse?: Set<string>;
   form: EditableForm;
+  statusChanged: boolean;
+  changeResourceStatusesToo: boolean;
 
   get allowProfiles() {
     return this.model.isOfType('profile');
@@ -26,4 +30,23 @@ export class ModelFormComponent {
   isEditing() {
     return this.form && this.form.editing;
   }
+
+  toggleChangeResourceStatusesToo() {
+
+    // Tämän metodin voisi ehkä välittää tänne ylempää... ???
+
+    // this.changeCodeStatusesToo = !this.changeCodeStatusesToo;
+    // this.codeSchemeForm.patchValue({ changeCodeStatuses: !this.codeSchemeForm.controls['changeCodeStatuses'].value });
+  }
+
+  showChangeResourceStatusesCheckbox(): boolean {
+
+    // NEXT: Pitää tunnistaa milloin status on vaihtunut ja palauttaa täältä true vain silloin.
+
+    // console.log('changeResourceStatusesToo', this.changeResourceStatusesToo);
+
+    // return this.form.editing && this.statusChanged && this.codesOfTheCodeScheme.length > 0;
+    return this.form.editing;
+  }
+
 }
