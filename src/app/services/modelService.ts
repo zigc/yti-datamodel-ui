@@ -11,8 +11,13 @@ import { ImportedNamespace, Link, Model, ModelListItem } from '../entities/model
 import { apiEndpointWithName } from './config';
 import { ClassService } from './classService';
 import { PredicateService } from './predicateService';
+import { Status } from 'yti-common-ui/entities/status';
+import { BehaviorSubject } from 'rxjs';
 
 export interface ModelService {
+
+  contentExpired$: BehaviorSubject<string | undefined>;
+
   getModels(): IPromise<ModelListItem[]>;
 
   getModelByUrn(urn: Uri | Urn): IPromise<Model>;
@@ -34,9 +39,13 @@ export interface ModelService {
   getAllImportableNamespaces(): IPromise<ImportedNamespace[]>;
 
   newNamespaceImport(namespace: string, prefix: string, label: string, lang: Language): IPromise<ImportedNamespace>;
+
+  changeStatuses(model: Model, initialStatus: Status, endStatus: Status): IPromise<any>;
 }
 
 export class DefaultModelService implements ModelService {
+
+  contentExpired$: BehaviorSubject<string | undefined> = new BehaviorSubject(undefined);
 
   constructor(private $http: IHttpService,
               private $q: IQService,
@@ -148,6 +157,18 @@ export class DefaultModelService implements ModelService {
   newNamespaceImport(namespace: string, prefix: string, label: string, lang: Language): IPromise<ImportedNamespace> {
     return this.$http.get<GraphData>(apiEndpointWithName('modelRequirementCreator'), { params: { namespace, prefix, label, lang } })
       .then(response => this.deserializeImportedNamespace(response.data!));
+  }
+
+  changeStatuses(model: Model, initialStatus: Status, endStatus: Status): IPromise<any> {
+
+    return this.$http.put(apiEndpointWithName('changeStatuses'), null, { params: { model: model.id.uri, initialStatus, endStatus } })
+      .then(() => {
+        const modelId: string = model.id.uri;
+
+        this.defaultClassService.clearCachedClasses(modelId);
+        this.defaultPredicateService.clearCachedPredicates(modelId);
+        this.contentExpired$.next(modelId);
+      });
   }
 
   private deserializeModelList(data: GraphData): IPromise<ModelListItem[]> {

@@ -12,10 +12,15 @@ import { EntityCreatorService } from './entityCreatorService';
 import { ClassificationService } from 'app/services/classificationService';
 import { contains } from 'yti-common-ui/utils/array';
 import { InteractiveHelpOrganizationService } from './helpOrganizationService';
+import { Status } from 'yti-common-ui/entities/status';
+import { BehaviorSubject } from 'rxjs';
 
 export class InteractiveHelpModelService implements ModelService, ResetableService {
 
   store = new ResourceStore<Model>();
+
+  // This is not yet supported in help
+  contentExpired$: BehaviorSubject<string | undefined>;
 
   constructor(private $q: IQService,
               private defaultModelService: ModelService,
@@ -101,5 +106,9 @@ export class InteractiveHelpModelService implements ModelService, ResetableServi
       prefix,
       label: { [lang]: label }
     });
+  }
+
+  changeStatuses(model: Model, initialStatus: Status, endStatus: Status): IPromise<any> {
+    throw new Error('changeStatuses is not yet supported operation in help');
   }
 }

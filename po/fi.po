@@ -93,6 +93,9 @@ msgstr "Linkit"
 msgid "Add link"
 msgstr "Lisää linkki"
 
+msgid "Statuses changed."
+msgstr "Tilat vaihdettu."
+
 msgid "Reference data"
 msgstr "Koodisto"
 
@@ -158,6 +161,9 @@ msgstr "Tilaa sähköposti-ilmoitukset"
 
 msgid "Remove email subscription"
 msgstr "Poista sähköposti-ilmoitukset"
+
+msgid "Update datamodel's resources' statuses"
+msgstr "Muuta tietomallin resurssien tiloja"
 
 msgid "No referrers"
 msgstr "Ei viittauksia"
@@ -318,7 +324,7 @@ msgid "Existing or reserved id error"
 msgstr "Tunniste on jo käytössä tai on varattu"
 
 msgid "Required error"
-msgstr "Pakollinen kenttä"
+msgstr "Pakollinen syöte"
 
 msgid "Required localized error"
 msgstr "Täytyy olla määritelty vähintään yhdellä kielellä"
@@ -363,8 +369,8 @@ msgstr "Ei tunnettu koodiston arvo"
 
 msgid "INFO_TEXT_FRONTPAGE_SEARCH"
 msgstr ""
-"Haku kohdistuu oletuksena tietomallien nimiin. Voit hakea muilla "
-"hakuehdoilla käyttämällä \"Tarkennettu haku\" -toimintoa."
+"Haku kohdistuu oletuksena tietomallien nimiin. Voit hakea myös sisällöistä "
+"käyttämällä \"Kohdista haku myös\" -toimintoa."
 
 msgid "Search term"
 msgstr "Hakusana"
@@ -452,6 +458,9 @@ msgstr "poista valinta"
 
 msgid "Edit reference data"
 msgstr "Muokkaa koodistoa"
+
+msgid "Enforce status transition rules"
+msgstr "Käytä tilasiirtymien validointisääntöjä."
 
 msgid ""
 "Please note that the content of this field is public. Don't use personal "
@@ -1140,8 +1149,8 @@ msgstr ""
 "Täältä voit lisätä luokalle uuden attribuutin jonka arvoalue perustuu "
 "tietotyyppiin tai assosiaation jolla viitataan toiseen luokkaan"
 
-msgid "Shapes are not allowed"
-msgstr "Erikoistettuja luokkia ei saa valita"
+msgid "Use class"
+msgstr "Käytä luokkaa"
 
 msgid "not found in the concept database"
 msgstr "ei löydy sanastosta"
@@ -1638,8 +1647,8 @@ msgstr "Ei ole lisätty nimiavaruudeksi"
 msgid "Cannot import profile"
 msgstr "Soveltamisprofiili ei voi olla nimiavaruutena"
 
-msgid "Define concept for the class"
-msgstr "Määrittele käsite luokalle"
+msgid "Shapes are not allowed"
+msgstr "Erikoistettuja luokkia ei saa valita"
 
 msgid "Classes are not allowed"
 msgstr "Erikoistamattomia luokkia ei saa valita"
@@ -1647,8 +1656,8 @@ msgstr "Erikoistamattomia luokkia ei saa valita"
 msgid "Non specialized classes are not allowed"
 msgstr "Erikoistamattomia luokkia ei saavalita"
 
-msgid "Use class"
-msgstr "Käytä luokkaa"
+msgid "Define concept for the class"
+msgstr "Määrittele käsite luokalle"
 
 msgid "Specialize class"
 msgstr "Tarkenna luokka"
@@ -1891,7 +1900,7 @@ msgid "Session expired"
 msgstr "Istunto on vanhentunut"
 
 msgid "Model not found"
-msgstr " Mallia ei löydy"
+msgstr "Mallia ei löydy"
 
 msgid "Group not found"
 msgstr "Ryhmää ei löydy"
@@ -2022,6 +2031,27 @@ msgstr ""
 "Tällä toiminnolla valitaan, onko ilmoitustoiminto aktiivinen. Ottamalla "
 "rastin pois kohdasta “Päivittäin” voit kytkeä kaikki ilmoitukset pois päältä "
 "kerralla. Palauttamalla rastin ilmoitukset aktivoituvat jälleen."
+
+msgid "CHANGE STATUS?"
+msgstr "VAIHDA TILAA?"
+
+msgid "CHANGE_STATUS_CONFIRMATION_PARAGRAPH_1"
+msgstr "Haluatko varmasti vaihtaa tilaa?"
+
+msgid "CHANGE_STATUS_CONFIRMATION_PARAGRAPH_2"
+msgstr ""
+"Tallennuksen jälkeen et voi enää vaihtaa takaisin tiloihin keskeneräinen tai "
+"luonnos."
+
+msgid "Choose starting status"
+msgstr "Valitse lähtötila"
+
+msgid "Choose target status"
+msgstr "Valitse kohdetila"
+
+msgid "Please wait. This could take a while..."
+msgstr ""
+"Ole hyvä ja odota. Mahdollisesti pitkäkestoinen prosessointi käynnissä."
 
 msgid "Example"
 msgstr "Esimerkki"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2019-11-18 17:51+0200\n"
+"PO-Revision-Date: 2019-11-26 14:18+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -94,6 +94,9 @@ msgstr ""
 msgid "Add link"
 msgstr ""
 
+msgid "Statuses changed."
+msgstr ""
+
 msgid "Reference data"
 msgstr ""
 
@@ -158,6 +161,9 @@ msgid "Add email subscription"
 msgstr ""
 
 msgid "Remove email subscription"
+msgstr ""
+
+msgid "Update datamodel's resources' statuses"
 msgstr ""
 
 msgid "No referrers"
@@ -365,8 +371,8 @@ msgstr ""
 
 msgid "INFO_TEXT_FRONTPAGE_SEARCH"
 msgstr ""
-"The names of the models are searched as a default. You may search with more "
-"options by clicking \"Advanced search\" link."
+"The names of the models are searched as a default. You may search also with "
+"content by clicking \"Extend search\" checkbox."
 
 msgid "Search term"
 msgstr ""
@@ -453,6 +459,9 @@ msgid "Clear selection"
 msgstr ""
 
 msgid "Edit reference data"
+msgstr ""
+
+msgid "Enforce status transition rules"
 msgstr ""
 
 msgid ""
@@ -1111,7 +1120,7 @@ msgstr "Terminology"
 msgid "You can add new attribute or association to the Class from here"
 msgstr ""
 
-msgid "Shapes are not allowed"
+msgid "Use class"
 msgstr ""
 
 msgid "not found in the concept database"
@@ -1607,7 +1616,7 @@ msgstr ""
 msgid "Cannot import profile"
 msgstr ""
 
-msgid "Define concept for the class"
+msgid "Shapes are not allowed"
 msgstr ""
 
 msgid "Classes are not allowed"
@@ -1616,7 +1625,7 @@ msgstr ""
 msgid "Non specialized classes are not allowed"
 msgstr ""
 
-msgid "Use class"
+msgid "Define concept for the class"
 msgstr ""
 
 msgid "Specialize class"
@@ -1986,6 +1995,24 @@ msgstr ""
 "This functionality chooses whether or not subscriptions are active. By "
 "unchecking “Daily” you can disable all subscriptions at once. Checking it "
 "activates the subscriptions again."
+
+msgid "CHANGE STATUS?"
+msgstr ""
+
+msgid "CHANGE_STATUS_CONFIRMATION_PARAGRAPH_1"
+msgstr "Are you sure you want to change the status?"
+
+msgid "CHANGE_STATUS_CONFIRMATION_PARAGRAPH_2"
+msgstr "After saving you cannot change the status back to incomplete or draft."
+
+msgid "Choose starting status"
+msgstr ""
+
+msgid "Choose target status"
+msgstr ""
+
+msgid "Please wait. This could take a while..."
+msgstr ""
 
 msgid "Example"
 msgstr ""

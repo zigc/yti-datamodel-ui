@@ -85,6 +85,9 @@ msgstr ""
 msgid "Add link"
 msgstr ""
 
+msgid "Statuses changed."
+msgstr ""
+
 msgid "Reference data"
 msgstr ""
 
@@ -149,6 +152,9 @@ msgid "Add email subscription"
 msgstr ""
 
 msgid "Remove email subscription"
+msgstr ""
+
+msgid "Update datamodel's resources' statuses"
 msgstr ""
 
 msgid "No referrers"
@@ -422,6 +428,9 @@ msgid "Clear selection"
 msgstr ""
 
 msgid "Edit reference data"
+msgstr ""
+
+msgid "Enforce status transition rules"
 msgstr ""
 
 msgid ""
@@ -1043,7 +1052,7 @@ msgstr ""
 msgid "You can add new attribute or association to the Class from here"
 msgstr ""
 
-msgid "Shapes are not allowed"
+msgid "Use class"
 msgstr ""
 
 msgid "not found in the concept database"
@@ -1510,7 +1519,7 @@ msgstr ""
 msgid "Cannot import profile"
 msgstr ""
 
-msgid "Define concept for the class"
+msgid "Shapes are not allowed"
 msgstr ""
 
 msgid "Classes are not allowed"
@@ -1519,7 +1528,7 @@ msgstr ""
 msgid "Non specialized classes are not allowed"
 msgstr ""
 
-msgid "Use class"
+msgid "Define concept for the class"
 msgstr ""
 
 msgid "Specialize class"
@@ -1882,6 +1891,24 @@ msgid "Subscription deletion failed."
 msgstr ""
 
 msgid "INFO_TEXT_EMAIL_SUBSCRIPTIONS"
+msgstr ""
+
+msgid "CHANGE STATUS?"
+msgstr ""
+
+msgid "CHANGE_STATUS_CONFIRMATION_PARAGRAPH_1"
+msgstr ""
+
+msgid "CHANGE_STATUS_CONFIRMATION_PARAGRAPH_2"
+msgstr ""
+
+msgid "Choose starting status"
+msgstr ""
+
+msgid "Choose target status"
+msgstr ""
+
+msgid "Please wait. This could take a while..."
 msgstr ""
 
 msgid "Example"

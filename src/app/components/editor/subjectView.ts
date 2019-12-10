@@ -3,8 +3,6 @@ import { Class } from '../../entities/class';
 import { Predicate } from '../../entities/predicate';
 import { Model } from '../../entities/model';
 import { LegacyComponent, modalCancelHandler } from '../../utils/angular';
-import { ConfigService } from '../../services/configService';
-import { Config } from '../../entities/config';
 import { EditableForm } from '../../components/form/editableEntityController';
 
 @LegacyComponent({
@@ -23,16 +21,11 @@ export class SubjectViewComponent {
 
   entity: Class|Predicate;
   model: Model;
-  config: Config;
   form: EditableForm;
   changeConceptDisabled: Boolean;
 
-  constructor(private searchConceptModal: SearchConceptModal,
-              private configService: ConfigService) {
+  constructor(private searchConceptModal: SearchConceptModal) {
     'ngInject';
-    this.configService.getConfig().then(urlConfig => {
-      this.config = urlConfig;
-    });
   }
 
   isEditing() {
@@ -44,7 +37,11 @@ export class SubjectViewComponent {
   }
 
   get conceptLink() {
-    return this.config && this.config.conceptUrl(this.entity.subject);
+    return this.entity.subject ? this.entity.subject.id.uri : '';
+  }
+
+  get vocabularyLink() {
+    return this.entity.subject ? this.entity.subject.vocabulary.id.uri : '';
   }
 
   changeSubject() {

@@ -72,6 +72,7 @@ export class ClassFormComponent {
 
     this.$scope.$watchGroup([
         () => this.class,
+        () => this.class.properties,
         () => this.languageService.getModelLanguage(this.model),
         () => this.sortAlphabetically,
         () => this.isEditing()

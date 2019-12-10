@@ -20,6 +20,12 @@
             ng-click="$ctrl.removeSubscription()"
             translate>Remove email subscription</button>
 
-  </div>
+    <button id="mass_migrate_datamodel_statuses_button"
+            ng-show="$ctrl.showMassMigrateDatamodelStatuses"
+            class="dropdown-item"
+            type="button"
+            ng-click="$ctrl.massMigrateDatamodelStatuses()"
+            translate>Update datamodel's resources' statuses</button>
 
+  </div>
 </div>
