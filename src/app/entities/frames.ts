@@ -123,7 +123,8 @@ const versionContext = Object.assign({}, coreContext, {
   generatedAtTime: { '@id': 'http://www.w3.org/ns/prov#generatedAtTime', '@type': 'http://www.w3.org/2001/XMLSchema#dateTime' },
   startedAtTime: { '@id': 'http://www.w3.org/ns/prov#startedAtTime', '@type': 'http://www.w3.org/2001/XMLSchema#dateTime' },
   generated: { '@id': 'http://www.w3.org/ns/prov#generated', '@type': '@id' },
-  used: { '@id': 'http://www.w3.org/ns/prov#used', '@type': '@id' }
+  used: { '@id': 'http://www.w3.org/ns/prov#used', '@type': '@id' },
+  name: { '@id': 'http://xmlns.com/foaf/0.1/name' },
 });
 
 const namespaceContext = Object.assign({}, coreContext, {
@@ -427,11 +428,14 @@ export function modelPositionsFrame(data: any) {
 
 export function versionFrame(data: any) {
   return frame(data, versionContext, {
+    name: {
+      '@omitDefault': true,
+      '@default': '',
+    },
     generated: {
       name: {
         '@omitDefault': true,
-        '@default': [],
-        '@embed': '@always'
+        '@default': '',
       },
       wasRevisionOf: {
         '@omitDefault': true,
