@@ -68,16 +68,12 @@ h4, .h4 {
 }
 
 ul.errors {
-  border-left: 5px solid $danger;
-  padding-left: 15px;
+  padding-left: 0;
   margin-bottom: 0;
 
   li {
+    color: $danger;
     list-style-type: none;
-  }
-
-  li:before {
-    content: '\b7\a0';
   }
 }
 
@@ -1049,4 +1045,8 @@ body.visualization-maximized {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.x-small-item {
+  font-size: x-small;
 }
