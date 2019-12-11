@@ -428,14 +428,18 @@ export function modelPositionsFrame(data: any) {
 export function versionFrame(data: any) {
   return frame(data, versionContext, {
     generated: {
-      wasAttributedTo: {},
+      name: {
+        '@omitDefault': true,
+        '@default': [],
+        '@embed': '@always'
+      },
       wasRevisionOf: {
         '@omitDefault': true,
         '@default': [],
         '@embed': false
       }
     },
-    'used': {
+    used: {
       '@embed': '@never'
     }
   });
