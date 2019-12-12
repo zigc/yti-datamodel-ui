@@ -33,7 +33,7 @@ export class ModelViewComponent extends EditableEntityController<Model> {
   deleted: (model: Model) => void;
   updated: (model: Model) => void;
   namespacesInUse: Set<string>;
-  statusChanged = false; // TÄMÄ EI VIELÄ TEE MITÄÄN
+  statusChanged = false;
   changeResourceStatusesToo = false;
 
   constructor($scope: EditableScope,
@@ -53,6 +53,16 @@ export class ModelViewComponent extends EditableEntityController<Model> {
 
   $onInit() {
     this.parent.registerView(this);
+
+    const editableStatus = () => this.editableInEdit ? this.editableInEdit.status : false;
+
+    this.$scope.$watch(() => editableStatus(), newStatus => {
+      this.statusChanged = newStatus && newStatus !== this.getEditable().status;
+
+      if (!this.statusChanged) {
+        this.changeResourceStatusesToo = false;
+      }
+    });
   }
 
   $onDestroy() {
@@ -68,6 +78,9 @@ export class ModelViewComponent extends EditableEntityController<Model> {
     const newStatus = model.status;
 
     const updateModel = () => {
+      this.changeResourceStatusesToo = false;
+      this.statusChanged = false;
+
       return this.modelService.updateModel(model).then(() => this.updated(model));
     };
 
@@ -104,7 +117,7 @@ export class ModelViewComponent extends EditableEntityController<Model> {
   }
 
   changeResourceStatuses(model: Model, oldStatus: Status, newStatus: Status) {
-    const modalRef = this.alertModalService.open('Please wait. This could take a while...');
+    const modalRef = this.alertModalService.open('UPDATING_STATUSES_MESSAGE');
 
     return this.modelService.changeStatuses(model, oldStatus, newStatus).then(result => {
       modalRef.message = this.translateService.instant('Statuses changed.');

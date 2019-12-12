@@ -72,7 +72,7 @@ export class MassMigrateDatamodelResourceStatusesModalComponent implements OnIni
 
   saveChanges() {
     const save = () => {
-      const modalRef = this.alertModalService.open('Please wait. This could take a while...');
+      const modalRef = this.alertModalService.open('UPDATING_STATUSES_MESSAGE');
 
       this.modelService.changeStatuses(this.model, this.fromStatus$.value!, this.toStatus$.value!).then(result => {
         modalRef.message = this.translateService.instant('Statuses changed.');

@@ -433,6 +433,9 @@ msgstr ""
 msgid "Enforce status transition rules"
 msgstr ""
 
+msgid "Change resource statuses as well"
+msgstr ""
+
 msgid ""
 "Please note that the content of this field is public. Don't use personal "
 "contact information!"
@@ -1908,7 +1911,7 @@ msgstr ""
 msgid "Choose target status"
 msgstr ""
 
-msgid "Please wait. This could take a while..."
+msgid "UPDATING_STATUSES_MESSAGE"
 msgstr ""
 
 msgid "Example"

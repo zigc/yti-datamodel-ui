@@ -462,6 +462,9 @@ msgstr "Muokkaa koodistoa"
 msgid "Enforce status transition rules"
 msgstr "Käytä tilasiirtymien validointisääntöjä."
 
+msgid "Change resource statuses as well"
+msgstr "Muuta myös resurssien tilat"
+
 msgid ""
 "Please note that the content of this field is public. Don't use personal "
 "contact information!"
@@ -2049,9 +2052,8 @@ msgstr "Valitse lähtötila"
 msgid "Choose target status"
 msgstr "Valitse kohdetila"
 
-msgid "Please wait. This could take a while..."
-msgstr ""
-"Ole hyvä ja odota. Mahdollisesti pitkäkestoinen prosessointi käynnissä."
+msgid "UPDATING_STATUSES_MESSAGE"
+msgstr "Muutetaan tietomallin resurssien tiloja"
 
 msgid "Example"
 msgstr "Esimerkki"
@@ -2549,6 +2551,10 @@ msgstr "Attribuutti"
 
 msgid "owl:ObjectProperty"
 msgstr "Assosiaatio"
+
+#~ msgid "Please wait. This could take a while..."
+#~ msgstr ""
+#~ "Ole hyvä ja odota. Mahdollisesti pitkäkestoinen prosessointi käynnissä."
 
 #~ msgid "Classes defined in profiles"
 #~ msgstr "Profiilien luokat"
