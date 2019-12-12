@@ -430,6 +430,12 @@ msgstr ""
 msgid "Edit reference data"
 msgstr ""
 
+msgid "Starting status"
+msgstr ""
+
+msgid "Target status"
+msgstr ""
+
 msgid "Enforce status transition rules"
 msgstr ""
 

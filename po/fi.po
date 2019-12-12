@@ -459,6 +459,12 @@ msgstr "poista valinta"
 msgid "Edit reference data"
 msgstr "Muokkaa koodistoa"
 
+msgid "Starting status"
+msgstr "Lähtötila"
+
+msgid "Target status"
+msgstr "Kohdetila"
+
 msgid "Enforce status transition rules"
 msgstr "Käytä tilasiirtymien validointisääntöjä."
 

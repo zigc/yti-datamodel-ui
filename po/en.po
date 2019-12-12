@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2019-12-12 12:46+0200\n"
+"PO-Revision-Date: 2019-12-12 15:21+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -459,6 +459,12 @@ msgid "Clear selection"
 msgstr ""
 
 msgid "Edit reference data"
+msgstr ""
+
+msgid "Starting status"
+msgstr ""
+
+msgid "Target status"
 msgstr ""
 
 msgid "Enforce status transition rules"

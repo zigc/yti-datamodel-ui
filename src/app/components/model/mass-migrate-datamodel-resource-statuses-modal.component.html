@@ -20,11 +20,13 @@
       </div>
     </div>
 
+    <label class="highlight" for="migrate_resource_statuses_from_status_input_dropdown" translate>Starting status</label>
     <app-filter-dropdown id="migrate_resource_statuses_from_status_input_dropdown"
                          [options]="fromOptions"
                          [filterSubject]="fromStatus$"></app-filter-dropdown>
 
     <br/>
+    <label class="highlight" for="migrate_resource_statuses_to_status_input_dropdown" translate>Target status</label>
     <app-filter-dropdown id="migrate_resource_statuses_to_status_input_dropdown"
                          [options]="toOptions"
                          [filterSubject]="toStatus$"></app-filter-dropdown>
