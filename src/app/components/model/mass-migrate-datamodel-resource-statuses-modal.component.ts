@@ -2,7 +2,7 @@ import { Component, OnInit, Injectable } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Model } from 'app/entities/model';
 import { UserService } from 'yti-common-ui/services/user.service';
-import { Status, selectableStatuses, restrictedStatuses } from 'yti-common-ui/entities/status';
+import { Status, selectableStatuses, changeToRestrictedStatus } from 'yti-common-ui/entities/status';
 import { BehaviorSubject, combineLatest } from 'rxjs';
 import { FilterOptions } from 'yti-common-ui/components/filter-dropdown.component';
 import { TranslateService } from '@ngx-translate/core';
@@ -11,7 +11,6 @@ import { ModalService } from 'yti-common-ui/services/modal.service';
 import { ModelService } from 'app/services/modelService';
 import { ModelServiceWrapper } from 'app/ajs-upgraded-providers';
 import { ErrorModalService } from 'yti-common-ui/components/error-modal.component';
-import { contains } from 'yti-common-ui/utils/array';
 import { ignoreModalClose } from 'yti-common-ui/utils/modal';
 import { DatamodelConfirmationModalService } from 'app/services/confirmation-modal.service';
 
@@ -85,15 +84,11 @@ export class MassMigrateDatamodelResourceStatusesModalComponent implements OnIni
       });
     };
 
-    if (this.changeToRestrictedStatus()) {
+    if (changeToRestrictedStatus(this.fromStatus$.value!, this.toStatus$.value!)) {
       this.confirmationModal.openChangeToRestrictedStatus().then(() => save(), ignoreModalClose);
     } else {
       save();
     }
-  }
-
-  changeToRestrictedStatus(): Boolean {
-    return !contains(restrictedStatuses, this.fromStatus$.value) && contains(restrictedStatuses, this.toStatus$.value);
   }
 
   toggleEnforceTransitionRulesForSuperUserToo() {
