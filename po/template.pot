@@ -94,7 +94,9 @@ msgstr ""
 msgid " resources."
 msgstr ""
 
-msgid "Statuses changed."
+msgid ""
+"No resources were found with the starting status. No changes to resources "
+"statuses."
 msgstr ""
 
 msgid "Reference data"

@@ -102,8 +102,12 @@ msgstr "Tila vaihdettu "
 msgid " resources."
 msgstr " resurssiin."
 
-msgid "Statuses changed."
-msgstr "Tilat vaihdettu."
+msgid ""
+"No resources were found with the starting status. No changes to resources "
+"statuses."
+msgstr ""
+"Tilaa ei vaihdettu yhteenkään resurssiin. Ei löytynyt resursseja "
+"vaihdettavassa tilassa."
 
 msgid "Reference data"
 msgstr "Koodisto"
@@ -2569,6 +2573,9 @@ msgstr "Attribuutti"
 
 msgid "owl:ObjectProperty"
 msgstr "Assosiaatio"
+
+#~ msgid "Statuses changed."
+#~ msgstr "Tilat vaihdettu."
 
 #~ msgid "Resources in this status"
 #~ msgstr "Resursseja tässä tilassa"

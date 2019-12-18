@@ -35,6 +35,7 @@ export class ModelViewComponent extends EditableEntityController<Model> {
   namespacesInUse: Set<string>;
   statusChanged = false;
   changeResourceStatusesToo = false;
+  statusResourcesTotal = 0;
 
   constructor($scope: EditableScope,
               $log: ILogService,
@@ -62,6 +63,12 @@ export class ModelViewComponent extends EditableEntityController<Model> {
       if (!this.statusChanged) {
         this.changeResourceStatusesToo = false;
       }
+    });
+
+    this.$scope.$watch(() => this.model.status, newStatus => {
+      this.modelService.getModelResourcesTotalCountByStatus(this.model, newStatus).then(resourcesTotal => {
+        this.statusResourcesTotal = resourcesTotal;
+      });
     });
   }
 
@@ -120,7 +127,17 @@ export class ModelViewComponent extends EditableEntityController<Model> {
     const modalRef = this.alertModalService.open('UPDATING_STATUSES_MESSAGE');
 
     return this.modelService.changeStatuses(model, oldStatus, newStatus).then(result => {
-      modalRef.message = this.translateService.instant('Statuses changed.');
+      if (this.statusResourcesTotal === 0) {
+        modalRef.message = this.translateService.instant('No resources were found with the starting status. No changes to resources statuses.');
+      } else if (this.statusResourcesTotal === 1) {
+        modalRef.message = this.translateService.instant('Status changed to one resource.');
+      } else {
+        const messagePart1 = this.translateService.instant('Status changed to ');
+        const messagePart2 = this.translateService.instant(' resources.');
+
+        modalRef.message = messagePart1 + this.statusResourcesTotal + messagePart2;
+      }
+
       modalRef.showOkButton = true;
     }, error => {
       this.errorModalService.openSubmitError(error);
