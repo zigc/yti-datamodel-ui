@@ -84,7 +84,6 @@ export class MassMigrateDatamodelResourceStatusesModalComponent implements OnIni
 
   canSave() {
     return this.fromStatusResourcesTotal > 0 && this.toStatus$.value != null && (this.fromStatus$.value !== this.toStatus$.value);
-    // return this.fromStatus$.value != null && this.toStatus$.value != null && (this.fromStatus$.value !== this.toStatus$.value);
   }
 
   saveChanges() {
