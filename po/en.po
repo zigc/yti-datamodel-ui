@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2019-12-12 15:21+0200\n"
+"PO-Revision-Date: 2019-12-18 09:17+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -92,6 +92,15 @@ msgid "Links"
 msgstr ""
 
 msgid "Add link"
+msgstr ""
+
+msgid "Status changed to one resource."
+msgstr ""
+
+msgid "Status changed to "
+msgstr ""
+
+msgid " resources."
 msgstr ""
 
 msgid "Statuses changed."
@@ -461,13 +470,16 @@ msgstr ""
 msgid "Edit reference data"
 msgstr ""
 
+msgid "Resources:"
+msgstr ""
+
+msgid "Enforce status transition rules"
+msgstr ""
+
 msgid "Starting status"
 msgstr ""
 
 msgid "Target status"
-msgstr ""
-
-msgid "Enforce status transition rules"
 msgstr ""
 
 msgid "Change resource statuses as well"

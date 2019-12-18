@@ -20,10 +20,23 @@
       </div>
     </div>
 
-    <label class="highlight" for="migrate_resource_statuses_from_status_input_dropdown" translate>Starting status</label>
-    <app-filter-dropdown id="migrate_resource_statuses_from_status_input_dropdown"
-                         [options]="fromOptions"
-                         [filterSubject]="fromStatus$"></app-filter-dropdown>
+    <div class="row">
+      <div class="col-12">
+        <label class="highlight" for="migrate_resource_statuses_from_status_input_dropdown" translate>Starting status</label>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12 col-md-auto">
+        <app-filter-dropdown id="migrate_resource_statuses_from_status_input_dropdown"
+                            [options]="fromOptions"
+                            [filterSubject]="fromStatus$"></app-filter-dropdown>
+      </div>
+      <div class="col-12 col-md">
+        <label *ngIf="showFromStatusResourcesTotal()">{{'Resources:' | translate}} {{fromStatusResourcesTotal}}</label>
+        <app-ajax-loading-indicator-small *ngIf="loadingResourcesTotal"></app-ajax-loading-indicator-small>
+      </div>
+    </div>
 
     <br/>
     <label class="highlight" for="migrate_resource_statuses_to_status_input_dropdown" translate>Target status</label>

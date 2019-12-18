@@ -24,6 +24,8 @@ export class MassMigrateDatamodelResourceStatusesModalComponent implements OnIni
   toOptions: FilterOptions<Status>;
   fromStatus$ = new BehaviorSubject<Status | null>(null);
   toStatus$ = new BehaviorSubject<Status | null>(null);
+  fromStatusResourcesTotal = 0;
+  loadingResourcesTotal = false;
   uploading = false;
   model: Model;
   private modelService: ModelService;
@@ -51,6 +53,21 @@ export class MassMigrateDatamodelResourceStatusesModalComponent implements OnIni
 
   ngOnInit() {
     this.reset();
+
+    this.fromStatus$.subscribe(status => {
+      this.loadingResourcesTotal = true;
+
+      if (status) {
+        this.modelService.getModelResourcesTotalCountByStatus(this.model, status).then(resourcesTotal => {
+          this.fromStatusResourcesTotal = resourcesTotal;
+          this.loadingResourcesTotal = false;
+        });
+
+      } else {
+        this.fromStatusResourcesTotal = 0;
+        this.loadingResourcesTotal = false;
+      }
+    });
   }
 
   get isSuperUser() {
@@ -66,7 +83,8 @@ export class MassMigrateDatamodelResourceStatusesModalComponent implements OnIni
   }
 
   canSave() {
-    return this.fromStatus$.value != null && this.toStatus$.value != null && (this.fromStatus$.value !== this.toStatus$.value);
+    return this.fromStatusResourcesTotal > 0 && this.toStatus$.value != null && (this.fromStatus$.value !== this.toStatus$.value);
+    // return this.fromStatus$.value != null && this.toStatus$.value != null && (this.fromStatus$.value !== this.toStatus$.value);
   }
 
   saveChanges() {
@@ -74,7 +92,16 @@ export class MassMigrateDatamodelResourceStatusesModalComponent implements OnIni
       const modalRef = this.alertModalService.open('UPDATING_STATUSES_MESSAGE');
 
       this.modelService.changeStatuses(this.model, this.fromStatus$.value!, this.toStatus$.value!).then(result => {
-        modalRef.message = this.translateService.instant('Statuses changed.');
+
+        if (this.fromStatusResourcesTotal === 1) {
+          modalRef.message = this.translateService.instant('Status changed to one resource.');
+        } else {
+          const messagePart1 = this.translateService.instant('Status changed to ');
+          const messagePart2 = this.translateService.instant(' resources.');
+
+          modalRef.message = messagePart1 + this.fromStatusResourcesTotal + messagePart2;
+        }
+
         modalRef.showOkButton = true;
         this.modal.close(false);
       }, error => {
@@ -166,6 +193,10 @@ export class MassMigrateDatamodelResourceStatusesModalComponent implements OnIni
         }
       }
     );
+  }
+
+  showFromStatusResourcesTotal(): boolean {
+    return this.fromStatus$.value !== null && !this.loadingResourcesTotal;
   }
 
 }

@@ -93,6 +93,15 @@ msgstr "Linkit"
 msgid "Add link"
 msgstr "Lisää linkki"
 
+msgid "Status changed to one resource."
+msgstr "Tila vaihdettu yhteen resurssiin."
+
+msgid "Status changed to "
+msgstr "Tila vaihdettu "
+
+msgid " resources."
+msgstr " resurssiin."
+
 msgid "Statuses changed."
 msgstr "Tilat vaihdettu."
 
@@ -459,14 +468,17 @@ msgstr "poista valinta"
 msgid "Edit reference data"
 msgstr "Muokkaa koodistoa"
 
+msgid "Resources:"
+msgstr "Resursseja:"
+
+msgid "Enforce status transition rules"
+msgstr "Käytä tilasiirtymien validointisääntöjä."
+
 msgid "Starting status"
 msgstr "Lähtötila"
 
 msgid "Target status"
 msgstr "Kohdetila"
-
-msgid "Enforce status transition rules"
-msgstr "Käytä tilasiirtymien validointisääntöjä."
 
 msgid "Change resource statuses as well"
 msgstr "Muuta myös resurssien tilat"
@@ -2557,6 +2569,9 @@ msgstr "Attribuutti"
 
 msgid "owl:ObjectProperty"
 msgstr "Assosiaatio"
+
+#~ msgid "Resources in this status"
+#~ msgstr "Resursseja tässä tilassa"
 
 #~ msgid "Please wait. This could take a while..."
 #~ msgstr ""

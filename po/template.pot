@@ -85,6 +85,15 @@ msgstr ""
 msgid "Add link"
 msgstr ""
 
+msgid "Status changed to one resource."
+msgstr ""
+
+msgid "Status changed to "
+msgstr ""
+
+msgid " resources."
+msgstr ""
+
 msgid "Statuses changed."
 msgstr ""
 
@@ -430,13 +439,16 @@ msgstr ""
 msgid "Edit reference data"
 msgstr ""
 
+msgid "Resources:"
+msgstr ""
+
+msgid "Enforce status transition rules"
+msgstr ""
+
 msgid "Starting status"
 msgstr ""
 
 msgid "Target status"
-msgstr ""
-
-msgid "Enforce status transition rules"
 msgstr ""
 
 msgid "Change resource statuses as well"
