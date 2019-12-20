@@ -1,4 +1,4 @@
-import { ILogService } from 'angular';
+import { ILogService, IPromise } from 'angular';
 import { PredicateService } from 'app/services/predicateService';
 import { UserService } from 'app/services/userService';
 import { EditableEntityController, EditableScope, Rights } from 'app/components/form/editableEntityController';
@@ -94,7 +94,18 @@ export class PredicateViewComponent extends EditableEntityController<Association
     return this.model;
   }
 
-  confirmChangeToRestrictedStatus(entity: Association|Attribute, oldEntity: Association|Attribute) {
+  // TODO: This is not used here yet.
+  confirmChangeToRestrictedStatus(entity: Association|Attribute, oldEntity: Association|Attribute): boolean {
     return entity.status && oldEntity.status ? changeToRestrictedStatus(oldEntity.status, entity.status) : false;
+  }
+
+  confirmChangeToRestrictedStatusDialog(entity: Association|Attribute, oldEntity: Association|Attribute): IPromise<any> | null {
+    // TODO: This is not implemented yet in PropertyView.
+    return null;
+  }
+
+  confirmDialog(entity: Association|Attribute, oldEntity: Association|Attribute): IPromise<any> | null {
+    // NOTE: This is not implemented or needed yet in PropertyView.
+    return null;
   }
 }

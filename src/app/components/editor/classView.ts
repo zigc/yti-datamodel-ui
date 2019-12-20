@@ -1,4 +1,4 @@
-import { ILogService } from 'angular';
+import { ILogService, IPromise } from 'angular';
 import { EditableEntityController, EditableScope, Rights } from 'app/components/form/editableEntityController';
 import { ClassService } from 'app/services/classService';
 import { SearchPredicateModal } from './searchPredicateModal';
@@ -108,7 +108,18 @@ export class ClassViewComponent extends EditableEntityController<Class> {
     return this.model;
   }
 
-  confirmChangeToRestrictedStatus(entity: Class, oldEntity: Class) {
+  // TODO: This is not used here yet.
+  confirmChangeToRestrictedStatus(entity: Class, oldEntity: Class): boolean {
     return entity.status && oldEntity.status ? changeToRestrictedStatus(oldEntity.status, entity.status) : false;
+  }
+
+  confirmChangeToRestrictedStatusDialog(entity: Class, oldEntity: Class): IPromise<any> | null {
+    // TODO: This is not implemented yet in ClassView.
+    return null;
+  }
+
+  confirmDialog(entity: Class, oldEntity: Class): IPromise<any> | null {
+    // NOTE: This is not implemented or needed yet in ClassView.
+    return null;
   }
 }

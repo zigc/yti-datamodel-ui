@@ -1,4 +1,4 @@
-import { ILogService, IPromise } from 'angular';
+import { ILogService, IPromise, IQService } from 'angular';
 import { EditableEntityController, EditableScope, Rights } from 'app/components/form/editableEntityController';
 import { ModelService } from 'app/services/modelService';
 import { UserService } from 'app/services/userService';
@@ -39,9 +39,10 @@ export class ModelViewComponent extends EditableEntityController<Model> {
 
   constructor($scope: EditableScope,
               $log: ILogService,
+              private $q: IQService,
               private modelService: ModelService,
               deleteConfirmationModal: DeleteConfirmationModal,
-              datamodelConfirmationModalService: DatamodelConfirmationModalService,
+              private datamodelConfirmationModalService: DatamodelConfirmationModalService,
               private errorModalService: ErrorModalService,
               errorModal: ErrorModal,
               userService: UserService,
@@ -49,7 +50,7 @@ export class ModelViewComponent extends EditableEntityController<Model> {
               private alertModalService: AlertModalService,
               private translateService: TranslateService) {
     'ngInject';
-    super($scope, $log, deleteConfirmationModal, errorModal, userService, datamodelConfirmationModalService);
+    super($scope, $log, deleteConfirmationModal, errorModal, userService);
   }
 
   $onInit() {
@@ -145,7 +146,15 @@ export class ModelViewComponent extends EditableEntityController<Model> {
     });
   }
 
-  confirmChangeToRestrictedStatus(model: Model, _oldEntity: Model) {
-    return changeToRestrictedStatus(_oldEntity.status, model.status);
+  confirmChangeToRestrictedStatusDialog(model: Model, _oldEntity: Model): IPromise<any> | null {
+    return changeToRestrictedStatus(_oldEntity.status, model.status) ? this.$q.when(this.datamodelConfirmationModalService.openChangeToRestrictedStatus()) : null;
+  }
+
+  confirmDialog(model: Model, _oldEntity: Model): IPromise<any> | null {
+
+    const startStatusLocalized: string = this.translateService.instant(model.status);
+    const endStatusLocalized: string = this.translateService.instant(_oldEntity.status);
+
+    return this.changeResourceStatusesToo ? this.$q.when(this.datamodelConfirmationModalService.openChangeResourceStatusesAlsoAlongWithTheDatamodelStatus(startStatusLocalized, endStatusLocalized)) : null;
   }
 }

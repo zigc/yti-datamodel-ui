@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2019-12-18 14:40+0200\n"
+"PO-Revision-Date: 2019-12-19 16:47+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -1143,7 +1143,7 @@ msgstr "Terminology"
 msgid "You can add new attribute or association to the Class from here"
 msgstr ""
 
-msgid "Use class"
+msgid "Specialize class"
 msgstr ""
 
 msgid "not found in the concept database"
@@ -1648,10 +1648,10 @@ msgstr ""
 msgid "Non specialized classes are not allowed"
 msgstr ""
 
-msgid "Define concept for the class"
+msgid "Use class"
 msgstr ""
 
-msgid "Specialize class"
+msgid "Define concept for the class"
 msgstr ""
 
 msgid "Copy shape"
@@ -2036,6 +2036,14 @@ msgstr ""
 
 msgid "UPDATING_STATUSES_MESSAGE"
 msgstr "Updating datamodel's resources' statuses"
+
+msgid "Change resource statuses at the same time?"
+msgstr ""
+
+msgid "CHANGE RESOURCE STATUSES TOO?"
+msgstr ""
+"Should all the resources with status {{startStatus}} be changed to status "
+"{{endStatus}}?"
 
 msgid "Example"
 msgstr ""

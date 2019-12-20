@@ -39,8 +39,7 @@ export abstract class EditableEntityController<T extends EditableEntity> {
               private $log: ILogService,
               protected deleteConfirmationModal: DeleteConfirmationModal,
               private errorModal: ErrorModal,
-              protected userService: UserService,
-              private datamodelConfirmationModalService?: DatamodelConfirmationModalService) {
+              protected userService: UserService) {
 
     $scope.$watch(() => userService.isLoggedIn(), (isLoggedIn, wasLoggedIn) => {
       if (!isLoggedIn && wasLoggedIn) {
@@ -65,7 +64,9 @@ export abstract class EditableEntityController<T extends EditableEntity> {
 
   abstract getContext(): LanguageContext;
 
-  abstract confirmChangeToRestrictedStatus(entity: T, oldEntity: T): boolean;
+  abstract confirmChangeToRestrictedStatusDialog(entity: T, oldEntity: T): IPromise<any> | null;
+
+  abstract confirmDialog(entity: T, oldEntity: T): IPromise<any> | null;
 
   select(editable: T | null) {
     this.setEditable(editable);
@@ -101,10 +102,22 @@ export abstract class EditableEntityController<T extends EditableEntity> {
         });
     };
 
-    if (this.confirmChangeToRestrictedStatus(editableInEdit!, editable!) && this.datamodelConfirmationModalService) {
-      this.datamodelConfirmationModalService.openChangeToRestrictedStatus().then(() => save(), ignoreModalClose);
+    const confirmAndSave = () => {
+      const confirmDialog = this.confirmDialog(editableInEdit!, editable!);
+
+      if (confirmDialog) {
+        confirmDialog.then(() => save(), ignoreModalClose);
+      } else {
+        save();
+      }
+    };
+
+    const confirmRestrictedStatusDialog = this.confirmChangeToRestrictedStatusDialog(editableInEdit!, editable!);
+
+    if (confirmRestrictedStatusDialog) {
+      confirmRestrictedStatusDialog.then(() => confirmAndSave(), ignoreModalClose);
     } else {
-      save();
+      confirmAndSave();
     }
 
   }

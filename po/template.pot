@@ -1075,7 +1075,7 @@ msgstr ""
 msgid "You can add new attribute or association to the Class from here"
 msgstr ""
 
-msgid "Use class"
+msgid "Specialize class"
 msgstr ""
 
 msgid "not found in the concept database"
@@ -1551,10 +1551,10 @@ msgstr ""
 msgid "Non specialized classes are not allowed"
 msgstr ""
 
-msgid "Define concept for the class"
+msgid "Use class"
 msgstr ""
 
-msgid "Specialize class"
+msgid "Define concept for the class"
 msgstr ""
 
 msgid "Copy shape"
@@ -1932,6 +1932,12 @@ msgid "Choose target status"
 msgstr ""
 
 msgid "UPDATING_STATUSES_MESSAGE"
+msgstr ""
+
+msgid "Change resource statuses at the same time?"
+msgstr ""
+
+msgid "CHANGE RESOURCE STATUSES TOO?"
 msgstr ""
 
 msgid "Example"
