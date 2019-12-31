@@ -9,7 +9,7 @@ import { LegacyComponent } from 'app/utils/angular';
     displayNameFormatter: '='
   },
   template: `
-      <iow-select id="{{$ctrl.id}}" required ng-model="$ctrl.value" options="value in $ctrl.values">
+      <iow-select id="{{$ctrl.id}}" id-prefix="$ctrl.id" required ng-model="$ctrl.value" options="value in $ctrl.values">
         <span>{{$ctrl.getName(value)}}</span>
       </iow-select>
   `
