@@ -152,8 +152,8 @@ export class ModelViewComponent extends EditableEntityController<Model> {
 
   confirmDialog(model: Model, _oldEntity: Model): IPromise<any> | null {
 
-    const startStatusLocalized: string = this.translateService.instant(model.status);
-    const endStatusLocalized: string = this.translateService.instant(_oldEntity.status);
+    const startStatusLocalized: string = this.translateService.instant(_oldEntity.status);
+    const endStatusLocalized: string = this.translateService.instant(model.status);
 
     return this.changeResourceStatusesToo ? this.$q.when(this.datamodelConfirmationModalService.openChangeResourceStatusesAlsoAlongWithTheDatamodelStatus(startStatusLocalized, endStatusLocalized)) : null;
   }
