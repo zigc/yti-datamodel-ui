@@ -17,12 +17,22 @@ function isRemovableStatus(status: Status|null): boolean {
 
 export class AuthorizationManagerService {
 
+  allowedTargetStatusesFrom_INCOMPLETE = ['INCOMPLETE', 'DRAFT'] as Status[];
+  allowedTargetStatusesFrom_DRAFT = ['DRAFT', 'INCOMPLETE', 'VALID'] as Status[];
+  allowedTargetStatusesFrom_VALID = ['VALID', 'RETIRED', 'INVALID'] as Status[];
+  allowedTargetStatusesFrom_RETIRED = ['RETIRED', 'VALID', 'INVALID'] as Status[];
+  allowedTargetStatusesFrom_INVALID = ['INVALID', 'VALID', 'RETIRED'] as Status[];
+
   constructor(private userService: UserService) {
     'ngInject';
   }
 
   private get user(): User {
     return this.userService.user;
+  }
+
+  get isSuperUser() {
+    return this.user.superuser;
   }
 
   canEditModel(model: Model): boolean {
@@ -34,7 +44,29 @@ export class AuthorizationManagerService {
   }
 
   getAllowedStatuses(model: Model) {
-    return selectableStatuses; // TODO
+    const originalStatus = model.status;
+
+    if (this.isSuperUser) {
+      return selectableStatuses;
+    }
+
+    if (originalStatus) {
+      if (originalStatus === 'INCOMPLETE') {
+        return this.allowedTargetStatusesFrom_INCOMPLETE;
+      } else if (originalStatus === 'DRAFT') {
+        return this.allowedTargetStatusesFrom_DRAFT;
+      } else if (originalStatus === 'VALID') {
+        return this.allowedTargetStatusesFrom_VALID;
+      } else if (originalStatus === 'RETIRED') {
+        return this.allowedTargetStatusesFrom_RETIRED;
+      } else if (originalStatus === 'INVALID') {
+        return this.allowedTargetStatusesFrom_INVALID;
+      } else {
+        return selectableStatuses; // should never come here anymore
+      }
+    } else {
+      return selectableStatuses;
+    }
   }
 
   filterOrganizationsAllowedForUser(organizations: Organization[]) {
