@@ -46,7 +46,7 @@ export class InteractiveHelpUserService implements UserService, ResetableService
     return this._user$.asObservable();
   }
 
-  updateLoggedInUser(fakeLoginMail?: string): void {
+  updateLoggedInUser(fakeLoginMail?: string): Promise<void> {
     throw new Error();
   }
 

@@ -117,7 +117,10 @@ export class NavigationBarComponent {
   }
 
   fakeUser(userEmail: string) {
-    this.userService.updateLoggedInUser(userEmail);
+
+    this.userService.updateLoggedInUser(userEmail).then(() => {
+      window.location.reload();
+    }).catch(reason => console.error('Fake login failed: ' + reason));
   }
 
   isLoggedIn() {
