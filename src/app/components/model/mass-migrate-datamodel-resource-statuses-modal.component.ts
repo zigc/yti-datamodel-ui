@@ -2,7 +2,7 @@ import { Component, OnInit, Injectable } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Model } from 'app/entities/model';
 import { UserService } from 'yti-common-ui/services/user.service';
-import { Status, selectableStatuses, changeToRestrictedStatus } from 'yti-common-ui/entities/status';
+import { Status, selectableStatuses, changeToRestrictedStatus, allowedTargetStatuses } from 'yti-common-ui/entities/status';
 import { BehaviorSubject, combineLatest } from 'rxjs';
 import { FilterOptions } from 'yti-common-ui/components/filter-dropdown.component';
 import { TranslateService } from '@ngx-translate/core';
@@ -32,12 +32,6 @@ export class MassMigrateDatamodelResourceStatusesModalComponent implements OnIni
 
   fromStatuses = ['INCOMPLETE', 'DRAFT', 'VALID', 'RETIRED', 'INVALID'] as Status[];
   toStatuses = ['INCOMPLETE', 'DRAFT', 'VALID', 'RETIRED', 'INVALID'] as Status[];
-
-  allowedTargetStatusesFrom_INCOMPLETE = ['DRAFT'] as Status[];
-  allowedTargetStatusesFrom_DRAFT = ['INCOMPLETE', 'VALID'] as Status[];
-  allowedTargetStatusesFrom_VALID = ['RETIRED', 'INVALID'] as Status[];
-  allowedTargetStatusesFrom_RETIRED = ['VALID', 'INVALID'] as Status[];
-  allowedTargetStatusesFrom_INVALID = ['VALID', 'RETIRED'] as Status[];
 
   enforceTransitionRulesForSuperUserToo = false;
 
@@ -153,38 +147,10 @@ export class MassMigrateDatamodelResourceStatusesModalComponent implements OnIni
     combineLatest(this.fromStatus$, this.toStatus$).subscribe(
       ([fromStatus, toStatus]) => {
         const chosenFromStatus: Status | null = fromStatus;
-        if (chosenFromStatus === 'INCOMPLETE' && (!this.isSuperUser || (this.isSuperUser && this.enforceTransitionRulesForSuperUserToo))) {
-          this.toOptions = [null, ...this.allowedTargetStatusesFrom_INCOMPLETE].map(stat => ({
-            value: stat,
-            name: () => this.translateService.instant(stat ? stat : 'Choose target status'),
-            idIdentifier: () => stat ? stat : 'all_selected'
-          }));
-        } else if (chosenFromStatus === 'DRAFT' && (!this.isSuperUser || (this.isSuperUser && this.enforceTransitionRulesForSuperUserToo))) {
-          this.toOptions = [null, ...this.allowedTargetStatusesFrom_DRAFT].map(stat => ({
-            value: stat,
-            name: () => this.translateService.instant(stat ? stat : 'Choose target status'),
-            idIdentifier: () => stat ? stat : 'all_selected'
-          }));
-        } else if (chosenFromStatus === 'VALID' && (!this.isSuperUser || (this.isSuperUser && this.enforceTransitionRulesForSuperUserToo))) {
-          this.toOptions = [null, ...this.allowedTargetStatusesFrom_VALID].map(stat => ({
-            value: stat,
-            name: () => this.translateService.instant(stat ? stat : 'Choose target status'),
-            idIdentifier: () => stat ? stat : 'all_selected'
-          }));
-        } else if (chosenFromStatus === 'RETIRED' && (!this.isSuperUser || (this.isSuperUser && this.enforceTransitionRulesForSuperUserToo))) {
-          this.toOptions = [null, ...this.allowedTargetStatusesFrom_RETIRED].map(stat => ({
-            value: stat,
-            name: () => this.translateService.instant(stat ? stat : 'Choose target status'),
-            idIdentifier: () => stat ? stat : 'all_selected'
-          }));
-        } else if (chosenFromStatus === 'INVALID' && (!this.isSuperUser || (this.isSuperUser && this.enforceTransitionRulesForSuperUserToo))) {
-          this.toOptions = [null, ...this.allowedTargetStatusesFrom_INVALID].map(stat => ({
-            value: stat,
-            name: () => this.translateService.instant(stat ? stat : 'Choose target status'),
-            idIdentifier: () => stat ? stat : 'all_selected'
-          }));
-        } else if (chosenFromStatus === null && (!this.isSuperUser || (this.isSuperUser && this.enforceTransitionRulesForSuperUserToo))) {
-          this.toOptions = [null, ...this.toStatuses].map(stat => ({
+        const allowedToStatuses = chosenFromStatus ? allowedTargetStatuses(chosenFromStatus, false) : this.toStatuses;
+
+        if (!this.isSuperUser || (this.isSuperUser && this.enforceTransitionRulesForSuperUserToo)) {
+          this.toOptions = [null, ...allowedToStatuses].map(stat => ({
             value: stat,
             name: () => this.translateService.instant(stat ? stat : 'Choose target status'),
             idIdentifier: () => stat ? stat : 'all_selected'

@@ -12,9 +12,9 @@ import { LegacyComponent } from 'app/utils/angular';
   },
   template: `
       <div class="form-group">
-      
+
         <label translate>Status</label>
-      
+
         <iow-select ng-if="$ctrl.isEditing()" id="{{$ctrl.id}}" id-prefix="$ctrl.id" options="state in $ctrl.getStates()" ng-model="$ctrl.state">
           <span>{{state | translate}}</span>
         </iow-select>
@@ -43,6 +43,6 @@ export class EditableStateSelectComponent {
   }
 
   getStates() {
-    return this.authorizationManagerService.getAllowedStatuses(this.model);
+    return this.authorizationManagerService.getAllowedStatuses(this.state);
   }
 }
