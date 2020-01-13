@@ -66,10 +66,14 @@ export class ModelViewComponent extends EditableEntityController<Model> {
       }
     });
 
-    this.$scope.$watch(() => this.model.status, newStatus => {
-      this.modelService.getModelResourcesTotalCountByStatus(this.model, newStatus).then(resourcesTotal => {
-        this.statusResourcesTotal = resourcesTotal;
-      });
+    const modelStatus = () => this.model ? this.model.status : false;
+
+    this.$scope.$watch(() => modelStatus(), newStatus => {
+      if (newStatus) {
+        this.modelService.getModelResourcesTotalCountByStatus(this.model, newStatus).then(resourcesTotal => {
+          this.statusResourcesTotal = resourcesTotal;
+        });
+      }
     });
   }
 
