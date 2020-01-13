@@ -1,4 +1,4 @@
-import { ILogService, IPromise } from 'angular';
+import { ILogService, IPromise, IQService } from 'angular';
 import { PredicateService } from 'app/services/predicateService';
 import { UserService } from 'app/services/userService';
 import { EditableEntityController, EditableScope, Rights } from 'app/components/form/editableEntityController';
@@ -11,6 +11,7 @@ import { EditorContainer, ModelControllerService } from 'app/components/model/mo
 import { AuthorizationManagerService } from 'app/services/authorizationManagerService';
 import { LegacyComponent } from 'app/utils/angular';
 import { changeToRestrictedStatus } from 'yti-common-ui/entities/status';
+import { DatamodelConfirmationModalService } from 'app/services/confirmation-modal.service';
 
 @LegacyComponent({
   bindings: {
@@ -32,6 +33,8 @@ export class PredicateViewComponent extends EditableEntityController<Association
 
   constructor($scope: EditableScope,
               $log: ILogService,
+              private $q: IQService,
+              private datamodelConfirmationModalService: DatamodelConfirmationModalService,
               deleteConfirmationModal: DeleteConfirmationModal,
               errorModal: ErrorModal,
               private predicateService: PredicateService,
@@ -94,14 +97,14 @@ export class PredicateViewComponent extends EditableEntityController<Association
     return this.model;
   }
 
-  // TODO: This is not used here yet.
   confirmChangeToRestrictedStatus(entity: Association|Attribute, oldEntity: Association|Attribute): boolean {
     return entity.status && oldEntity.status ? changeToRestrictedStatus(oldEntity.status, entity.status) : false;
   }
 
   confirmChangeToRestrictedStatusDialog(entity: Association|Attribute, oldEntity: Association|Attribute): IPromise<any> | null {
-    // TODO: This is not implemented yet in PropertyView.
-    return null;
+    return entity.status && oldEntity.status
+      ? changeToRestrictedStatus(oldEntity.status, entity.status) ? this.$q.when(this.datamodelConfirmationModalService.openChangeToRestrictedStatus()) : null
+      : null;
   }
 
   confirmDialog(entity: Association|Attribute, oldEntity: Association|Attribute): IPromise<any> | null {
