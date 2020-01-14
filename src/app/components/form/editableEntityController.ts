@@ -5,7 +5,6 @@ import { isModalCancel } from 'app/utils/angular';
 import { ErrorModal } from './errorModal';
 import { LanguageContext } from 'app/types/language';
 import { EditableEntity } from 'app/types/entity';
-import { DatamodelConfirmationModalService } from 'app/services/confirmation-modal.service';
 import { ignoreModalClose } from 'yti-common-ui/utils/modal';
 
 export interface EditableForm extends IFormController {
