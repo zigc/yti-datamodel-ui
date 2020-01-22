@@ -24,7 +24,7 @@
       <!-- IDEA: Koska näin ei toimi, tee oma AngularJS komponentti, joka kutsuu tätä prefix-editablea:
             - parametrina sinne tarvittavat tiedot -->
 
-      <prefix-editable [model]='model' [prefix]="prefix" [title]="'Prefix'" [context]="model.context"></prefix-editable>
+      <prefix-editable [prefix]="prefix" [context]="model.context" (saveNewVersion)="saveNewVersion($event)"></prefix-editable>
 
       <!-- <editable title="Prefix" [context]="model.context">
         <input id="modelPrefix" class="form-control" type="text" prefix-input

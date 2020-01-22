@@ -51,23 +51,21 @@ export class NewDatamodelVersionModalComponent {
   //   return true;
   // }
 
-  // saveNewVersion() {
-  //   const modalRef = this.alertModalService.open('CREATING_NEW_MODEL_VERSION_MESSAGE');
+  saveNewVersion(prefix: string) {
+    const modalRef = this.alertModalService.open('CREATING_NEW_MODEL_VERSION_MESSAGE');
 
-  //   modalRef.message = 'Prefix: ' + this.prefix;
+    this.modelService.createNewModelVersion(prefix, this.model.id.uri).then(newUri => {
 
-  //   this.modelService.createNewModelVersion(this.prefix, this.model.id.uri).then(newUri => {
+      modalRef.message = this.translateService.instant('New version of datamodel is created') +  ': ' + newUri;
 
-  //     modalRef.message = this.translateService.instant('New version of datamodel is created') +  ': ' + newUri;
-
-  //     modalRef.showOkButton = true;
-  //     this.modal.close(false);
-  //   }, error => {
-  //     this.uploading = false;
-  //     this.errorModalService.openSubmitError(error);
-  //     modalRef.cancel();
-  //   });
-  // };
+      modalRef.showOkButton = true;
+      this.modal.close(false);
+    }, error => {
+      this.uploading = false;
+      this.errorModalService.openSubmitError(error);
+      modalRef.cancel();
+    });
+  };
 
 }
 
