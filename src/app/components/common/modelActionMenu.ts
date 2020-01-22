@@ -10,6 +10,7 @@ import { Url } from '../../entities/uri';
 import { UserService } from '../../services/userService';
 import { MassMigrateDatamodelResourceStatusesModalService } from 'app/components/model/mass-migrate-datamodel-resource-statuses-modal.component';
 import { AuthorizationManagerService } from 'app/services/authorizationManagerService';
+import { NewDatamodelVersionModalService } from 'app/components/model/new-datamodel-version-modal.component';
 
 @LegacyComponent({
   bindings: {
@@ -38,7 +39,8 @@ export class ModelActionMenuComponent {
               private errorModal: ErrorModal,
               private userService: UserService,
               private authorizationManagerService: AuthorizationManagerService,
-              private massMigrateDatamodelResourceStatusesModalService: MassMigrateDatamodelResourceStatusesModalService) {
+              private massMigrateDatamodelResourceStatusesModalService: MassMigrateDatamodelResourceStatusesModalService,
+              private newDatamodelVersionModalService: NewDatamodelVersionModalService) {
     'ngInject';
   }
 
@@ -75,6 +77,11 @@ export class ModelActionMenuComponent {
   get showMassMigrateDatamodelStatuses(): boolean {
 
     return this.canMassMigrateDatamodelStatuses && !this.editing;
+  }
+
+  get showCreateNewDatamodelVersion(): boolean {
+
+    return this.authorizationManagerService.canEditModel(this.entity);
   }
 
 
@@ -127,5 +134,9 @@ export class ModelActionMenuComponent {
 
   massMigrateDatamodelStatuses() {
     this.massMigrateDatamodelResourceStatusesModalService.open(this.entity);
+  }
+
+  createNewDatamodelVersion() {
+    this.newDatamodelVersionModalService.open(this.entity);
   }
 }

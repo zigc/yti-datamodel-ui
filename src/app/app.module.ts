@@ -67,7 +67,8 @@ import {
   ModelLanguageChooserDirective,
   ModelPageDirective,
   ModelViewDirective,
-  SortByColumnHeaderDirective
+  SortByColumnHeaderDirective,
+  PrefixEditableDirective
 } from './ajs-upgraded-components';
 import { DefaultAngularLocalizer, LanguageService } from './services/languageService';
 import { Localizer as AngularLocalizer } from 'yti-common-ui/types/localization';
@@ -88,6 +89,8 @@ import { ModalService } from 'yti-common-ui/services/modal.service';
 import { AlertModalService } from 'yti-common-ui/components/alert-modal.component';
 import { DatamodelConfirmationModalService } from './services/confirmation-modal.service';
 import { ErrorModalService } from 'yti-common-ui/components/error-modal.component';
+import { NewDatamodelVersionModalComponent } from './components/model/new-datamodel-version-modal.component';
+import { NewDatamodelVersionModalService } from './components/model/new-datamodel-version-modal.component';
 
 require('angular-gettext');
 require('checklist-model');
@@ -174,12 +177,14 @@ export function localizerFactory(languageService: LanguageService): AngularLocal
     ModelActionMenuDirective,
     SortByColumnHeaderDirective,
     HighlightDirective,
+    PrefixEditableDirective,
     SearchClassTableModalContentComponent,
     SearchPredicateTableModalContentComponent,
     UserDetailsComponent,
     UserDetailsInformationComponent,
     UserDetailsSubscriptionsComponent,
-    MassMigrateDatamodelResourceStatusesModalComponent
+    MassMigrateDatamodelResourceStatusesModalComponent,
+    NewDatamodelVersionModalComponent
   ],
   entryComponents: [
     FooterComponent,
@@ -198,7 +203,8 @@ export function localizerFactory(languageService: LanguageService): AngularLocal
     UserDetailsComponent,
     UserDetailsInformationComponent,
     UserDetailsSubscriptionsComponent,
-    MassMigrateDatamodelResourceStatusesModalComponent
+    MassMigrateDatamodelResourceStatusesModalComponent,
+    NewDatamodelVersionModalComponent
   ],
   providers: [
     { provide: AUTHENTICATED_USER_ENDPOINT, useFactory: resolveAuthenticatedUserEndpoint },
@@ -227,7 +233,8 @@ export function localizerFactory(languageService: LanguageService): AngularLocal
     ModalService,
     AlertModalService,
     DatamodelConfirmationModalService,
-    ErrorModalService
+    ErrorModalService,
+    NewDatamodelVersionModalService
   ]
 })
 export class AppModule {
@@ -281,6 +288,7 @@ mod.directive('appUserDetails', downgradeComponent({ component: UserDetailsCompo
 mod.directive('appUserDetailsInformation', downgradeComponent({ component: UserDetailsInformationComponent }));
 mod.directive('appUserDetailsSubscriptions', downgradeComponent({ component: UserDetailsSubscriptionsComponent }));
 mod.directive('appMassMigrateDatamodelResourceStatusesModalComponent', downgradeComponent({ component: MassMigrateDatamodelResourceStatusesModalComponent }));
+mod.directive('appNewDatamodelVersionModalComponent', downgradeComponent({ component: NewDatamodelVersionModalComponent }));
 
 mod.factory('translateService', downgradeInjectable(TranslateService));
 mod.factory('loginModal', downgradeInjectable(LoginModalService));
@@ -296,6 +304,7 @@ mod.factory('modalService', downgradeInjectable(ModalService));
 mod.factory('alertModalService', downgradeInjectable(AlertModalService));
 mod.factory('datamodelConfirmationModalService', downgradeInjectable(DatamodelConfirmationModalService));
 mod.factory('errorModalService', downgradeInjectable(ErrorModalService));
+mod.factory('newDatamodelVersionModalService', downgradeInjectable(NewDatamodelVersionModalService));
 
 mod.config(routeConfig);
 

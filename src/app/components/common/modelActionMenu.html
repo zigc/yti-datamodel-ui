@@ -27,5 +27,12 @@
             ng-click="$ctrl.massMigrateDatamodelStatuses()"
             translate>Update datamodel's resources' statuses</button>
 
+    <button id="create_new_datamodel_version_button"
+            ng-show="$ctrl.showCreateNewDatamodelVersion"
+            class="dropdown-item"
+            type="button"
+            ng-click="$ctrl.createNewDatamodelVersion()"
+            translate>Create new version</button>
+
   </div>
 </div>

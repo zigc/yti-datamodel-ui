@@ -108,3 +108,17 @@ export class HighlightDirective extends UpgradeComponent {
     super('highlight', elementRef, injector);
   }
 }
+
+@Directive({
+  selector: 'prefix-editable'
+})
+export class PrefixEditableDirective extends UpgradeComponent {
+  @Input() model: Model;
+  @Input() prefix: string;
+  @Input() title: string;
+  @Input() context: LanguageContext;
+
+  constructor(elementRef: ElementRef, injector: Injector) {
+    super('prefixEditable', elementRef, injector);
+  }
+}

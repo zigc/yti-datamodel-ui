@@ -18,7 +18,7 @@
 
     <non-editable data-title="Prefix" value="$ctrl.model.prefix" context="$ctrl.model"></non-editable>
     <non-editable data-title="Namespace" value="$ctrl.model.namespace" context="$ctrl.model" clipboard="$ctrl.model.namespace"></non-editable>
-
+    <non-editable data-title="Previous version" value="$ctrl.model.previousModel" context="$ctrl.model" link="$ctrl.previousModelLink"></non-editable>
     <editable-state-select ng-if="!$ctrl.model.unsaved" id="modelState" state="$ctrl.model.status" model="$ctrl.model"></editable-state-select>
     <div class="row" ng-if="$ctrl.showChangeResourceStatusesCheckbox()">
       <div class="col-md-4" style="line-height: 45px; white-space: nowrap">
