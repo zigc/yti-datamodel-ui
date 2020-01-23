@@ -1,6 +1,6 @@
 {
   "/datamodel-api/api/v1/*": {
-    "target": "http://localhost:8084",
+    "target": "http://localhost:9004",
     "secure": false
   },
   "/messaging-api/*": {
