@@ -110,14 +110,14 @@ export class HighlightDirective extends UpgradeComponent {
 }
 
 @Directive({
-  selector: 'prefix-editable'
+  selector: 'new-datamodel-version-prefix-modal-form'
 })
-export class PrefixEditableDirective extends UpgradeComponent {
-  @Input() prefix: string;
-  @Input() context: LanguageContext;
+export class NewDatamodelVersionPrefixModalFormDirective extends UpgradeComponent {
+  @Input() model: Model;
   @Output() saveNewVersion: EventEmitter<string>;
+  @Output() close: EventEmitter<void>;
 
   constructor(elementRef: ElementRef, injector: Injector) {
-    super('prefixEditable', elementRef, injector);
+    super('newDatamodelVersionPrefixModalForm', elementRef, injector);
   }
 }

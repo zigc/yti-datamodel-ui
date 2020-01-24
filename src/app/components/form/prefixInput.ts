@@ -1,6 +1,7 @@
 import { IAttributes, IDirectiveFactory, INgModelController, IScope } from 'angular';
 import { isValidPrefix, isValidPrefixLength } from './validators';
 import { ImportedNamespace, Model, NamespaceType } from 'app/entities/model';
+import { ValidatorService } from 'app/services/validatorService';
 
 interface PrefixInputScope extends IScope {
   model: Model;
@@ -8,16 +9,19 @@ interface PrefixInputScope extends IScope {
   allowTechnical: boolean;
   reservedPrefixes?: string[];
   reservedPrefixesGetter?: () => string[];
+  isModelPrefix?: boolean;
 }
 
-export const PrefixInputDirective: IDirectiveFactory = () => {
+export const PrefixInputDirective: IDirectiveFactory = (validatorService: ValidatorService) => {
+  'ngInject';
   return {
     scope: {
       model: '=?',
       activeNamespace: '=?',
       allowTechnical: '=?',
       reservedPrefixes: '=?',
-      reservedPrefixesGetter: '=?'
+      reservedPrefixesGetter: '=?',
+      isModelPrefix: '=?'
     },
     restrict: 'A',
     require: 'ngModel',
@@ -54,6 +58,14 @@ export const PrefixInputDirective: IDirectiveFactory = () => {
           return true;
         }
       };
+
+      const isModelPrefix = $scope.isModelPrefix;
+
+      if (isModelPrefix) {
+        ngModel.$asyncValidators['existingId'] = (prefix: string) => {
+          return validatorService.prefixDoesNotExists(prefix);
+        };
+      }
     }
   };
 };

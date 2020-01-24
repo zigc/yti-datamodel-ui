@@ -1,50 +1,7 @@
-<!-- <form name="form" class="editable-form" implicit-edit-mode> -->
+<div *ngIf="loading">
+  <app-ajax-loading-indicator></app-ajax-loading-indicator>
+</div>
 
-  <div *ngIf="loading">
-    <app-ajax-loading-indicator></app-ajax-loading-indicator>
-  </div>
-
-  <div [hidden]="loading">
-    <div class="modal-header">
-      <h4 class="modal-title strong">
-        <a><i id="close_modal_link" class="fa fa-times" (click)="close()"></i></a>
-        <span translate>Create new version of datamodel</span>
-      </h4>
-    </div>
-
-    <div class="modal-body">
-
-      <!-- <input id="modelPrefix" class="form-control" type="text" prefix-input
-            [(ngModel)]="prefix"
-            autocomplete="off"
-            required /> -->
-
-      <!-- <highlight [text]="model.label" [context]="model" [search]="''"></highlight> -->
-
-      <!-- IDEA: Koska näin ei toimi, tee oma AngularJS komponentti, joka kutsuu tätä prefix-editablea:
-            - parametrina sinne tarvittavat tiedot -->
-
-      <prefix-editable [prefix]="prefix" [context]="model.context" (saveNewVersion)="saveNewVersion($event)"></prefix-editable>
-
-      <!-- <editable title="Prefix" [context]="model.context">
-        <input id="modelPrefix" class="form-control" type="text" prefix-input
-              [(ngModel)]="prefix"
-              autocomplete="off"
-              required />
-      </editable> -->
-
-    </div>
-    <div class="modal-footer">
-      <div>
-        <!-- <button id="save_new_version_button"
-                [disabled]="!canSave()"
-                type="button"
-                class="btn btn-action"
-                (click)="saveNewVersion()"
-                translate>Save</button> -->
-        <button id="cancel_migrate_resource_statuses_button" type="button" class="btn btn-link" (click)="close()" translate>Cancel</button>
-      </div>
-    </div>
-  </div>
-
-<!-- </form> -->
+<div [hidden]="loading">
+  <new-datamodel-version-prefix-modal-form [model]="model" (saveNewVersion)="saveNewVersion($event)" (close)="close()"></new-datamodel-version-prefix-modal-form>
+</div>

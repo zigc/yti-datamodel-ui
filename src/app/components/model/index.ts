@@ -24,6 +24,7 @@ import { ConceptFormComponent } from './conceptForm';
 import { ModelPageComponent } from './modelPage';
 import { NewModelPageComponent } from './newModelPage';
 import { NonEditableVocabularyComponent } from './nonEditableVocabulary';
+import { NewDatamodelVersionPrefixModalFormComponent } from './newDatamodelVersionPrefixModalForm';
 
 import { componentDeclaration } from 'app/utils/angular';
 import { module as mod } from './module';
@@ -47,6 +48,7 @@ mod.component('referenceDatasView', componentDeclaration(ReferenceDatasViewCompo
 mod.component('technicalNamespaces', componentDeclaration(TechnicalNamespacesComponent));
 mod.component('classificationsView', componentDeclaration(ClassificationsViewComponent));
 mod.component('contributorsView', componentDeclaration(ContributorsViewComponent));
+mod.component('newDatamodelVersionPrefixModalForm', componentDeclaration(NewDatamodelVersionPrefixModalFormComponent));
 
 mod.service('addEditLinkModal', AddEditLinkModal);
 mod.service('addEditNamespaceModal', AddEditNamespaceModal);

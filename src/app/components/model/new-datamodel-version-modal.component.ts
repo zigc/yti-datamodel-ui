@@ -26,7 +26,6 @@ export class NewDatamodelVersionModalComponent {
 
   model: Model;
   uploading = false;
-  prefix = '';
 
   private modelService: ModelService;
 
@@ -41,15 +40,6 @@ export class NewDatamodelVersionModalComponent {
   get loading(): boolean {
     return this.uploading;
   }
-
-  close() {
-    this.modal.dismiss('cancel');
-  }
-
-  // canSave() {
-  //   // TODO
-  //   return true;
-  // }
 
   saveNewVersion(prefix: string) {
     const modalRef = this.alertModalService.open('CREATING_NEW_MODEL_VERSION_MESSAGE');
@@ -66,6 +56,10 @@ export class NewDatamodelVersionModalComponent {
       modalRef.cancel();
     });
   };
+
+  close() {
+    this.modal.dismiss('cancel');
+  }
 
 }
 

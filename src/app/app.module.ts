@@ -68,7 +68,7 @@ import {
   ModelPageDirective,
   ModelViewDirective,
   SortByColumnHeaderDirective,
-  PrefixEditableDirective
+  NewDatamodelVersionPrefixModalFormDirective
 } from './ajs-upgraded-components';
 import { DefaultAngularLocalizer, LanguageService } from './services/languageService';
 import { Localizer as AngularLocalizer } from 'yti-common-ui/types/localization';
@@ -177,7 +177,7 @@ export function localizerFactory(languageService: LanguageService): AngularLocal
     ModelActionMenuDirective,
     SortByColumnHeaderDirective,
     HighlightDirective,
-    PrefixEditableDirective,
+    NewDatamodelVersionPrefixModalFormDirective,
     SearchClassTableModalContentComponent,
     SearchPredicateTableModalContentComponent,
     UserDetailsComponent,
