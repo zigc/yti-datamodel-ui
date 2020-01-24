@@ -17,14 +17,15 @@ import { Model } from 'app/entities/model';
     </div>
     <div class="modal-body">
       <form name="$ctrl.form" class="editable-form" implicit-edit-mode>
-        <editable data-title="Prefix" context="$ctrl.model.context">
-          <input id="modelPrefix" class="form-control" type="text" prefix-input
-                  reserved-prefixes-getter="$ctrl.importedPrefixes"
-                  is-model-prefix='true'
-                  ng-model="$ctrl.prefix"
-                  autocomplete="off"
-                  required />
-        </editable>
+          <p translate>Define prefix for the new version. Note that prefix is used to define the new namespace.</p>
+          <editable data-title="Prefix" context="$ctrl.model.context">
+            <input id="new_datamodel_version_prefix_input" class="form-control" type="text" prefix-input
+                    reserved-prefixes-getter="$ctrl.importedPrefixes"
+                    is-model-prefix='true'
+                    ng-model="$ctrl.prefix"
+                    autocomplete="off"
+                    required />
+          </editable>
       </form>
     </div>
     <div class="modal-footer">

@@ -99,6 +99,20 @@ msgid ""
 "statuses."
 msgstr ""
 
+msgid "New version of datamodel is created"
+msgstr ""
+
+msgid "Create new version of datamodel"
+msgstr ""
+
+msgid ""
+"Define prefix for the new version. Note that prefix is used to define the "
+"new namespace."
+msgstr ""
+
+msgid "Save"
+msgstr ""
+
 msgid "Reference data"
 msgstr ""
 
@@ -166,6 +180,9 @@ msgid "Remove email subscription"
 msgstr ""
 
 msgid "Update datamodel's resources' statuses"
+msgstr ""
+
+msgid "Create new version"
 msgstr ""
 
 msgid "No referrers"
@@ -298,9 +315,6 @@ msgid "Select concept"
 msgstr ""
 
 msgid "No concept defined"
-msgstr ""
-
-msgid "Save"
 msgstr ""
 
 msgid "Invalid url error"
@@ -1075,7 +1089,7 @@ msgstr ""
 msgid "You can add new attribute or association to the Class from here"
 msgstr ""
 
-msgid "Specialize class"
+msgid "Copy shape"
 msgstr ""
 
 msgid "not found in the concept database"
@@ -1554,10 +1568,10 @@ msgstr ""
 msgid "Use class"
 msgstr ""
 
-msgid "Define concept for the class"
+msgid "Specialize class"
 msgstr ""
 
-msgid "Copy shape"
+msgid "Define concept for the class"
 msgstr ""
 
 msgid "Can be selected only from this library"
@@ -1940,7 +1954,10 @@ msgstr ""
 msgid "CHANGE RESOURCE STATUSES TOO?"
 msgstr ""
 
-msgid "Example"
+msgid "CREATING_NEW_MODEL_VERSION_MESSAGE"
+msgstr ""
+
+msgid "Example info"
 msgstr ""
 
 msgid "Editorial note"
@@ -2159,10 +2176,10 @@ msgstr ""
 msgid "Specialized from class info"
 msgstr ""
 
-msgid "Definition info"
+msgid "Example"
 msgstr ""
 
-msgid "Example info"
+msgid "Definition info"
 msgstr ""
 
 msgid "Value class"
@@ -2220,6 +2237,12 @@ msgid "Namespace"
 msgstr ""
 
 msgid "Namespace info"
+msgstr ""
+
+msgid "Previous version"
+msgstr ""
+
+msgid "Previous version info"
 msgstr ""
 
 msgid "Resource identifier"
