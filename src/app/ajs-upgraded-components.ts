@@ -108,3 +108,16 @@ export class HighlightDirective extends UpgradeComponent {
     super('highlight', elementRef, injector);
   }
 }
+
+@Directive({
+  selector: 'new-datamodel-version-prefix-modal-form'
+})
+export class NewDatamodelVersionPrefixModalFormDirective extends UpgradeComponent {
+  @Input() model: Model;
+  @Output() saveNewVersion: EventEmitter<string>;
+  @Output() close: EventEmitter<void>;
+
+  constructor(elementRef: ElementRef, injector: Injector) {
+    super('newDatamodelVersionPrefixModalForm', elementRef, injector);
+  }
+}

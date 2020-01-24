@@ -27,6 +27,10 @@ export class ModelFormComponent {
     return this.model.isOfType('profile');
   }
 
+  get previousModelLink() {
+    return this.model.previousModel ? this.model.previousModel.uri : null;
+  }
+
   isEditing() {
     return this.form && this.form.editing;
   }

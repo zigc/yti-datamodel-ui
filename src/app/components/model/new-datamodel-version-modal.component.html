@@ -1,0 +1,7 @@
+<div *ngIf="loading">
+  <app-ajax-loading-indicator></app-ajax-loading-indicator>
+</div>
+
+<div [hidden]="loading">
+  <new-datamodel-version-prefix-modal-form [model]="model" (saveNewVersion)="saveNewVersion($event)" (close)="close()"></new-datamodel-version-prefix-modal-form>
+</div>

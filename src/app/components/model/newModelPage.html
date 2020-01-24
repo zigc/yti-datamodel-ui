@@ -44,6 +44,7 @@
           <editable data-title="Prefix" context="$ctrl.context">
             <input id="modelPrefix" class="form-control" type="text" prefix-input
                    reserved-prefixes-getter="$ctrl.importedPrefixes"
+                   is-model-prefix='true'
                    ng-model="$ctrl.prefix"
                    autocomplete="off"
                    required />
