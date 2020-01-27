@@ -45,9 +45,8 @@ export class NewDatamodelVersionModalComponent {
     const modalRef = this.alertModalService.open('CREATING_NEW_MODEL_VERSION_MESSAGE');
 
     this.modelService.createNewModelVersion(prefix, this.model.id.uri).then(newUri => {
-
-      modalRef.message = this.translateService.instant('New version of datamodel is created') +  ': ' + newUri;
-
+      modalRef.message = this.translateService.instant('New version of datamodel is created') +  ': ';
+      modalRef.link = newUri;
       modalRef.showOkButton = true;
       this.modal.close(false);
     }, error => {
