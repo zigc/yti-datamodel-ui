@@ -72,7 +72,7 @@ import { makeSimpleSearchRegexp } from 'yti-common-ui/utils/search';
                                                   *ngIf="isLoadingSelection(searchResult)"></app-ajax-loading-indicator-small>
                 <highlight [text]="searchResult.label" [context]="model" [search]="searchText"></highlight>
               </div>
-              <a [href]="model.linkToResource(searchResult.id)" target="_blank"
+              <a [href]="model.linkToResource(searchResult.id)" target="_blank" rel="noopener noreferrer"
                  [innerHTML]="searchResult.id.compact | highlight: simpleSearchRegexp"></a>
               <div class="pt-1">
                 <app-status [status]="searchResult.status"></app-status>

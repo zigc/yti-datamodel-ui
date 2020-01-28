@@ -61,31 +61,32 @@ const nonExpandedLimit = 2;
         </thead>
         <tbody>
           <tr id="{{$ctrl.id + '_' + $ctrl.normalizeValueForId($ctrl.properties[0].nameExtractor(value)) + '_drag_sortable_item'}}"
-              ng-repeat="value in $ctrl.values | filter: $ctrl.filter | orderBy: $ctrl.orderBy" 
-              ng-class="['expandable-table', {collapsed: $ctrl.limit && $index >= $ctrl.limit}]" 
-              ng-init="valueIndex = $index" 
+              ng-repeat="value in $ctrl.values | filter: $ctrl.filter | orderBy: $ctrl.orderBy"
+              ng-class="['expandable-table', {collapsed: $ctrl.limit && $index >= $ctrl.limit}]"
+              ng-init="valueIndex = $index"
               drag-sortable-item>
             <td ng-class="property.cssClass" ng-repeat="property in $ctrl.properties">
               <span ng-if="!property.hrefExtractor && !property.onClick">{{property.nameExtractor(value)}}</span>
-              <a id="{{$ctrl.id + '_' + property.hrefExtractor(value) + '_href_editable_link'}}" 
+              <a id="{{$ctrl.id + '_' + property.hrefExtractor(value) + '_href_editable_link'}}"
                  ng-if="property.hrefExtractor"
                  target="_blank"
+                 rel="noopener noreferrer"
                  ng-href="{{property.hrefExtractor(value)}}">
                 {{property.nameExtractor(value)}}
               </a>
-              <a id="{{$ctrl.id + '_' + $ctrl.normalizeValueForId(property.nameExtractor(value)) + '_on_click_editable_link'}}" 
+              <a id="{{$ctrl.id + '_' + $ctrl.normalizeValueForId(property.nameExtractor(value)) + '_on_click_editable_link'}}"
                  ng-if="property.onClick"
                  ng-click="property.onClick(value)">
                 {{property.nameExtractor(value)}}
               </a>
             </td>
             <td id="{{$ctrl.id + '_' + $ctrl.normalizeValueForId($ctrl.properties[0].nameExtractor(value)) + '_remove_editable_button'}}"
-                ng-class="[ 'action', 'remove', { editable: $ctrl.canRemove(value) } ]" 
+                ng-class="[ 'action', 'remove', { editable: $ctrl.canRemove(value) } ]"
                 ng-click="$ctrl.remove(value, valueIndex)">
               <i class="fas fa-trash-alt" uib-tooltip="{{'Remove' | translate}}"></i>
             </td>
             <td id="{{$ctrl.id + '_' + $ctrl.normalizeValueForId($ctrl.properties[0].nameExtractor(value)) + '_edit_editable_button'}}"
-                ng-class="[ 'action', 'edit', { editable: $ctrl.canEdit(value) } ]" 
+                ng-class="[ 'action', 'edit', { editable: $ctrl.canEdit(value) } ]"
                 ng-click="$ctrl.edit(value, valueIndex)">
               <i class="fas fa-pencil-alt" uib-tooltip="{{'Edit' | translate}}"></i>
             </td>

@@ -11,6 +11,7 @@
        ng-attr-id="{{$ctrl.getId('show_' + download.name)}}"
        class="dropdown-item"
        target="_blank"
+       rel="noopener noreferrer"
        ng-href="{{download.hrefRaw}}"
        ng-click="download.onClick()">
       {{download.name | translate}}
