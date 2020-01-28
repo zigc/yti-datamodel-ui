@@ -41,6 +41,10 @@ export interface ModelService {
   newNamespaceImport(namespace: string, prefix: string, label: string, lang: Language): IPromise<ImportedNamespace>;
 
   changeStatuses(model: Model, initialStatus: Status, endStatus: Status): IPromise<any>;
+
+  getModelResourcesTotalCountByStatus(model: Model, resourceStatus: Status): IPromise<number>;
+
+  createNewModelVersion(newPrefix: string, uri: string): IPromise<any>
 }
 
 export class DefaultModelService implements ModelService {
@@ -169,6 +173,16 @@ export class DefaultModelService implements ModelService {
         this.defaultPredicateService.clearCachedPredicates(modelId);
         this.contentExpired$.next(modelId);
       });
+  }
+
+  getModelResourcesTotalCountByStatus(model: Model, resourceStatus: Status): IPromise<number> {
+    return this.$http.get<{ meta: { totalResults: number } }>(apiEndpointWithName('integration/resources'), { params: { container: model.id.uri, status: resourceStatus, pageSize: 0 } })
+      .then(response => response.data!.meta.totalResults);
+  }
+
+  createNewModelVersion(newPrefix: string, uri: string): IPromise<any> {
+    return this.$http.post<{ uri: string }>(apiEndpointWithName('modelVersion'), null, { params: { newPrefix, uri } })
+      .then(response => response.data.uri);
   }
 
   private deserializeModelList(data: GraphData): IPromise<ModelListItem[]> {

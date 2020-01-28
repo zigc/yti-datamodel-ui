@@ -111,4 +111,12 @@ export class InteractiveHelpModelService implements ModelService, ResetableServi
   changeStatuses(model: Model, initialStatus: Status, endStatus: Status): IPromise<any> {
     throw new Error('changeStatuses is not yet supported operation in help');
   }
+
+  getModelResourcesTotalCountByStatus(model: Model, resourceStatus: Status): IPromise<number> {
+    throw new Error('getModelResourcesTotalCountByStatus is not yet supported operation in help');
+  }
+
+  createNewModelVersion(newPrefix: string, uri: string): IPromise<any> {
+    throw new Error('createNewModelVersion is not yet supported operation in help');
+  }
 }

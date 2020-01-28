@@ -2,7 +2,7 @@ import { Component, OnInit, Injectable } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Model } from 'app/entities/model';
 import { UserService } from 'yti-common-ui/services/user.service';
-import { Status, selectableStatuses, restrictedStatuses } from 'yti-common-ui/entities/status';
+import { Status, selectableStatuses, changeToRestrictedStatus, allowedTargetStatuses } from 'yti-common-ui/entities/status';
 import { BehaviorSubject, combineLatest } from 'rxjs';
 import { FilterOptions } from 'yti-common-ui/components/filter-dropdown.component';
 import { TranslateService } from '@ngx-translate/core';
@@ -11,7 +11,6 @@ import { ModalService } from 'yti-common-ui/services/modal.service';
 import { ModelService } from 'app/services/modelService';
 import { ModelServiceWrapper } from 'app/ajs-upgraded-providers';
 import { ErrorModalService } from 'yti-common-ui/components/error-modal.component';
-import { contains } from 'yti-common-ui/utils/array';
 import { ignoreModalClose } from 'yti-common-ui/utils/modal';
 import { DatamodelConfirmationModalService } from 'app/services/confirmation-modal.service';
 
@@ -25,18 +24,14 @@ export class MassMigrateDatamodelResourceStatusesModalComponent implements OnIni
   toOptions: FilterOptions<Status>;
   fromStatus$ = new BehaviorSubject<Status | null>(null);
   toStatus$ = new BehaviorSubject<Status | null>(null);
+  fromStatusResourcesTotal = 0;
+  loadingResourcesTotal = false;
   uploading = false;
   model: Model;
   private modelService: ModelService;
 
   fromStatuses = ['INCOMPLETE', 'DRAFT', 'VALID', 'RETIRED', 'INVALID'] as Status[];
   toStatuses = ['INCOMPLETE', 'DRAFT', 'VALID', 'RETIRED', 'INVALID'] as Status[];
-
-  allowedTargetStatusesFrom_INCOMPLETE = ['DRAFT'] as Status[];
-  allowedTargetStatusesFrom_DRAFT = ['INCOMPLETE', 'VALID'] as Status[];
-  allowedTargetStatusesFrom_VALID = ['RETIRED', 'INVALID'] as Status[];
-  allowedTargetStatusesFrom_RETIRED = ['VALID', 'INVALID'] as Status[];
-  allowedTargetStatusesFrom_INVALID = ['VALID', 'RETIRED'] as Status[];
 
   enforceTransitionRulesForSuperUserToo = false;
 
@@ -52,6 +47,21 @@ export class MassMigrateDatamodelResourceStatusesModalComponent implements OnIni
 
   ngOnInit() {
     this.reset();
+
+    this.fromStatus$.subscribe(status => {
+      this.loadingResourcesTotal = true;
+
+      if (status) {
+        this.modelService.getModelResourcesTotalCountByStatus(this.model, status).then(resourcesTotal => {
+          this.fromStatusResourcesTotal = resourcesTotal;
+          this.loadingResourcesTotal = false;
+        });
+
+      } else {
+        this.fromStatusResourcesTotal = 0;
+        this.loadingResourcesTotal = false;
+      }
+    });
   }
 
   get isSuperUser() {
@@ -67,15 +77,24 @@ export class MassMigrateDatamodelResourceStatusesModalComponent implements OnIni
   }
 
   canSave() {
-    return this.fromStatus$.value != null && this.toStatus$.value != null && (this.fromStatus$.value !== this.toStatus$.value);
+    return this.fromStatusResourcesTotal > 0 && this.toStatus$.value != null && (this.fromStatus$.value !== this.toStatus$.value);
   }
 
   saveChanges() {
     const save = () => {
-      const modalRef = this.alertModalService.open('Please wait. This could take a while...');
+      const modalRef = this.alertModalService.open('UPDATING_STATUSES_MESSAGE');
 
       this.modelService.changeStatuses(this.model, this.fromStatus$.value!, this.toStatus$.value!).then(result => {
-        modalRef.message = this.translateService.instant('Statuses changed.');
+
+        if (this.fromStatusResourcesTotal === 1) {
+          modalRef.message = this.translateService.instant('Status changed to one resource.');
+        } else {
+          const messagePart1 = this.translateService.instant('Status changed to ');
+          const messagePart2 = this.translateService.instant(' resources.');
+
+          modalRef.message = messagePart1 + this.fromStatusResourcesTotal + messagePart2;
+        }
+
         modalRef.showOkButton = true;
         this.modal.close(false);
       }, error => {
@@ -85,15 +104,11 @@ export class MassMigrateDatamodelResourceStatusesModalComponent implements OnIni
       });
     };
 
-    if (this.changeToRestrictedStatus()) {
+    if (changeToRestrictedStatus(this.fromStatus$.value!, this.toStatus$.value!)) {
       this.confirmationModal.openChangeToRestrictedStatus().then(() => save(), ignoreModalClose);
     } else {
       save();
     }
-  }
-
-  changeToRestrictedStatus(): Boolean {
-    return !contains(restrictedStatuses, this.fromStatus$.value) && contains(restrictedStatuses, this.toStatus$.value);
   }
 
   toggleEnforceTransitionRulesForSuperUserToo() {
@@ -132,38 +147,10 @@ export class MassMigrateDatamodelResourceStatusesModalComponent implements OnIni
     combineLatest(this.fromStatus$, this.toStatus$).subscribe(
       ([fromStatus, toStatus]) => {
         const chosenFromStatus: Status | null = fromStatus;
-        if (chosenFromStatus === 'INCOMPLETE' && (!this.isSuperUser || (this.isSuperUser && this.enforceTransitionRulesForSuperUserToo))) {
-          this.toOptions = [null, ...this.allowedTargetStatusesFrom_INCOMPLETE].map(stat => ({
-            value: stat,
-            name: () => this.translateService.instant(stat ? stat : 'Choose target status'),
-            idIdentifier: () => stat ? stat : 'all_selected'
-          }));
-        } else if (chosenFromStatus === 'DRAFT' && (!this.isSuperUser || (this.isSuperUser && this.enforceTransitionRulesForSuperUserToo))) {
-          this.toOptions = [null, ...this.allowedTargetStatusesFrom_DRAFT].map(stat => ({
-            value: stat,
-            name: () => this.translateService.instant(stat ? stat : 'Choose target status'),
-            idIdentifier: () => stat ? stat : 'all_selected'
-          }));
-        } else if (chosenFromStatus === 'VALID' && (!this.isSuperUser || (this.isSuperUser && this.enforceTransitionRulesForSuperUserToo))) {
-          this.toOptions = [null, ...this.allowedTargetStatusesFrom_VALID].map(stat => ({
-            value: stat,
-            name: () => this.translateService.instant(stat ? stat : 'Choose target status'),
-            idIdentifier: () => stat ? stat : 'all_selected'
-          }));
-        } else if (chosenFromStatus === 'RETIRED' && (!this.isSuperUser || (this.isSuperUser && this.enforceTransitionRulesForSuperUserToo))) {
-          this.toOptions = [null, ...this.allowedTargetStatusesFrom_RETIRED].map(stat => ({
-            value: stat,
-            name: () => this.translateService.instant(stat ? stat : 'Choose target status'),
-            idIdentifier: () => stat ? stat : 'all_selected'
-          }));
-        } else if (chosenFromStatus === 'INVALID' && (!this.isSuperUser || (this.isSuperUser && this.enforceTransitionRulesForSuperUserToo))) {
-          this.toOptions = [null, ...this.allowedTargetStatusesFrom_INVALID].map(stat => ({
-            value: stat,
-            name: () => this.translateService.instant(stat ? stat : 'Choose target status'),
-            idIdentifier: () => stat ? stat : 'all_selected'
-          }));
-        } else if (chosenFromStatus === null && (!this.isSuperUser || (this.isSuperUser && this.enforceTransitionRulesForSuperUserToo))) {
-          this.toOptions = [null, ...this.toStatuses].map(stat => ({
+        const allowedToStatuses = chosenFromStatus ? allowedTargetStatuses(chosenFromStatus, false) : this.toStatuses;
+
+        if (!this.isSuperUser || (this.isSuperUser && this.enforceTransitionRulesForSuperUserToo)) {
+          this.toOptions = [null, ...allowedToStatuses].map(stat => ({
             value: stat,
             name: () => this.translateService.instant(stat ? stat : 'Choose target status'),
             idIdentifier: () => stat ? stat : 'all_selected'
@@ -171,6 +158,10 @@ export class MassMigrateDatamodelResourceStatusesModalComponent implements OnIni
         }
       }
     );
+  }
+
+  showFromStatusResourcesTotal(): boolean {
+    return this.fromStatus$.value !== null && !this.loadingResourcesTotal;
   }
 
 }

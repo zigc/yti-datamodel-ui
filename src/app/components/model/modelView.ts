@@ -1,4 +1,4 @@
-import { ILogService, IPromise } from 'angular';
+import { ILogService, IPromise, IQService } from 'angular';
 import { EditableEntityController, EditableScope, Rights } from 'app/components/form/editableEntityController';
 import { ModelService } from 'app/services/modelService';
 import { UserService } from 'app/services/userService';
@@ -9,6 +9,11 @@ import { LanguageContext } from 'app/types/language';
 import { EditorContainer } from './modelControllerService';
 import { AuthorizationManagerService } from 'app/services/authorizationManagerService';
 import { LegacyComponent } from 'app/utils/angular';
+import { AlertModalService } from 'yti-common-ui/components/alert-modal.component';
+import { TranslateService } from '@ngx-translate/core';
+import { changeToRestrictedStatus, Status } from 'yti-common-ui/entities/status';
+import { DatamodelConfirmationModalService } from 'app/services/confirmation-modal.service';
+import { ErrorModalService } from 'yti-common-ui/components/error-modal.component';
 
 @LegacyComponent({
   bindings: {
@@ -28,20 +33,48 @@ export class ModelViewComponent extends EditableEntityController<Model> {
   deleted: (model: Model) => void;
   updated: (model: Model) => void;
   namespacesInUse: Set<string>;
+  statusChanged = false;
+  changeResourceStatusesToo = false;
+  statusResourcesTotal = 0;
 
   constructor($scope: EditableScope,
               $log: ILogService,
+              private $q: IQService,
               private modelService: ModelService,
               deleteConfirmationModal: DeleteConfirmationModal,
+              private datamodelConfirmationModalService: DatamodelConfirmationModalService,
+              private errorModalService: ErrorModalService,
               errorModal: ErrorModal,
               userService: UserService,
-              private authorizationManagerService: AuthorizationManagerService) {
+              private authorizationManagerService: AuthorizationManagerService,
+              private alertModalService: AlertModalService,
+              private translateService: TranslateService) {
     'ngInject';
     super($scope, $log, deleteConfirmationModal, errorModal, userService);
   }
 
   $onInit() {
     this.parent.registerView(this);
+
+    const editableStatus = () => this.editableInEdit ? this.editableInEdit.status : false;
+
+    this.$scope.$watch(() => editableStatus(), newStatus => {
+      this.statusChanged = newStatus && newStatus !== this.getEditable().status;
+
+      if (!this.statusChanged) {
+        this.changeResourceStatusesToo = false;
+      }
+    });
+
+    const modelStatus = () => this.model ? this.model.status : false;
+
+    this.$scope.$watch(() => modelStatus(), newStatus => {
+      if (newStatus) {
+        this.modelService.getModelResourcesTotalCountByStatus(this.model, newStatus).then(resourcesTotal => {
+          this.statusResourcesTotal = resourcesTotal;
+        });
+      }
+    });
   }
 
   $onDestroy() {
@@ -53,7 +86,23 @@ export class ModelViewComponent extends EditableEntityController<Model> {
   }
 
   update(model: Model, _oldEntity: Model) {
-    return this.modelService.updateModel(model).then(() => this.updated(model));
+    const oldStatus = _oldEntity.status;
+    const newStatus = model.status;
+
+    const updateModel = () => {
+      this.changeResourceStatusesToo = false;
+      this.statusChanged = false;
+
+      return this.modelService.updateModel(model).then(() => this.updated(model));
+    };
+
+    if (this.changeResourceStatusesToo) {
+      return this.changeResourceStatuses(model, oldStatus, newStatus).then(() => {
+        return updateModel();
+      });
+    } else {
+      return updateModel();
+    }
   }
 
   remove(model: Model): IPromise<any> {
@@ -77,5 +126,39 @@ export class ModelViewComponent extends EditableEntityController<Model> {
 
   getContext(): LanguageContext {
     return this.model;
+  }
+
+  changeResourceStatuses(model: Model, oldStatus: Status, newStatus: Status) {
+    const modalRef = this.alertModalService.open('UPDATING_STATUSES_MESSAGE');
+
+    return this.modelService.changeStatuses(model, oldStatus, newStatus).then(result => {
+      if (this.statusResourcesTotal === 0) {
+        modalRef.message = this.translateService.instant('No resources were found with the starting status. No changes to resources statuses.');
+      } else if (this.statusResourcesTotal === 1) {
+        modalRef.message = this.translateService.instant('Status changed to one resource.');
+      } else {
+        const messagePart1 = this.translateService.instant('Status changed to ');
+        const messagePart2 = this.translateService.instant(' resources.');
+
+        modalRef.message = messagePart1 + this.statusResourcesTotal + messagePart2;
+      }
+
+      modalRef.showOkButton = true;
+    }, error => {
+      this.errorModalService.openSubmitError(error);
+      modalRef.cancel();
+    });
+  }
+
+  confirmChangeToRestrictedStatusDialog(model: Model, _oldEntity: Model): IPromise<any> | null {
+    return changeToRestrictedStatus(_oldEntity.status, model.status) ? this.$q.when(this.datamodelConfirmationModalService.openChangeToRestrictedStatus()) : null;
+  }
+
+  confirmDialog(model: Model, _oldEntity: Model): IPromise<any> | null {
+
+    const startStatusLocalized: string = this.translateService.instant(_oldEntity.status);
+    const endStatusLocalized: string = this.translateService.instant(model.status);
+
+    return this.changeResourceStatusesToo ? this.$q.when(this.datamodelConfirmationModalService.openChangeResourceStatusesAlsoAlongWithTheDatamodelStatus(startStatusLocalized, endStatusLocalized)) : null;
   }
 }

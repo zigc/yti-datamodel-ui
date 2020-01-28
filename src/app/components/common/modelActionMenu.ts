@@ -1,5 +1,3 @@
-import { IScope, IWindowService } from 'angular';
-import { LanguageService } from 'app/services/languageService';
 import { LanguageContext } from 'app/types/language';
 import { LegacyComponent } from 'app/utils/angular';
 import { Model } from '../../entities/model';
@@ -12,6 +10,7 @@ import { Url } from '../../entities/uri';
 import { UserService } from '../../services/userService';
 import { MassMigrateDatamodelResourceStatusesModalService } from 'app/components/model/mass-migrate-datamodel-resource-statuses-modal.component';
 import { AuthorizationManagerService } from 'app/services/authorizationManagerService';
+import { NewDatamodelVersionModalService } from 'app/components/model/new-datamodel-version-modal.component';
 
 @LegacyComponent({
   bindings: {
@@ -35,15 +34,13 @@ export class ModelActionMenuComponent {
   config: Config;
   changeHasSubscription: (enabled: boolean) => void;
 
-  constructor(private $scope: IScope,
-              private $window: IWindowService,
-              private languageService: LanguageService,
-              private confirmationModalService: ConfirmationModalService,
+  constructor(private confirmationModalService: ConfirmationModalService,
               private messagingService: MessagingService,
               private errorModal: ErrorModal,
               private userService: UserService,
               private authorizationManagerService: AuthorizationManagerService,
-              private massMigrateDatamodelResourceStatusesModalService: MassMigrateDatamodelResourceStatusesModalService) {
+              private massMigrateDatamodelResourceStatusesModalService: MassMigrateDatamodelResourceStatusesModalService,
+              private newDatamodelVersionModalService: NewDatamodelVersionModalService) {
     'ngInject';
   }
 
@@ -54,7 +51,7 @@ export class ModelActionMenuComponent {
 
   get showMenu(): boolean {
 
-    return this.canSubscribe;
+    return this.canSubscribe || this.showMassMigrateDatamodelStatuses;
   }
 
   get canSubscribe(): boolean {
@@ -80,6 +77,11 @@ export class ModelActionMenuComponent {
   get showMassMigrateDatamodelStatuses(): boolean {
 
     return this.canMassMigrateDatamodelStatuses && !this.editing;
+  }
+
+  get showCreateNewDatamodelVersion(): boolean {
+
+    return this.authorizationManagerService.canEditModel(this.entity);
   }
 
 
@@ -132,5 +134,9 @@ export class ModelActionMenuComponent {
 
   massMigrateDatamodelStatuses() {
     this.massMigrateDatamodelResourceStatusesModalService.open(this.entity);
+  }
+
+  createNewDatamodelVersion() {
+    this.newDatamodelVersionModalService.open(this.entity);
   }
 }

@@ -93,8 +93,37 @@ msgstr "Linkit"
 msgid "Add link"
 msgstr "Lisää linkki"
 
-msgid "Statuses changed."
-msgstr "Tilat vaihdettu."
+msgid "Status changed to one resource."
+msgstr "Tila vaihdettu yhteen resurssiin."
+
+msgid "Status changed to "
+msgstr "Tila vaihdettu "
+
+msgid " resources."
+msgstr " resurssiin."
+
+msgid ""
+"No resources were found with the starting status. No changes to resources "
+"statuses."
+msgstr ""
+"Tilaa ei vaihdettu yhteenkään resurssiin. Ei löytynyt resursseja "
+"vaihdettavassa tilassa."
+
+msgid "New version of datamodel is created"
+msgstr "Luotu uusi versio tietomallista"
+
+msgid "Create new version of datamodel"
+msgstr "Luo uusi versio tietomallista"
+
+msgid ""
+"Define prefix for the new version. Note that prefix is used to define the "
+"new namespace."
+msgstr ""
+"Määrittele uudelle versiolle etuliite. Annettu etuliite on osa uuden "
+"tietomallin nimiavaruutta."
+
+msgid "Save"
+msgstr "Tallenna"
 
 msgid "Reference data"
 msgstr "Koodisto"
@@ -164,6 +193,9 @@ msgstr "Poista sähköposti-ilmoitukset"
 
 msgid "Update datamodel's resources' statuses"
 msgstr "Muuta tietomallin resurssien tiloja"
+
+msgid "Create new version"
+msgstr "Luo uusi versio"
 
 msgid "No referrers"
 msgstr "Ei viittauksia"
@@ -296,9 +328,6 @@ msgstr "Valitse käsite"
 
 msgid "No concept defined"
 msgstr "Käsitettä ei ole määritelty"
-
-msgid "Save"
-msgstr "Tallenna"
 
 msgid "Invalid url error"
 msgstr "Syöte ei ole URL"
@@ -459,8 +488,20 @@ msgstr "poista valinta"
 msgid "Edit reference data"
 msgstr "Muokkaa koodistoa"
 
+msgid "Resources:"
+msgstr "Resursseja:"
+
 msgid "Enforce status transition rules"
 msgstr "Käytä tilasiirtymien validointisääntöjä."
+
+msgid "Starting status"
+msgstr "Lähtötila"
+
+msgid "Target status"
+msgstr "Kohdetila"
+
+msgid "Change resource statuses as well"
+msgstr "Muuta myös resurssien tilat"
 
 msgid ""
 "Please note that the content of this field is public. Don't use personal "
@@ -1149,8 +1190,8 @@ msgstr ""
 "Täältä voit lisätä luokalle uuden attribuutin jonka arvoalue perustuu "
 "tietotyyppiin tai assosiaation jolla viitataan toiseen luokkaan"
 
-msgid "Use class"
-msgstr "Käytä luokkaa"
+msgid "Copy shape"
+msgstr "Kopioi tarkennettu luokka"
 
 msgid "not found in the concept database"
 msgstr "ei löydy sanastosta"
@@ -1656,14 +1697,14 @@ msgstr "Erikoistamattomia luokkia ei saa valita"
 msgid "Non specialized classes are not allowed"
 msgstr "Erikoistamattomia luokkia ei saavalita"
 
-msgid "Define concept for the class"
-msgstr "Määrittele käsite luokalle"
+msgid "Use class"
+msgstr "Käytä luokkaa"
 
 msgid "Specialize class"
 msgstr "Tarkenna luokka"
 
-msgid "Copy shape"
-msgstr "Kopioi tarkennettu luokka"
+msgid "Define concept for the class"
+msgstr "Määrittele käsite luokalle"
 
 msgid "Can be selected only from this library"
 msgstr "Valinta on tehtävä tietokomponenettikirjaston luokista"
@@ -2049,12 +2090,22 @@ msgstr "Valitse lähtötila"
 msgid "Choose target status"
 msgstr "Valitse kohdetila"
 
-msgid "Please wait. This could take a while..."
-msgstr ""
-"Ole hyvä ja odota. Mahdollisesti pitkäkestoinen prosessointi käynnissä."
+msgid "UPDATING_STATUSES_MESSAGE"
+msgstr "Muutetaan tietomallin resurssien tiloja"
 
-msgid "Example"
-msgstr "Esimerkki"
+msgid "Change resource statuses at the same time?"
+msgstr "Vaihda samalla resurssien tilat?"
+
+msgid "CHANGE RESOURCE STATUSES TOO?"
+msgstr ""
+"Muutetaanko myös kaikki tilassa {{startStatus}} olleet resurssit tilaan "
+"{{endStatus}}?"
+
+msgid "CREATING_NEW_MODEL_VERSION_MESSAGE"
+msgstr "Luodaan uutta versiota tietomallista"
+
+msgid "Example info"
+msgstr "Esimerkkiarvo ominaisuudelle"
 
 msgid "Editorial note"
 msgstr "Muokkaajan kommentti"
@@ -2291,11 +2342,11 @@ msgstr "Tarkennettu luokasta"
 msgid "Specialized from class info"
 msgstr "Luokka jota soveltamisprofiilissa on tarkennettu"
 
+msgid "Example"
+msgstr "Esimerkki"
+
 msgid "Definition info"
 msgstr "Käsitteen määritelmä"
-
-msgid "Example info"
-msgstr "Esimerkkiarvo ominaisuudelle"
 
 msgid "Value class"
 msgstr "Kohde"
@@ -2360,6 +2411,12 @@ msgstr "Nimiavaruus"
 
 msgid "Namespace info"
 msgstr "Nimiavaruus jota käytetään resurssien yksilöintiin ja resolvointiin"
+
+msgid "Previous version"
+msgstr "Aiempi versio"
+
+msgid "Previous version info"
+msgstr "Linkki edeltävään versioon"
 
 msgid "Resource identifier"
 msgstr "Resurssin tunniste"
@@ -2549,6 +2606,16 @@ msgstr "Attribuutti"
 
 msgid "owl:ObjectProperty"
 msgstr "Assosiaatio"
+
+#~ msgid "Statuses changed."
+#~ msgstr "Tilat vaihdettu."
+
+#~ msgid "Resources in this status"
+#~ msgstr "Resursseja tässä tilassa"
+
+#~ msgid "Please wait. This could take a while..."
+#~ msgstr ""
+#~ "Ole hyvä ja odota. Mahdollisesti pitkäkestoinen prosessointi käynnissä."
 
 #~ msgid "Classes defined in profiles"
 #~ msgstr "Profiilien luokat"

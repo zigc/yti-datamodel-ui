@@ -35,8 +35,8 @@ interface SelectionScope extends IScope {
   transclude: true,
   template: `
       <div>
-        <div class="btn btn-dropdown dropdown-toggle" tabindex="0" iow-select-input>
-          <iow-selection-transclude></iow-selection-transclude>       
+        <div id="{{$ctrl.idPrefix}}_item_select" class="btn btn-dropdown dropdown-toggle" tabindex="0" iow-select-input>
+          <iow-selection-transclude></iow-selection-transclude>
         </div>
         <input-popup id-prefix="$ctrl.idPrefix" ctrl="$ctrl"><iow-selectable-item-transclude></iow-selectable-item-transclude></input-popup>
       </div>

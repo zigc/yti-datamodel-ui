@@ -6,6 +6,8 @@ import { apiEndpointWithName } from './config';
 export interface ValidatorService {
   classDoesNotExist(id: Uri): IPromise<boolean>;
   predicateDoesNotExist(id: Uri): IPromise<boolean>;
+  predicateDoesNotExist(id: Uri): IPromise<boolean>;
+  prefixDoesNotExists(prefix: string): IPromise<boolean>
 }
 
 export class DefaultValidatorService implements DefaultValidatorService {
@@ -20,6 +22,11 @@ export class DefaultValidatorService implements DefaultValidatorService {
 
   predicateDoesNotExist(id: Uri): IPromise<boolean> {
     return this.idDoesNotExist(id.withName(camelCase(id.name)));
+  }
+
+  prefixDoesNotExists(prefix: string): IPromise<boolean>  {
+    return this.$http.get(apiEndpointWithName('freePrefix'), {params: {prefix}})
+      .then(result => result.data ? true : this.$q.reject('exists'), _err => true);
   }
 
   private idDoesNotExist(id: Uri): IPromise<boolean> {

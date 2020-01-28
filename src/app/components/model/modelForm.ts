@@ -6,7 +6,9 @@ import { EditableForm } from 'app/components/form/editableEntityController';
   bindings: {
     id: '=',
     model: '=',
-    namespacesInUse: '<'
+    namespacesInUse: '<',
+    statusChanged: '=',
+    changeResourceStatusesToo: '='
   },
   require: {
     form: '?^form'
@@ -18,12 +20,22 @@ export class ModelFormComponent {
   model: Model;
   namespacesInUse?: Set<string>;
   form: EditableForm;
+  statusChanged: boolean;
+  changeResourceStatusesToo: boolean;
 
   get allowProfiles() {
     return this.model.isOfType('profile');
   }
 
+  get previousModelLink() {
+    return this.model.previousModel ? this.model.previousModel.uri : null;
+  }
+
   isEditing() {
     return this.form && this.form.editing;
+  }
+
+  showChangeResourceStatusesCheckbox(): boolean {
+    return this.form.editing && this.statusChanged;
   }
 }

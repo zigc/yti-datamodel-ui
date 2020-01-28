@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2019-11-26 14:18+0200\n"
+"PO-Revision-Date: 2020-01-24 15:19+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -94,7 +94,32 @@ msgstr ""
 msgid "Add link"
 msgstr ""
 
-msgid "Statuses changed."
+msgid "Status changed to one resource."
+msgstr ""
+
+msgid "Status changed to "
+msgstr ""
+
+msgid " resources."
+msgstr ""
+
+msgid ""
+"No resources were found with the starting status. No changes to resources "
+"statuses."
+msgstr ""
+
+msgid "New version of datamodel is created"
+msgstr ""
+
+msgid "Create new version of datamodel"
+msgstr ""
+
+msgid ""
+"Define prefix for the new version. Note that prefix is used to define the "
+"new namespace."
+msgstr ""
+
+msgid "Save"
 msgstr ""
 
 msgid "Reference data"
@@ -164,6 +189,9 @@ msgid "Remove email subscription"
 msgstr ""
 
 msgid "Update datamodel's resources' statuses"
+msgstr ""
+
+msgid "Create new version"
 msgstr ""
 
 msgid "No referrers"
@@ -298,9 +326,6 @@ msgid "Select concept"
 msgstr "Search for {{name}}"
 
 msgid "No concept defined"
-msgstr ""
-
-msgid "Save"
 msgstr ""
 
 msgid "Invalid url error"
@@ -461,7 +486,19 @@ msgstr ""
 msgid "Edit reference data"
 msgstr ""
 
+msgid "Resources:"
+msgstr ""
+
 msgid "Enforce status transition rules"
+msgstr ""
+
+msgid "Starting status"
+msgstr ""
+
+msgid "Target status"
+msgstr ""
+
+msgid "Change resource statuses as well"
 msgstr ""
 
 msgid ""
@@ -1120,7 +1157,7 @@ msgstr "Terminology"
 msgid "You can add new attribute or association to the Class from here"
 msgstr ""
 
-msgid "Use class"
+msgid "Copy shape"
 msgstr ""
 
 msgid "not found in the concept database"
@@ -1625,13 +1662,13 @@ msgstr ""
 msgid "Non specialized classes are not allowed"
 msgstr ""
 
-msgid "Define concept for the class"
+msgid "Use class"
 msgstr ""
 
 msgid "Specialize class"
 msgstr ""
 
-msgid "Copy shape"
+msgid "Define concept for the class"
 msgstr ""
 
 msgid "Can be selected only from this library"
@@ -2011,11 +2048,22 @@ msgstr ""
 msgid "Choose target status"
 msgstr ""
 
-msgid "Please wait. This could take a while..."
+msgid "UPDATING_STATUSES_MESSAGE"
+msgstr "Updating datamodel's resources' statuses"
+
+msgid "Change resource statuses at the same time?"
 msgstr ""
 
-msgid "Example"
+msgid "CHANGE RESOURCE STATUSES TOO?"
 msgstr ""
+"Should all the resources with status {{startStatus}} be changed to status "
+"{{endStatus}}?"
+
+msgid "CREATING_NEW_MODEL_VERSION_MESSAGE"
+msgstr "Creating the new version of datamodel"
+
+msgid "Example info"
+msgstr "Example value for the property"
 
 msgid "Editorial note"
 msgstr ""
@@ -2241,11 +2289,11 @@ msgstr ""
 msgid "Specialized from class info"
 msgstr "Reference to the Class of the Shape"
 
+msgid "Example"
+msgstr ""
+
 msgid "Definition info"
 msgstr "Definition of the concept"
-
-msgid "Example info"
-msgstr "Example value for the property"
 
 msgid "Value class"
 msgstr ""
@@ -2307,6 +2355,12 @@ msgstr ""
 
 msgid "Namespace info"
 msgstr "Namespaces are used to identify and resolve resources"
+
+msgid "Previous version"
+msgstr ""
+
+msgid "Previous version info"
+msgstr "Link to previous version"
 
 msgid "Resource identifier"
 msgstr "Resource identifier"

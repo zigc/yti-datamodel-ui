@@ -1,4 +1,4 @@
-import { ILogService } from 'angular';
+import { ILogService, IPromise, IQService } from 'angular';
 import { EditableEntityController, EditableScope, Rights } from 'app/components/form/editableEntityController';
 import { ClassService } from 'app/services/classService';
 import { SearchPredicateModal } from './searchPredicateModal';
@@ -11,6 +11,8 @@ import { Model } from 'app/entities/model';
 import { LanguageContext } from 'app/types/language';
 import { EditorContainer, ModelControllerService } from 'app/components/model/modelControllerService';
 import { AuthorizationManagerService } from 'app/services/authorizationManagerService';
+import { changeToRestrictedStatus } from 'yti-common-ui/entities/status';
+import { DatamodelConfirmationModalService } from 'app/services/confirmation-modal.service';
 
 @LegacyComponent({
   bindings: {
@@ -33,7 +35,9 @@ export class ClassViewComponent extends EditableEntityController<Class> {
 
   constructor($scope: EditableScope,
               $log: ILogService,
+              private $q: IQService,
               private searchPredicateModal: SearchPredicateModal,
+              private datamodelConfirmationModalService: DatamodelConfirmationModalService,
               deleteConfirmationModal: DeleteConfirmationModal,
               errorModal: ErrorModal,
               private classService: ClassService,
@@ -46,7 +50,9 @@ export class ClassViewComponent extends EditableEntityController<Class> {
   $onInit() {
     this.parent.registerView(this);
 
-    this.$scope.$watch(() => this.getEditable().properties, props => this.select(this.getEditable()));
+    const editableProperties = () => this.getEditable() ? this.getEditable().properties : false;
+
+    this.$scope.$watch(() => editableProperties(), props => this.select(this.getEditable()));
   }
 
   $onDestroy() {
@@ -105,5 +111,43 @@ export class ClassViewComponent extends EditableEntityController<Class> {
 
   getContext(): LanguageContext {
     return this.model;
+  }
+
+  confirmChangeToRestrictedStatus(entity: Class, oldEntity: Class): boolean {
+    return entity.status && oldEntity.status ? changeToRestrictedStatus(oldEntity.status, entity.status) : false;
+  }
+
+  confirmChangeToRestrictedStatusDialog(entity: Class, oldEntity: Class): IPromise<any> | null {
+
+    const changeAtLeastOnePropertyStatusToRestricted = () => {
+      let result = false;
+
+      entity.properties.forEach(property => {
+
+        const oldPropertyToUpdate = oldEntity.properties.find(prop => prop.internalId.uuid === property.internalId.uuid);
+
+        if (oldPropertyToUpdate) {
+          const toRestrictedStatus = changeToRestrictedStatus(oldPropertyToUpdate.status, property.status);
+
+          if (toRestrictedStatus) {
+            result = true;
+          }
+        } else if (changeToRestrictedStatus('DRAFT', property.status)) {
+            result = true;
+        }
+      });
+
+      return result;
+    }
+
+    const changeClassStatusToRestricted = (entity.status && oldEntity.status && changeToRestrictedStatus(oldEntity.status, entity.status));
+    const showRestrictedStatusDialog = changeClassStatusToRestricted || changeAtLeastOnePropertyStatusToRestricted();
+
+    return showRestrictedStatusDialog ? this.$q.when(this.datamodelConfirmationModalService.openChangeToRestrictedStatus()) : null;
+  }
+
+  confirmDialog(entity: Class, oldEntity: Class): IPromise<any> | null {
+    // NOTE: This is not implemented or needed yet in ClassView.
+    return null;
   }
 }

@@ -21,6 +21,10 @@ export class InteractiveHelpValidatorService implements ValidatorService, Reseta
     return this.$q.when(!this.helpPredicateService.predicateExists(id));
   }
 
+  prefixDoesNotExists(prefix: string): IPromise<boolean> {
+    throw new Error('prefixDoesNotExists is not yet supported operation in help');
+  }
+
   reset(): IPromise<any> {
     return this.$q.when();
   }

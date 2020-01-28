@@ -123,7 +123,8 @@ const versionContext = Object.assign({}, coreContext, {
   generatedAtTime: { '@id': 'http://www.w3.org/ns/prov#generatedAtTime', '@type': 'http://www.w3.org/2001/XMLSchema#dateTime' },
   startedAtTime: { '@id': 'http://www.w3.org/ns/prov#startedAtTime', '@type': 'http://www.w3.org/2001/XMLSchema#dateTime' },
   generated: { '@id': 'http://www.w3.org/ns/prov#generated', '@type': '@id' },
-  used: { '@id': 'http://www.w3.org/ns/prov#used', '@type': '@id' }
+  used: { '@id': 'http://www.w3.org/ns/prov#used', '@type': '@id' },
+  name: { '@id': 'http://xmlns.com/foaf/0.1/name' },
 });
 
 const namespaceContext = Object.assign({}, coreContext, {
@@ -139,7 +140,8 @@ const modelContext = Object.assign({}, coreContext, namespaceContext, referenceD
   codeLists: { '@id': 'http://uri.suomi.fi/datamodel/ns/iow#codeLists', '@type': '@id' },
   language: { '@id': 'http://purl.org/dc/terms/language', '@container': '@list' },
   useContext: { '@id': 'http://uri.suomi.fi/datamodel/ns/iow#useContext' },
-  contact: {'@id': 'http://uri.suomi.fi/datamodel/ns/iow#contact', '@container': '@language'}
+  contact: {'@id': 'http://uri.suomi.fi/datamodel/ns/iow#contact', '@container': '@language'},
+  wasRevisionOf : { '@id' : 'http://www.w3.org/ns/prov#wasRevisionOf',  '@type' : '@id' }
 });
 
 const usageContext = Object.assign({}, coreContext, modelContext, {
@@ -427,15 +429,22 @@ export function modelPositionsFrame(data: any) {
 
 export function versionFrame(data: any) {
   return frame(data, versionContext, {
+    name: {
+      '@omitDefault': true,
+      '@default': '',
+    },
     generated: {
-      wasAttributedTo: {},
+      name: {
+        '@omitDefault': true,
+        '@default': '',
+      },
       wasRevisionOf: {
         '@omitDefault': true,
         '@default': [],
         '@embed': false
       }
     },
-    'used': {
+    used: {
       '@embed': '@never'
     }
   });

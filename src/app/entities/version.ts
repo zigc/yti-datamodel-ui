@@ -6,14 +6,14 @@ import { comparingDate } from 'app/utils/comparator';
 import { init } from './mapping';
 import { GraphNode } from './graphNode';
 import { uriSerializer, entityAwareList, entity, entityAwareOptional } from './serializer/entitySerializer';
-import { dateSerializer, userLoginSerializer } from './serializer/serializer';
+import { dateSerializer, optional, stringSerializer, userLoginSerializer } from './serializer/serializer';
 
 export class Activity extends GraphNode {
 
   static activityMappings = {
     id:             { name: '@id',             serializer: uriSerializer },
     createdAt:      { name: 'startedAtTime',   serializer: dateSerializer },
-    lastModifiedBy: { name: 'wasAttributedTo', serializer: userLoginSerializer },
+    lastModifiedBy: { name: 'name', serializer: optional(stringSerializer) },
     versions:       { name: 'generated',       serializer: entityAwareList(entity(() => Entity)) },
     latestVersion:  { name: 'used',            serializer: uriSerializer }
   };
@@ -47,7 +47,7 @@ export class Entity extends GraphNode {
   static entityMappings = {
     id:              { name: '@id',             serializer: uriSerializer },
     createdAt:       { name: 'generatedAtTime', serializer: dateSerializer },
-    createdBy:       { name: 'wasAttributedTo', serializer: userLoginSerializer },
+    createdBy:       { name: 'name', serializer: optional(stringSerializer) },
     previousVersion: { name: 'wasRevisionOf',   serializer: entityAwareOptional(uriSerializer) }
   };
 

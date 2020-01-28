@@ -85,7 +85,32 @@ msgstr ""
 msgid "Add link"
 msgstr ""
 
-msgid "Statuses changed."
+msgid "Status changed to one resource."
+msgstr ""
+
+msgid "Status changed to "
+msgstr ""
+
+msgid " resources."
+msgstr ""
+
+msgid ""
+"No resources were found with the starting status. No changes to resources "
+"statuses."
+msgstr ""
+
+msgid "New version of datamodel is created"
+msgstr ""
+
+msgid "Create new version of datamodel"
+msgstr ""
+
+msgid ""
+"Define prefix for the new version. Note that prefix is used to define the "
+"new namespace."
+msgstr ""
+
+msgid "Save"
 msgstr ""
 
 msgid "Reference data"
@@ -155,6 +180,9 @@ msgid "Remove email subscription"
 msgstr ""
 
 msgid "Update datamodel's resources' statuses"
+msgstr ""
+
+msgid "Create new version"
 msgstr ""
 
 msgid "No referrers"
@@ -287,9 +315,6 @@ msgid "Select concept"
 msgstr ""
 
 msgid "No concept defined"
-msgstr ""
-
-msgid "Save"
 msgstr ""
 
 msgid "Invalid url error"
@@ -430,7 +455,19 @@ msgstr ""
 msgid "Edit reference data"
 msgstr ""
 
+msgid "Resources:"
+msgstr ""
+
 msgid "Enforce status transition rules"
+msgstr ""
+
+msgid "Starting status"
+msgstr ""
+
+msgid "Target status"
+msgstr ""
+
+msgid "Change resource statuses as well"
 msgstr ""
 
 msgid ""
@@ -1052,7 +1089,7 @@ msgstr ""
 msgid "You can add new attribute or association to the Class from here"
 msgstr ""
 
-msgid "Use class"
+msgid "Copy shape"
 msgstr ""
 
 msgid "not found in the concept database"
@@ -1528,13 +1565,13 @@ msgstr ""
 msgid "Non specialized classes are not allowed"
 msgstr ""
 
-msgid "Define concept for the class"
+msgid "Use class"
 msgstr ""
 
 msgid "Specialize class"
 msgstr ""
 
-msgid "Copy shape"
+msgid "Define concept for the class"
 msgstr ""
 
 msgid "Can be selected only from this library"
@@ -1908,10 +1945,19 @@ msgstr ""
 msgid "Choose target status"
 msgstr ""
 
-msgid "Please wait. This could take a while..."
+msgid "UPDATING_STATUSES_MESSAGE"
 msgstr ""
 
-msgid "Example"
+msgid "Change resource statuses at the same time?"
+msgstr ""
+
+msgid "CHANGE RESOURCE STATUSES TOO?"
+msgstr ""
+
+msgid "CREATING_NEW_MODEL_VERSION_MESSAGE"
+msgstr ""
+
+msgid "Example info"
 msgstr ""
 
 msgid "Editorial note"
@@ -2130,10 +2176,10 @@ msgstr ""
 msgid "Specialized from class info"
 msgstr ""
 
-msgid "Definition info"
+msgid "Example"
 msgstr ""
 
-msgid "Example info"
+msgid "Definition info"
 msgstr ""
 
 msgid "Value class"
@@ -2191,6 +2237,12 @@ msgid "Namespace"
 msgstr ""
 
 msgid "Namespace info"
+msgstr ""
+
+msgid "Previous version"
+msgstr ""
+
+msgid "Previous version info"
 msgstr ""
 
 msgid "Resource identifier"

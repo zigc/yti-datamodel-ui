@@ -5,7 +5,7 @@ import { WithDefinedBy } from 'app/types/entity';
 import { Association, Attribute } from 'app/entities/predicate';
 import { Class } from 'app/entities/class';
 import { Organization } from 'app/entities/organization';
-import { selectableStatuses, Status } from 'yti-common-ui/entities/status';
+import { selectableStatuses, Status, allowedTargetStatuses } from 'yti-common-ui/entities/status';
 
 function isReference(model: Model, resource: WithDefinedBy): boolean {
   return resource.definedBy.id.notEquals(model.id);
@@ -25,6 +25,10 @@ export class AuthorizationManagerService {
     return this.userService.user;
   }
 
+  get isSuperUser() {
+    return this.user.superuser;
+  }
+
   canEditModel(model: Model): boolean {
     return this.hasRightToModifyModel(model);
   }
@@ -33,8 +37,17 @@ export class AuthorizationManagerService {
     return isRemovableStatus(model.status) && this.hasRightToModifyModel(model);
   }
 
-  getAllowedStatuses(model: Model) {
-    return selectableStatuses; // TODO
+  getAllowedStatuses(originalStatus: Status) {
+
+    if (this.isSuperUser) {
+      return selectableStatuses;
+    }
+
+    if (originalStatus) {
+      return allowedTargetStatuses(originalStatus);
+    } else {
+      return selectableStatuses;
+    }
   }
 
   filterOrganizationsAllowedForUser(organizations: Organization[]) {

@@ -18,8 +18,18 @@
 
     <non-editable data-title="Prefix" value="$ctrl.model.prefix" context="$ctrl.model"></non-editable>
     <non-editable data-title="Namespace" value="$ctrl.model.namespace" context="$ctrl.model" clipboard="$ctrl.model.namespace"></non-editable>
-
+    <non-editable data-title="Previous version" value="$ctrl.model.previousModel" context="$ctrl.model" link="$ctrl.previousModelLink"></non-editable>
     <editable-state-select ng-if="!$ctrl.model.unsaved" id="modelState" state="$ctrl.model.status" model="$ctrl.model"></editable-state-select>
+    <div class="row" ng-if="$ctrl.showChangeResourceStatusesCheckbox()">
+      <div class="col-md-4" style="line-height: 45px; white-space: nowrap">
+        <div class="checkbox">
+          <input id="change_resource_statuses_too_checkbox" type="checkbox" ng-model="$ctrl.changeResourceStatusesToo">
+          <label style="vertical-align: 5%; padding-left: 5px;" for="change_resource_statuses_too_checkbox" translate>
+            Change resource statuses as well
+          </label>
+        </div>
+      </div>
+    </div>
     <app-use-context-input ng-model="$ctrl.model.useContext" [editing]="$ctrl.isEditing()" [model-type]="$ctrl.model.normalizedType"></app-use-context-input>
 
     <h4 translate>Additional information</h4>
