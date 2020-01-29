@@ -23,7 +23,8 @@ type DataType = ClassListItem|PredicateListItem;
     model: '=',
     id: '@',
     title: '@',
-    customDataSource: '<'
+    customDataSource: '<',
+    requiredByInUse: '<'
   },
   require: {
     form: '?^form'
@@ -66,6 +67,7 @@ export class EditableMultipleUriSelectComponent {
   id: string;
   title: string;
   customDataSource: DataSource<DataType>;
+  requiredByInUse: boolean;
 
   addUri: (uri: Uri) => void;
   datasource: DataSource<DataType>;
@@ -88,8 +90,8 @@ export class EditableMultipleUriSelectComponent {
     if (this.customDataSource) {
       this.datasource = this.customDataSource;
     } else {
-      this.datasource = this.type === 'class' ? this.classService.getClassesForModelDataSource(modelProvider)
-        : this.predicateService.getPredicatesForModelDataSource(modelProvider);
+      this.datasource = this.type === 'class' ? this.classService.getClassesForModelDataSource(modelProvider, this.requiredByInUse)
+        : this.predicateService.getPredicatesForModelDataSource(modelProvider, this.requiredByInUse);
     }
   }
 

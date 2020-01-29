@@ -45,7 +45,7 @@
   <div class="col-md-6">
     <editable-state-select ng-if="!$ctrl.class.unsaved" id="classState" state="$ctrl.class.status" model="$ctrl.model"></editable-state-select>
     <defined-by entity="$ctrl.class" model="$ctrl.model"></defined-by>
-    <editable-multiple-uri-select id="equivalentClass" type="class" ng-model="$ctrl.class.equivalentClasses" model="$ctrl.model" data-title="{{'Equivalent class'}}"></editable-multiple-uri-select>
+    <editable-multiple-uri-select id="equivalentClass" type="class" ng-model="$ctrl.class.equivalentClasses" model="$ctrl.model" data-title="{{'Equivalent class'}}" required-by-in-use="true"></editable-multiple-uri-select>
   </div>
 </div>
 

@@ -49,7 +49,7 @@
       <uri-select id="predicateValueClass" type="class" uri="$ctrl.predicate.valueClass" model="$ctrl.model" default-to-current-model="true"></uri-select>
     </editable>
 
-    <editable-multiple-uri-select id="equivalentProperty" type="{{$ctrl.predicate.normalizedType}}" ng-model="$ctrl.predicate.equivalentProperties" model="$ctrl.model" data-title="{{'Equivalent ' + $ctrl.predicate.normalizedType}}"></editable-multiple-uri-select>
+    <editable-multiple-uri-select id="equivalentProperty" type="{{$ctrl.predicate.normalizedType}}" ng-model="$ctrl.predicate.equivalentProperties" model="$ctrl.model" data-title="{{'Equivalent ' + $ctrl.predicate.normalizedType}}" required-by-in-use="true"></editable-multiple-uri-select>
   </div>
 </div>
 

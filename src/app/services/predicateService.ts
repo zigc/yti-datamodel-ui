@@ -27,7 +27,7 @@ export interface PredicateService {
   getPredicate(id: Uri|Urn, model?: Model): IPromise<Predicate>;
   getAllPredicates(model: Model): IPromise<PredicateListItem[]>;
   getPredicatesForModel(model: Model): IPromise<PredicateListItem[]>;
-  getPredicatesForModelDataSource(modelProvider: () => Model): DataSource<PredicateListItem>;
+  getPredicatesForModelDataSource(modelProvider: () => Model, requiredByInUse?: boolean): DataSource<PredicateListItem>;
   getPredicatesAssignedToModel(model: Model): IPromise<PredicateListItem[]>;
   createPredicate(predicate: Predicate): IPromise<any>;
   updatePredicate(predicate: Predicate, originalId: Uri): IPromise<any>;
@@ -67,11 +67,17 @@ export class DefaultPredicateService implements PredicateService {
     return this.getAllPredicates(model).then(predicates => predicates.filter(predicate => predicate.id.resolves()));  // if resolves, it is known namespace
   }
 
-  getPredicatesForModelDataSource(modelProvider: () => Model): DataSource<PredicateListItem> {
+  getRequiredByPredicates(model: Model): IPromise<PredicateListItem[]> {
+    return this.$http.get<GraphData>(apiEndpointWithName('predicate'), {params: {requiredBy: model.id.uri}})
+      .then(expandContextWithKnownModels(model))
+      .then(response => this.deserializePredicateList(response.data!));
+  }
+
+  getPredicatesForModelDataSource(modelProvider: () => Model, requiredByInUse: boolean = false): DataSource<PredicateListItem> {
 
     const cachedResultsProvider = modelScopeCache(modelProvider,  model => {
       return this.$q.all([
-        this.getPredicatesForModel(model),
+        requiredByInUse ? this.getRequiredByPredicates(model) : this.getPredicatesForModel(model),
         this.getExternalPredicatesForModel(model)
       ]).then(flatten);
     });

@@ -29,7 +29,7 @@ export interface ClassService {
   getClass(id: Uri|Urn, model: Model): IPromise<Class>;
   getAllClasses(model: Model): IPromise<ClassListItem[]>;
   getClassesForModel(model: Model): IPromise<ClassListItem[]>;
-  getClassesForModelDataSource(modelProvider: () => Model): DataSource<ClassListItem>;
+  getClassesForModelDataSource(modelProvider: () => Model, requiredByInUse?: boolean): DataSource<ClassListItem>;
   getClassesAssignedToModel(model: Model): IPromise<ClassListItem[]>;
   createClass(klass: Class): IPromise<any>;
   updateClass(klass: Class, originalId: Uri): IPromise<any>;
@@ -72,11 +72,17 @@ export class DefaultClassService implements ClassService {
       .then(classes => classes.filter(klass => klass.id.resolves())); // if resolves, it is known namespace
   }
 
-  getClassesForModelDataSource(modelProvider: () => Model): DataSource<ClassListItem> {
+  getRequiredByClasses(model: Model): IPromise<ClassListItem[]> {
+    return this.$http.get<GraphData>(apiEndpointWithName('class'), {params: {requiredBy: model.id.uri}})
+      .then(expandContextWithKnownModels(model))
+      .then(response => this.deserializeClassList(response.data!));
+  }
 
-    const cachedResultsProvider = modelScopeCache(modelProvider,  model => {
+  getClassesForModelDataSource(modelProvider: () => Model, requiredByInUse: boolean = false): DataSource<ClassListItem> {
+
+    const cachedResultsProvider = modelScopeCache(modelProvider, model => {
       return this.$q.all([
-        this.getClassesForModel(model),
+        requiredByInUse ? this.getRequiredByClasses(model) : this.getClassesForModel(model),
         this.getExternalClassesForModel(model)
       ]).then(flatten);
     });
