@@ -52,14 +52,12 @@ export class DefaultPredicateService implements PredicateService {
 
   getPredicate(id: Uri|Urn, model?: Model): IPromise<Predicate> {
     return this.$http.get<GraphData>(apiEndpointWithName('predicate'), {params: {id: id.toString()}})
-      .then(expandContextWithKnownModels(model))
       .then(response => this.deserializePredicate(response.data!, false))
       .then(predicate => requireDefined(predicate));
   }
 
   getAllPredicates(model: Model): IPromise<PredicateListItem[]> {
     return this.$http.get<GraphData>(apiEndpointWithName('predicate'))
-      .then(expandContextWithKnownModels(model))
       .then(response => this.deserializePredicateList(response.data!));
   }
 
@@ -69,7 +67,6 @@ export class DefaultPredicateService implements PredicateService {
 
   getRequiredByPredicates(model: Model): IPromise<PredicateListItem[]> {
     return this.$http.get<GraphData>(apiEndpointWithName('predicate'), {params: {requiredBy: model.id.uri}})
-      .then(expandContextWithKnownModels(model))
       .then(response => this.deserializePredicateList(response.data!));
   }
 
@@ -93,7 +90,6 @@ export class DefaultPredicateService implements PredicateService {
       return this.$q.when(predicates);
     } else {
       return this.$http.get<GraphData>(apiEndpointWithName('predicate'), {params: {model: model.id.uri}})
-        .then(expandContextWithKnownModels(model))
         .then(response => this.deserializePredicateList(response.data!))
         .then(predicateList => {
           this.modelPredicatesCache.set(model.id.uri, predicateList);
@@ -267,7 +263,6 @@ export class DefaultPredicateService implements PredicateService {
 
   getExternalPredicate(externalId: Uri, model: Model) {
     return this.$http.get<GraphData>(apiEndpointWithName('externalPredicate'), {params: {model: model.id.uri, id: externalId.uri}})
-      .then(expandContextWithKnownModels(model))
       .then(response => this.deserializePredicate(response.data!, true))
       .then(predicate => {
         if (predicate) {
@@ -279,7 +274,6 @@ export class DefaultPredicateService implements PredicateService {
 
   getExternalPredicatesForModel(model: Model) {
     return this.$http.get<GraphData>(apiEndpointWithName('externalPredicate'), {params: {model: model.id.uri}})
-      .then(expandContextWithKnownModels(model))
       .then(response => this.deserializePredicateList(response.data!));
   }
 

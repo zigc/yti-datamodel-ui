@@ -56,14 +56,12 @@ export class DefaultClassService implements ClassService {
 
   getClass(id: Uri|Urn, model: Model): IPromise<Class> {
     return this.$http.get<GraphData>(apiEndpointWithName('class'), {params: {id: id.toString()}})
-      .then(expandContextWithKnownModels(model))
       .then(response => this.deserializeClass(response.data!, false))
       .then(klass => requireDefined(klass));
   }
 
   getAllClasses(model: Model): IPromise<ClassListItem[]> {
     return this.$http.get<GraphData>(apiEndpointWithName('class'))
-      .then(expandContextWithKnownModels(model))
       .then(response => this.deserializeClassList(response.data!));
   }
 
@@ -74,7 +72,6 @@ export class DefaultClassService implements ClassService {
 
   getRequiredByClasses(model: Model): IPromise<ClassListItem[]> {
     return this.$http.get<GraphData>(apiEndpointWithName('class'), {params: {requiredBy: model.id.uri}})
-      .then(expandContextWithKnownModels(model))
       .then(response => this.deserializeClassList(response.data!));
   }
 
@@ -98,7 +95,6 @@ export class DefaultClassService implements ClassService {
       return this.$q.when(classes);
     } else {
       return this.$http.get<GraphData>(apiEndpointWithName('class'), {params: {model: model.id.uri}})
-        .then(expandContextWithKnownModels(model))
         .then(response => this.deserializeClassList(response.data!))
         .then(classList => {
           this.modelClassesCache.set(model.id.uri, classList);
@@ -255,7 +251,6 @@ export class DefaultClassService implements ClassService {
 
   getExternalClass(externalId: Uri, model: Model) {
     return this.$http.get<GraphData>(apiEndpointWithName('externalClass'), {params: {model: model.id.uri, id: externalId.uri}})
-      .then(expandContextWithKnownModels(model))
       .then((response: any) => this.deserializeClass(response.data, true))
       .then(klass => {
         if (klass) {
@@ -267,7 +262,6 @@ export class DefaultClassService implements ClassService {
 
   getExternalClassesForModel(model: Model) {
     return this.$http.get<GraphData>(apiEndpointWithName('externalClass'), {params: {model: model.id.uri}})
-      .then(expandContextWithKnownModels(model))
       .then(response => this.deserializeClassList(response.data!));
   }
 
