@@ -28,6 +28,7 @@ export class RelatedClass {
 export interface ClassService {
   getClass(id: Uri|Urn, model: Model): IPromise<Class>;
   getAllClasses(model: Model): IPromise<ClassListItem[]>;
+  getRequiredByClasses(model: Model): IPromise<ClassListItem[]>;
   getClassesForModel(model: Model): IPromise<ClassListItem[]>;
   getClassesForModelDataSource(modelProvider: () => Model, requiredByInUse?: boolean): DataSource<ClassListItem>;
   getClassesAssignedToModel(model: Model): IPromise<ClassListItem[]>;
@@ -65,14 +66,14 @@ export class DefaultClassService implements ClassService {
       .then(response => this.deserializeClassList(response.data!));
   }
 
-  getClassesForModel(model: Model) {
-    return this.getAllClasses(model)
-      .then(classes => classes.filter(klass => klass.id.resolves())); // if resolves, it is known namespace
-  }
-
   getRequiredByClasses(model: Model): IPromise<ClassListItem[]> {
     return this.$http.get<GraphData>(apiEndpointWithName('class'), {params: {requiredBy: model.id.uri}})
       .then(response => this.deserializeClassList(response.data!));
+  }
+
+  getClassesForModel(model: Model) {
+    return this.getAllClasses(model)
+      .then(classes => classes.filter(klass => klass.id.resolves())); // if resolves, it is known namespace
   }
 
   getClassesForModelDataSource(modelProvider: () => Model, requiredByInUse: boolean = false): DataSource<ClassListItem> {

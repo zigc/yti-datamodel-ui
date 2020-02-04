@@ -1,6 +1,6 @@
 import { IPromise } from 'angular';
 import { SearchPredicateModal } from './searchPredicateModal';
-import { SearchClassModal } from './searchClassModal';
+import { SearchClassModal, defaultTextForSelection } from './searchClassModal';
 import { Uri } from 'app/entities/uri';
 import { EditableForm } from 'app/components/form/editableEntityController';
 import { collectProperties } from 'yti-common-ui/utils/array';
@@ -103,8 +103,8 @@ export class EditableMultipleUriSelectComponent {
     let promise: IPromise<DataType>;
     if (!this.customDataSource) {
       promise = this.type === 'class' || this.type === 'shape'
-        ? this.searchClassModal.openWithOnlySelection(this.model, false, this.createExclusion())
-        : this.searchPredicateModal.openWithOnlySelection(this.model, this.type, this.createExclusion());
+        ? this.searchClassModal.openWithOnlySelection(this.model, false, this.createExclusion(), defaultTextForSelection, this.requiredByInUse)
+        : this.searchPredicateModal.openWithOnlySelection(this.model, this.type, this.createExclusion(), this.requiredByInUse);
     } else {
       if (this.type === 'class' || this.type === 'shape') {
         console.error('Custom data source for class selection dialog not yet supported');

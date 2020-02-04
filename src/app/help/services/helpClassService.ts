@@ -40,6 +40,10 @@ export class InteractiveHelpClassService implements ClassService, ResetableServi
     return this.$q.when(this.store.getResourceValuesForAllModels());
   }
 
+  getRequiredByClasses(model: Model): IPromise<Class[]> {
+    throw new Error('getRequiredByClasses is not yet implemented in help');
+  }
+
   getClassesForModel(model: Model): IPromise<Class[]> {
     return this.store.getAllResourceValuesForModel(model);
   }

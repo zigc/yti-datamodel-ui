@@ -58,11 +58,11 @@ export class SearchPredicateModal {
     return this.openModal(model, type, dataSource, exclude, true, false);
   }
 
-  openWithOnlySelection(model: Model, type: KnownPredicateType, exclude: Exclusion<AbstractPredicate> = noExclude): IPromise<Predicate> {
-    return this.openModal(model, type, undefined, exclude, true, true);
+  openWithOnlySelection(model: Model, type: KnownPredicateType, exclude: Exclusion<AbstractPredicate> = noExclude, requiredByInUse: boolean = false): IPromise<Predicate> {
+    return this.openModal(model, type, undefined, exclude, true, true, requiredByInUse);
   }
 
-  private openModal(model: Model, type: KnownPredicateType | null, customDataSource: DataSource<PredicateListItem> | undefined, exclude: Exclusion<AbstractPredicate>, onlySelection: boolean, allowExternal: boolean) {
+  private openModal(model: Model, type: KnownPredicateType | null, customDataSource: DataSource<PredicateListItem> | undefined, exclude: Exclusion<AbstractPredicate>, onlySelection: boolean, allowExternal: boolean, requiredByInUse: boolean = false) {
     return this.$uibModal.open({
       template: require('./searchPredicateModal.html'),
       size: 'lg',
@@ -75,7 +75,8 @@ export class SearchPredicateModal {
         exclude: () => exclude,
         onlySelection: () => onlySelection,
         allowExternal: () => allowExternal,
-        customDataSource: () => customDataSource
+        customDataSource: () => customDataSource,
+        requiredByInUse: () => requiredByInUse
       }
     }).result;
   }
@@ -115,6 +116,7 @@ export class SearchPredicateController implements SearchController<PredicateList
               public exclude: Exclusion<PredicateListItem>,
               public onlySelection: boolean,
               public allowExternal: boolean,
+              public requiredByInUse: boolean,
               private predicateService: PredicateService,
               languageService: LanguageService,
               private searchConceptModal: SearchConceptModal,
@@ -131,7 +133,11 @@ export class SearchPredicateController implements SearchController<PredicateList
     };
 
     if (!customDataSource) {
-      predicateService.getAllPredicates(model).then(appendResults);
+      if (this.requiredByInUse) {
+        predicateService.getRequiredByPredicates(model).then(appendResults);
+      } else {
+        predicateService.getAllPredicates(model).then(appendResults);
+      }
       if (this.canAddExternal()) {
         predicateService.getExternalPredicatesForModel(model).then(appendResults);
       }

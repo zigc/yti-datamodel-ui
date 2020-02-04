@@ -38,6 +38,10 @@ export class InteractiveHelpPredicateService implements PredicateService, Reseta
     return this.$q.when(this.store.getResourceValuesForAllModels());
   }
 
+  getRequiredByPredicates(model: Model): IPromise<Predicate[]> {
+    throw new Error('getRequiredByPredicates is not yet implemented in help');
+  }
+
   getPredicatesForModel(model: Model): IPromise<Predicate[]> {
     return this.store.getAllResourceValuesForModel(model);
   }

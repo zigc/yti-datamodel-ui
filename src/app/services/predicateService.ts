@@ -26,6 +26,7 @@ export class RelatedPredicate {
 export interface PredicateService {
   getPredicate(id: Uri|Urn, model?: Model): IPromise<Predicate>;
   getAllPredicates(model: Model): IPromise<PredicateListItem[]>;
+  getRequiredByPredicates(model: Model): IPromise<PredicateListItem[]>;
   getPredicatesForModel(model: Model): IPromise<PredicateListItem[]>;
   getPredicatesForModelDataSource(modelProvider: () => Model, requiredByInUse?: boolean): DataSource<PredicateListItem>;
   getPredicatesAssignedToModel(model: Model): IPromise<PredicateListItem[]>;
@@ -61,13 +62,13 @@ export class DefaultPredicateService implements PredicateService {
       .then(response => this.deserializePredicateList(response.data!));
   }
 
-  getPredicatesForModel(model: Model) {
-    return this.getAllPredicates(model).then(predicates => predicates.filter(predicate => predicate.id.resolves()));  // if resolves, it is known namespace
-  }
-
   getRequiredByPredicates(model: Model): IPromise<PredicateListItem[]> {
     return this.$http.get<GraphData>(apiEndpointWithName('predicate'), {params: {requiredBy: model.id.uri}})
       .then(response => this.deserializePredicateList(response.data!));
+  }
+
+  getPredicatesForModel(model: Model) {
+    return this.getAllPredicates(model).then(predicates => predicates.filter(predicate => predicate.id.resolves()));  // if resolves, it is known namespace
   }
 
   getPredicatesForModelDataSource(modelProvider: () => Model, requiredByInUse: boolean = false): DataSource<PredicateListItem> {
