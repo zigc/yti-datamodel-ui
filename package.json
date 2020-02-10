@@ -5,8 +5,8 @@
   "scripts": {
     "ng": "node -- node_modules/@angular/cli/bin/ng",
     "ts-node": "node -- node_modules/ts-node/dist/bin.js -P scripts/tsconfig.script.json --skip-ignore",
-    "start": "ng serve --port 9001 --proxy-config proxy.conf.json",
-    "start-dev": "ng serve --port 9001 --proxy-config proxy-dev.conf.json --ssl true",
+    "start": "ng serve --port 9000 --proxy-config proxy.conf.json",
+    "start-dev": "ng serve --port 9000 --proxy-config proxy-dev.conf.json --ssl true",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
