@@ -1,0 +1,2625 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2020-02-10 16:50+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: xls-to-po 1.0\n"
+"X-Generator: Poedit 2.3\n"
+
+msgid "Copied"
+msgstr "Kopierat"
+
+msgid "Yes"
+msgstr "Ja"
+
+msgid "Cancel"
+msgstr "Ångra"
+
+msgid "Select help topic"
+msgstr "Välj anvisningens ämne"
+
+msgid "Close"
+msgstr "Stäng"
+
+msgid "Show history"
+msgstr "Visa historik"
+
+msgid "${title}"
+msgstr ""
+
+msgid "${body}"
+msgstr ""
+
+msgid "Copy"
+msgstr "Kopiera"
+
+msgid "Imported namespaces"
+msgstr "Namnrymder som använts"
+
+msgid "Defined by this model"
+msgstr "Definierade i denna informationsmodell"
+
+msgid "All models"
+msgstr "Alla informationsmodeller"
+
+msgid "Show classes defined in profiles"
+msgstr "Visa de klasser som definierats i profilerna"
+
+msgid "All types"
+msgstr "Alla typer"
+
+msgid "Required"
+msgstr "Obligatoriskt fält"
+
+msgid "Status"
+msgstr "Status"
+
+msgid "Remove"
+msgstr "Ta bort"
+
+msgid "Edit"
+msgstr "Redigera"
+
+msgid "None added"
+msgstr "Inget har lagts till"
+
+msgid "Use context"
+msgstr "Typ av innehåll"
+
+msgid "Classifications"
+msgstr "Informationsområden"
+
+msgid "Add classification"
+msgstr "Lägg till informationsområde"
+
+msgid "Contributors"
+msgstr "Innehållsproducenter"
+
+msgid "Add contributor"
+msgstr "Lägg till innehållsproducent"
+
+msgid "Import namespace"
+msgstr "Lägg till namnrymd"
+
+msgid "Links"
+msgstr "Länkar"
+
+msgid "Add link"
+msgstr "Lägg till länk"
+
+msgid "Status changed to one resource."
+msgstr "Status har ändrats för en resurs."
+
+msgid "Status changed to "
+msgstr "Status har ändrats"
+
+msgid " resources."
+msgstr " för resursen."
+
+msgid ""
+"No resources were found with the starting status. No changes to resources "
+"statuses."
+msgstr ""
+"Status har inte ändrats för en enda resurs. Det gick inte att hitta "
+"utbytbara resurser."
+
+msgid "New version of datamodel is created"
+msgstr "Ny version av informationsmodellet skapat"
+
+msgid "Create new version of datamodel"
+msgstr "Skapa ny version av informationsmodellet"
+
+msgid ""
+"Define prefix for the new version. Note that prefix is used to define the "
+"new namespace."
+msgstr ""
+"Definiera prefix för den nya versionen. Prefix är en del av namnrymd det nya "
+"informationsmodellet."
+
+msgid "Save"
+msgstr "Spara"
+
+msgid "Reference data"
+msgstr "Kodsystem"
+
+msgid "Add reference data"
+msgstr "Lägg till kodsystem"
+
+msgid "Technical namespaces"
+msgstr "Tekniska namnrymder"
+
+msgid "Reference data information"
+msgstr "Uppgifter om kodlistan"
+
+msgid "Terminologies"
+msgstr "Ordlistor som används"
+
+msgid "Add vocabulary"
+msgstr "Lägg till ordlista"
+
+msgid "Maximize"
+msgstr "Förstora"
+
+msgid "Minimize"
+msgstr "Förminska"
+
+msgid "previous"
+msgstr "föregående"
+
+msgid "next"
+msgstr "nästa"
+
+msgid "close"
+msgstr "stäng"
+
+msgid "Data Vocabularies"
+msgstr "Informationsmodeller"
+
+msgid "Confirm delete"
+msgstr "Godkännande av borttagning"
+
+msgid "Following items are depending on the deleted"
+msgstr "Följande påverkas av borttagningen"
+
+msgid "Are you sure that you want to delete?"
+msgstr "Är du säker att du vill ta bort?"
+
+msgid "Show"
+msgstr "Visa"
+
+msgid "Download"
+msgstr "spara"
+
+msgid "Export"
+msgstr "Exportera"
+
+msgid "Historical versions"
+msgstr "Historiska versioner"
+
+msgid "Choose action"
+msgstr "Välj funktion"
+
+msgid "Add email subscription"
+msgstr "Beställ e-postaviseringar"
+
+msgid "Remove email subscription"
+msgstr "Ta bort e-postaviseringar"
+
+msgid "Update datamodel's resources' statuses"
+msgstr "Ändra status till informationsmodellets resurser"
+
+msgid "Create new version"
+msgstr "Skapa ny version"
+
+msgid "No referrers"
+msgstr "Inga referenser"
+
+msgid "Usage"
+msgstr "Referenser från andra komponenter"
+
+msgid "?"
+msgstr ""
+
+msgid "Select all"
+msgstr "Välj alla"
+
+msgid "Deselect all"
+msgstr "Ta bort alla val"
+
+msgid "Define type for class property"
+msgstr "Definiera typen av egenskap för klassen"
+
+msgid "Choose"
+msgstr "Välj"
+
+msgid "Add property"
+msgstr "Lägg till ett attribut eller en association"
+
+msgid "No properties yet"
+msgstr "Inga egenskaper ännu"
+
+msgid "Additional information"
+msgstr "Mer information"
+
+msgid "Logical constraints"
+msgstr "Logiska begränsningar"
+
+msgid "Choose class"
+msgstr "Välj klass"
+
+msgid "Not defined"
+msgstr "Ingen definition"
+
+msgid "Reusable predicate information"
+msgstr "Uppgifter om en återanvändbar egenskap"
+
+msgid "Change reusable predicate"
+msgstr "Byt återanvändbar egenskap"
+
+msgid "Predicate information not found"
+msgstr "Det gick inte att hitta någon återanvändbar egenskap"
+
+msgid "Optional metadata"
+msgstr "Valbara metadata"
+
+msgid "Technical metadata"
+msgstr "Tekniska metadata"
+
+msgid "Property pairs"
+msgstr "Motsvarigheter till egenskapen"
+
+msgid "Reusable predicate"
+msgstr "Återanvändbar egenskap"
+
+msgid "Select class"
+msgstr "Välj klass"
+
+msgid "Add class"
+msgstr "Lägg till klass"
+
+msgid "External classes"
+msgstr "Externa klasser"
+
+msgid "Include:"
+msgstr "Visa även:"
+
+msgid "All information domains"
+msgstr "Alla informationsområden"
+
+msgid "All class types"
+msgstr "Alla klasstyper"
+
+msgid "All statuses"
+msgstr "Alla statusar"
+
+msgid "Create shape from external URI"
+msgstr "Skapa klass från en extern URI-kod"
+
+msgid "Search existing class"
+msgstr "Hämta befintlig klass"
+
+msgid "New class"
+msgstr "Ny klass"
+
+msgid "Shape from URI"
+msgstr "Precisera utifrån URI-koden"
+
+msgid "Actions"
+msgstr "Funktioner"
+
+msgid "Copy class"
+msgstr "Kopiera klass"
+
+msgid "Create sub class"
+msgstr "Skapa underordnad klass"
+
+msgid "Create super class"
+msgstr "Skapa överordnad klass"
+
+msgid "Add namespace to model"
+msgstr "Lägg till en informationsmodell som ett beroende"
+
+msgid " without referencing concept"
+msgstr ""
+
+msgid "All vocabularies"
+msgstr "Alla ordlistor"
+
+msgid "Concept is suggested to vocabulary"
+msgstr "Begreppet har föreslagits till ordlistan"
+
+msgid "Select attribute or association"
+msgstr "Välj ett attribut eller en association"
+
+msgid "Add attribute or association"
+msgstr "Lägg till ett attribut eller en association"
+
+msgid "INFO_TEXT_SUBJECT_VIEW_SELECT_CONCEPT"
+msgstr "Välj ett begrepp ur ordlistan"
+
+msgid "Select concept"
+msgstr "Välj begrepp"
+
+msgid "No concept defined"
+msgstr "Begreppet har inte definierats"
+
+msgid "Invalid url error"
+msgstr "Inmatningen är inte en URL"
+
+msgid "Invalid stem error"
+msgstr "Felaktig URI-format"
+
+msgid "Invalid namespace error"
+msgstr "Namnrymden måste sluta med tecknet ”#” eller ”/”"
+
+msgid "Invalid namespace url urn error"
+msgstr ""
+"Namnrymden ska vara en URL och sluta med tecknet ”#” eller ”/” eller vara i "
+"URN-format"
+
+msgid "Invalid id error"
+msgstr "Felaktig identifikationsuppgift"
+
+msgid "Existing id error"
+msgstr "Identifikationsuppgiften är redan i bruk"
+
+msgid "Existing or reserved id error"
+msgstr "Identifikationsuppgiften är redan i bruk eller reserverad"
+
+msgid "Required error"
+msgstr "Obligatoriskt fält"
+
+msgid "Required localized error"
+msgstr "Måste definieras på minst ett språk"
+
+msgid "Duplicate error"
+msgstr "Inmatningen har redan lagts till"
+
+msgid "String error"
+msgstr "Litteralen måste börja med en bokstav"
+
+msgid "Length error"
+msgstr "Inmatningen är för lång"
+
+msgid "Prefix error"
+msgstr ""
+"Prefixet ska börja med liten bokstav. Den får endast innehålla små "
+"bokstäver, siffror samt skiljetecknen ”-” och ”_”. Bokstäverna å, ä, ö är "
+"inte tillåtna."
+
+msgid "Negative error"
+msgstr "Får inte vara negativ"
+
+msgid "Greater than max error"
+msgstr "Får inte vara större än maxvärdet"
+
+msgid "Less than min error"
+msgstr "Får inte var mindre än minimivärdet"
+
+msgid "Unknown namespace"
+msgstr "Okänd namnrymd"
+
+msgid "Id name is required"
+msgstr "Koden saknas i namnrymden"
+
+msgid "Must be imported namespace"
+msgstr "Ingen namnrymd har lagts till som ett beroende"
+
+msgid "Is not valid language code"
+msgstr "Okänd språkkod"
+
+msgid "Is not valid reference data code"
+msgstr "Okänt värde för kodlistan"
+
+msgid "INFO_TEXT_FRONTPAGE_SEARCH"
+msgstr ""
+"Sökningen omfattar enligt standardinställningen informationsmodellernas "
+"namn. Du kan även söka i innehåll med hjälp av funktionen ”Sök även i”."
+
+msgid "Search term"
+msgstr "Sökord"
+
+msgid "INFO_TEXT_FRONTPAGE_FILTER_W_CLASSIFICATION"
+msgstr ""
+"Alla informationsmodeller är kategoriserade i ett informationsområde. Genom "
+"att klicka på informationsområdet kan du filtrera sökresultaten att endast "
+"visa informationsmodeller som ingår i ett visst informationsområde. Du tar "
+"bort valet genom att klicka på informationsområdet på nytt."
+
+msgid "INFO_TEXT_FRONTPAGE_FILTER_RESULTS"
+msgstr ""
+"Du kan filtrera sökresultaten enligt organisation, typ eller status. Med "
+"organisation avses den organisation som producerar innehållet i och ansvarar "
+"för uppdateringen av informationsmodellen. Typ avser typen av "
+"informationsmodell som kan vara ett datakomponentsbibliotek eller en "
+"tillämpningsprofil. Status avser status för informationsmodellens "
+"administration."
+
+msgid " hit"
+msgstr ""
+
+msgid "Total results"
+msgstr "Träffar totalt"
+
+msgid "Add model"
+msgstr "Lägg till en informationsmodell"
+
+msgid "ADD_LIBRARY_BUTTON_TEXT"
+msgstr "Lägg till ett datakomponentsbibliotek"
+
+msgid "ADD_PROFILE_BUTTON_TEXT"
+msgstr "Lägg till en tillämpningsprofil"
+
+msgid "ToolInfo"
+msgstr ""
+"Verktyget Informationsmodeller är ett verktyg för datamodellerare och "
+"informationsarkitekter på organisationer inom den offentliga förvaltningen. "
+"Verktyget används för att beskriva datasystemens och gränsytornas "
+"informerande innehåll och datastrukturer. Verktyget Informationsmodeller gör "
+"den logiska datamodelleringen av offentliga data inom den offentliga "
+"förvaltningen öppen och offentlig, vilket underlättar användningen av "
+"informationsmodeller över organisationsgränserna."
+
+msgid "Search model"
+msgstr "Hämta informationsmodell"
+
+msgid "Extend search"
+msgstr "Sök även i"
+
+msgid "to content"
+msgstr "innehåll"
+
+msgid "Filter with information domain"
+msgstr "Avgränsa enligt informationsområde"
+
+msgid "Filter results"
+msgstr "Avgränsa sökresultaten"
+
+msgid "result"
+msgstr "sökresultat"
+
+msgid "results"
+msgstr "sökresultat"
+
+msgid "Search results"
+msgstr "Sökresultat"
+
+msgid "Maintenance content"
+msgstr ""
+"Tyvärr är systemet för närvarande ur bruk på grund av ett serviceavbrott"
+
+msgid "Maintenance"
+msgstr "Serviceavbrott"
+
+msgid "Concept information"
+msgstr "Uppgifter om begreppet"
+
+msgid "Not selected"
+msgstr "Inget valt"
+
+msgid "Choose root class"
+msgstr "Välj rotnod"
+
+msgid "Clear selection"
+msgstr "ta bort val"
+
+msgid "Edit reference data"
+msgstr "Redigera kodlistan"
+
+msgid "Resources:"
+msgstr "Resurser:"
+
+msgid "Enforce status transition rules"
+msgstr "Använd valideringsreglerna för statusövergångar."
+
+msgid "Starting status"
+msgstr "Utgångsläge"
+
+msgid "Target status"
+msgstr "Målläge"
+
+msgid "Change resource statuses as well"
+msgstr "Byt samtidigt status för resurserna"
+
+msgid ""
+"Please note that the content of this field is public. Don't use personal "
+"contact information!"
+msgstr ""
+"Observera att innehållet i detta fält är offentligt. Använd inte personliga "
+"kontaktuppgifter!"
+
+msgid "You will receive an email notification when this resource changes."
+msgstr "Du meddelas per e-post när det görs ändringar i detta material."
+
+msgid "Datamodel definition"
+msgstr "Datadefinitioner"
+
+msgid "Datamodel details"
+msgstr "Uppgifter om informationsmodellen"
+
+msgid "Information domain"
+msgstr "Informationsområde"
+
+msgid "Organization"
+msgstr "Organisation"
+
+msgid "Browse reference data codes"
+msgstr "Bläddra i kodlistan"
+
+msgid "Identifier"
+msgstr "Identifikationsuppgift"
+
+msgid "Title"
+msgstr "Namn"
+
+msgid "Select domain"
+msgstr "Välj informationsområde"
+
+msgid "Show technical namespaces"
+msgstr "Visa tekniska namnrymder"
+
+msgid "Add new namespace"
+msgstr "Skapa ny namnrymd"
+
+msgid "Search namespaces"
+msgstr "Hämta namnrymder"
+
+msgid "Select organization"
+msgstr "Välj organisation"
+
+msgid "Search reference data"
+msgstr "Hämta kodlistor"
+
+msgid "All servers"
+msgstr "Alla servrar"
+
+msgid "All groups"
+msgstr "Alla grupper"
+
+msgid "Create new"
+msgstr "Skapa ny"
+
+msgid "Use selection"
+msgstr "Använd valet"
+
+msgid "Search vocabularies"
+msgstr "Hämta ordlistor"
+
+msgid "No search results"
+msgstr "Inga sökresultat"
+
+msgid "Start help"
+msgstr "Starta anvisning"
+
+msgid "Impersonate user"
+msgstr "Agera som användare"
+
+msgid "LOG IN"
+msgstr "LOGGA IN"
+
+msgid "LOG OUT"
+msgstr "LOGGA UT"
+
+msgid "User details"
+msgstr "Användaruppgifter"
+
+msgid "Suomi.fi Terminologies"
+msgstr "Suomi.fi-ordlistor"
+
+msgid "Suomi.fi Reference Data"
+msgstr "Suomi.fi-kodlistor"
+
+msgid "Suomi.fi Comments"
+msgstr "Suomi.fi-kommentarer"
+
+msgid "User right management"
+msgstr "Administrering av behörigheter"
+
+msgid "Name"
+msgstr "Namn"
+
+msgid "Email"
+msgstr "E-post"
+
+msgid "Organizations and roles"
+msgstr "Organisationer och roller"
+
+msgid "Unknown organization"
+msgstr "Okänd organisation"
+
+msgid "Waiting for approval"
+msgstr "Väntar på godkännande"
+
+msgid "Send access request"
+msgstr "Skicka begäran om behörighet"
+
+msgid "Send"
+msgstr "Sänd"
+
+msgid ""
+"You have subscribed to be notified via email when the following resources "
+"change. To remove the subscription, click the icon next to the resource."
+msgstr ""
+"Du har beställt e-postaviseringar om ändringar i följande material. För att "
+"ta bort aviseringen, klicka på ikonen bredvid materialet."
+
+msgid "Email notifications"
+msgstr "E-postaviseringar"
+
+msgid "Daily"
+msgstr "Dagligen"
+
+msgid "Code list resources"
+msgstr "Material som hänför sig kodlistor"
+
+msgid "Terminology resources"
+msgstr "Material som hänför sig till ordlistor"
+
+msgid "Datamodel resources"
+msgstr "Material som hänför sig till informationsmodeller"
+
+msgid "Comments resources"
+msgstr "Material som hänför sig till kommentarer"
+
+msgid "INFORMATION"
+msgstr "UPPGIFTER"
+
+msgid "SUBSCRIPTIONS"
+msgstr "BESTÄLLNINGAR"
+
+msgid "xsd:long error"
+msgstr "Fel heltal"
+
+msgid "xsd:string"
+msgstr "Text"
+
+msgid "rdfs:Literal"
+msgstr "Litteral"
+
+msgid "rdfs:Literal error"
+msgstr "Fel litteral"
+
+msgid "rdf:langString"
+msgstr "Texten har språkversioner"
+
+msgid "rdf:langString error"
+msgstr "Fel text i språkversionerna"
+
+msgid "xsd:anyURI"
+msgstr "URI"
+
+msgid "xsd:anyURI error"
+msgstr "Fel URI"
+
+msgid "xsd:boolean"
+msgstr "Koppling"
+
+msgid "xsd:boolean error"
+msgstr "Fel koppling"
+
+msgid "xsd:decimal"
+msgstr "Decimal"
+
+msgid "xsd:decimal error"
+msgstr "Fel decimal"
+
+msgid "xsd:double"
+msgstr "Decimal (64bit)"
+
+msgid "xsd:double error"
+msgstr "Fel decimal"
+
+msgid "xsd:float"
+msgstr "Decimal (32bit)"
+
+msgid "xsd:float error"
+msgstr "Fel decimal"
+
+msgid "xsd:integer"
+msgstr "Heltal"
+
+msgid "xsd:integer error"
+msgstr "Fel heltal"
+
+msgid "xsd:long"
+msgstr "Heltal (64bit)"
+
+msgid "xsd:string error"
+msgstr "Fel text"
+
+msgid "xsd:int"
+msgstr "Heltal (32bit)"
+
+msgid "xsd:int error"
+msgstr "Fel heltal"
+
+msgid "xsd:date"
+msgstr "Datum"
+
+msgid "xsd:date error"
+msgstr "Fel datum"
+
+msgid "xsd:dateTime"
+msgstr "Tidpunkt"
+
+msgid "xsd:dateTime error"
+msgstr "Fel tidpunkt"
+
+msgid "xsd:time"
+msgstr "Tid"
+
+msgid "xsd:time error"
+msgstr "Fel tid"
+
+msgid "xsd:gYear"
+msgstr "År"
+
+msgid "xsd:gYear error"
+msgstr "Fel år"
+
+msgid "xsd:gMonth"
+msgstr "Månad"
+
+msgid "xsd:gMonth error"
+msgstr "Fel månad"
+
+msgid "xsd:gDay"
+msgstr "Datum"
+
+msgid "xsd:gDay error"
+msgstr "Fel datum"
+
+msgid "xsd:hexBinary"
+msgstr "Hex binär"
+
+msgid "xsd:hexBinary error"
+msgstr "Fel hex binär"
+
+msgid "xsd:base64Binary"
+msgstr "Base64 binär"
+
+msgid "xsd:base64Binary error"
+msgstr "Fel Base64 binär"
+
+msgid "Guide through specializing a class"
+msgstr "Anvisning för specialisering av klass"
+
+msgid "Add classification info"
+msgstr ""
+"Informationsområdena kategoriserar informationsmodellerna enligt olika "
+"förvaltningsområden."
+
+msgid "Add contributor info"
+msgstr ""
+"Organisationen som producerar innehållet ansvarar för uppdateringen av "
+"informationsmodellen. Alla datamodellerare i organisationen kan redigera de "
+"informationsmodeller som organisationen är innehållsproducent för."
+
+msgid "Add library"
+msgstr "Lägg till en informationsområdesspecifik informationsmodell"
+
+msgid "Add library description"
+msgstr ""
+"Genom att lägga till ett nytt datakomponentsbibliotek kan du beskriva "
+"informerande innehåll som vanligtvis används inom informationsområdet. Då du "
+"definierar datakomponenter kan du använda ordlistorna för området i fråga "
+"och länka det informerande innehållet till internationella standarder. "
+"Klasserna i datakomponentbiblioteket är återanvändbara strukturer som kan "
+"användas för att definiera tillämpningsspecifikt informerande innehåll i "
+"tillämpningsprofilen."
+
+msgid "Add model description"
+msgstr ""
+"Här kan du lägga till en ny domänspecifik informationsmodell eller en "
+"tillämpningsspecifik informationsmodell."
+
+msgid "Add new property"
+msgstr "Lägg till ett nytt attribut eller en ny association"
+
+msgid "Add new property description"
+msgstr ""
+"Attributet och associationen är klassens egenskaper, med vilka du kan "
+"närmare definiera klassens innehåll och förhållande till andra klasser."
+
+msgid "Add profile"
+msgstr "Lägg till en tillämpningsspecifik informationsmodell"
+
+msgid "Add profile description"
+msgstr ""
+"Genom att lägga till en ny tillämpningsprofil kan du beskriva ett valfritt "
+"informerande innehåll med hjälp av de återanvändbara klasserna som "
+"definierats i datakomponentsbiblioteket. Dessutom kan du definiera nya "
+"klasser med hjälp av domänspecifika ordlistor."
+
+msgid "Add reference to namespace"
+msgstr "Lägg till referens till namnrymden"
+
+msgid "Add reference to namespace description"
+msgstr ""
+"Genom att lägga till en ny namnrymd kan du länka klasser eller egenskaper "
+"till internationella rekommendationer"
+
+msgid "Add vocabulary description"
+msgstr ""
+"Genom att lägga till en ordlista till informationsmodellen kan du använda "
+"begreppsdefinitioner som används i informationsområdet för att definiera "
+"informationsmodeller."
+
+msgid "Association is here"
+msgstr "Uppgifterna om associationen visas här"
+
+msgid "Association label"
+msgstr "Associationens namn (label)"
+
+msgid "Association label info"
+msgstr "Associationens människoläsbara namn"
+
+msgid ""
+"Association target can be changed from the list or by typing the identifier"
+msgstr ""
+"Objektet för associationen kan ändras här genom att välja ett nytt objekt "
+"från listan eller ange klassens identifikationsuppgift i fältet"
+
+msgid "Association target is here"
+msgstr "Objektet för associationen visas här"
+
+msgid "Association target must be selected from list of existing classes"
+msgstr ""
+"Objektet för associationen måste väljas från listan över befintliga klasser"
+
+msgid "Attribute is here"
+msgstr "Uppgifterna om attributet visas här"
+
+msgid "Attribute is here info"
+msgstr ""
+"I attributets uppgifter fastställs en permanent URI-kod, ett namn, en "
+"definition och en datatyp"
+
+msgid "Attribute label"
+msgstr "Attributets namn (label)"
+
+msgid "Attribute label info"
+msgstr "Attributets människoläsbara namn"
+
+msgid "Changes need to be saved"
+msgstr "Om du vill spara ändringarna, klicka på Spara"
+
+msgid "Class is here"
+msgstr "Uppgifterna om klassen visas här"
+
+msgid "Class is here info"
+msgstr ""
+"I klassens uppgifter fastställs klassens namn, beskrivning, begrepp som "
+"klassen bygger på, samt klassens egenskaper"
+
+msgid "Classes can be modified"
+msgstr "Klassen kan redigeras här"
+
+msgid "Classes can be seen visually here"
+msgstr "Klasserna och associationerna mellan dessa återges visuellt här"
+
+msgid "Classifications are here"
+msgstr "Informationsområdena visas här"
+
+msgid "Concept is here"
+msgstr "Begreppet finns här"
+
+msgid "Concept is here info"
+msgstr "Begreppets "
+
+msgid "Concept label"
+msgstr "Begreppets namn"
+
+msgid "Concept label info"
+msgstr "Begreppets rekommenderade namn"
+
+msgid "Confirm selection"
+msgstr "Godkänn valet"
+
+msgid "Confirm selection info"
+msgstr "Godkänn ändringarna och fortsätt"
+
+msgid "Congratulations for completing adding an association!"
+msgstr "Grattis, du har lagt till en association!"
+
+msgid "Congratulations for completing adding an attribute!"
+msgstr "Grattis, du har lagt till ett attribut!"
+
+msgid "Congratulations for completing class assignation!"
+msgstr "Grattis, du har lagt till en klass i biblioteket!"
+
+msgid "Congratulations for completing library creation!"
+msgstr "Grattis, du har skapat ett datakomponentbibliotek!"
+
+msgid "Congratulations for completing library creation! description"
+msgstr "Du kan nu fortsätta skapa riktiga datakomponentbibliotek"
+
+msgid "Congratulations for completing namespace require!"
+msgstr "Grattis, du har lagt till en namnrymd!"
+
+msgid "Congratulations for completing new class creation!"
+msgstr "Grattis, du har lagt till en ny klass!"
+
+msgid "Congratulations for completing profile creation!"
+msgstr "Grattis, du har skapat en tillämpningsprofil!"
+
+msgid "Congratulations for completing profile creation! description"
+msgstr "Du kan nu fortsätta skapa riktiga tillämpningsprofiler"
+
+msgid "Congratulations for completing specialize class!"
+msgstr "Grattis, du har specialiserat en klass!"
+
+msgid "Contributors are here"
+msgstr "Innehållsproducenterna visas här"
+
+msgid "Definition"
+msgstr "Definition"
+
+msgid "Description"
+msgstr "Beskrivning"
+
+msgid "Description info"
+msgstr "Beskrivning av det informerande innehållet"
+
+msgid "Guide through adding an association"
+msgstr "Anvisning för att lägga till association"
+
+msgid "Guide through adding an attribute"
+msgstr "Anvisning för att lägga attribut"
+
+msgid "Guide through assigning class to a library"
+msgstr "Anvisning för att koppla en klass till biblioteket"
+
+msgid "Guide through creating a class"
+msgstr "Anvisning för att skapa en ny klass"
+
+msgid "Guide through creating new library"
+msgstr "Anvisning för att skapa en nytt datakomponentbibliotek"
+
+msgid "Guide through creating new library description"
+msgstr ""
+"Med ett datakomponentbibliotek avses en logisk informationsmodell som "
+"definierats enligt domän och i vilken man definierar återanvändbara "
+"datastrukturer. Datakomponenterna länkas till internationella och nationella "
+"standarder, ordlistor och kodsystem som används inom domänen."
+
+msgid "Guide through creating new profile"
+msgstr "Anvisning för att skapa en ny tillämpningsprofil"
+
+msgid "Guide through creating new profile description"
+msgstr ""
+"Med en tillämpningsprofil avses en logisk informationsmodell som fastställs "
+"för ett visst bruk och som använder återanvändbara datakomponeter som "
+"definierats för domänen. Med hjälp av en tillämpningsprofil kan man "
+"dokumentera nödvändigt informerande innehåll och datastrukturer."
+
+msgid "Guide through requiring a namespace"
+msgstr "Anvisning för att lägga till en namnrymd"
+
+msgid "Add class description"
+msgstr "Du kan lägga till en ny klass här"
+
+msgid "Imported namespaces are here"
+msgstr "Namnrymder som lagts till visas här"
+
+msgid "Imported namespaces can be used to link resources to existing standards"
+msgstr "Inkluderade namnrymder kan användas för att länka datakomponenter"
+
+msgid "Library label"
+msgstr "Datakomponentbibliotekets namn"
+
+msgid "Library label info"
+msgstr "Datakomponentbibliotekets människoläsbara namn"
+
+msgid "Model languages"
+msgstr "Det informerande innehållets språk"
+
+msgid "Model languages info"
+msgstr ""
+"Genom att definiera språket kan en informationsmodell lokaliseras för det "
+"valda språket. Ett språk definieras genom att de önskade språken "
+"klassificeras enligt standarden ISO-639-2"
+
+msgid "Modify class"
+msgstr "Redigerar klassen"
+
+msgid "Modify library"
+msgstr "Redigerar datakomponentbiblioteket"
+
+msgid "Modify library description"
+msgstr ""
+"Datakomponentbiblioteket kan redigeras om du vill precisera beskrivningen "
+"eller lägga till nya ordlistor, kodlistor eller namnrymder"
+
+msgid "Modify profile"
+msgstr "Redigera tillämpningsprofilen"
+
+msgid "Modify profile description"
+msgstr ""
+"Tillämpningsprofilen kan redigeras om du vill precisera beskrivningen eller "
+"lägga till nya ordlistor, kodsystem eller namnrymder"
+
+msgid "Open library details"
+msgstr "Öppnar uppgifterna för datakomponentbiblioteket"
+
+msgid "Open library details description"
+msgstr ""
+"Tilläggsuppgifter om datakomponetbiblioteket, såsom ordlistor och kodsystem "
+"som använts finns under denna panel Här kan du även exportera "
+"datakomponetbiblioteket i olika format, såsom XML- eller JSON base-schema"
+
+msgid "Open profile details"
+msgstr "Öppna uppgifterna för tillämpningsprofilen"
+
+msgid "Open profile details description"
+msgstr ""
+"Tilläggsuppgifter om tillämpningsprofilen, såsom ordlistor och kodlistor som "
+"använts finns under denna panel Här kan du även exportera profilen i olika "
+"format såsom XML- eller JSON-scheman."
+
+msgid "Prefix"
+msgstr "Prefix"
+
+msgid "Prefix info"
+msgstr ""
+"Med prefix avses en kort kod som används för att bilda en permanent URI-kod "
+"och namnrymd."
+
+msgid "Profile label"
+msgstr "Tillämpningsprofilens namn"
+
+msgid "Profile label info"
+msgstr "Tillämpningsprofilens människoläsbara namn"
+
+msgid "Property is here"
+msgstr "Uppgifter om egenskapen visas här"
+
+msgid "Property is here info"
+msgstr ""
+"Uppgifterna för egenskapen beskriver namnet, definitionen, värdeområdet och "
+"begreppet som egenskapen bygger på."
+
+msgid "Save changes"
+msgstr "Spara ändringar"
+
+msgid "Search for"
+msgstr "Sök {{name}}"
+
+msgid "Search for class"
+msgstr "Sök klass"
+
+msgid "Search for class info"
+msgstr "Sök klassens uppgifter"
+
+msgid "Search for concept"
+msgstr "Sök begrepp"
+
+msgid "Search for concept info"
+msgstr "Hämta begreppet från ordlistan"
+
+msgid "Search for info"
+msgstr "Du kan söka innehåll här"
+
+msgid "Search for predicate"
+msgstr "Hämta en återanvändbar egenskap"
+
+msgid "Search for predicate info"
+msgstr "Hämta det attribut eller den association som du behöver"
+
+msgid "Select association target"
+msgstr "Välj objekt för associationen"
+
+msgid "Select class description"
+msgstr "Du kan välja klass här"
+
+msgid "Select concept suggest creation"
+msgstr "Föreslå ett nytt begrepp i ordlistan"
+
+msgid "Select concept suggest creation info"
+msgstr ""
+"Föreslå ett begrepp om det befintliga begreppet inte är definierat i de "
+"ordlistor som används"
+
+msgid "Select name and description"
+msgstr "Välj attributen namn och beskrivning"
+
+msgid "Select name and description info"
+msgstr "Önskade egenskaper väljs bland egenskaper"
+
+msgid "Select new association creation"
+msgstr "Välj skapa ny association"
+
+msgid "Select new association creation info"
+msgstr "Skapa en ny association om du inte hittar återanvändbara egenskaper"
+
+msgid "Select new attribute creation"
+msgstr "Välj lägg till nytt attribut"
+
+msgid "Select new attribute creation info"
+msgstr "Här kan du skapa ett nytt attribut"
+
+msgid "Select new creation"
+msgstr "Välj skapa ny"
+
+msgid "Select new creation info"
+msgstr "Skapa ny om du inte hittar befintliga datadefinitioner"
+
+msgid "Select registration number and vehicle code"
+msgstr "Välj registreringsnummer och fordonsnummer"
+
+msgid "Select registration number and vehicle code info"
+msgstr ""
+"Här kan du välja egenskaper för den överordnade klassen som du vill använda"
+
+msgid "Select search result"
+msgstr "Välj {{name}}"
+
+msgid "Select search result info"
+msgstr "Välj rätt värde i listan"
+
+msgid "Select super class"
+msgstr "Välj överordnad klass"
+
+msgid "Select the vocabulary that is missing the required concept"
+msgstr "Välj en ordlista, i vilken du vill föreslå ett nytt begrepp"
+
+msgid "Suggest definition or description for the concept"
+msgstr ""
+"Föreslå en definition för begreppet genom att beskriva begreppet som "
+"noggrant som möjligt"
+
+msgid "Super class can be changed from the list or by typing the identifier"
+msgstr ""
+"Du kan byta överordnad klass via knappen eller genom att ange klassens kod"
+
+msgid "Super class is here"
+msgstr "Den överordnade klassen visas här"
+
+msgid "Super class must be selected from list of existing classes"
+msgstr "Den överordnade klassen måste väljas bland befintliga klasser"
+
+msgid "This tutorial shows how to add Class from existing library"
+msgstr ""
+"Denna anvisning visar hur man hänvisar från till en befintlig klass från ett "
+"annat bibliotek"
+
+msgid "This tutorial shows how to add association to a Class"
+msgstr ""
+"Denna anvisning visar hur man lägger till en ny association till en klass"
+
+msgid "This tutorial shows how to add new attribute"
+msgstr ""
+"Denna anvisning visar hur man lägger till ett nytt attribut till en klass"
+
+msgid "This tutorial shows how to create a new Class"
+msgstr "Denna anvisning visar hur man lägger till en ny klass"
+
+msgid "This tutorial shows how to create a new shape from a class"
+msgstr ""
+"Denna anvisning visar hur man preciserar en klass utifrån en befintlig klass"
+
+msgid "This tutorial shows how to import new namespace to the model"
+msgstr "Denna anvisning visar hur man lägger till en namnrymd"
+
+msgid "Vocabularies are here"
+msgstr "Ordlistorna finns här"
+
+msgid "Vocabularies can be used to link resources to existing concepts"
+msgstr ""
+"Ordlistorna kan användas för att definiera informationsmodeller genom att "
+"länka och återanvända termer och definitioner"
+
+msgid "Vocabulary"
+msgstr "Ordlista"
+
+msgid "You can add new attribute or association to the Class from here"
+msgstr ""
+"Här kan lägga till nya attribut för klassen. Attributens värdeområde bygger "
+"på datatypen eller associationen, vilken man hänvisar till en annan klass"
+
+msgid "Copy shape"
+msgstr "Kopiera den preciserade klassen"
+
+msgid "not found in the concept database"
+msgstr "finns inte i ordlistan"
+
+msgid "Define concept for the new class"
+msgstr "Definiera ett begrepp för den nya klassen"
+
+msgid "Define concept for the shape"
+msgstr "Definiera ett begrepp för den preciserade klassen"
+
+msgid "Define concept for the new shape"
+msgstr "Definiera ett begrepp för den nya preciserade klassen"
+
+msgid "Define concept for the attribute"
+msgstr "Definiera ett begrepp för attributet"
+
+msgid "Define concept for the new attribute"
+msgstr "Definiera ett begrepp för det nya attributet"
+
+msgid "Define concept for the association"
+msgstr "Definiera ett begrepp för associationen"
+
+msgid "Define concept for the new association"
+msgstr "Definiera ett begrepp för den nya associationen"
+
+msgid "Create new class without referencing concept"
+msgstr "Skapa en ny klass utan en begreppsreferens"
+
+msgid "Create new shape without referencing concept"
+msgstr "Skapa en ny preciserad klass utan en begreppsreferens"
+
+msgid "Create new association without referencing concept"
+msgstr "Skapa en ny association utan en begreppsreferens"
+
+msgid "Create new attribute without referencing concept"
+msgstr "Skapa ett nytt attribut utan en begreppsreferens"
+
+msgid "suggest"
+msgstr "föreslå"
+
+msgid "suggestion"
+msgstr "förslag"
+
+msgid "and create new"
+msgstr "och skapa ny"
+
+msgid "Use"
+msgstr "Använd"
+
+msgid "Unstable"
+msgstr "Halvfärdig"
+
+msgid "Draft"
+msgstr "Utkast"
+
+msgid "Recommendation"
+msgstr "Rekommendation"
+
+msgid "Deprecated"
+msgstr "Ur bruk"
+
+msgid "Suggestion"
+msgstr "Förslag"
+
+msgid "Hide"
+msgstr "Dölj"
+
+msgid "Show model details"
+msgstr "Visa uppgifterna för informationsmodellen"
+
+msgid "Hide model details"
+msgstr "Dölj uppgifterna för informationsmodellen"
+
+msgid "Front page"
+msgstr "Startsida"
+
+msgid "New library creation"
+msgstr "Skapa ett nytt datakomponetbibliotek"
+
+msgid "New profile creation"
+msgstr "Skapa en ny tillämpningsprofil"
+
+msgid "Delete library"
+msgstr "Ta bort datakomponetbiblioteket"
+
+msgid "Delete profile"
+msgstr "Ta bort tillämpningsprofilen"
+
+msgid "group"
+msgstr "Grupp"
+
+msgid "model"
+msgstr "Datakomponetbibliotek"
+
+msgid "library"
+msgstr "Datakomponetbibliotek"
+
+msgid "shape"
+msgstr "Preciserad klass"
+
+msgid "profile"
+msgstr "Tillämpningsprofil"
+
+msgid "class"
+msgstr "Klass"
+
+msgid "attribute"
+msgstr "Attribut"
+
+msgid "association"
+msgstr "Association"
+
+msgid "property"
+msgstr "Egenskap"
+
+msgid "fi"
+msgstr "På finska"
+
+msgid "en"
+msgstr "På engelska"
+
+msgid "data language"
+msgstr "Innehållets språk"
+
+msgid "data fi"
+msgstr "Innehåll på finska"
+
+msgid "data en"
+msgstr "Innehåll på engelska"
+
+msgid "data sv"
+msgstr "Innehåll på svenska"
+
+msgid "data ru"
+msgstr "Innehåll på ryska"
+
+msgid "Edit in progress"
+msgstr "Redigeringen är halvfärdig"
+
+msgid ""
+"Are you sure that you want to continue? By continuing unsaved changes will "
+"be lost."
+msgstr ""
+"Är du säker på att du vill fortsätta? Om du fortsätter förlorar du de "
+"ändringar som inte sparats."
+
+msgid "Dialog is open"
+msgstr "Dialogrutan är öppen"
+
+msgid "Are you sure that you want to close dialog?"
+msgstr "Är du säker att du vill stänga dialogrutan?"
+
+msgid "Save visualization position"
+msgstr "Spara visualiseringens lägen"
+
+msgid ""
+"Are you sure you want to save? Saving overrides previously saves positions."
+msgstr "Är du säker att du vill spara? Om du sparar ersätt de tidigare lägena."
+
+msgid "Delete class"
+msgstr "Ta bort klassen"
+
+msgid "Delete shape"
+msgstr "Ta bort den preciserade klassen"
+
+msgid "Delete class from this library"
+msgstr "Ta bort klassen från detta bibliotek"
+
+msgid "Delete shape from this library"
+msgstr "Ta bort den preciserade klassen från detta bibliotek"
+
+msgid "Class list"
+msgstr "Klasser"
+
+msgid "Add attribute"
+msgstr "Lägg ett attribut"
+
+msgid "Delete attribute"
+msgstr "Ta bort attributet"
+
+msgid "Delete attribute from this library"
+msgstr "Ta bort attributet från detta bibliotek"
+
+msgid "Delete attribute from this profile"
+msgstr "Ta bort attributet från denna profil"
+
+msgid "Attribute list"
+msgstr "Attribut"
+
+msgid "Add association"
+msgstr "Lägg till en association"
+
+msgid "Delete association"
+msgstr "Ta bort associationen"
+
+msgid "Delete association from this library"
+msgstr "Ta bort associationen från detta bibliotek"
+
+msgid "Delete association from this profile"
+msgstr "Ta bort associationen från denna profil"
+
+msgid "Association list"
+msgstr "Associationer"
+
+msgid "Choose attribute"
+msgstr "Välj attribut"
+
+msgid "Choose association"
+msgstr "Välj association"
+
+msgid "What is description?"
+msgstr "Vad är interoperabilitetsbeskrivningar?"
+
+msgid "What is description content"
+msgstr ""
+"Interoperabilitetsbeskrivningar är datadefinitioner, med hjälp av vilka man "
+"säkerställer såväl den människoläsbara som den maskinläsbara semantiska "
+"interoperabiliteten samt den tekniska interoperabiliteten som datasystemen "
+"kräver i elektroniska, dataintensiva serviceprocesser. "
+"Interoperabilitetsbeskrivningarna bildas av begrepp som beskrivs i "
+"ordlistorna, gemensamma datadefinitioner vars semantik bygger på dessa "
+"begrepp, det vill säga datakomponenter samt tillämpningsprofiler som vidare "
+"preciserar deras användning i olika tillämpningar."
+
+msgid "What is method?"
+msgstr "Vad är interoperabilitetsmetoden?"
+
+msgid "What is method content"
+msgstr ""
+"Med hjälp av interoperabilitetsmetoden kan man beskriva informerande "
+"innehåll som används i datasystemen utan att ta ställning till "
+"applikationernas tekniska genomförande. Interoperabilitetsmetoden kombinerar "
+"utvecklandet av datamodeller, ordlistor och kodsystem till en enhetlig "
+"helhet. Metoden bygger på tillämpning av de internationella standarderna. Du "
+"kan läsa om interoperabilitetsmetoden och utvecklingen av verktygen här <a "
+"href='https://confluence.csc.fi/pages/viewpage.action?pageId=51893708'>.</a>"
+
+msgid "What can I do?"
+msgstr "Vad kan man göra med interoperabilitetsverktygen?"
+
+msgid "What can I do content"
+msgstr ""
+"Interoperabilitetsplattformen är ett verktyg, med hjälp av vilket man kan "
+"konkret använda definitioner för dataarkitekturen i den operativa "
+"verksamheten. Med datasystemet kan man utveckla, dokumentera och öppet "
+"publicera datakomponenter för sam- och återanvändning samt datadefinitioner "
+"för specifika genomföranden (tillämpningsprofiler). Datadefinitioner som "
+"publiceras via plattformen kan användas för kommunikation "
+"(gränssnittslösningar), som databasstrukturer (datalager) eller för "
+"applikationsutveckling (informationssystem)."
+
+msgid "How?"
+msgstr "Hur kan jag delta?"
+
+msgid "How content"
+msgstr ""
+"Du kan fritt söka datadefinitioner som publiceras via plattformen. "
+"Sakkunniga inom olika områden producerar innehållet i "
+"datakomponentbiblioteken."
+
+msgid "of group"
+msgstr "från grupp"
+
+msgid "of model"
+msgstr "från datakomponetbibliotek"
+
+msgid "of library"
+msgstr "från bibliotek"
+
+msgid "of profile"
+msgstr "från tillämpningsprofil"
+
+msgid "of class"
+msgstr "från klass"
+
+msgid "of shape"
+msgstr "från preciserad klass"
+
+msgid "of association"
+msgstr "från association"
+
+msgid "of attribute"
+msgstr "från attribut"
+
+msgid "of concept"
+msgstr "från begrepp"
+
+msgid "of conceptSuggestion"
+msgstr "från begreppsförslag"
+
+msgid "search attribute or association"
+msgstr "Hämta ett attribut eller en association"
+
+msgid "search class"
+msgstr "Skriv klassens namn"
+
+msgid "search descriptions"
+msgstr "Sök i interoperabilitetsbeskrivningar"
+
+msgid "Search from concept database"
+msgstr "Hämta från ordlista..."
+
+msgid "search namespace"
+msgstr "Hämta namnrymd..."
+
+msgid "search vocabulary"
+msgstr "Hämta ordlista..."
+
+msgid "search reference data"
+msgstr "Hämta kodsystem..."
+
+msgid "Select attribute"
+msgstr "Välj attribut"
+
+msgid "search attribute"
+msgstr "Skriv attributets namn"
+
+msgid "Select association"
+msgstr "Välj association"
+
+msgid "search association"
+msgstr "Skriv associationens namn"
+
+msgid "Use attribute"
+msgstr "Använd attribut"
+
+msgid "Use association"
+msgstr "Använd association"
+
+msgid "Create and use attribute"
+msgstr "Skapa ett attribut och använd"
+
+msgid "Create and use association"
+msgstr "Skapa en association och använd"
+
+msgid "Unauthorized"
+msgstr "Inga rättigheter"
+
+msgid "ID is already in use"
+msgstr "Identifikationsuppgiften är redan i bruk"
+
+msgid "Resource dependencies restricts removing"
+msgstr "Resursens beroenden förhindrar borttagningen"
+
+msgid "Unexpected error"
+msgstr "Det skedde ett oväntat fel"
+
+msgid "Not found"
+msgstr "Kan inte hittas"
+
+msgid "Not removed"
+msgstr "Kunde inte tas bort"
+
+msgid "Resource status restricts removing"
+msgstr "Kan inte tas bort"
+
+msgid "Resource is in use"
+msgstr "Är redan i bruk"
+
+msgid "Already added"
+msgstr "Har redan lagts till"
+
+msgid "Write identifier"
+msgstr "Skriv identifikationsuppgift..."
+
+msgid "Write URI"
+msgstr "Skriv URI..."
+
+msgid "Write URL"
+msgstr "Skriv URL..."
+
+msgid "Library information"
+msgstr "Uppgifter om datakomponentbiblioteket"
+
+msgid "Profile information"
+msgstr "Uppgifter om tillämpningsprofilen"
+
+msgid "Class information"
+msgstr "Uppgifter om klassen"
+
+msgid "Shape information"
+msgstr "Uppgifter om den preciserade klassen"
+
+msgid "Attribute information"
+msgstr "Uppgifter om attributet"
+
+msgid "Association information"
+msgstr "Uppgifter om associationen"
+
+msgid "Property information"
+msgstr "Uppgifter om egenskapen"
+
+msgid "Concept suggestion information"
+msgstr "Uppgifter om begreppsförslaget"
+
+msgid "Class properties"
+msgstr "Klassens attribut och associationer"
+
+msgid "Shape properties"
+msgstr "Den preciserade klassens attribut och associationer"
+
+msgid "Show excluded"
+msgstr "Visa även dem som inte kan läggas till"
+
+msgid "Concept"
+msgstr "Begrepp"
+
+msgid "Concept suggestion"
+msgstr "Begreppsförslag"
+
+msgid "application/ld+json"
+msgstr "JSON-LD"
+
+msgid "text/turtle"
+msgstr "Turtle"
+
+msgid "application/xml"
+msgstr "XML"
+
+msgid "application/rdf+xml"
+msgstr "RDF"
+
+msgid "application/ld+json+context"
+msgstr "JSON-LD Context"
+
+msgid "application/schema+json"
+msgstr "JSON Schema"
+
+msgid "application/vnd+oai+openapi+json"
+msgstr "Open API 3.0.2"
+
+msgid "framed ld+json"
+msgstr "Framed JSON-LD"
+
+msgid "ld+json frame"
+msgstr "JSON-LD Frame"
+
+msgid "date format"
+msgstr "DD.MM.YYYY HH:mm"
+
+msgid "User login"
+msgstr "Användarnamn"
+
+msgid "User name"
+msgstr "Namn"
+
+msgid "Created at"
+msgstr "Skapad"
+
+msgid "Modified at"
+msgstr "Redigerad"
+
+msgid "Member groups"
+msgstr "Användare i grupper"
+
+msgid "Admin groups"
+msgstr "Huvudanvändare i grupper"
+
+msgid "Add properties from class"
+msgstr "Lägg till egenskaper från en klass"
+
+msgid "Add properties from super class"
+msgstr "Lägg till egenskaper från en överordnad klass"
+
+msgid "Add properties from scope class"
+msgstr "Lägg till egenskaper från en preciserad klass"
+
+msgid "Add properties from profile class"
+msgstr "Lägg till egenskaper i en klass som flyttas upp"
+
+msgid "Add properties from external class"
+msgstr "Lägg till egenskaper från en extern klass"
+
+msgid "Do you want to add following properties from class?"
+msgstr "Vill du lägga till följande egenskaper från en klass?"
+
+msgid "Do you want to add following properties from super class?"
+msgstr "Vill du lägga till följande egenskaper från en överordnad klass?"
+
+msgid "Do you want to add following properties from scope class?"
+msgstr "Vill du lägga till följande egenskaper från en preciserad klass?"
+
+msgid "Do you want to add following properties from profile class?"
+msgstr "Vill du lägga till följande egenskaper i en klass som flyttas upp?"
+
+msgid "Do you want to add following properties from external class?"
+msgstr "Vill du lägga till följande egenskaper från en extern klass?"
+
+msgid "Not imported by model"
+msgstr "Inga namnrymder har lagts till"
+
+msgid "Cannot import profile"
+msgstr "Tillämpningsprofilen kan inte användas som namnrymd"
+
+msgid "Shapes are not allowed"
+msgstr "Preciserade klasser får inte väljas"
+
+msgid "Classes are not allowed"
+msgstr "Det går inte att välja icke-specialiserade klasser"
+
+msgid "Non specialized classes are not allowed"
+msgstr "Det går inte att välja icke-specialiserade klasser"
+
+msgid "Use class"
+msgstr "Använd klassen"
+
+msgid "Specialize class"
+msgstr "Precisera klassen"
+
+msgid "Define concept for the class"
+msgstr "Definiera ett begrepp för klassen"
+
+msgid "Can be selected only from this library"
+msgstr "Välj bland klasserna i datakomponentbiblioteket"
+
+msgid "Can be selected only from this profile"
+msgstr "Välj bland klasserna i tillämpningsprofilen"
+
+msgid "Subject"
+msgstr "Begrepp"
+
+msgid "to vocabulary"
+msgstr "i ordlistan"
+
+msgid "Create new class"
+msgstr "Skapa en ny klass"
+
+msgid "Create new shape"
+msgstr "Skapa en ny preciserad klass"
+
+msgid "Create new predicate"
+msgstr "Skapa en ny egenskap"
+
+msgid "Create new attribute"
+msgstr "Lägg till ett nytt attribut"
+
+msgid "Create new association"
+msgstr "Lägg till en ny association"
+
+msgid "New attribute"
+msgstr "Nytt attribut"
+
+msgid "New association"
+msgstr "Ny association"
+
+msgid "Copy attribute"
+msgstr "Kopiera attribut"
+
+msgid "Copy association"
+msgstr "Kopiera association"
+
+msgid "Create sub attribute"
+msgstr "Skapa underordnat attribut"
+
+msgid "Create sub association"
+msgstr "Skapa underordnat association"
+
+msgid "Create super attribute"
+msgstr "Skapa överordnat attribut"
+
+msgid "Create super association"
+msgstr "Skapa överordnad association"
+
+msgid "Show class information"
+msgstr "Visa klassens uppgifter"
+
+msgid "Show attribute information"
+msgstr "Visa attributets uppgifter"
+
+msgid "Show association information"
+msgstr "Visa associationens uppgifter"
+
+msgid "by referencing external uri"
+msgstr "genom att hänvisa till en extern identifikationsuppgift"
+
+msgid "Self reference not allowed"
+msgstr "En referens kan inte hänvisa till sig själv"
+
+msgid "Invalid ID"
+msgstr "Felaktig identifikationsuppgift"
+
+msgid "External class not found"
+msgstr "Det går inte att hitta extern klass"
+
+msgid "External predicate not found"
+msgstr "Det går inte att hitta egenskapen"
+
+msgid "External predicate is of wrong type"
+msgstr "Fel typ av extern egenskap"
+
+msgid "Input"
+msgstr "Skriv"
+
+msgid "Assigned to this profile"
+msgstr "Till denna profil kopplade"
+
+msgid "Assigned to this library"
+msgstr "Till detta bibliotek kopplade"
+
+msgid "language code"
+msgstr "språkkod"
+
+msgid "Internal vocabulary"
+msgstr "Internt begreppsurval"
+
+msgid "Edit namespace"
+msgstr "Redigera namnrymd"
+
+msgid "Vocabularies"
+msgstr "Ordlistor"
+
+msgid "Vocabulary name"
+msgstr "Ordlistans namn"
+
+msgid "Edit link"
+msgstr "Redigera länk"
+
+msgid "Reference data name"
+msgstr "Kodlistans namn"
+
+msgid "Reference data status"
+msgstr "Kodlistans status"
+
+msgid "Create new reference data"
+msgstr "Skapa ny kodlista"
+
+msgid "Choose reference data"
+msgstr "Välj kodlista"
+
+msgid "Write reference data code"
+msgstr "Skriv kod..."
+
+msgid "Browse concepts"
+msgstr "Bläddra i begrepp"
+
+msgid "Search concept"
+msgstr "Välj begrepp"
+
+msgid "Delete concept"
+msgstr "Ta bort begrepp"
+
+msgid "Delete concept from this library"
+msgstr "Ta bort begreppet från detta bibliotek"
+
+msgid "Delete concept from this profile"
+msgstr "Ta bort begreppet från denna profil"
+
+msgid "Delete conceptSuggestion"
+msgstr "Ta bort begreppsförslag"
+
+msgid "Delete conceptSuggestion from this library"
+msgstr "Ta bort begreppsförslaget från detta bibliotek"
+
+msgid "Delete conceptSuggestion from this profile"
+msgstr "Ta bort begreppsförslaget från denna profil"
+
+msgid "URI stem"
+msgstr "URI-format"
+
+msgid "Interoperability method description"
+msgstr ""
+"Med hjälp av metoden säkerställer man att tillämpningen av gemensamma "
+"definitioner är systematisk och bibehåller semantiken i olika genomföranden, "
+"och kan således förstås av olika aktörer."
+
+msgid "Label"
+msgstr "Namn"
+
+msgid "ID"
+msgstr "ID"
+
+msgid "Local ID"
+msgstr "Lokalt ID"
+
+msgid "Allowed languages"
+msgstr "Tillåtna språk"
+
+msgid "In language"
+msgstr "På finska"
+
+msgid "Undefined"
+msgstr "Ingen definition"
+
+msgid "Assign reusable predicate to library"
+msgstr "Lägg till en referens i biblioteket"
+
+msgid "Assign reusable predicate to profile"
+msgstr "Lägg till en referens i tillämpningsprofilen"
+
+msgid "Assign class to library"
+msgstr "Lägg till en klass i biblioteket"
+
+msgid "Specialize class to profile"
+msgstr "Precisera klassen i tillämpningsprofilen"
+
+msgid "Copy reusable association to library"
+msgstr "Kopiera associationen till biblioteket"
+
+msgid "Copy reusable association to profile"
+msgstr "Kopiera associationen till tillämpningsprofilen"
+
+msgid "Copy reusable attribute to library"
+msgstr "Kopiera attributet till biblioteket"
+
+msgid "Copy reusable attribute to profile"
+msgstr "Kopiera attributet till tillämpningsprofilen"
+
+msgid "Defined in vocabularies"
+msgstr "Har definierats i ordlistor"
+
+msgid "Change concept"
+msgstr "Byt begrepp"
+
+msgid "Choose concept"
+msgstr "Välj begrepp"
+
+msgid "Submit error"
+msgstr "Det skedde ett fel i funktionen"
+
+msgid "Predicate in use"
+msgstr "Predikatet är redan i bruk"
+
+msgid ""
+"Predicate type cannot be changed because it is already used by following "
+"resources"
+msgstr ""
+"Typen av predikat kan inte ändras, eftersom följande resurser använder det"
+
+msgid "Convert to association"
+msgstr "Ändra till association"
+
+msgid "Convert to attribute"
+msgstr "Ändra till attribut"
+
+msgid "Copy \"{{text}}\" to clipboard"
+msgstr "Kopiera “{{text}}” till urklipp"
+
+msgid "Copy properties"
+msgstr "Kopiera egenskaper"
+
+msgid "Copy properties from class"
+msgstr "Kopiera attribut eller associationer från klassen"
+
+msgid "Session expired"
+msgstr "Sessionen har gått ut"
+
+msgid "Model not found"
+msgstr "Modellen kan inte hittas"
+
+msgid "Group not found"
+msgstr "Gruppen kan inte hittas"
+
+msgid "Page not found"
+msgstr "Sidan kan inte hittas"
+
+msgid "Resource not found"
+msgstr "Resursen kan inte hittas"
+
+msgid "You will be redirected to the front page"
+msgstr "Du omdirigeras till starsidan"
+
+msgid "You will be redirected to the model"
+msgstr "Du omdirigeras till modellens sida"
+
+msgid "Please login to perform the action"
+msgstr "Vänligen logga in för att slutföra funktionen"
+
+msgid "Duplicate association target"
+msgstr "Objektet för associationen har redan lagts till"
+
+msgid "No"
+msgstr "Nej"
+
+msgid "Match to content"
+msgstr "Hämta från innehåll"
+
+msgid "Unique label"
+msgstr "Ett värde per språk"
+
+msgid "All organizations"
+msgstr "Alla organisationer"
+
+msgid "Choose organization"
+msgstr "Välj organisation"
+
+msgid "ADMIN"
+msgstr "Administratör"
+
+msgid "DATA_MODEL_EDITOR"
+msgstr "Datamodellerare"
+
+msgid "TERMINOLOGY_EDITOR"
+msgstr "Terminologiredigerare"
+
+msgid "CODE_LIST_EDITOR"
+msgstr "Kodlistredigerare"
+
+msgid "MEMBER"
+msgstr "Medlem"
+
+msgid "Add new library"
+msgstr "Lägg till ny informationsområdesspecifik informationsmodell"
+
+msgid "Add new profile"
+msgstr "Lägg till ny tillämpningsspecifik informationsmodell"
+
+msgid "InformationPool"
+msgstr "Datalager"
+
+msgid "InformationSystem"
+msgstr "Informationssystem"
+
+msgid "ExchangeFormat"
+msgstr "Överföringsformat"
+
+msgid "InformationDescription"
+msgstr "Informerande innehåll"
+
+msgid "Search"
+msgstr "Sök"
+
+msgid "standard"
+msgstr "Internationell rekommendation"
+
+msgid "All model types"
+msgstr "Alla typer av informationsmodeller"
+
+msgid "All use contexts"
+msgstr "Alla typer av innehåll"
+
+msgid "Model"
+msgstr "Informationsmodell"
+
+msgid "Deep class hit"
+msgstr "Klasser"
+
+msgid "Deep shape hit"
+msgstr "Preciserade klasser"
+
+msgid "Deep attribute hit"
+msgstr "Attribut"
+
+msgid "Deep association hit"
+msgstr "Associationer"
+
+msgid "Concept status"
+msgstr "Begreppets status"
+
+msgid "Concept modified at"
+msgstr "Begreppet har redigerats"
+
+msgid "ADD EMAIL SUBSCRIPTION TO RESOURCE REGARDING CHANGES?"
+msgstr "BESTÄLL E-POSTAVISERINGAR OM ÄNDRINGAR I MATERIALET?"
+
+msgid "REMOVE EMAIL SUBSCRIPTION TO RESOURCE?"
+msgstr "TA BORT E-POSTBESTÄLLNINGEN OM MATERIALET?"
+
+msgid "ARE YOU SURE YOU WANT TO ENABLE THE NOTIFICATION EMAIL SUBSCRIPTION?"
+msgstr "ÄR DU SÄKER ATT DU VILL AKTIVERA INSTÄLLNINGEN FÖR ATT TA EMOT E-POST?"
+
+msgid "ARE YOU SURE YOU WANT TO DISABLE THE NOTIFICATION EMAIL SUBSCRIPTION?"
+msgstr ""
+"ÄR DU SÄKER ATT DU VILL INAKTIVERA INSTÄLLNINGEN FÖR ATT TA EMOT E-POST?"
+
+msgid "Adding subscription failed."
+msgstr "Det gick inte att beställa aviseringar."
+
+msgid "Subscription deletion failed."
+msgstr "Borttagning av aviseringar misslyckades."
+
+msgid "INFO_TEXT_EMAIL_SUBSCRIPTIONS"
+msgstr ""
+"Med denna funktion väljer du att aktivera/inaktivera aviseringsfunktionen. "
+"Genom att ta bort krysset för ”Dagligen” kan du inaktivera alla aviseringar "
+"på en gång. Genom att kryssa för på nytt aktiveras aviseringar."
+
+msgid "CHANGE STATUS?"
+msgstr "ÄNDRA STATUS?"
+
+msgid "CHANGE_STATUS_CONFIRMATION_PARAGRAPH_1"
+msgstr "Är du säker att du vill ändra status?"
+
+msgid "CHANGE_STATUS_CONFIRMATION_PARAGRAPH_2"
+msgstr ""
+"Efter att du sparat kan du inte längre ändra status till Halvfärdig eller "
+"Utkast."
+
+msgid "Choose starting status"
+msgstr "Välj utgångsläge"
+
+msgid "Choose target status"
+msgstr "Välj målläge"
+
+msgid "UPDATING_STATUSES_MESSAGE"
+msgstr "Förändringen av statusar i informationsmodellets resurser pågår."
+
+msgid "Change resource statuses at the same time?"
+msgstr "Ändra samtidigt status för resurser?"
+
+msgid "CHANGE RESOURCE STATUSES TOO?"
+msgstr ""
+"Ska även alla resurser med status {{startStatus}} ändras till status "
+"{{endStatus}}?"
+
+msgid "CREATING_NEW_MODEL_VERSION_MESSAGE"
+msgstr "Skapande av ny version pågår"
+
+msgid "Example info"
+msgstr "Exempelvärde för egenskapen"
+
+msgid "Editorial note"
+msgstr "Redigerarens kommentar"
+
+msgid "Editorial note info"
+msgstr ""
+
+msgid "Class id"
+msgstr "Klassens identifikationsuppgift"
+
+msgid "Class id info"
+msgstr "Klassens individualiserande curie-identifikationsuppgift"
+
+msgid "Shape id"
+msgstr "Den preciserade klassens identifikationsuppgift"
+
+msgid "Shape id info"
+msgstr "Den preciserade klassens identifikationsuppgift"
+
+msgid "Attribute id"
+msgstr "Attributets identifikationsuppgift"
+
+msgid "Attribute id info"
+msgstr "Attributets individualiserande curie-identifikationsuppgift"
+
+msgid "Association id"
+msgstr "Associationens identifikationsuppgift"
+
+msgid "Association id info"
+msgstr "Associationens individualiserande curie-identifikationsuppgift"
+
+msgid "Property id"
+msgstr "Egenskapens identifikationsuppgift"
+
+msgid "Property id info"
+msgstr "Egenskapens individualiserande identifikationsuppgift"
+
+msgid "Class property id"
+msgstr "Lokal identifikationsuppgift för klassens egenskap"
+
+msgid "Class property id info"
+msgstr ""
+"Sekundär identifikationsuppgift för klassens egenskap som kan användas i ett "
+"schema eller andra lokala genomföranden"
+
+msgid "Class attribute id"
+msgstr "Lokal identifikationsuppgift för klassens attribut"
+
+msgid "Class attribute id info"
+msgstr ""
+"Sekundär identifikationsuppgift för klassens attribut som kan användas i ett "
+"schema eller andra lokala genomföranden"
+
+msgid "Class association id"
+msgstr "Lokal identifikationsuppgift för klassens association"
+
+msgid "Class association id info"
+msgstr ""
+"Sekundär identifikationsuppgift för klassens association som kan användas i "
+"ett schema eller andra lokala genomföranden"
+
+msgid "Concept id"
+msgstr "Begreppets identifikationsuppgift"
+
+msgid "Concept id info"
+msgstr "Begreppets unika URI-identifikationsuppgift"
+
+msgid "Vocabulary id"
+msgstr "Ordlistans identifikationsuppgift"
+
+msgid "Vocabulary id info"
+msgstr "Kort identifikationsuppgift för ordlistan"
+
+msgid "Reference data URI"
+msgstr "Kodlistans URI"
+
+msgid "Reference data URI info"
+msgstr ""
+"Kodlistans URI-kod är en permanent och unik referens till kodlistans läge"
+
+msgid "Max properties"
+msgstr "Maxantal egenskaper"
+
+msgid "Max properties info"
+msgstr ""
+"Maxantal attribut eller associationer för klassen. OBS! Fungerar endast i "
+"JSON-scheman."
+
+msgid "Min properties"
+msgstr "Minimiantal egenskaper"
+
+msgid "Min properties info"
+msgstr ""
+"Minimiantal attribut eller associationer för klassen. OBS! Fungerar endast i "
+"JSON-scheman."
+
+msgid "Group label"
+msgstr "Gruppens namn"
+
+msgid "Group label info"
+msgstr "Namn för områdets grupp"
+
+msgid "Class label"
+msgstr "Klassens namn"
+
+msgid "Class label info"
+msgstr "Klassens människoläsbara namn"
+
+msgid "Shape label"
+msgstr "Den preciserade klassens namn"
+
+msgid "Shape label info"
+msgstr "Den preciserade klassens människoläsbara namn"
+
+msgid "Property label"
+msgstr "Egenskapens namn"
+
+msgid "Property label info"
+msgstr "Egenskapens människoläsbara namn"
+
+msgid "Class property label"
+msgstr "Namn för klassens egenskap"
+
+msgid "Class property label info"
+msgstr "Människoläsbart namn för klassens egenskap"
+
+msgid "Class attribute label"
+msgstr "Namn för klassens attribut"
+
+msgid "Class attribute label info"
+msgstr "Människoläsbart namn för klassens attribut"
+
+msgid "Class association label"
+msgstr "Namn för klassen association"
+
+msgid "Class association label info"
+msgstr "Människoläsbart namn för klassens association"
+
+msgid "Concept suggestion label"
+msgstr "Begreppsförslagets namn"
+
+msgid "Concept suggestion label info"
+msgstr "Föreslagen term för begreppet"
+
+msgid "Concept definition"
+msgstr "Begreppets definition"
+
+msgid "Concept definition info"
+msgstr ""
+"Begreppets definition beskriver begreppets innehåll på allmän nivå och tar "
+"endast i beaktande väsentliga begreppsdrag"
+
+msgid "Concept suggestion definition"
+msgstr "Begreppsförslagets definition"
+
+msgid "Concept suggestion definition info"
+msgstr ""
+"Begreppsförslagets definition bör omfatta bakgrundinformation om hur "
+"begreppets används eller vara välformulerad. En välformulerad definition "
+"beskriver objektets semantiska innehåll exakt och tar endast i beaktande "
+"objektets nödvändiga drag, men dock i tillräcklig utsträckning."
+
+msgid "Namespace label"
+msgstr "Namnrymdens namn"
+
+msgid "Namespace label info"
+msgstr "Människoläsbart namn för namnrymden"
+
+msgid "Reference data label"
+msgstr "Kodlistans namn"
+
+msgid "Reference data label info"
+msgstr "En kodlista är en överenskommen grupp kodvärden"
+
+msgid "State"
+msgstr "Status"
+
+msgid "State info"
+msgstr "Status för resursen gällande en förvaltningsmodell"
+
+msgid "Defined by"
+msgstr "Definition"
+
+msgid "Defined by info"
+msgstr "Referens till modell som definierar resursen"
+
+msgid "Defined by library"
+msgstr "Datakomponetbibliotek"
+
+msgid "Defined by library info"
+msgstr "Referens till datakomponentbibliotek där resursen är definierad"
+
+msgid "Defined by profile"
+msgstr "Definierad i tillämpningsprofil"
+
+msgid "Defined by profile info"
+msgstr ""
+"Referens till tillämpningsprofil där användningen av resursen är definierad"
+
+msgid "Superclass"
+msgstr "Överordnad klass"
+
+msgid "Superclass info"
+msgstr "Klass som kan generaliseras och som har en bredare semantik"
+
+msgid "Superassociation"
+msgstr "Överordnad association"
+
+msgid "Superassociation info"
+msgstr "Association som kan generaliseras och som har en bredare semantik"
+
+msgid "Superattribute"
+msgstr "Överordnat attribut"
+
+msgid "Superattribute info"
+msgstr "Attribut som kan generaliseras och som har en bredare semantik"
+
+msgid "Superproperty"
+msgstr "Överordnat begrepp"
+
+msgid "Superproperty info"
+msgstr "Egenskap som kan generaliseras och som har en bredare semantik"
+
+msgid "Range"
+msgstr "Datatyp"
+
+msgid "Range info"
+msgstr "Attributets datatyp ska väljas bland kompatibla XSD-datatyper"
+
+msgid "Specialized from class"
+msgstr "Preciserad utifrån klass"
+
+msgid "Specialized from class info"
+msgstr "Klass som har preciserats i tillämpningsprofilen"
+
+msgid "Example"
+msgstr "Exempel"
+
+msgid "Definition info"
+msgstr "Begreppets definition"
+
+msgid "Value class"
+msgstr "Objekt"
+
+msgid "Value class info"
+msgstr "Referens till klass oms fungerar som objekt för associationen"
+
+msgid "Predicate type"
+msgstr "Egenskapens typ"
+
+msgid "Predicate type info"
+msgstr "Egenskapen kan vara antingen ett attribut eller en association"
+
+msgid "Equivalent class"
+msgstr "Motsvarande klasser"
+
+msgid "Equivalent class info"
+msgstr ""
+"En förteckning över klasser som definierats på andra ställen och som har "
+"motsvarande semantisk betydelse"
+
+msgid "Equivalent attribute"
+msgstr "Motsvarande attribut"
+
+msgid "Equivalent attribute info"
+msgstr ""
+"En förteckning över attribut som definierats på andra ställen och som har "
+"motsvarande semantisk betydelse"
+
+msgid "Equivalent association"
+msgstr "Motsvarande associationer"
+
+msgid "Equivalent association info"
+msgstr ""
+"En förteckning över associationer som definierats på andra ställen och som "
+"har motsvarande semantisk betydelse"
+
+msgid "Equivalent property"
+msgstr "Motsvarande egenskaper"
+
+msgid "Equivalent property info"
+msgstr ""
+"En förteckning över egenskaper som definierats på andra ställen och som har "
+"motsvarande semantisk betydelse"
+
+msgid "Broader concept"
+msgstr "Bredare begrepp"
+
+msgid "Broader concept info"
+msgstr "Överordnat begrepp som anknyter till begreppet"
+
+msgid "Internal group page"
+msgstr "Gruppens interna sidor"
+
+msgid "Internal group page info"
+msgstr "Interna sidor för gruppen i området i fråga"
+
+msgid "Vocabulary info"
+msgstr "Information om ordlistan"
+
+msgid "Namespace"
+msgstr "Namnrymd"
+
+msgid "Namespace info"
+msgstr "Namnrymden som används för att individualisera och resolvera resurser"
+
+msgid "Previous version"
+msgstr "Tidigare version"
+
+msgid "Previous version info"
+msgstr "Länk till den tidigare versionen"
+
+msgid "Resource identifier"
+msgstr "Resursens identifikationsuppgift"
+
+msgid "Resource identifier info"
+msgstr ""
+"Använd attributets värde som resursens huvudsakliga identifikationsuppgift"
+
+msgid "Default value"
+msgstr "Standardvärde"
+
+msgid "Default value info"
+msgstr "Standardvärde som ges en egenskap om inget annat värde har fastställts"
+
+msgid "Allowed values"
+msgstr "Tillåtna värden"
+
+msgid "Allowed values info"
+msgstr "Lista över tillåtna värden för egenskapen"
+
+msgid "Class type"
+msgstr "Klassens typ"
+
+msgid "Class type info"
+msgstr "En klass kan ha flera tillåtna klassdefinitioner"
+
+msgid "Fixed value"
+msgstr "Obligatoriskt värde"
+
+msgid "Fixed value info"
+msgstr ""
+"Obligatoriskt värde som fastställts på förhand och som ska finnas i "
+"datamängden"
+
+msgid "Pattern"
+msgstr "Regelbunden mening"
+
+msgid "Pattern info"
+msgstr ""
+"Regelbunden mening som kan användas för att validera egenskapens värden"
+
+msgid "Min count"
+msgstr "Minimiantal"
+
+msgid "Min count info"
+msgstr "Minimiantal tillåtna värden"
+
+msgid "Max count"
+msgstr "Maxantal"
+
+msgid "Max count info"
+msgstr "Maxantal tillåtna värden"
+
+msgid "Min length"
+msgstr "Minimilängd"
+
+msgid "Min length info"
+msgstr "Värdets minsta tillåtna längd"
+
+msgid "Max length"
+msgstr "Maxlängd"
+
+msgid "Max length info"
+msgstr "Värdets högsta tillåtna antal"
+
+msgid "XML Wrapper"
+msgstr "XML Wrapper"
+
+msgid "XML Wrapper info"
+msgstr ""
+"Bilda ett XML Wrapper-element av identifikationsuppgiften för klassens "
+"egenskap"
+
+msgid "XML Attribute"
+msgstr "XML-attribut"
+
+msgid "XML Attribute info"
+msgstr "Bilda av egenskapen ett attribut för XML-elementet i ett XML-schema"
+
+msgid "Deactivated"
+msgstr "Inaktiverad"
+
+msgid "Deactivated info"
+msgstr ""
+"En inaktiverad resurs används inte för att generera eller validera scheman"
+
+msgid "Unique label info"
+msgstr ""
+"Definiera om endast ett lokaliserat värde är tillåtet per språk. Med hjälp "
+"av detta kan man fastställa exempelvis ”Maxantal 2” så att endast värden i "
+"olika språk är tillåtna."
+
+msgid "Equals"
+msgstr "Lika med"
+
+msgid "Equals info"
+msgstr "Egenskap med ett värde som ska vara lika med värdet för denna egenskap"
+
+msgid "Disjoint"
+msgstr "Annan än"
+
+msgid "Disjoint info"
+msgstr "Egenskap som ska ha ett annat värde än värdet för denna egenskap"
+
+msgid "Less than"
+msgstr "Mindre än"
+
+msgid "Less than info"
+msgstr "Egenskap som ska ha ett annat värde än värdet för denna egenskap"
+
+msgid "Less than or equals"
+msgstr "Mindre än eller lika med"
+
+msgid "Less than or equals info"
+msgstr ""
+"Egenskap med ett värde som ska vara mindre än eller lika med värdet för "
+"denna egenskap"
+
+msgid "Homepage"
+msgstr "Länk"
+
+msgid "Homepage info"
+msgstr ""
+"Länk till en webbplats eller en applikation där det informerande innehållet "
+"används"
+
+msgid "Title info"
+msgstr "Människoläsbart namn"
+
+msgid "External URI"
+msgstr "Extern identifikationsuppgift"
+
+msgid "External URI info"
+msgstr "Referens till en extern URI-kod"
+
+msgid "Namespace redirection"
+msgstr "Omdirigering av namnrymd"
+
+msgid "Namespace redirection info"
+msgstr ""
+"Genom att omdirigera namnrymden kan man definiera informationsmodeller som "
+"använder en extern namnrymd"
+
+msgid "Constraint classes"
+msgstr "Klasser för en logisk begränsning"
+
+msgid "Constraint classes info"
+msgstr ""
+
+msgid "Root class"
+msgstr "Rotnod"
+
+msgid "Root class info"
+msgstr ""
+"En rotnod används för att definiera utgångspunkten för en hierarkisk "
+"informationsmodell, till exempel den första entiteten i ett XML- eller JSON-"
+"meddelande"
+
+msgid "Creator"
+msgstr "Skapad av"
+
+msgid "Creator info"
+msgstr ""
+
+msgid "Localname"
+msgstr "Klassens lokala identifikationsuppgift"
+
+msgid "Localname info"
+msgstr "Kan användas i scheman eller andra lokala genomföranden"
+
+msgid "Read-only"
+msgstr "Endast ett tal"
+
+msgid "Read-only info"
+msgstr ""
+"Ett attribut vars värde inte längre får redigeras efter den första "
+"formateringen"
+
+msgid "API path"
+msgstr "API-sökväg"
+
+msgid "API path info"
+msgstr ""
+"En API-sökväg ska definieras för minst en klass så att Open API-"
+"beskrivningen kan göras på rätt sätt. För API-sökvägen kan användas sökvägs- "
+"({}) eller frågeparametrar (?&), till exempel: /org/{id}/person?name&role"
+
+msgid "Contact label"
+msgstr "Kontakt"
+
+msgid "Contact label info"
+msgstr "Responskanal för informationsmodellen, t.ex. e-postadress."
+
+msgid "owl:DatatypeProperty"
+msgstr "Attribut"
+
+msgid "owl:ObjectProperty"
+msgstr "Association"
