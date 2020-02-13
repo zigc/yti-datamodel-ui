@@ -9,6 +9,7 @@ export const HrefDirective: IDirectiveFactory = ($timeout: ITimeoutService) => {
         const link = element.attr('href');
         if (link && !link.startsWith('/') && !link.startsWith('#')) {
           element.attr('target', '_blank');
+          element.attr('rel', 'noopener noreferrer');
         }
       });
     }
