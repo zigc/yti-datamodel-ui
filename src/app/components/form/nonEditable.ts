@@ -3,6 +3,7 @@ import { DisplayItem, DisplayItemFactory, Value } from './displayItemFactory';
 import { EditableForm } from './editableEntityController';
 import { LanguageContext } from 'app/types/language';
 import { LegacyComponent } from 'app/utils/angular';
+import { isExternalLink } from 'app/components/form/href';
 
 @LegacyComponent({
   bindings: {
@@ -65,5 +66,9 @@ export class NonEditableComponent {
     } else {
       return {};
     }
+  }
+
+  isExternalLink(link: string): boolean {
+    return isExternalLink(link);
   }
 }

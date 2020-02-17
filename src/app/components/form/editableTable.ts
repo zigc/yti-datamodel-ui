@@ -3,6 +3,7 @@ import { Url } from 'app/entities/uri';
 import { labelNameToResourceIdIdentifier } from 'yti-common-ui/utils/resource';
 import { EditableForm } from './editableEntityController';
 import { LegacyComponent } from 'app/utils/angular';
+import { isExternalLink } from 'app/components/form/href';
 
 export abstract class TableDescriptor<T> {
 
@@ -73,6 +74,7 @@ const nonExpandedLimit = 2;
                  rel="noopener noreferrer"
                  ng-href="{{property.hrefExtractor(value)}}">
                 {{property.nameExtractor(value)}}
+                <i ng-if="$ctrl.isExternalLink(property.hrefExtractor(value))" class="fas fa-external-link-alt x-small-item"></i>
               </a>
               <a id="{{$ctrl.id + '_' + $ctrl.normalizeValueForId(property.nameExtractor(value)) + '_on_click_editable_link'}}"
                  ng-if="property.onClick"
@@ -185,5 +187,9 @@ export class EditableTableComponent<T> {
 
   normalizeValueForId(value: string): string {
     return labelNameToResourceIdIdentifier(value);
+  }
+
+  isExternalLink(link: string): boolean {
+    return isExternalLink(link);
   }
 }

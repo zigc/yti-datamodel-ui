@@ -75,7 +75,7 @@ import { makeSimpleSearchRegexp } from 'yti-common-ui/utils/search';
                 <highlight [text]="searchResult.label" [context]="model" [search]="searchText"></highlight>
               </div>
               <a [href]="model.linkToResource(searchResult.id)" target="_blank" rel="noopener noreferrer"
-                 [innerHTML]="searchResult.id.compact | highlight: simpleSearchRegexp"></a>
+                 [innerHTML]="(searchResult.id.compact | highlight: simpleSearchRegexp) + '&nbsp;<i class=&quot;fas fa-external-link-alt x-small-item&quot;></i>'"></a>
               <div class="pt-1">
                 <app-status [status]="searchResult.status"></app-status>
               </div>

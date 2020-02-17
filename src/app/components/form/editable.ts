@@ -3,6 +3,7 @@ import { DisplayItem, DisplayItemFactory, Value } from './displayItemFactory';
 import { EditableForm } from './editableEntityController';
 import { LanguageContext } from 'app/types/language';
 import { LegacyComponent } from 'app/utils/angular';
+import { isExternalLink } from 'app/components/form/href';
 
 const NG_HIDE_CLASS = 'ng-hide';
 const NG_HIDE_IN_PROGRESS_CLASS = 'ng-hide-animate';
@@ -111,5 +112,9 @@ export class EditableComponent {
 
   isEditing() {
     return this.form && (this.form.editing || this.form.pendingEdit) && !this.disable;
+  }
+
+  isExternalLink(link: string): boolean {
+    return isExternalLink(link);
   }
 }
