@@ -30,11 +30,11 @@ type DataType = ClassListItem|PredicateListItem;
     form: '?^form'
   },
   template: `
-      <editable-multiple id="{{$ctrl.id}}" data-title="{{$ctrl.title}}" ng-model="$ctrl.ngModel" link="$ctrl.link" input="$ctrl.input">
+      <editable-multiple id="{{$ctrl.id + '_editable_multiple'}}" data-title="{{$ctrl.title}}" ng-model="$ctrl.ngModel" link="$ctrl.link" input="$ctrl.input">
 
         <input-container>
           <autocomplete datasource="$ctrl.datasource" value-extractor="$ctrl.valueExtractor" exclude-provider="$ctrl.createExclusion">
-            <input id="{{$ctrl.id}}"
+            <input id="{{$ctrl.id + '_input'}}"
                    type="text"
                    restrict-duplicates="$ctrl.ngModel"
                    uri-input
