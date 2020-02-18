@@ -5,6 +5,7 @@ import { extendNgModelOptions, formatWithFormatters, LegacyComponent, validateWi
 import { remove } from 'yti-common-ui/utils/array';
 import { enter } from 'yti-common-ui/utils/key-code';
 import { normalizeAsId } from 'yti-common-ui/utils/resource';
+import { isExternalLink } from 'app/components/form/href';
 
 const skipValidators = new Set<string>(['duplicate']);
 
@@ -192,5 +193,9 @@ export class EditableMultipleComponent<T> {
 
   showLink(value: T): boolean {
     return this.link && this.isLink(value);
+  }
+
+  isExternalLink(link: string): boolean {
+    return isExternalLink(link);
   }
 }
