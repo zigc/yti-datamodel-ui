@@ -7,6 +7,7 @@ import { Model } from 'app/entities/model';
 import { ConstraintType } from 'app/types/entity';
 import { LegacyComponent, modalCancelHandler } from 'app/utils/angular';
 import { EditableForm } from 'app/components/form/editableEntityController';
+import { isExternalLink } from 'app/components/form/href';
 
 @LegacyComponent({
   bindings: {
@@ -54,5 +55,9 @@ export class EditableConstraintComponent {
 
   removeItem(item: ConstraintListItem) {
     this.constraint.removeItem(item);
+  }
+
+  isExternalLink(link: string): boolean {
+    return isExternalLink(link);
   }
 }
