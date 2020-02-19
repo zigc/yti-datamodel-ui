@@ -1,6 +1,6 @@
 import { IPromise } from 'angular';
 import { SearchPredicateModal } from './searchPredicateModal';
-import { SearchClassModal } from './searchClassModal';
+import { SearchClassModal, defaultTextForSelection } from './searchClassModal';
 import { Uri } from 'app/entities/uri';
 import { EditableForm } from 'app/components/form/editableEntityController';
 import { collectProperties } from 'yti-common-ui/utils/array';
@@ -23,17 +23,18 @@ type DataType = ClassListItem|PredicateListItem;
     model: '=',
     id: '@',
     title: '@',
-    customDataSource: '<'
+    customDataSource: '<',
+    requiredByInUse: '<'
   },
   require: {
     form: '?^form'
   },
   template: `
-      <editable-multiple id="{{$ctrl.id}}" data-title="{{$ctrl.title}}" ng-model="$ctrl.ngModel" link="$ctrl.link" input="$ctrl.input">
+      <editable-multiple id="{{$ctrl.id + '_editable_multiple'}}" data-title="{{$ctrl.title}}" ng-model="$ctrl.ngModel" link="$ctrl.link" input="$ctrl.input">
 
         <input-container>
           <autocomplete datasource="$ctrl.datasource" value-extractor="$ctrl.valueExtractor" exclude-provider="$ctrl.createExclusion">
-            <input id="{{$ctrl.id}}"
+            <input id="{{$ctrl.id + '_input'}}"
                    type="text"
                    restrict-duplicates="$ctrl.ngModel"
                    uri-input
@@ -66,6 +67,7 @@ export class EditableMultipleUriSelectComponent {
   id: string;
   title: string;
   customDataSource: DataSource<DataType>;
+  requiredByInUse: boolean;
 
   addUri: (uri: Uri) => void;
   datasource: DataSource<DataType>;
@@ -88,8 +90,8 @@ export class EditableMultipleUriSelectComponent {
     if (this.customDataSource) {
       this.datasource = this.customDataSource;
     } else {
-      this.datasource = this.type === 'class' ? this.classService.getClassesForModelDataSource(modelProvider)
-        : this.predicateService.getPredicatesForModelDataSource(modelProvider);
+      this.datasource = this.type === 'class' ? this.classService.getClassesForModelDataSource(modelProvider, this.requiredByInUse)
+        : this.predicateService.getPredicatesForModelDataSource(modelProvider, this.requiredByInUse);
     }
   }
 
@@ -101,8 +103,8 @@ export class EditableMultipleUriSelectComponent {
     let promise: IPromise<DataType>;
     if (!this.customDataSource) {
       promise = this.type === 'class' || this.type === 'shape'
-        ? this.searchClassModal.openWithOnlySelection(this.model, false, this.createExclusion())
-        : this.searchPredicateModal.openWithOnlySelection(this.model, this.type, this.createExclusion());
+        ? this.searchClassModal.openWithOnlySelection(this.model, false, this.createExclusion(), defaultTextForSelection, this.requiredByInUse)
+        : this.searchPredicateModal.openWithOnlySelection(this.model, this.type, this.createExclusion(), this.requiredByInUse);
     } else {
       if (this.type === 'class' || this.type === 'shape') {
         console.error('Custom data source for class selection dialog not yet supported');

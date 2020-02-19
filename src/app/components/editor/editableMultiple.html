@@ -4,7 +4,10 @@
   <div ng-if="!$ctrl.isEditing()" class="content">
     <span ng-repeat="value in $ctrl.ngModel">
       <span ng-if="!$ctrl.showLink(value)">{{$ctrl.format(value)}}<span ng-if="!$last">, </span></span>
-      <a ng-if="$ctrl.showLink(value)" ng-href="{{$ctrl.link(value)}}">{{$ctrl.format(value)}}<span ng-if="!$last">, </span></a>
+      <a ng-if="$ctrl.showLink(value)" ng-href="{{$ctrl.link(value)}}">{{$ctrl.format(value)}}
+        <i ng-if="$ctrl.isExternalLink($ctrl.link(value))" class="fas fa-external-link-alt x-small-item"></i>
+        <span ng-if="!$last">, </span>
+      </a>
     </span>
   </div>
 

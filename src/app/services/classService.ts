@@ -28,8 +28,9 @@ export class RelatedClass {
 export interface ClassService {
   getClass(id: Uri|Urn, model: Model): IPromise<Class>;
   getAllClasses(model: Model): IPromise<ClassListItem[]>;
+  getRequiredByClasses(model: Model): IPromise<ClassListItem[]>;
   getClassesForModel(model: Model): IPromise<ClassListItem[]>;
-  getClassesForModelDataSource(modelProvider: () => Model): DataSource<ClassListItem>;
+  getClassesForModelDataSource(modelProvider: () => Model, requiredByInUse?: boolean): DataSource<ClassListItem>;
   getClassesAssignedToModel(model: Model): IPromise<ClassListItem[]>;
   createClass(klass: Class): IPromise<any>;
   updateClass(klass: Class, originalId: Uri): IPromise<any>;
@@ -56,14 +57,17 @@ export class DefaultClassService implements ClassService {
 
   getClass(id: Uri|Urn, model: Model): IPromise<Class> {
     return this.$http.get<GraphData>(apiEndpointWithName('class'), {params: {id: id.toString()}})
-      .then(expandContextWithKnownModels(model))
       .then(response => this.deserializeClass(response.data!, false))
       .then(klass => requireDefined(klass));
   }
 
   getAllClasses(model: Model): IPromise<ClassListItem[]> {
     return this.$http.get<GraphData>(apiEndpointWithName('class'))
-      .then(expandContextWithKnownModels(model))
+      .then(response => this.deserializeClassList(response.data!));
+  }
+
+  getRequiredByClasses(model: Model): IPromise<ClassListItem[]> {
+    return this.$http.get<GraphData>(apiEndpointWithName('class'), {params: {requiredBy: model.id.uri}})
       .then(response => this.deserializeClassList(response.data!));
   }
 
@@ -72,11 +76,11 @@ export class DefaultClassService implements ClassService {
       .then(classes => classes.filter(klass => klass.id.resolves())); // if resolves, it is known namespace
   }
 
-  getClassesForModelDataSource(modelProvider: () => Model): DataSource<ClassListItem> {
+  getClassesForModelDataSource(modelProvider: () => Model, requiredByInUse: boolean = false): DataSource<ClassListItem> {
 
-    const cachedResultsProvider = modelScopeCache(modelProvider,  model => {
+    const cachedResultsProvider = modelScopeCache(modelProvider, model => {
       return this.$q.all([
-        this.getClassesForModel(model),
+        requiredByInUse ? this.getRequiredByClasses(model) : this.getClassesForModel(model),
         this.getExternalClassesForModel(model)
       ]).then(flatten);
     });
@@ -92,7 +96,6 @@ export class DefaultClassService implements ClassService {
       return this.$q.when(classes);
     } else {
       return this.$http.get<GraphData>(apiEndpointWithName('class'), {params: {model: model.id.uri}})
-        .then(expandContextWithKnownModels(model))
         .then(response => this.deserializeClassList(response.data!))
         .then(classList => {
           this.modelClassesCache.set(model.id.uri, classList);
@@ -249,7 +252,6 @@ export class DefaultClassService implements ClassService {
 
   getExternalClass(externalId: Uri, model: Model) {
     return this.$http.get<GraphData>(apiEndpointWithName('externalClass'), {params: {model: model.id.uri, id: externalId.uri}})
-      .then(expandContextWithKnownModels(model))
       .then((response: any) => this.deserializeClass(response.data, true))
       .then(klass => {
         if (klass) {
@@ -261,7 +263,6 @@ export class DefaultClassService implements ClassService {
 
   getExternalClassesForModel(model: Model) {
     return this.$http.get<GraphData>(apiEndpointWithName('externalClass'), {params: {model: model.id.uri}})
-      .then(expandContextWithKnownModels(model))
       .then(response => this.deserializeClassList(response.data!));
   }
 

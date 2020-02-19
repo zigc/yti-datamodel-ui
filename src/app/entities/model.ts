@@ -91,7 +91,7 @@ export class Model extends AbstractModel {
     contributors:       { name: 'contributor',  serializer: entityAwareList(entity(() => Organization)) },
     version:            { name: 'identifier',   serializer: optional(identitySerializer<Urn>()) },
     rootClass:          { name: 'rootResource', serializer: entityAwareOptional(uriSerializer) },
-    language:           { name: 'language',     serializer: list<Language>(languageSerializer, ['fi', 'en']) },
+    language:           { name: 'language',     serializer: list<Language>(languageSerializer, ['fi', 'en', 'sv']) },
     modifiedAt:         { name: 'modified',     serializer: optional(dateSerializer) },
     createdAt:          { name: 'created',      serializer: optional(dateSerializer) },
     useContext:         { name: 'useContext',   serializer: valueOrDefault(identitySerializer<UseContext>(), 'InformationDescription') },

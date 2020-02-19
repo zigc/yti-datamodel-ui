@@ -35,7 +35,7 @@ export class NewModelPageComponent {
   importedPrefixes: () => string[];
   links: Link[] = [];
 
-  languages: Language[] = ['fi', 'en'];
+  languages: Language[] = ['fi', 'en', 'sv'];
   type: KnownModelType;
   useContext: UseContext = 'InformationDescription';
 

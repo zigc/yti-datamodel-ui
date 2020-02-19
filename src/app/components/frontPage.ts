@@ -14,6 +14,7 @@ import { BehaviorSubject, combineLatest, concat, Observable, Subscription } from
 import { fromIPromise } from '../utils/observable';
 import { anyMatching } from 'yti-common-ui/utils/array';
 import { FilterOptions } from 'yti-common-ui/components/filter-dropdown.component';
+import { Option } from 'yti-common-ui/components/dropdown.component';
 import { KnownModelType, profileUseContexts, UseContext } from '../types/entity';
 import { gettextCatalog as GettextCatalog } from 'angular-gettext';
 import { OrganizationService } from '../services/organizationService';
@@ -140,10 +141,12 @@ export class FrontPageComponent implements HelpProvider {
     this.locationService.atFrontPage();
     this.helpService.registerProvider(this);
 
+    const localizer = this.languageService.createLocalizer();
+
     const informationDomains$ = fromIPromise(this.classificationService.getClassifications());
     const organizations$ = fromIPromise(this.organizationService.getOrganizations());
 
-    this.subscriptionsToClean.push(combineLatest(informationDomains$, organizations$).subscribe(([informationDomains, organizations]) => {
+    this.subscriptionsToClean.push(combineLatest(informationDomains$, organizations$, this.languageService.language$).subscribe(([informationDomains, organizations]) => {
       this.organizations = [null, ...organizations].map(org => {
         return {
           value: org,
@@ -151,6 +154,8 @@ export class FrontPageComponent implements HelpProvider {
           idIdentifier: () => org ? labelNameToResourceIdIdentifier(this.languageService.translate(org.label)) : 'all_selected'
         }
       });
+      this.organizations.sort(comparingLocalizable<Option<Organization>>(localizer, c =>
+        c.value ? c.value.label : {}));
       organizations.map(org => this.organizationMap[org.id.toString()] = org);
       informationDomains.forEach(domain => this.informationDomainMap[domain.identifier] = domain);
       this.subscribeModels();

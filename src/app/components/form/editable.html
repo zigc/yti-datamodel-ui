@@ -3,7 +3,10 @@
   <div ng-show="$ctrl.isEditing()" ng-transclude></div>
 
   <div ng-if="!$ctrl.isEditing()" class="content">
-    <a ng-if="$ctrl.item.href" ng-href="{{$ctrl.item.href}}">{{$ctrl.item.displayValue}}</a>
+    <a ng-if="$ctrl.item.href" ng-href="{{$ctrl.item.href}}">
+      {{$ctrl.item.displayValue}}
+      <i ng-if="$ctrl.isExternalLink($ctrl.item.href)" class="fas fa-external-link-alt x-small-item"></i>
+    </a>
     <a ng-if="$ctrl.item.onClick" ng-click="$ctrl.item.onClick()">{{$ctrl.item.displayValue}}</a>
     <span ng-if="!$ctrl.item.href && !$ctrl.item.onClick" ng-bind-html="$ctrl.item.displayValue | paragraphize"></span>
     <clipboard text="$ctrl.clipboard"></clipboard>

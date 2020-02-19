@@ -26,8 +26,9 @@ export class RelatedPredicate {
 export interface PredicateService {
   getPredicate(id: Uri|Urn, model?: Model): IPromise<Predicate>;
   getAllPredicates(model: Model): IPromise<PredicateListItem[]>;
+  getRequiredByPredicates(model: Model): IPromise<PredicateListItem[]>;
   getPredicatesForModel(model: Model): IPromise<PredicateListItem[]>;
-  getPredicatesForModelDataSource(modelProvider: () => Model): DataSource<PredicateListItem>;
+  getPredicatesForModelDataSource(modelProvider: () => Model, requiredByInUse?: boolean): DataSource<PredicateListItem>;
   getPredicatesAssignedToModel(model: Model): IPromise<PredicateListItem[]>;
   createPredicate(predicate: Predicate): IPromise<any>;
   updatePredicate(predicate: Predicate, originalId: Uri): IPromise<any>;
@@ -52,14 +53,17 @@ export class DefaultPredicateService implements PredicateService {
 
   getPredicate(id: Uri|Urn, model?: Model): IPromise<Predicate> {
     return this.$http.get<GraphData>(apiEndpointWithName('predicate'), {params: {id: id.toString()}})
-      .then(expandContextWithKnownModels(model))
       .then(response => this.deserializePredicate(response.data!, false))
       .then(predicate => requireDefined(predicate));
   }
 
   getAllPredicates(model: Model): IPromise<PredicateListItem[]> {
     return this.$http.get<GraphData>(apiEndpointWithName('predicate'))
-      .then(expandContextWithKnownModels(model))
+      .then(response => this.deserializePredicateList(response.data!));
+  }
+
+  getRequiredByPredicates(model: Model): IPromise<PredicateListItem[]> {
+    return this.$http.get<GraphData>(apiEndpointWithName('predicate'), {params: {requiredBy: model.id.uri}})
       .then(response => this.deserializePredicateList(response.data!));
   }
 
@@ -67,11 +71,11 @@ export class DefaultPredicateService implements PredicateService {
     return this.getAllPredicates(model).then(predicates => predicates.filter(predicate => predicate.id.resolves()));  // if resolves, it is known namespace
   }
 
-  getPredicatesForModelDataSource(modelProvider: () => Model): DataSource<PredicateListItem> {
+  getPredicatesForModelDataSource(modelProvider: () => Model, requiredByInUse: boolean = false): DataSource<PredicateListItem> {
 
     const cachedResultsProvider = modelScopeCache(modelProvider,  model => {
       return this.$q.all([
-        this.getPredicatesForModel(model),
+        requiredByInUse ? this.getRequiredByPredicates(model) : this.getPredicatesForModel(model),
         this.getExternalPredicatesForModel(model)
       ]).then(flatten);
     });
@@ -87,7 +91,6 @@ export class DefaultPredicateService implements PredicateService {
       return this.$q.when(predicates);
     } else {
       return this.$http.get<GraphData>(apiEndpointWithName('predicate'), {params: {model: model.id.uri}})
-        .then(expandContextWithKnownModels(model))
         .then(response => this.deserializePredicateList(response.data!))
         .then(predicateList => {
           this.modelPredicatesCache.set(model.id.uri, predicateList);
@@ -261,7 +264,6 @@ export class DefaultPredicateService implements PredicateService {
 
   getExternalPredicate(externalId: Uri, model: Model) {
     return this.$http.get<GraphData>(apiEndpointWithName('externalPredicate'), {params: {model: model.id.uri, id: externalId.uri}})
-      .then(expandContextWithKnownModels(model))
       .then(response => this.deserializePredicate(response.data!, true))
       .then(predicate => {
         if (predicate) {
@@ -273,7 +275,6 @@ export class DefaultPredicateService implements PredicateService {
 
   getExternalPredicatesForModel(model: Model) {
     return this.$http.get<GraphData>(apiEndpointWithName('externalPredicate'), {params: {model: model.id.uri}})
-      .then(expandContextWithKnownModels(model))
       .then(response => this.deserializePredicateList(response.data!));
   }
 

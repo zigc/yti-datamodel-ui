@@ -5,11 +5,14 @@ import { BehaviorSubject } from 'rxjs';
 import { MessagingResource } from '../../entities-messaging/messaging-resource';
 import { MessagingService } from '../../services/messaging-service';
 import { UserService } from 'yti-common-ui/services/user.service';
-import { LanguageService } from '../../services/languageService';
+import { LanguageService, Localizer } from '../../services/languageService';
 import { ConfirmationModalService } from 'yti-common-ui/components/confirmation-modal.component';
 import { ErrorModalService } from 'yti-common-ui/components/error-modal.component';
 import { ConfigServiceWrapper } from '../../ajs-upgraded-providers';
 import { Config } from '../../entities/config';
+import { comparingLocalizable } from '../../utils/comparator';
+import { comparingPrimitive } from 'yti-common-ui/utils/comparator';
+import { Localizable } from 'yti-common-ui/types/localization';
 
 @Component({
   selector: 'app-user-details-subscriptions',
@@ -31,13 +34,20 @@ export class UserDetailsSubscriptionsComponent implements OnInit {
 
   config: Config;
 
+  private localizer: Localizer;
+
   constructor(public languageService: LanguageService,
               private messagingService: MessagingService,
               private configServiceWrapper: ConfigServiceWrapper,
               private userService: UserService,
               private confirmationModalService: ConfirmationModalService,
               private errorModalService: ErrorModalService) {
-    console.log('User details constructor!');
+
+    this.localizer = languageService.createLocalizer();
+
+    this.languageService.language$.subscribe(language => {
+      this.sortMessagingResources();
+    });
   }
 
   ngOnInit() {
@@ -91,6 +101,7 @@ export class UserDetailsSubscriptionsComponent implements OnInit {
         }
         if (resources.size > 0) {
           this.messagingResources = resources;
+          this.sortMessagingResources();
         } else {
           this.messagingResources = null;
         }
@@ -99,6 +110,31 @@ export class UserDetailsSubscriptionsComponent implements OnInit {
       }
       this.loading = false;
     });
+  }
+
+  sortMessagingResources() {
+
+    const resourceMap: Map<string, MessagingResource[]> | null = this.messagingResources$.getValue();
+    if (resourceMap) {
+      this.sortApplicationResources(resourceMap, this.APPLICATION_TERMINOLOGY);
+      this.sortApplicationResources(resourceMap, this.APPLICATION_DATAMODEL);
+      this.sortApplicationResources(resourceMap, this.APPLICATION_CODELIST);
+      this.sortApplicationResources(resourceMap, this.APPLICATION_COMMENTS);
+    }
+    this.messagingResources = resourceMap;
+  }
+
+  sortApplicationResources(resourceMap: Map<string, MessagingResource[]>,
+                           applicationIdentifier: string) {
+    if (resourceMap.has(applicationIdentifier)) {
+      // @ts-ignore
+      resourceMap.get(applicationIdentifier).sort(comparingPrimitive<MessagingResource>(
+        resource => this.isLocalizableEmpty(resource.prefLabel))
+        .andThen(comparingPrimitive<MessagingResource>(resource =>
+          this.isLocalizableEmpty(resource.prefLabel) ? resource.uri.toLowerCase() : null))
+        .andThen(comparingLocalizable<MessagingResource>(this.languageService.createLocalizer(),
+          resource => resource.prefLabel ? resource.prefLabel : {})));
+    }
   }
 
   get messagingResources(): Map<string, MessagingResource[]> | null {
@@ -171,5 +207,20 @@ export class UserDetailsSubscriptionsComponent implements OnInit {
   getUriWithEnv(uri: string): string | null {
 
     return this.config.getUriWithEnv(uri);
+  }
+
+  isLocalizableEmpty(localizable: Localizable): boolean {
+
+    if (!localizable) {
+      return true;
+    }
+
+    for (const prop in localizable) {
+      if (localizable.hasOwnProperty(prop)) {
+        return false;
+      }
+    }
+
+    return JSON.stringify(localizable) === JSON.stringify({});
   }
 }

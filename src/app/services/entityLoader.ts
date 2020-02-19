@@ -275,7 +275,7 @@ export class EntityLoader {
             details.label['fi'],
             classifications,
             organizations,
-            ['fi', 'en'],
+            ['fi', 'en', 'sv'],
             details.type)
         ).then(model => {
 

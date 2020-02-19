@@ -30,8 +30,8 @@ export class MassMigrateDatamodelResourceStatusesModalComponent implements OnIni
   model: Model;
   private modelService: ModelService;
 
-  fromStatuses = ['INCOMPLETE', 'DRAFT', 'VALID', 'RETIRED', 'INVALID'] as Status[];
-  toStatuses = ['INCOMPLETE', 'DRAFT', 'VALID', 'RETIRED', 'INVALID'] as Status[];
+  fromStatuses = ['INCOMPLETE', 'DRAFT', 'VALID', 'SUPERSEDED', 'RETIRED', 'INVALID'] as Status[];
+  toStatuses = ['INCOMPLETE', 'DRAFT', 'VALID', 'SUPERSEDED', 'RETIRED', 'INVALID'] as Status[];
 
   enforceTransitionRulesForSuperUserToo = false;
 

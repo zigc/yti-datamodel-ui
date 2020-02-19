@@ -29,7 +29,8 @@ export class SearchClassModal {
                     exclude: Exclusion<AbstractClass>,
                     defaultToCurrentModel: boolean,
                     onlySelection: boolean,
-                    textForSelection: (klass: Optional<Class | ExternalEntity>) => string) {
+                    textForSelection: (klass: Optional<Class | ExternalEntity>) => string,
+                    requiredByInUse: boolean = false) {
 
     return this.$uibModal.open({
       template: require('./searchClassModal.html'),
@@ -42,7 +43,8 @@ export class SearchClassModal {
         exclude: () => exclude,
         defaultToCurrentModel: () => defaultToCurrentModel,
         onlySelection: () => onlySelection,
-        textForSelection: () => textForSelection
+        textForSelection: () => textForSelection,
+        requiredByInUse: () => requiredByInUse
       }
     }).result;
   }
@@ -57,9 +59,10 @@ export class SearchClassModal {
   openWithOnlySelection(model: Model,
                         defaultToCurrentModel: boolean,
                         exclude: Exclusion<AbstractClass>,
-                        textForSelection: (klass: Optional<Class | ExternalEntity>) => string = defaultTextForSelection): IPromise<Class> {
+                        textForSelection: (klass: Optional<Class | ExternalEntity>) => string = defaultTextForSelection,
+                        requiredByInUse: boolean = false): IPromise<Class> {
 
-    return this.openModal(model, exclude, defaultToCurrentModel, true, textForSelection);
+    return this.openModal(model, exclude, defaultToCurrentModel, true, textForSelection, requiredByInUse);
   }
 }
 
@@ -103,6 +106,7 @@ class SearchClassController implements SearchController<ClassListItem> {
               public defaultToCurrentModel: boolean,
               public onlySelection: boolean,
               public textForSelection: (klass: Optional<Class | ExternalEntity>) => string,
+              public requiredByInUse: boolean,
               private searchConceptModal: SearchConceptModal,
               private gettextCatalog: GettextCatalog) {
     'ngInject';
@@ -115,7 +119,11 @@ class SearchClassController implements SearchController<ClassListItem> {
       this.loadingResults = false;
     };
 
-    classService.getAllClasses(model).then(appendResults);
+    if (this.requiredByInUse) {
+      classService.getRequiredByClasses(model).then(appendResults);
+    } else {
+      classService.getAllClasses(model).then(appendResults);
+    }
 
     if (model.isOfType('profile')) {
       classService.getExternalClassesForModel(model).then(appendResults);
