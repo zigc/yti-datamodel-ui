@@ -61,7 +61,7 @@ export class InteractiveHelpPredicateService implements PredicateService, Reseta
     return this.$q.when(predicate);
   }
 
-  updatePredicate(predicate: Predicate, originalId: Uri): IPromise<any> {
+  updatePredicate(predicate: Predicate, originalId: Uri, model: Model): IPromise<any> {
     predicate.modifiedAt = moment();
     this.store.updateResourceInModel(predicate.definedBy, predicate, originalId.uri);
     return this.$q.when(predicate);

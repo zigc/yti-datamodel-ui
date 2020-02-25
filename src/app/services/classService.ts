@@ -33,7 +33,7 @@ export interface ClassService {
   getClassesForModelDataSource(modelProvider: () => Model, requiredByInUse?: boolean): DataSource<ClassListItem>;
   getClassesAssignedToModel(model: Model): IPromise<ClassListItem[]>;
   createClass(klass: Class): IPromise<any>;
-  updateClass(klass: Class, originalId: Uri): IPromise<any>;
+  updateClass(klass: Class, originalId: Uri, model: Model): IPromise<any>;
   deleteClass(id: Uri, model: Model): IPromise<any>;
   assignClassToModel(classId: Uri, model: Model): IPromise<any>;
   newClass(model: Model, classLabel: string, conceptID: Uri|null, lang: Language): IPromise<Class>;
@@ -119,7 +119,7 @@ export class DefaultClassService implements ClassService {
       });
   }
 
-  updateClass(klass: Class, originalId: Uri): IPromise<any> {
+  updateClass(klass: Class, originalId: Uri, model: Model): IPromise<any> {
     const requestParams: any = {
       id: klass.id.uri,
       model: requireDefined(klass.definedBy).id.uri
@@ -127,6 +127,8 @@ export class DefaultClassService implements ClassService {
     if (klass.id.notEquals(originalId)) {
       requestParams.oldid = originalId.uri;
     }
+    model.expandContextWithKnownModels(klass.context);
+
     return this.$http.post<{ identifier: Urn }>(apiEndpointWithName('class'), klass.serialize(), {params: requestParams})
       .then(response => {
         this.modelClassesCache.delete(requireDefined(klass.definedBy).id.uri);
