@@ -63,7 +63,7 @@ export class InteractiveHelpClassService implements ClassService, ResetableServi
     return this.$q.when();
   }
 
-  updateClass(klass: Class, originalId: Uri): IPromise<any> {
+  updateClass(klass: Class, originalId: Uri, model: Model): IPromise<any> {
     klass.modifiedAt = moment();
     this.store.updateResourceInModel(klass.definedBy, klass, originalId.uri);
     return this.$q.when();

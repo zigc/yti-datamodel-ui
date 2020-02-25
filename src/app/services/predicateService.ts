@@ -31,7 +31,7 @@ export interface PredicateService {
   getPredicatesForModelDataSource(modelProvider: () => Model, requiredByInUse?: boolean): DataSource<PredicateListItem>;
   getPredicatesAssignedToModel(model: Model): IPromise<PredicateListItem[]>;
   createPredicate(predicate: Predicate): IPromise<any>;
-  updatePredicate(predicate: Predicate, originalId: Uri): IPromise<any>;
+  updatePredicate(predicate: Predicate, originalId: Uri, model: Model): IPromise<any>;
   deletePredicate(id: Uri, model: Model): IPromise<any>;
   assignPredicateToModel(predicateId: Uri, model: Model): IPromise<any>;
   newPredicate<T extends Attribute|Association>(model: Model, predicateLabel: string, conceptID: Uri|null, type: KnownPredicateType, lang: Language): IPromise<T>;
@@ -114,7 +114,7 @@ export class DefaultPredicateService implements PredicateService {
       });
   }
 
-  updatePredicate(predicate: Predicate, originalId: Uri): IPromise<any> {
+  updatePredicate(predicate: Predicate, originalId: Uri, model: Model): IPromise<any> {
     const requestParams: any = {
       id: predicate.id.uri,
       model: predicate.definedBy.id.uri
@@ -122,6 +122,8 @@ export class DefaultPredicateService implements PredicateService {
     if (predicate.id.notEquals(originalId)) {
       requestParams.oldid = originalId.uri;
     }
+    model.expandContextWithKnownModels(predicate.context);
+
     return this.$http.post<{ identifier: Urn }>(apiEndpointWithName('predicate'), predicate.serialize(), {params: requestParams})
       .then(response => {
         predicate.version = response.data!.identifier;

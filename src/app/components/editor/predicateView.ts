@@ -57,7 +57,7 @@ export class PredicateViewComponent extends EditableEntityController<Association
   }
 
   update(entity: Association|Attribute, oldEntity: Association|Attribute) {
-    return this.predicateService.updatePredicate(entity, oldEntity.id).then(() => this.modelController.selectionEdited(oldEntity, entity));
+    return this.predicateService.updatePredicate(entity, oldEntity.id, this.model).then(() => this.modelController.selectionEdited(oldEntity, entity));
   }
 
   remove(entity: Association|Attribute) {

@@ -73,7 +73,7 @@ export class ClassViewComponent extends EditableEntityController<Class> {
   }
 
   update(entity: Class, oldEntity: Class) {
-    return this.classService.updateClass(entity, oldEntity.id).then(() => this.modelController.selectionEdited(oldEntity, entity));
+    return this.classService.updateClass(entity, oldEntity.id, this.model).then(() => this.modelController.selectionEdited(oldEntity, entity));
   }
 
   remove(entity: Class) {
