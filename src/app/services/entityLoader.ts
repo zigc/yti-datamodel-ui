@@ -252,7 +252,7 @@ export class EntityLoader {
 
   createConceptSuggestion(details: ConceptSuggestionDetails, modelPromise: IPromise<Model>): IPromise<Uri> {
     const result = modelPromise.then((model: Model) =>
-      this.vocabularyService.createConceptSuggestion(model.vocabularies[0], details.label, details.comment, 'fi', model));
+      this.vocabularyService.createConceptSuggestion(model.vocabularies[0], details.label, details.comment, 'sl', model));
 
     return this.addAction(result, details);
   }
@@ -272,10 +272,10 @@ export class EntityLoader {
         .then(([classifications, organizations]) =>
           this.modelService.newModel(
             details.prefix,
-            details.label['fi'],
+            details.label['sl'],
             classifications,
             organizations,
-            ['fi', 'en', 'sv'],
+            ['sl', 'en'],
             details.type)
         ).then(model => {
 
@@ -304,7 +304,7 @@ export class EntityLoader {
             );
 
           } else if (isExternalNamespace(namespace)) {
-            promises.push(this.modelService.newNamespaceImport(namespace.namespace, namespace.prefix, namespace.label, 'fi')
+            promises.push(this.modelService.newNamespaceImport(namespace.namespace, namespace.prefix, namespace.label, 'sl')
               .then(newImportedNamespace => model.addImportedNamespace(newImportedNamespace))
             );
           } else {
@@ -340,7 +340,7 @@ export class EntityLoader {
       })
         .then(([model, klass]: [Model, Class]) => {
           const fetchClass = (id: string) => this.classService.getClass(new Uri(id, this.context), model);
-          return this.classService.newShape(klass, model, false, 'fi')
+          return this.classService.newShape(klass, model, false, 'sl')
             .then(shape => {
               setDetails(shape, details);
               setId(shape, details);
@@ -394,7 +394,7 @@ export class EntityLoader {
 
     const result =
       this.$q.all([modelPromise, conceptIdPromise])
-        .then(([model, conceptId]: [Model, Uri]) => this.$q.all([model, this.classService.newClass(model, details.label['fi'], conceptId, 'fi')]))
+        .then(([model, conceptId]: [Model, Uri]) => this.$q.all([model, this.classService.newClass(model, details.label['sl'], conceptId, 'sl')]))
         .then(([model, klass]) => {
 
           const fetchClass = (id: string) => this.classService.getClass(new Uri(id, this.context), model);
@@ -458,7 +458,7 @@ export class EntityLoader {
 
     const result =
       this.$q.all([modelPromise, conceptIdPromise])
-        .then(([model, conceptId]: [Model, Uri]) => this.predicateService.newPredicate(model, details.label['fi'], conceptId, type, 'fi'))
+        .then(([model, conceptId]: [Model, Uri]) => this.predicateService.newPredicate(model, details.label['sl'], conceptId, type, 'sl'))
         .then((predicate: T) => {
           setDetails(predicate, details);
           setId(predicate, details);

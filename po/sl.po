@@ -1,0 +1,2422 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Language-Team: \n"
+"X-Generator: Poedit 2.3\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100>=3 && n%100<=4 ? 2 : 3);\n"
+"Language: sl\n"
+
+msgid "Copied"
+msgstr "Kopirano"
+
+msgid "Yes"
+msgstr "Da"
+
+msgid "Cancel"
+msgstr "Prekliči"
+
+msgid "Select help topic"
+msgstr "Izberite temo pomoči"
+
+msgid "Close"
+msgstr "Zapri"
+
+msgid "Show history"
+msgstr "Pokaži zgodovino"
+
+msgid "${title}"
+msgstr ""
+
+msgid "${body}"
+msgstr ""
+
+msgid "Copy"
+msgstr "Kopirati"
+
+msgid "Imported namespaces"
+msgstr "Uvoženi prostori imen"
+
+msgid "Defined by this model"
+msgstr "Določen s tem modelom"
+
+msgid "All models"
+msgstr "Vsi modeli"
+
+msgid "Show classes defined in profiles"
+msgstr "Prikaži razrede, definirane v profilih"
+
+msgid "All types"
+msgstr "Vse vrste"
+
+msgid "Required"
+msgstr "Obvezno"
+
+msgid "Status"
+msgstr "Stanje"
+
+msgid "Remove"
+msgstr "Odstrani"
+
+msgid "Edit"
+msgstr "Uredi"
+
+msgid "None added"
+msgstr "Ni dodano"
+
+msgid "Use context"
+msgstr "Uporabi kontekst"
+
+msgid "Classifications"
+msgstr "Klasifikacije"
+
+msgid "Add classification"
+msgstr "Dodaj klasifikacijo"
+
+msgid "Contributors"
+msgstr "Sodelavci"
+
+msgid "Add contributor"
+msgstr "Dodaj prispevalec"
+
+msgid "Import namespace"
+msgstr "Uvoz imenskega prostora"
+
+msgid "Links"
+msgstr "Povezave"
+
+msgid "Add link"
+msgstr "Dodaj povezavo"
+
+msgid "Status changed to one resource."
+msgstr "Status je spremenjen v en vir."
+
+msgid "Status changed to "
+msgstr "Status spremenjen v "
+
+msgid " resources."
+msgstr " viri."
+
+msgid "No resources were found with the starting status. No changes to resources statuses."
+msgstr "Z začetnim statusom niso bili najdeni nobeni viri. Stanj virov ni bilo."
+
+msgid "New version of datamodel is created"
+msgstr "Ustvarjena je nova različica podatkovnega modela"
+
+msgid "Create new version of datamodel"
+msgstr "Ustvari novo različico podatkovnega modela"
+
+msgid "Define prefix for the new version. Note that prefix is used to define the new namespace."
+msgstr "Določite predpono za novo različico. Upoštevajte, da se za določitev novega imenskega prostora uporablja predpona."
+
+msgid "Save"
+msgstr "Shrani"
+
+msgid "Reference data"
+msgstr "Referenčni podatki"
+
+msgid "Add reference data"
+msgstr "Dodaj referenčne podatke"
+
+msgid "Technical namespaces"
+msgstr "Tehnični prostori imen"
+
+msgid "Reference data information"
+msgstr "Informacije o referenčnih podatkih"
+
+msgid "Terminologies"
+msgstr "Terminologije"
+
+msgid "Add vocabulary"
+msgstr "Dodaj besedišče"
+
+msgid "Maximize"
+msgstr "Maksimiziraj"
+
+msgid "Minimize"
+msgstr "Zmanjšaj"
+
+msgid "previous"
+msgstr "prejšnji"
+
+msgid "next"
+msgstr "naslednji"
+
+msgid "close"
+msgstr "zapri"
+
+msgid "Data Vocabularies"
+msgstr "Podatkovni slovarji"
+
+msgid "Confirm delete"
+msgstr "Potrdi brisanje"
+
+msgid "Following items are depending on the deleted"
+msgstr "Naslednji elementi so odvisni od izbrisanih"
+
+msgid "Are you sure that you want to delete?"
+msgstr "Ali ste prepričani, da želite izbrisati?"
+
+msgid "Show"
+msgstr "Pokaži"
+
+msgid "Download"
+msgstr "Prenesi"
+
+msgid "Export"
+msgstr "Izvozi"
+
+msgid "Historical versions"
+msgstr "Zgodovinske različice"
+
+msgid "Choose action"
+msgstr "Izberi dejanje"
+
+msgid "Add email subscription"
+msgstr "Dodaj e-poštno naročnino"
+
+msgid "Remove email subscription"
+msgstr "Odstrani naročnino"
+
+msgid "Update datamodel's resources' statuses"
+msgstr "Posodobi stanja virov podatkovne modele"
+
+msgid "Create new version"
+msgstr "Ustvari novo različico"
+
+msgid "No referrers"
+msgstr "Brez napotiteljev"
+
+msgid "Usage"
+msgstr "Uporaba"
+
+msgid "?"
+msgstr "?"
+
+msgid "Select all"
+msgstr "Izberi vse"
+
+msgid "Deselect all"
+msgstr "Prekliči izbor"
+
+msgid "Define type for class property"
+msgstr "Določite vrsto lastnosti razreda"
+
+msgid "Choose"
+msgstr "Izberi"
+
+msgid "Add property"
+msgstr "Dodaj znamko"
+
+msgid "No properties yet"
+msgstr "Še ni lastnosti"
+
+msgid "Additional information"
+msgstr "Dodatne informacije"
+
+msgid "Logical constraints"
+msgstr "Logične omejitve"
+
+msgid "Choose class"
+msgstr "Izberi razred"
+
+msgid "Not defined"
+msgstr "Ni določeno"
+
+msgid "Reusable predicate information"
+msgstr "Informacije o predikatu za večkratno uporabo"
+
+msgid "Change reusable predicate"
+msgstr "Spremeni predikat za večkratno uporabo"
+
+msgid "Predicate information not found"
+msgstr "Podatkov o predikatu ni mogoče najti"
+
+msgid "Optional metadata"
+msgstr "Neobvezni metapodatki"
+
+msgid "Technical metadata"
+msgstr "Tehnični metapodatki"
+
+msgid "Property pairs"
+msgstr "Lastniški pari"
+
+msgid "Reusable predicate"
+msgstr "Predikat za večkratno uporabo"
+
+msgid "Select class"
+msgstr "Izberi razred"
+
+msgid "Add class"
+msgstr "Dodaj razred"
+
+msgid "External classes"
+msgstr "Zunanji razredi"
+
+msgid "Include:"
+msgstr "Vključi:"
+
+msgid "All information domains"
+msgstr "Vse informacije področja"
+
+msgid "All class types"
+msgstr "Vse vrste razredov"
+
+msgid "All statuses"
+msgstr "Vsi statusi"
+
+msgid "Create shape from external URI"
+msgstr "Ustvari obliko iz zunanjega URI"
+
+msgid "Search existing class"
+msgstr "Išči po obstoječem razredu"
+
+msgid "New class"
+msgstr "Nov razred"
+
+msgid "Shape from URI"
+msgstr "Oblika URI"
+
+msgid "Actions"
+msgstr "Dejanja"
+
+msgid "Copy class"
+msgstr "Kopiraj razred"
+
+msgid "Create sub class"
+msgstr "Ustvari podvrst"
+
+msgid "Create super class"
+msgstr "Ustvari super razred"
+
+msgid "Add namespace to model"
+msgstr "Dodaj imeni model v model"
+
+msgid " without referencing concept"
+msgstr " brez sklicevanja na koncept"
+
+msgid "All vocabularies"
+msgstr "Vsi besednjaki"
+
+msgid "Concept is suggested to vocabulary"
+msgstr "Koncept se predlaga v besedišče"
+
+msgid "Select attribute or association"
+msgstr "Izberi atribut ali povezavo"
+
+msgid "Add attribute or association"
+msgstr "Dodaj atribut ali povezavo"
+
+msgid "INFO_TEXT_SUBJECT_VIEW_SELECT_CONCEPT"
+msgstr "INFO_TEXT_SUBJECT_VIEW_SELECT_CONCEPT"
+
+msgid "Select concept"
+msgstr "Izberi koncept"
+
+msgid "No concept defined"
+msgstr "Koncept ni definiran"
+
+msgid "Invalid url error"
+msgstr "Neveljavna napaka URL-ja"
+
+msgid "Invalid stem error"
+msgstr "Neveljavna napaka stebla"
+
+msgid "Invalid namespace error"
+msgstr "Neveljavna napaka imena prostora"
+
+msgid "Invalid namespace url urn error"
+msgstr "Napaka v urnu urna URL-ja imena prostora je neveljavna"
+
+msgid "Invalid id error"
+msgstr "Neveljavna napaka id"
+
+msgid "Existing id error"
+msgstr "Obstoječa napaka id"
+
+msgid "Existing or reserved id error"
+msgstr "Obstoječa ali rezervirana napaka id"
+
+msgid "Required error"
+msgstr "Zahtevana napaka"
+
+msgid "Required localized error"
+msgstr "Zahtevana lokalizirana napaka"
+
+msgid "Duplicate error"
+msgstr "Podvojena napaka"
+
+msgid "String error"
+msgstr "String error"
+
+msgid "Length error"
+msgstr "Napaka dolžine"
+
+msgid "Prefix error"
+msgstr "Napaka predpone"
+
+msgid "Negative error"
+msgstr "Negativna napaka"
+
+msgid "Greater than max error"
+msgstr "Večja od največje napake"
+
+msgid "Less than min error"
+msgstr "Manj kot min napake"
+
+msgid "Unknown namespace"
+msgstr "Neznani prostor imen"
+
+msgid "Id name is required"
+msgstr "Ime je obvezno"
+
+msgid "Must be imported namespace"
+msgstr "Mora biti uvoženo imeniško polje"
+
+msgid "Is not valid language code"
+msgstr "Ni veljavna jezikovna koda"
+
+msgid "Is not valid reference data code"
+msgstr "Ni veljavna referenčna koda podatkov"
+
+msgid "INFO_TEXT_FRONTPAGE_SEARCH"
+msgstr "INFO_TEXT_FRONTPAGE_SEARCH"
+
+msgid "Search term"
+msgstr "Iskalni izraz"
+
+msgid "INFO_TEXT_FRONTPAGE_FILTER_W_CLASSIFICATION"
+msgstr "INFO_TEXT_FRONTPAGE_FILTER_W_CLASSIFICATION"
+
+msgid "INFO_TEXT_FRONTPAGE_FILTER_RESULTS"
+msgstr "INFO_TEXT_FRONTPAGE_FILTER_RESULTS"
+
+msgid " hit"
+msgstr " zadeti"
+
+msgid "Total results"
+msgstr "Skupni rezultati"
+
+msgid "Add model"
+msgstr "Dodaj model"
+
+msgid "ADD_LIBRARY_BUTTON_TEXT"
+msgstr "ADD_LIBRARY_BUTTON_TEXT"
+
+msgid "ADD_PROFILE_BUTTON_TEXT"
+msgstr "ADD_PROFILE_BUTTON_TEXT"
+
+msgid "ToolInfo"
+msgstr "ToolInfo"
+
+msgid "Search model"
+msgstr "Model iskanja"
+
+msgid "Extend search"
+msgstr "Razširite iskanje"
+
+msgid "to content"
+msgstr "do vsebine"
+
+msgid "Filter with information domain"
+msgstr "Filtriraj z informacijsko domeno"
+
+msgid "Filter results"
+msgstr "Filtriraj rezultate"
+
+msgid "result"
+msgstr "rezultat"
+
+msgid "results"
+msgstr "rezultati"
+
+msgid "Search results"
+msgstr "Rezultati iskanja"
+
+msgid "Maintenance content"
+msgstr "Vsebina za vzdrževanje"
+
+msgid "Maintenance"
+msgstr "Vzdrževanje"
+
+msgid "Concept information"
+msgstr "Konceptne informacije"
+
+msgid "Not selected"
+msgstr "Ni izbrano"
+
+msgid "Choose root class"
+msgstr "Izberi korenski razred"
+
+msgid "Clear selection"
+msgstr "Počisti izbor"
+
+msgid "Edit reference data"
+msgstr "Urejanje referenčnih podatkov"
+
+msgid "Resources:"
+msgstr "Viri:"
+
+msgid "Enforce status transition rules"
+msgstr "Izvršiti pravila prehoda na status"
+
+msgid "Starting status"
+msgstr "Začetni status"
+
+msgid "Target status"
+msgstr "Ciljno stanje"
+
+msgid "Change resource statuses as well"
+msgstr "Spremeni tudi stanja virov"
+
+msgid "Please note that the content of this field is public. Don't use personal contact information!"
+msgstr "Prosimo, upoštevajte, da je vsebina tega polja javna. Ne uporabljajte osebnih kontaktnih podatkov!"
+
+msgid "You will receive an email notification when this resource changes."
+msgstr "Ko se ta vir spremeni, boste prejeli obvestilo po e-pošti."
+
+msgid "Datamodel definition"
+msgstr "Opredelitev podatkovnega modela"
+
+msgid "Datamodel details"
+msgstr "Podrobnosti podatkovnega modela"
+
+msgid "Information domain"
+msgstr "Informacijska domena"
+
+msgid "Organization"
+msgstr "Organizacija"
+
+msgid "Browse reference data codes"
+msgstr "Brskanje po referenčnih podatkovnih kodah"
+
+msgid "Identifier"
+msgstr "Identifikator"
+
+msgid "Title"
+msgstr "Naslov"
+
+msgid "Select domain"
+msgstr "Izberi domeno"
+
+msgid "Show technical namespaces"
+msgstr "Prikaži tehnične prostore imen"
+
+msgid "Add new namespace"
+msgstr "Dodaj nov imenski prostor"
+
+msgid "Search namespaces"
+msgstr "Išči prostore imen"
+
+msgid "Select organization"
+msgstr "Izberi organizacijo"
+
+msgid "Search reference data"
+msgstr "Iskanje referenčnih podatkov"
+
+msgid "All servers"
+msgstr "Vsi strežniki"
+
+msgid "All groups"
+msgstr "Vse skupine"
+
+msgid "Create new"
+msgstr "Ustvari novo"
+
+msgid "Use selection"
+msgstr "Uporabi izbiro"
+
+msgid "Search vocabularies"
+msgstr "Iskanje besednih zvez"
+
+msgid "No search results"
+msgstr "Ni rezultatov iskanja"
+
+msgid "Start help"
+msgstr "Začni pomoč"
+
+msgid "Impersonate user"
+msgstr "Osebni uporabnik"
+
+msgid "LOG IN"
+msgstr "VPIŠI SE"
+
+msgid "LOG OUT"
+msgstr "ODJAVA"
+
+msgid "User details"
+msgstr "Podrobnosti o uporabniku"
+
+msgid "Suomi.fi Terminologies"
+msgstr "Terminologija"
+
+msgid "Suomi.fi Reference Data"
+msgstr "Referenčni podatki"
+
+msgid "Suomi.fi Comments"
+msgstr "Komentarji"
+
+msgid "User right management"
+msgstr "Upravljanje pravic uporabnikov"
+
+msgid "Name"
+msgstr "Ime"
+
+msgid "Email"
+msgstr "E-naslov"
+
+msgid "Organizations and roles"
+msgstr "Organizacije in vloge"
+
+msgid "Unknown organization"
+msgstr "Neznana organizacija"
+
+msgid "Waiting for approval"
+msgstr "Čakam na odobritev"
+
+msgid "Send access request"
+msgstr "Pošlji zahtevo za dostop"
+
+msgid "Send"
+msgstr "Pošlji"
+
+msgid "You have subscribed to be notified via email when the following resources change. To remove the subscription, click the icon next to the resource."
+msgstr "Naročeni ste, da boste obveščeni po e-pošti, ko se spremenijo naslednji viri. Če želite naročnino odstraniti, kliknite ikono poleg vira."
+
+msgid "Email notifications"
+msgstr "Obvestila po e-pošti"
+
+msgid "Daily"
+msgstr "Dnevno"
+
+msgid "Code list resources"
+msgstr "Viri seznama kod"
+
+msgid "Terminology resources"
+msgstr "Terminološki viri"
+
+msgid "Datamodel resources"
+msgstr "Viri podatkovnih modelov"
+
+msgid "Comments resources"
+msgstr "Viri za komentar"
+
+msgid "INFORMATION"
+msgstr "INFORMACIJE"
+
+msgid "SUBSCRIPTIONS"
+msgstr "PRIJAVE"
+
+msgid "xsd:long error"
+msgstr "xsd:long error"
+
+msgid "xsd:string"
+msgstr "xsd:string"
+
+msgid "rdfs:Literal"
+msgstr "rdfs:Literal"
+
+msgid "rdfs:Literal error"
+msgstr "rdfs:Literal error"
+
+msgid "rdf:langString"
+msgstr "rdf:langString"
+
+msgid "rdf:langString error"
+msgstr "rdf:langString error"
+
+msgid "xsd:anyURI"
+msgstr "xsd:anyURI"
+
+msgid "xsd:anyURI error"
+msgstr "xsd:anyURI error"
+
+msgid "xsd:boolean"
+msgstr "xsd:boolean"
+
+msgid "xsd:boolean error"
+msgstr "xsd:boolean error"
+
+msgid "xsd:decimal"
+msgstr "xsd:decimal"
+
+msgid "xsd:decimal error"
+msgstr "xsd:decimal error"
+
+msgid "xsd:double"
+msgstr "xsd:double"
+
+msgid "xsd:double error"
+msgstr "xsd:double error"
+
+msgid "xsd:float"
+msgstr "xsd:float"
+
+msgid "xsd:float error"
+msgstr "xsd:float error"
+
+msgid "xsd:integer"
+msgstr "xsd:integer"
+
+msgid "xsd:integer error"
+msgstr "xsd:integer error"
+
+msgid "xsd:long"
+msgstr "xsd:long"
+
+msgid "xsd:string error"
+msgstr "xsd:string error"
+
+msgid "xsd:int"
+msgstr "xsd:int"
+
+msgid "xsd:int error"
+msgstr "xsd:int error"
+
+msgid "xsd:date"
+msgstr "xsd:date"
+
+msgid "xsd:date error"
+msgstr "xsd:date error"
+
+msgid "xsd:dateTime"
+msgstr "xsd:dateTime"
+
+msgid "xsd:dateTime error"
+msgstr "xsd:dateTime error"
+
+msgid "xsd:time"
+msgstr "xsd:time"
+
+msgid "xsd:time error"
+msgstr "xsd:time error"
+
+msgid "xsd:gYear"
+msgstr "xsd:gYear"
+
+msgid "xsd:gYear error"
+msgstr "xsd:gYear error"
+
+msgid "xsd:gMonth"
+msgstr "xsd:gMonth"
+
+msgid "xsd:gMonth error"
+msgstr "xsd:gMonth error"
+
+msgid "xsd:gDay"
+msgstr "xsd:gDay"
+
+msgid "xsd:gDay error"
+msgstr "xsd:gDay error"
+
+msgid "xsd:hexBinary"
+msgstr "xsd:hexBinary"
+
+msgid "xsd:hexBinary error"
+msgstr "xsd:hexBinary error"
+
+msgid "xsd:base64Binary"
+msgstr "xsd:base64Binary"
+
+msgid "xsd:base64Binary error"
+msgstr "xsd:base64Binary error"
+
+msgid "Guide through specializing a class"
+msgstr "Vodnik po specializiranem razredu"
+
+msgid "Add classification info"
+msgstr "Dodaj podatke o klasifikaciji"
+
+msgid "Add contributor info"
+msgstr "Dodaj podatke o prispevku"
+
+msgid "Add library"
+msgstr "Dodaj knjižnico"
+
+msgid "Add library description"
+msgstr "Dodaj opis knjižnice"
+
+msgid "Add model description"
+msgstr "Dodaj opis modela"
+
+msgid "Add new property"
+msgstr "Dodaj novo znamko"
+
+msgid "Add new property description"
+msgstr "Dodaj nov opis lastnosti"
+
+msgid "Add profile"
+msgstr "Dodaj profil"
+
+msgid "Add profile description"
+msgstr "Dodaj opis profila"
+
+msgid "Add reference to namespace"
+msgstr "Dodaj sklicevanje na imeni"
+
+msgid "Add reference to namespace description"
+msgstr "Dodaj sklicevanje na opis imenskega prostora"
+
+msgid "Add vocabulary description"
+msgstr "Dodaj opis besedišča"
+
+msgid "Association is here"
+msgstr "Združenje je tukaj"
+
+msgid "Association label"
+msgstr "Združitvena oznaka"
+
+msgid "Association label info"
+msgstr "Podatki o oznaki povezave"
+
+msgid "Association target can be changed from the list or by typing the identifier"
+msgstr "Cilj povezave lahko spremenite s seznama ali vtipkate identifikator"
+
+msgid "Association target is here"
+msgstr "Cilj pridružitve je tu"
+
+msgid "Association target must be selected from list of existing classes"
+msgstr "Cilj povezave mora biti izbran s seznama obstoječih razredov"
+
+msgid "Attribute is here"
+msgstr "Atribut je tukaj"
+
+msgid "Attribute is here info"
+msgstr "Atributi so tukaj podatki"
+
+msgid "Attribute label"
+msgstr "Oznaka lastnosti"
+
+msgid "Attribute label info"
+msgstr "Podatki o oznaki atributa"
+
+msgid "Changes need to be saved"
+msgstr "Spremembe je treba shraniti"
+
+msgid "Class is here"
+msgstr "Razred je tukaj"
+
+msgid "Class is here info"
+msgstr "Razred je tukaj info"
+
+msgid "Classes can be modified"
+msgstr "Razredi se lahko spremenijo"
+
+msgid "Classes can be seen visually here"
+msgstr "Razredi so tukaj vidni"
+
+msgid "Classifications are here"
+msgstr "Klasifikacije so tukaj"
+
+msgid "Concept is here"
+msgstr "Koncept je tu"
+
+msgid "Concept is here info"
+msgstr "Koncept je tukaj info"
+
+msgid "Concept label"
+msgstr "Konceptna nalepka"
+
+msgid "Concept label info"
+msgstr "Podatki o oznaki koncepta"
+
+msgid "Confirm selection"
+msgstr "Potrdi izbiro"
+
+msgid "Confirm selection info"
+msgstr "Potrdi podatke o izbiri"
+
+msgid "Congratulations for completing adding an association!"
+msgstr "Čestitamo za dokončno dodajanje združenja!"
+
+msgid "Congratulations for completing adding an attribute!"
+msgstr "Čestitamo, da ste dodali atribut!"
+
+msgid "Congratulations for completing class assignation!"
+msgstr "Čestitamo vam za izpolnitev razpisa!"
+
+msgid "Congratulations for completing library creation!"
+msgstr "Čestitamo za dokončanje ustvarjanja knjižnice!"
+
+msgid "Congratulations for completing library creation! description"
+msgstr "Čestitamo za dokončanje ustvarjanja knjižnice! Opis"
+
+msgid "Congratulations for completing namespace require!"
+msgstr "Čestitke za izpolnitev imenskega prostora zahtevajo!"
+
+msgid "Congratulations for completing new class creation!"
+msgstr "Čestitamo za dokončanje ustvarjanja novega razreda!"
+
+msgid "Congratulations for completing profile creation!"
+msgstr "Čestitamo za dokončanje ustvarjanja profila!"
+
+msgid "Congratulations for completing profile creation! description"
+msgstr "Čestitamo za dokončanje ustvarjanja profila! Opis"
+
+msgid "Congratulations for completing specialize class!"
+msgstr "Čestitamo za zaključen specialistični razred!"
+
+msgid "Contributors are here"
+msgstr "Prispevki so tukaj"
+
+msgid "Definition"
+msgstr "Opredelitev"
+
+msgid "Description"
+msgstr "Opis"
+
+msgid "Description info"
+msgstr "Opis informacij"
+
+msgid "Guide through adding an association"
+msgstr "Vodnik po dodajanju povezave"
+
+msgid "Guide through adding an attribute"
+msgstr "Vodnik po dodajanju atributa"
+
+msgid "Guide through assigning class to a library"
+msgstr "Vodnik po dodeljevanju razreda knjižnici"
+
+msgid "Guide through creating a class"
+msgstr "Vodnik po ustvarjanju razreda"
+
+msgid "Guide through creating new library"
+msgstr "Vodnik po ustvarjanju nove knjižnice"
+
+msgid "Guide through creating new library description"
+msgstr "Vodnik po ustvarjanju novega opisa knjižnice"
+
+msgid "Guide through creating new profile"
+msgstr "Vodnik po ustvarjanju novega profila"
+
+msgid "Guide through creating new profile description"
+msgstr "Vodnik po ustvarjanju novega opisa profila"
+
+msgid "Guide through requiring a namespace"
+msgstr "Vodnik po zahtevi prostora za imena"
+
+msgid "Add class description"
+msgstr "Dodaj opis razreda"
+
+msgid "Imported namespaces are here"
+msgstr "Uvoženi prostori imen so tukaj"
+
+msgid "Imported namespaces can be used to link resources to existing standards"
+msgstr "Uvožene prostore imen lahko uporabite za povezavo virov z obstoječimi standardi"
+
+msgid "Library label"
+msgstr "Nalepka knjižnice"
+
+msgid "Library label info"
+msgstr "Informacije o nalepki knjižnice"
+
+msgid "Model languages"
+msgstr "Vzorčni jeziki"
+
+msgid "Model languages info"
+msgstr "Informacije o jezikih vzorcev"
+
+msgid "Modify class"
+msgstr "Spremeni razred"
+
+msgid "Modify library"
+msgstr "Spremeni knjižnico"
+
+msgid "Modify library description"
+msgstr "Spremeni opis knjižnice"
+
+msgid "Modify profile"
+msgstr "Spremeni profil"
+
+msgid "Modify profile description"
+msgstr "Spremeni opis profila"
+
+msgid "Open library details"
+msgstr "Odpri podatke o knjižnici"
+
+msgid "Open library details description"
+msgstr "Odpri opis podrobnosti knjižnice"
+
+msgid "Open profile details"
+msgstr "Odpri podrobnosti profila"
+
+msgid "Open profile details description"
+msgstr "Odpri opis podrobnosti profila"
+
+msgid "Prefix"
+msgstr "Predpona"
+
+msgid "Prefix info"
+msgstr "Podatki o predponi"
+
+msgid "Profile label"
+msgstr "Oznaka profila"
+
+msgid "Profile label info"
+msgstr "Podatki o oznaki profila"
+
+msgid "Property is here"
+msgstr "Lastnost je tukaj"
+
+msgid "Property is here info"
+msgstr "Lastnost je tukaj info"
+
+msgid "Save changes"
+msgstr "Shrani spremembe"
+
+msgid "Search for"
+msgstr "Išči"
+
+msgid "Search for class"
+msgstr "Iskanje razreda"
+
+msgid "Search for class info"
+msgstr "Iskanje informacij o pouku"
+
+msgid "Search for concept"
+msgstr "Iskanje pojma"
+
+msgid "Search for concept info"
+msgstr "Iskanje informacij o konceptu"
+
+msgid "Search for info"
+msgstr "Iskanje informacij"
+
+msgid "Search for predicate"
+msgstr "Iskanje predikata"
+
+msgid "Search for predicate info"
+msgstr "Iskanje informacij o predikatu"
+
+msgid "Select association target"
+msgstr "Izberi cilj povezave"
+
+msgid "Select class description"
+msgstr "Izberi opis razreda"
+
+msgid "Select concept suggest creation"
+msgstr "Izberite koncept predlaga ustvarjanje"
+
+msgid "Select concept suggest creation info"
+msgstr "Izberi koncept predlaga informacije o ustvarjanju"
+
+msgid "Select name and description"
+msgstr "Izberite ime in opis"
+
+msgid "Select name and description info"
+msgstr "Izberite podatke o imenu in opisu"
+
+msgid "Select new association creation"
+msgstr "Izberi novo ustvarjanje povezave"
+
+msgid "Select new association creation info"
+msgstr "Izberite nove podatke o ustvarjanju povezave"
+
+msgid "Select new attribute creation"
+msgstr "Izberi ustvarjanje novega atributa"
+
+msgid "Select new attribute creation info"
+msgstr "Izberite nove podatke o ustvarjanju atributa"
+
+msgid "Select new creation"
+msgstr "Izberi novo ustvarjanje"
+
+msgid "Select new creation info"
+msgstr "Izberi nove podatke o ustvarjanju"
+
+msgid "Select registration number and vehicle code"
+msgstr "Izberite registrsko številko in kodo vozila"
+
+msgid "Select registration number and vehicle code info"
+msgstr "Izberite registracijsko številko in podatke o kodi vozila"
+
+msgid "Select search result"
+msgstr "Izberi rezultat iskanja"
+
+msgid "Select search result info"
+msgstr "Izberi podatke o rezultatih iskanja"
+
+msgid "Select super class"
+msgstr "Izberi super razred"
+
+msgid "Select the vocabulary that is missing the required concept"
+msgstr "Izberite besednjak, v katerem manjka zahtevani koncept"
+
+msgid "Suggest definition or description for the concept"
+msgstr "Predlagajte definicijo ali opis za koncept"
+
+msgid "Super class can be changed from the list or by typing the identifier"
+msgstr "Super razred lahko spremenite s seznama ali vtipkate identifikator"
+
+msgid "Super class is here"
+msgstr "Super razred je tu"
+
+msgid "Super class must be selected from list of existing classes"
+msgstr "Super razred je treba izbrati s seznama obstoječih razredov"
+
+msgid "This tutorial shows how to add Class from existing library"
+msgstr "Ta vadnica prikazuje, kako dodati Class iz obstoječe knjižnice"
+
+msgid "This tutorial shows how to add association to a Class"
+msgstr "Ta vadnica prikazuje, kako dodati povezavo v razred"
+
+msgid "This tutorial shows how to add new attribute"
+msgstr "Ta vadnica prikazuje, kako dodati nov atribut"
+
+msgid "This tutorial shows how to create a new Class"
+msgstr "Ta vadnica prikazuje, kako ustvariti nov razred"
+
+msgid "This tutorial shows how to create a new shape from a class"
+msgstr "Ta vadnica prikazuje, kako ustvariti novo obliko iz razreda"
+
+msgid "This tutorial shows how to import new namespace to the model"
+msgstr "V tej vadnici je prikazano, kako uvoziti nov imenski prostor v model"
+
+msgid "Vocabularies are here"
+msgstr "Besedniki so tukaj"
+
+msgid "Vocabularies can be used to link resources to existing concepts"
+msgstr "Besednice se lahko uporabljajo za povezavo virov z obstoječimi koncepti"
+
+msgid "Vocabulary"
+msgstr "Besedišče"
+
+msgid "You can add new attribute or association to the Class from here"
+msgstr "Tu lahko dodate nov atribut ali povezavo"
+
+msgid "Copy shape"
+msgstr "Kopiraj obliko"
+
+msgid "not found in the concept database"
+msgstr "ni mogoče najti v zbirki pojmov"
+
+msgid "Define concept for the new class"
+msgstr "Določi koncept novega razreda"
+
+msgid "Define concept for the shape"
+msgstr "Določi koncept oblike"
+
+msgid "Define concept for the new shape"
+msgstr "Določi koncept za novo obliko"
+
+msgid "Define concept for the attribute"
+msgstr "Določi koncept za atribut"
+
+msgid "Define concept for the new attribute"
+msgstr "Določi koncept novega atributa"
+
+msgid "Define concept for the association"
+msgstr "Določi koncept za združenje"
+
+msgid "Define concept for the new association"
+msgstr "Določite koncept za novo združenje"
+
+msgid "Create new class without referencing concept"
+msgstr "Ustvari nov razred brez sklicevanja na koncept"
+
+msgid "Create new shape without referencing concept"
+msgstr "Ustvari novo obliko brez sklicevanja na koncept"
+
+msgid "Create new association without referencing concept"
+msgstr "Ustvari novo povezavo brez sklicevanja na koncept"
+
+msgid "Create new attribute without referencing concept"
+msgstr "Ustvari nov atribut brez sklicevanja na koncept"
+
+msgid "suggest"
+msgstr "predlagati"
+
+msgid "suggestion"
+msgstr "predlog"
+
+msgid "and create new"
+msgstr "in ustvarite novo"
+
+msgid "Use"
+msgstr "Uporaba"
+
+msgid "Unstable"
+msgstr "Nestabilno"
+
+msgid "Draft"
+msgstr "Osnutek"
+
+msgid "Recommendation"
+msgstr "Priporočilo"
+
+msgid "Deprecated"
+msgstr "Zastarelo"
+
+msgid "Suggestion"
+msgstr "Predlog"
+
+msgid "Hide"
+msgstr "Skrij"
+
+msgid "Show model details"
+msgstr "Prikaži podrobnosti modela"
+
+msgid "Hide model details"
+msgstr "Skrij podrobnosti modela"
+
+msgid "Front page"
+msgstr "Prednja stran"
+
+msgid "New library creation"
+msgstr "Novo ustvarjanje knjižnice"
+
+msgid "New profile creation"
+msgstr "Novo ustvarjanje profila"
+
+msgid "Delete library"
+msgstr "Izbriši knjižnico"
+
+msgid "Delete profile"
+msgstr "Izbriši profil"
+
+msgid "group"
+msgstr "group"
+
+msgid "model"
+msgstr "model"
+
+msgid "library"
+msgstr "library"
+
+msgid "shape"
+msgstr "shape"
+
+msgid "profile"
+msgstr "profile"
+
+msgid "class"
+msgstr "class"
+
+msgid "attribute"
+msgstr "attribute"
+
+msgid "association"
+msgstr "association"
+
+msgid "property"
+msgstr "property"
+
+msgid "fi"
+msgstr "fi"
+
+msgid "sl"
+msgstr "sl"
+
+msgid "en"
+msgstr "en"
+
+msgid "data language"
+msgstr "data language"
+
+msgid "data fi"
+msgstr "data fi"
+
+msgid "data sl"
+msgstr "data sl"
+
+msgid "data en"
+msgstr "data en"
+
+msgid "data sv"
+msgstr "data sv"
+
+msgid "data ru"
+msgstr "data ru"
+
+msgid "Edit in progress"
+msgstr "Urejanje v postopku"
+
+msgid "Are you sure that you want to continue? By continuing unsaved changes will be lost."
+msgstr "Ali ste prepričani, da želite nadaljevati? Z nadaljevanjem neshranjenih sprememb se izgubijo."
+
+msgid "Dialog is open"
+msgstr "Dialog je odprt"
+
+msgid "Are you sure that you want to close dialog?"
+msgstr "Ali ste prepričani, da želite zapreti pogovorno okno?"
+
+msgid "Save visualization position"
+msgstr "Shrani vizualizacijski položaj"
+
+msgid "Are you sure you want to save? Saving overrides previously saves positions."
+msgstr "Ali ste prepričani, da želite shraniti? Shranjevanje preglasov prej shrani položaje."
+
+msgid "Delete class"
+msgstr "Izbriši razred"
+
+msgid "Delete shape"
+msgstr "Izbriši obliko"
+
+msgid "Delete class from this library"
+msgstr "Izbriši razred iz te knjižnice"
+
+msgid "Delete shape from this library"
+msgstr "Izbriši obliko iz te knjižnice"
+
+msgid "Class list"
+msgstr "Seznam razredov"
+
+msgid "Add attribute"
+msgstr "Dodaj atribut"
+
+msgid "Delete attribute"
+msgstr "Izbriši atribut"
+
+msgid "Delete attribute from this library"
+msgstr "Izbriši atribut iz te knjižnice"
+
+msgid "Delete attribute from this profile"
+msgstr "Izbriši atribut iz tega profila"
+
+msgid "Attribute list"
+msgstr "Seznam lastnosti"
+
+msgid "Add association"
+msgstr "Dodaj povezavo"
+
+msgid "Delete association"
+msgstr "Izbriši povezavo"
+
+msgid "Delete association from this library"
+msgstr "Izbriši povezavo iz te knjižnice"
+
+msgid "Delete association from this profile"
+msgstr "Izbriši povezavo s tega profila"
+
+msgid "Association list"
+msgstr "Združitveni seznam"
+
+msgid "Choose attribute"
+msgstr "Izberi atribut"
+
+msgid "Choose association"
+msgstr "Izberi povezavo"
+
+msgid "What is description?"
+msgstr "Kaj je opis?"
+
+msgid "What is description content"
+msgstr "Kaj je opisna vsebina"
+
+msgid "What is method?"
+msgstr "Kaj je metoda?"
+
+msgid "What is method content"
+msgstr "Kaj je vsebina metode"
+
+msgid "What can I do?"
+msgstr "Kaj lahko naredim?"
+
+msgid "What can I do content"
+msgstr "Kaj lahko naredim z vsebino"
+
+msgid "How?"
+msgstr "Kako?"
+
+msgid "How content"
+msgstr "Kako vsebina"
+
+msgid "of group"
+msgstr "od skupine"
+
+msgid "of model"
+msgstr "modela"
+
+msgid "of library"
+msgstr "knjižnice"
+
+msgid "of profile"
+msgstr "profila"
+
+msgid "of class"
+msgstr "razreda"
+
+msgid "of shape"
+msgstr "oblike"
+
+msgid "of association"
+msgstr "of Association"
+
+msgid "of attribute"
+msgstr "atributa"
+
+msgid "of concept"
+msgstr "koncepta"
+
+msgid "of conceptSuggestion"
+msgstr "of conceptSuggestion"
+
+msgid "search attribute or association"
+msgstr "atribut iskanja ali povezava"
+
+msgid "search class"
+msgstr "iskalni razred"
+
+msgid "search descriptions"
+msgstr "opisi iskanja"
+
+msgid "Search from concept database"
+msgstr "Iskanje iz pojma baze podatkov"
+
+msgid "search namespace"
+msgstr "iskalni prostor za iskanje"
+
+msgid "search vocabulary"
+msgstr "iskanje besednjak"
+
+msgid "search reference data"
+msgstr "referenčni podatki o iskanju"
+
+msgid "Select attribute"
+msgstr "Izberi atribut"
+
+msgid "search attribute"
+msgstr "atribut iskanja"
+
+msgid "Select association"
+msgstr "Izberi povezavo"
+
+msgid "search association"
+msgstr "iskalno združenje"
+
+msgid "Use attribute"
+msgstr "Uporabi atribut"
+
+msgid "Use association"
+msgstr "Uporabi povezavo"
+
+msgid "Create and use attribute"
+msgstr "Ustvari in uporabi atribut"
+
+msgid "Create and use association"
+msgstr "Ustvari in uporabi povezavo"
+
+msgid "Unauthorized"
+msgstr "Nepooblaščeno"
+
+msgid "ID is already in use"
+msgstr "ID je že v uporabi"
+
+msgid "Resource dependencies restricts removing"
+msgstr "Odvisnosti od virov omejujejo odstranjevanje"
+
+msgid "Unexpected error"
+msgstr "Nepričakovana napaka"
+
+msgid "Not found"
+msgstr "Ni najdeno"
+
+msgid "Not removed"
+msgstr "Ni odstranjeno"
+
+msgid "Resource status restricts removing"
+msgstr "Status vira omejuje odstranjevanje"
+
+msgid "Resource is in use"
+msgstr "Vir je v uporabi"
+
+msgid "Already added"
+msgstr "Že dodano"
+
+msgid "Write identifier"
+msgstr "Napiši identifikator"
+
+msgid "Write URI"
+msgstr "Napiši URI"
+
+msgid "Write URL"
+msgstr "Napiši URL"
+
+msgid "Library information"
+msgstr "Knjižnični podatki"
+
+msgid "Profile information"
+msgstr "Podatki o profilu"
+
+msgid "Class information"
+msgstr "Podatki o razredu"
+
+msgid "Shape information"
+msgstr "Podatki o obliki"
+
+msgid "Attribute information"
+msgstr "Podatki o atributih"
+
+msgid "Association information"
+msgstr "Podatki o združenju"
+
+msgid "Property information"
+msgstr "Podatki o lastnini"
+
+msgid "Concept suggestion information"
+msgstr "Podatki o predlogah koncepta"
+
+msgid "Class properties"
+msgstr "Lastnosti razreda"
+
+msgid "Shape properties"
+msgstr "Lastnosti oblike"
+
+msgid "Show excluded"
+msgstr "Pokaži izključeno"
+
+msgid "Concept"
+msgstr "Koncept"
+
+msgid "Concept suggestion"
+msgstr "Pojem koncepta"
+
+msgid "application/ld+json"
+msgstr "application/ld+json"
+
+msgid "text/turtle"
+msgstr "text/turtle"
+
+msgid "application/xml"
+msgstr "application/xml"
+
+msgid "application/rdf+xml"
+msgstr "application/rdf+xml"
+
+msgid "application/ld+json+context"
+msgstr "application/ld+json+context"
+
+msgid "application/schema+json"
+msgstr "application/schema+json"
+
+msgid "application/vnd+oai+openapi+json"
+msgstr "application/vnd+oai+openapi+json"
+
+msgid "framed ld+json"
+msgstr "framed ld+json"
+
+msgid "ld+json frame"
+msgstr "ld+json frame"
+
+msgid "date format"
+msgstr "date format"
+
+msgid "User login"
+msgstr "Uporabniška prijava"
+
+msgid "User name"
+msgstr "Uporabniško ime"
+
+msgid "Created at"
+msgstr "Ustvarjeno ob"
+
+msgid "Modified at"
+msgstr "Spremenjeno ob"
+
+msgid "Member groups"
+msgstr "Skupine članov"
+
+msgid "Admin groups"
+msgstr "Administratorske skupine"
+
+msgid "Add properties from class"
+msgstr "Dodaj lastnosti iz razreda"
+
+msgid "Add properties from super class"
+msgstr "Dodaj lastnosti iz super razreda"
+
+msgid "Add properties from scope class"
+msgstr "Dodaj lastnosti iz razreda obsega"
+
+msgid "Add properties from profile class"
+msgstr "Dodaj lastnosti iz razreda profilov"
+
+msgid "Add properties from external class"
+msgstr "Dodaj lastnosti iz zunanjega razreda"
+
+msgid "Do you want to add following properties from class?"
+msgstr "Ali želite dodati naslednje lastnosti iz razreda?"
+
+msgid "Do you want to add following properties from super class?"
+msgstr "Ali želite dodati naslednje lastnosti iz super razreda?"
+
+msgid "Do you want to add following properties from scope class?"
+msgstr "Ali želite dodati naslednje lastnosti iz razreda obsega?"
+
+msgid "Do you want to add following properties from profile class?"
+msgstr "Ali želite dodati naslednje lastnosti iz razreda profila?"
+
+msgid "Do you want to add following properties from external class?"
+msgstr "Ali želite dodati naslednje lastnosti iz zunanjega razreda?"
+
+msgid "Not imported by model"
+msgstr "Ni uvoženo po modelu"
+
+msgid "Cannot import profile"
+msgstr "Profila ni mogoče uvoziti"
+
+msgid "Shapes are not allowed"
+msgstr "Oblike niso dovoljene"
+
+msgid "Classes are not allowed"
+msgstr "Razredi niso dovoljeni"
+
+msgid "Non specialized classes are not allowed"
+msgstr "Nespecializirani razredi niso dovoljeni"
+
+msgid "Use class"
+msgstr "Uporabi razred"
+
+msgid "Specialize class"
+msgstr "Specializiraj razred"
+
+msgid "Define concept for the class"
+msgstr "Določi koncept za razred"
+
+msgid "Can be selected only from this library"
+msgstr "Lahko je izbran samo iz te knjižnice"
+
+msgid "Can be selected only from this profile"
+msgstr "Lahko je izbran samo iz tega profila"
+
+msgid "Subject"
+msgstr "Predmet"
+
+msgid "to vocabulary"
+msgstr "v slovar"
+
+msgid "Create new class"
+msgstr "Ustvari nov razred"
+
+msgid "Create new shape"
+msgstr "Ustvari novo obliko"
+
+msgid "Create new predicate"
+msgstr "Ustvari nov predikat"
+
+msgid "Create new attribute"
+msgstr "Ustvari nov atribut"
+
+msgid "Create new association"
+msgstr "Ustvari novo povezavo"
+
+msgid "New attribute"
+msgstr "Nov atribut"
+
+msgid "New association"
+msgstr "Novo združenje"
+
+msgid "Copy attribute"
+msgstr "Kopiraj atribut"
+
+msgid "Copy association"
+msgstr "Kopiraj povezavo"
+
+msgid "Create sub attribute"
+msgstr "Ustvari pod atribut"
+
+msgid "Create sub association"
+msgstr "Ustvari pod povezavo"
+
+msgid "Create super attribute"
+msgstr "Ustvari super atribut"
+
+msgid "Create super association"
+msgstr "Ustvari super povezavo"
+
+msgid "Show class information"
+msgstr "Pokaži podatke o razredu"
+
+msgid "Show attribute information"
+msgstr "Pokaži podatke o atributih"
+
+msgid "Show association information"
+msgstr "Pokaži podatke o povezavi"
+
+msgid "by referencing external uri"
+msgstr "s sklicevanjem na zunanji uri"
+
+msgid "Self reference not allowed"
+msgstr "Samopovezava ni dovoljena"
+
+msgid "Invalid ID"
+msgstr "Neveljaven ID"
+
+msgid "External class not found"
+msgstr "Zunanjega razreda ni mogoče najti"
+
+msgid "External predicate not found"
+msgstr "Zunanji predikat ni najden"
+
+msgid "External predicate is of wrong type"
+msgstr "Zunanji predikat je napačnega tipa"
+
+msgid "Input"
+msgstr "Vnos"
+
+msgid "Assigned to this profile"
+msgstr "Dodeljeno temu profilu"
+
+msgid "Assigned to this library"
+msgstr "Dodeljeno tej knjižnici"
+
+msgid "language code"
+msgstr "jezikovna koda"
+
+msgid "Internal vocabulary"
+msgstr "Notranji besednjak"
+
+msgid "Edit namespace"
+msgstr "Urejanje imenskega prostora"
+
+msgid "Vocabularies"
+msgstr "Besednice"
+
+msgid "Vocabulary name"
+msgstr "Ime besedišča"
+
+msgid "Edit link"
+msgstr "Uredi povezavo"
+
+msgid "Reference data name"
+msgstr "Ime referenčnih podatkov"
+
+msgid "Reference data status"
+msgstr "Status referenčnih podatkov"
+
+msgid "Create new reference data"
+msgstr "Ustvari nove referenčne podatke"
+
+msgid "Choose reference data"
+msgstr "Izberi referenčne podatke"
+
+msgid "Write reference data code"
+msgstr "Napišite referenčno kodo podatkov"
+
+msgid "Browse concepts"
+msgstr "Brskaj po konceptih"
+
+msgid "Search concept"
+msgstr "Koncept iskanja"
+
+msgid "Delete concept"
+msgstr "Izbriši koncept"
+
+msgid "Delete concept from this library"
+msgstr "Izbriši koncept iz te knjižnice"
+
+msgid "Delete concept from this profile"
+msgstr "Izbriši koncept iz tega profila"
+
+msgid "Delete conceptSuggestion"
+msgstr "Izbriši koncept Predlog"
+
+msgid "Delete conceptSuggestion from this library"
+msgstr "Izbriši koncept Predlog iz te knjižnice"
+
+msgid "Delete conceptSuggestion from this profile"
+msgstr "Izbriši koncept Predlog iz tega profila"
+
+msgid "URI stem"
+msgstr "URI steblo"
+
+msgid "Interoperability method description"
+msgstr "Opis metode interoperabilnosti"
+
+msgid "Label"
+msgstr "Oznaka"
+
+msgid "ID"
+msgstr "ID"
+
+msgid "Local ID"
+msgstr "Lokalni ID"
+
+msgid "Allowed languages"
+msgstr "Dovoljeni jeziki"
+
+msgid "In language"
+msgstr "V jeziku"
+
+msgid "Undefined"
+msgstr "Nedoločeno"
+
+msgid "Assign reusable predicate to library"
+msgstr "Dodeli predikat za večkratno uporabo knjižnici"
+
+msgid "Assign reusable predicate to profile"
+msgstr "Dodeli predikat za večkratno uporabo profilu"
+
+msgid "Assign class to library"
+msgstr "Dodeli razred knjižnici"
+
+msgid "Specialize class to profile"
+msgstr "Specializiraj razred za profil"
+
+msgid "Copy reusable association to library"
+msgstr "Kopiraj povezavo za večkratno uporabo v knjižnico"
+
+msgid "Copy reusable association to profile"
+msgstr "Kopiraj povezavo za večkratno uporabo v profil"
+
+msgid "Copy reusable attribute to library"
+msgstr "Kopiraj atribut za večkratno uporabo v knjižnico"
+
+msgid "Copy reusable attribute to profile"
+msgstr "Kopiraj atribut za večkratno uporabo v profil"
+
+msgid "Defined in vocabularies"
+msgstr "Določena v besednih zavodih"
+
+msgid "Change concept"
+msgstr "Spremeni koncept"
+
+msgid "Choose concept"
+msgstr "Izberi koncept"
+
+msgid "Submit error"
+msgstr "Pošlji napako"
+
+msgid "Predicate in use"
+msgstr "Predikat v uporabi"
+
+msgid "Predicate type cannot be changed because it is already used by following resources"
+msgstr "Vrsta predikata ni mogoče spremeniti, ker ga že uporabljajo naslednji viri"
+
+msgid "Convert to association"
+msgstr "Pretvori v združenje"
+
+msgid "Convert to attribute"
+msgstr "Pretvori v atribut"
+
+msgid "Copy \"{{text}}\" to clipboard"
+msgstr "Kopiraj \" {{text}} \" v odložišče"
+
+msgid "Copy properties"
+msgstr "Kopiraj lastnosti"
+
+msgid "Copy properties from class"
+msgstr "Kopiraj lastnosti iz razreda"
+
+msgid "Session expired"
+msgstr "Seja je potekla"
+
+msgid "Model not found"
+msgstr "Model ni najden"
+
+msgid "Group not found"
+msgstr "Skupine ni mogoče najti"
+
+msgid "Page not found"
+msgstr "Stran ni najdena"
+
+msgid "Resource not found"
+msgstr "Resorja ni mogoče najti"
+
+msgid "You will be redirected to the front page"
+msgstr "Preusmerjeni boste na naslovno stran"
+
+msgid "You will be redirected to the model"
+msgstr "Preusmerjeni boste na model"
+
+msgid "Please login to perform the action"
+msgstr "Prosimo, prijavite se za izvedbo dejanja"
+
+msgid "Duplicate association target"
+msgstr "Podvojen cilj povezave"
+
+msgid "No"
+msgstr "Ne"
+
+msgid "Match to content"
+msgstr "Ujemanje z vsebino"
+
+msgid "Unique label"
+msgstr "Edinstvena nalepka"
+
+msgid "All organizations"
+msgstr "Vse organizacije"
+
+msgid "Choose organization"
+msgstr "Izberi organizacijo"
+
+msgid "ADMIN"
+msgstr "ADMIN"
+
+msgid "DATA_MODEL_EDITOR"
+msgstr "DATA_MODEL_EDITOR"
+
+msgid "TERMINOLOGY_EDITOR"
+msgstr "TERMINOLOGY_EDITOR"
+
+msgid "CODE_LIST_EDITOR"
+msgstr "CODE_LIST_EDITOR"
+
+msgid "MEMBER"
+msgstr "ČLAN"
+
+msgid "Add new library"
+msgstr "Dodaj novo knjižnico"
+
+msgid "Add new profile"
+msgstr "Dodaj nov profil"
+
+msgid "InformationPool"
+msgstr "Informacijski bazen"
+
+msgid "InformationSystem"
+msgstr "Informacijski sistem"
+
+msgid "ExchangeFormat"
+msgstr "ExchangeFormat"
+
+msgid "InformationDescription"
+msgstr "Informacijski opis"
+
+msgid "Search"
+msgstr "Iskanje"
+
+msgid "standard"
+msgstr "standardni"
+
+msgid "All model types"
+msgstr "Vse vrste modelov"
+
+msgid "All use contexts"
+msgstr "Vsi uporabi kontekstov"
+
+msgid "Model"
+msgstr "Model"
+
+msgid "Deep class hit"
+msgstr "Globok hit razreda"
+
+msgid "Deep shape hit"
+msgstr "Hit globoke oblike"
+
+msgid "Deep attribute hit"
+msgstr "Globok zadetek atributa"
+
+msgid "Deep association hit"
+msgstr "Globok zadetek združenja"
+
+msgid "Concept status"
+msgstr "Konceptni status"
+
+msgid "Concept modified at"
+msgstr "Koncept spremenjen ob"
+
+msgid "ADD EMAIL SUBSCRIPTION TO RESOURCE REGARDING CHANGES?"
+msgstr "DODAJ PRIJAVO E-POŠTE RESNICEM V ZVEZI S SPREMEMBAM?"
+
+msgid "REMOVE EMAIL SUBSCRIPTION TO RESOURCE?"
+msgstr "ODSTRANI PRIJAVO E-POŠTE NA RESNICO?"
+
+msgid "ARE YOU SURE YOU WANT TO ENABLE THE NOTIFICATION EMAIL SUBSCRIPTION?"
+msgstr "Ali ste prepričani, da želite DOGOVORITI PRIJAVO E-POŠTI?"
+
+msgid "ARE YOU SURE YOU WANT TO DISABLE THE NOTIFICATION EMAIL SUBSCRIPTION?"
+msgstr "Ali ste prepričani, da želite onemogočiti prijavo e-poštnega sporočila z obvestilom?"
+
+msgid "Adding subscription failed."
+msgstr "Dodajanje naročnine ni uspelo."
+
+msgid "Subscription deletion failed."
+msgstr "Izbris naročnine ni uspel."
+
+msgid "INFO_TEXT_EMAIL_SUBSCRIPTIONS"
+msgstr "INFO_TEXT_EMAIL_SUBSCRIPTIONS"
+
+msgid "CHANGE STATUS?"
+msgstr "SPREMENITE STATUS?"
+
+msgid "CHANGE_STATUS_CONFIRMATION_PARAGRAPH_1"
+msgstr "CHANGE_STATUS_CONFIRMATION_PARAGRAPH_1"
+
+msgid "CHANGE_STATUS_CONFIRMATION_PARAGRAPH_2"
+msgstr "CHANGE_STATUS_CONFIRMATION_PARAGRAPH_2"
+
+msgid "Choose starting status"
+msgstr "Izberi začetni status"
+
+msgid "Choose target status"
+msgstr "Izberi ciljno stanje"
+
+msgid "UPDATING_STATUSES_MESSAGE"
+msgstr "UPDATING_STATUSES_MESSAGE"
+
+msgid "Change resource statuses at the same time?"
+msgstr "Hkrati spremenite stanje virov?"
+
+msgid "CHANGE RESOURCE STATUSES TOO?"
+msgstr "SPREMENITE STATUSE SREDSTEV?"
+
+msgid "CREATING_NEW_MODEL_VERSION_MESSAGE"
+msgstr "CREATING_NEW_MODEL_VERSION_MESSAGE"
+
+msgid "Example info"
+msgstr "Primer informacij"
+
+msgid "Editorial note"
+msgstr "Uredništvo"
+
+msgid "Editorial note info"
+msgstr "Informacije o uredniških opombah"
+
+msgid "Class id"
+msgstr "ID razreda"
+
+msgid "Class id info"
+msgstr "Informacije o razredu"
+
+msgid "Shape id"
+msgstr "ID oblike"
+
+msgid "Shape id info"
+msgstr "Podatki o obliki id"
+
+msgid "Attribute id"
+msgstr "ID atributa"
+
+msgid "Attribute id info"
+msgstr "Podatki o atributih"
+
+msgid "Association id"
+msgstr "ID združenja"
+
+msgid "Association id info"
+msgstr "Podatki o pridruženem ID-ju"
+
+msgid "Property id"
+msgstr "ID znamke"
+
+msgid "Property id info"
+msgstr "Informacije o lastnostih"
+
+msgid "Class property id"
+msgstr "ID lastnosti razreda"
+
+msgid "Class property id info"
+msgstr "Podatki o ID-ju lastnosti"
+
+msgid "Class attribute id"
+msgstr "ID atributa razreda"
+
+msgid "Class attribute id info"
+msgstr "Podatki o atributih razreda"
+
+msgid "Class association id"
+msgstr "ID združenja razreda"
+
+msgid "Class association id info"
+msgstr "Podatki o pridruževanju razreda"
+
+msgid "Concept id"
+msgstr "Koncept id"
+
+msgid "Concept id info"
+msgstr "Konceptni podatki"
+
+msgid "Vocabulary id"
+msgstr "ID besedišča"
+
+msgid "Vocabulary id info"
+msgstr "Podatki o slovarju"
+
+msgid "Reference data URI"
+msgstr "Referenčni URI podatkov"
+
+msgid "Reference data URI info"
+msgstr "Referenčni podatki o URI podatkih"
+
+msgid "Max properties"
+msgstr "Najvišje lastnosti"
+
+msgid "Max properties info"
+msgstr "Najvišje informacije o lastnostih"
+
+msgid "Min properties"
+msgstr "Min lastnosti"
+
+msgid "Min properties info"
+msgstr "Informacije o najmanjših lastnostih"
+
+msgid "Group label"
+msgstr "Oznaka skupine"
+
+msgid "Group label info"
+msgstr "Podatki o oznaki skupine"
+
+msgid "Class label"
+msgstr "Oznaka razreda"
+
+msgid "Class label info"
+msgstr "Podatki o oznaki razreda"
+
+msgid "Shape label"
+msgstr "Nalepka oblike"
+
+msgid "Shape label info"
+msgstr "Podatki o nalepki oblike"
+
+msgid "Property label"
+msgstr "Oznaka lastnosti"
+
+msgid "Property label info"
+msgstr "Podatki o oznaki lastnosti"
+
+msgid "Class property label"
+msgstr "Oznaka lastnosti razreda"
+
+msgid "Class property label info"
+msgstr "Podatki o oznaki lastnosti razreda"
+
+msgid "Class attribute label"
+msgstr "Oznaka atributa razreda"
+
+msgid "Class attribute label info"
+msgstr "Podatki o oznaki atributa razreda"
+
+msgid "Class association label"
+msgstr "Nalepka združenja razreda"
+
+msgid "Class association label info"
+msgstr "Podatki o oznaki združenja razreda"
+
+msgid "Concept suggestion label"
+msgstr "Oznaka predloga koncepta"
+
+msgid "Concept suggestion label info"
+msgstr "Podatki o oznaki predloga koncepta"
+
+msgid "Concept definition"
+msgstr "Pojem opredelitev"
+
+msgid "Concept definition info"
+msgstr "Informacije o definiciji koncepta"
+
+msgid "Concept suggestion definition"
+msgstr "Definicija predloga koncepta"
+
+msgid "Concept suggestion definition info"
+msgstr "Informacije o definiciji predloga koncepta"
+
+msgid "Namespace label"
+msgstr "Oznaka prostora imena"
+
+msgid "Namespace label info"
+msgstr "Informacije o oznaki prostora imena"
+
+msgid "Reference data label"
+msgstr "Oznaka referenčnih podatkov"
+
+msgid "Reference data label info"
+msgstr "Informacije o referenčnih podatkih o oznaki"
+
+msgid "State"
+msgstr "Država"
+
+msgid "State info"
+msgstr "Državne informacije"
+
+msgid "Defined by"
+msgstr "Določi"
+
+msgid "Defined by info"
+msgstr "Določeno z informacijami"
+
+msgid "Defined by library"
+msgstr "Določi knjižnica"
+
+msgid "Defined by library info"
+msgstr "Določena s podatki o knjižnici"
+
+msgid "Defined by profile"
+msgstr "Določeno s profilom"
+
+msgid "Defined by profile info"
+msgstr "Določena s podatki o profilu"
+
+msgid "Superclass"
+msgstr "Superklas"
+
+msgid "Superclass info"
+msgstr "Podatki o razredu"
+
+msgid "Superassociation"
+msgstr "Superasociacija"
+
+msgid "Superassociation info"
+msgstr "Podatki o združenju"
+
+msgid "Superattribute"
+msgstr "Superattribute"
+
+msgid "Superattribute info"
+msgstr "Podatki o super-atributih"
+
+msgid "Superproperty"
+msgstr "Superpremičnina"
+
+msgid "Superproperty info"
+msgstr "Podatki o super lastnini"
+
+msgid "Range"
+msgstr "Domet"
+
+msgid "Range info"
+msgstr "Podatki o območju"
+
+msgid "Specialized from class"
+msgstr "Specializirano za razred"
+
+msgid "Specialized from class info"
+msgstr "Specializirano za informacije o pouku"
+
+msgid "Example"
+msgstr "Primer"
+
+msgid "Definition info"
+msgstr "Informacije o definiciji"
+
+msgid "Value class"
+msgstr "Vrednostni razred"
+
+msgid "Value class info"
+msgstr "Podatki o vrednostnem razredu"
+
+msgid "Predicate type"
+msgstr "Vrsta predikata"
+
+msgid "Predicate type info"
+msgstr "Podatki o predikatu"
+
+msgid "Equivalent class"
+msgstr "Ekvivalentni razred"
+
+msgid "Equivalent class info"
+msgstr "Ekvivalentne informacije o razredu"
+
+msgid "Equivalent attribute"
+msgstr "Enakovreden atribut"
+
+msgid "Equivalent attribute info"
+msgstr "Enakovredne informacije o atributih"
+
+msgid "Equivalent association"
+msgstr "Enakovredno združenje"
+
+msgid "Equivalent association info"
+msgstr "Enakovredne informacije o združenju"
+
+msgid "Equivalent property"
+msgstr "Enakovredna lastnina"
+
+msgid "Equivalent property info"
+msgstr "Podatki o enakovrednih lastnostih"
+
+msgid "Broader concept"
+msgstr "Širši koncept"
+
+msgid "Broader concept info"
+msgstr "Širše informacije o konceptu"
+
+msgid "Internal group page"
+msgstr "Notranja skupina strani"
+
+msgid "Internal group page info"
+msgstr "Informacije o notranji strani skupine"
+
+msgid "Vocabulary info"
+msgstr "Informacije o besedišču"
+
+msgid "Namespace"
+msgstr "Imenski prostor"
+
+msgid "Namespace info"
+msgstr "Podatki o imeni"
+
+msgid "Previous version"
+msgstr "Prejšnja različica"
+
+msgid "Previous version info"
+msgstr "Informacije o prejšnji različici"
+
+msgid "Resource identifier"
+msgstr "Identifikator vira"
+
+msgid "Resource identifier info"
+msgstr "Informacije o identifikatorju vira"
+
+msgid "Default value"
+msgstr "Privzeta vrednost"
+
+msgid "Default value info"
+msgstr "Podatki o privzeti vrednosti"
+
+msgid "Allowed values"
+msgstr "Dovoljene vrednosti"
+
+msgid "Allowed values info"
+msgstr "Informacije o dovoljenih vrednostih"
+
+msgid "Class type"
+msgstr "Vrsta razreda"
+
+msgid "Class type info"
+msgstr "Informacije o vrsti razreda"
+
+msgid "Fixed value"
+msgstr "Fiksna vrednost"
+
+msgid "Fixed value info"
+msgstr "Informacije s fiksno vrednostjo"
+
+msgid "Pattern"
+msgstr "Vzorec"
+
+msgid "Pattern info"
+msgstr "Podatki o vzorcu"
+
+msgid "Min count"
+msgstr "Min. Štetje"
+
+msgid "Min count info"
+msgstr "Minimalne informacije o štetju"
+
+msgid "Max count"
+msgstr "Največje število"
+
+msgid "Max count info"
+msgstr "Informacije o največjem številu"
+
+msgid "Min length"
+msgstr "Min. Dolžina"
+
+msgid "Min length info"
+msgstr "Informacije o najmanjši dolžini"
+
+msgid "Max length"
+msgstr "Največja dolžina"
+
+msgid "Max length info"
+msgstr "Informacije o največji dolžini"
+
+msgid "XML Wrapper"
+msgstr "XML ovitek"
+
+msgid "XML Wrapper info"
+msgstr "Informacije o zavoju XML"
+
+msgid "XML Attribute"
+msgstr "Atributi XML"
+
+msgid "XML Attribute info"
+msgstr "Informacije o atributih XML"
+
+msgid "Deactivated"
+msgstr "Izključeno"
+
+msgid "Deactivated info"
+msgstr "Deaktivirani podatki"
+
+msgid "Unique label info"
+msgstr "Edinstvene informacije o oznaki"
+
+msgid "Equals"
+msgstr "Enako"
+
+msgid "Equals info"
+msgstr "Enako informacije"
+
+msgid "Disjoint"
+msgstr "Disjoint"
+
+msgid "Disjoint info"
+msgstr "Nepovezane informacije"
+
+msgid "Less than"
+msgstr "Manj kot"
+
+msgid "Less than info"
+msgstr "Manj kot info"
+
+msgid "Less than or equals"
+msgstr "Manj ali enako"
+
+msgid "Less than or equals info"
+msgstr "Manj ali enakih informacij"
+
+msgid "Homepage"
+msgstr "Domača stran"
+
+msgid "Homepage info"
+msgstr "Informacije o domači strani"
+
+msgid "Title info"
+msgstr "Informacije o naslovu"
+
+msgid "External URI"
+msgstr "Zunanji URI"
+
+msgid "External URI info"
+msgstr "Zunanji podatki o URI-ju"
+
+msgid "Namespace redirection"
+msgstr "Preusmeritev imenskega prostora"
+
+msgid "Namespace redirection info"
+msgstr "Podatki o preusmeritvi imena prostora"
+
+msgid "Constraint classes"
+msgstr "Omejitveni razredi"
+
+msgid "Constraint classes info"
+msgstr "Informacije o razredih omejitev"
+
+msgid "Root class"
+msgstr "Korenski razred"
+
+msgid "Root class info"
+msgstr "Podatki o osnovnem razredu"
+
+msgid "Creator"
+msgstr "Ustvarjalec"
+
+msgid "Creator info"
+msgstr "Podatki o ustvarjalcu"
+
+msgid "Localname"
+msgstr "Lokalno ime"
+
+msgid "Localname info"
+msgstr "Informacije o krajevnem imenu"
+
+msgid "Read-only"
+msgstr "Le za branje"
+
+msgid "Read-only info"
+msgstr "Informacije samo za branje"
+
+msgid "API path"
+msgstr "Pot API"
+
+msgid "API path info"
+msgstr "Informacije o poti API-ja"
+
+msgid "Contact label"
+msgstr "Kontaktna nalepka"
+
+msgid "Contact label info"
+msgstr "Podatki o kontaktni nalepki"
+
+msgid "owl:DatatypeProperty"
+msgstr "owl:DatatypeProperty"
+
+msgid "owl:ObjectProperty"
+msgstr "owl:ObjectProperty"

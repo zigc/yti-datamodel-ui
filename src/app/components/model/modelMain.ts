@@ -92,7 +92,7 @@ export class ModelMainComponent implements OnDestroy, OnInit, EditorContainer, E
                 const newModelAndSelection = ModelAndSelection.fromModelAndRoute(model, newestSelection);
                 if (!oldModelAndSelection.equals(newModelAndSelection)) {
                   this.currentModelAndSelection.next(newModelAndSelection);
-                  this.setHelps();
+                  //this.setHelps();
                 }
               } else {
                 // Really weird, on the brink of "cannot happen", as this.loadingModelPrefix should match selection subject quite closely.

@@ -35,9 +35,9 @@ export const availableLanguages: Language[] = [
     'uz', 've', 'vi', 'vo', 'wa', 'cy', 'wo', 'fy', 'xh', 'yi', 'yo', 'za', 'zu'
 ];
 
-export type UILanguage = 'fi' | 'en' | 'sv';
+export type UILanguage = 'sl' | 'en';
 
-export const availableUILanguages: UILanguage[] = ['fi', 'en', 'sv'];
+export const availableUILanguages: UILanguage[] = ['sl', 'en'];
 
 export interface LanguageContext {
   id: Uri;

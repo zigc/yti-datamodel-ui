@@ -24,7 +24,7 @@ export class LanguageService {
     gettextCatalog.baseLanguage = translationDefaultLanguage;
     translateService.setDefaultLang(translationDefaultLanguage);
 
-    this.language$ = new BehaviorSubject(sessionService.UILanguage || 'fi');
+    this.language$ = new BehaviorSubject(sessionService.UILanguage || 'sl');
 
     this.language$.subscribe(lang => {
       this.sessionService.UILanguage = lang;
@@ -72,7 +72,7 @@ export class LanguageService {
   }
 
   translateToGivenLanguage(localizable: Localizable, languageToUse: string|null): string {
-    
+
     if (!localizable || !languageToUse) {
       return '';
     }
@@ -101,7 +101,7 @@ export class LanguageService {
 
   checkForFallbackLanguages(localizable: Localizable): string | null {
 
-    const fallbackLanguages: string[] = ['en', 'fi', 'sv'];
+    const fallbackLanguages: string[] = ['en', 'sl'];
 
     for (const language of fallbackLanguages) {
       if (this.hasLocalizationForLanguage(localizable, language)) {
@@ -145,7 +145,7 @@ export class DefaultAngularLocalizer implements AngularLocalizer {
     return this.languageService.translate(localizable);
   }
 
-  translateToGivenLanguage(localizable: Localizable, languageToUse: string|null): string {    
+  translateToGivenLanguage(localizable: Localizable, languageToUse: string|null): string {
     return this.languageService.translateToGivenLanguage(localizable, languageToUse);
   }
 }

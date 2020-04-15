@@ -1,11 +1,11 @@
 {
   "/datamodel-api/api/v1/*": {
-    "target": "https://tietomallit.dev.yti.cloud.vrk.fi",
+    "target": "http://iow-test.medius:9004",
     "changeOrigin": true,
     "secure": false
   },
   "/messaging-api/*": {
-    "target": "https://tietomallit.dev.yti.cloud.vrk.fi",
+    "target": "http://iow-test.medius:9900",
     "changeOrigin": true,
     "secure": false
   }
